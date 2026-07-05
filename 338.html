@@ -1,0 +1,542 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~呼吸机报警处理与急诊血液净化技术*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8f0f8 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #2d3748;
+        }
+        
+        .header {
+            position: relative;
+            margin-bottom: 15px;
+            min-height: 110px;
+        }
+        
+        .home-btn {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: linear-gradient(135deg, #3182ce 0%, #2b6cb0 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(49, 130, 206, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(49, 130, 206, 0.4);
+        }
+        
+        .nav-btns {
+            position: absolute;
+            right: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(56, 161, 105, 0.3);
+            transition: all 0.3s ease;
+            min-width: 70px;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(56, 161, 105, 0.4);
+        }
+        
+        .favorite-btn {
+            background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+            box-shadow: 0 2px 6px rgba(237, 137, 54, 0.3);
+        }
+        
+        .favorite-btn:hover {
+            box-shadow: 0 3px 10px rgba(237, 137, 54, 0.4);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a365d;
+            font-size: 22px;
+            padding: 55px 100px 20px;
+            line-height: 1.5;
+            font-weight: 700;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #2b6cb0 0%, #2c5282 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 18px 14px;
+            font-size: 20px;
+            font-weight: 700;
+            text-align: left;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e2e8f0;
+            transition: background 0.2s ease;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        tbody tr:hover {
+            background: #edf2f7;
+        }
+        
+        tbody td {
+            padding: 14px;
+            color: #4a5568;
+            line-height: 1.8;
+            word-break: break-word;
+            vertical-align: top;
+        }
+        
+        .section-title {
+            color: #2b6cb0;
+            font-weight: 700;
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+        
+        .bullet {
+            color: #e53e3e;
+            font-weight: bold;
+            margin-right: 4px;
+        }
+        
+        .author {
+            color: #718096;
+            font-style: italic;
+            text-align: right;
+            margin-top: 8px;
+        }
+        
+        .main-section {
+            background: linear-gradient(135deg, #ebf8ff 0%, #bee3f8 100%);
+            color: #1a365d;
+            font-weight: 800;
+            font-size: 16px;
+        }
+        
+        .tags-section {
+            margin-top: 25px;
+            padding: 22px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 17px;
+            color: #1a365d;
+            margin-bottom: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tags-title::before {
+            content: "🏷️";
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: linear-gradient(135deg, #ebf8ff 0%, #bee3f8 100%);
+            color: #2b6cb0;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #90cdf4;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(43, 108, 176, 0.2);
+        }
+        
+        .page-info {
+            text-align: center;
+            margin-top: 25px;
+            padding: 18px;
+            color: #718096;
+            font-size: 15px;
+        }
+        
+        .page-number {
+            font-size: 22px;
+            color: #2b6cb0;
+            font-weight: 800;
+        }
+        
+        .copy-section {
+            margin-top: 20px;
+            padding: 22px;
+            background: white;
+            border-radius: 16px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 14px 18px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 14px;
+            color: #4a5568;
+            background: #fafafa;
+            transition: border-color 0.3s ease;
+        }
+        
+        .copy-input:focus {
+            outline: none;
+            border-color: #3182ce;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #805ad5 0%, #6b46c1 100%);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 15px;
+            cursor: pointer;
+            white-space: nowrap;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(128, 90, 213, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(128, 90, 213, 0.4);
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .keywords-section {
+            margin-top: 20px;
+            padding: 18px;
+            background: linear-gradient(135deg, #fffaf0 0%, #feebc8 100%);
+            border-radius: 12px;
+            border-left: 5px solid #ed8936;
+        }
+        
+        .keywords-title {
+            font-size: 15px;
+            color: #c05621;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .keywords {
+            color: #744210;
+            font-size: 14px;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 17px;
+                padding: 60px 10px 15px;
+            }
+            
+            .home-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .nav-btn {
+                padding: 6px 14px;
+                font-size: 12px;
+                min-width: 60px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 14px 10px;
+            }
+            
+            tbody td {
+                padding: 12px 10px;
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="nav-btns">
+            <a href="337.html" class="nav-btn">← 上一页</a>
+            <a href="339.html" class="nav-btn">下一页 →</a>
+            <button class="nav-btn favorite-btn" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~呼吸机报警处理与急诊血液净化技术*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~呼吸机报警处理与急诊血液净化技术*****、序号、内容分类、详细内容、急诊血液净化</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>内容分类</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td>高频率报警</td>
+                    <td><span class="bullet">●</span>咳嗽、管路积水、人机对抗、自主呼吸过强。</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>低频率报警</td>
+                    <td><span class="bullet">●</span>自主呼吸过弱。</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>电源电池报警</td>
+                    <td><span class="bullet">●</span>交流电源未接上。</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>湿化器报警</td>
+                    <td><span class="bullet">●</span>湿化器温度异常。</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>报警处理</td>
+                    <td>
+                        <span class="bullet">●</span>若呼吸机报警一时难以判断原因，应立即断开呼吸机，呼吸机接上膜肺，用简易呼吸器给患者人工通气。<br><br>
+                        <span class="bullet">●</span>若呼吸机接上膜肺后报警消失，说明报警原因在患者，需要仔细评估患者的气道阻力、顺应性、自主呼吸状况和呼吸机设置。<br><br>
+                        <span class="bullet">●</span>若呼吸机接上膜肺后报警仍在，考虑呼吸机和管路存在问题。<br>
+                        <div class="author">（徐胜勇）</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="main-section">■ 急诊血液净化</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>概述</td>
+                    <td>1977年，Kramer等首次将连续性动静脉血液滤过（CAVH）应用于临床，很大程度上克服了传统的间歇性血液透析（IHD）所存在的"非生理性缺陷"，能够连续、缓慢、等渗地清除水、溶质，纠正电解质紊乱和酸碱平衡失调，并能清除炎症介质，且具有较好的血流动力学稳定性，目前将这些治疗方法统称为连续性肾替代治疗（CRRT）。</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>急诊血液净化的目的</td>
+                    <td>清除各种代谢产物、毒物、药物过量和某些致病因子；清除抗体（移植受者体内抗体、免疫复合物）；清除炎症介质；调节水电解质紊乱和酸碱平衡失调。总体来说就是清除溶剂和清除溶质两部分：清除溶剂即"水"；清除溶质即过高的血钾、肌酐、尿素、毒物、药物等。</td>
+                </tr>
+                <tr>
+                    <td rowspan="4">3</td>
+                    <td rowspan="4">急诊CRRT的实施步骤</td>
+                    <td><span class="bullet">●</span>选择适应证患者。</td>
+                </tr>
+                <tr>
+                    <td><span class="bullet">●</span>建立血管通路：大部分患者需要进行股静脉或颈内静脉血滤血透管置入，有的患者已经建立动静脉瘘和半永久透析管，也可以使用；对于瘘，应注意保护，一些难以很好配合的患者，尽可能不使用动静脉瘘。</td>
+                </tr>
+                <tr>
+                    <td><span class="bullet">●</span>选择血滤机：大部分血滤机能提供常用功能，适合于绝大部分临床情况，有些特殊的治疗模式如双膜血浆置换可能需要某些具体的血滤机。</td>
+                </tr>
+                <tr>
+                    <td><span class="bullet">●</span>选择管路和滤器：根据具体血滤机类型和需要进行血液净化模式的选择。如血滤选择血滤器，血浆置换选择血浆分离器，</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag">高频率报警</span>
+            <span class="tag">低频率报警</span>
+            <span class="tag">电源电池报警</span>
+            <span class="tag">湿化器报警</span>
+            <span class="tag">膜肺</span>
+            <span class="tag">人机对抗</span>
+            <span class="tag">CAVH</span>
+            <span class="tag">IHD</span>
+            <span class="tag">CRRT</span>
+            <span class="tag">Kramer</span>
+            <span class="tag">电解质紊乱</span>
+            <span class="tag">酸碱平衡失调</span>
+            <span class="tag">炎症介质</span>
+            <span class="tag">代谢产物</span>
+            <span class="tag">毒物</span>
+            <span class="tag">药物过量</span>
+            <span class="tag">抗体</span>
+            <span class="tag">免疫复合物</span>
+            <span class="tag">血钾</span>
+            <span class="tag">肌酐</span>
+            <span class="tag">尿素</span>
+            <span class="tag">股静脉</span>
+            <span class="tag">颈内静脉</span>
+            <span class="tag">动静脉瘘</span>
+            <span class="tag">血滤机</span>
+            <span class="tag">双膜血浆置换</span>
+            <span class="tag">血滤器</span>
+            <span class="tag">血浆分离器</span>
+        </div>
+    </div>
+    
+    <div class="page-info">
+        当前页码：<span class="page-number">338</span>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="呼吸机报警处理与急诊血液净化技术；报警处理；急诊血液净化；CRRT；CAVH；IHD；Kramer；电解质紊乱；酸碱平衡失调；炎症介质；血滤机；血浆置换；=338" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <div class="keywords-section">
+        <div class="keywords-title">🔑 关键词</div>
+        <div class="keywords">338</div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(input.value).then(function() {
+                    showToast('✅ 已复制到剪贴板');
+                }).catch(function() {
+                    fallbackCopy(input);
+                });
+            } else {
+                fallbackCopy(input);
+            }
+        }
+        
+        function fallbackCopy(input) {
+            try {
+                document.execCommand('copy');
+                showToast('✅ 已复制到剪贴板');
+            } catch (err) {
+                showToast('❌ 复制失败，请手动复制');
+            }
+        }
+        
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.8);color:white;padding:16px 28px;border-radius:12px;font-size:15px;z-index:10000;';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2000);
+        }
+        
+        function addToFavorites() {
+            const title = document.title;
+            const url = window.location.href;
+            const pageData = {
+                title: title,
+                url: url,
+                category: '急诊血液净化',
+                time: new Date().toLocaleString('zh-CN')
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('kimi_favorites') || '[]');
+            const exists = favorites.some(f => f.url === url);
+            
+            if (!exists) {
+                favorites.push(pageData);
+                localStorage.setItem('kimi_favorites', JSON.stringify(favorites));
+                showToast('⭐ 已添加到收藏！请在index.html查看');
+            } else {
+                showToast('⚠️ 该页面已在收藏列表中');
+            }
+        }
+    </script>
+</body>
+</html>
