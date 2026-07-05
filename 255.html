@@ -1,0 +1,533 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~低钾血症的临床表现与急诊处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #e6f3ff 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(33,150,243,0.3);
+            z-index: 100;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background: #1976D2;
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .nav-btns a, .nav-btns button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(76,175,80,0.3);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .nav-btns a:hover, .nav-btns button:hover {
+            background: #388E3C;
+        }
+        
+        /* 收藏按钮 */
+        .favorite-btn {
+            background: #FF9800 !important;
+            box-shadow: 0 3px 10px rgba(255,152,0,0.3) !important;
+        }
+        
+        .favorite-btn:hover {
+            background: #F57C00 !important;
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 900px;
+            margin: 70px auto 30px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            padding: 25px 20px;
+            background: linear-gradient(90deg, #1976D2, #2196F3, #42A5F5);
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+        
+        /* 表头蓝色 */
+        thead tr {
+            background: #1976D2 !important;
+        }
+        
+        thead th {
+            color: white;
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        /* 表格行 */
+        tbody tr:nth-child(odd) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #ffffff;
+        }
+        
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e0e0e0;
+            line-height: 1.8;
+            vertical-align: top;
+        }
+        
+        /* 第一列（分类）加粗 */
+        td:first-child {
+            font-weight: bold;
+            color: #1565C0;
+            white-space: nowrap;
+            width: 120px;
+        }
+        
+        /* 内容中的标记 */
+        .check-mark {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        .bullet {
+            color: #1976D2;
+            font-weight: bold;
+        }
+        
+        .diamond {
+            color: #FF9800;
+        }
+        
+        /* 注意标记 */
+        .notice {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        
+        /* 心电图图片区域 */
+        .ecg-note {
+            background: #fff3e0;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        
+        .ecg-note-title {
+            font-weight: bold;
+            color: #e65100;
+            margin-bottom: 5px;
+        }
+        
+        .ecg-note-desc {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* 页码区域 */
+        .page-number {
+            text-align: center;
+            padding: 20px;
+            font-size: 16px;
+            color: #666;
+            background: #f5f5f5;
+        }
+        
+        .page-number span {
+            color: #1976D2;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        /* 关键词标签区域 */
+        .tags-section {
+            padding: 20px;
+            background: #fafafa;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .tag-disease {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+        
+        .tag-drug {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .tag-bacteria {
+            background: #fff3e0;
+            color: #ef6c00;
+            border: 1px solid #ffcc80;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            padding: 20px;
+            background: #fff;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .copy-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #90caf9;
+            border-radius: 8px;
+            font-size: 14px;
+            background: #f8fbff;
+            color: #333;
+        }
+        
+        .copy-btn {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #1976D2;
+        }
+        
+        .copy-btn.copied {
+            background: #4CAF50;
+        }
+        
+        /* 关键词底部 */
+        .keywords-bottom {
+            padding: 15px 20px;
+            background: #e3f2fd;
+            text-align: center;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .keywords-bottom strong {
+            color: #1565C0;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .page-title {
+                font-size: 18px;
+                padding: 18px 15px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 12px 8px;
+            }
+            
+            td {
+                padding: 10px 8px;
+                font-size: 14px;
+            }
+            
+            td:first-child {
+                width: 90px;
+            }
+            
+            .home-btn, .nav-btns a, .nav-btns button {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 右上角导航 -->
+    <div class="nav-btns">
+        <a href="254.html">⬆ 上一页</a>
+        <a href="256.html">⬇ 下一页</a>
+        <button class="favorite-btn" onclick="addToFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <div class="container">
+        <!-- 标题 -->
+        <div class="page-title">~~~~~低钾血症的临床表现与急诊处理*****</div>
+        
+        <!-- 主表格 -->
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">低钾血症 - 急诊医学</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>常见病因<br>(续)</td>
+                    <td>
+                        <span class="check-mark">✓</span> 经尿丢失增加：常见原因为使用利尿药；少见原因如盐皮质激素活性增加（如原发性醛固酮增多症）、肾小管性酸中毒、应用两性霉素B、Bartter综合征与Gitelman综合征等
+                    </td>
+                </tr>
+                <tr>
+                    <td>临床表现</td>
+                    <td>
+                        <span class="bullet">●</span> 肌无力<br>
+                        &nbsp;&nbsp;<span class="check-mark">✓</span> 是低钾血症的首要临床表现<br>
+                        &nbsp;&nbsp;<span class="check-mark">✓</span> 长期慢性低钾，血钾＞2.5mmol/L，通常不会出现肌无力<br>
+                        &nbsp;&nbsp;<span class="check-mark">✓</span> 血钾＜2.5mmol/L可发生肌无力，通常从下肢开始，逐渐进展至躯干、上肢，严重者表现为肢体麻痹<br>
+                        <span class="bullet">●</span> 横纹肌溶解<br>
+                        &nbsp;&nbsp;<span class="check-mark">✓</span> 严重低钾血症（血钾＜2.5mmol/L）可导致肌肉痛性痉挛、横纹肌溶解<br>
+                        &nbsp;&nbsp;<span class="check-mark">✓</span> 横纹肌溶解使钾从细胞内释放到细胞外，这一过程可能掩盖基础低钾血症，甚至导致血钾浓度正常或升高<br>
+                        <span class="bullet">●</span> 心电图异常/心律失常<br>
+                        &nbsp;&nbsp;<span class="check-mark">✓</span> 心电图可呈现特征性改变，典型表现为T波结束后出现U波（图20），可合并ST段压低、T波低平，QT间期延长<br>
+                        &nbsp;&nbsp;<span class="check-mark">✓</span> 严重者可出现各种类型的心律失常，包括房性/室性期前收缩、窦性心动过缓、室上性心动过速、房室传导阻滞、室性心动过速，甚至心室颤动<br><br>
+                        <div class="ecg-note">
+                            <div class="ecg-note-title">📊 图20 低钾血症典型心电图改变</div>
+                            <div class="ecg-note-desc">注：T波结束后可见U波出现</div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>必做检查</td>
+                    <td>ABG、血常规、肝功能、肾全、电解质、心电图</td>
+                </tr>
+                <tr>
+                    <td>选做检查</td>
+                    <td>
+                        <span class="bullet">●</span> 心肌酶（包括CK、CK-MB）、肌钙蛋白、肌红蛋白、血糖<br>
+                        <span class="bullet">●</span> 24小时尿钾、肾素活性、醛固酮卧立位试验<br>
+                        <span class="bullet">●</span> 肾上腺CT
+                    </td>
+                </tr>
+                <tr>
+                    <td>急诊处理</td>
+                    <td>
+                        <span class="bullet">●</span> 补钾：通常选择氯化钾制剂，伴代谢性酸中毒的患者优先选
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 页码 -->
+        <div class="page-number">
+            页码：<span>255</span>
+        </div>
+        
+        <!-- 检索标签 -->
+        <div class="tags-section">
+            <div class="tags-title">🔍 检索标签（点击可检索）：</div>
+            <div class="tags-container">
+                <span class="tag tag-disease">低钾血症</span>
+                <span class="tag tag-disease">原发性醛固酮增多症</span>
+                <span class="tag tag-disease">肾小管性酸中毒</span>
+                <span class="tag tag-disease">Bartter综合征</span>
+                <span class="tag tag-disease">Gitelman综合征</span>
+                <span class="tag tag-disease">横纹肌溶解</span>
+                <span class="tag tag-disease">代谢性酸中毒</span>
+                <span class="tag tag-disease">心律失常</span>
+                <span class="tag tag-disease">心室颤动</span>
+                <span class="tag tag-disease">房室传导阻滞</span>
+                <span class="tag tag-disease">窦性心动过缓</span>
+                <span class="tag tag-disease">室性心动过速</span>
+                <span class="tag tag-disease">室上性心动过速</span>
+                <span class="tag tag-drug">利尿药</span>
+                <span class="tag tag-drug">两性霉素B</span>
+                <span class="tag tag-drug">氯化钾</span>
+                <span class="tag tag-drug">肌钙蛋白</span>
+            </div>
+        </div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <div class="copy-wrapper">
+                <input type="text" class="copy-input" id="copyText" value="低钾血症的临床表现与急诊处理；低钾血症、原发性醛固酮增多症、肾小管性酸中毒、Bartter综合征、Gitelman综合征、横纹肌溶解、代谢性酸中毒、心律失常、心室颤动、房室传导阻滞、窦性心动过缓、室性心动过速、室上性心动过速、利尿药、两性霉素B、氯化钾、肌钙蛋白；=255" readonly>
+                <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+            </div>
+        </div>
+        
+        <!-- 底部关键词 -->
+        <div class="keywords-bottom">
+            <strong>关键词：</strong>低钾血症 | 肌无力 | 横纹肌溶解 | 心电图异常 | 心律失常 | 原发性醛固酮增多症 | 肾小管性酸中毒 | Bartter综合征 | Gitelman综合征 | 利尿药 | 两性霉素B | 氯化钾 | 肌钙蛋白 | CK | CK-MB | 肌红蛋白 | 醛固酮 | 肾素 | 代谢性酸中毒 | 心室颤动 | 房室传导阻滞 | 窦性心动过缓 | 室性心动过速 | 室上性心动过速 | U波 | ST段压低
+        </div>
+    </div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 添加到收藏
+        function addToFavorite() {
+            const title = document.querySelector('.page-title').textContent;
+            const pageNum = '255';
+            const url = window.location.href;
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            const exists = favorites.some(f => f.pageNum === pageNum);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                pageNum: pageNum,
+                url: url,
+                time: new Date().toLocaleString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            try {
+                if (window.opener && !window.opener.closed) {
+                    window.opener.postMessage({
+                        type: 'addFavorite',
+                        data: {
+                            title: title,
+                            pageNum: pageNum,
+                            url: '255.html'
+                        }
+                    }, '*');
+                }
+            } catch(e) {}
+            
+            alert('⭐ 已收藏！页面 "' + title + '" 已添加到收藏夹。');
+        }
+        
+        window.addEventListener('message', function(e) {
+            if (e.data && e.data.type === 'addFavorite') {
+                console.log('收到收藏请求:', e.data.data);
+            }
+        });
+    </script>
+</body>
+</html>
