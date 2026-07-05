@@ -1,0 +1,641 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~缺血性脑卒中：检查与急诊处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #faf8f5 0%, #f0ece6 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #5a8fc7;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(90, 143, 199, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #4a7ab0;
+            transform: translateY(-2px);
+        }
+        
+        /* 右上角导航按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #6b9b7a;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            box-shadow: 0 2px 8px rgba(107, 155, 122, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #5a8a69;
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn.next {
+            background: #d4a373;
+            box-shadow: 0 2px 8px rgba(212, 163, 115, 0.3);
+        }
+        
+        .nav-btn.next:hover {
+            background: #c49363;
+        }
+        
+        /* 收藏按钮 */
+        .favorite-btn {
+            background: #c97b7b;
+            box-shadow: 0 2px 8px rgba(201, 123, 123, 0.3);
+        }
+        
+        .favorite-btn:hover {
+            background: #b86a6a;
+        }
+        
+        .favorite-btn.active {
+            background: #6b9b7a;
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 15px 30px;
+        }
+        
+        /* 标题样式 */
+        h1 {
+            text-align: center;
+            color: #3d5a80;
+            font-size: 26px;
+            margin-bottom: 10px;
+            padding: 15px;
+            background: linear-gradient(90deg, #edf2f7 0%, #d6e3f0 50%, #edf2f7 100%);
+            border-radius: 12px;
+            border-left: 5px solid #5a8fc7;
+            border-right: 5px solid #5a8fc7;
+        }
+        
+        h2 {
+            color: #2d3748;
+            font-size: 20px;
+            margin: 20px 0 12px;
+            padding: 10px 15px;
+            background: #edf2f7;
+            border-radius: 8px;
+            border-left: 4px solid #5a8fc7;
+        }
+        
+        h3 {
+            color: #4a5568;
+            font-size: 16px;
+            margin: 15px 0 10px;
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+        
+        /* 表格头部蓝色 */
+        thead tr {
+            background: linear-gradient(135deg, #5a8fc7 0%, #3d5a80 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        /* 表格第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 16px;
+            font-weight: 600;
+            background: #f8fafc;
+        }
+        
+        td, th {
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+            transition: background 0.3s ease;
+        }
+        
+        /* 列表样式 */
+        ul, ol {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+        
+        li {
+            margin: 8px 0;
+            color: #4a5568;
+        }
+        
+        /* 特殊标记 */
+        .check-mark {
+            color: #38a169;
+            font-weight: bold;
+        }
+        
+        .bullet {
+            color: #5a8fc7;
+            font-weight: bold;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            color: #a0aec0;
+            font-size: 16px;
+            margin: 20px 0;
+            padding: 15px;
+        }
+        
+        /* 底部编辑框区域 */
+        .bottom-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #4a5568;
+            background: #f8fafc;
+        }
+        
+        .copy-btn {
+            background: #7b8cde;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #6a7bd0;
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn.copied {
+            background: #6b9b7a;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            text-align: center;
+            padding: 20px;
+            margin: 20px 0;
+            background: linear-gradient(135deg, #f0e6f5 0%, #e6d5f0 100%);
+            border-radius: 12px;
+        }
+        
+        .keywords-title {
+            color: #7b68a6;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .keyword-tag {
+            display: inline-block;
+            background: white;
+            color: #7b68a6;
+            padding: 6px 14px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #d6c2e8;
+            transition: all 0.3s ease;
+        }
+        
+        .keyword-tag:hover {
+            background: #7b68a6;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* 特色检索标签 */
+        .search-tags {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+        
+        .search-tags-title {
+            color: #2d3748;
+            font-size: 16px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .tag-category {
+            margin: 15px 0;
+        }
+        
+        .tag-category-name {
+            color: #4a5568;
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .search-tag {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 5px;
+            border-radius: 25px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .disease-tag {
+            background: #fde2e2;
+            color: #c53030;
+            border: 1px solid #fbb6b6;
+        }
+        
+        .disease-tag:hover {
+            background: #c53030;
+            color: white;
+        }
+        
+        .drug-tag {
+            background: #d4edda;
+            color: #276749;
+            border: 1px solid #a8d5ba;
+        }
+        
+        .drug-tag:hover {
+            background: #276749;
+            color: white;
+        }
+        
+        .bacteria-tag {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .bacteria-tag:hover {
+            background: #856404;
+            color: white;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .container {
+                padding: 70px 10px 20px;
+            }
+            
+            h1 {
+                font-size: 20px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            
+            td, th {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                top: 10px;
+                left: 10px;
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <button class="home-btn" onclick="window.location.href='index.html'">🏠 返回首页</button>
+    
+    <!-- 右上角导航按钮 -->
+    <div class="nav-buttons">
+        <button class="nav-btn" onclick="window.location.href='177.html'">← 上一页</button>
+        <button class="nav-btn next" onclick="window.location.href='179.html'">下一页 →</button>
+        <button class="nav-btn favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">❤ 收藏</button>
+    </div>
+    
+    <div class="container">
+        <!-- 标题 -->
+        <h1>~~~~~缺血性脑卒中：检查与急诊处理*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~缺血性脑卒中：检查与急诊处理*****、缺血性脑卒中检查与急诊处理、4. 必做检查、5. 选做检查、6. 急诊处理</div>
+        
+        <!-- 主要内容表格 -->
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">缺血性脑卒中检查与急诊处理</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        <span class="check-mark">✓</span> 检查头部有无创伤。<br>
+                        <span class="check-mark">✓</span> 检查有无舌咬伤，如存在可能提示癫痫发作。<br>
+                        <span class="check-mark">✓</span> 神经系统检查应尽量确认病史采集中的发现，同时提供可量化的检查，为进一步评估做准备。最常采用美国国立卫生研究院脑卒中量表（NIHSS），通常将NIHSS评分≤3分定义为轻型卒中。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="background: #edf2f7; font-weight: bold; color: #3d5a80;">4. 必做检查</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="bullet">●</span> 即刻实验室检查：对于所有突发神经功能恶化或急性脑卒中的患者，务必进行紧急头颅CT或MRI。<br><br>
+                        <span class="bullet">●</span> 所有疑似脑卒中的患者还应紧急接受以下检查。<br>
+                        <span class="check-mark">✓</span> 平扫头颅CT或MRI（含DWI）。<br>
+                        <span class="check-mark">✓</span> 快速血糖检测。<br>
+                        <span class="check-mark">✓</span> 氧饱和度检测。<br>
+                        <span class="check-mark">✓</span> ECG。<br>
+                        <span class="check-mark">✓</span> 全血细胞计数（含血小板）。<br>
+                        <span class="check-mark">✓</span> 血清电解质、尿素氮和肌酐检测。<br>
+                        <span class="check-mark">✓</span> 肝功能检查。<br>
+                        <span class="check-mark">✓</span> cTn检测。<br>
+                        <span class="check-mark">✓</span> PT和INR检测。<br>
+                        <span class="check-mark">✓</span> APTT检测。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="background: #edf2f7; font-weight: bold; color: #3d5a80;">5. 选做检查</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="bullet">●</span> 毒理学筛查。<br>
+                        <span class="bullet">●</span> 血乙醇水平检测。<br>
+                        <span class="bullet">●</span> 血、尿HCG测定：适用于育龄期女性。<br>
+                        <span class="bullet">●</span> ABG：疑似缺氧患者。<br>
+                        <span class="bullet">●</span> 胸片：疑似肺部疾病患者。<br>
+                        <span class="bullet">●</span> 脑电图：疑有癫痫发作。<br>
+                        <span class="bullet">●</span> 若患者出现发热，需行胸片检查、尿液分析和血培养。<br>
+                        <span class="bullet">●</span> 心电监护：以发现慢性或间歇性心律失常（如心房颤动）。<br>
+                        <span class="bullet">●</span> 经胸壁和经食管超声心动图：可充分评估脑栓塞的其他心源性和主动脉源性原因。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="background: #edf2f7; font-weight: bold; color: #3d5a80;">6. 急诊处理</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="bullet">●</span> 第一时间请神经科会诊。<br><br>
+                        <span class="bullet">●</span> 初期目标<br>
+                        <span class="check-mark">✓</span> 确保病情稳定的同时特别关注气道、呼吸和循环。<br>
+                        <span class="check-mark">✓</span> 迅速逆转任何促成患者病情的因素。<br>
+                        <span class="check-mark">✓</span> 确定急性缺血性脑卒中患者是否适合静脉溶栓治疗或血管内取栓术。
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 页码 -->
+        <div class="page-number">166</div>
+        
+        <!-- 页码链接显示 -->
+        <div style="text-align: center; color: #a0aec0; font-size: 14px; margin-bottom: 20px;">
+            页码：166
+        </div>
+        
+        <!-- 复制编辑框区域 -->
+        <div class="bottom-section">
+            <h3 style="margin-bottom: 15px; color: #4a5568;">📋 快速复制</h3>
+            <div class="copy-section">
+                <input type="text" class="copy-input" id="copyInput" value="缺血性脑卒中：检查与急诊处理；缺血性脑卒中、脑卒中、轻型卒中、NIHSS、美国国立卫生研究院脑卒中量表、癫痫发作、头颅CT、MRI、DWI、ECG、全血细胞计数、血小板、血清电解质、尿素氮、肌酐、肝功能、cTn、PT、INR、APTT、毒理学筛查、血乙醇、HCG、ABG、胸片、脑电图、血培养、心电监护、心房颤动、超声心动图、经胸壁超声心动图、经食管超声心动图、静脉溶栓治疗、血管内取栓术、神经科会诊；=166" readonly>
+                <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+            </div>
+        </div>
+        
+        <!-- 关键词区域 -->
+        <div class="keywords-section">
+            <div class="keywords-title">🔍 关键词</div>
+            <span class="keyword-tag">缺血性脑卒中</span>
+            <span class="keyword-tag">NIHSS</span>
+            <span class="keyword-tag">轻型卒中</span>
+            <span class="keyword-tag">头颅CT</span>
+            <span class="keyword-tag">MRI</span>
+            <span class="keyword-tag">DWI</span>
+            <span class="keyword-tag">ECG</span>
+            <span class="keyword-tag">cTn</span>
+            <span class="keyword-tag">PT</span>
+            <span class="keyword-tag">INR</span>
+            <span class="keyword-tag">APTT</span>
+            <span class="keyword-tag">静脉溶栓</span>
+            <span class="keyword-tag">血管内取栓</span>
+        </div>
+        
+        <!-- 特色检索标签 -->
+        <div class="search-tags">
+            <div class="search-tags-title">🏷️ 特色检索标签</div>
+            
+            <div class="tag-category">
+                <div class="tag-category-name">🦠 疾病</div>
+                <a href="#" class="search-tag disease-tag">缺血性脑卒中</a>
+                <a href="#" class="search-tag disease-tag">脑卒中</a>
+                <a href="#" class="search-tag disease-tag">轻型卒中</a>
+                <a href="#" class="search-tag disease-tag">癫痫发作</a>
+                <a href="#" class="search-tag disease-tag">心房颤动</a>
+                <a href="#" class="search-tag disease-tag">急性缺血性脑卒中</a>
+            </div>
+            
+            <div class="tag-category">
+                <div class="tag-category-name">💊 药物/治疗</div>
+                <a href="#" class="search-tag drug-tag">静脉溶栓治疗</a>
+                <a href="#" class="search-tag drug-tag">血管内取栓术</a>
+                <a href="#" class="search-tag drug-tag">神经科会诊</a>
+                <a href="#" class="search-tag drug-tag">心电监护</a>
+            </div>
+            
+            <div class="tag-category">
+                <div class="tag-category-name">🧫 细菌</div>
+                <span style="color: #a0aec0; font-size: 13px;">本页内容主要涉及检查与急诊处理，未包含细菌相关内容</span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 复制到剪贴板功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            navigator.clipboard.writeText(input.value).then(function() {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '✓ 已复制';
+                btn.classList.add('copied');
+                
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }).catch(function(err) {
+                // 降级方案
+                document.execCommand('copy');
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '✓ 已复制';
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                }, 2000);
+            });
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFavorited = btn.classList.contains('active');
+            
+            if (!isFavorited) {
+                // 添加到收藏
+                btn.classList.add('active');
+                btn.innerHTML = '✓ 已收藏';
+                
+                // 保存到localStorage
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '缺血性脑卒中：检查与急诊处理',
+                    url: window.location.href,
+                    pageNum: '166'
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.pageNum === '166');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                // 尝试更新index.html的收藏类目
+                try {
+                    const bc = new BroadcastChannel('favorite_channel');
+                    bc.postMessage({
+                        action: 'add',
+                        data: pageInfo
+                    });
+                } catch(e) {
+                    console.log('BroadcastChannel not supported');
+                }
+                
+                alert('已添加到收藏！请在index.html查看收藏列表。');
+            } else {
+                // 取消收藏
+                btn.classList.remove('active');
+                btn.innerHTML = '❤ 收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.pageNum !== '166');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.pageNum === '166');
+            
+            if (isFavorited) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('active');
+                btn.innerHTML = '✓ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
