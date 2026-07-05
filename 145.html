@@ -1,0 +1,599 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~腹水评估与鉴别诊断*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5ee 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #333;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .header h1 {
+            font-size: 22px;
+            color: #1a5276;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .nav-btn, .fav-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .nav-btn {
+            background: #3498db;
+            color: white;
+            box-shadow: 0 2px 8px rgba(52,152,219,0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .fav-btn {
+            background: #e74c3c;
+            color: white;
+            box-shadow: 0 2px 8px rgba(231,76,60,0.3);
+        }
+        
+        .fav-btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        .fav-btn.active {
+            background: #27ae60;
+        }
+        
+        .back-home {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            padding: 8px 16px;
+            background: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(46,204,113,0.3);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .back-home:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        thead {
+            background: #2c5aa0;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 600;
+            border: 1px solid #1e3d6f;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e8e8e8;
+            transition: background 0.2s;
+        }
+        
+        tbody tr:hover {
+            background: #f8f9ff;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border: 1px solid #e8e8e8;
+            line-height: 1.8;
+            vertical-align: top;
+        }
+        
+        .section-title {
+            background: #e8f0fe;
+            font-weight: 600;
+            color: #1a5276;
+        }
+        
+        .sub-item {
+            padding-left: 20px;
+            color: #555;
+        }
+        
+        .check-mark {
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .diamond {
+            color: #e67e22;
+            margin-right: 5px;
+        }
+        
+        .square {
+            color: #7f8c8d;
+            margin-right: 5px;
+        }
+        
+        .highlight-box {
+            background: #fff8e1;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #f39c12;
+        }
+        
+        .highlight-box strong {
+            color: #d35400;
+        }
+        
+        .tags-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #2c5aa0;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 4px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #ffeaa7;
+            color: #d63031;
+        }
+        
+        .tag-disease:hover {
+            background: #fdcb6e;
+        }
+        
+        .tag-bacteria {
+            background: #dfe6e9;
+            color: #2d3436;
+        }
+        
+        .tag-bacteria:hover {
+            background: #b2bec3;
+        }
+        
+        .tag-drug {
+            background: #a8e6cf;
+            color: #1b4332;
+        }
+        
+        .tag-drug:hover {
+            background: #74c69d;
+        }
+        
+        .copy-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            font-size: 13px;
+            outline: none;
+        }
+        
+        .copy-btn {
+            padding: 12px 24px;
+            background: #9b59b6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #8e44ad;
+        }
+        
+        .copy-btn.copied {
+            background: #27ae60;
+        }
+        
+        .page-info {
+            text-align: center;
+            padding: 15px;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        .page-number {
+            display: inline-block;
+            padding: 8px 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            font-weight: 600;
+            color: #2c5aa0;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                padding-top: 60px;
+            }
+            
+            .header h1 {
+                font-size: 18px;
+            }
+            
+            .nav-buttons {
+                position: relative;
+                top: 0;
+                right: 0;
+                flex-direction: row;
+                justify-content: center;
+                margin-bottom: 15px;
+            }
+            
+            .back-home {
+                position: relative;
+                top: 0;
+                left: 0;
+                margin-bottom: 10px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="back-home">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <button class="nav-btn" onclick="location.href='144.html'">上一页</button>
+        <button class="nav-btn" onclick="location.href='146.html'">下一页</button>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="header">
+        <h1>~~~~~腹水评估与鉴别诊断*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~腹水评估与鉴别诊断*****、腹水评估与鉴别诊断（）、一、腹水病因分类、二、评估、三、腹水检查项目、肝硬化相关、腹膜疾病、其他病因、症状、查体、影像学检查、腹水穿刺、外观检查、常规检查、生化检查、病原学、病理学、肿瘤标志物</div>
+    </div>
+    
+    <!-- 表格内容 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">腹水评估与鉴别诊断（第133页）</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2" class="section-title">一、腹水病因分类</td>
+                </tr>
+                <tr>
+                    <td style="width: 120px;"><strong>肝硬化相关</strong></td>
+                    <td>液透析相关、低蛋白血症、肾病综合征、蛋白丢失性肠病、重度营养不良</td>
+                </tr>
+                <tr>
+                    <td><strong>腹膜疾病</strong></td>
+                    <td>
+                        <span class="check-mark">✓</span>恶性腹水（如卵巢癌、间皮瘤等）<br>
+                        <span class="check-mark">✓</span>感染性腹膜炎（如结核和真菌感染）<br>
+                        <span class="check-mark">✓</span>嗜酸性粒细胞性胃肠炎<br>
+                        <span class="check-mark">✓</span>淀粉肉芽肿性腹膜炎<br>
+                        <span class="check-mark">✓</span>腹膜透析相关
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>其他病因</strong></td>
+                    <td>胰腺炎、腹腔妊娠、Whipple病和结节病</td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2" class="section-title">二、评估</td>
+                </tr>
+                <tr>
+                    <td><strong>症状</strong></td>
+                    <td>
+                        <span class="check-mark">✓</span>腹部症状：腹胀、腹部膨隆、蛙状腹<br>
+                        <span class="check-mark">✓</span>压迫症状：呼吸困难、早饱<br>
+                        <span class="check-mark">✓</span>感染症状：发热、压痛
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>查体</strong></td>
+                    <td>移动性浊音提示腹水量在1500ml以上</td>
+                </tr>
+                <tr>
+                    <td><strong>影像学检查</strong></td>
+                    <td>
+                        <span class="check-mark">✓</span>超声：无创，可检出最少100ml的少量腹水<br>
+                        <span class="check-mark">✓</span>CT/MRI：可以寻找病因
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>腹水穿刺</strong></td>
+                    <td>每一个新发腹水患者均应进行</td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2" class="section-title">三、腹水检查项目</td>
+                </tr>
+                <tr>
+                    <td><strong>外观检查</strong></td>
+                    <td>
+                        <span class="diamond">◆</span><strong>乳糜性：</strong>乳白色不透明，甘油三酯（TG）↑，白细胞（WBC）↑，总蛋白（TP）＞30g/L<br>
+                        <span class="square">□</span>多见于腹腔内肿瘤、腹膜后肿瘤、腹腔内炎症、胸导管阻塞、外伤或手术<br>
+                        <span class="square">□</span>假性乳糜性腹水：多见于慢性腹腔化脓性感染，为卵磷脂、胆固醇以及小量蛋白、脂肪颗粒，乙醚试验阴性<br><br>
+                        <span class="diamond">◆</span><strong>血性：</strong>大量红细胞，TP＞30g/L，多见于实质脏器破裂出血、急性门静脉血栓、急性出血坏死性胰腺炎、腹腔内肿瘤、结核性腹膜炎、Meigs综合征
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>常规检查</strong></td>
+                    <td>细胞计数分类</td>
+                </tr>
+                <tr>
+                    <td><strong>生化检查</strong></td>
+                    <td>TP、白蛋白、淀粉酶（AMY）、LDH、胆红素、TG等，腺苷脱氨酶（ADA）＞40U/L者应考虑结核</td>
+                </tr>
+                <tr>
+                    <td><strong>病原学</strong></td>
+                    <td>细菌培养出多种菌提示消化道穿孔</td>
+                </tr>
+                <tr>
+                    <td><strong>病理学</strong></td>
+                    <td>细胞病理检查</td>
+                </tr>
+                <tr>
+                    <td><strong>肿瘤标志物</strong></td>
+                    <td>AFP↑提示肝癌；CEA↑提示胰腺和肠道肿瘤</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- SAAG注意要点 -->
+    <div class="highlight-box">
+        <strong>注意：SAAG（血清-腹水白蛋白梯度）</strong>＝血清白蛋白－腹水白蛋白<br>
+        ≥11g/L提示门脉高压性腹水，腹水成因有静水压力性漏出因素；<br>
+        ＜11g/L提示非门脉高压性腹水，腹水成因没有静水压因素参与，多为渗出性。<br>
+        具体鉴别流程见图18。
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <span class="tag tag-disease" onclick="filterByTag('腹水')">腹水</span>
+        <span class="tag tag-disease" onclick="filterByTag('肝硬化')">肝硬化</span>
+        <span class="tag tag-disease" onclick="filterByTag('恶性腹水')">恶性腹水</span>
+        <span class="tag tag-disease" onclick="filterByTag('卵巢癌')">卵巢癌</span>
+        <span class="tag tag-disease" onclick="filterByTag('间皮瘤')">间皮瘤</span>
+        <span class="tag tag-disease" onclick="filterByTag('感染性腹膜炎')">感染性腹膜炎</span>
+        <span class="tag tag-disease" onclick="filterByTag('结核')">结核</span>
+        <span class="tag tag-disease" onclick="filterByTag('真菌感染')">真菌感染</span>
+        <span class="tag tag-disease" onclick="filterByTag('嗜酸性粒细胞性胃肠炎')">嗜酸性粒细胞性胃肠炎</span>
+        <span class="tag tag-disease" onclick="filterByTag('淀粉肉芽肿性腹膜炎')">淀粉肉芽肿性腹膜炎</span>
+        <span class="tag tag-disease" onclick="filterByTag('胰腺炎')">胰腺炎</span>
+        <span class="tag tag-disease" onclick="filterByTag('腹腔妊娠')">腹腔妊娠</span>
+        <span class="tag tag-disease" onclick="filterByTag('Whipple病')">Whipple病</span>
+        <span class="tag tag-disease" onclick="filterByTag('结节病')">结节病</span>
+        <span class="tag tag-disease" onclick="filterByTag('肾病综合征')">肾病综合征</span>
+        <span class="tag tag-disease" onclick="filterByTag('蛋白丢失性肠病')">蛋白丢失性肠病</span>
+        <span class="tag tag-disease" onclick="filterByTag('低蛋白血症')">低蛋白血症</span>
+        <span class="tag tag-disease" onclick="filterByTag('乳糜性腹水')">乳糜性腹水</span>
+        <span class="tag tag-disease" onclick="filterByTag('假性乳糜性腹水')">假性乳糜性腹水</span>
+        <span class="tag tag-disease" onclick="filterByTag('血性腹水')">血性腹水</span>
+        <span class="tag tag-disease" onclick="filterByTag('门静脉血栓')">门静脉血栓</span>
+        <span class="tag tag-disease" onclick="filterByTag('出血坏死性胰腺炎')">出血坏死性胰腺炎</span>
+        <span class="tag tag-disease" onclick="filterByTag('结核性腹膜炎')">结核性腹膜炎</span>
+        <span class="tag tag-disease" onclick="filterByTag('Meigs综合征')">Meigs综合征</span>
+        <span class="tag tag-disease" onclick="filterByTag('肝癌')">肝癌</span>
+        <span class="tag tag-disease" onclick="filterByTag('胰腺癌')">胰腺癌</span>
+        <span class="tag tag-disease" onclick="filterByTag('肠道肿瘤')">肠道肿瘤</span>
+        <span class="tag tag-disease" onclick="filterByTag('消化道穿孔')">消化道穿孔</span>
+        <span class="tag tag-bacteria" onclick="filterByTag('细菌')">细菌</span>
+        <span class="tag tag-bacteria" onclick="filterByTag('多种菌')">多种菌</span>
+        <span class="tag tag-drug" onclick="filterByTag('腺苷脱氨酶')">腺苷脱氨酶</span>
+        <span class="tag tag-drug" onclick="filterByTag('ADA')">ADA</span>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="腹水评估与鉴别诊断；腹水、肝硬化、恶性腹水、结核性腹膜炎、肿瘤标志物、SAAG、乳糜性腹水、血性腹水；=133" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <!-- 页码信息 -->
+    <div class="page-info">
+        <span class="page-number">第 133 页</span>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                
+                // 保存到localStorage
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '腹水评估与鉴别诊断',
+                    page: '133',
+                    url: '133.html',
+                    category: '急诊疾病'
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.page === '133');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                    
+                    // 同时更新index.html的收藏（通过postMessage或共享存储）
+                    updateIndexFavorites(pageInfo);
+                }
+                
+                alert('已添加到收藏！');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.page !== '133');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        function updateIndexFavorites(info) {
+            // 尝试通过广播方式通知index页面
+            localStorage.setItem('lastFavorited', JSON.stringify(info));
+            localStorage.setItem('updateIndex', Date.now().toString());
+        }
+        
+        // 标签筛选功能
+        function filterByTag(tag) {
+            alert('正在搜索标签: ' + tag + '\n（在实际应用中，这将跳转到搜索结果页或筛选相关内容）');
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.page === '133');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
