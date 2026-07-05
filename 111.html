@@ -1,0 +1,426 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~心房颤动（续）- 选做检查与急诊处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            background-image: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .back-btn {
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background-color: #45a049;
+        }
+        
+        .favorite-btn {
+            background-color: #FF9800;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+        
+        .favorite-btn:hover {
+            background-color: #e68900;
+        }
+        
+        .favorite-btn.active {
+            background-color: #f44336;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1565C0;
+            font-size: 28px;
+            margin: 20px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .main-table {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto 30px;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .main-table th {
+            background-color: #1976D2;
+            color: white;
+            padding: 18px 15px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .main-table td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #e3f2fd;
+            color: #333;
+            font-size: 15px;
+            line-height: 1.8;
+            vertical-align: top;
+        }
+        
+        .main-table tr:hover {
+            background-color: #f5fbff;
+        }
+        
+        .section-title {
+            background-color: #e3f2fd;
+            font-weight: bold;
+            color: #1565C0;
+            font-size: 16px;
+        }
+        
+        .bullet {
+            color: #1976D2;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+        
+        .check-mark {
+            color: #4CAF50;
+            margin-right: 6px;
+        }
+        
+        .diamond {
+            color: #FF9800;
+            margin-right: 6px;
+        }
+        
+        .bottom-section {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #90caf9;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+            background-color: #fff;
+        }
+        
+        .copy-btn {
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background-color: #1976D2;
+        }
+        
+        .tags-section {
+            margin-bottom: 20px;
+        }
+        
+        .tags-title {
+            color: #1565C0;
+            font-size: 16px;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: #e3f2fd;
+            color: #1976D2;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 4px;
+            font-size: 13px;
+            border: 1px solid #90caf9;
+        }
+        
+        .keywords-section {
+            text-align: center;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .keywords-title {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .keywords {
+            color: #1976D2;
+            font-size: 15px;
+            word-break: break-all;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+            padding: 10px;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #333;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            display: none;
+            z-index: 1000;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 22px;
+            }
+            
+            .main-table th {
+                font-size: 16px;
+                padding: 14px 10px;
+            }
+            
+            .main-table td {
+                font-size: 14px;
+                padding: 10px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="110.html" class="nav-btn">上一页</a>
+            <a href="112.html" class="nav-btn">下一页</a>
+            <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~心房颤动（续）- 选做检查与急诊处理*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~心房颤动（续）- 选做检查与急诊处理*****、心房颤动 - 选做检查与急诊处理、5. 选做检查、6. 急诊处理</div>
+    
+    <table class="main-table">
+        <tr>
+            <th colspan="2">心房颤动 - 选做检查与急诊处理</th>
+        </tr>
+        <tr>
+            <td colspan="2" class="section-title">5. 选做检查</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <span class="bullet">●</span>超声心动图：发现可能存在的心脏瓣膜病、心肌病、心包疾病、先天性心脏病、肺动脉高压，初步筛查心房血栓，对下一步对因治疗以及抗凝和是否复律提供依据。<br><br>
+                <span class="bullet">●</span>基线筛查：甲状腺功能，尤其是TSH和游离T₄水平，用于筛查甲亢或亚临床型甲亢；糖化血红蛋白，筛查糖尿病。<br><br>
+                <span class="bullet">●</span>伴发或共存疾病的相关检查，如急性心力衰竭——胸片、BNP；COPD急性发作——ABG。
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="section-title">6. 急诊处理</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <span class="bullet">●</span>两个主要治疗目标：控制症状和预防血栓栓塞。<br><br>
+                <span class="bullet">●</span>紧急情况：需要送进抢救室进行监护下诊治。<br>
+                <span class="check-mark">✓</span>因快速心室率导致严重难治性低血压、重度急性心力衰竭及持续心肌缺血者，可能需要紧急电复律，双向波50～100J同步电复律。<br>
+                <span class="check-mark">✓</span>电复律前予以吸氧并尽量维持血氧饱和度和电解质（尤其是血钾水平）接近正常。<br>
+                <span class="check-mark">✓</span>紧急复律前抗凝，可选择肝素或低分子肝素。<br>
+                <span class="check-mark">✓</span>使患者处于程序化镇静中，可采用丙泊酚，或依托咪酯，或咪达唑仑等。<br>
+                <span class="check-mark">✓</span>复律期间及之后注意保护气道，必要时予以人工辅助通气。<br><br>
+                <span class="bullet">●</span>非紧急情况<br>
+                <span class="check-mark">✓</span>复律：结合急诊具体情况，一般仅限于48小时以内新发房颤者；对发作超过48小时又需要复律的情况可先行经食管超声心动图除外心房血栓，再给予复律。<br>
+                <span class="diamond">◇</span>适用于症状性房颤而无法自发终止者，但大多数情况下不需早期复律。<br>
+                <span class="diamond">◇</span>不适宜早期复律者：①无症状或症状轻微，尤其是合并多种疾病、高龄和预后差的患者；②需要抗凝但患者拒绝抗凝的患者，除非发作时间明确小于48小时；③超声心动图发现心房内血栓；④之前复律失败；⑤复律前未控制潜在诱因或估计无法维持窦性心律的房颤，如甲亢等。<br>
+                <span class="diamond">◇</span>复律方法：①推荐首选电复律；②药物复律，首选普罗帕酮（不推荐用于结构性心脏病患者），还可选胺碘酮或伊布利特。<br>
+                <span class="check-mark">✓</span>控制心室率：大多数情况下，房颤的治疗优选心室率控制，
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center; color: #999; font-size: 13px;">- 第99页 -</td>
+        </tr>
+    </table>
+    
+    <div class="bottom-section">
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="心房颤动；选做检查；急诊处理；超声心动图；甲状腺功能；TSH；游离T₄；糖化血红蛋白；胸片；BNP；ABG；电复律；同步电复律；肝素；低分子肝素；丙泊酚；依托咪酯；咪达唑仑；普罗帕酮；胺碘酮；伊布利特；心室率控制；=111" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+        
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 检索标签</div>
+            <span class="tag">心房颤动</span>
+            <span class="tag">心脏瓣膜病</span>
+            <span class="tag">心肌病</span>
+            <span class="tag">先天性心脏病</span>
+            <span class="tag">肺动脉高压</span>
+            <span class="tag">甲亢</span>
+            <span class="tag">糖尿病</span>
+            <span class="tag">急性心力衰竭</span>
+            <span class="tag">COPD</span>
+            <span class="tag">肝素</span>
+            <span class="tag">低分子肝素</span>
+            <span class="tag">丙泊酚</span>
+            <span class="tag">依托咪酯</span>
+            <span class="tag">咪达唑仑</span>
+            <span class="tag">普罗帕酮</span>
+            <span class="tag">胺碘酮</span>
+            <span class="tag">伊布利特</span>
+        </div>
+        
+        <div class="keywords-section">
+            <div class="keywords-title">关键词</div>
+            <div class="keywords">心房颤动、选做检查、急诊处理、超声心动图、甲状腺功能、TSH、游离T₄、糖化血红蛋白、胸片、BNP、ABG、电复律、同步电复律、肝素、低分子肝素、丙泊酚、依托咪酯、咪达唑仑、普罗帕酮、胺碘酮、伊布利特、心室率控制、心脏瓣膜病、心肌病、心包疾病、先天性心脏病、肺动脉高压、甲亢、糖尿病、急性心力衰竭、COPD</div>
+        </div>
+        
+        <div class="page-number">页码：111</div>
+    </div>
+    
+    <div class="toast" id="toast">已复制到剪贴板！</div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                showToast('已复制到剪贴板！');
+            }).catch(function() {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            });
+        }
+        
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(function() {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            if (btn.classList.contains('active')) {
+                btn.classList.remove('active');
+                btn.innerHTML = '☆ 收藏';
+                showToast('已取消收藏');
+            } else {
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+                showToast('已添加到收藏');
+                
+                try {
+                    const favoriteData = {
+                        title: '心房颤动（续）- 选做检查与急诊处理',
+                        url: window.location.href,
+                        page: '111'
+                    };
+                    localStorage.setItem('favorite_111', JSON.stringify(favoriteData));
+                } catch(e) {
+                    console.log('localStorage not available');
+                }
+            }
+        }
+        
+        window.onload = function() {
+            try {
+                const saved = localStorage.getItem('favorite_111');
+                if (saved) {
+                    const btn = document.getElementById('favoriteBtn');
+                    btn.classList.add('active');
+                    btn.innerHTML = '★ 已收藏';
+                }
+            } catch(e) {}
+        };
+    </script>
+</body>
+</html>
