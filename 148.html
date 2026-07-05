@@ -1,0 +1,580 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~AKI分期与常见病因及尿沉渣检查*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e6eef7 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #2d3748;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .back-btn {
+            background: #3182ce;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(49, 130, 206, 0.3);
+        }
+        
+        .back-btn:hover {
+            background: #2c5282;
+            transform: translateY(-2px);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #4299e1;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(66, 153, 225, 0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #3182ce;
+            transform: translateY(-1px);
+        }
+        
+        .fav-btn {
+            background: #ed8936;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(237, 137, 54, 0.3);
+        }
+        
+        .fav-btn:hover {
+            background: #dd6b20;
+            transform: translateY(-1px);
+        }
+        
+        .fav-btn.active {
+            background: #c53030;
+        }
+        
+        .main-title {
+            text-align: center;
+            font-size: 26px;
+            color: #2b6cb0;
+            margin: 15px 0 25px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.08);
+        }
+        
+        .subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #4a5568;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        thead {
+            background: #2b6cb0;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        
+        tbody td {
+            padding: 10px 12px;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+            vertical-align: top;
+            line-height: 1.7;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        tbody tr:hover {
+            background: #edf2f7;
+        }
+        
+        .section-header {
+            background: #ebf8ff !important;
+            color: #2b6cb0;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        
+        .category-cell {
+            background: #f0fff4;
+            color: #276749;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        .subcategory-cell {
+            background: #fffaf0;
+            color: #c05621;
+            font-weight: 500;
+        }
+        
+        .detail-cell {
+            color: #4a5568;
+        }
+        
+        .important-note {
+            color: #c53030;
+            font-weight: 600;
+        }
+        
+        .drug-name {
+            color: #6b46c1;
+            font-weight: 600;
+        }
+        
+        .dosage {
+            color: #2d3748;
+            background: #fef3c7;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        .nested-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 8px 0;
+        }
+        
+        .nested-table th {
+            background: #4299e1;
+            color: white;
+            padding: 10px;
+            font-size: 13px;
+            text-align: center;
+        }
+        
+        .nested-table td {
+            padding: 10px;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+        }
+        
+        .tags-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #4a5568;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            border: none;
+        }
+        
+        .tag-disease {
+            background: #fed7d7;
+            color: #c53030;
+        }
+        
+        .tag-disease:hover {
+            background: #fc8181;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .tag-bacteria:hover {
+            background: #68d391;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #e9d8fd;
+            color: #6b46c1;
+        }
+        
+        .tag-drug:hover {
+            background: #b794f4;
+            color: white;
+        }
+        
+        .tag-organ {
+            background: #bee3f8;
+            color: #2b6cb0;
+        }
+        
+        .tag-organ:hover {
+            background: #63b3ed;
+            color: white;
+        }
+        
+        .copy-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #4a5568;
+        }
+        
+        .copy-btn {
+            background: #48bb78;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(72, 187, 120, 0.3);
+        }
+        
+        .copy-btn:hover {
+            background: #38a169;
+        }
+        
+        .copy-btn.copied {
+            background: #805ad5;
+        }
+        
+        .page-info {
+            text-align: center;
+            margin: 20px 0;
+            color: #718096;
+            font-size: 14px;
+        }
+        
+        .keywords {
+            text-align: center;
+            margin: 15px 0 30px;
+            color: #a0aec0;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 20px;
+            }
+            
+            .subtitle {
+                font-size: 15px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                font-size: 12px;
+                padding: 8px;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-buttons {
+                flex-direction: row;
+                justify-content: flex-end;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="147.html" class="nav-btn">上一页</a>
+            <a href="149.html" class="nav-btn">下一页</a>
+            <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <h1 class="main-title">~~~~~AKI分期与常见病因及尿沉渣检查*****</h1>
+    <div class="subtitle">AKI分期续表 | AKI常见病因 | 并发症 | 必做检查 | 尿沉渣结果</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>章节</th>
+                    <th>分类/项目</th>
+                    <th>详细内容/标准</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-header">
+                    <td colspan="3">续表 — AKI分期（表21续）</td>
+                </tr>
+                <tr>
+                    <td rowspan="3" class="category-cell">AKI分期</td>
+                    <td class="subcategory-cell">分期</td>
+                    <td class="detail-cell">3期</td>
+                </tr>
+                <tr>
+                    <td class="subcategory-cell">血肌酐</td>
+                    <td class="detail-cell">基线值的<span class="dosage">3.0倍</span>，或 <span class="dosage">≥ 353.6μmol/L（4.0mg/dl）</span></td>
+                </tr>
+                <tr>
+                    <td class="subcategory-cell">尿量</td>
+                    <td class="detail-cell"><span class="dosage">< 0.3ml/(kg·h)</span>，持续<span class="dosage">24小时</span>及以上；或无尿持续<span class="dosage">12小时</span>及以上；或开始肾脏替代治疗；或对于<span class="dosage">< 18岁</span>的患者，eGFR下降到<span class="dosage">< 35ml/(min·1.73m²)</span></td>
+                </tr>
+                <tr class="section-header">
+                    <td colspan="3">2. 常见病因（表22）</td>
+                </tr>
+                <tr>
+                    <td rowspan="15" class="category-cell">AKI常见病因</td>
+                    <td class="subcategory-cell">肾前性</td>
+                    <td class="detail-cell">胃肠道体液丢失、过度利尿、大出血、皮肤黏膜体液丢失、体液向细胞外液转移、有效循环容量不足、充血性心力衰竭（心肾综合征）、感染性休克、扩血管药物、肝硬化失代偿期（肝肾综合征）、肾上腺危象、肾动脉狭窄、栓塞、<span class="drug-name">ACEI/ARB</span>、<span class="drug-name">NSAID</span>、<span class="drug-name">环孢素</span></td>
+                </tr>
+                <tr>
+                    <td class="subcategory-cell">肾性</td>
+                    <td class="detail-cell">原发或继发性肾小球肾炎、<span class="important-note">HUS/TTP</span>、<span class="important-note">DIC</span>、恶性高血压、先兆子痫、硬皮病、高钙血症、急性间质性肾炎、药物过敏、感染、肿瘤：淋巴瘤、白血病、肾前性AKI持续发展、毒素：横纹肌溶解、溶血、造影剂肾病</td>
+                </tr>
+                <tr>
+                    <td class="subcategory-cell">肾后性</td>
+                    <td class="detail-cell">结石、肿瘤、前列腺肥大、肾乳头坏死、血凝块、腹膜后纤维化</td>
+                </tr>
+                <tr class="section-header">
+                    <td colspan="3">3. 并发症</td>
+                </tr>
+                <tr>
+                    <td class="category-cell">并发症</td>
+                    <td class="subcategory-cell">临床表现</td>
+                    <td class="detail-cell">容量超负荷、高钾血症、代谢性酸中毒、精神状态改变、高尿酸血症、高镁血症</td>
+                </tr>
+                <tr class="section-header">
+                    <td colspan="3">4. 必做检查</td>
+                </tr>
+                <tr>
+                    <td class="category-cell">必做检查</td>
+                    <td class="subcategory-cell">检查项目</td>
+                    <td class="detail-cell">尿常规 + 尿沉渣（表23）</td>
+                </tr>
+                <tr class="section-header">
+                    <td colspan="3">表23 不同肾脏疾病的尿沉渣结果</td>
+                </tr>
+                <tr>
+                    <td rowspan="3" class="category-cell">尿沉渣结果</td>
+                    <td class="subcategory-cell">肾前性</td>
+                    <td class="detail-cell">正常或透明管型</td>
+                </tr>
+                <tr>
+                    <td class="subcategory-cell">肾性</td>
+                    <td class="detail-cell">—</td>
+                </tr>
+                <tr>
+                    <td class="subcategory-cell">小管细胞损伤</td>
+                    <td class="detail-cell">棕色颗粒管型、上皮细胞管型</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签（点击筛选）</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">急性肾损伤</span>
+            <span class="tag tag-disease">AKI</span>
+            <span class="tag tag-disease">心肾综合征</span>
+            <span class="tag tag-disease">肝肾综合征</span>
+            <span class="tag tag-disease">HUS</span>
+            <span class="tag tag-disease">TTP</span>
+            <span class="tag tag-disease">DIC</span>
+            <span class="tag tag-disease">恶性高血压</span>
+            <span class="tag tag-disease">先兆子痫</span>
+            <span class="tag tag-disease">硬皮病</span>
+            <span class="tag tag-disease">急性间质性肾炎</span>
+            <span class="tag tag-disease">淋巴瘤</span>
+            <span class="tag tag-disease">白血病</span>
+            <span class="tag tag-disease">横纹肌溶解</span>
+            <span class="tag tag-disease">溶血</span>
+            <span class="tag tag-disease">造影剂肾病</span>
+            <span class="tag tag-disease">感染性休克</span>
+            <span class="tag tag-disease">肾上腺危象</span>
+            <span class="tag tag-disease">肾动脉狭窄</span>
+            <span class="tag tag-disease">肾乳头坏死</span>
+            <span class="tag tag-disease">腹膜后纤维化</span>
+            <span class="tag tag-disease">容量超负荷</span>
+            <span class="tag tag-disease">高钾血症</span>
+            <span class="tag tag-disease">代谢性酸中毒</span>
+            <span class="tag tag-disease">高尿酸血症</span>
+            <span class="tag tag-disease">高镁血症</span>
+            <span class="tag tag-drug">ACEI</span>
+            <span class="tag tag-drug">ARB</span>
+            <span class="tag tag-drug">NSAID</span>
+            <span class="tag tag-drug">环孢素</span>
+            <span class="tag tag-organ">肾</span>
+            <span class="tag tag-organ">肾小球</span>
+            <span class="tag tag-organ">小管</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="AKI分期与常见病因及尿沉渣检查；AKI分期续表；AKI常见病因；并发症；必做检查；尿常规；尿沉渣；肾前性；肾性；肾后性；心肾综合征；肝肾综合征；HUS；TTP；DIC；恶性高血压；先兆子痫；硬皮病；急性间质性肾炎；淋巴瘤；白血病；横纹肌溶解；溶血；造影剂肾病；感染性休克；肾上腺危象；肾动脉狭窄；肾乳头坏死；腹膜后纤维化；容量超负荷；高钾血症；代谢性酸中毒；高尿酸血症；高镁血症；ACEI；ARB；NSAID；环孢素；=148" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyContent()">复制</button>
+    </div>
+    
+    <div class="page-info">页码：148</div>
+    
+    <div class="keywords">关键词：AKI分期 | 急性肾损伤 | 常见病因 | 肾前性 | 肾性 | 肾后性 | 并发症 | 尿常规 | 尿沉渣 | 心肾综合征 | 肝肾综合征 | HUS | TTP | DIC | 恶性高血压 | 先兆子痫 | 硬皮病 | 急性间质性肾炎 | 淋巴瘤 | 白血病 | 横纹肌溶解 | 溶血 | 造影剂肾病 | 感染性休克 | 肾上腺危象 | 肾动脉狭窄 | 肾乳头坏死 | 腹膜后纤维化 | 容量超负荷 | 高钾血症 | 代谢性酸中毒 | 高尿酸血症 | 高镁血症 | ACEI | ARB | NSAID | 环孢素</div>
+    
+    <script>
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制 ✓';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            if (isFav) {
+                btn.classList.remove('active');
+                btn.innerHTML = '☆ 收藏';
+                removeFromIndex();
+            } else {
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+                addToIndex();
+            }
+        }
+        
+        function addToIndex() {
+            const title = 'AKI分期与常见病因及尿沉渣检查';
+            const url = window.location.href;
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            favorites.push({ title: title, url: url, page: '148' });
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert('已添加到收藏！请在首页查看。');
+        }
+        
+        function removeFromIndex() {
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            favorites = favorites.filter(f => !f.url.includes('148'));
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert('已取消收藏！');
+        }
+        
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url.includes('148') || f.page === '148');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
