@@ -1,0 +1,857 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~氨基糖苷类药物与急诊糖皮质激素生物学特性及剂型比较*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e6eef7 100%);
+            color: #2d3748;
+            line-height: 1.7;
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #3182ce;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(49,130,206,0.3);
+            z-index: 100;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+        }
+        
+        .home-btn:hover {
+            background: #2c5282;
+            transform: translateY(-1px);
+        }
+        
+        /* 导航按钮区域 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #3182ce;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(49,130,206,0.3);
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        
+        .nav-btn:hover {
+            background: #2c5282;
+            transform: translateY(-1px);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #dd6b20;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(221,107,32,0.3);
+            transition: all 0.2s;
+        }
+        
+        .fav-btn:hover {
+            background: #c05621;
+            transform: translateY(-1px);
+        }
+        
+        .fav-btn.active {
+            background: #c53030;
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            color: #2c5282;
+            font-size: 22px;
+            font-weight: bold;
+            margin: 70px 0 25px 0;
+            padding: 18px;
+            background: rgba(255,255,255,0.85);
+            border-radius: 12px;
+            border-left: 6px solid #3182ce;
+            border-right: 6px solid #3182ce;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        /* 表格样式 */
+        .content-table {
+            width: 100%;
+            max-width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        .content-table thead {
+            background: #2b6cb0;
+            color: white;
+        }
+        
+        .content-table th {
+            padding: 20px 15px;
+            text-align: left;
+            font-size: 19px;
+            font-weight: bold;
+            border-bottom: 3px solid #1a4d7a;
+        }
+        
+        .content-table td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 15px;
+            color: #2d3748;
+            vertical-align: top;
+        }
+        
+        .content-table tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        .content-table tr:hover {
+            background: #edf2f7;
+        }
+        
+        .sub-bullet {
+            color: #38a169;
+            font-weight: bold;
+        }
+        
+        .highlight-bacteria {
+            color: #c53030;
+            font-weight: 600;
+        }
+        
+        .highlight-drug {
+            color: #276749;
+            font-weight: 600;
+        }
+        
+        .highlight-disease {
+            color: #744210;
+            font-weight: 600;
+        }
+        
+        .section-title {
+            color: #2b6cb0;
+            font-size: 17px;
+            font-weight: bold;
+        }
+        
+        .chapter-title {
+            color: #1a365d;
+            font-size: 20px;
+            font-weight: bold;
+            background: #e6fffa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 5px solid #38b2ac;
+        }
+        
+        .source-note {
+            color: #718096;
+            font-style: italic;
+            text-align: center;
+            padding: 10px;
+        }
+        
+        /* 数据表格样式 */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+        
+        .data-table th {
+            background: #4299e1;
+            color: white;
+            padding: 12px 8px;
+            text-align: center;
+            font-size: 13px;
+        }
+        
+        .data-table td {
+            padding: 10px 8px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .data-table tr:nth-child(even) {
+            background: #ebf8ff;
+        }
+        
+        .category-cell {
+            font-weight: bold;
+            color: #2b6cb0;
+            background: #e6fffa;
+        }
+        
+        /* 页码显示 */
+        .page-num {
+            text-align: center;
+            color: #718096;
+            font-size: 14px;
+            margin: 15px 0;
+            font-weight: 500;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+        }
+        
+        .copy-section label {
+            display: block;
+            color: #4a5568;
+            font-size: 14px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .copy-box-wrapper {
+            display: flex;
+            gap: 12px;
+            align-items: stretch;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 14px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #2d3748;
+            background: #f7fafc;
+            word-break: break-all;
+            transition: border-color 0.2s;
+        }
+        
+        .copy-input:focus {
+            outline: none;
+            border-color: #3182ce;
+        }
+        
+        .copy-btn {
+            background: #38a169;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+        
+        .copy-btn:hover {
+            background: #2f855a;
+        }
+        
+        .copy-btn.copied {
+            background: #2b6cb0;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            color: #2d3748;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .tag-category {
+            font-size: 13px;
+            color: #718096;
+            margin: 15px 0 10px 0;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            user-select: none;
+        }
+        
+        .tag:active {
+            transform: scale(0.95);
+        }
+        
+        .tag-disease {
+            background: #fed7d7;
+            color: #c53030;
+        }
+        
+        .tag-disease:hover {
+            background: #fc8181;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .tag-bacteria:hover {
+            background: #68d391;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #bee3f8;
+            color: #2b6cb0;
+        }
+        
+        .tag-drug:hover {
+            background: #63b3ed;
+            color: white;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+        }
+        
+        .keywords-title {
+            color: #2d3748;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .keywords-list {
+            color: #4a5568;
+            font-size: 14px;
+            line-height: 2.2;
+        }
+        
+        .keyword {
+            display: inline-block;
+            background: #edf2f7;
+            padding: 6px 14px;
+            border-radius: 15px;
+            margin: 3px;
+            color: #4a5568;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+        
+        .keyword:hover {
+            background: #e2e8f0;
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2d3748;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 30px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 200;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .toast.show {
+            opacity: 1;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 640px) {
+            .main-title {
+                font-size: 17px;
+                margin-top: 85px;
+                padding: 14px;
+            }
+            
+            .content-table th {
+                font-size: 16px;
+                padding: 16px 12px;
+            }
+            
+            .content-table td {
+                font-size: 14px;
+                padding: 12px;
+            }
+            
+            .data-table {
+                font-size: 12px;
+            }
+            
+            .data-table th, .data-table td {
+                padding: 8px 4px;
+            }
+            
+            .home-btn, .nav-btn, .fav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-box-wrapper {
+                flex-direction: column;
+            }
+            
+            .copy-btn {
+                width: 100%;
+                padding: 12px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="362.html" class="nav-btn">上一页</a>
+        <a href="364.html" class="nav-btn">下一页</a>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~氨基糖苷类药物与急诊糖皮质激素生物学特性及剂型比较*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~氨基糖苷类药物与急诊糖皮质激素生物学特性及剂型比较*****、📋 氨基糖苷类药物与急诊糖皮质激素使用要点、类别、药物、等效剂量（mg）、糖代谢活性（比值）、水盐代谢活性（比值）、血浆半衰期（分钟）、作用持续时间（小时）、第5节续：急诊常用抗菌药物的分类（续）、急诊糖皮质激素的使用 ——摘自《糖皮质激素急诊应用专家共识》、1. 糖皮质激素的生物学特性、短效、中效、长效、氢化可的松、泼尼松龙、甲基泼尼松龙、倍他米松</div>
+    
+    <!-- 主表格 -->
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th colspan="2">📋 氨基糖苷类药物与急诊糖皮质激素使用要点</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="2">
+                    <strong class="section-title">第5节续：急诊常用抗菌药物的分类（续）</strong>
+                </td>
+            </tr>
+            <tr>
+                <td width="80"></td>
+                <td>得性<span class="highlight-disease">呼吸道感染</span>，对<span class="highlight-bacteria">支原体属</span>、<span class="highlight-bacteria">衣原体属</span>等非典型病原体具有良好的抗菌活性。</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span class="sub-bullet">✓ 氨基糖苷类药物：</span>可由<span class="highlight-drug">链霉素</span>培养液、<span class="highlight-bacteria">小单胞菌属</span>滤液或者半合成获得。代表品种包括<span class="highlight-drug">庆大霉素</span>、<span class="highlight-drug">阿米卡星</span>、<span class="highlight-drug">妥布霉素</span>、<span class="highlight-drug">奈替米星</span>等，对各种<span class="highlight-bacteria">革兰阴性杆菌</span>有强大的杀菌活性。<span class="highlight-drug">氨基糖苷类药物</span>具有<span class="highlight-disease">耳毒性</span>和<span class="highlight-disease">肾毒性</span>，曾一度较少在临床应用，但近年来随着<span class="highlight-bacteria">革兰阴性杆菌</span>耐药率的增加，<span class="highlight-drug">氨基糖苷类药物</span>的使用有增加的趋势，常联合其他<span class="highlight-drug">抗菌药物</span>治疗敏感<span class="highlight-bacteria">革兰阴性杆菌</span>所致全身<span class="highlight-disease">感染</span>。</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="source-note">
+                    （中国医师协会急诊医师分会　中华医学会急诊医学分会<br>
+                    中国急诊专科医联体　北京急诊医学学会）
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="chapter-title">■ 急诊糖皮质激素的使用</div>
+                    <div class="source-note">——摘自《糖皮质激素急诊应用专家共识》</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <strong class="section-title">1. 糖皮质激素的生物学特性</strong>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span class="bullet">●</span> <span class="highlight-drug">糖皮质激素</span>的基本结构为<span class="highlight-drug">类固醇（甾体）</span>，由3个六元环与1个五元环组成。全身用<span class="highlight-drug">糖皮质激素</span>常用药物包括内源性的<span class="highlight-drug">可的松</span>和<span class="highlight-drug">氢化可的松</span>，以及外源性的<span class="highlight-drug">泼尼松</span>（强的松）、<span class="highlight-drug">泼尼松龙</span>（强的松龙）、<span class="highlight-drug">甲泼尼龙</span>（甲基强的松龙）、<span class="highlight-drug">倍他米松</span>和<span class="highlight-drug">地塞米松</span>（表43）。</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div style="text-align:center; font-weight:bold; color:#2b6cb0; margin:15px 0; font-size:16px;">表43　各剂型糖皮质激素比较</div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>类别</th>
+                                <th>药物</th>
+                                <th>等效剂量（mg）</th>
+                                <th>糖代谢活性（比值）</th>
+                                <th>水盐代谢活性（比值）</th>
+                                <th>血浆半衰期（分钟）</th>
+                                <th>作用持续时间（小时）</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="2" class="category-cell">短效</td>
+                                <td>可的松</td>
+                                <td>25</td>
+                                <td>0.8</td>
+                                <td>0.8</td>
+                                <td>30</td>
+                                <td>8～12</td>
+                            </tr>
+                            <tr>
+                                <td>氢化可的松</td>
+                                <td>20</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>90</td>
+                                <td>8～12</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3" class="category-cell">中效</td>
+                                <td>泼尼松</td>
+                                <td>5</td>
+                                <td>4</td>
+                                <td>0.8</td>
+                                <td>60</td>
+                                <td>12～36</td>
+                            </tr>
+                            <tr>
+                                <td>泼尼松龙</td>
+                                <td>5</td>
+                                <td>4</td>
+                                <td>0.8</td>
+                                <td>200</td>
+                                <td>12～36</td>
+                            </tr>
+                            <tr>
+                                <td>甲基泼尼松龙</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td>0.5</td>
+                                <td>180</td>
+                                <td>12～36</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2" class="category-cell">长效</td>
+                                <td>地塞米松</td>
+                                <td>0.75</td>
+                                <td>20～30</td>
+                                <td>0</td>
+                                <td>100～300</td>
+                                <td>36～54</td>
+                            </tr>
+                            <tr>
+                                <td>倍他米松</td>
+                                <td>0.6</td>
+                                <td>20～30</td>
+                                <td>0</td>
+                                <td>100～300</td>
+                                <td>36～54</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span class="bullet">●</span> <span class="highlight-drug">可的松</span>和<span class="highlight-drug">氢化可的松</span>与人体内源性<span class="highlight-drug">皮质激素</span>功能相同，为短效制剂，同时具有<span class="highlight-drug">糖皮质激素</span>和<span class="highlight-drug">盐皮质激素</span>活性，因此适用于生理性替代治疗，但用于抗炎治疗时，<span class="highlight-disease">水钠潴留</span>副作用明显。此类剂型结合球蛋白的能力强，游离激素水平较低，对</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 页码 -->
+    <div class="page-num">— 第 354 页 —</div>
+    
+    <!-- 复制功能区域 -->
+    <div class="copy-section">
+        <label>📋 复制标题与关键词（用于检索）</label>
+        <div class="copy-box-wrapper">
+            <input type="text" class="copy-input" id="copyInput" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyContent()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签（点击筛选）</div>
+        
+        <div class="tag-category">🦠 细菌/病原体</div>
+        <div class="tags-container">
+            <span class="tag tag-bacteria" onclick="filterByTag('支原体属')">支原体属</span>
+            <span class="tag tag-bacteria" onclick="filterByTag('衣原体属')">衣原体属</span>
+            <span class="tag tag-bacteria" onclick="filterByTag('小单胞菌属')">小单胞菌属</span>
+            <span class="tag tag-bacteria" onclick="filterByTag('革兰阴性杆菌')">革兰阴性杆菌</span>
+        </div>
+        
+        <div class="tag-category">💊 药物</div>
+        <div class="tags-container">
+            <span class="tag tag-drug" onclick="filterByTag('氨基糖苷类')">氨基糖苷类</span>
+            <span class="tag tag-drug" onclick="filterByTag('链霉素')">链霉素</span>
+            <span class="tag tag-drug" onclick="filterByTag('庆大霉素')">庆大霉素</span>
+            <span class="tag tag-drug" onclick="filterByTag('阿米卡星')">阿米卡星</span>
+            <span class="tag tag-drug" onclick="filterByTag('妥布霉素')">妥布霉素</span>
+            <span class="tag tag-drug" onclick="filterByTag('奈替米星')">奈替米星</span>
+            <span class="tag tag-drug" onclick="filterByTag('抗菌药物')">抗菌药物</span>
+            <span class="tag tag-drug" onclick="filterByTag('糖皮质激素')">糖皮质激素</span>
+            <span class="tag tag-drug" onclick="filterByTag('类固醇')">类固醇</span>
+            <span class="tag tag-drug" onclick="filterByTag('甾体')">甾体</span>
+            <span class="tag tag-drug" onclick="filterByTag('可的松')">可的松</span>
+            <span class="tag tag-drug" onclick="filterByTag('氢化可的松')">氢化可的松</span>
+            <span class="tag tag-drug" onclick="filterByTag('泼尼松')">泼尼松</span>
+            <span class="tag tag-drug" onclick="filterByTag('强的松')">强的松</span>
+            <span class="tag tag-drug" onclick="filterByTag('泼尼松龙')">泼尼松龙</span>
+            <span class="tag tag-drug" onclick="filterByTag('强的松龙')">强的松龙</span>
+            <span class="tag tag-drug" onclick="filterByTag('甲泼尼龙')">甲泼尼龙</span>
+            <span class="tag tag-drug" onclick="filterByTag('甲基强的松龙')">甲基强的松龙</span>
+            <span class="tag tag-drug" onclick="filterByTag('倍他米松')">倍他米松</span>
+            <span class="tag tag-drug" onclick="filterByTag('地塞米松')">地塞米松</span>
+            <span class="tag tag-drug" onclick="filterByTag('皮质激素')">皮质激素</span>
+            <span class="tag tag-drug" onclick="filterByTag('盐皮质激素')">盐皮质激素</span>
+        </div>
+        
+        <div class="tag-category">🏥 疾病/临床情况/毒性</div>
+        <div class="tags-container">
+            <span class="tag tag-disease" onclick="filterByTag('呼吸道感染')">呼吸道感染</span>
+            <span class="tag tag-disease" onclick="filterByTag('感染')">感染</span>
+            <span class="tag tag-disease" onclick="filterByTag('耳毒性')">耳毒性</span>
+            <span class="tag tag-disease" onclick="filterByTag('肾毒性')">肾毒性</span>
+            <span class="tag tag-disease" onclick="filterByTag('水钠潴留')">水钠潴留</span>
+        </div>
+    </div>
+    
+    <!-- 关键词区域 -->
+    <div class="keywords-section">
+        <div class="keywords-title">🔑 关键词</div>
+        <div class="keywords-list">
+            <span class="keyword">氨基糖苷类</span>
+            <span class="keyword">耳毒性</span>
+            <span class="keyword">肾毒性</span>
+            <span class="keyword">糖皮质激素</span>
+            <span class="keyword">短效糖皮质激素</span>
+            <span class="keyword">中效糖皮质激素</span>
+            <span class="keyword">长效糖皮质激素</span>
+            <span class="keyword">可的松</span>
+            <span class="keyword">氢化可的松</span>
+            <span class="keyword">泼尼松</span>
+            <span class="keyword">地塞米松</span>
+            <span class="keyword">倍他米松</span>
+            <span class="keyword">等效剂量</span>
+            <span class="keyword">糖代谢活性</span>
+            <span class="keyword">水盐代谢活性</span>
+            <span class="keyword">血浆半衰期</span>
+        </div>
+    </div>
+    
+    <!-- 提示框 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 页面信息
+        const pageInfo = {
+            title: "氨基糖苷类药物与急诊糖皮质激素生物学特性及剂型比较",
+            subtitle: "氨基糖苷类药物特点与毒性、糖皮质激素分类及表43各剂型比较",
+            keywords: "氨基糖苷类;耳毒性;肾毒性;糖皮质激素;短效;中效;长效;可的松;氢化可的松;泼尼松;地塞米松;倍他米松;等效剂量;糖代谢活性;水盐代谢活性;血浆半衰期",
+            pageNum: "354"
+        };
+        
+        // 初始化复制框内容
+        const copyContentText = `${pageInfo.title};${pageInfo.subtitle};${pageInfo.keywords}=${pageInfo.pageNum}`;
+        document.getElementById('copyInput').value = copyContentText;
+        
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('✓ 已复制到剪贴板');
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '已复制';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.textContent = '复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                }).catch(() => {
+                    fallbackCopy(input);
+                });
+            } else {
+                fallbackCopy(input);
+            }
+        }
+        
+        function fallbackCopy(input) {
+            try {
+                document.execCommand('copy');
+                showToast('✓ 已复制到剪贴板');
+            } catch (e) {
+                showToast('复制失败，请手动复制');
+            }
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+        
+        // 标签筛选功能
+        function filterByTag(tag) {
+            showToast(`正在筛选: ${tag}`);
+            highlightText(tag);
+        }
+        
+        // 高亮页面内匹配文本
+        function highlightText(text) {
+            document.querySelectorAll('.temp-highlight').forEach(el => {
+                el.outerHTML = el.innerHTML;
+            });
+            
+            const walker = document.createTreeWalker(
+                document.body,
+                NodeFilter.SHOW_TEXT,
+                null,
+                false
+            );
+            
+            const nodes = [];
+            let node;
+            while (node = walker.nextNode()) {
+                if (node.textContent.includes(text) && node.parentElement.tagName !== 'SCRIPT' && node.parentElement.tagName !== 'STYLE') {
+                    nodes.push(node);
+                }
+            }
+            
+            nodes.forEach(node => {
+                const span = document.createElement('span');
+                span.className = 'temp-highlight';
+                span.style.background = '#fef3c7';
+                span.style.padding = '2px 4px';
+                span.style.borderRadius = '4px';
+                const regex = new RegExp(`(${text})`, 'g');
+                span.innerHTML = node.textContent.replace(regex, '<mark style="background:#fbbf24;padding:2px 4px;border-radius:4px;">$1</mark>');
+                node.parentNode.replaceChild(span, node);
+            });
+            
+            if (nodes.length > 0) {
+                showToast(`✓ 找到 ${nodes.length} 处匹配`);
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                showToast('⭐ 已添加到收藏');
+                
+                const favData = {
+                    title: pageInfo.title,
+                    url: '354.html',
+                    pageNum: '354',
+                    category: '急诊用药指南',
+                    timestamp: new Date().toISOString()
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '354.html');
+                favorites.push(favData);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                window.dispatchEvent(new CustomEvent('favoriteUpdated', { detail: favData }));
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                showToast('已取消收藏');
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '354.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.addEventListener('DOMContentLoaded', function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '354.html');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        });
+    </script>
+</body>
+</html>
