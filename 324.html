@@ -1,0 +1,529 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~高流量氧疗系统与文丘里面罩技术指南*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f0f5f9;
+            color: #333;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background-color: #2196F3;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background-color: #45a049;
+        }
+        
+        .home-btn:hover {
+            background-color: #1976D2;
+        }
+        
+        .favorite-btn {
+            background-color: #FF9800;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+        
+        .favorite-btn:hover {
+            background-color: #F57C00;
+        }
+        
+        .favorite-btn.active {
+            background-color: #E91E63;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1565C0;
+            font-size: 24px;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #E3F2FD;
+            border-radius: 10px;
+            border-left: 5px solid #2196F3;
+        }
+        
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        thead {
+            background-color: #2196F3;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background-color: #E3F2FD;
+        }
+        
+        td {
+            padding: 14px;
+            font-size: 14px;
+            vertical-align: top;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            color: #1565C0;
+            background-color: #BBDEFB;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 8px 0;
+        }
+        
+        .check-mark {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        .key-point {
+            color: #D32F2F;
+            font-weight: bold;
+        }
+        
+        .note-text {
+            color: #555;
+            font-size: 13px;
+        }
+        
+        .equipment-desc {
+            background-color: #FFF3E0;
+            border-left: 4px solid #FF9800;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .figure-note {
+            background-color: #f5f5f5;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 8px 0;
+            font-size: 13px;
+            text-align: center;
+        }
+        
+        .tags-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .tags-title {
+            color: #1565C0;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: #E8F5E9;
+            color: #2E7D32;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            border: 1px solid #A5D6A7;
+        }
+        
+        .copy-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #2196F3;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        
+        .copy-btn {
+            background-color: #9C27B0;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .copy-btn:hover {
+            background-color: #7B1FA2;
+        }
+        
+        .copy-btn.copied {
+            background-color: #4CAF50;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin: 20px 0;
+        }
+        
+        .keywords-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .keywords-title {
+            color: #1565C0;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        .keyword {
+            display: inline-block;
+            background-color: #FFF3E0;
+            color: #E65100;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            border: 1px solid #FFCC80;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px;
+            }
+            
+            td {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            .header-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-bar">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="nav-buttons">
+            <a href="323.html" class="nav-btn">⬅ 上一页</a>
+            <a href="325.html" class="nav-btn">➡ 下一页</a>
+            <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+        </div>
+    </div>
+
+    <h1>~~~~~高流量氧疗系统与文丘里面罩技术指南*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~高流量氧疗系统与文丘里面罩技术指南*****、高流量氧疗系统与文丘里面罩技术</div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>高流量氧疗系统与文丘里面罩技术</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="section-title">📝 无重复呼吸面罩说明</div>
+                        <span class="note-text">
+                        吸入氧体积分数可达<span class="key-point">35% ~ 60%</span>。<br>
+                        无重复呼吸面罩在面罩与储气囊之间有单向阀，从而避免吸气时重复吸入呼出气。<br>
+                        为保证面罩内的呼出气体能够被冲刷出去，氧流量至少要<span class="key-point">6L/min</span>。<br>
+                        储氧面罩给氧体积分数高于普通面罩，不适于有<span class="key-point">CO₂潴留</span>风险的<span class="key-point">COPD</span>患者。
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">✓ 文丘里（Venturi）面罩</div>
+                        <div class="equipment-desc">
+                            是可调节的高流量精确给氧装置。<br><br>
+                            吸氧体积分数设定<span class="key-point">&lt; 40%</span>时与实测值误差<span class="key-point">&lt; 2%</span>；<br>
+                            吸入氧体积分数设定为<span class="key-point">40%以上</span>时与实测值相差约<span class="key-point">10%</span>。<br><br>
+                            <strong>作用原理：</strong><br>
+                            氧气经狭窄的孔道进入面罩，产生喷射气流使面罩周围产生负压，与大气的压力差促使一定量的空气流入面罩。<br>
+                            随着供氧流速的增加，进入面罩内的空气流速也相应增加，且喷射入面罩的气流通常大于患者吸气时的最高流速要求，因此吸氧体积分数恒定。<br><br>
+                            此外，高流速的气体不断冲刷面罩内部，呼出气中的CO₂难以在面罩潴留，故无重复呼吸。<br><br>
+                            文丘里面罩可提供<span class="key-point">24%、28%、31%、35%、40%</span>和<span class="key-point">60%</span>浓度的氧气。<br><br>
+                            因文丘里面罩可以实现高流量、低浓度给氧，适合伴<span class="key-point">高碳酸血症</span>的<span class="key-point">低氧</span>患者。<br><br>
+                            <strong>使用方法：</strong><br>
+                            使用文丘里面罩时，首先设定患者的吸入氧体积分数，其次根据患者的呼吸情况决定面罩提供的气体流量，最后调节氧源的给氧流量。
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">● 高流量氧疗</div>
+                        <span class="note-text">
+                        经鼻高流量氧疗装置包括鼻导管吸氧系统（加温湿化器，封闭式呼吸管路，双短鼻塞导管）和空氧混合器（图30）。<br><br>
+                        能输送流速最高达<span class="key-point">60L/min</span>的空氧混合气体，氧体积分数、流量可调，具有主动加温加湿功能。<br><br>
+                        主要应用在<span class="key-point">急性呼吸衰竭</span>、拔管后的序贯吸氧治疗、支气管镜等其他有创操作时。<br><br>
+                        经鼻高流量氧疗设备在临床应用中疗效最明显的是<span class="key-point">急性低氧性呼吸衰竭</span>的患者。<br>
+                        高流量氧疗在治疗
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">📷 图30 高流量氧疗系统</div>
+                        <div class="figure-note">
+                            图示：高流量氧疗系统设备（加温湿化器、封闭式呼吸管路、双短鼻塞导管、空氧混合器）
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">📖 相关术语</div>
+                        <span class="note-text">
+                        无重复呼吸面罩、单向阀、储气囊、CO₂潴留、COPD、文丘里面罩、Venturi、高流量氧疗、空氧混合器、加温湿化器、封闭式呼吸管路、双短鼻塞导管、急性呼吸衰竭、急性低氧性呼吸衰竭、序贯吸氧治疗、支气管镜、高碳酸血症、低氧、急救技术
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <span class="tag">COPD</span>
+        <span class="tag">急性呼吸衰竭</span>
+        <span class="tag">急性低氧性呼吸衰竭</span>
+        <span class="tag">高碳酸血症</span>
+        <span class="tag">低氧</span>
+        <span class="tag">CO₂潴留</span>
+        <span class="tag">文丘里面罩</span>
+        <span class="tag">高流量氧疗</span>
+        <span class="tag">急救技术</span>
+    </div>
+
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="高流量氧疗系统与文丘里面罩技术指南；COPD、急性呼吸衰竭、急性低氧性呼吸衰竭、高碳酸血症、低氧、CO₂潴留、文丘里面罩、高流量氧疗、急救技术；=324" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+    </div>
+
+    <div class="page-number">
+        页码：324
+    </div>
+
+    <div class="keywords-section">
+        <div class="keywords-title">🔑 关键词</div>
+        <span class="keyword">COPD</span>
+        <span class="keyword">急性呼吸衰竭</span>
+        <span class="keyword">急性低氧性呼吸衰竭</span>
+        <span class="keyword">高碳酸血症</span>
+        <span class="keyword">低氧</span>
+        <span class="keyword">CO₂潴留</span>
+        <span class="keyword">文丘里面罩</span>
+        <span class="keyword">Venturi</span>
+        <span class="keyword">高流量氧疗</span>
+        <span class="keyword">急救技术</span>
+        <span class="keyword">无重复呼吸面罩</span>
+        <span class="keyword">单向阀</span>
+        <span class="keyword">储气囊</span>
+        <span class="keyword">空氧混合器</span>
+        <span class="keyword">加温湿化器</span>
+        <span class="keyword">封闭式呼吸管路</span>
+        <span class="keyword">双短鼻塞导管</span>
+        <span class="keyword">序贯吸氧治疗</span>
+        <span class="keyword">支气管镜</span>
+    </div>
+
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(function() {
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '已复制';
+                    btn.classList.add('copied');
+                    setTimeout(function() {
+                        btn.textContent = '复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }
+        }
+
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isActive = btn.classList.contains('active');
+            
+            if (!isActive) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                
+                // 保存到localStorage
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '高流量氧疗系统与文丘里面罩技术指南',
+                    url: '324.html',
+                    pageNum: '324'
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.url === '324.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                alert('已添加到收藏！');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                
+                // 从localStorage移除
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '324.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.url === '324.html');
+            const btn = document.getElementById('favoriteBtn');
+            
+            if (isFavorited) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
