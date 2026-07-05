@@ -1,0 +1,566 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~SAH治疗与急性播散性脑脊髓炎*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #5a9bd5;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .favorite-btn {
+            background: #e8b339;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        
+        .favorite-btn.active {
+            background: #d4a017;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .main-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .main-table thead {
+            background: #2e75b6;
+        }
+        
+        .main-table thead th {
+            color: white;
+            padding: 18px 15px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .main-table tbody td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #e8eef4;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #2c3e50;
+        }
+        
+        .main-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .main-table tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        .main-table tbody tr:hover {
+            background: #e8f4fd;
+        }
+        
+        .section-title {
+            color: #1a5276;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .sub-item {
+            padding-left: 20px;
+            color: #34495e;
+        }
+        
+        .sub-sub-item {
+            padding-left: 40px;
+            color: #5d6d7e;
+        }
+        
+        .check {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .author {
+            text-align: right;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .copy-section {
+            margin-top: 25px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .copy-section label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        .copy-input-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        #copyInput {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+            background: #fafafa;
+        }
+        
+        #copyBtn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        #copyBtn:hover {
+            background: #219a52;
+        }
+        
+        .tags-section {
+            margin-top: 25px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-section h3 {
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #e8f4fd;
+            color: #2e75b6;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #b8d4f0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            background: #2e75b6;
+            color: white;
+        }
+        
+        .keywords-section {
+            margin-top: 25px;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 13px;
+        }
+        
+        .page-number {
+            margin-top: 10px;
+            color: #95a5a6;
+            font-size: 12px;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            display: none;
+            z-index: 1000;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+                padding: 12px;
+            }
+            
+            .main-table thead th {
+                font-size: 16px;
+                padding: 14px 10px;
+            }
+            
+            .main-table tbody td {
+                padding: 12px 10px;
+                font-size: 13px;
+            }
+            
+            .sub-item {
+                padding-left: 15px;
+            }
+            
+            .sub-sub-item {
+                padding-left: 30px;
+            }
+            
+            .copy-input-group {
+                flex-direction: column;
+            }
+            
+            #copyInput {
+                width: 100%;
+            }
+            
+            .header-nav {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <div class="header-nav">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="184.html" class="nav-btn">上一页</a>
+            <a href="186.html" class="nav-btn">下一页</a>
+            <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~SAH治疗与急性播散性脑脊髓炎*****</h1>
+    
+    <!-- 主表格 -->
+    <table class="main-table">
+        <thead>
+            <tr>
+                <th>SAH治疗与急性播散性脑脊髓炎（ADEM）</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="sub-item">颅内压进行测定和治疗。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">● 伴高血压：最佳治疗尚不明确。虽然降低血压可能降低再出血风险，但获益可能被增加的梗死风险抵消。若动脉瘤未妥当处理，将收缩压降低至160mmHg以下是适当的。此时优选拉贝洛尔、尼卡地平和依那普利。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">● 推荐应用尼莫地平（60mg q4h，经口或鼻饲管给药）：减少血管痉挛和迟发型脑缺血，改善SAH患者的神经功能结局。治疗在发病后4天内开始，并持续21天。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">● 抗癫痫药（AED）治疗</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-sub-item"><span class="check">✓</span> 并非所有患者都需预防性AED治疗，但在一些动脉瘤未处理妥当和皮质大量出血患者中可考虑应用。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-sub-item"><span class="check">✓</span> 癫痫发作应及时治疗。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-sub-item"><span class="check">✓</span> 对于无急性癫痫发作的患者，动脉瘤治疗得当后可能没有必要继续AED治疗。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-sub-item"><span class="check">✓</span> SAH后出现急性癫痫发作（7天内）的患者，AED治疗通常需持续约6个月。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">● 预防并发症治疗</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-sub-item"><span class="check">✓</span> 再出血：动脉瘤再出血的死亡率极高。外科夹闭术和血管内弹簧圈栓塞术能有效预防再出血，应尽早实施。不能避免动脉瘤治疗延迟的患者，可考虑短期应用抗纤溶药物预防再出血。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-sub-item"><span class="check">✓</span> 血管痉挛：20% ~ 30%动脉瘤性SAH可并发有临床意义的血管痉挛，与迟发性脑缺血和较差的神经功能结局相关。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-sub-item"><span class="check">✓</span> 低血容量：是缺血性并发症的危险因素，应避免。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-sub-item"><span class="check">✓</span> 脑积水：是SAH的常见并发症。有意识水平障碍且存在进展性或无改善的脑积水患者，应考虑放置脑室引流。有些患者可能需要放置永久分流。</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="author">
+                    （崔庆宏）
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="section-title">■ 急性播散性脑脊髓炎</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="section-title">1. 定义</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">● 急性播散性脑脊髓炎（ADEM）是一种自身免疫性中枢神经系统脱髓鞘性疾病。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">● ADEM呈急性发病，常进展迅速。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="section-title">2. 病因</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">● ADEM可能发生在非特异性上呼吸道或胃肠道疾病后，常由病毒感染诱发。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">● 可发生于接种疫苗后，由脑和脊髓中的炎性反应所致。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">● 与ADEM相关的病原体：风疹病毒、腮腺炎病毒、水痘-带</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <label>快速复制标题与关键词：</label>
+        <div class="copy-input-group">
+            <input type="text" id="copyInput" value="SAH治疗与急性播散性脑脊髓炎；SAH；蛛网膜下腔出血；高血压；拉贝洛尔；尼卡地平；依那普利；尼莫地平；抗癫痫药；AED；动脉瘤；外科夹闭术；血管内弹簧圈栓塞术；抗纤溶药物；血管痉挛；迟发性脑缺血；低血容量；脑积水；脑室引流；急性播散性脑脊髓炎；ADEM；自身免疫性；脱髓鞘；风疹病毒；腮腺炎病毒；水痘-带状疱疹病毒；=185" readonly>
+            <button id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <h3>🔖 特色检索标签</h3>
+        <div class="tags-container">
+            <span class="tag">SAH</span>
+            <span class="tag">蛛网膜下腔出血</span>
+            <span class="tag">高血压</span>
+            <span class="tag">拉贝洛尔</span>
+            <span class="tag">尼卡地平</span>
+            <span class="tag">依那普利</span>
+            <span class="tag">尼莫地平</span>
+            <span class="tag">抗癫痫药</span>
+            <span class="tag">AED</span>
+            <span class="tag">动脉瘤</span>
+            <span class="tag">外科夹闭术</span>
+            <span class="tag">血管内弹簧圈栓塞术</span>
+            <span class="tag">抗纤溶药物</span>
+            <span class="tag">血管痉挛</span>
+            <span class="tag">迟发性脑缺血</span>
+            <span class="tag">低血容量</span>
+            <span class="tag">脑积水</span>
+            <span class="tag">脑室引流</span>
+            <span class="tag">急性播散性脑脊髓炎</span>
+            <span class="tag">ADEM</span>
+            <span class="tag">自身免疫性</span>
+            <span class="tag">脱髓鞘</span>
+            <span class="tag">风疹病毒</span>
+            <span class="tag">腮腺炎病毒</span>
+        </div>
+    </div>
+    
+    <!-- 关键词与页码 -->
+    <div class="keywords-section">
+        <div>关键词：SAH | 蛛网膜下腔出血 | 高血压 | 拉贝洛尔 | 尼卡地平 | 依那普利 | 尼莫地平 | 抗癫痫药 | AED | 动脉瘤 | 外科夹闭术 | 血管内弹簧圈栓塞术 | 抗纤溶药物 | 血管痉挛 | 迟发性脑缺血 | 低血容量 | 脑积水 | 脑室引流 | 急性播散性脑脊髓炎 | ADEM | 自身免疫性 | 脱髓鞘 | 风疹病毒 | 腮腺炎病毒</div>
+        <div class="page-number">页码：185</div>
+    </div>
+    
+    <!-- 提示框 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isActive = btn.classList.contains('active');
+            
+            if (!isActive) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: 'SAH治疗与急性播散性脑脊髓炎',
+                    url: '185.html',
+                    pageNum: '185'
+                };
+                
+                const exists = favorites.some(f => f.url === '185.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                showToast('已添加到收藏！');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+                
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const filtered = favorites.filter(f => f.url !== '185.html');
+                localStorage.setItem('favorites', JSON.stringify(filtered));
+                
+                showToast('已取消收藏！');
+            }
+        }
+        
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const btn = document.getElementById('favoriteBtn');
+            if (favorites.some(f => f.url === '185.html')) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
