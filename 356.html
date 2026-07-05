@@ -1,0 +1,488 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~成人心搏骤停自主循环恢复后治疗流程（图41）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f7f4;
+            background-image: linear-gradient(160deg, #e8f6f0 0%, #f0f7f4 50%, #f5f9f7 100%);
+            color: #2c3e50;
+            line-height: 1.7;
+            padding: 12px;
+            min-height: 100vh;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .home-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 6px rgba(52,152,219,0.3);
+        }
+        .home-btn:hover {
+            background-color: #2980b9;
+        }
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        .nav-btn {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 5px rgba(39,174,96,0.3);
+        }
+        .nav-btn:hover {
+            background-color: #219a52;
+        }
+        .fav-btn {
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(243,156,18,0.3);
+        }
+        .fav-btn:hover {
+            background-color: #e67e22;
+        }
+        .fav-btn.active {
+            background-color: #e74c3c;
+        }
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 12px;
+            background-color: #d4efdf;
+            border-radius: 12px;
+            border-left: 5px solid #27ae60;
+            border-right: 5px solid #27ae60;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            font-size: 14px;
+        }
+        thead {
+            background-color: #2e86de;
+            color: white;
+        }
+        thead th {
+            padding: 16px 12px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        tbody td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f0f9f4;
+        }
+        tbody tr:hover {
+            background-color: #d5f5e3;
+        }
+        .phase-title {
+            font-weight: bold;
+            color: #1e8449;
+            font-size: 15px;
+            background-color: #e8f8f0;
+            padding: 8px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+        .flow-step {
+            background-color: #eaf2f8;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 6px 0;
+            text-align: center;
+            font-weight: bold;
+            color: #1a5276;
+        }
+        .decision-box {
+            background-color: #fef9e7;
+            border: 2px solid #f39c12;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 6px 0;
+            text-align: center;
+            color: #7d6608;
+        }
+        .action-box {
+            background-color: #f5eef8;
+            border: 2px solid #9b59b6;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 6px 0;
+            color: #5b2c6f;
+        }
+        .param-list {
+            margin: 4px 0;
+            padding-left: 16px;
+        }
+        .param-list li {
+            margin: 3px 0;
+        }
+        .tags-container {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+        }
+        .tags-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        .tag {
+            display: inline-block;
+            background-color: #e74c3c;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            box-shadow: 0 2px 4px rgba(231,76,60,0.2);
+        }
+        .bottom-section {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+        }
+        .keywords {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 12px;
+            word-break: break-all;
+            line-height: 1.8;
+        }
+        .page-number {
+            text-align: center;
+            font-size: 20px;
+            color: #2e86de;
+            font-weight: bold;
+            margin: 12px 0;
+            padding: 8px;
+            background-color: #eaf2f8;
+            border-radius: 8px;
+        }
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            font-size: 13px;
+            background-color: #f8fbff;
+        }
+        .copy-btn {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 0 2px 6px rgba(39,174,96,0.3);
+        }
+        .copy-btn:hover {
+            background-color: #219a52;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 8px;
+            }
+            h1 {
+                font-size: 17px;
+                padding: 10px;
+            }
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            tbody td {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            .home-btn, .nav-btn, .fav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            .copy-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="353.html" class="nav-btn">上一页</a>
+            <a href="355.html" class="nav-btn">下一页</a>
+            <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+        </div>
+    </div>
+
+    <h1>~~~~~成人心搏骤停自主循环恢复后治疗流程（图41）*****</h1>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>阶段</th>
+                    <th>步骤/内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <div class="flow-step">心脏骤停自主循环恢复（ROSC）</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="3">
+                        <div class="phase-title">初始稳定阶段</div>
+                    </td>
+                    <td>
+                        <div class="action-box">
+                            <strong>管理气道及早置入气管插管</strong>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="action-box">
+                            <strong>管理呼吸参数：</strong>
+                            <ul class="param-list">
+                                <li>初始通气速率为10次/分</li>
+                                <li>SpO₂ 92%～98%</li>
+                                <li>PaCO₂ 35～45mmHg</li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="action-box">
+                            <strong>管理血流动力学参数：</strong>
+                            <ul class="param-list">
+                                <li>SBP＞90mmHg</li>
+                                <li>MAP＞65mmHg</li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <div class="flow-step">描记12导联心电图</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <div class="decision-box">
+                            <strong>若出现以下情况，则考虑紧急心脏介入治疗：</strong><br>
+                            • 存在STEMI<br>
+                            • 不稳定性心源性休克<br>
+                            • 需要机械循环支持
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <div class="decision-box">
+                            <strong>听从指令？</strong>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div style="text-align: center; font-weight: bold; color: #c0392b;">否 → 昏迷</div>
+                    </td>
+                    <td>
+                        <div style="text-align: center; font-weight: bold; color: #27ae60;">是 → 清醒</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="action-box">
+                            <ul class="param-list">
+                                <li>目标体温管理</li>
+                                <li>头颅CT检查</li>
+                                <li>脑电图监测</li>
+                                <li>其他重症监护管理</li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="action-box" style="text-align: center;">
+                            其他重症监护管理
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <div class="flow-step">
+                            快速评估和治疗可逆病因，咨询专家意见，以便持续管理
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="phase-title">持续管理以及其他紧急措施</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tags-container">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <span class="tag">心脏骤停</span>
+        <span class="tag">ROSC</span>
+        <span class="tag">气管插管</span>
+        <span class="tag">STEMI</span>
+        <span class="tag">心源性休克</span>
+        <span class="tag">昏迷</span>
+        <span class="tag">目标体温管理</span>
+        <span class="tag">头颅CT</span>
+        <span class="tag">脑电图</span>
+    </div>
+
+    <div class="bottom-section">
+        <div class="keywords">
+            <strong>关键词：</strong>成人心搏骤停自主循环恢复后治疗流程；ROSC；心脏骤停；自主循环恢复；气管插管；通气速率；SpO₂；PaCO₂；血流动力学；SBP；MAP；12导联心电图；STEMI；心源性休克；机械循环支持；昏迷；目标体温管理；头颅CT检查；脑电图监测；重症监护；可逆病因
+        </div>
+        <div class="page-number">354</div>
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="成人心搏骤停自主循环恢复后治疗流程（图41）；成人心搏骤停自主循环恢复后治疗流程、ROSC、心脏骤停、自主循环恢复、气管插管、通气速率、SpO₂、PaCO₂、血流动力学、SBP、MAP、12导联心电图、STEMI、心源性休克、机械循环支持、昏迷、目标体温管理、头颅CT检查、脑电图监测、重症监护、可逆病因；=354" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            var input = document.getElementById("copyInput");
+            input.select();
+            input.setSelectionRange(0, 99999);
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(function() {
+                    alert("已复制到剪贴板！");
+                });
+            } else {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            }
+        }
+
+        function toggleFavorite() {
+            var btn = document.getElementById("favBtn");
+            var title = document.title.replace(/~~~~~|\*\*\*\*\*/g, "");
+            var url = window.location.href;
+            var favData = {
+                title: title,
+                url: url,
+                page: "354"
+            };
+            
+            var favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+            var index = favorites.findIndex(function(f) { return f.url === url; });
+            
+            if (index === -1) {
+                favorites.push(favData);
+                btn.textContent = "❤️ 已收藏";
+                btn.classList.add("active");
+                alert("已添加到收藏！");
+            } else {
+                favorites.splice(index, 1);
+                btn.textContent = "⭐ 收藏";
+                btn.classList.remove("active");
+                alert("已取消收藏！");
+            }
+            
+            localStorage.setItem("favorites", JSON.stringify(favorites));
+            
+            updateIndexFavorites(favorites);
+        }
+
+        function updateIndexFavorites(favorites) {
+            localStorage.setItem("page354_favorite", JSON.stringify({
+                title: "成人心搏骤停自主循环恢复后治疗流程（图41）",
+                url: "354.html",
+                added: new Date().toLocaleString()
+            }));
+        }
+
+        window.onload = function() {
+            var favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+            var url = window.location.href;
+            var index = favorites.findIndex(function(f) { return f.url === url; });
+            var btn = document.getElementById("favBtn");
+            if (index !== -1) {
+                btn.textContent = "❤️ 已收藏";
+                btn.classList.add("active");
+            }
+        };
+    </script>
+</body>
+</html>
