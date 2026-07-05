@@ -1,0 +1,468 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~腰痛鉴别诊断与检查*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #f5f0ff 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .back-btn {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btns {
+            position: absolute;
+            right: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+        }
+        
+        .favorite-btn {
+            background: #f0ad4e;
+            margin-top: 5px;
+        }
+        
+        .favorite-btn:hover {
+            background: #ec971f;
+        }
+        
+        .favorite-btn.active {
+            background: #d9534f;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c5aa0;
+            font-size: 24px;
+            padding: 50px 20px 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .table-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead th {
+            background: #2c5aa0;
+            color: white;
+            padding: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: left;
+        }
+        
+        tbody td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #e0e8f0;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #444;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background: #e8f2ff;
+        }
+        
+        .section-title {
+            background: #e3f0ff !important;
+            font-weight: 600;
+            color: #1a4a8a;
+        }
+        
+        .disease-name {
+            color: #c0392b;
+            font-weight: 600;
+        }
+        
+        .check-must {
+            color: #27ae60;
+            font-weight: 600;
+        }
+        
+        .check-optional {
+            color: #e67e22;
+            font-weight: 600;
+        }
+        
+        .keywords-section {
+            max-width: 900px;
+            margin: 25px auto;
+            padding: 20px;
+            background: rgba(255,255,255,0.85);
+            border-radius: 10px;
+        }
+        
+        .keywords-title {
+            color: #2c5aa0;
+            font-size: 16px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #e8f4f8;
+            color: #2c5aa0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #b8d4e8;
+        }
+        
+        .copy-section {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255,255,255,0.85);
+            border-radius: 10px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #b8d4e8;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background: #5bc0de;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #46b8da;
+        }
+        
+        .copy-btn.copied {
+            background: #5cb85c;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+                padding: 55px 10px 15px;
+            }
+            
+            .back-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px;
+            }
+            
+            tbody td {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-btns">
+            <a href="58.html" class="nav-btn">上一页</a>
+            <a href="60.html" class="nav-btn">下一页</a>
+            <button class="nav-btn favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~腰痛鉴别诊断与检查*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~腰痛鉴别诊断与检查*****、类别、详细内容、输尿管结石相关症状、肾盂肾炎、腹主动脉夹层、腰椎骨折、带状疱疹、肾梗死、妇科及消化系统疾病、必做检查、选做检查、临床表现、血常规、尿常规和尿沉渣、泌尿系B超、腹盆CT平扫、腰椎X线检查、腹盆增强CT/CTA</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>类别</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-title">
+                    <td colspan="2">输尿管结石相关症状</td>
+                </tr>
+                <tr>
+                    <td>临床表现</td>
+                    <td>可呈发作性，部分患者伴排尿痛、排尿困难、尿急或血尿。查体肾区叩痛阳性，可有输尿管走行区深压痛。需注意，结石位于输尿管膀胱开口处时可以表现为下腹疼痛，而无典型肾区叩痛体征。</td>
+                </tr>
+                <tr class="section-title">
+                    <td colspan="2">肾盂肾炎</td>
+                </tr>
+                <tr>
+                    <td>临床表现</td>
+                    <td>患者多合并高热、畏寒、寒战，可无尿路刺激征。查体肾区叩痛阳性，尿白细胞升高。临床拟诊肾盂肾炎应需完善相关检查明确有无尿路梗阻，因合并尿路梗阻者需泌尿外科急诊解除梗阻。</td>
+                </tr>
+                <tr class="section-title">
+                    <td colspan="2">腹主动脉夹层</td>
+                </tr>
+                <tr>
+                    <td>临床表现</td>
+                    <td>根据撕裂部位不同，临床可表现为腹痛、背痛或腰痛，疼痛多为撕裂样、刀割样，程度剧烈伴大汗，出现相应部位缺血症状。查体可闻及血管杂音，腹主动脉瘤破裂可出现晕厥、休克、猝死、搏动性腹部包块。</td>
+                </tr>
+                <tr class="section-title">
+                    <td colspan="2">腰椎骨折</td>
+                </tr>
+                <tr>
+                    <td>临床表现</td>
+                    <td>患者可无外伤史，一般有骨质疏松、应用糖皮质激素等危险因素。慢性骨质疏松相关腰椎压缩骨折疼痛可以很轻微，严重急性腰椎压缩性骨折疼痛明显，通常出现在突然弯腰、咳嗽、提举重物后。查体腰椎压痛阳性。</td>
+                </tr>
+                <tr class="section-title">
+                    <td colspan="2">带状疱疹</td>
+                </tr>
+                <tr>
+                    <td>临床表现</td>
+                    <td>可先出现腰痛，后出现痛性皮疹伴水疱，沿神经走行出现，腹部查体阴性。部分患者可以无皮肤疱疹表现，但皮肤触痛明显。</td>
+                </tr>
+                <tr class="section-title">
+                    <td colspan="2">肾梗死</td>
+                </tr>
+                <tr>
+                    <td>临床表现</td>
+                    <td>如肾动脉血栓形成、血栓栓塞、肾动脉夹层等。临床少见，但因临床表现与肾结石相似易漏诊或延误治疗。患者除剧烈腰痛外，可伴腹痛、恶心、呕吐、发热等，合并心房颤动（心源性栓子脱落）、血压急性升高（肾素释放增加所致）有一定提示意义。</td>
+                </tr>
+                <tr class="section-title">
+                    <td colspan="2">妇科及消化系统疾病</td>
+                </tr>
+                <tr>
+                    <td>临床表现</td>
+                    <td>均可以腰痛为主诉就诊，但患者多合并腹部症状及体征，仔细询问病史及查体即可鉴别。</td>
+                </tr>
+                <tr class="section-title">
+                    <td colspan="2">必做检查</td>
+                </tr>
+                <tr>
+                    <td class="check-must">血常规</td>
+                    <td>明确有无感染及严重程度。</td>
+                </tr>
+                <tr>
+                    <td class="check-must">尿常规和尿沉渣</td>
+                    <td>明确有无泌尿系感染及血尿等，以及区分血尿来源。</td>
+                </tr>
+                <tr>
+                    <td class="check-must">泌尿系B超</td>
+                    <td>明确泌尿系有无结石、梗阻等。靠近输尿管膀胱开口处结石可以假阴性。</td>
+                </tr>
+                <tr>
+                    <td class="check-must">腹盆CT平扫</td>
+                    <td>明确腹盆腔各脏器情况，尤其是有无泌尿系结石、梗阻等。对后腹膜病变、肾上腺占位等少见情况有提示意义。</td>
+                </tr>
+                <tr class="section-title">
+                    <td colspan="2">选做检查</td>
+                </tr>
+                <tr>
+                    <td class="check-optional">腰椎X线检查</td>
+                    <td>明确有无腰椎骨折等。</td>
+                </tr>
+                <tr>
+                    <td class="check-optional">腹盆增强CT/CTA</td>
+                    <td>患者剧烈腹痛持续不缓解，腹盆CT平扫未能明确诊断，临床怀疑腹主动脉夹层、肾梗死等情况时。</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="keywords-section">
+        <div class="keywords-title">特色检索标签</div>
+        <div class="tag-container">
+            <span class="tag">输尿管结石</span>
+            <span class="tag">肾盂肾炎</span>
+            <span class="tag">腹主动脉夹层</span>
+            <span class="tag">腰椎骨折</span>
+            <span class="tag">带状疱疹</span>
+            <span class="tag">肾梗死</span>
+            <span class="tag">泌尿系感染</span>
+            <span class="tag">血尿</span>
+            <span class="tag">尿路梗阻</span>
+            <span class="tag">骨质疏松</span>
+            <span class="tag">心源性栓子</span>
+            <span class="tag">心房颤动</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="腰痛鉴别诊断与检查；输尿管结石、肾盂肾炎、腹主动脉夹层、腰椎骨折、带状疱疹、肾梗死、妇科及消化系统疾病、血常规、尿常规、泌尿系B超、腹盆CT平扫、腰椎X线、腹盆增强CT/CTA；=59" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyContent()">复制</button>
+    </div>
+    
+    <div class="page-number">页码：59</div>
+    
+    <script>
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            document.execCommand('copy');
+            
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '已复制';
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFav = btn.classList.toggle('active');
+            
+            if (isFav) {
+                btn.textContent = '❤️ 已收藏';
+                
+                // 尝试添加到index.html的收藏类目
+                try {
+                    const favData = {
+                        title: '腰痛鉴别诊断与检查',
+                        url: '59.html',
+                        date: new Date().toISOString()
+                    };
+                    
+                    let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                    const exists = favorites.some(f => f.url === '59.html');
+                    
+                    if (!exists) {
+                        favorites.push(favData);
+                        localStorage.setItem('favorites', JSON.stringify(favorites));
+                        
+                        // 尝试通知index页面更新
+                        window.dispatchEvent(new CustomEvent('favoriteAdded', { detail: favData }));
+                    }
+                } catch(e) {
+                    console.log('收藏存储失败', e);
+                }
+                
+            } else {
+                btn.textContent = '⭐ 收藏';
+                
+                // 移除收藏
+                try {
+                    let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                    favorites = favorites.filter(f => f.url !== '59.html');
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                } catch(e) {
+                    console.log('取消收藏失败', e);
+                }
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.addEventListener('DOMContentLoaded', () => {
+            try {
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const isFav = favorites.some(f => f.url === '59.html');
+                if (isFav) {
+                    const btn = document.getElementById('favoriteBtn');
+                    btn.classList.add('active');
+                    btn.textContent = '❤️ 已收藏';
+                }
+            } catch(e) {}
+        });
+    </script>
+</body>
+</html>
