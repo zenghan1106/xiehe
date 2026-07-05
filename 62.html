@@ -1,0 +1,479 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~血尿急诊处理与少尿定义*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #f5f0ff 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .back-btn {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btns {
+            position: absolute;
+            right: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+        }
+        
+        .favorite-btn {
+            background: #f0ad4e;
+        }
+        
+        .favorite-btn:hover {
+            background: #ec971f;
+        }
+        
+        .favorite-btn.active {
+            background: #d9534f;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c5aa0;
+            font-size: 24px;
+            padding: 50px 20px 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .table-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead th {
+            background: #2c5aa0;
+            color: white;
+            padding: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: left;
+        }
+        
+        tbody td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #e0e8f0;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #444;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background: #e8f2ff;
+        }
+        
+        .section-title {
+            background: #e3f0ff !important;
+            font-weight: 600;
+            color: #1a4a8a;
+        }
+        
+        .disease-name {
+            color: #c0392b;
+            font-weight: 600;
+        }
+        
+        .drug-name {
+            color: #27ae60;
+            font-weight: 600;
+        }
+        
+        .check-item {
+            color: #8e44ad;
+            font-weight: 600;
+        }
+        
+        .warning {
+            color: #e67e22;
+            font-weight: 600;
+        }
+        
+        .keywords-section {
+            max-width: 900px;
+            margin: 25px auto;
+            padding: 20px;
+            background: rgba(255,255,255,0.85);
+            border-radius: 10px;
+        }
+        
+        .keywords-title {
+            color: #2c5aa0;
+            font-size: 16px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #e8f4f8;
+            color: #2c5aa0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #b8d4e8;
+        }
+        
+        .copy-section {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255,255,255,0.85);
+            border-radius: 10px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #b8d4e8;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background: #5bc0de;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #46b8da;
+        }
+        
+        .copy-btn.copied {
+            background: #5cb85c;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+                padding: 55px 10px 15px;
+            }
+            
+            .back-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px;
+            }
+            
+            tbody td {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-btns">
+            <a href="61.html" class="nav-btn">上一页</a>
+            <a href="63.html" class="nav-btn">下一页</a>
+            <button class="nav-btn favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~血尿急诊处理与少尿定义*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~血尿急诊处理与少尿定义*****、类别、详细内容、评估检查、4. 急诊处理、少尿、1. 定义、2. 常见病因及临床表现、危险情况、血常规＋CRP检测、尿常规、尿沉渣、尿培养、凝血功能检查、CT尿路造影（CTU）、低剂量腹盆CT、泌尿系感染、肾及输尿管结石、对症处理、少尿标准、无尿标准、临床特点、肾前性疾病</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>类别</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="warning">危险情况</td>
+                    <td>况是复杂泌尿道感染、非肾小球性快速大量出血造成失血性休克，以及产生血凝块阻塞输尿管或阻塞膀胱出口引起尿潴留。</td>
+                </tr>
+                <tr class="section-title">
+                    <td colspan="2">评估检查</td>
+                </tr>
+                <tr>
+                    <td class="check-item">血常规＋CRP检测</td>
+                    <td>评估感染情况，评估出血量。</td>
+                </tr>
+                <tr>
+                    <td class="check-item">尿常规</td>
+                    <td>评估感染情况。</td>
+                </tr>
+                <tr>
+                    <td class="check-item">尿沉渣</td>
+                    <td>鉴别肾小球源性血尿和非肾小球源性血尿。</td>
+                </tr>
+                <tr>
+                    <td class="check-item">尿培养</td>
+                    <td>怀疑泌尿系感染的患者。</td>
+                </tr>
+                <tr>
+                    <td class="check-item">凝血功能检查</td>
+                    <td>评估凝血功能，鉴别凝血异常导致的出血。</td>
+                </tr>
+                <tr>
+                    <td class="check-item">CT尿路造影（CTU）</td>
+                    <td>肉眼血尿伴血凝块者。若不能行CTU，则考虑B超、CT，并需要转诊泌尿外科评估行膀胱镜检查。</td>
+                </tr>
+                <tr>
+                    <td class="check-item">低剂量腹盆CT</td>
+                    <td>怀疑肾及输尿管结石者。若不能行低剂量CT，则CT平扫或B超，孕妇首选B超。B超诊断肾结石的敏感性低于CT，但能可靠检测肾积水。</td>
+                </tr>
+                <tr class="section-title">
+                    <td colspan="2">4. 急诊处理</td>
+                </tr>
+                <tr>
+                    <td class="disease-name">泌尿系感染</td>
+                    <td>应予抗感染治疗。复杂泌尿道感染有感染性休克的风险，若存在泌尿系梗阻，需积极解除梗阻引流。</td>
+                </tr>
+                <tr>
+                    <td class="disease-name">肾及输尿管结石</td>
+                    <td>控制疼痛可用<span class="drug-name">NSAID</span>和阿片类药物。鼓励患者用力排尿。若结石直径＜10mm、无发热且疼痛能控制，可使用促进排石药物，如α受体阻断药、钙通道阻滞药和解痉药。若结石直径＞10mm、存在明显梗阻、症状不能控制、排石无效，应泌尿外科处理，行震波碎石、输尿管镜。</td>
+                </tr>
+                <tr>
+                    <td class="disease-name">对症处理</td>
+                    <td>出血量大的患者应考虑持续膀胱冲洗，并应用止血药物，如<span class="drug-name">卡络磺钠</span>、<span class="drug-name">氨甲环酸</span>等。血尿伴血凝块患者需完善影像学检查，请泌尿外科会诊评估膀胱镜。已有血块阻塞导致泌尿系梗阻需解除梗阻，以避免损伤肾功能。</td>
+                </tr>
+                <tr class="section-title">
+                    <td colspan="2">■ 少尿</td>
+                </tr>
+                <tr class="section-title">
+                    <td colspan="2">1. 定义</td>
+                </tr>
+                <tr>
+                    <td>少尿标准</td>
+                    <td>尿量＜0.3ml/(kg·h) 或400ml/d。可以为多种疾病的临床表现形式，可伴或不伴肾功能改变。</td>
+                </tr>
+                <tr>
+                    <td>无尿标准</td>
+                    <td>若尿量更进一步减少，可出现无尿（尿量＜100ml/d）。</td>
+                </tr>
+                <tr>
+                    <td>临床特点</td>
+                    <td>少尿可以是急性疾病的临床表现，也可以是亚急性和慢性疾病的临床表现。</td>
+                </tr>
+                <tr class="section-title">
+                    <td colspan="2">2. 常见病因及临床表现</td>
+                </tr>
+                <tr>
+                    <td class="disease-name">肾前性疾病</td>
+                    <td>主要因肾灌注不足引起少尿。对于生命体征的注重应当置于首位，若患者存在循环休克伴少尿，生命体征能够快速帮助临床医师进行判断。灌注不足原因如下：</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="keywords-section">
+        <div class="keywords-title">特色检索标签</div>
+        <div class="tag-container">
+            <span class="tag">复杂泌尿道感染</span>
+            <span class="tag">失血性休克</span>
+            <span class="tag">血凝块</span>
+            <span class="tag">尿潴留</span>
+            <span class="tag">血常规</span>
+            <span class="tag">CRP</span>
+            <span class="tag">尿常规</span>
+            <span class="tag">尿沉渣</span>
+            <span class="tag">尿培养</span>
+            <span class="tag">凝血功能检查</span>
+            <span class="tag">CT尿路造影</span>
+            <span class="tag">CTU</span>
+            <span class="tag">低剂量腹盆CT</span>
+            <span class="tag">B超</span>
+            <span class="tag">泌尿系感染</span>
+            <span class="tag">肾及输尿管结石</span>
+            <span class="tag">NSAID</span>
+            <span class="tag">阿片类药物</span>
+            <span class="tag">α受体阻断药</span>
+            <span class="tag">钙通道阻滞药</span>
+            <span class="tag">解痉药</span>
+            <span class="tag">卡络磺钠</span>
+            <span class="tag">氨甲环酸</span>
+            <span class="tag">膀胱镜</span>
+            <span class="tag">少尿</span>
+            <span class="tag">无尿</span>
+            <span class="tag">肾前性疾病</span>
+            <span class="tag">循环休克</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="血尿急诊处理与少尿定义；危险情况、评估检查、血常规、CRP、尿常规、尿沉渣、尿培养、凝血功能检查、CT尿路造影、CTU、低剂量腹盆CT、B超、急诊处理、泌尿系感染、肾及输尿管结石、NSAID、阿片类药物、α受体阻断药、钙通道阻滞药、解痉药、卡络磺钠、氨甲环酸、膀胱镜、少尿、无尿、肾前性疾病、循环休克；=62" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyContent()">复制</button>
+    </div>
+    
+    <div class="page-number">页码：62</div>
+    
+    <script>
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            document.execCommand('copy');
+            
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '已复制';
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFav = btn.classList.toggle('active');
+            
+            if (isFav) {
+                btn.textContent = '❤️ 已收藏';
+                
+                try {
+                    const favData = {
+                        title: '血尿急诊处理与少尿定义',
+                        url: '62.html',
+                        date: new Date().toISOString()
+                    };
+                    
+                    let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                    const exists = favorites.some(f => f.url === '62.html');
+                    
+                    if (!exists) {
+                        favorites.push(favData);
+                        localStorage.setItem('favorites', JSON.stringify(favorites));
+                        window.dispatchEvent(new CustomEvent('favoriteAdded', { detail: favData }));
+                    }
+                } catch(e) {
+                    console.log('收藏存储失败', e);
+                }
+                
+            } else {
+                btn.textContent = '⭐ 收藏';
+                
+                try {
+                    let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                    favorites = favorites.filter(f => f.url !== '62.html');
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                } catch(e) {
+                    console.log('取消收藏失败', e);
+                }
+            }
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            try {
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const isFav = favorites.some(f => f.url === '62.html');
+                if (isFav) {
+                    const btn = document.getElementById('favoriteBtn');
+                    btn.classList.add('active');
+                    btn.textContent = '❤️ 已收藏';
+                }
+            } catch(e) {}
+        });
+    </script>
+</body>
+</html>
