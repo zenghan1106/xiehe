@@ -1,0 +1,613 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~医学英文缩略语续表（ROSC-TEE）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .back-home {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 100;
+        }
+        
+        .back-home a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #4a90d9;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .back-home a:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 右上角导航按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn, .fav-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+        }
+        
+        .nav-btn:hover {
+            background: #449d44;
+            transform: translateY(-2px);
+        }
+        
+        .fav-btn {
+            background: #f0ad4e;
+            color: white;
+        }
+        
+        .fav-btn:hover {
+            background: #ec971f;
+            transform: translateY(-2px);
+        }
+        
+        .fav-btn.active {
+            background: #d9534f;
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            margin: 60px 0 30px;
+            font-size: 22px;
+            color: #2c3e50;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            max-width: 900px;
+            margin: 0 auto 30px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        /* 表头 */
+        thead tr {
+            background: linear-gradient(135deg, #1e5799 0%, #2989d8 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 18px 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            letter-spacing: 1px;
+        }
+        
+        /* 表格内容 */
+        tbody tr {
+            transition: background 0.2s ease;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        tbody td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        tbody td:first-child {
+            font-weight: 600;
+            color: #1e5799;
+            white-space: nowrap;
+        }
+        
+        tbody td:nth-child(2) {
+            color: #555;
+            word-break: break-word;
+        }
+        
+        tbody td:nth-child(3) {
+            color: #333;
+            word-break: break-word;
+        }
+        
+        /* 页码显示 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            color: #666;
+            margin: 20px 0;
+            font-weight: 500;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            max-width: 900px;
+            margin: 0 auto 30px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            padding: 0 10px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background: white;
+        }
+        
+        .copy-btn {
+            padding: 12px 25px;
+            background: #5bc0de;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: #46b8da;
+        }
+        
+        .copy-btn.copied {
+            background: #5cb85c;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            max-width: 900px;
+            margin: 0 auto 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #e3f2fd;
+            color: #1976d2;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #bbdefb;
+        }
+        
+        .tag:hover {
+            background: #1976d2;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* 关键词 */
+        .keywords {
+            max-width: 900px;
+            margin: 0 auto 20px;
+            text-align: center;
+            color: #888;
+            font-size: 13px;
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 15px 30px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 200;
+            display: none;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 18px;
+                margin: 70px 0 20px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 14px 10px;
+            }
+            
+            tbody td {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            .nav-buttons {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .nav-btn, .fav-btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            
+            .back-home a {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <div class="back-home">
+        <a href="index.html">← 返回首页</a>
+    </div>
+    
+    <!-- 右上角导航 -->
+    <div class="nav-buttons">
+        <a href="404.html" class="nav-btn">上一页</a>
+        <a href="406.html" class="nav-btn">下一页</a>
+        <button class="fav-btn" onclick="toggleFavorite()" id="favBtn">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">~~~~~医学英文缩略语续表（ROSC-TEE）*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>英文缩略语</th>
+                    <th>英文全称</th>
+                    <th>中文全称</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ROSC</td>
+                    <td>return of spontaneous circulation</td>
+                    <td>自主循环恢复</td>
+                </tr>
+                <tr>
+                    <td>RPGN</td>
+                    <td>rapidly progressive glomerulonephritis</td>
+                    <td>急进性肾小球肾炎</td>
+                </tr>
+                <tr>
+                    <td>rt-PA</td>
+                    <td>recombinant tissue plasminogen activator</td>
+                    <td>重组组织型纤溶酶原激活剂</td>
+                </tr>
+                <tr>
+                    <td>SABA</td>
+                    <td>short-acting β₂ agonist</td>
+                    <td>短效β₂受体激动药</td>
+                </tr>
+                <tr>
+                    <td>SAH</td>
+                    <td>subarachnoid hemorrhage</td>
+                    <td>蛛网膜下腔出血</td>
+                </tr>
+                <tr>
+                    <td>SAP</td>
+                    <td>severe acute pancreatitis</td>
+                    <td>重症急性胰腺炎</td>
+                </tr>
+                <tr>
+                    <td>SBP</td>
+                    <td>spontaneous bacterial peritonitis</td>
+                    <td>自发性细菌性腹膜炎</td>
+                </tr>
+                <tr>
+                    <td>SCI</td>
+                    <td>spinal cord injury</td>
+                    <td>急性脊髓损伤</td>
+                </tr>
+                <tr>
+                    <td>SDF</td>
+                    <td>sidestream dark-field imaging</td>
+                    <td>旁流暗场成像</td>
+                </tr>
+                <tr>
+                    <td>SIADH</td>
+                    <td>syndrome of inappropriate secretion of antidiuretic hormone</td>
+                    <td>抗利尿激素分泌不当综合征</td>
+                </tr>
+                <tr>
+                    <td>SIE</td>
+                    <td>subacute infective endocarditis</td>
+                    <td>亚急性感染性心内膜炎</td>
+                </tr>
+                <tr>
+                    <td>SIMV</td>
+                    <td>synchronized intermittent mandatory ventilation</td>
+                    <td>同步间歇指令通气</td>
+                </tr>
+                <tr>
+                    <td>SIRS</td>
+                    <td>systemic inflammatory response syndrome</td>
+                    <td>全身炎症反应综合征</td>
+                </tr>
+                <tr>
+                    <td>SJS</td>
+                    <td>Stevens-Johnson syndrome</td>
+                    <td>Stevens-Johnson综合征</td>
+                </tr>
+                <tr>
+                    <td>SLE</td>
+                    <td>systemic lupus erythematosus</td>
+                    <td>系统性红斑狼疮</td>
+                </tr>
+                <tr>
+                    <td>SOFA</td>
+                    <td>sequential organ failure assessment</td>
+                    <td>序贯器官衰竭评分</td>
+                </tr>
+                <tr>
+                    <td>Sosm</td>
+                    <td>serum osmolality</td>
+                    <td>血浆渗透压</td>
+                </tr>
+                <tr>
+                    <td>SpO₂</td>
+                    <td>saturation of blood oxygen</td>
+                    <td>经皮脉搏血氧饱和度</td>
+                </tr>
+                <tr>
+                    <td>SRC</td>
+                    <td>scleroderma renal crisis</td>
+                    <td>硬皮病肾危象</td>
+                </tr>
+                <tr>
+                    <td>SSc</td>
+                    <td>systemic sclerosis</td>
+                    <td>系统性硬化症</td>
+                </tr>
+                <tr>
+                    <td>STEMI</td>
+                    <td>ST segment elevation myocardial infarction</td>
+                    <td>ST段抬高心肌梗死</td>
+                </tr>
+                <tr>
+                    <td>sTREM-1</td>
+                    <td>soluble triggering receptor expressed on myeloid cell-1</td>
+                    <td>可溶性髓系细胞触发受体-1</td>
+                </tr>
+                <tr>
+                    <td>SV</td>
+                    <td>stroke volume</td>
+                    <td>每搏量</td>
+                </tr>
+                <tr>
+                    <td>SVR</td>
+                    <td>systemic vascular resistance</td>
+                    <td>体循环阻力</td>
+                </tr>
+                <tr>
+                    <td>TBil</td>
+                    <td>total bilirubin</td>
+                    <td>总胆红素</td>
+                </tr>
+                <tr>
+                    <td>TBM</td>
+                    <td>tuberculous bacterial meningitis</td>
+                    <td>结核性脑膜炎</td>
+                </tr>
+                <tr>
+                    <td>TEE</td>
+                    <td>transesophageal echocardiography</td>
+                    <td>经食管超声心动图</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">398</div>
+    
+    <!-- 编辑框和复制按钮 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" readonly>
+        <button class="copy-btn" onclick="copyContent()">复制</button>
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag">急进性肾小球肾炎</span>
+            <span class="tag">蛛网膜下腔出血</span>
+            <span class="tag">重症急性胰腺炎</span>
+            <span class="tag">自发性细菌性腹膜炎</span>
+            <span class="tag">急性脊髓损伤</span>
+            <span class="tag">抗利尿激素分泌不当综合征</span>
+            <span class="tag">亚急性感染性心内膜炎</span>
+            <span class="tag">全身炎症反应综合征</span>
+            <span class="tag">Stevens-Johnson综合征</span>
+            <span class="tag">系统性红斑狼疮</span>
+            <span class="tag">硬皮病肾危象</span>
+            <span class="tag">系统性硬化症</span>
+            <span class="tag">ST段抬高心肌梗死</span>
+            <span class="tag">结核性脑膜炎</span>
+            <!-- 药物标签 -->
+            <span class="tag">重组组织型纤溶酶原激活剂</span>
+            <span class="tag">短效β₂受体激动药</span>
+            <!-- 细菌相关 -->
+            <span class="tag">自发性细菌性腹膜炎</span>
+            <span class="tag">结核性脑膜炎</span>
+            <span class="tag">亚急性感染性心内膜炎</span>
+        </div>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        关键词：ROSC；RPGN；rt-PA；SABA；SAH；SAP；SBP；SCI；SDF；SIADH；SIE；SIMV；SIRS；SJS；SLE；SOFA；Sosm；SpO₂；SRC；SSc；STEMI；sTREM-1；SV；SVR；TBil；TBM；TEE
+    </div>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 设置编辑框内容
+        const title = "医学英文缩略语续表（ROSC-TEE）";
+        const subtitle = "自主循环恢复至经食管超声心动图";
+        const keywords = "ROSC；RPGN；rt-PA；SABA；SAH；SAP；SBP；SCI；SDF；SIADH；SIE；SIMV；SIRS；SJS；SLE；SOFA；Sosm；SpO₂；SRC；SSc；STEMI；sTREM-1；SV；SVR；TBil；TBM；TEE";
+        const pageNum = "405";
+        
+        document.getElementById('copyInput').value = `${title}；${subtitle}；${keywords}=${pageNum}`;
+        
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            navigator.clipboard.writeText(input.value).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '已复制';
+                btn.classList.add('copied');
+                showToast('内容已复制到剪贴板');
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        // 收藏功能（使用localStorage模拟）
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = localStorage.getItem('fav_405') === 'true';
+            
+            if (!isFav) {
+                localStorage.setItem('fav_405', 'true');
+                localStorage.setItem('fav_405_title', title);
+                localStorage.setItem('fav_405_url', window.location.href);
+                btn.textContent = '❤️ 已收藏';
+                btn.classList.add('active');
+                showToast('已添加到收藏（本地存储）');
+            } else {
+                localStorage.removeItem('fav_405');
+                localStorage.removeItem('fav_405_title');
+                localStorage.removeItem('fav_405_url');
+                btn.textContent = '⭐ 收藏';
+                btn.classList.remove('active');
+                showToast('已取消收藏');
+            }
+        }
+        
+        // 检查收藏状态
+        if (localStorage.getItem('fav_405') === 'true') {
+            const btn = document.getElementById('favBtn');
+            btn.textContent = '❤️ 已收藏';
+            btn.classList.add('active');
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 标签点击搜索功能
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const text = this.textContent;
+                showToast(`搜索: ${text}`);
+                // 实际可跳转搜索页面
+            });
+        });
+    </script>
+</body>
+</html>
