@@ -1,0 +1,549 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~上下尿路感染鉴别要点与诊断策略*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .nav-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #e8b339;
+            margin-top: 5px;
+        }
+        
+        .fav-btn:hover {
+            background: #d4a030;
+        }
+        
+        /* 标题样式 */
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 60px 0 25px 0;
+            padding: 0 80px;
+            line-height: 1.5;
+        }
+        
+        /* 副标题 */
+        .subtitle {
+            text-align: center;
+            color: #2874a6;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        
+        /* 章节标题 */
+        .section-title {
+            background: #d6eaf8;
+            color: #1a5276;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 12px 15px;
+            margin: 20px 0 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #2e86c1;
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        /* 表头 */
+        thead tr {
+            background: #2e86c1;
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 12px;
+            text-align: center;
+            font-size: 17px;
+            font-weight: bold;
+        }
+        
+        /* 表格第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 15px;
+            font-weight: bold;
+            background: #eaf2f8;
+        }
+        
+        /* 普通单元格 */
+        td, th {
+            padding: 12px;
+            border: 1px solid #aed6f1;
+            text-align: center;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #d4e6f1;
+        }
+        
+        /* 列表样式 */
+        .check-list {
+            background: white;
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        .check-list li {
+            margin: 10px 0;
+            font-size: 14px;
+            line-height: 1.7;
+            color: #444;
+        }
+        
+        .check-list li::marker {
+            color: #2e86c1;
+        }
+        
+        /* 诊断策略特殊样式 */
+        .diag-item {
+            background: white;
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        .diag-item p {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #444;
+            margin: 8px 0;
+        }
+        
+        .check-mark {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        /* 页码显示 */
+        .page-num {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 16px;
+            margin: 25px 0;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 30px 0 20px 0;
+        }
+        
+        .tags-title {
+            color: #1a5276;
+            font-size: 15px;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #d6eaf8;
+            color: #1a5276;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #aed6f1;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 25px 0;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        .copy-input-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        #copyInput {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #aed6f1;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            width: calc(100% - 100px);
+        }
+        
+        #copyBtn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        #copyBtn:hover {
+            background: #219a52;
+        }
+        
+        #copyBtn.copied {
+            background: #7f8c8d;
+        }
+        
+        /* 关键词底部 */
+        .keywords-bottom {
+            text-align: center;
+            color: #95a5a6;
+            font-size: 13px;
+            margin-top: 20px;
+            padding: 15px;
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #27ae60;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            display: none;
+            z-index: 200;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 18px;
+                padding: 0 60px;
+                margin-top: 80px;
+            }
+            
+            .nav-buttons {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .nav-btn, .home-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            
+            td, th {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <button class="home-btn" onclick="location.href='index.html'">返回首页</button>
+    
+    <!-- 右上角导航 -->
+    <div class="nav-buttons">
+        <button class="nav-btn" onclick="location.href='213.html'">上一页</button>
+        <button class="nav-btn" onclick="location.href='215.html'">下一页</button>
+        <button class="nav-btn fav-btn" onclick="addToFavorite()">收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~上下尿路感染鉴别要点与诊断策略*****</h1>
+    <p class="subtitle">必做检查 · 选做检查 · 诊断策略 · 鉴别要点</p>
+    
+    <!-- 4. 必做检查 -->
+    <div class="section-title">4. 必做检查</div>
+    <ul class="check-list">
+        <li>血常规＋炎性指标检测。</li>
+        <li>尿常规：白细胞增多、红细胞阳性或正常、亚硝酸盐阳性或阴性。</li>
+        <li>尿培养：需要留取清洁中段尿或直接导尿管留取，推荐使用中段尿培养。</li>
+        <li>腹盆CT：可显示结石、产气菌感染、出血、梗阻和脓肿等，肾盂肾炎治疗72小时后发热未控制需除外肾脓肿。若需显示肾灌注状态及鉴别占位性质，应完善增强CT。</li>
+        <li>泌尿系超声：评估复杂泌尿系感染或男性尿路感染常规检查。</li>
+        <li>血培养：寻找全身感染证据。</li>
+        <li>药敏试验：适用于经验性治疗效果欠佳者。</li>
+    </ul>
+    
+    <!-- 5. 选做检查 -->
+    <div class="section-title">5. 选做检查</div>
+    <div class="check-list">
+        <p style="font-size:14px;line-height:1.7;color:#444;">排泄性尿路造影：评估先天或后天原因造成的解剖结构异常。</p>
+    </div>
+    
+    <!-- 6. 诊断策略 -->
+    <div class="section-title">6. 诊断策略</div>
+    
+    <div class="diag-item">
+        <p><strong>是否为尿路感染：</strong>满足以下条件之一可确诊为泌尿系感染。</p>
+        <p><span class="check-mark">✓</span> 典型症状＋脓尿＋尿亚硝酸盐试验阳性＋清洁离心中段尿沉渣白细胞数＞10/HP，或有尿路感染症状者＋正规清晨清洁中段尿细菌定量培养，菌落数≥10⁵/ml。</p>
+        <p><span class="check-mark">✓</span> 连续两次尿细菌计数≥10⁵/ml，且两次细菌及亚型相同者。</p>
+        <p><span class="check-mark">✓</span> 膀胱穿刺尿培养，如细菌阳性不论菌数多少。</p>
+        <p><span class="check-mark">✓</span> 典型尿路感染症状＋治疗前清晨清洁中断尿离心尿沉渣革兰染色找细菌，细菌＞1个/油镜视野。</p>
+    </div>
+    
+    <div class="diag-item">
+        <p><strong>是上尿路感染还是下尿路感染：</strong>鉴别要点见表31。</p>
+    </div>
+    
+    <!-- 表31 上下尿路感染鉴别要点 -->
+    <div class="section-title">表31 上下尿路感染鉴别要点</div>
+    <table>
+        <thead>
+            <tr>
+                <th>症状</th>
+                <th>下尿路感染</th>
+                <th>上尿路感染</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>尿路刺激征</td>
+                <td>有</td>
+                <td>不明显，合并下尿路感染可有</td>
+            </tr>
+            <tr>
+                <td>全身症状</td>
+                <td>不明显</td>
+                <td>明显</td>
+            </tr>
+            <tr>
+                <td>腰痛</td>
+                <td>不明显</td>
+                <td>明显</td>
+            </tr>
+            <tr>
+                <td>肾区叩击痛</td>
+                <td>无</td>
+                <td>有</td>
+            </tr>
+            <tr>
+                <td>尿白细胞管型</td>
+                <td>无</td>
+                <td>可有</td>
+            </tr>
+            <tr>
+                <td>尿浓缩功能减退</td>
+                <td>无</td>
+                <td>有</td>
+            </tr>
+            <tr>
+                <td>尿抗体包裹细菌</td>
+                <td>阴性</td>
+                <td>阳性</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 页码 -->
+    <div class="page-num">202</div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag">尿路感染</span>
+            <span class="tag">肾盂肾炎</span>
+            <span class="tag">膀胱炎</span>
+            <span class="tag">尿培养</span>
+            <span class="tag">药敏试验</span>
+            <span class="tag">尿常规</span>
+            <span class="tag">血培养</span>
+            <span class="tag">白细胞</span>
+            <span class="tag">亚硝酸盐</span>
+            <span class="tag">细菌</span>
+            <span class="tag">脓尿</span>
+            <span class="tag">革兰染色</span>
+            <span class="tag">产气菌</span>
+            <span class="tag">肾脓肿</span>
+            <span class="tag">尿抗体包裹细菌</span>
+            <span class="tag">尿白细胞管型</span>
+        </div>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <div class="copy-input-group">
+            <input type="text" id="copyInput" readonly>
+            <button id="copyBtn" onclick="copyContent()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 关键词底部 -->
+    <div class="keywords-bottom">
+        关键词：上下尿路感染鉴别要点与诊断策略；必做检查；选做检查；诊断策略；表31；尿路感染；肾盂肾炎；膀胱炎；尿培养；药敏试验 | 页码：202
+    </div>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 设置复制框内容
+        const pageNum = '202';
+        const title = '上下尿路感染鉴别要点与诊断策略';
+        const subtitle = '必做检查；选做检查；诊断策略；鉴别要点';
+        const keywords = '尿路感染；肾盂肾炎；膀胱炎；尿培养；药敏试验；尿常规；血培养；白细胞；亚硝酸盐；细菌；脓尿；革兰染色；产气菌；肾脓肿；尿抗体包裹细菌；尿白细胞管型';
+        document.getElementById('copyInput').value = title + '；' + subtitle + '；' + keywords + '；=' + pageNum;
+        
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => showCopySuccess());
+            } else {
+                document.execCommand('copy');
+                showCopySuccess();
+            }
+        }
+        
+        function showCopySuccess() {
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '已复制';
+            btn.classList.add('copied');
+            
+            showToast('内容已复制到剪贴板');
+            
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2500);
+        }
+        
+        // 收藏功能
+        function addToFavorite() {
+            // 获取当前页面信息
+            const currentTitle = document.title.replace(/~~~~~|\\\\*\\\\*\\\\*\\\\*\\\\*/g, '');
+            const currentUrl = window.location.pathname.split('/').pop() || '202.html';
+            
+            // 尝试添加到index.html的收藏类目（通过localStorage模拟）
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.find(f => f.url === currentUrl);
+            if (exists) {
+                showToast('该页面已在收藏中');
+                return;
+            }
+            
+            favorites.push({
+                title: currentTitle,
+                url: currentUrl,
+                category: '感染性疾病',
+                date: new Date().toLocaleDateString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试通过postMessage或broadcast通知index.html（同域情况下）
+            try {
+                localStorage.setItem('favoriteUpdate', Date.now().toString());
+            } catch(e) {}
+            
+            showToast('已添加到收藏，请在首页查看');
+        }
+    </script>
+</body>
+</html>
