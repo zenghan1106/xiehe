@@ -1,0 +1,610 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊医学-有机磷中毒临床表现*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5ee 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(135deg, #4a90d9, #357abd);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(74, 144, 217, 0.3);
+            z-index: 1000;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background: linear-gradient(135deg, #357abd, #2a5f8f);
+            transform: translateY(-2px);
+        }
+        
+        /* 右上角导航按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #5cb85c, #449d44);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(92, 184, 92, 0.3);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .nav-btn:hover {
+            background: linear-gradient(135deg, #449d44, #357a35);
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn.prev {
+            background: linear-gradient(135deg, #f0ad4e, #ec971f);
+        }
+        
+        .nav-btn.prev:hover {
+            background: linear-gradient(135deg, #ec971f, #d58512);
+        }
+        
+        /* 收藏按钮 */
+        .favorite-btn {
+            background: linear-gradient(135deg, #d9534f, #c9302c);
+            margin-top: 5px;
+        }
+        
+        .favorite-btn:hover {
+            background: linear-gradient(135deg, #c9302c, #ac2925);
+        }
+        
+        /* 标题样式 */
+        .main-title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 60px 0 25px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #4a90d9;
+            border-right: 5px solid #4a90d9;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            max-width: 100%;
+            overflow-x: auto;
+            margin: 0 auto 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        /* 表头样式 - 蓝色 */
+        thead th {
+            background: linear-gradient(135deg, #2c5aa0, #1e3d6f);
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 18px 15px;
+            text-align: left;
+            border-bottom: 3px solid #ffd700;
+        }
+        
+        /* 表格内容样式 */
+        tbody td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #e0e8f0;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #2c3e50;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: rgba(240, 248, 255, 0.6);
+        }
+        
+        tbody tr:hover {
+            background: rgba(232, 244, 248, 0.9);
+        }
+        
+        /* 分类标题行 */
+        .category-row {
+            background: linear-gradient(90deg, #e8f4f8, #d4edda) !important;
+        }
+        
+        .category-row td {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 16px;
+            border-left: 4px solid #4a90d9;
+        }
+        
+        /* 子项样式 */
+        .sub-item {
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .sub-item::before {
+            content: "◆";
+            position: absolute;
+            left: 8px;
+            color: #4a90d9;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 30px auto;
+            max-width: 800px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .tag-disease {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a5a);
+            color: white;
+        }
+        
+        .tag-drug {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: linear-gradient(135deg, #a8e6cf, #7fcdcd);
+            color: #2c5f2d;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            margin: 30px auto;
+            max-width: 800px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .copy-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .copy-box-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #4a90d9;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #333;
+            background: #f8fbff;
+            min-height: 45px;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 15px;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+        }
+        
+        .copy-btn:hover {
+            background: linear-gradient(135deg, #5a67d8, #6b46c1);
+        }
+        
+        .copy-btn.copied {
+            background: linear-gradient(135deg, #5cb85c, #449d44);
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            margin: 25px auto;
+            max-width: 800px;
+            text-align: center;
+            padding: 15px;
+        }
+        
+        .keywords {
+            font-size: 14px;
+            color: #666;
+            line-height: 2;
+        }
+        
+        .keywords strong {
+            color: #1a5276;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 20px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 20px;
+                margin-top: 80px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 14px 10px;
+            }
+            
+            tbody td {
+                font-size: 14px;
+                padding: 12px 10px;
+            }
+            
+            .nav-buttons {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .nav-btn, .home-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-box-wrapper {
+                flex-direction: column;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+        
+        /* 成功提示 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #5cb85c;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 2000;
+        }
+        
+        .toast.show {
+            display: block;
+            animation: fadeInOut 2s ease;
+        }
+        
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            20% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            80% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 右上角导航按钮 -->
+    <div class="nav-buttons">
+        <a href="286.html" class="nav-btn prev">← 上一页</a>
+        <a href="288.html" class="nav-btn">下一页 →</a>
+        <button class="nav-btn favorite-btn" onclick="addToFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~急诊医学-有机磷中毒临床表现*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">急诊医学 - 有机磷中毒临床表现</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">身各器官，其中以肝内浓度最高，其次为肾、肺、脾等，肌肉和脑含量最少。OPI主要在肝内进行生物转化和代谢。OPI经水解后毒性降低。OPI吸收后6～12小时血中浓度达高峰，24小时内由尿液排泄，多数OPI及代谢产物约48小时后可完全排出体外，少数品种如剧毒类在体内存留可达数周甚至更长时间。</td>
+                </tr>
+                <tr>
+                    <td colspan="2">● 患者常死于呼吸衰竭。</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="2">2. 临床表现</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="2">● 急性中毒</td>
+                </tr>
+                <tr>
+                    <td colspan="2">口服中毒者10分钟至2小时发病；吸入中毒者数分钟至半小时内发病；皮肤吸收2～6小时发病。中毒后出现急性胆碱能危象。</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="2">✓ 毒蕈碱样症状</td>
+                </tr>
+                <tr>
+                    <td colspan="2">又称M样症状，主要是副交感神经末梢过度兴奋，类似毒蕈碱样作用。</td>
+                </tr>
+                <tr>
+                    <td width="30%">◇ 平滑肌痉挛</td>
+                    <td>表现为瞳孔缩小、腹痛、腹泻。</td>
+                </tr>
+                <tr>
+                    <td>◇ 括约肌松弛</td>
+                    <td>表现尿便失禁。</td>
+                </tr>
+                <tr>
+                    <td>◇ 腺体分泌增加</td>
+                    <td>表现为大汗、流泪和流涎。</td>
+                </tr>
+                <tr>
+                    <td>◇ 气道分泌物增多</td>
+                    <td>表现为咳嗽、气促、呼吸困难、双肺湿啰音，严重者发生肺水肿。</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="2">✓ 烟碱样症状</td>
+                </tr>
+                <tr>
+                    <td colspan="2">又称N样症状，包括肌束颤动、全身肌强直性痉挛，也可出现肌力减退或瘫痪，呼吸肌麻痹引起呼吸衰竭。交感神经节后纤维末梢释放儿茶酚胺，表现为血压增高和心律失常。</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="2">✓ 中枢神经系统症状</td>
+                </tr>
+                <tr>
+                    <td colspan="2">◇ 血ChE浓度明显降低而脑组织ChE活力＞60%时，通常不出现中毒症状和体征。</td>
+                </tr>
+                <tr>
+                    <td colspan="2">◇ 脑ChE活力＜60%时，出现头晕、头痛、烦躁不安、谵妄、抽搐和昏迷，有的发生呼吸、循环衰竭死亡。</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="2">✓ 局部损害</td>
+                </tr>
+                <tr>
+                    <td colspan="2">有些OPI接触皮肤后发生过敏性皮炎、皮肤水疱或剥脱性皮炎；污染眼部出现结膜充血和瞳孔缩小。</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="2">● 中间型综合征</td>
+                </tr>
+                <tr>
+                    <td colspan="2">✓ 多发生在重度OPI中毒后24～96小时及ChE复能药用量不足患者，经治疗胆碱能危象消失或迟发性多发神经病发生前。</td>
+                </tr>
+                <tr>
+                    <td colspan="2">✓ 突然出现屈颈肌和四肢近端肌无力，以及第Ⅲ、Ⅶ、Ⅸ、X对脑神经支配的肌无力，出现上睑下垂、眼外展障碍、面瘫和呼吸肌麻痹。</td>
+                </tr>
+                <tr>
+                    <td colspan="2">✓ 如引起通气障碍性呼吸困难或衰竭，可导致死亡。</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="2">● 迟发性多发神经病</td>
+                </tr>
+                <tr>
+                    <td colspan="2">✓ 急性重度和中度OPI中毒患者症状消失后2～3周出现。</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">呼吸衰竭</span>
+            <span class="tag tag-disease">急性中毒</span>
+            <span class="tag tag-disease">急性胆碱能危象</span>
+            <span class="tag tag-disease">毒蕈碱样症状</span>
+            <span class="tag tag-disease">M样症状</span>
+            <span class="tag tag-disease">烟碱样症状</span>
+            <span class="tag tag-disease">N样症状</span>
+            <span class="tag tag-disease">肺水肿</span>
+            <span class="tag tag-disease">过敏性皮炎</span>
+            <span class="tag tag-disease">剥脱性皮炎</span>
+            <span class="tag tag-disease">中间型综合征</span>
+            <span class="tag tag-disease">迟发性多发神经病</span>
+            <span class="tag tag-disease">呼吸肌麻痹</span>
+            <span class="tag tag-disease">通气障碍性呼吸困难</span>
+            <span class="tag tag-disease">循环衰竭</span>
+            <span class="tag tag-disease">谵妄</span>
+            <span class="tag tag-disease">昏迷</span>
+            <span class="tag tag-disease">抽搐</span>
+            <span class="tag tag-disease">瘫痪</span>
+            <span class="tag tag-disease">肌无力</span>
+            <span class="tag tag-disease">上睑下垂</span>
+            <span class="tag tag-disease">眼外展障碍</span>
+            <span class="tag tag-disease">面瘫</span>
+            <span class="tag tag-drug">OPI</span>
+            <span class="tag tag-drug">ChE复能药</span>
+            <span class="tag tag-bacteria">胆碱酯酶</span>
+            <span class="tag tag-bacteria">ChE</span>
+            <span class="tag tag-bacteria">乙酰胆碱</span>
+            <span class="tag tag-bacteria">儿茶酚胺</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制</div>
+        <div class="copy-box-wrapper">
+            <input type="text" class="copy-input" id="copyInput" value="急诊医学-有机磷中毒临床表现；有机磷中毒；临床表现；急性中毒；毒蕈碱样症状；烟碱样症状；中间型综合征；迟发性多发神经病；=275" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">— 275 —</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords">
+            <strong>关键词：</strong>有机磷中毒 | 临床表现 | 急性胆碱能危象 | 毒蕈碱样症状 | M样症状 | 烟碱样症状 | N样症状 | 中枢神经系统症状 | 中间型综合征 | 迟发性多发神经病 | 呼吸肌麻痹 | 肺水肿 | 瞳孔缩小 | 肌束颤动 | ChE | OPI
+        </div>
+    </div>
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast">已复制到剪贴板！</div>
+    <div class="toast" id="favToast">已添加到收藏！</div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('copy');
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('copy');
+            }
+            
+            const btn = document.querySelector('.copy-btn');
+            btn.textContent = '已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        function showToast(type) {
+            const toastId = type === 'copy' ? 'toast' : 'favToast';
+            const toast = document.getElementById(toastId);
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+        
+        function addToFavorite() {
+            const favData = {
+                title: '急诊医学-有机磷中毒临床表现',
+                url: window.location.href,
+                page: '275'
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.page === favData.page);
+            
+            if (!exists) {
+                favorites.push(favData);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+            
+            showToast('fav');
+        }
+        
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1.05)';
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>
