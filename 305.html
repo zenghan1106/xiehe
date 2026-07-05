@@ -1,0 +1,615 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~热射病检查诊断与急诊处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5f0 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 10px;
+            background: linear-gradient(145deg, #4a90d9, #357abd);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(74,144,217,0.3);
+            z-index: 1000;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .home-btn:hover {
+            background: linear-gradient(145deg, #357abd, #2a6aa0);
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页/下一页按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(145deg, #5cb85c, #4cae4c);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(92,184,92,0.3);
+            text-decoration: none;
+            text-align: center;
+        }
+        
+        .nav-btn:hover {
+            background: linear-gradient(145deg, #4cae4c, #449d44);
+            transform: translateY(-1px);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: linear-gradient(145deg, #f0ad4e, #ec971f);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(240,173,78,0.3);
+            margin-top: 5px;
+        }
+        
+        .fav-btn:hover {
+            background: linear-gradient(145deg, #ec971f, #d58512);
+        }
+        
+        .fav-btn.active {
+            background: linear-gradient(145deg, #d9534f, #c9302c);
+        }
+        
+        /* 标题区域 */
+        .title-section {
+            text-align: center;
+            padding: 60px 15px 25px;
+        }
+        
+        .main-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            line-height: 1.4;
+        }
+        
+        .sub-title {
+            font-size: 16px;
+            color: #2874a6;
+            margin-top: 8px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            max-width: 800px;
+            margin: 0 auto 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        /* 表头 */
+        thead tr {
+            background: linear-gradient(145deg, #2e86c1, #1a5276);
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 12px;
+            text-align: left;
+            font-size: 17px;
+            font-weight: bold;
+            border: none;
+        }
+        
+        /* 表格内容 */
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        td {
+            padding: 12px;
+            line-height: 1.7;
+            color: #2c3e50;
+            vertical-align: top;
+        }
+        
+        td:first-child {
+            font-weight: bold;
+            color: #1a5276;
+            width: 22%;
+            min-width: 100px;
+            background: rgba(46,134,193,0.05);
+        }
+        
+        /* 列表样式 */
+        td ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        td li {
+            position: relative;
+            padding-left: 18px;
+            margin-bottom: 6px;
+        }
+        
+        td li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        td li.bullet::before {
+            content: "●";
+            color: #2e86c1;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #1a5276;
+            font-weight: bold;
+            margin: 20px 0 10px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            max-width: 800px;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 10px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #2e86c1;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #555;
+            background: white;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-btn {
+            background: linear-gradient(145deg, #9b59b6, #8e44ad);
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(155,89,182,0.3);
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: linear-gradient(145deg, #8e44ad, #7d3c98);
+        }
+        
+        .copy-btn.copied {
+            background: linear-gradient(145deg, #27ae60, #229954);
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .keywords-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .keyword-tag {
+            display: inline-block;
+            background: linear-gradient(145deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin: 4px;
+        }
+        
+        /* 检索标签 */
+        .tags-section {
+            max-width: 800px;
+            margin: 25px auto;
+            padding: 20px 15px;
+            background: rgba(255,255,255,0.85);
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            color: #1a5276;
+            font-weight: bold;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        
+        .tag-category {
+            margin-bottom: 12px;
+        }
+        
+        .tag-label {
+            display: inline-block;
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+        
+        .tag-item {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            margin: 3px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #ffeaa7;
+            color: #d63031;
+        }
+        
+        .tag-drug {
+            background: #dfe6e9;
+            color: #2d3436;
+        }
+        
+        .tag-bacteria {
+            background: #a8e6cf;
+            color: #00b894;
+        }
+        
+        .tag-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* 页脚 */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #888;
+            font-size: 12px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .main-title {
+                font-size: 18px;
+            }
+            
+            .sub-title {
+                font-size: 14px;
+            }
+            
+            table {
+                font-size: 13px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            
+            td {
+                padding: 10px 8px;
+            }
+            
+            td:first-child {
+                width: 28%;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                top: 10px;
+                right: 5px;
+            }
+            
+            .nav-btn, .fav-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                top: 10px;
+                left: 5px;
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="304.html" class="nav-btn">⬅ 上一页</a>
+        <a href="306.html" class="nav-btn">下一页 ➡</a>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="title-section">
+        <h1 class="main-title">~~~~~热射病检查诊断与急诊处理*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~热射病检查诊断与急诊处理*****、热射病检查诊断与急诊处理、必做检查、选做检查、诊断策略、急诊处理</div>
+        <p class="sub-title">急诊疾病 | 必做检查·选做检查·诊断策略·急诊处理</p>
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">热射病检查诊断与急诊处理</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>必做检查</td>
+                    <td>
+                        <ul>
+                            <li class="bullet">肝肾功能、电解质、血糖、ABG、炎症指标：由于热射病常伴多器官功能损伤，进行实验室检查时应尽可能全面。</li>
+                            <li class="bullet">ECG：常见窦房结功能异常、快速性心律失常（窦性心动过速、室上性心动过速、心房颤动等）、传导异常（右束支传导阻滞、室内传导阻滞等）、QT间期延长、非特异性ST段改变等，少数患者可表现为心动过缓。</li>
+                            <li class="bullet">超声心动图：有助于了解心脏腔室形态、收缩及舒张功能、容量状况（如测量下腔静脉宽度和变异度）等，有助于鉴别其他原因导致的心肌损伤。</li>
+                            <li class="bullet">头颅CT：有助于发现和鉴别严重的脑水肿、出血等，发病早期头颅CT多无阳性发现，2～5天可出现脑实质弥漫性水肿。热射病患者全脑水肿大部分可逆，7～10天病情稳定后可逐渐消退。凝血功能障碍者可出现蛛网膜下腔出血、颅内出血或点状出血，也可以出现梗死灶。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>选做检查</td>
+                    <td>
+                        <ul>
+                            <li class="bullet">血培养：持续高热或可疑感染者需完善该检查。</li>
+                            <li class="bullet">腹部超声：早期多无特异发现，严重肝脏受损患者可表现为肝实质回声增粗，分布欠均匀。</li>
+                            <li class="bullet">头颅MRI：热射病中枢神经系统损伤部位广泛，头颅MRI可用于明确不同性质的病变及部位。</li>
+                            <li class="bullet">脑电图：对于意识障碍的热射病患者，脑电图改变多无特异性。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>诊断策略</td>
+                    <td>
+                        <ul>
+                            <li class="bullet">国际上关于热射病的诊断仍缺乏统一标准，在很大程度上主要根据病史和临床表现。有病史信息中任意一条加上临床表现中的任意一条，且不能用其他原因解释，应考虑热射病的诊断。</li>
+                            <li>病史信息：①暴露于高温、高湿环境；②高强度运动。</li>
+                            <li>临床表现：①中枢神经系统功能障碍表现（如昏迷、抽搐、谵妄、行为异常等）；②核心温度＞40℃；③多器官（≥2个）功能损伤表现（肝、肾、横纹肌、胃肠等）；④严重凝血功能障碍或DIC。</li>
+                            <li class="bullet">鉴别诊断：脑炎、脑膜炎、感染性疾病、恶性高热等。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>急诊处理</td>
+                    <td>
+                        <ul>
+                            <li class="bullet">心电监护，建立静脉通路迅速补液扩容，快速、有效、持续降温，有效控制躁动和抽搐。</li>
+                            <li class="bullet">目标温度管理（TTM）：推荐监测直肠温度，维持直肠温度在37.0～38.5℃。方法包括控温毯、连续性血液净化治疗，不推荐药物降温。</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">305</div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">关键词</div>
+        <span class="keyword-tag">热射病</span>
+        <span class="keyword-tag">ECG</span>
+        <span class="keyword-tag">ABG</span>
+        <span class="keyword-tag">DIC</span>
+        <span class="keyword-tag">TTM</span>
+        <span class="keyword-tag">脑水肿</span>
+        <span class="keyword-tag">恶性高热</span>
+        <span class="keyword-tag">控温毯</span>
+        <span class="keyword-tag">血液净化</span>
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 特色检索标签</div>
+        
+        <div class="tag-category">
+            <span class="tag-label">疾病：</span><br>
+            <span class="tag-item tag-disease">热射病</span>
+            <span class="tag-item tag-disease">脑水肿</span>
+            <span class="tag-item tag-disease">脑炎</span>
+            <span class="tag-item tag-disease">脑膜炎</span>
+            <span class="tag-item tag-disease">感染性疾病</span>
+            <span class="tag-item tag-disease">恶性高热</span>
+            <span class="tag-item tag-disease">窦性心动过速</span>
+            <span class="tag-item tag-disease">室上性心动过速</span>
+            <span class="tag-item tag-disease">心房颤动</span>
+            <span class="tag-item tag-disease">心动过缓</span>
+        </div>
+        
+        <div class="tag-category">
+            <span class="tag-label">药物/治疗：</span><br>
+            <span class="tag-item tag-drug">控温毯</span>
+            <span class="tag-item tag-drug">连续性血液净化治疗</span>
+            <span class="tag-item tag-drug">补液扩容</span>
+            <span class="tag-item tag-drug">心电监护</span>
+        </div>
+        
+        <div class="tag-category">
+            <span class="tag-label">细菌：</span><br>
+            <span class="tag-item tag-bacteria">（本页无细菌相关）</span>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <div class="footer">
+        急诊疾病 · 热射病 · 第293页
+    </div>
+    
+    <script>
+        // 设置复制框内容
+        const title = "热射病检查诊断与急诊处理";
+        const subtitle = "急诊疾病|必做检查|选做检查|诊断策略|急诊处理";
+        const keywords = "热射病;ECG;ABG;DIC;TTM;脑水肿;恶性高热;控温毯;血液净化;肝肾功能;电解质;血糖;炎症指标;超声心动图;头颅CT;血培养;腹部超声;头颅MRI;脑电图;心电监护;补液扩容;目标温度管理;直肠温度";
+        const pageNum = "305";
+        document.getElementById('copyInput').value = title + ";" + subtitle + ";" + keywords + "=305";
+        
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        let isFavorited = false;
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            isFavorited = !isFavorited;
+            
+            if (isFavorited) {
+                btn.textContent = '❤ 已收藏';
+                btn.classList.add('active');
+                
+                // 保存到localStorage模拟添加到index收藏
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const currentPage = {
+                    title: '~~~~~热射病检查诊断与急诊处理*****',
+                    url: '305.html',
+                    category: '急诊疾病',
+                    date: new Date().toISOString()
+                };
+                
+                // 避免重复
+                const exists = favorites.some(f => f.url === currentPage.url);
+                if (!exists) {
+                    favorites.push(currentPage);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                alert('已添加到收藏！请在 index.html 收藏类目查看');
+            } else {
+                btn.textContent = '⭐ 收藏';
+                btn.classList.remove('active');
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '305.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            if (favorites.some(f => f.url === '305.html')) {
+                isFavorited = true;
+                const btn = document.getElementById('favBtn');
+                btn.textContent = '❤ 已收藏';
+                btn.classList.add('active');
+            }
+        };
+    </script>
+</body>
+</html>
