@@ -1,0 +1,427 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~渗出液漏出液常见病因与急性呼吸窘迫综合征*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 100px;
+        }
+        
+        .header {
+            background-color: #fff;
+            padding: 15px;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .back-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background-color: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            z-index: 1000;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background-color: #4a90d9;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 15px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .collect-btn {
+            background-color: #e6a23c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 15px;
+            font-size: 13px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+        
+        .title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a3a5c;
+            margin: 60px 15px 20px;
+            padding: 15px;
+            background-color: #e8f4fd;
+            border-radius: 10px;
+        }
+        
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c5aa0;
+            margin: 20px 0 12px;
+            padding: 10px 15px;
+            background-color: #d6e9f8;
+            border-radius: 8px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            margin: 15px 0;
+        }
+        
+        thead {
+            background-color: #2c5aa0;
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 12px;
+            font-size: 17px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+            font-size: 14px;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f4fd;
+        }
+        
+        .bullet-list {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        .bullet-list li {
+            margin: 10px 0;
+            padding-left: 5px;
+            font-size: 14px;
+            list-style-position: inside;
+        }
+        
+        .tags-section {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px 15px;
+            margin: 20px 15px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c5aa0;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: #4a90d9;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        
+        .tag:hover {
+            background-color: #357abd;
+        }
+        
+        .copy-section {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            padding: 12px 15px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            z-index: 999;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-btn {
+            background-color: #52c41a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+            margin: 10px 15px 80px;
+            padding: 10px;
+            background-color: #f0f2f5;
+            border-radius: 8px;
+        }
+        
+        @media (max-width: 600px) {
+            .title {
+                font-size: 18px;
+                margin-top: 70px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            .nav-btn, .collect-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">返回首页</a>
+    
+    <div class="nav-buttons">
+        <a href="91.html" class="nav-btn">上一页</a>
+        <a href="93.html" class="nav-btn">下一页</a>
+        <button class="collect-btn" onclick="addToFavorites()">收藏</button>
+    </div>
+    
+    <div class="title">~~~~~渗出液漏出液常见病因与急性呼吸窘迫综合征*****</div>
+    
+    <div class="content">
+        <div class="section-title">表11 渗出液/漏出液的常见病因</div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>漏出性</th>
+                    <th>渗出性</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>心力衰竭、窄缩性心包炎</td>
+                    <td>肿瘤</td>
+                </tr>
+                <tr>
+                    <td>肝源性</td>
+                    <td>肺炎旁积液、结核性胸膜炎</td>
+                </tr>
+                <tr>
+                    <td>肾病综合征</td>
+                    <td>肺栓塞</td>
+                </tr>
+                <tr>
+                    <td>低蛋白血症</td>
+                    <td>结缔组织病</td>
+                </tr>
+                <tr>
+                    <td>上腔静脉阻塞综合征</td>
+                    <td>尿毒症</td>
+                </tr>
+                <tr>
+                    <td>甲状腺功能减退症</td>
+                    <td>食管破裂、急性胰腺炎</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="section-title">7. 急诊处理</div>
+        <ul class="bullet-list">
+            <li>寻找病因，对因治疗。</li>
+            <li>漏出性胸腔积液：首选利尿治疗，明显呼吸困难者可穿刺引流。</li>
+            <li>渗出性胸腔积液：感染性胸腔积液尽早充分引流，肿瘤性胸腔积液可穿刺引流缓解症状。</li>
+        </ul>
+        
+        <div style="text-align: right; color: #666; font-size: 14px; margin: 10px 0;">（杨 婧）</div>
+        
+        <div class="section-title">■ 急性呼吸窘迫综合征</div>
+        
+        <div class="section-title">1. 定义</div>
+        <ul class="bullet-list">
+            <li>急性呼吸窘迫综合征（ARDS）是一种急性弥漫性炎症性肺损伤，可导致肺血管通透性增加、肺重量增加和肺含气组织减少。</li>
+            <li>临床特征是低氧血症和影像学显示双肺阴影。</li>
+            <li>病理标志是弥散性肺泡损伤（DAD），即肺泡水肿伴或不伴局灶性出血、急性肺泡壁炎症和透明膜形成。</li>
+        </ul>
+        
+        <div class="section-title">2. 病因</div>
+        <ul class="bullet-list">
+            <li>直接肺损伤：吸入、各种病原体所致肺炎、外伤所致肺挫伤、溺水、脂肪栓塞、化学物质损伤及肺移植术后再灌注损伤等。</li>
+            <li>间接肺损伤：脓毒症、创伤、输血、胰腺炎、体外循环等。</li>
+        </ul>
+        
+        <div class="section-title">3. 临床表现</div>
+        <ul class="bullet-list">
+            <li>在诱发事件发生后出现急性呼吸困难、咳嗽、胸痛、低氧血症和双肺弥漫性湿啰音。</li>
+            <li>呼吸窘迫通常明显，包括呼吸急促、心动过速、出汗和使用辅助呼吸肌呼吸。</li>
+            <li>其他临床表现常与病因有关：如由脓毒症导致ARDS的患者可能有发热、白细胞增多、组织低灌注等休克表现。</li>
+        </ul>
+    </div>
+    
+    <div class="page-number">80</div>
+    
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <span class="tag">心力衰竭</span>
+        <span class="tag">窄缩性心包炎</span>
+        <span class="tag">肝源性</span>
+        <span class="tag">肾病综合征</span>
+        <span class="tag">低蛋白血症</span>
+        <span class="tag">上腔静脉阻塞综合征</span>
+        <span class="tag">甲状腺功能减退症</span>
+        <span class="tag">肿瘤</span>
+        <span class="tag">肺炎旁积液</span>
+        <span class="tag">结核性胸膜炎</span>
+        <span class="tag">肺栓塞</span>
+        <span class="tag">结缔组织病</span>
+        <span class="tag">尿毒症</span>
+        <span class="tag">食管破裂</span>
+        <span class="tag">急性胰腺炎</span>
+        <span class="tag">急性呼吸窘迫综合征</span>
+        <span class="tag">ARDS</span>
+        <span class="tag">脓毒症</span>
+        <span class="tag">肺炎</span>
+        <span class="tag">肺挫伤</span>
+        <span class="tag">脂肪栓塞</span>
+        <span class="tag">低氧血症</span>
+        <span class="tag">弥散性肺泡损伤</span>
+        <span class="tag">休克</span>
+    </div>
+    
+    <div class="keywords">
+        关键词：渗出液、漏出液、胸腔积液、急性呼吸窘迫综合征、ARDS、肺损伤、低氧血症、脓毒症、肺炎、结核性胸膜炎、肺栓塞、急性胰腺炎
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="渗出液漏出液常见病因与急性呼吸窘迫综合征；渗出液、漏出液、胸腔积液、急性呼吸窘迫综合征、ARDS、肺损伤、低氧血症、脓毒症、肺炎、结核性胸膜炎、肺栓塞、急性胰腺炎；=92" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            var copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            }, function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板！");
+            });
+        }
+        
+        function addToFavorites() {
+            var title = document.title;
+            var url = window.location.href;
+            
+            // 尝试使用localStorage存储收藏信息
+            var favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            var exists = favorites.some(function(f) { return f.url === url; });
+            
+            if (!exists) {
+                favorites.push({
+                    title: title,
+                    url: url,
+                    category: '急诊疾病'
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已添加到收藏！');
+            } else {
+                alert('该页面已在收藏中！');
+            }
+            
+            // 尝试更新index.html的收藏（需要配合index.html使用）
+            try {
+                if (window.opener && window.opener.updateFavorites) {
+                    window.opener.updateFavorites(title, url);
+                }
+            } catch(e) {
+                console.log('无法直接更新父页面');
+            }
+        }
+    </script>
+</body>
+</html>
