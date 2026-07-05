@@ -1,178 +1,232 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>xiehe</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700;900&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>协和急诊住院医师手册 · 检索</title>
 <style>
-  :root{
-    --ink:#1a1714;
-    --paper:#f4f1ea;
-    --paper-2:#ece7db;
-    --accent:#e2452b;
-    --muted:#8a8175;
-    --line:rgba(26,23,20,.14);
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+    background: linear-gradient(135deg, #eef4f8 0%, #dce9f1 100%);
+    color: #243b53;
+    min-height: 100vh;
+    padding: 14px 12px 40px;
   }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{
-    font-family:"Noto Serif SC",Georgia,"Songti SC",serif;
-    background:var(--paper);color:var(--ink);line-height:1.65;
-    -webkit-font-smoothing:antialiased;
+  .container { max-width: 860px; margin: 0 auto; }
+
+  /* 顶部标题 */
+  .header {
+    background: linear-gradient(135deg, #0e7490 0%, #0891b2 55%, #06b6d4 100%);
+    color: #fff;
+    padding: 22px 20px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(14, 116, 144, 0.35);
+    margin-bottom: 16px;
   }
-  .sans{font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
-  a{color:inherit}
+  .header h1 { font-size: 23px; letter-spacing: 1px; margin-bottom: 6px; }
+  .header p { font-size: 13px; opacity: 0.9; }
 
-  /* nav */
-  header.nav{
-    position:sticky;top:0;z-index:20;
-    backdrop-filter:saturate(140%) blur(8px);
-    background:color-mix(in srgb,var(--paper) 86%,transparent);
-    border-bottom:1px solid var(--line);
+  /* 搜索区 */
+  .search-box {
+    background: #fff;
+    padding: 16px;
+    border-radius: 14px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    margin-bottom: 14px;
   }
-  .nav-in{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
-  .mark{font-size:22px;font-weight:900;letter-spacing:.04em}
-  .mark span{color:var(--accent)}
-  nav.links a{color:var(--muted);text-decoration:none;margin-left:26px;font-size:15px;transition:color .2s}
-  nav.links a:hover{color:var(--ink)}
-  .menu-btn{display:none;background:none;border:0;font-size:22px;cursor:pointer;color:var(--ink)}
-
-  /* hero */
-  .hero{padding:120px 0 90px;position:relative}
-  .kicker{color:var(--accent);font-size:13px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:24px}
-  h1{
-    font-size:clamp(54px,11vw,128px);line-height:.94;font-weight:900;
-    letter-spacing:-.02em;margin-bottom:30px;
+  .input-row { display: flex; gap: 10px; align-items: stretch; }
+  #searchInput {
+    flex: 1;
+    padding: 13px 14px;
+    font-size: 16px;
+    border: 2px solid #cbd5e1;
+    border-radius: 10px;
+    outline: none;
+    transition: border-color .2s;
+    min-width: 0;
   }
-  h1 em{font-style:normal;color:var(--accent)}
-  .lede{font-size:clamp(18px,2.4vw,23px);color:#4a443c;max-width:46ch}
-  .cta-row{margin-top:42px;display:flex;gap:14px;flex-wrap:wrap}
-  .btn{
-    display:inline-block;padding:15px 34px;border-radius:999px;text-decoration:none;
-    font-size:16px;transition:transform .2s ease,background .2s;
+  #searchInput:focus { border-color: #0891b2; }
+  .btn {
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 0 18px;
+    min-height: 46px;
+    transition: transform .1s, box-shadow .2s, background .2s;
+    white-space: nowrap;
   }
-  .btn.primary{background:var(--ink);color:var(--paper)}
-  .btn.primary:hover{transform:translateY(-2px)}
-  .btn.ghost{border:1px solid var(--ink);color:var(--ink)}
-  .btn.ghost:hover{background:var(--ink);color:var(--paper)}
+  .btn:active { transform: scale(0.97); }
+  .btn-split { background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%); color: #7c2d12; box-shadow: 0 4px 12px rgba(245,158,11,.4); }
+  .btn-clear { background: #e2e8f0; color: #475569; }
 
-  /* sections */
-  section.block{padding:84px 0;border-top:1px solid var(--line)}
-  .sec-title{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
-  h2{font-size:clamp(30px,5vw,52px);font-weight:700;line-height:1.05;margin-bottom:22px;letter-spacing:-.01em}
-  .prose{font-size:18px;color:#3f3a33;max-width:62ch}
-  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:42px}
-  .card{
-    background:var(--paper-2);border:1px solid var(--line);border-radius:16px;
-    padding:30px 26px;transition:transform .2s ease;
+  .hint { font-size: 12.5px; color: #64748b; margin-top: 10px; line-height: 1.6; }
+  .hint b { color: #0891b2; }
+
+  /* 结果计数 */
+  #resultCount { padding: 6px 4px 12px; font-size: 14px; color: #475569; }
+
+  /* 结果列表 */
+  .card {
+    display: flex;
+    align-items: stretch;
+    background: #fff;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    transition: transform .12s, box-shadow .2s, border-color .2s;
+    border: 1px solid transparent;
   }
-  .card:hover{transform:translateY(-4px)}
-  .card .num{font-size:14px;color:var(--accent);font-weight:700;letter-spacing:.1em}
-  .card h3{font-size:22px;margin:12px 0 10px;font-weight:700}
-  .card p{font-size:15.5px;color:#564f46;line-height:1.6}
+  .card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(8,145,178,.18); border-color: #67e8f9; }
+  .card-id {
+    flex: 0 0 64px;
+    background: linear-gradient(135deg, #0e7490 0%, #0891b2 100%);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 17px;
+    flex-direction: column;
+  }
+  .card-id small { font-size: 10px; opacity: .8; font-weight: 400; margin-top: 2px; }
+  .card-body { flex: 1; min-width: 0; padding: 12px 14px; }
+  .card-title { font-size: 16px; font-weight: 700; color: #0f172a; line-height: 1.4; margin-bottom: 5px; word-break: break-word; }
+  .card-kw { font-size: 12.5px; color: #64748b; line-height: 1.5; word-break: break-word;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .card-arrow { flex: 0 0 40px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 20px; }
+  mark { background: #fde68a; color: #92400e; padding: 0 1px; border-radius: 3px; }
 
-  /* contact */
-  .contact-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:start}
-  .mail{font-size:clamp(26px,4vw,40px);font-weight:700;color:var(--ink);text-decoration:none;border-bottom:2px solid var(--accent);padding-bottom:4px}
-  .social a{display:inline-block;margin-right:18px;color:var(--muted);text-decoration:none;font-size:15px}
-  .social a:hover{color:var(--ink)}
+  .empty { text-align: center; padding: 50px 20px; color: #94a3b8; font-size: 15px; }
 
-  footer.ft{padding:40px 0;border-top:1px solid var(--line);color:var(--muted);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .footer { text-align: center; padding: 24px 0 4px; font-size: 12px; color: #94a3b8; }
 
-  @media(max-width:760px){
-    nav.links{display:none}
-    .menu-btn{display:block}
-    .hero{padding:84px 0 60px}
-    .grid3{grid-template-columns:1fr}
-    .contact-grid{grid-template-columns:1fr}
+  @media (max-width: 560px) {
+    .header h1 { font-size: 19px; }
+    .btn { padding: 0 14px; font-size: 14px; }
+    .card-id { flex-basis: 54px; font-size: 15px; }
+    .card-title { font-size: 15px; }
   }
 </style>
 </head>
 <body>
-
-<header class="nav">
-  <div class="wrap nav-in">
-    <div class="mark">xie<span>he</span></div>
-    <nav class="links sans">
-      <a href="#about">关于</a>
-      <a href="#work">作品</a>
-      <a href="#contact">联系</a>
-    </nav>
-    <button class="menu-btn" aria-label="menu">≡</button>
+<div class="container">
+  <div class="header">
+    <h1>📕 协和急诊住院医师手册 · 检索</h1>
+    <p>输入关键词检索标题或正文关键词，支持多个关键词同时匹配</p>
   </div>
-</header>
 
-<main class="wrap">
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="kicker">xiehe · 个人站点</div>
-    <h1>把想法<br>做成<em>作品</em>。</h1>
-    <p class="lede">这是 xiehe 的线上角落。一处安放项目、记录思考、与人连接的地方。</p>
-    <div class="cta-row sans">
-      <a class="btn primary" href="#work">看看作品</a>
-      <a class="btn ghost" href="#contact">联系我</a>
+  <div class="search-box">
+    <div class="input-row">
+      <input type="text" id="searchInput" placeholder="输入关键词，多个词用 + 分隔（匹配标题或关键词）" autocomplete="off">
+      <button class="btn btn-split" id="splitBtn">＋ 号分割</button>
+      <button class="btn btn-clear" id="clearBtn">清空</button>
     </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section class="block" id="about">
-    <div class="sec-title">关于 / About</div>
-    <h2>一行话说清楚<br>我是谁、在做什么。</h2>
-    <p class="prose">【待替换】在这里写一段自我介绍：你的身份、你专注的领域、你相信什么。保持克制，两三句话足够。读者停留不过几秒，先把最硬核的那句亮出来。</p>
-  </section>
-
-  <!-- WORK -->
-  <section class="block" id="work">
-    <div class="sec-title">作品 / Work</div>
-    <h2>近期在做的事</h2>
-    <div class="grid3">
-      <div class="card">
-        <div class="num sans">01</div>
-        <h3>项目标题</h3>
-        <p>【待替换】一句话描述这个项目解决了什么问题、有什么亮点。</p>
-      </div>
-      <div class="card">
-        <div class="num sans">02</div>
-        <h3>项目标题</h3>
-        <p>【待替换】一句话描述这个项目解决了什么问题、有什么亮点。</p>
-      </div>
-      <div class="card">
-        <div class="num sans">03</div>
-        <h3>项目标题</h3>
-        <p>【待替换】一句话描述这个项目解决了什么问题、有什么亮点。</p>
-      </div>
+    <div class="hint">
+      💡 在编辑框输入文字即可实时检索；多个关键词用 <b>+</b> 分隔（如 <b>胸痛+心电图</b>），
+      需<b>同时</b>命中标题或关键词。点击「＋ 号分割」可把空格 / 逗号自动转为 <b>+</b> 分隔。
     </div>
-  </section>
+  </div>
 
-  <!-- CONTACT -->
-  <section class="block" id="contact">
-    <div class="sec-title">联系 / Contact</div>
-    <div class="contact-grid">
-      <div>
-        <h2>想聊聊？</h2>
-        <p class="prose" style="margin-bottom:22px">合作、约稿、或者只是打个招呼都欢迎。</p>
-        <a class="mail" href="mailto:hello@xiehe.com">hello@xiehe.com</a>
-      </div>
-      <div class="social sans">
-        <a href="#">GitHub ↗</a>
-        <a href="#">微信公众号 ↗</a>
-        <a href="#">微博 ↗</a>
-      </div>
-    </div>
-  </section>
+  <div id="resultCount"></div>
+  <div id="results"></div>
 
-</main>
+  <div class="footer">本检索页由网页标题与关键词自动生成 · 点击条目打开对应页面</div>
+</div>
 
-<footer class="ft sans">
-  <span>© <span id="y"></span> xiehe · 用 GitHub Pages 搭建</span>
-  <span>Hosted on GitHub Pages</span>
-</footer>
+<script src="data.js"></script>
+<script>
+  var input = document.getElementById('searchInput');
+  var resultsEl = document.getElementById('results');
+  var countEl = document.getElementById('resultCount');
 
-<script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+  // 把查询拆成多个关键词（支持 + ; ； ， , 、 以及空白）
+  function getTerms(q) {
+    return q.split(/[+；;，,、\s]+/)
+            .map(function (s) { return s.trim().toLowerCase(); })
+            .filter(function (s) { return s.length > 0; });
+  }
+
+  // 高亮命中的关键词
+  function highlight(text, terms) {
+    if (!text) return '';
+    var safe = text.replace(/[&<>]/g, function (c) {
+      return c === '&' ? '&amp;' : c === '<' ? '&lt;' : '&gt;';
+    });
+    if (!terms.length) return safe;
+    var escTerms = terms.map(function (t) {
+      return t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    });
+    var re = new RegExp('(' + escTerms.join('|') + ')', 'gi');
+    return safe.replace(re, '<mark>$1</mark>');
+  }
+
+  function search() {
+    var q = input.value.trim();
+    var terms = getTerms(q);
+    var list;
+    if (terms.length === 0) {
+      list = DATA;
+    } else {
+      list = DATA.filter(function (it) {
+        var hay = (it.title + ' ' + it.keywords).toLowerCase();
+        return terms.every(function (t) { return hay.indexOf(t) !== -1; });
+      });
+    }
+    render(list, terms);
+  }
+
+  function render(list, terms) {
+    countEl.textContent = '共找到 ' + list.length + ' 条结果' +
+      (terms.length ? '（关键词：' + terms.join(' + ') + '）' : '（显示全部）');
+    if (list.length === 0) {
+      resultsEl.innerHTML = '<div class="empty">😕 没有匹配的结果，试试别的关键词</div>';
+      return;
+    }
+    var html = '';
+    list.forEach(function (it) {
+      var titleHtml = highlight(it.title || '', terms);
+      var kwHtml = highlight(it.keywords || '', terms);
+      html +=
+        '<a class="card" href="' + encodeURI(it.file) + '">' +
+          '<div class="card-id">' + (it.id || '?') + '<small>页码</small></div>' +
+          '<div class="card-body">' +
+            '<div class="card-title">' + titleHtml + '</div>' +
+            (it.keywords ? '<div class="card-kw">' + kwHtml + '</div>' : '') +
+          '</div>' +
+          '<div class="card-arrow">›</div>' +
+        '</a>';
+    });
+    resultsEl.innerHTML = html;
+  }
+
+  // ＋ 号分割：把各种分隔符规范成 + ，并立即检索
+  function splitPlus() {
+    var raw = input.value;
+    var s = raw
+      .replace(/[；;，,、\s]+/g, '+')
+      .replace(/\+{2,}/g, '+')
+      .replace(/^\+|\+$/g, '');
+    input.value = s;
+    search();
+  }
+
+  input.addEventListener('input', search);
+  document.getElementById('splitBtn').addEventListener('click', splitPlus);
+  document.getElementById('clearBtn').addEventListener('click', function () {
+    input.value = '';
+    input.focus();
+    search();
+  });
+
+  // 初始展示全部
+  search();
+</script>
 </body>
 </html>
