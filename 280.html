@@ -1,0 +1,422 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~子痫前期与HELLP综合征*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background-color: #2c5aa0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background-color: #4a90d9;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .favorite-btn {
+            background-color: #e8b339;
+            color: #333;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+        
+        .favorite-btn.active {
+            background-color: #c9302c;
+            color: white;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a3a6e;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #e8f0fe;
+            border-radius: 10px;
+            border-left: 5px solid #2c5aa0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        thead tr {
+            background-color: #2c5aa0;
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e8e8e8;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f0fe;
+        }
+        
+        td, th {
+            padding: 12px;
+            vertical-align: top;
+        }
+        
+        td:first-child {
+            font-weight: bold;
+            color: #2c5aa0;
+            width: 25%;
+            background-color: #f0f4f8;
+        }
+        
+        .check-item {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .section-title {
+            color: #c0392b;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        
+        .sub-item {
+            padding-left: 20px;
+            color: #555;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .tag {
+            background-color: #e8f0fe;
+            color: #2c5aa0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #2c5aa0;
+            cursor: pointer;
+        }
+        
+        .tag:hover {
+            background-color: #2c5aa0;
+            color: white;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .copy-input {
+            flex: 1;
+            max-width: calc(100% - 100px);
+            padding: 10px;
+            border: 2px solid #2c5aa0;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+        
+        .copy-btn {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background-color: #219a52;
+        }
+        
+        .keywords {
+            text-align: center;
+            padding: 15px;
+            color: #666;
+            font-size: 13px;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            color: #2c5aa0;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 14px;
+            }
+            
+            td, th {
+                padding: 8px;
+                font-size: 13px;
+            }
+            
+            td:first-child {
+                width: 30%;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-buttons {
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="279.html" class="nav-btn">上一页</a>
+            <a href="281.html" class="nav-btn">下一页</a>
+            <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~子痫前期与HELLP综合征*****</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>分类</th>
+                <th>详细内容</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>高危因素</td>
+                <td>
+                    <span class="check-item">✓</span> 慢性肾脏疾病<br>
+                    <span class="check-item">✓</span> 自身免疫病（抗磷脂综合征、系统性红斑狼疮等）<br>
+                    <span class="check-item">✓</span> 血管疾病<br>
+                    <span class="check-item">✓</span> 糖尿病<br>
+                    <span class="check-item">✓</span> 多胎妊娠病史<br>
+                    <span class="check-item">✓</span> 肥胖病史<br>
+                    <span class="check-item">✓</span> 非洲裔人种<br>
+                    <span class="check-item">✓</span> 胎儿水肿<br>
+                    <span class="check-item">✓</span> 青少年妊娠<br>
+                    <span class="check-item">✓</span> 胎儿生长受限<br>
+                    <span class="check-item">✓</span> 血压正常的孕产妇距上一次的妊娠间期较长<br>
+                    <span class="check-item">✓</span> 上一次妊娠出现子痫前期的孕产妇间期过短<br>
+                    <span class="check-item">✓</span> 辅助生殖技术史<br>
+                    <span class="check-item">✓</span> 睡眠呼吸暂停病史<br>
+                    <span class="check-item">✓</span> 血铅水平升高<br>
+                    <span class="check-item">✓</span> 创伤后应激障碍<br><br>
+                    <span class="section-title">HELLP综合征：</span>子痫前期或HELLP综合征既往史，多种基因突变也可导致HELLP综合征发病
+                </td>
+            </tr>
+            <tr>
+                <td>临床表现 - 子痫前期</td>
+                <td>
+                    <span class="section-title">症状：</span><br>
+                    <span class="sub-item">持续性和/或严重头痛，视觉异常[出现暗点、畏光、视物模糊或短暂失明（罕见症状）]，上腹痛或胃区疼痛，意识状态改变，呼吸困难或胸骨后疼痛，少尿，外周性水肿，胎盘早剥</span><br><br>
+                    <span class="section-title">体征：</span><br>
+                    <span class="sub-item">高血压（≥140/90mmHg），严重的子痫前期可出现脑卒中的神经定位体征，反射亢进，颜面部水肿和体重增加，肺水肿，腹部压痛，视力和视野检查异常</span>
+                </td>
+            </tr>
+            <tr>
+                <td>临床表现 - HELLP综合征</td>
+                <td>
+                    <span class="check-item">✓</span> 腹痛，中上腹、右上腹或胸骨下压痛，伴恶心、呕吐<br>
+                    <span class="check-item">✓</span> 血压升高同子痫前期，血压升高和蛋白尿在重度HELLP综合征的女性中可能缺失<br>
+                    <span class="check-item">✓</span> 可见腹水、黄疸<br>
+                    <span class="check-item">✓</span> 较少出现DIC、胎盘早剥、急性肾衰竭、肺水肿、被膜下或肝实质血肿、视网膜剥脱
+                </td>
+            </tr>
+            <tr>
+                <td>必做检查</td>
+                <td>
+                    <span class="section-title">尿常规：</span>随机尿蛋白呈阳性<br><br>
+                    <span class="section-title">24小时尿蛋白测定：</span>尿蛋白≥0.3g/24h<br><br>
+                    <span class="section-title">生化检查</span><br>
+                    <span class="check-item">✓</span> 肌酐：水平升高，如>97.3μmol/L，应警惕严重类型的子痫
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="tags-container">
+        <span class="tag">子痫前期</span>
+        <span class="tag">HELLP综合征</span>
+        <span class="tag">高血压</span>
+        <span class="tag">蛋白尿</span>
+        <span class="tag">慢性肾脏疾病</span>
+        <span class="tag">自身免疫病</span>
+        <span class="tag">抗磷脂综合征</span>
+        <span class="tag">系统性红斑狼疮</span>
+        <span class="tag">糖尿病</span>
+        <span class="tag">多胎妊娠</span>
+        <span class="tag">胎儿水肿</span>
+        <span class="tag">胎儿生长受限</span>
+        <span class="tag">辅助生殖技术</span>
+        <span class="tag">睡眠呼吸暂停</span>
+        <span class="tag">创伤后应激障碍</span>
+        <span class="tag">肌酐</span>
+        <span class="tag">DIC</span>
+        <span class="tag">胎盘早剥</span>
+        <span class="tag">急性肾衰竭</span>
+        <span class="tag">肺水肿</span>
+        <span class="tag">视网膜剥脱</span>
+        <span class="tag">腹水</span>
+        <span class="tag">黄疸</span>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="子痫前期与HELLP综合征；子痫前期、HELLP综合征、高血压、蛋白尿、慢性肾脏疾病、自身免疫病、糖尿病、多胎妊娠、胎儿水肿、胎儿生长受限、辅助生殖技术、肌酐、DIC、胎盘早剥、急性肾衰竭、肺水肿、视网膜剥脱、腹水、黄疸；=280" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="page-number">280</div>
+    
+    <div class="keywords">
+        关键词：子痫前期、HELLP综合征、高血压、蛋白尿、慢性肾脏疾病、自身免疫病、抗磷脂综合征、系统性红斑狼疮、糖尿病、多胎妊娠、胎儿水肿、胎儿生长受限、辅助生殖技术、睡眠呼吸暂停、创伤后应激障碍、肌酐、DIC、胎盘早剥、急性肾衰竭、肺水肿、视网膜剥脱、腹水、黄疸
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                alert('已复制到剪贴板：' + input.value);
+            }, function(err) {
+                document.execCommand('copy');
+                alert('已复制到剪贴板');
+            });
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const title = document.querySelector('h1').textContent;
+            const pageNum = '280';
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const index = favorites.findIndex(f => f.page === pageNum);
+            
+            if (index > -1) {
+                favorites.splice(index, 1);
+                btn.textContent = '⭐ 收藏';
+                btn.classList.remove('active');
+                alert('已取消收藏');
+            } else {
+                favorites.push({
+                    title: title,
+                    page: pageNum,
+                    url: '280.html'
+                });
+                btn.textContent = '❤️ 已收藏';
+                btn.classList.add('active');
+                alert('已添加到收藏');
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const pageNum = '280';
+            const index = favorites.findIndex(f => f.page === pageNum);
+            const btn = document.getElementById('favoriteBtn');
+            
+            if (index > -1) {
+                btn.textContent = '❤️ 已收藏';
+                btn.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
