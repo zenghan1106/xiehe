@@ -1,0 +1,531 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊医学目录-循环消化泌尿血液系统疾病*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .page-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .page-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .fav-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(255,107,107,0.3);
+            z-index: 1000;
+        }
+        
+        .fav-btn:hover {
+            background: #ee5a5a;
+        }
+        
+        .main-title {
+            text-align: center;
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .sub-title {
+            text-align: center;
+            font-size: 16px;
+            color: #5a6c7d;
+            margin-bottom: 25px;
+        }
+        
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead {
+            background: #4a90d9;
+        }
+        
+        th {
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .category {
+            background: #e3f2fd;
+            font-weight: bold;
+            color: #1565c0;
+        }
+        
+        .sub-item {
+            padding-left: 30px;
+            color: #444;
+        }
+        
+        .page-num {
+            text-align: right;
+            color: #666;
+            font-family: monospace;
+            white-space: nowrap;
+        }
+        
+        .tags-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #e3f2fd;
+            color: #1565c0;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid #bbdefb;
+        }
+        
+        .bottom-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .page-indicator {
+            text-align: center;
+            font-size: 18px;
+            color: #4a90d9;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            width: calc(100% - 120px);
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: monospace;
+        }
+        
+        .copy-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .copy-btn:hover {
+            background: #218838;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 18px;
+            }
+            
+            th {
+                font-size: 16px;
+                padding: 12px;
+            }
+            
+            td {
+                font-size: 14px;
+                padding: 10px;
+            }
+            
+            .sub-item {
+                padding-left: 15px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .fav-btn {
+                position: static;
+                margin-bottom: 10px;
+                align-self: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    
+    <div class="top-nav">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="page-nav">
+            <a href="10.html" class="page-btn">上一页</a>
+            <a href="12.html" class="page-btn">下一页</a>
+        </div>
+    </div>
+    
+    <h1 class="main-title">~~~~~急诊医学目录-循环消化泌尿血液系统疾病*****</h1>
+    <p class="sub-title">急诊内科学疾病分类目录</p>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>疾病名称</th>
+                    <th style="width: 80px; text-align: center;">页码</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category">
+                    <td>胸腔积液</td>
+                    <td class="page-num">78</td>
+                </tr>
+                <tr class="category">
+                    <td>急性呼吸窘迫综合征</td>
+                    <td class="page-num">80</td>
+                </tr>
+                <tr class="category">
+                    <td>循环系统疾病急诊</td>
+                    <td class="page-num">83</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>急性冠脉综合征</td>
+                    <td class="page-num">83</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>急性失代偿性心力衰竭</td>
+                    <td class="page-num">89</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>急性心肌炎</td>
+                    <td class="page-num">92</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>快速性心律失常</td>
+                    <td class="page-num">95</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>心房颤动</td>
+                    <td class="page-num">98</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>缓慢性心律失常</td>
+                    <td class="page-num">100</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>急性主动脉夹层</td>
+                    <td class="page-num">103</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>高血压急症</td>
+                    <td class="page-num">106</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>休克</td>
+                    <td class="page-num">107</td>
+                </tr>
+                <tr class="category">
+                    <td>消化系统疾病急诊</td>
+                    <td class="page-num">111</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>急性阑尾炎</td>
+                    <td class="page-num">111</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>急性胰腺炎</td>
+                    <td class="page-num">114</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>急性胆囊炎</td>
+                    <td class="page-num">118</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>急性化脓性胆管炎</td>
+                    <td class="page-num">121</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>上消化道出血</td>
+                    <td class="page-num">124</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>急性肝衰竭</td>
+                    <td class="page-num">126</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>急性肠梗阻</td>
+                    <td class="page-num">130</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>腹水</td>
+                    <td class="page-num">132</td>
+                </tr>
+                <tr class="category">
+                    <td>泌尿系统疾病急诊</td>
+                    <td class="page-num">135</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>急性肾损伤</td>
+                    <td class="page-num">135</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>急进性肾小球肾炎</td>
+                    <td class="page-num">138</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>泌尿系结石</td>
+                    <td class="page-num">140</td>
+                </tr>
+                <tr class="category">
+                    <td>血液系统疾病急诊</td>
+                    <td class="page-num">142</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>血小板减少症</td>
+                    <td class="page-num">142</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>重症溶血性贫血</td>
+                    <td class="page-num">146</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>急性粒细胞缺乏症</td>
+                    <td class="page-num">148</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>血友病合并急性出血</td>
+                    <td class="page-num">150</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>血栓性微血管病</td>
+                    <td class="page-num">153</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>血栓性血小板减少性紫癜</td>
+                    <td class="page-num">154</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>溶血性尿毒综合征</td>
+                    <td class="page-num">156</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>弥散性血管内凝血</td>
+                    <td class="page-num">157</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div class="tags-container">
+            <span class="tag">胸腔积液</span>
+            <span class="tag">急性呼吸窘迫综合征</span>
+            <span class="tag">循环系统疾病急诊</span>
+            <span class="tag">急性冠脉综合征</span>
+            <span class="tag">急性失代偿性心力衰竭</span>
+            <span class="tag">急性心肌炎</span>
+            <span class="tag">快速性心律失常</span>
+            <span class="tag">心房颤动</span>
+            <span class="tag">缓慢性心律失常</span>
+            <span class="tag">急性主动脉夹层</span>
+            <span class="tag">高血压急症</span>
+            <span class="tag">休克</span>
+            <span class="tag">消化系统疾病急诊</span>
+            <span class="tag">急性阑尾炎</span>
+            <span class="tag">急性胰腺炎</span>
+            <span class="tag">急性胆囊炎</span>
+            <span class="tag">急性化脓性胆管炎</span>
+            <span class="tag">上消化道出血</span>
+            <span class="tag">急性肝衰竭</span>
+            <span class="tag">急性肠梗阻</span>
+            <span class="tag">腹水</span>
+            <span class="tag">泌尿系统疾病急诊</span>
+            <span class="tag">急性肾损伤</span>
+            <span class="tag">急进性肾小球肾炎</span>
+            <span class="tag">泌尿系结石</span>
+            <span class="tag">血液系统疾病急诊</span>
+            <span class="tag">血小板减少症</span>
+            <span class="tag">重症溶血性贫血</span>
+            <span class="tag">急性粒细胞缺乏症</span>
+            <span class="tag">血友病合并急性出血</span>
+            <span class="tag">血栓性微血管病</span>
+            <span class="tag">血栓性血小板减少性紫癜</span>
+            <span class="tag">溶血性尿毒综合征</span>
+            <span class="tag">弥散性血管内凝血</span>
+        </div>
+    </div>
+    
+    <div class="bottom-section">
+        <div class="keywords">
+            关键词：急诊医学、循环系统疾病、消化系统疾病、泌尿系统疾病、血液系统疾病、急性冠脉综合征、心力衰竭、心律失常、急性阑尾炎、急性胰腺炎、急性肾损伤、血小板减少症、弥散性血管内凝血
+        </div>
+        <div class="page-indicator">11</div>
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="急诊医学目录-循环消化泌尿血液系统疾病；急诊内科学疾病分类目录；急诊医学、循环系统疾病、消化系统疾病、泌尿系统疾病、血液系统疾病、急性冠脉综合征、心力衰竭、心律失常、急性阑尾炎、急性胰腺炎、急性肾损伤、血小板减少症、弥散性血管内凝血；=11" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                alert('已复制到剪贴板！');
+            }).catch(function() {
+                document.execCommand('copy');
+                alert('已复制到剪贴板！');
+            });
+        }
+        
+        function addToFavorites() {
+            const title = document.title;
+            const url = window.location.href;
+            
+            // 尝试使用本地存储模拟收藏功能
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const newFav = {
+                title: title,
+                url: url,
+                time: new Date().toISOString()
+            };
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            favorites.push(newFav);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试打开index.html并传递收藏数据（需要index.html配合）
+            alert('已添加到收藏！请确保index.html页面支持读取localStorage中的favorites数据。');
+            
+            // 向index.html发送消息（同域情况下）
+            try {
+                localStorage.setItem('addFavorite', JSON.stringify(newFav));
+            } catch(e) {}
+        }
+    </script>
+</body>
+</html>
