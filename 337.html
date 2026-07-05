@@ -1,0 +1,539 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~机械通气模式与呼吸机监测管理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8f0f8 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #2d3748;
+        }
+        
+        .header {
+            position: relative;
+            margin-bottom: 15px;
+            min-height: 110px;
+        }
+        
+        .home-btn {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: linear-gradient(135deg, #3182ce 0%, #2b6cb0 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(49, 130, 206, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(49, 130, 206, 0.4);
+        }
+        
+        .nav-btns {
+            position: absolute;
+            right: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(56, 161, 105, 0.3);
+            transition: all 0.3s ease;
+            min-width: 70px;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(56, 161, 105, 0.4);
+        }
+        
+        .favorite-btn {
+            background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+            box-shadow: 0 2px 6px rgba(237, 137, 54, 0.3);
+        }
+        
+        .favorite-btn:hover {
+            box-shadow: 0 3px 10px rgba(237, 137, 54, 0.4);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a365d;
+            font-size: 22px;
+            padding: 55px 100px 20px;
+            line-height: 1.5;
+            font-weight: 700;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #2b6cb0 0%, #2c5282 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 18px 14px;
+            font-size: 20px;
+            font-weight: 700;
+            text-align: left;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e2e8f0;
+            transition: background 0.2s ease;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        tbody tr:hover {
+            background: #edf2f7;
+        }
+        
+        tbody td {
+            padding: 14px;
+            color: #4a5568;
+            line-height: 1.8;
+            word-break: break-word;
+            vertical-align: top;
+        }
+        
+        .section-title {
+            color: #2b6cb0;
+            font-weight: 700;
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+        
+        .check {
+            color: #38a169;
+            font-weight: bold;
+            margin-right: 4px;
+        }
+        
+        .bullet {
+            color: #e53e3e;
+            font-weight: bold;
+            margin-right: 4px;
+        }
+        
+        .tags-section {
+            margin-top: 25px;
+            padding: 22px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 17px;
+            color: #1a365d;
+            margin-bottom: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tags-title::before {
+            content: "🏷️";
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: linear-gradient(135deg, #ebf8ff 0%, #bee3f8 100%);
+            color: #2b6cb0;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #90cdf4;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(43, 108, 176, 0.2);
+        }
+        
+        .page-info {
+            text-align: center;
+            margin-top: 25px;
+            padding: 18px;
+            color: #718096;
+            font-size: 15px;
+        }
+        
+        .page-number {
+            font-size: 22px;
+            color: #2b6cb0;
+            font-weight: 800;
+        }
+        
+        .copy-section {
+            margin-top: 20px;
+            padding: 22px;
+            background: white;
+            border-radius: 16px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 14px 18px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 14px;
+            color: #4a5568;
+            background: #fafafa;
+            transition: border-color 0.3s ease;
+        }
+        
+        .copy-input:focus {
+            outline: none;
+            border-color: #3182ce;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #805ad5 0%, #6b46c1 100%);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 15px;
+            cursor: pointer;
+            white-space: nowrap;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(128, 90, 213, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(128, 90, 213, 0.4);
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .keywords-section {
+            margin-top: 20px;
+            padding: 18px;
+            background: linear-gradient(135deg, #fffaf0 0%, #feebc8 100%);
+            border-radius: 12px;
+            border-left: 5px solid #ed8936;
+        }
+        
+        .keywords-title {
+            font-size: 15px;
+            color: #c05621;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .keywords {
+            color: #744210;
+            font-size: 14px;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 17px;
+                padding: 60px 10px 15px;
+            }
+            
+            .home-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .nav-btn {
+                padding: 6px 14px;
+                font-size: 12px;
+                min-width: 60px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 14px 10px;
+            }
+            
+            tbody td {
+                padding: 12px 10px;
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="nav-btns">
+            <a href="336.html" class="nav-btn">← 上一页</a>
+            <a href="338.html" class="nav-btn">下一页 →</a>
+            <button class="nav-btn favorite-btn" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~机械通气模式与呼吸机监测管理*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~机械通气模式与呼吸机监测管理*****、序号、内容分类、详细内容、7续、高压报警：咳嗽、痰多、管路打折、气道痉挛等。、高通气量报警：做雾化、呼吸频率过快、人机对抗等。、低通气量报警：漏气、自主呼吸过弱。</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>内容分类</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>续</td>
+                    <td>PC续</td>
+                    <td>吸机还会送气，设置的呼吸频率只是保证最低通气频率，不是最终频率。</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">7续</td>
+                    <td rowspan="2">机械通气模式</td>
+                    <td>
+                        <span class="check">✓</span>PS：主要参数有FiO₂、PEEP和PS，患者开始吸气时，呼吸机提供预设气道正压，以帮助患者克服吸气阻力，在预设触发灵敏度和吸气压力支持水平情况下，患者自己控制呼吸频率与吸气和呼气时间，并与支持压力一起决定吸气流速及潮气量。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check">✓</span>SIMV：一般合并PS使用，为SIMV＋PS模式。除了要设置PS的参数外，还要设置SIMV的参数。SIMV有VC和PC两种方式送气，因此主要参数除FiO₂、PEEP外，还有SIMV频率、吸气时间Ti、Vt（或PC）、PS，设置的呼吸频率只是SIMV的通气频率，总的频率等于SIMV的频率＋PS的频率，总频率取决于呼吸机和患者的共同作用结果。
+                    </td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>机械通气后低血压</td>
+                    <td>容量不足，镇静药的使用，插管前的正常血压甚至高血压假象，机械通气减少血液回流、减少心输出量，特别是高PEEP时明显；肺过度充气引起内源性PEEP（PEEPi）的产生，在COPD和哮喘患者中常见。</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>通气过程的监测</td>
+                    <td>呼吸力学监测如峰压（Ppeak）、平均气道压（Pmean）、平台压（Pplat）、通气波形等；呼吸容量监测如Vt、每分通气量（Vmin）；呼吸生理学监测如动脉和静脉血气；通气副作用监测如胸腔压增加、静脉回流减少、肺血管阻力增加、心输出量减少、颅内压增高、肝肾灌注减少、肝淤血、腹内压增加、气压伤等。患者的监测是第一位的！</td>
+                </tr>
+                <tr>
+                    <td rowspan="4">10</td>
+                    <td rowspan="4">影响因素</td>
+                    <td>
+                        <span class="bullet">●</span>影响氧合的参数：主要是FiO₂、PEEP，还有吸气时间、通气量、平台压等。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="bullet">●</span>影响CO₂分压的指标：Vt、R、呼气时间、PEEP等。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="bullet">●</span>影响压力的指标：PEEP、Vt、吸气时间、峰流速等。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="bullet">●</span>呼吸机的参数调整：一般呼吸机稳定通气15分钟以上血气趋向稳定，每调整一次参数后，15～30分钟需要复查血气以进一步调整参数。
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="4">11</td>
+                    <td rowspan="4">常见的呼吸机报警</td>
+                    <td>
+                        <span class="bullet">●</span>低压报警：脱机、漏气，气囊未充气、破裂，湿化器漏气。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="bullet">●</span>高压报警：咳嗽、痰多、管路打折、气道痉挛等。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="bullet">●</span>高通气量报警：做雾化、呼吸频率过快、人机对抗等。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="bullet">●</span>低通气量报警：漏气、自主呼吸过弱。
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag">PS</span>
+            <span class="tag">SIMV</span>
+            <span class="tag">FiO₂</span>
+            <span class="tag">PEEP</span>
+            <span class="tag">PEEPi</span>
+            <span class="tag">COPD</span>
+            <span class="tag">哮喘</span>
+            <span class="tag">低血压</span>
+            <span class="tag">Ppeak</span>
+            <span class="tag">Pmean</span>
+            <span class="tag">Pplat</span>
+            <span class="tag">Vt</span>
+            <span class="tag">Vmin</span>
+            <span class="tag">CO₂</span>
+            <span class="tag">人机对抗</span>
+            <span class="tag">低压报警</span>
+            <span class="tag">高压报警</span>
+            <span class="tag">高通气量报警</span>
+            <span class="tag">低通气量报警</span>
+        </div>
+    </div>
+    
+    <div class="page-info">
+        当前页码：<span class="page-number">337</span>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="机械通气模式与呼吸机监测管理；PS；SIMV；机械通气后低血压；通气过程监测；影响因素；呼吸机报警；FiO₂；PEEP；COPD；哮喘；Ppeak；Pplat；Vt；=337" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <div class="keywords-section">
+        <div class="keywords-title">🔑 关键词</div>
+        <div class="keywords">337</div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(input.value).then(function() {
+                    showToast('✅ 已复制到剪贴板');
+                }).catch(function() {
+                    fallbackCopy(input);
+                });
+            } else {
+                fallbackCopy(input);
+            }
+        }
+        
+        function fallbackCopy(input) {
+            try {
+                document.execCommand('copy');
+                showToast('✅ 已复制到剪贴板');
+            } catch (err) {
+                showToast('❌ 复制失败，请手动复制');
+            }
+        }
+        
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.8);color:white;padding:16px 28px;border-radius:12px;font-size:15px;z-index:10000;';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2000);
+        }
+        
+        function addToFavorites() {
+            const title = document.title;
+            const url = window.location.href;
+            const pageData = {
+                title: title,
+                url: url,
+                category: '机械通气',
+                time: new Date().toLocaleString('zh-CN')
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('kimi_favorites') || '[]');
+            const exists = favorites.some(f => f.url === url);
+            
+            if (!exists) {
+                favorites.push(pageData);
+                localStorage.setItem('kimi_favorites', JSON.stringify(favorites));
+                showToast('⭐ 已添加到收藏！请在index.html查看');
+            } else {
+                showToast('⚠️ 该页面已在收藏列表中');
+            }
+        }
+    </script>
+</body>
+</html>
