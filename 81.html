@@ -1,0 +1,585 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~社区获得性肺炎(CAP)诊疗指南*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f0f7ff;
+            background-image: linear-gradient(135deg, #f0f7ff 0%, #e8f4f8 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 收藏按钮 */
+        .favorite-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+        }
+        
+        .favorite-btn:hover {
+            background: #ee5a5a;
+        }
+        
+        .favorite-btn.active {
+            background: #ffd93d;
+            color: #333;
+        }
+        
+        /* 标题样式 */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 60px 0 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            border-left: 5px solid #4a90d9;
+        }
+        
+        /* 表格样式 */
+        .main-table {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto 30px auto;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .main-table thead {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        .main-table thead th {
+            padding: 18px 15px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        .main-table tbody td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #e8f0f8;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #2c3e50;
+        }
+        
+        .main-table tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        .main-table tbody tr:hover {
+            background: #e8f4ff;
+        }
+        
+        .section-header {
+            background: #e8f4ff !important;
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 16px !important;
+        }
+        
+        .bullet-point {
+            color: #4a90d9;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .sub-bullet {
+            padding-left: 20px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            max-width: 900px;
+            margin: 0 auto 25px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4a90d9;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #e8f4ff;
+            color: #1a5276;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid #4a90d9;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            max-width: 900px;
+            margin: 0 auto 25px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .keywords-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 15px;
+        }
+        
+        .keywords-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .keyword {
+            display: inline-block;
+            padding: 6px 14px;
+            background: #fff3e0;
+            color: #e65100;
+            border-radius: 15px;
+            font-size: 13px;
+        }
+        
+        /* 页码显示 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #4a90d9;
+            margin: 20px 0;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            max-width: 900px;
+            margin: 0 auto 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #4a90d9;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-btn {
+            padding: 12px 25px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #357abd;
+        }
+        
+        .copy-btn.copied {
+            background: #27ae60;
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #27ae60;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 14px;
+            display: none;
+            z-index: 200;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .page-title {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            
+            .main-table thead th {
+                font-size: 17px;
+                padding: 14px 10px;
+            }
+            
+            .main-table tbody td {
+                font-size: 14px;
+                padding: 12px 10px;
+            }
+            
+            .nav-buttons {
+                position: relative;
+                top: 0;
+                right: 0;
+                flex-direction: row;
+                justify-content: center;
+                margin-bottom: 15px;
+            }
+            
+            .home-btn {
+                position: relative;
+                top: 0;
+                left: 0;
+                margin-bottom: 10px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <button class="home-btn" onclick="location.href='index.html'">← 返回首页</button>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="80.html" class="nav-btn">↑ 上一页</a>
+        <a href="82.html" class="nav-btn">↓ 下一页</a>
+        <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">☆ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">~~~~~社区获得性肺炎(CAP)诊疗指南*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~社区获得性肺炎(CAP)诊疗指南*****、社区获得性肺炎（CAP）诊疗要点、1. 定义、2. 危险因素、高龄。、病毒性呼吸道感染。、3. 临床表现、4. 必做检查、血常规。</div>
+    
+    <!-- 主表格 -->
+    <table class="main-table">
+        <thead>
+            <tr>
+                <th>社区获得性肺炎（CAP）诊疗要点</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="section-header">
+                <td>1. 定义</td>
+            </tr>
+            <tr>
+                <td><span class="bullet-point">●</span> 社区获得性肺炎（CAP）指在医疗保健机构之外发生的肺实质急性感染。</td>
+            </tr>
+            <tr class="section-header">
+                <td>2. 危险因素</td>
+            </tr>
+            <tr>
+                <td><span class="bullet-point">●</span> 高龄。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet-point">●</span> 慢性共存疾病：慢性肺病，如支气管扩张、哮喘、COPD等；慢性心脏病，特别是充血性心力衰竭；脑卒中、糖尿病、营养不良和免疫功能受损疾病。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet-point">●</span> 病毒性呼吸道感染。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet-point">●</span> 气道保护受损：意识改变，如脑卒中、癫痫、麻醉、药物或酒精使用所致，或吞咽困难，如食管病变或动力障碍引起。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet-point">●</span> 吸烟、酗酒及其他生活方式因素（拥挤的生活条件，如监狱、收容所，居住于经济条件较差的地区，以及暴露于环境毒素，如溶剂、油漆或汽油等）。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet-point">●</span> 同时存在多种危险因素使风险累加，如有吸烟、COPD和充血性心力衰竭。</td>
+            </tr>
+            <tr class="section-header">
+                <td>3. 临床表现</td>
+            </tr>
+            <tr>
+                <td><span class="bullet-point">●</span> 肺部症状：干咳或咳痰、呼吸困难和胸膜炎性胸痛是CAP的最常见症状。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet-point">●</span> 肺炎体征：包括呼吸过速、呼吸功增加，以及附加呼吸音，包括湿啰音和干啰音。触觉语颤、羊鸣音和叩诊浊音也提示肺炎。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet-point">●</span> 全身症状：绝大多数CAP患者会出现发热。其他全身症状也很常见，如寒战、疲劳、不适、胸痛（可能是胸膜炎性）和食欲减退。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet-point">●</span> 全身体征：严重者全身炎症反应还可导致心动过速、低血压、意识障碍、少尿等。</td>
+            </tr>
+            <tr class="section-header">
+                <td>4. 必做检查</td>
+            </tr>
+            <tr>
+                <td><span class="bullet-point">●</span> 血常规。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet-point">●</span> 胸片：大多数疑似CAP患者，通常需拍摄后前位和侧位胸片。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet-point">✓</span> 对引起心搏骤停的确诊或高度怀疑的PE患者，可在心肺复苏同时给予rt-PA 50mg iv，15分钟后无自主循环恢复可再给予1剂。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet-point">●</span> 静脉取栓：对于有条件的医疗机构，对血流动力学不稳定的患者可进行导管取栓或开胸取栓术。（刘业成）</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 页码 -->
+    <div class="page-number">页码：81</div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div class="tags-container">
+            <span class="tag">社区获得性肺炎</span>
+            <span class="tag">CAP</span>
+            <span class="tag">肺炎</span>
+            <span class="tag">肺实质急性感染</span>
+            <span class="tag">COPD</span>
+            <span class="tag">支气管扩张</span>
+            <span class="tag">哮喘</span>
+            <span class="tag">充血性心力衰竭</span>
+            <span class="tag">脑卒中</span>
+            <span class="tag">糖尿病</span>
+            <span class="tag">营养不良</span>
+            <span class="tag">免疫功能受损</span>
+            <span class="tag">病毒性呼吸道感染</span>
+            <span class="tag">气道保护受损</span>
+            <span class="tag">吞咽困难</span>
+            <span class="tag">吸烟</span>
+            <span class="tag">酗酒</span>
+            <span class="tag">干咳</span>
+            <span class="tag">咳痰</span>
+            <span class="tag">呼吸困难</span>
+            <span class="tag">胸膜炎性胸痛</span>
+            <span class="tag">湿啰音</span>
+            <span class="tag">干啰音</span>
+            <span class="tag">发热</span>
+            <span class="tag">寒战</span>
+            <span class="tag">低血压</span>
+            <span class="tag">心动过速</span>
+            <span class="tag">意识障碍</span>
+            <span class="tag">少尿</span>
+            <span class="tag">血常规</span>
+            <span class="tag">胸片</span>
+            <span class="tag">rt-PA</span>
+            <span class="tag">PE</span>
+            <span class="tag">肺栓塞</span>
+            <span class="tag">心搏骤停</span>
+            <span class="tag">心肺复苏</span>
+            <span class="tag">静脉取栓</span>
+            <span class="tag">导管取栓</span>
+            <span class="tag">开胸取栓</span>
+        </div>
+    </div>
+    
+    <!-- 关键词区域 -->
+    <div class="keywords-section">
+        <div class="keywords-title">🔑 关键词</div>
+        <div class="keywords-list">
+            <span class="keyword">社区获得性肺炎</span>
+            <span class="keyword">CAP</span>
+            <span class="keyword">肺炎</span>
+            <span class="keyword">COPD</span>
+            <span class="keyword">心力衰竭</span>
+            <span class="keyword">rt-PA</span>
+            <span class="keyword">肺栓塞</span>
+            <span class="keyword">取栓术</span>
+            <span class="keyword">胸片</span>
+            <span class="keyword">呼吸困难</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="社区获得性肺炎(CAP)诊疗指南；定义、危险因素、临床表现、必做检查；关键词=社区获得性肺炎,CAP,肺炎,COPD,心力衰竭,rt-PA,肺栓塞,取栓术,胸片,呼吸困难；页码=81" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <!-- 提示信息 -->
+    <div class="toast" id="toast">已复制到剪贴板！</div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                const btn = document.querySelector('.copy-btn');
+                const toast = document.getElementById('toast');
+                btn.classList.add('copied');
+                btn.textContent = '已复制';
+                toast.style.display = 'block';
+                setTimeout(function() {
+                    btn.classList.remove('copied');
+                    btn.textContent = '复制';
+                    toast.style.display = 'none';
+                }, 2000);
+            });
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isActive = btn.classList.contains('active');
+            
+            if (!isActive) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                
+                // 添加到index.html的收藏类目
+                const favoriteData = {
+                    title: '社区获得性肺炎(CAP)诊疗指南',
+                    url: '81.html',
+                    tags: ['肺炎', 'CAP', 'rt-PA'],
+                    date: new Date().toISOString()
+                };
+                
+                // 保存到localStorage
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites.push(favoriteData);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                // 显示提示
+                const toast = document.getElementById('toast');
+                toast.textContent = '已添加到收藏！';
+                toast.style.display = 'block';
+                toast.style.background = '#ffd93d';
+                toast.style.color = '#333';
+                setTimeout(function() {
+                    toast.style.display = 'none';
+                    toast.textContent = '已复制到剪贴板！';
+                    toast.style.background = '#27ae60';
+                    toast.style.color = 'white';
+                }, 2000);
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+                
+                // 从收藏中移除
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '81.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.url === '81.html');
+            if (isFavorited) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
