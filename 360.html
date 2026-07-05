@@ -1,0 +1,585 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~规范病原微生物采集与急诊抗菌药物再评估*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            z-index: 100;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            text-decoration: none;
+            text-align: center;
+        }
+        
+        .nav-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #e8a838;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(232,168,56,0.3);
+        }
+        
+        .fav-btn:hover {
+            background: #d49a2f;
+        }
+        
+        .fav-btn.active {
+            background: #c9302c;
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            color: #2c5282;
+            font-size: 22px;
+            font-weight: bold;
+            margin: 60px 0 25px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            border-left: 5px solid #4a90d9;
+            border-right: 5px solid #4a90d9;
+        }
+        
+        /* 表格样式 */
+        .content-table {
+            width: 100%;
+            max-width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        .content-table thead {
+            background: #2b6cb0;
+            color: white;
+        }
+        
+        .content-table th {
+            padding: 18px 15px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+            border-bottom: 3px solid #1a4d7a;
+        }
+        
+        .content-table td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 15px;
+            color: #2d3748;
+        }
+        
+        .content-table tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        .content-table tr:hover {
+            background: #edf2f7;
+        }
+        
+        .section-num {
+            color: #2b6cb0;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .bullet {
+            color: #4a90d9;
+            font-weight: bold;
+        }
+        
+        .highlight-bacteria {
+            color: #c53030;
+            font-weight: 600;
+        }
+        
+        .highlight-drug {
+            color: #276749;
+            font-weight: 600;
+        }
+        
+        .highlight-disease {
+            color: #744210;
+            font-weight: 600;
+        }
+        
+        /* 页码显示 */
+        .page-num {
+            text-align: center;
+            color: #718096;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .copy-section label {
+            display: block;
+            color: #4a5568;
+            font-size: 14px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .copy-box-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #2d3748;
+            background: #f7fafc;
+            word-break: break-all;
+        }
+        
+        .copy-btn {
+            background: #38a169;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #2f855a;
+        }
+        
+        .copy-btn.copied {
+            background: #2b6cb0;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            color: #2d3748;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .tag-disease {
+            background: #fed7d7;
+            color: #c53030;
+        }
+        
+        .tag-disease:hover {
+            background: #fc8181;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .tag-bacteria:hover {
+            background: #68d391;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #bee3f8;
+            color: #2b6cb0;
+        }
+        
+        .tag-drug:hover {
+            background: #63b3ed;
+            color: white;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .keywords-title {
+            color: #2d3748;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .keywords-list {
+            color: #4a5568;
+            font-size: 14px;
+            line-height: 2;
+        }
+        
+        .keyword {
+            display: inline-block;
+            background: #edf2f7;
+            padding: 4px 12px;
+            border-radius: 15px;
+            margin: 3px;
+            color: #4a5568;
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2d3748;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 200;
+        }
+        
+        .toast.show {
+            opacity: 1;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .main-title {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            
+            .content-table th {
+                font-size: 16px;
+                padding: 14px 12px;
+            }
+            
+            .content-table td {
+                font-size: 14px;
+                padding: 12px;
+            }
+            
+            .home-btn, .nav-btn, .fav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-box-wrapper {
+                flex-direction: column;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="359.html" class="nav-btn">上一页</a>
+        <a href="361.html" class="nav-btn">下一页</a>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~规范病原微生物采集与急诊抗菌药物再评估*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~规范病原微生物采集与急诊抗菌药物再评估*****、📋 规范病原微生物采集与急诊抗菌药物治疗要点</div>
+    
+    <!-- 主表格 -->
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th colspan="2">📋 规范病原微生物采集与急诊抗菌药物治疗要点</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td width="80"><span class="section-num">3.</span></td>
+                <td><strong style="color:#2b6cb0; font-size:16px;">规范病原微生物采集</strong><br>
+                病原微生物鉴定对于感染的诊断和治疗至关重要，鉴定方法包括传统的病原微生物培养和不断新增的免疫学检测技术。其中病原微生物培养过程中的采集、保存和送检对培养结果有明显影响。</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span class="bullet">● 采集：</span>尽量在使用<span class="highlight-drug">抗菌药物</span>之前采集标本。<span class="highlight-disease">血液</span>、<span class="highlight-disease">脑脊液</span>、<span class="highlight-disease">关节液</span>等需要穿刺获得的标本，注意有效消毒以避免标本被皮肤或黏膜正常定植菌群污染。<span class="highlight-drug">碘酊</span>和<span class="highlight-drug">氯己定</span>消毒的消毒效果优于<span class="highlight-drug">聚维酮碘</span>。对于经纤维支气管镜留取的<span class="highlight-disease">痰液</span>，正确操作污染可能小。对于经口留取的痰培养标本，在咳痰前1～2小时内应禁食，咳痰之前应漱口，咳出深部痰液。对于<span class="highlight-disease">尿培养</span>标本，建议清洁尿道口以降低污染率。应使用不起泡的消毒液对尿道口和邻近黏膜进行局部消毒，然后用无菌拭子擦干以避免尿液与消毒液混合。留取时尽量减少尿流与黏膜的接触。应弃去初段尿液。如果不了解相关标本采集要求，应在样本采集前咨询微生物学实验室。</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span class="bullet">● 保存：</span>最好在样本采集后1～2小时内将细菌培养样本送检至微生物实验室。标本处理延迟可造成部分微生物过度生长或苛养病原体的死亡。如果延时送检无法避免，大部分标本（除了<span class="highlight-disease">血液</span>、<span class="highlight-disease">脑脊液</span>、<span class="highlight-disease">关节液</span>以及用于<span class="highlight-bacteria">淋病奈瑟菌</span>培养的样本）需储存于专用的标本储藏冰箱，4℃冷藏保存直至转运。还要避免标本干燥脱水。</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span class="bullet">● 送检：</span>标本盛放于无菌、防渗漏容器中，用塑料袋密封后进行送检。注射器采集的液态样本（如穿刺抽吸、关节抽吸、脓肿穿刺引流液），可将注射器内采集的标本转移到另一容器后再进行转运，也可以拔掉注射器针头并加帽后直接送检含有抽吸物的注射器。对于特殊的测试申请，或疑为罕见病原体、高度传染性病原体、生物恐怖病原体，送检前需提前通知微生物学实验室。</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span class="bullet">● 初步判断：</span>痰标本的自身性状可以对病原学情况进行一定的推断。<span class="highlight-disease">铁锈色痰</span>提示<span class="highlight-bacteria">肺炎链球菌</span>；<span class="highlight-disease">砖红色痰</span>提示<span class="highlight-bacteria">肺炎克雷伯菌</span>；<span class="highlight-disease">黄绿色或者翠绿色痰液</span>提示<span class="highlight-bacteria">铜绿假单胞菌</span>；<span class="highlight-disease">脓痰伴恶臭</span>提示<span class="highlight-bacteria">厌氧菌</span>；<span class="highlight-disease">白色黏稠、难以咳出的拉丝样痰</span>提示<span class="highlight-bacteria">白念珠菌</span>；大量稀薄浆液性痰中含粉皮样物提示<span class="highlight-disease">棘球蚴病</span>。</td>
+            </tr>
+            <tr>
+                <td><span class="section-num">4.</span></td>
+                <td><strong style="color:#2b6cb0; font-size:16px;">急诊抗菌药物初次选择后的再评估和优化治疗</strong><br>
+                通常急诊经验使用<span class="highlight-drug">抗菌药物</span>后，应当在48～72小时内评估<span class="highlight-drug">抗菌药物</span>的疗效。特别对于使用广谱<span class="highlight-drug">抗菌药物</span>及联合两种及以上<span class="highlight-drug">抗菌药物</span>使用的患者，应综合考虑体格检查、影像学表现、临床疗效、初步的细菌学证据等因素，在<span class="highlight-drug">抗菌药物</span>治疗有效的情</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 页码 -->
+    <div class="page-num">— 第 360 页 —</div>
+    
+    <!-- 复制功能区域 -->
+    <div class="copy-section">
+        <label>📋 复制标题与关键词（用于检索）</label>
+        <div class="copy-box-wrapper">
+            <input type="text" class="copy-input" id="copyInput" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyContent()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签（点击筛选）</div>
+        <div class="tags-container">
+            <span class="tag tag-disease" onclick="filterByTag('血液')">血液</span>
+            <span class="tag tag-disease" onclick="filterByTag('脑脊液')">脑脊液</span>
+            <span class="tag tag-disease" onclick="filterByTag('关节液')">关节液</span>
+            <span class="tag tag-disease" onclick="filterByTag('痰液')">痰液</span>
+            <span class="tag tag-disease" onclick="filterByTag('尿培养')">尿培养</span>
+            <span class="tag tag-disease" onclick="filterByTag('铁锈色痰')">铁锈色痰</span>
+            <span class="tag tag-disease" onclick="filterByTag('砖红色痰')">砖红色痰</span>
+            <span class="tag tag-disease" onclick="filterByTag('黄绿色痰')">黄绿色痰</span>
+            <span class="tag tag-disease" onclick="filterByTag('翠绿色痰')">翠绿色痰</span>
+            <span class="tag tag-disease" onclick="filterByTag('脓痰')">脓痰</span>
+            <span class="tag tag-disease" onclick="filterByTag('白色黏稠痰')">白色黏稠痰</span>
+            <span class="tag tag-disease" onclick="filterByTag('棘球蚴病')">棘球蚴病</span>
+            <span class="tag tag-bacteria" onclick="filterByTag('肺炎链球菌')">肺炎链球菌</span>
+            <span class="tag tag-bacteria" onclick="filterByTag('肺炎克雷伯菌')">肺炎克雷伯菌</span>
+            <span class="tag tag-bacteria" onclick="filterByTag('铜绿假单胞菌')">铜绿假单胞菌</span>
+            <span class="tag tag-bacteria" onclick="filterByTag('厌氧菌')">厌氧菌</span>
+            <span class="tag tag-bacteria" onclick="filterByTag('白念珠菌')">白念珠菌</span>
+            <span class="tag tag-bacteria" onclick="filterByTag('淋病奈瑟菌')">淋病奈瑟菌</span>
+            <span class="tag tag-drug" onclick="filterByTag('抗菌药物')">抗菌药物</span>
+            <span class="tag tag-drug" onclick="filterByTag('碘酊')">碘酊</span>
+            <span class="tag tag-drug" onclick="filterByTag('氯己定')">氯己定</span>
+            <span class="tag tag-drug" onclick="filterByTag('聚维酮碘')">聚维酮碘</span>
+            <span class="tag tag-drug" onclick="filterByTag('广谱抗菌药物')">广谱抗菌药物</span>
+        </div>
+    </div>
+    
+    <!-- 关键词区域 -->
+    <div class="keywords-section">
+        <div class="keywords-title">🔑 关键词</div>
+        <div class="keywords-list">
+            <span class="keyword">病原微生物采集</span>
+            <span class="keyword">标本保存</span>
+            <span class="keyword">细菌培养</span>
+            <span class="keyword">痰液性状判断</span>
+            <span class="keyword">抗菌药物评估</span>
+            <span class="keyword">急诊感染</span>
+        </div>
+    </div>
+    
+    <!-- 提示框 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 页面信息
+        const pageInfo = {
+            title: "规范病原微生物采集与急诊抗菌药物再评估",
+            subtitle: "病原微生物采集、保存、送检、初步判断及抗菌药物再评估",
+            keywords: "病原微生物采集;标本保存;细菌培养;痰液性状;抗菌药物评估;急诊感染",
+            pageNum: "360"
+        };
+        
+        // 初始化复制框内容
+        const copyContentText = `${pageInfo.title};${pageInfo.subtitle};${pageInfo.keywords}=${pageInfo.pageNum}`;
+        document.getElementById('copyInput').value = copyContentText;
+        
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('✓ 已复制到剪贴板');
+                    document.getElementById('copyBtn').textContent = '已复制';
+                    document.getElementById('copyBtn').classList.add('copied');
+                    setTimeout(() => {
+                        document.getElementById('copyBtn').textContent = '复制';
+                        document.getElementById('copyBtn').classList.remove('copied');
+                    }, 2000);
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('✓ 已复制到剪贴板');
+            }
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+        
+        // 标签筛选功能（模拟）
+        function filterByTag(tag) {
+            showToast(`正在筛选: ${tag}`);
+            // 实际应用中这里会执行筛选逻辑
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                showToast('⭐ 已添加到收藏');
+                
+                // 保存到localStorage，供index.html读取
+                const favData = {
+                    title: pageInfo.title,
+                    url: '360.html',
+                    pageNum: '360',
+                    category: '急诊用药指南'
+                };
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites.push(favData);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                showToast('已取消收藏');
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '360.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 页面加载时检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '360.html');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
