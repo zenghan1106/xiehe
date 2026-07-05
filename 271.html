@@ -1,0 +1,637 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~重症药疹诊断与急诊处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(180deg, #f0f4f8 0%, #e8eef5 100%);
+            min-height: 100vh;
+            padding: 20px 15px 30px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 - 左上角 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2b6cb0;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 8px rgba(43, 108, 176, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #1a5276;
+            transform: translateY(-2px);
+        }
+        
+        /* 右上角导航按钮容器 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #38a169;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(56, 161, 105, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #2f855a;
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn.next {
+            background: #e53e3e;
+            box-shadow: 0 2px 8px rgba(229, 62, 62, 0.3);
+        }
+        
+        .nav-btn.next:hover {
+            background: #c53030;
+        }
+        
+        /* 收藏按钮 - 在下一页下方 */
+        .favorite-btn {
+            background: #d69e2e;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(214, 158, 46, 0.3);
+            transition: all 0.3s ease;
+            margin-top: 5px;
+        }
+        
+        .favorite-btn:hover {
+            background: #b7791f;
+            transform: translateY(-2px);
+        }
+        
+        .favorite-btn.active {
+            background: #e53e3e;
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2b6cb0;
+            margin: 70px 0 25px 0;
+            padding: 0 10px;
+            line-height: 1.5;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        /* 主表格 - 所有内容在一个表格中 */
+        .content-table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .content-table thead {
+            background: #2b6cb0;
+        }
+        
+        .content-table thead th {
+            color: white;
+            padding: 20px 15px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        .content-table tbody tr {
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .content-table tbody tr:last-child {
+            border-bottom: none;
+        }
+        
+        .content-table td {
+            padding: 14px 15px;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #444;
+            vertical-align: top;
+            word-break: break-all;
+        }
+        
+        .check-item {
+            color: #38a169;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .dot-item {
+            color: #e53e3e;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .section-title {
+            background: #ebf8ff;
+            font-weight: bold;
+            color: #2b6cb0;
+            font-size: 16px;
+        }
+        
+        .sub-section {
+            background: #f7fafc;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            max-width: 800px;
+            margin: 0 auto 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2b6cb0;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .tag-disease {
+            background: #fed7d7;
+            color: #c53030;
+        }
+        
+        .tag-disease:hover {
+            background: #c53030;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #bee3f8;
+            color: #2b6cb0;
+        }
+        
+        .tag-drug:hover {
+            background: #2b6cb0;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .tag-bacteria:hover {
+            background: #276749;
+            color: white;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            max-width: 800px;
+            margin: 0 auto 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .copy-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2b6cb0;
+            margin-bottom: 15px;
+        }
+        
+        .copy-box-wrapper {
+            display: flex;
+            gap: 12px;
+            align-items: stretch;
+        }
+        
+        .copy-input {
+            flex: 1;
+            width: calc(100% - 100px);
+            padding: 14px 16px;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #444;
+            background: #f7fafc;
+            outline: none;
+            transition: border-color 0.3s;
+            min-height: 50px;
+            resize: vertical;
+            font-family: inherit;
+        }
+        
+        .copy-input:focus {
+            border-color: #2b6cb0;
+        }
+        
+        .copy-btn {
+            padding: 14px 24px;
+            background: #2b6cb0;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .copy-btn:hover {
+            background: #1a5276;
+        }
+        
+        .copy-btn.copied {
+            background: #38a169;
+        }
+        
+        /* 关键词与页码 - 底部 */
+        .keywords-section {
+            max-width: 800px;
+            margin: 0 auto 20px;
+            text-align: center;
+            padding: 15px;
+        }
+        
+        .page-number {
+            font-size: 16px;
+            color: #2b6cb0;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        .keywords {
+            font-size: 14px;
+            color: #666;
+            line-height: 2;
+        }
+        
+        .keyword-item {
+            display: inline-block;
+            margin: 3px 6px;
+            padding: 5px 14px;
+            background: #ebf8ff;
+            color: #2b6cb0;
+            border-radius: 15px;
+            font-size: 13px;
+        }
+        
+        /* 移动端适配 */
+        @media (max-width: 600px) {
+            .main-title {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            
+            .content-table thead th {
+                font-size: 17px;
+                padding: 16px 12px;
+            }
+            
+            .content-table td {
+                padding: 12px;
+                font-size: 14px;
+            }
+            
+            .copy-box-wrapper {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                justify-content: center;
+            }
+            
+            .home-btn, .nav-btn, .favorite-btn {
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 右上角导航按钮 -->
+    <div class="nav-buttons">
+        <a href="270.html" class="nav-btn">← 上一页</a>
+        <a href="272.html" class="nav-btn next">下一页 →</a>
+        <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~重症药疹诊断与急诊处理*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~重症药疹诊断与急诊处理*****、皮肤疾病急诊 - 重症药疹、皮损及系统受累多表现为迟发性，可在用药后3周以上甚至更久才出现皮肤斑丘疹。、3. 必做检查、血常规：判断是否合并感染，是否出现嗜酸性粒细胞增多等。、4. 选做检查、胸片：发现有无潜在感染等，为药物选择提供依据。、ABG：精准判断低氧、过度通气或CO₂潴留、酸碱平衡失调等。、5. 诊断策略、病史追溯是诊断最重要的一环。、所用药物剂量、时间应详细记录。、用药与发疹存在先后顺序。、极少数药疹患者由于各种原因无法提供有用的用药史。、结合药疹的典型表现。、AGEP典型表现为皱褶、间擦部位的红斑及细小脓疱。、SJS及TEN靶形皮损及表皮松解，黏膜（眼、口腔、外阴）受累。、DRESS陈旧性皮肤红斑、肝损害及嗜酸性粒细胞增多。、6. 急诊处理、呼吸、循环等生命体征判断和支持，维持水电解质平衡。、早期足量糖皮质激素使用，推荐剂量为1～2mg/(kg·d)。</div>
+    
+    <!-- 主表格 - 所有内容在一个表格中 -->
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th colspan="2">皮肤疾病急诊 - 重症药疹</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="2"><span class="dot-item">●</span>伴嗜酸性粒细胞增多和系统症状的药物反应（DRESS）：又称药物超敏综合征（DIHS）。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="check-item">✓</span>皮损及系统受累多表现为迟发性，可在用药后3周以上甚至更久才出现皮肤斑丘疹。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="check-item">✓</span>有些可表现红皮病、剥脱性皮炎等皮肤表现，伴外周血嗜酸性粒细胞增多、肝功能异常及全身淋巴结肿大。</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="sub-section">3. 必做检查</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="dot-item">●</span>血常规：判断是否合并感染，是否出现嗜酸性粒细胞增多等。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="dot-item">●</span>生化检查：发现电解质紊乱等。患者一般处于循环不足、缺水、电解质紊乱状态，需着重关注患者肝肾功能。</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="sub-section">4. 选做检查</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="dot-item">●</span>胸片：发现有无潜在感染等，为药物选择提供依据。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="dot-item">●</span>ABG：精准判断低氧、过度通气或CO₂潴留、酸碱平衡失调等。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="dot-item">●</span>皮肤组织病理活检：若不能判断是否为药物引起的疾病，可行皮肤活检与自身免疫性皮肤病等疾病进行鉴别。</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="sub-section">5. 诊断策略</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="dot-item">●</span>病史追溯是诊断最重要的一环。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="check-item">✓</span>着重追问一切用药情况，包括抗生素、磺胺类药物、抗癫痫药物、抗结核药物、解热镇痛药物、中药、眼药等。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="check-item">✓</span>所用药物剂量、时间应详细记录。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="check-item">✓</span>用药与发疹存在先后顺序。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="check-item">✓</span>极少数药疹患者由于各种原因无法提供有用的用药史。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="dot-item">●</span>结合药疹的典型表现。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="check-item">✓</span>AGEP典型表现为皱褶、间擦部位的红斑及细小脓疱。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="check-item">✓</span>SJS及TEN靶形皮损及表皮松解，黏膜（眼、口腔、外阴）受累。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="check-item">✓</span>DRESS陈旧性皮肤红斑、肝损害及嗜酸性粒细胞增多。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="dot-item">●</span>需要鉴别的其他诊断。①脓疱型银屑病；②自身免疫性大疱病；③其他原因引发的红皮病。</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="sub-section">6. 急诊处理</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="dot-item">●</span>呼吸、循环等生命体征判断和支持，维持水电解质平衡。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="dot-item">●</span>早期足量糖皮质激素使用，推荐剂量为1～2mg/(kg·d)。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="dot-item">●</span>静脉注射免疫球蛋白（IVIG），推荐剂量成人20g/d，或0.4～0.6g/(kg·d)。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="dot-item">●</span>皮肤创面的清洁与护理：对于已出现大面积表皮剥脱的患者，极易经由皮肤糜烂面引发感染，需每日对创面进行生理盐水清洁及外用凡士林油纱覆盖，凡士林油纱外侧可选择抗生素</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 特色检索标签 - 网页最下方，仅图片中的文字 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">DRESS</span>
+            <span class="tag tag-disease">药物超敏综合征</span>
+            <span class="tag tag-disease">DIHS</span>
+            <span class="tag tag-disease">红皮病</span>
+            <span class="tag tag-disease">剥脱性皮炎</span>
+            <span class="tag tag-disease">AGEP</span>
+            <span class="tag tag-disease">SJS</span>
+            <span class="tag tag-disease">TEN</span>
+            <span class="tag tag-disease">脓疱型银屑病</span>
+            <span class="tag tag-disease">自身免疫性大疱病</span>
+            <!-- 药物/抗生素标签 -->
+            <span class="tag tag-drug">抗生素</span>
+            <span class="tag tag-drug">磺胺类药物</span>
+            <span class="tag tag-drug">抗癫痫药物</span>
+            <span class="tag tag-drug">抗结核药物</span>
+            <span class="tag tag-drug">解热镇痛药物</span>
+            <span class="tag tag-drug">中药</span>
+            <span class="tag tag-drug">眼药</span>
+            <span class="tag tag-drug">糖皮质激素</span>
+            <span class="tag tag-drug">免疫球蛋白</span>
+            <span class="tag tag-drug">IVIG</span>
+            <span class="tag tag-drug">凡士林</span>
+            <!-- 细菌标签 -->
+            <span class="tag tag-bacteria">感染</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制</div>
+        <div class="copy-box-wrapper">
+            <textarea class="copy-input" id="copyInput" readonly>重症药疹诊断与急诊处理；皮肤疾病急诊、重症药疹、DRESS、药物超敏综合征、DIHS、AGEP、SJS、TEN、脓疱型银屑病、自身免疫性大疱病、抗生素、磺胺类药物、抗癫痫药物、抗结核药物、解热镇痛药物、糖皮质激素、免疫球蛋白、IVIG、感染=271</textarea>
+            <button class="copy-btn" id="copyBtn" onclick="copyContent()">📄 复制</button>
+        </div>
+    </div>
+    
+    <!-- 关键词与页码 - 网页底部 -->
+    <div class="keywords-section">
+        <div class="page-number">页码：271</div>
+        <div class="keywords">
+            <span class="keyword-item">重症药疹</span>
+            <span class="keyword-item">DRESS</span>
+            <span class="keyword-item">药物超敏综合征</span>
+            <span class="keyword-item">DIHS</span>
+            <span class="keyword-item">AGEP</span>
+            <span class="keyword-item">SJS</span>
+            <span class="keyword-item">TEN</span>
+            <span class="keyword-item">脓疱型银屑病</span>
+            <span class="keyword-item">自身免疫性大疱病</span>
+            <span class="keyword-item">抗生素</span>
+            <span class="keyword-item">磺胺类药物</span>
+            <span class="keyword-item">抗癫痫药物</span>
+            <span class="keyword-item">抗结核药物</span>
+            <span class="keyword-item">解热镇痛药物</span>
+            <span class="keyword-item">糖皮质激素</span>
+            <span class="keyword-item">免疫球蛋白</span>
+            <span class="keyword-item">IVIG</span>
+            <span class="keyword-item">感染</span>
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            const btn = document.getElementById('copyBtn');
+            
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    btn.textContent = '✓ 已复制';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.textContent = '📄 复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            } else {
+                document.execCommand('copy');
+                btn.textContent = '✓ 已复制';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '📄 复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFavorited = localStorage.getItem('fav_271') === 'true';
+            
+            if (!isFavorited) {
+                localStorage.setItem('fav_271', 'true');
+                localStorage.setItem('fav_271_title', '重症药疹诊断与急诊处理');
+                localStorage.setItem('fav_271_url', '271.html');
+                btn.textContent = '❤️ 已收藏';
+                btn.classList.add('active');
+                
+                // 添加到index的收藏类目
+                let favorites = JSON.parse(localStorage.getItem('index_favorites') || '[]');
+                const exists = favorites.find(f => f.url === '271.html');
+                if (!exists) {
+                    favorites.push({
+                        title: '重症药疹诊断与急诊处理',
+                        url: '271.html',
+                        date: new Date().toISOString()
+                    });
+                    localStorage.setItem('index_favorites', JSON.stringify(favorites));
+                }
+                
+                alert('已添加到收藏！');
+            } else {
+                localStorage.removeItem('fav_271');
+                localStorage.removeItem('fav_271_title');
+                localStorage.removeItem('fav_271_url');
+                btn.textContent = '⭐ 收藏';
+                btn.classList.remove('active');
+                
+                let favorites = JSON.parse(localStorage.getItem('index_favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '271.html');
+                localStorage.setItem('index_favorites', JSON.stringify(favorites));
+                
+                alert('已取消收藏！');
+            }
+        }
+        
+        // 初始化收藏状态
+        document.addEventListener('DOMContentLoaded', function() {
+            const isFavorited = localStorage.getItem('fav_271') === 'true';
+            const btn = document.getElementById('favoriteBtn');
+            if (isFavorited) {
+                btn.textContent = '❤️ 已收藏';
+                btn.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
