@@ -1,0 +1,546 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~嗜铬细胞瘤-症状体征检查诊断策略*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            z-index: 100;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(92,184,92,0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            top: 110px;
+            right: 15px;
+            background: #f0ad4e;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(240,173,78,0.3);
+            z-index: 100;
+        }
+        
+        .fav-btn:hover {
+            background: #ec971f;
+        }
+        
+        .fav-btn.active {
+            background: #d9534f;
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            color: #2c5282;
+            margin: 60px 0 20px 0;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        /* 副标题 */
+        .sub-title {
+            text-align: center;
+            font-size: 15px;
+            color: #4a5568;
+            margin-bottom: 25px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: #3182ce;
+            color: white;
+            padding: 16px 12px;
+            font-size: 17px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        /* 表格内容 */
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+            line-height: 1.7;
+            color: #2d3748;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        tbody tr:hover {
+            background: #edf2f7;
+        }
+        
+        /* 项目符号样式 */
+        .bullet {
+            color: #3182ce;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .check-mark {
+            color: #38a169;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        /* 章节标题 */
+        .section-title {
+            color: #2b6cb0;
+            font-weight: bold;
+            font-size: 15px;
+            margin: 8px 0;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #4a5568;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            background: white;
+            border-radius: 12px;
+            padding: 18px;
+            margin: 20px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .keywords-title {
+            font-size: 15px;
+            color: #2c5282;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .keywords-content {
+            font-size: 13px;
+            color: #4a5568;
+            line-height: 1.8;
+            word-break: break-all;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background: white;
+            border-radius: 12px;
+            padding: 18px;
+            margin: 20px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            color: #2c5282;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #ebf8ff;
+            color: #2b6cb0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            border: 1px solid #bee3f8;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            background: white;
+            border-radius: 12px;
+            padding: 18px;
+            margin: 20px 0 30px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .copy-title {
+            font-size: 15px;
+            color: #2c5282;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        .copy-box-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #4a5568;
+            background: #f7fafc;
+            outline: none;
+        }
+        
+        .copy-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #5a67d8;
+        }
+        
+        .copy-btn.copied {
+            background: #38a169;
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 14px;
+            display: none;
+            z-index: 200;
+        }
+        
+        /* 手机适配 */
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 18px;
+                margin-top: 70px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 10px;
+            }
+            
+            tbody td {
+                font-size: 13px;
+                padding: 10px;
+            }
+            
+            .home-btn, .nav-btn, .fav-btn {
+                font-size: 12px;
+                padding: 7px 12px;
+            }
+            
+            .copy-box-wrapper {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="247.html" class="nav-btn">↑ 上一页</a>
+        <a href="249.html" class="nav-btn">↓ 下一页</a>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~嗜铬细胞瘤-症状体征检查诊断策略*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~嗜铬细胞瘤-症状体征检查诊断策略*****、嗜铬细胞瘤 - 详细内容、变和其他器官功能障碍</div>
+    <p class="sub-title">急诊疾病 | 内分泌危象 | 肾上腺肿瘤</p>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>嗜铬细胞瘤 - 详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="section-title">变和其他器官功能障碍</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">不常见的症状与体征：</div>
+                        <span class="check-mark">✓</span>直立性低血压、视物模糊、视盘水肿、体重减轻、多尿、烦渴、便秘、ESR增快、胰岛素抵抗、高血糖、精神障碍、心肌病（类似应激性心肌病、肺水肿，并随着β受体阻断药的应用而恶化）及心律失常。<br><br>
+                        <span class="bullet">●</span>体征：阵发性高血压、高血压与低血压交替、高热、心率加快、神志改变、心律失常等。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">4. 必做检查</div>
+                        <span class="bullet">●</span>生化检查：血常规、肝功能、肾全、凝血功能、电解质、血糖、心肌酶等。<br>
+                        <span class="bullet">●</span>内分泌相关检查：血MN、NMN，24小时尿儿茶酚胺。<br>
+                        <span class="bullet">●</span>ECG：合并儿茶酚胺心肌病患者可能出现类似急性冠脉综合征的心电图，应注意鉴别，同时评估有无心律失常。<br>
+                        <span class="bullet">●</span>超声心动图：应完善。<br>
+                        <span class="bullet">●</span>影像学检查：腹部增强CT和超声明确肿块大小及其与周围器官的关系。散发性嗜铬细胞瘤大多直径≥3cm。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">5. 选做检查</div>
+                        <span class="bullet">●</span>间碘苄胍（¹²³I-MIBG）显像：如临床和生化支持，但腹盆CT或MRI阴性，仍怀疑嗜铬细胞瘤，可进行该检查，特异性较高。用于检测CT或MRI不能发现的肿瘤或CT/MRI阳性时检出多发肿瘤。<br>
+                        <span class="bullet">●</span>奥曲肽显像：有助于发现肾上腺外的副神经节瘤。<br>
+                        <span class="bullet">●</span>FDG-PET：检测转移灶敏感性高于MIBG及CT/MRI，但特异性低。<br>
+                        <span class="bullet">●</span>头颅CT：患者可能出现恶性高血压、意识障碍或精神症状，需警惕急性脑血管事件。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">6. 诊断策略</div>
+                        <span class="bullet">●</span>有症状患者的病史、偶然发现肾上腺肿块或有家族性疾病患者的家族史通常可提示嗜铬细胞瘤。<br>
+                        <span class="bullet">●</span>在骤发高血压或持续性高血压阵发性加剧的基础上，伴下列一项或多项症状，可诊断嗜铬细胞瘤危象。<br>
+                        <span class="check-mark">✓</span>发作时有剧烈头痛、呕吐、视力下降且血压＞220/180mmHg。<br>
+                        <span class="check-mark">✓</span>有短暂意识丧失、抽搐、脑出血等明显高血压脑病症状。<br>
+                        <span class="check-mark">✓</span>严重心律失常、心力衰竭、心肌损害等心脏损害。<br>
+                        <span class="check-mark">✓</span>剧烈腹痛、消化道出血、急性溃疡穿孔等消化道急症。<br>
+                        <span class="check-mark">✓</span>高热（体温＞39℃）。<br>
+                        <span class="check-mark">✓</span>出现休克或高血压与低血压反复交替出现。<br>
+                        <span class="bullet">●</span>增强CT和腹部超声发现肾上腺肿物。
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">页码：248</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">关键词</div>
+        <div class="keywords-content">
+            嗜铬细胞瘤；儿茶酚胺；阵发性高血压；直立性低血压；血MN；NMN；24小时尿儿茶酚胺；MIBG显像；奥曲肽显像；FDG-PET；肾上腺肿物；嗜铬细胞瘤危象；高血压危象；β受体阻断药
+        </div>
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">检索标签</div>
+        <div>
+            <span class="tag">嗜铬细胞瘤</span>
+            <span class="tag">高血压</span>
+            <span class="tag">低血压</span>
+            <span class="tag">心律失常</span>
+            <span class="tag">心肌病</span>
+            <span class="tag">肾上腺</span>
+            <span class="tag">肿瘤</span>
+            <span class="tag">CT</span>
+            <span class="tag">MRI</span>
+            <span class="tag">MIBG</span>
+            <span class="tag">FDG-PET</span>
+            <span class="tag">脑出血</span>
+            <span class="tag">心力衰竭</span>
+            <span class="tag">消化道出血</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <div class="copy-title">复制信息</div>
+        <div class="copy-box-wrapper">
+            <input type="text" class="copy-input" id="copyInput" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 设置复制框内容
+        const title = "嗜铬细胞瘤-症状体征检查诊断策略";
+        const subtitle = "急诊疾病 | 内分泌危象 | 肾上腺肿瘤";
+        const keywords = "嗜铬细胞瘤；儿茶酚胺；阵发性高血压；直立性低血压；血MN；NMN；24小时尿儿茶酚胺；MIBG显像；奥曲肽显像；FDG-PET；肾上腺肿物；嗜铬细胞瘤危象；高血压危象；β受体阻断药";
+        const pageNum = "248";
+        document.getElementById('copyInput').value = title + "；" + subtitle + "；" + keywords + "；=" + pageNum;
+        
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                    document.getElementById('copyBtn').classList.add('copied');
+                    document.getElementById('copyBtn').textContent = '已复制';
+                    setTimeout(() => {
+                        document.getElementById('copyBtn').classList.remove('copied');
+                        document.getElementById('copyBtn').textContent = '复制';
+                    }, 2000);
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                showToast('已添加到收藏！');
+                
+                // 保存到localStorage模拟添加到index收藏类目
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '~~~~~嗜铬细胞瘤-症状体征检查诊断策略*****',
+                    url: '248.html',
+                    page: '248'
+                };
+                // 检查是否已存在
+                const exists = favorites.some(f => f.url === '248.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+                showToast('已取消收藏！');
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '248.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '248.html');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
