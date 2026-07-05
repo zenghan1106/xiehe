@@ -1,0 +1,518 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~血友病与获得性血友病临床特点*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            z-index: 100;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 导航按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+        }
+        
+        .nav-btn.next {
+            background: #f0ad4e;
+            box-shadow: 0 2px 8px rgba(240, 173, 78, 0.3);
+        }
+        
+        .nav-btn.next:hover {
+            background: #ec971f;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #d9534f;
+            box-shadow: 0 2px 8px rgba(217, 83, 79, 0.3);
+        }
+        
+        .fav-btn:hover {
+            background: #c9302c;
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 60px 0 25px 0;
+            padding: 0 10px;
+            line-height: 1.4;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            max-width: 100%;
+            overflow-x: auto;
+            margin: 0 auto 25px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 15px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: #2c5aa0;
+            color: white;
+            padding: 14px 10px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            border: 1px solid #1a3a6e;
+        }
+        
+        thead th:first-child {
+            width: 18%;
+        }
+        
+        /* 表格内容 */
+        td {
+            padding: 12px 10px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+        
+        td:first-child {
+            font-weight: bold;
+            color: #2c5aa0;
+            background: #f8fafc;
+            text-align: center;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tr:hover {
+            background: #e8f4f8;
+        }
+        
+        /* 说明文字 */
+        .notes {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 20px;
+            margin: 0 auto 25px;
+            max-width: 100%;
+        }
+        
+        .notes h3 {
+            color: #2c5aa0;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .notes ul {
+            padding-left: 20px;
+        }
+        
+        .notes li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+            color: #444;
+        }
+        
+        /* 急诊处理 */
+        .emergency {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 20px;
+            margin: 0 auto 25px;
+        }
+        
+        .emergency h3 {
+            color: #d9534f;
+            font-size: 17px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .emergency li {
+            margin-bottom: 12px;
+            line-height: 1.7;
+            color: #444;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 20px;
+            margin: 0 auto 25px;
+        }
+        
+        .tags-section h3 {
+            color: #2c5aa0;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        .tag-disease {
+            background: #ffe0e0;
+            color: #c0392b;
+        }
+        
+        .tag-drug {
+            background: #e0f0ff;
+            color: #2980b9;
+        }
+        
+        .tag-bacteria {
+            background: #e8f5e9;
+            color: #27ae60;
+        }
+        
+        /* 关键词和页码 */
+        .footer-info {
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+        
+        .page-num {
+            font-size: 15px;
+            color: #2c5aa0;
+            font-weight: bold;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 20px;
+            margin: 0 auto 25px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            font-family: monospace;
+        }
+        
+        .copy-btn {
+            background: #6c5ce7;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #5b4cdb;
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 6px;
+            }
+            
+            td {
+                padding: 10px 6px;
+                font-size: 13px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="162.html" class="nav-btn">上一页</a>
+        <a href="164.html" class="nav-btn next">下一页</a>
+        <button class="nav-btn fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~血友病与获得性血友病临床特点*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>特点</th>
+                    <th>血友病</th>
+                    <th>血友病合并抑制物</th>
+                    <th>获得性血友病</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>病因</td>
+                    <td>先天凝血因子缺乏</td>
+                    <td>先天凝血因子缺乏的基础上因输注因子制剂产生相应因子抑制物</td>
+                    <td>后天针对凝血因子的特异性抗体</td>
+                </tr>
+                <tr>
+                    <td>家族史</td>
+                    <td>有</td>
+                    <td>有</td>
+                    <td>无</td>
+                </tr>
+                <tr>
+                    <td>既往出血史</td>
+                    <td>有</td>
+                    <td>有</td>
+                    <td>可无</td>
+                </tr>
+                <tr>
+                    <td>出血表现</td>
+                    <td>关节和内脏出血为主</td>
+                    <td>出血表现同血友病，但输注因子制剂止血效果不佳</td>
+                    <td>皮肤/皮下组织、肌肉或软组织出血多见，出血表现重</td>
+                </tr>
+                <tr>
+                    <td>正浆纠正试验</td>
+                    <td>PT或APTT（即刻+2小时）可以被纠正</td>
+                    <td>PT或APTT即刻可以纠正，孵育2小时不纠正</td>
+                    <td>PT或APTT即刻可以纠正，孵育2小时不能纠正</td>
+                </tr>
+                <tr>
+                    <td>因子水平</td>
+                    <td>↓↓</td>
+                    <td>↓↓</td>
+                    <td>↓↓</td>
+                </tr>
+                <tr>
+                    <td>抑制物水平</td>
+                    <td>—</td>
+                    <td>↑↑</td>
+                    <td>↑↑，但与因子水平下降不完全匹配</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 说明注释 -->
+    <div class="notes">
+        <h3>📋 检测说明</h3>
+        <ul>
+            <li><strong>正浆纠正试验：</strong>若PT或APTT延长，则进行混合血浆PT或APTT纠正试验；若试验显示APTT（即刻+2小时）可被纠正，则符合某一凝血因子缺乏，而非存在凝血因子抑制物，再测量凝血因子活性水平。</li>
+            <li><strong>凝血因子水平检测：</strong>按照血液科专科会诊进行对应凝血因子水平检测。</li>
+            <li><strong>凝血因子抑制物水平测定：</strong>正浆纠正试验2小时较即刻明显延长，疑有抑制物时检测。</li>
+        </ul>
+    </div>
+    
+    <!-- 急诊处理 -->
+    <div class="emergency">
+        <h3>🏥 急诊处理</h3>
+        <ul>
+            <li>血友病急性出血治疗的短期目标：提高凝血因子活性，达到止血目的。凝血因子的目标活性水平取决于出血部位和严重程度，以及有无相关损伤或是否发生于目标关节。</li>
+            <li>获得性血友病出血治疗的目标：提高凝血因子水平和消除抑制物，治疗目标取决于抑制物水平和出血严重程度。</li>
+            <li>若不能确定出血的严重程度，最好按严重出血治疗（即"怀疑就治疗"）。有什么输什么，没有优选的特定凝血因子则选择次选的凝血酶原复合物或血浆。对于有抑制物或输注凝血因子无法控制出血的患者，其他止血疗法见下文（血友病有抑制物或获得性血友病）。</li>
+        </ul>
+    </div>
+    
+    <!-- 标签 -->
+    <div class="tags-section">
+        <h3>🏷️ 标签检索</h3>
+        <div class="tags">
+            <span class="tag tag-disease">血友病</span>
+            <span class="tag tag-disease">获得性血友病</span>
+            <span class="tag tag-disease">血友病合并抑制物</span>
+            <span class="tag tag-disease">出血</span>
+            <span class="tag tag-disease">关节出血</span>
+            <span class="tag tag-disease">内脏出血</span>
+            <span class="tag tag-disease">肌肉出血</span>
+            <span class="tag tag-disease">皮下出血</span>
+            <span class="tag tag-disease">凝血因子缺乏</span>
+            <span class="tag tag-disease">抑制物</span>
+            <span class="tag tag-disease">PT延长</span>
+            <span class="tag tag-disease">APTT延长</span>
+            <span class="tag tag-drug">凝血因子制剂</span>
+            <span class="tag tag-drug">凝血酶原复合物</span>
+            <span class="tag tag-drug">血浆</span>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="footer-info">
+        <p class="page-num">页码：163</p>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="血友病与获得性血友病临床特点；血友病、获得性血友病、血友病合并抑制物、凝血因子、抑制物、PT、APTT、出血治疗、急诊处理；=163" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="footer-info" style="margin-bottom: 30px;">
+        <p>关键词：血友病 | 获得性血友病 | 血友病合并抑制物 | 凝血因子 | 抑制物 | PT | APTT | 正浆纠正试验 | 出血治疗 | 急诊处理</p>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(() => {
+                    alert("已复制到剪贴板！");
+                });
+            } else {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            }
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            // 获取当前页面信息
+            const title = document.title.replace(/~~~~~|*****/g, '');
+            const url = window.location.href;
+            
+            // 尝试使用本地存储模拟收藏功能
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            // 添加到收藏
+            favorites.push({
+                title: title,
+                url: url,
+                date: new Date().toLocaleString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试打开index.html并添加（简化实现）
+            alert('已添加到收藏！\n标题：' + title + '\n请手动在index.html中查看收藏列表。');
+        }
+    </script>
+</body>
+</html>
