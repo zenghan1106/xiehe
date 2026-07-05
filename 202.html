@@ -1,0 +1,380 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~流行性脑脊髓膜炎临床表现与诊治要点*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-home {
+            background-color: #4a90d9;
+            color: white;
+        }
+        
+        .btn-nav {
+            background-color: #5a9bd5;
+            color: white;
+        }
+        
+        .btn-favorite {
+            background-color: #e8b339;
+            color: #333;
+            font-size: 13px;
+            padding: 8px 14px;
+        }
+        
+        .btn-copy {
+            background-color: #4caf50;
+            color: white;
+            padding: 12px 20px;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .btn:hover {
+            opacity: 0.85;
+            transform: translateY(-1px);
+        }
+        
+        /* 标题样式 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            color: #1a5276;
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #d6eaf8;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        
+        /* 表格样式 */
+        .content-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        .content-table thead tr {
+            background-color: #2e75b6;
+            color: white;
+        }
+        
+        .content-table thead th {
+            padding: 16px 12px;
+            font-size: 18px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        .content-table tbody td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 15px;
+            vertical-align: top;
+        }
+        
+        .content-table tbody tr:hover {
+            background-color: #f8fbff;
+        }
+        
+        .content-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        /* 内容中的标题样式 */
+        .section-title {
+            color: #1a5276;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+        
+        .check-item {
+            color: #27ae60;
+        }
+        
+        .diamond-item {
+            color: #555;
+            padding-left: 20px;
+        }
+        
+        .bullet-item {
+            color: #333;
+            margin: 4px 0;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1a5276;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background-color: #e8f4f8;
+            color: #2e75b6;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid #b8d4e8;
+        }
+        
+        /* 底部编辑框区域 */
+        .bottom-section {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .copy-area {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+            margin-bottom: 12px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 14px;
+            border: 2px solid #c5e0f7;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+            background-color: #f8fbff;
+        }
+        
+        .page-info {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            padding: 10px;
+        }
+        
+        /* 关键词 */
+        .keywords-section {
+            text-align: center;
+            padding: 15px;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        .keywords-title {
+            color: #1a5276;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="201.html" class="btn btn-nav">上一页</a>
+            <a href="203.html" class="btn btn-nav">下一页</a>
+            <button class="btn btn-favorite" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="main-title">~~~~~流行性脑脊髓膜炎临床表现与诊治要点*****</div>
+    
+    <!-- 主内容表格 -->
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th>流行性脑脊髓膜炎 - 败血症期、脑膜炎期、恢复期及临床特征</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="check-item">✓ 败血症期</div>
+                    <div class="diamond-item">◇ 突发或前驱期后突然寒战、高热，伴头痛、肌肉酸痛、食欲减退及精神萎缩等毒血症症状。</div>
+                    <div class="diamond-item">◇ 特征性表现是皮疹，通常为皮肤或黏膜瘀点或瘀斑，见于70%～90%患者，直径1～2cm，开始为鲜红色，后为紫红色，最早见于结膜和口腔黏膜，大小不一，多少不等，分布不均，以肩、肘、臀等易受压处多见，色泽鲜红，后变为紫红。严重者瘀斑迅速扩大，其中央因血栓形成而出现紫黑色坏死或形成大疱，如坏死累及皮下组织可留瘢痕。</div>
+                    <div class="diamond-item">◇ 多数患者12～24小时发展致脑膜炎期。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="check-item">✓ 脑膜炎期</div>
+                    <div class="diamond-item">◇ 脑膜炎症状多与败血症期症状同时出现。在前驱期症状基础上出现剧烈头痛、频繁呕吐、狂躁及脑膜刺激征，血压可升高而脉搏减慢，重者谵妄、意识障碍及抽搐。</div>
+                    <div class="diamond-item">◇ 通常在2～5天后进入恢复期。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="check-item">✓ 恢复期</div>
+                    <div class="diamond-item">◇ 经治疗后体温逐渐降至正常，皮肤瘀点、瘀斑消失。大瘀斑中央坏死部位形成溃疡，后结痂而愈，症状逐渐好转，神经系统检查正常。</div>
+                    <div class="diamond-item">◇ 约10%患者出现口唇疱疹。</div>
+                    <div class="diamond-item">◇ 一般在1～3周内痊愈。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="bullet-item">• 典型初始表现包括平素体健的患者突然出现发热、恶心、呕吐、头痛、注意力下降和肌痛。</div>
+                    <div class="bullet-item">• 咽炎（非化脓性）作为前驱症状可导致在初期被误诊为链球菌性咽炎。但患者在就诊时可能表现为或快速发展为程度过于严重的疾病，有助于与链球菌性咽炎鉴别。</div>
+                    <div class="bullet-item">• 临床表现范围很广，需要对该病保持高度怀疑，并仔细寻找疾病线索，特别是在未发生流行性疾病的情况下。</div>
+                    <div class="bullet-item">• 尽管患者初始临床特征与许多常见的自限性病毒感染疾病类似，但根据早期脓毒症的征象可区别出需要临床监测的患者。</div>
+                    <div class="bullet-item">• 部分患者可出现休克、DIC及暴发性紫癜。</div>
+                    <div class="bullet-item">• 可有免疫复合物相关的并发症，如关节炎（未检出微生物）、胸膜炎、血管炎和心包炎。</div>
+                    <div class="bullet-item">• 生命体征常显示为血压降低和脉搏加快。应加强搜寻瘀点和瘀斑。查体还应包括针对脑膜易激惹的激发试验，如克氏征和布氏征。缺乏脑膜炎体征并不能排除全身性脑膜炎球菌感染的诊断。</div>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: center; color: #888; font-size: 13px;">
+                    页码：190
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag">流行性脑脊髓膜炎</span>
+            <span class="tag">流脑</span>
+            <span class="tag">败血症</span>
+            <span class="tag">脑膜炎</span>
+            <span class="tag">DIC</span>
+            <span class="tag">暴发性紫癜</span>
+            <span class="tag">脑膜炎球菌</span>
+            <span class="tag">链球菌</span>
+        </div>
+    </div>
+    
+    <!-- 复制编辑框区域 -->
+    <div class="bottom-section">
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyText" value="流行性脑脊髓膜炎临床表现与诊治要点；败血症期、脑膜炎期、恢复期、临床特征；流行性脑脊髓膜炎、流脑、败血症、脑膜炎、DIC、暴发性紫癜、脑膜炎球菌、链球菌；=202" readonly>
+            <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 页码信息 -->
+    <div class="page-info">
+        页码：202
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">关键词</div>
+        <div>流行性脑脊髓膜炎 | 流脑 | 败血症期 | 脑膜炎期 | 恢复期 | 瘀点 | 瘀斑 | 脑膜刺激征 | DIC | 暴发性紫癜 | 脑膜炎球菌 | 链球菌 | 克氏征 | 布氏征 | 脓毒症</div>
+    </div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(function() {
+                    alert("已复制到剪贴板！");
+                });
+            } else {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            }
+        }
+        
+        // 添加到收藏
+        function addToFavorites() {
+            const title = "流行性脑脊髓膜炎临床表现与诊治要点";
+            const url = window.location.href;
+            const pageNum = "202";
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert("该页面已在收藏夹中！");
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                pageNum: pageNum,
+                category: "传染病诊疗"
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert("已添加到收藏！\n标题：" + title + "\n页码：" + pageNum);
+        }
+    </script>
+<div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~流行性脑脊髓膜炎临床表现与诊治要点*****、流行性脑脊髓膜炎 - 败血症期、脑膜炎期、恢复期及临床特征、页码：190</div></body>
+</html>
