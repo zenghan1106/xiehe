@@ -1,0 +1,618 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中暑分类与热射病详解</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #e6f3ff 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 导航按钮组 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn.next {
+            background: #f0ad4e;
+            box-shadow: 0 2px 8px rgba(240, 173, 78, 0.3);
+        }
+        
+        .nav-btn.next:hover {
+            background: #ec971f;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #d9534f;
+            box-shadow: 0 2px 8px rgba(217, 83, 79, 0.3);
+        }
+        
+        .fav-btn:hover {
+            background: #c9302c;
+        }
+        
+        .fav-btn.active {
+            background: #5cb85c;
+        }
+        
+        /* 标题样式 */
+        .page-title {
+            text-align: center;
+            margin: 60px 0 25px 0;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c5282;
+        }
+        
+        .page-title::before {
+            content: "~~~~~";
+            color: #4a90d9;
+            margin-right: 10px;
+        }
+        
+        .page-title::after {
+            content: "*****";
+            color: #4a90d9;
+            margin-left: 10px;
+        }
+        
+        /* 表格样式 */
+        .content-table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .content-table thead tr {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+        }
+        
+        .content-table thead th {
+            padding: 18px 15px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+            border: none;
+        }
+        
+        .content-table tbody td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #e8f0fe;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #444;
+            vertical-align: top;
+        }
+        
+        .content-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .content-table tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        .content-table tbody tr:hover {
+            background: #e8f4ff;
+        }
+        
+        /* 层级缩进样式 */
+        .level-1 {
+            font-weight: bold;
+            color: #2c5282;
+        }
+        
+        .level-2 {
+            padding-left: 20px !important;
+            color: #357abd;
+        }
+        
+        .level-3 {
+            padding-left: 40px !important;
+            color: #555;
+        }
+        
+        .level-4 {
+            padding-left: 60px !important;
+            color: #666;
+        }
+        
+        .bullet::before {
+            content: "● ";
+            color: #4a90d9;
+            font-weight: bold;
+        }
+        
+        .check::before {
+            content: "✓ ";
+            color: #5cb85c;
+            font-weight: bold;
+        }
+        
+        .diamond::before {
+            content: "◇ ";
+            color: #f0ad4e;
+        }
+        
+        .square::before {
+            content: "□ ";
+            color: #d9534f;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            max-width: 800px;
+            margin: 0 auto 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c5282;
+            margin-bottom: 15px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .tag-disease {
+            background: #ffe0e0;
+            color: #c9302c;
+            border-color: #f5c6cb;
+        }
+        
+        .tag-disease:hover {
+            background: #f5c6cb;
+        }
+        
+        .tag-bacteria {
+            background: #e0f7fa;
+            color: #00838f;
+            border-color: #b2ebf2;
+        }
+        
+        .tag-bacteria:hover {
+            background: #b2ebf2;
+        }
+        
+        .tag-drug {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-color: #c8e6c9;
+        }
+        
+        .tag-drug:hover {
+            background: #c8e6c9;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            max-width: 800px;
+            margin: 0 auto 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .keywords-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c5282;
+            margin-bottom: 15px;
+        }
+        
+        .keywords-content {
+            font-size: 14px;
+            color: #666;
+            line-height: 2;
+        }
+        
+        .keyword {
+            display: inline-block;
+            background: #f0f4ff;
+            padding: 4px 12px;
+            border-radius: 6px;
+            margin: 3px;
+            color: #4a90d9;
+        }
+        
+        /* 页码显示 */
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 25px;
+        }
+        
+        .page-number span {
+            background: #4a90d9;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-weight: bold;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #555;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .copy-input:focus {
+            border-color: #4a90d9;
+        }
+        
+        .copy-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #357abd;
+        }
+        
+        .copy-btn.copied {
+            background: #5cb85c;
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            display: none;
+            z-index: 200;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .page-title {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            
+            .content-table thead th {
+                font-size: 16px;
+                padding: 14px 12px;
+            }
+            
+            .content-table tbody td {
+                font-size: 14px;
+                padding: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <button class="home-btn" onclick="location.href='index.html'">← 返回首页</button>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="302.html" class="nav-btn">上一页</a>
+        <a href="304.html" class="nav-btn next">下一页</a>
+        <button class="nav-btn fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">中暑分类与热射病详解</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：中暑分类与热射病详解、根据病情严重程度，分为3种类型、重症中暑：可分为热痉挛、热衰竭和热射病。、2. 危险因素</div>
+    
+    <!-- 主表格 -->
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th>中暑分类与热射病详解</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="level-1 bullet">根据病情严重程度，分为3种类型</td>
+            </tr>
+            <tr>
+                <td class="level-2 check">先兆中暑：暴露于高温环境时，出现大汗、四肢无力、头晕、口渴、头痛、注意力不集中、眼花、耳鸣、动作不协调等，伴或不伴体温升高。若脱离高温环境，及时通风降温补充冷盐水，短时间内即可缓解。</td>
+            </tr>
+            <tr>
+                <td class="level-2 check">轻症中暑：先兆中暑症状继续加重，体温上升到38℃以上，且出现皮肤灼热、面色潮红或脱水等症状。若脱离高温环境，及时通风降温补充冷盐水，数小时内可缓解。</td>
+            </tr>
+            <tr>
+                <td class="level-2 check">重症中暑：可分为热痉挛、热衰竭和热射病。</td>
+            </tr>
+            <tr>
+                <td class="level-3 diamond">热痉挛：指在劳力中或劳力后发生短暂性、间歇性肌肉痉挛，可能与钠盐丢失有关。</td>
+            </tr>
+            <tr>
+                <td class="level-3 diamond">热衰竭：指热应激时液体丢失所致以有效血容量不足为特征的临床综合征。</td>
+            </tr>
+            <tr>
+                <td class="level-3 diamond">热射病：指暴露于热环境和/或剧烈运动所致机体产热与散热失衡，以核心温度升高（>40℃）和中枢神经系统异常为特征，如精神状态改变、抽搐或昏迷，伴多器官损害的危及生命的临床综合征。</td>
+            </tr>
+            <tr>
+                <td class="level-3 diamond">热痉挛、热衰竭均是热损伤因素作用于机体引起的特定器官或系统的受损表现，可单独或合并存在，过于纠结它们之间的概念区分意义不大，本书不再强调上述概念，主要阐述热射病。</td>
+            </tr>
+            <tr>
+                <td class="level-3 diamond">根据发病原因和易感人群的不同，热射病分为经典型热射病（CHS）和劳力型热射病（EHS）。</td>
+            </tr>
+            <tr>
+                <td class="level-4 square">CHS：主要由于被动暴露于热环境引起机体产热与散热失衡而发病。CHS常见于年幼者、孕妇和年老体衰者，以及有慢性基础疾病或免疫功能受损的个体。</td>
+            </tr>
+            <tr>
+                <td class="level-4 square">EHS：主要由于高强度体力活动引起机体产热与散热失衡而发病。EHS常见于夏季剧烈运动的健康青年人，如在夏季参训的官兵、运动员、消防员、建筑工人等。尽管EHS在高温高湿环境中更易发生，但环境条件并非必需。</td>
+            </tr>
+            <tr>
+                <td class="level-1 bullet">2. 危险因素</td>
+            </tr>
+            <tr>
+                <td class="level-2 bullet">高温高湿的气候因素和高强度体力活动是导致热射病最主要的危险因素。</td>
+            </tr>
+            <tr>
+                <td class="level-2 bullet">CHS主要由高温和/或高湿环境因素引起，通常没有剧烈的体力活动；EHS的易感因素差异较大。</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">中暑</span>
+            <span class="tag tag-disease">先兆中暑</span>
+            <span class="tag tag-disease">轻症中暑</span>
+            <span class="tag tag-disease">重症中暑</span>
+            <span class="tag tag-disease">热痉挛</span>
+            <span class="tag tag-disease">热衰竭</span>
+            <span class="tag tag-disease">热射病</span>
+            <span class="tag tag-disease">经典型热射病</span>
+            <span class="tag tag-disease">CHS</span>
+            <span class="tag tag-disease">劳力型热射病</span>
+            <span class="tag tag-disease">EHS</span>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">
+        页码：<span>303</span>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">🔑 关键词</div>
+        <div class="keywords-content">
+            <span class="keyword">中暑</span>
+            <span class="keyword">热射病</span>
+            <span class="keyword">CHS</span>
+            <span class="keyword">EHS</span>
+            <span class="keyword">热痉挛</span>
+            <span class="keyword">热衰竭</span>
+            <span class="keyword">高温</span>
+            <span class="keyword">高湿</span>
+            <span class="keyword">核心温度</span>
+            <span class="keyword">散热失衡</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyContent()">复制</button>
+    </div>
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 初始化复制输入框内容
+        const title = "中暑分类与热射病详解";
+        const subtitle = "重症中暑经典型热射病与劳力型热射病";
+        const keywords = "中暑;热射病;CHS;EHS;热痉挛;热衰竭;高温;高湿;核心温度;散热失衡";
+        const pageNum = "303";
+        
+        document.getElementById('copyInput').value = `${title};${subtitle};${keywords};=${pageNum}`;
+        
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            document.execCommand('copy');
+            
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '已复制';
+            btn.classList.add('copied');
+            
+            showToast('复制成功！');
+            
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 提示功能
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 收藏功能
+        let isFavorited = false;
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            isFavorited = !isFavorited;
+            
+            if (isFavorited) {
+                btn.innerHTML = '★ 已收藏';
+                btn.classList.add('active');
+                showToast('已添加到收藏！');
+                
+                // 保存到localStorage，用于index页面读取
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const currentPage = {
+                    title: '~~~~~中暑分类与热射病详解*****',
+                    url: '303.html',
+                    pageNum: '303'
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.url === currentPage.url);
+                if (!exists) {
+                    favorites.push(currentPage);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            } else {
+                btn.innerHTML = '☆ 收藏';
+                btn.classList.remove('active');
+                showToast('已取消收藏！');
+                
+                // 从localStorage移除
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const filtered = favorites.filter(f => f.url !== '303.html');
+                localStorage.setItem('favorites', JSON.stringify(filtered));
+            }
+        }
+        
+        // 页面加载时检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '303.html');
+            if (isFav) {
+                isFavorited = true;
+                const btn = document.getElementById('favBtn');
+                btn.innerHTML = '★ 已收藏';
+                btn.classList.add('active');
+            }
+        };
+    </script>
+</body>
+</html>
