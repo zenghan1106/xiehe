@@ -1,0 +1,645 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急性中毒-循环血液泌尿及慢性中毒诊断策略*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5ee 100%);
+            min-height: 100vh;
+            padding: 10px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 10px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 右上角按钮组 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+        }
+        .nav-btns a, .nav-btns button {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(92,184,92,0.3);
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .nav-btns a:hover, .nav-btns button:hover {
+            background: #4cae4c;
+            transform: translateY(-2px);
+        }
+        .nav-btns .prev-btn {
+            background: #f0ad4e;
+            box-shadow: 0 2px 8px rgba(240,173,78,0.3);
+        }
+        .nav-btns .prev-btn:hover {
+            background: #ec971f;
+        }
+        .nav-btns .next-btn {
+            background: #5bc0de;
+            box-shadow: 0 2px 8px rgba(91,192,222,0.3);
+        }
+        .nav-btns .next-btn:hover {
+            background: #46b8da;
+        }
+        .nav-btns .fav-btn {
+            background: #d9534f;
+            box-shadow: 0 2px 8px rgba(217,83,79,0.3);
+        }
+        .nav-btns .fav-btn:hover {
+            background: #c9302c;
+        }
+        .nav-btns .fav-btn.faved {
+            background: #5cb85c;
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            padding: 70px 10px 20px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c3e50;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            max-width: 100%;
+            overflow-x: auto;
+            margin: 0 auto 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        
+        /* 表格头部 - 蓝色 */
+        thead tr {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+        }
+        thead th {
+            padding: 15px 12px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+            border-bottom: 3px solid #2a6db5;
+        }
+        
+        /* 表格内容 */
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+        }
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        tbody tr:hover {
+            background: #f0f7ff;
+        }
+        
+        /* 层级缩进样式 */
+        .level-1 {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 15px;
+        }
+        .level-2 {
+            padding-left: 20px;
+            color: #34495e;
+        }
+        .level-3 {
+            padding-left: 40px;
+            color: #555;
+            font-size: 13px;
+        }
+        .level-4 {
+            padding-left: 60px;
+            color: #666;
+            font-size: 13px;
+        }
+        .level-5 {
+            padding-left: 80px;
+            color: #777;
+            font-size: 13px;
+        }
+        
+        /* 标记符号颜色 */
+        .bullet {
+            color: #e74c3c;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        .check {
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        .diamond {
+            color: #3498db;
+            margin-right: 5px;
+        }
+        .square {
+            color: #9b59b6;
+            margin-right: 5px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 20px 10px;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .tag-disease {
+            background: #ffe0e0;
+            color: #c0392b;
+            border: 1px solid #f5b7b1;
+        }
+        .tag-disease:hover {
+            background: #f5b7b1;
+            transform: scale(1.05);
+        }
+        .tag-drug {
+            background: #e0f7fa;
+            color: #00838f;
+            border: 1px solid #80deea;
+        }
+        .tag-drug:hover {
+            background: #80deea;
+            transform: scale(1.05);
+        }
+        .tag-bacteria {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        .tag-bacteria:hover {
+            background: #a5d6a7;
+            transform: scale(1.05);
+        }
+        
+        /* 关键词和页码区域 */
+        .bottom-section {
+            margin: 20px 10px;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        .keywords {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 2;
+        }
+        .keywords span {
+            display: inline-block;
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 4px 12px;
+            margin: 3px;
+            border-radius: 15px;
+            font-size: 13px;
+        }
+        .page-number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #4a90d9;
+            margin-top: 10px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            margin: 20px 10px;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: border 0.3s;
+        }
+        .copy-input:focus {
+            border-color: #4a90d9;
+        }
+        .copy-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        .copy-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        .copy-btn.copied {
+            background: #5cb85c;
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 2000;
+        }
+        .toast.show {
+            opacity: 1;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .page-title {
+                font-size: 18px;
+                padding-top: 80px;
+            }
+            thead th {
+                font-size: 16px;
+                padding: 12px 8px;
+            }
+            tbody td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            .nav-btns a, .nav-btns button {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            .home-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+
+    <!-- 右上角导航 -->
+    <div class="nav-btns">
+        <a href="283.html" class="prev-btn">← 上一页</a>
+        <a href="285.html" class="next-btn">下一页 →</a>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+    </div>
+
+    <!-- 标题 -->
+    <div class="page-title">~~~~~急性中毒-循环血液泌尿及慢性中毒诊断策略*****</div>
+
+    <!-- 表格 -->
+    <div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~急性中毒-循环血液泌尿及慢性中毒诊断策略*****、急性中毒 - 循环系统、泌尿系统、血液系统表现及慢性中毒、诊断策略、循环系统表现、心搏骤停、血液系统表现、氯霉素、抗肿瘤药或苯等中毒引起白细胞减少。、发热：见于阿托品、二硝基酚或棉酚等中毒。、慢性中毒、泌尿系统表现：镉、汞或铅中毒引起中毒性肾损害。、3. 诊断策略</div><div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>急性中毒 - 循环系统、泌尿系统、血液系统表现及慢性中毒、诊断策略</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>循环系统表现</td>
+                </tr>
+                <tr>
+                    <td class="level-4"><span class="diamond">◇</span>心律失常：洋地黄、夹竹桃、蟾蜍毒素中毒兴奋迷走神经，拟肾上腺素药、三环类抗抑郁药中毒兴奋交感神经，氨茶碱中毒所致心律失常的机制多样。</td>
+                </tr>
+                <tr>
+                    <td class="level-4"><span class="diamond">◇</span>心搏骤停</td>
+                </tr>
+                <tr>
+                    <td class="level-5"><span class="square">□</span>心肌毒性作用：见于洋地黄、奎尼丁、锑剂或依米丁（吐根碱）等中毒。</td>
+                </tr>
+                <tr>
+                    <td class="level-5"><span class="square">□</span>缺氧：见于一氧化碳、硫化氢、氰化物、苯胺、亚硝酸盐等中毒。</td>
+                </tr>
+                <tr>
+                    <td class="level-5"><span class="square">□</span>严重低钾血症：见于可溶性钡盐、棉酚或降钾药物中毒。</td>
+                </tr>
+                <tr>
+                    <td class="level-4"><span class="diamond">◇</span>休克：强酸和强碱引起严重灼伤致血浆渗出，三氧化二砷中毒引起剧烈呕吐和腹泻，麻醉药过量、严重巴比妥类药物中毒抑制血管中枢导致外周血管扩张。以上因素都可通过不同途径引起循环血容量绝对或相对减少，发生休克。</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>泌尿系统表现：中毒后肾损害、肾缺血或肾小管坏死导致急性肾衰竭，出现少尿或无尿。</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>血液系统表现</td>
+                </tr>
+                <tr>
+                    <td class="level-4"><span class="diamond">◇</span>砷化氢中毒、苯胺或硝基苯等中毒引起溶血性贫血和黄疸。</td>
+                </tr>
+                <tr>
+                    <td class="level-4"><span class="diamond">◇</span>水杨酸类、肝素或双香豆素、敌鼠钠盐、溴敌隆和蛇毒咬伤中毒引起出凝血功能障碍导致出血。</td>
+                </tr>
+                <tr>
+                    <td class="level-4"><span class="diamond">◇</span>氯霉素、抗肿瘤药或苯等中毒引起白细胞减少。</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>发热：见于阿托品、二硝基酚或棉酚等中毒。</td>
+                </tr>
+                <tr>
+                    <td class="level-2"><span class="bullet">●</span>慢性中毒</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>神经系统表现：痴呆（见于四乙铅或一氧化碳等中毒）、帕金森病（见于一氧化碳、吩噻嗪或锰等中毒）、周围神经病（见于铅、砷或OPI中毒）。</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>消化系统表现：砷、四氯化碳、三硝基甲苯或氯乙烯中毒引起中毒性肝病。</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>泌尿系统表现：镉、汞或铅中毒引起中毒性肾损害。</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>血液系统表现：苯、三硝基甲苯可引起白细胞减少或再生障碍性贫血。</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>骨骼系统：氟中毒可引起氟骨症；黄磷中毒可引起下颌骨坏死。</td>
+                </tr>
+                <tr>
+                    <td class="level-1">3. 诊断策略</td>
+                </tr>
+                <tr>
+                    <td class="level-2">由病史（毒物接触史、既往史）、临床表现及毒物检测结果综合判断。</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div>
+            <span class="tag tag-disease">心律失常</span>
+            <span class="tag tag-disease">心搏骤停</span>
+            <span class="tag tag-disease">休克</span>
+            <span class="tag tag-disease">急性肾衰竭</span>
+            <span class="tag tag-disease">少尿</span>
+            <span class="tag tag-disease">无尿</span>
+            <span class="tag tag-disease">溶血性贫血</span>
+            <span class="tag tag-disease">黄疸</span>
+            <span class="tag tag-disease">白细胞减少</span>
+            <span class="tag tag-disease">发热</span>
+            <span class="tag tag-disease">痴呆</span>
+            <span class="tag tag-disease">帕金森病</span>
+            <span class="tag tag-disease">周围神经病</span>
+            <span class="tag tag-disease">中毒性肝病</span>
+            <span class="tag tag-disease">中毒性肾损害</span>
+            <span class="tag tag-disease">再生障碍性贫血</span>
+            <span class="tag tag-disease">氟骨症</span>
+            <span class="tag tag-disease">下颌骨坏死</span>
+            <span class="tag tag-drug">洋地黄</span>
+            <span class="tag tag-drug">夹竹桃</span>
+            <span class="tag tag-drug">蟾蜍毒素</span>
+            <span class="tag tag-drug">拟肾上腺素药</span>
+            <span class="tag tag-drug">三环类抗抑郁药</span>
+            <span class="tag tag-drug">氨茶碱</span>
+            <span class="tag tag-drug">奎尼丁</span>
+            <span class="tag tag-drug">锑剂</span>
+            <span class="tag tag-drug">依米丁</span>
+            <span class="tag tag-drug">吐根碱</span>
+            <span class="tag tag-drug">一氧化碳</span>
+            <span class="tag tag-drug">硫化氢</span>
+            <span class="tag tag-drug">氰化物</span>
+            <span class="tag tag-drug">苯胺</span>
+            <span class="tag tag-drug">亚硝酸盐</span>
+            <span class="tag tag-drug">可溶性钡盐</span>
+            <span class="tag tag-drug">棉酚</span>
+            <span class="tag tag-drug">降钾药物</span>
+            <span class="tag tag-drug">强酸</span>
+            <span class="tag tag-drug">强碱</span>
+            <span class="tag tag-drug">三氧化二砷</span>
+            <span class="tag tag-drug">麻醉药</span>
+            <span class="tag tag-drug">巴比妥类</span>
+            <span class="tag tag-drug">阿托品</span>
+            <span class="tag tag-drug">二硝基酚</span>
+            <span class="tag tag-drug">砷化氢</span>
+            <span class="tag tag-drug">硝基苯</span>
+            <span class="tag tag-drug">水杨酸类</span>
+            <span class="tag tag-drug">肝素</span>
+            <span class="tag tag-drug">双香豆素</span>
+            <span class="tag tag-drug">敌鼠钠盐</span>
+            <span class="tag tag-drug">溴敌隆</span>
+            <span class="tag tag-drug">蛇毒</span>
+            <span class="tag tag-drug">氯霉素</span>
+            <span class="tag tag-drug">抗肿瘤药</span>
+            <span class="tag tag-drug">苯</span>
+            <span class="tag tag-drug">四乙铅</span>
+            <span class="tag tag-drug">吩噻嗪</span>
+            <span class="tag tag-drug">锰</span>
+            <span class="tag tag-drug">铅</span>
+            <span class="tag tag-drug">砷</span>
+            <span class="tag tag-drug">OPI</span>
+            <span class="tag tag-drug">四氯化碳</span>
+            <span class="tag tag-drug">三硝基甲苯</span>
+            <span class="tag tag-drug">氯乙烯</span>
+            <span class="tag tag-drug">镉</span>
+            <span class="tag tag-drug">汞</span>
+            <span class="tag tag-drug">氟</span>
+            <span class="tag tag-drug">黄磷</span>
+        </div>
+    </div>
+
+    <!-- 关键词和页码 -->
+    <div class="bottom-section">
+        <div class="keywords">
+            <span>急性中毒</span>
+            <span>中毒</span>
+            <span>慢性中毒</span>
+            <span>循环系统表现</span>
+            <span>心律失常</span>
+            <span>心搏骤停</span>
+            <span>休克</span>
+            <span>泌尿系统表现</span>
+            <span>急性肾衰竭</span>
+            <span>血液系统表现</span>
+            <span>溶血性贫血</span>
+            <span>白细胞减少</span>
+            <span>发热</span>
+            <span>诊断策略</span>
+            <span>洋地黄</span>
+            <span>一氧化碳</span>
+            <span>氰化物</span>
+            <span>砷</span>
+            <span>铅</span>
+            <span>汞</span>
+            <span>苯</span>
+            <span>OPI</span>
+            <span>巴比妥类</span>
+            <span>阿托品</span>
+            <span>氯霉素</span>
+        </div>
+        <div class="page-number">284</div>
+    </div>
+
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="急性中毒-循环血液泌尿及慢性中毒诊断策略；急性中毒、中毒、慢性中毒、循环系统表现、心律失常、心搏骤停、休克、泌尿系统表现、急性肾衰竭、血液系统表现、溶血性贫血、白细胞减少、发热、诊断策略、洋地黄、一氧化碳、氰化物、砷、铅、汞、苯、OPI、巴比妥类、阿托品、氯霉素=284" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+    </div>
+
+    <!-- 提示 -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                    document.getElementById('copyBtn').classList.add('copied');
+                    document.getElementById('copyBtn').textContent = '已复制';
+                    setTimeout(() => {
+                        document.getElementById('copyBtn').classList.remove('copied');
+                        document.getElementById('copyBtn').textContent = '复制';
+                    }, 2000);
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 提示消息
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+        
+        // 收藏功能 (使用localStorage)
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const pageInfo = {
+                title: '急性中毒-循环血液泌尿及慢性中毒诊断策略',
+                url: '284.html',
+                pageNum: '284'
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const idx = favorites.findIndex(f => f.url === '284.html');
+            
+            if (idx === -1) {
+                favorites.push(pageInfo);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                btn.classList.add('faved');
+                btn.textContent = '★ 已收藏';
+                showToast('已添加到收藏！');
+            } else {
+                favorites.splice(idx, 1);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                btn.classList.remove('faved');
+                btn.textContent = '☆ 收藏';
+                showToast('已取消收藏！');
+            }
+        }
+        
+        // 初始化收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const btn = document.getElementById('favBtn');
+            if (favorites.find(f => f.url === '284.html')) {
+                btn.classList.add('faved');
+                btn.textContent = '★ 已收藏';
+            }
+        };
+    </script>
+
+</body>
+</html>
