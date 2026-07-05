@@ -1,0 +1,465 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~严重出血时凝血因子用法用量*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            z-index: 100;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 导航按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+        }
+        
+        .nav-btn.next {
+            background: #f0ad4e;
+            box-shadow: 0 2px 8px rgba(240, 173, 78, 0.3);
+        }
+        
+        .nav-btn.next:hover {
+            background: #ec971f;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #d9534f;
+            box-shadow: 0 2px 8px rgba(217, 83, 79, 0.3);
+        }
+        
+        .fav-btn:hover {
+            background: #c9302c;
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 60px 0 25px 0;
+            padding: 0 10px;
+            line-height: 1.4;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            max-width: 100%;
+            overflow-x: auto;
+            margin: 0 auto 25px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 15px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: #2c5aa0;
+            color: white;
+            padding: 14px 10px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            border: 1px solid #1a3a6e;
+        }
+        
+        thead th:first-child {
+            width: 22%;
+        }
+        
+        /* 表格内容 */
+        td {
+            padding: 12px 10px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+        
+        td:first-child {
+            font-weight: bold;
+            color: #2c5aa0;
+            background: #f8fafc;
+            text-align: center;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tr:hover {
+            background: #e8f4f8;
+        }
+        
+        /* 子标题行 */
+        .subheader td {
+            background: #e3f2fd;
+            color: #1565c0;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        .subheader td:first-child {
+            background: #bbdefb;
+            text-align: center;
+        }
+        
+        /* 缩进内容 */
+        .indent {
+            padding-left: 20px;
+            display: block;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 20px;
+            margin: 0 auto 25px;
+        }
+        
+        .tags-section h3 {
+            color: #2c5aa0;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        .tag-disease {
+            background: #ffe0e0;
+            color: #c0392b;
+        }
+        
+        .tag-drug {
+            background: #e0f0ff;
+            color: #2980b9;
+        }
+        
+        .tag-bacteria {
+            background: #e8f5e9;
+            color: #27ae60;
+        }
+        
+        /* 关键词和页码 */
+        .footer-info {
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+        
+        .page-num {
+            font-size: 15px;
+            color: #2c5aa0;
+            font-weight: bold;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 20px;
+            margin: 0 auto 25px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            font-family: monospace;
+        }
+        
+        .copy-btn {
+            background: #6c5ce7;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #5b4cdb;
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 6px;
+            }
+            
+            td {
+                padding: 10px 6px;
+                font-size: 13px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .indent {
+                padding-left: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="163.html" class="nav-btn">上一页</a>
+        <a href="165.html" class="nav-btn next">下一页</a>
+        <button class="nav-btn fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~严重出血时凝血因子用法用量*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类</th>
+                    <th>内容详情</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>严重出血原则</td>
+                    <td>严重出血时，凝血因子的活性水平应始终保持在50%以上</td>
+                </tr>
+                <tr>
+                    <td>两种选择</td>
+                    <td>①立即输注一剂凝血因子，使峰值水平达到80%～100%，并在活性水平接近50%时再输注一剂，使患者血液循环中的凝血因子水平不低于50%；②给予一剂凝血因子，将水平提高至80%～100%，之后持续输注，以维持稳定的止血水平。如上所述，在等待影像学结果时，应及时给予凝血因子</td>
+                </tr>
+                <tr class="subheader">
+                    <td colspan="2">无抑制物的血友病合并严重出血</td>
+                </tr>
+                <tr>
+                    <td>方法一</td>
+                    <td>FⅧ初始剂量为50IU/kg，使其水平提高至100%。FⅧ剂量=患者体重（kg）×期望达到的FⅧ活性水平（取整数，期望水平为100%时取100）×分布容积（FⅧ为0.5）。例如，体重60kg的患者因子水平需要增加至100%，则FⅧ剂量为60kg×100×0.5=3000IU。第2剂和后续给药的间隔约是制品在患者体内代谢的1个半衰期，取决于峰水平和谷水平。标准FⅧ制品的典型半衰期为8～12小时。长效FⅧ制品的半衰期为10～20小时。这些剂量约为初始剂量的一半，并根据测量的因子水平和期望的峰值水平调整</td>
+                </tr>
+                <tr>
+                    <td>方法二</td>
+                    <td>初始快速给予负荷量，之后持续输注。FⅧ以约4U/(kg·h)持续输注标准FⅧ浓缩物。该方法的优势包括效果稳定、监测频率更低且因子使用量减少。持续输注期间应定期检测凝血因子的活性水平，检测间隔时间由上次检测值、剂量调整和临床出血情况决定。持续输注装置不能带过滤器，凝血因子制品只能与生理盐水混合</td>
+                </tr>
+                <tr class="subheader">
+                    <td colspan="2">血友病有抑制物或获得性血友病</td>
+                </tr>
+                <tr>
+                    <td>抑制物效价≥5BU</td>
+                    <td>对于抑制物效价≥5BU和效价未知但明确为高反应性的患者，紧急输注凝血因子无法克服循环中大量的抗体，所以很可能无效</td>
+                </tr>
+                <tr>
+                    <td>高反应性抑制物</td>
+                    <td>对于有效价≥5BU的高反应性抑制物、严重出血又需要大手术的患者，使用旁路制品（FⅦ或凝血酶原复合物）</td>
+                </tr>
+                <tr>
+                    <td>清除抑制物</td>
+                    <td>一旦患者病情稳定、出血已停止，或产生抑制物，应清除抑制物/诱导免疫耐受</td>
+                </tr>
+                <tr>
+                    <td>rFⅦa-rFⅦa</td>
+                    <td>剂量常为给药方案：90μg/kg iv，每2～3小时重复，止血后改为每3～6小时1次</td>
+                </tr>
+                <tr>
+                    <td>凝血酶原复合物</td>
+                    <td>50～100IU/kg，每8～12小时1次，最大剂量&lt;200IU/(kg·d)，输注至止血</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 标签 -->
+    <div class="tags-section">
+        <h3>🏷️ 标签检索</h3>
+        <div class="tags">
+            <span class="tag tag-disease">血友病</span>
+            <span class="tag tag-disease">获得性血友病</span>
+            <span class="tag tag-disease">血友病合并抑制物</span>
+            <span class="tag tag-disease">严重出血</span>
+            <span class="tag tag-disease">出血</span>
+            <span class="tag tag-disease">抑制物</span>
+            <span class="tag tag-disease">高反应性</span>
+            <span class="tag tag-drug">凝血因子</span>
+            <span class="tag tag-drug">FⅧ</span>
+            <span class="tag tag-drug">FⅦ</span>
+            <span class="tag tag-drug">rFⅦa</span>
+            <span class="tag tag-drug">凝血酶原复合物</span>
+            <span class="tag tag-drug">旁路制品</span>
+            <span class="tag tag-drug">标准FⅧ浓缩物</span>
+            <span class="tag tag-drug">长效FⅧ制品</span>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="footer-info">
+        <p class="page-num">页码：152</p>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="严重出血时凝血因子用法用量；血友病、获得性血友病、血友病合并抑制物、严重出血、凝血因子、FⅧ、FⅦ、rFⅦa、凝血酶原复合物、抑制物、旁路制品；=152" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="footer-info" style="margin-bottom: 30px;">
+        <p>关键词：严重出血 | 凝血因子 | FⅧ | FⅦ | rFⅦa | 凝血酶原复合物 | 血友病 | 获得性血友病 | 抑制物 | 旁路制品 | 免疫耐受</p>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(() => {
+                    alert("已复制到剪贴板！");
+                });
+            } else {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            }
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            const title = document.title.replace(/~~~~~|*****/g, '');
+            const url = window.location.href;
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                date: new Date().toLocaleString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert('已添加到收藏！\n标题：' + title);
+        }
+    </script>
+</body>
+</html>
