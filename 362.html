@@ -1,0 +1,727 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~头孢菌素四代特点与β-内酰胺类、碳青霉烯类、喹诺酮类、大环内酯类药物详解*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e6eef7 100%);
+            color: #2d3748;
+            line-height: 1.7;
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #3182ce;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(49,130,206,0.3);
+            z-index: 100;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+        }
+        
+        .home-btn:hover {
+            background: #2c5282;
+            transform: translateY(-1px);
+        }
+        
+        /* 导航按钮区域 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #3182ce;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(49,130,206,0.3);
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        
+        .nav-btn:hover {
+            background: #2c5282;
+            transform: translateY(-1px);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #dd6b20;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(221,107,32,0.3);
+            transition: all 0.2s;
+        }
+        
+        .fav-btn:hover {
+            background: #c05621;
+            transform: translateY(-1px);
+        }
+        
+        .fav-btn.active {
+            background: #c53030;
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            color: #2c5282;
+            font-size: 22px;
+            font-weight: bold;
+            margin: 70px 0 25px 0;
+            padding: 18px;
+            background: rgba(255,255,255,0.85);
+            border-radius: 12px;
+            border-left: 6px solid #3182ce;
+            border-right: 6px solid #3182ce;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        /* 表格样式 */
+        .content-table {
+            width: 100%;
+            max-width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        .content-table thead {
+            background: #2b6cb0;
+            color: white;
+        }
+        
+        .content-table th {
+            padding: 20px 15px;
+            text-align: left;
+            font-size: 19px;
+            font-weight: bold;
+            border-bottom: 3px solid #1a4d7a;
+        }
+        
+        .content-table td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 15px;
+            color: #2d3748;
+            vertical-align: top;
+        }
+        
+        .content-table tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        .content-table tr:hover {
+            background: #edf2f7;
+        }
+        
+        .sub-bullet {
+            color: #38a169;
+            font-weight: bold;
+        }
+        
+        .highlight-bacteria {
+            color: #c53030;
+            font-weight: 600;
+        }
+        
+        .highlight-drug {
+            color: #276749;
+            font-weight: 600;
+        }
+        
+        .highlight-disease {
+            color: #744210;
+            font-weight: 600;
+        }
+        
+        /* 页码显示 */
+        .page-num {
+            text-align: center;
+            color: #718096;
+            font-size: 14px;
+            margin: 15px 0;
+            font-weight: 500;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+        }
+        
+        .copy-section label {
+            display: block;
+            color: #4a5568;
+            font-size: 14px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .copy-box-wrapper {
+            display: flex;
+            gap: 12px;
+            align-items: stretch;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 14px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #2d3748;
+            background: #f7fafc;
+            word-break: break-all;
+            transition: border-color 0.2s;
+        }
+        
+        .copy-input:focus {
+            outline: none;
+            border-color: #3182ce;
+        }
+        
+        .copy-btn {
+            background: #38a169;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+        
+        .copy-btn:hover {
+            background: #2f855a;
+        }
+        
+        .copy-btn.copied {
+            background: #2b6cb0;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            color: #2d3748;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .tag-category {
+            font-size: 13px;
+            color: #718096;
+            margin: 15px 0 10px 0;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            user-select: none;
+        }
+        
+        .tag:active {
+            transform: scale(0.95);
+        }
+        
+        .tag-disease {
+            background: #fed7d7;
+            color: #c53030;
+        }
+        
+        .tag-disease:hover {
+            background: #fc8181;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .tag-bacteria:hover {
+            background: #68d391;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #bee3f8;
+            color: #2b6cb0;
+        }
+        
+        .tag-drug:hover {
+            background: #63b3ed;
+            color: white;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+        }
+        
+        .keywords-title {
+            color: #2d3748;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .keywords-list {
+            color: #4a5568;
+            font-size: 14px;
+            line-height: 2.2;
+        }
+        
+        .keyword {
+            display: inline-block;
+            background: #edf2f7;
+            padding: 6px 14px;
+            border-radius: 15px;
+            margin: 3px;
+            color: #4a5568;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+        
+        .keyword:hover {
+            background: #e2e8f0;
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2d3748;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 30px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 200;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .toast.show {
+            opacity: 1;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 640px) {
+            .main-title {
+                font-size: 17px;
+                margin-top: 85px;
+                padding: 14px;
+            }
+            
+            .content-table th {
+                font-size: 16px;
+                padding: 16px 12px;
+            }
+            
+            .content-table td {
+                font-size: 14px;
+                padding: 12px;
+            }
+            
+            .home-btn, .nav-btn, .fav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-box-wrapper {
+                flex-direction: column;
+            }
+            
+            .copy-btn {
+                width: 100%;
+                padding: 12px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="361.html" class="nav-btn">上一页</a>
+        <a href="363.html" class="nav-btn">下一页</a>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~头孢菌素四代特点与β-内酰胺类、碳青霉烯类、喹诺酮类、大环内酯类药物详解*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~头孢菌素四代特点与β-内酰胺类、碳青霉烯类、喹诺酮类、大环内酯类药物详解*****、📋 头孢菌素四代特点与各类抗菌药物详解、第5节续：急诊常用抗菌药物的分类（续）</div>
+    
+    <!-- 主表格 -->
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th colspan="2">📋 头孢菌素四代特点与各类抗菌药物详解</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="2">
+                    <strong style="color:#2b6cb0; font-size:16px;">第5节续：急诊常用抗菌药物的分类（续）</strong>
+                </td>
+            </tr>
+            <tr>
+                <td width="80"></td>
+                <td>代<span class="highlight-drug">头孢菌素</span>抗<span class="highlight-bacteria">革兰阳性球菌</span>的作用逐渐减弱，抗<span class="highlight-bacteria">革兰阴性杆菌</span>的作用逐渐增强；多数第三代头孢药物对<span class="highlight-bacteria">革兰阴性杆菌</span>产生的<span class="highlight-drug">β-内酰胺酶</span>稳定，但对细菌产生的产超广谱<span class="highlight-drug">β-内酰胺酶（ESBL）</span>和<span class="highlight-drug">AmpC酶</span>不稳定。第四代<span class="highlight-drug">头孢菌素</span>对<span class="highlight-bacteria">金黄色葡萄球菌</span>等<span class="highlight-bacteria">革兰阳性菌</span>的作用较第三代强；对产酶<span class="highlight-bacteria">革兰阴性菌</span>的稳定性优于第三代<span class="highlight-drug">头孢菌素</span>。</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span class="sub-bullet">✓ β-内酰胺类/β-内酰胺酶抑制剂合剂：</span><span class="highlight-drug">β-内酰胺酶抑制剂</span>能够抑制大部分<span class="highlight-drug">β-内酰胺酶</span>，恢复<span class="highlight-drug">β-内酰胺类抗生素</span>的抗菌活性。因此，<span class="highlight-drug">β-内酰胺类抗生素/β-内酰胺酶抑制剂合剂</span>在临床抗感染中已成为治疗多种<span class="highlight-bacteria">耐药细菌</span>感染的重要选择。目前临床应用的主要品种有<span class="highlight-drug">阿莫西林/克拉维酸</span>、<span class="highlight-drug">氨苄西林/舒巴坦</span>、<span class="highlight-drug">头孢哌酮/舒巴坦</span>、<span class="highlight-drug">替卡西林/克拉维酸</span>、<span class="highlight-drug">哌拉西林/他唑巴坦</span>，<span class="highlight-drug">头孢他啶/阿维巴坦</span>。</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span class="highlight-drug">β-内酰胺酶类酶抑制剂</span>对<span class="highlight-bacteria">流感嗜血杆菌</span>、<span class="highlight-bacteria">卡他莫拉菌</span>、部分<span class="highlight-bacteria">肠杆菌科细菌</span>等细菌所产的<span class="highlight-drug">β-内酰胺酶</span>有较强的抑制作用。因此，<span class="highlight-drug">β-内酰胺酶复方制剂</span>对多种<span class="highlight-bacteria">革兰阳性菌</span>、<span class="highlight-bacteria">阴性菌</span>有良好的抗菌作用。其中<span class="highlight-drug">头孢哌酮/舒巴坦</span>中的<span class="highlight-drug">舒巴坦</span>制剂还有抗<span class="highlight-bacteria">不动杆菌</span>的活性。但须注意，<span class="highlight-drug">β-内酰胺酶复合制剂</span>的抗菌作用主要取决于其中的<span class="highlight-drug">β-内酰胺类药物</span>，<span class="highlight-drug">β-内酰胺酶</span>一般不增强与其配伍药物的抗菌活性。</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span class="sub-bullet">✓ 碳青霉烯类抗菌药物：</span>为<span class="highlight-drug">硫霉素</span>衍生物，同样通过抑制细菌细胞壁合成发挥杀菌作用，为广谱<span class="highlight-drug">抗菌药物</span>，对包括<span class="highlight-bacteria">铜绿假单胞菌</span>、<span class="highlight-bacteria">脆弱拟杆菌</span>、<span class="highlight-bacteria">葡萄球菌</span>等<span class="highlight-bacteria">革兰阳性</span>和<span class="highlight-bacteria">阴性菌</span>都具有强大的杀菌活性。主要品种包括<span class="highlight-drug">亚胺培南/西司他丁</span>、<span class="highlight-drug">美罗培南</span>、<span class="highlight-drug">厄他培南</span>、<span class="highlight-drug">比阿培南</span>等。近年来<span class="highlight-bacteria">铜绿假单胞菌</span>、<span class="highlight-bacteria">不动杆菌</span>等细菌对<span class="highlight-drug">碳青霉烯类药物</span>的耐药率呈逐年上升趋势。且临床产灭活<span class="highlight-drug">碳青霉烯类药物</span>的<span class="highlight-drug">β-内酰胺酶</span>的细菌也呈上升趋势，临床使用时需要加以注意。</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span class="sub-bullet">✓ 喹诺酮类药物：</span>是吡酮酸化学合成产物。抗菌谱广、组织浓度高、可每日给药1次，静脉及口服品种齐全，在急诊应用广泛。主要品种包括<span class="highlight-drug">环丙沙星</span>、<span class="highlight-drug">左氧氟沙星</span>、<span class="highlight-drug">莫西沙星</span>、<span class="highlight-drug">奈洛沙星</span>。其中<span class="highlight-drug">左氧氟沙星</span>、<span class="highlight-drug">莫西沙星</span>、<span class="highlight-drug">加替沙星</span>、<span class="highlight-drug">吉米沙星</span>等作为"呼吸喹诺酮"对<span class="highlight-bacteria">肺炎链球菌</span>、<span class="highlight-bacteria">化脓性链球菌</span>、<span class="highlight-bacteria">肺炎支原体</span>、<span class="highlight-bacteria">肺炎衣原体</span>及<span class="highlight-bacteria">嗜肺军团菌</span>等社区获得性<span class="highlight-disease">肺炎</span>病原微生物有良好的杀菌活性。此外，<span class="highlight-drug">喹诺酮类药物</span>主要经肾排泄，肾组织和尿液中浓度均较高，可用于治疗敏感菌导致的<span class="highlight-disease">上尿路感染</span>、<span class="highlight-disease">下尿路感染</span>。</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span class="sub-bullet">✓ 大环内酯类药物：</span>均具有大环内酯环而得名，代表品种包括<span class="highlight-drug">红霉素</span>、<span class="highlight-drug">克拉霉素</span>、<span class="highlight-drug">阿奇霉素</span>等。对于临床常见的病原菌具有良好的<span class="highlight-drug">抗生素后效应（PAE）</span>。主要用于治疗社区获</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 页码 -->
+    <div class="page-num">— 第 353 页 —</div>
+    
+    <!-- 复制功能区域 -->
+    <div class="copy-section">
+        <label>📋 复制标题与关键词（用于检索）</label>
+        <div class="copy-box-wrapper">
+            <input type="text" class="copy-input" id="copyInput" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyContent()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签（点击筛选）</div>
+        
+        <div class="tag-category">🦠 细菌</div>
+        <div class="tags-container">
+            <span class="tag tag-bacteria" onclick="filterByTag('革兰阳性球菌')">革兰阳性球菌</span>
+            <span class="tag tag-bacteria" onclick="filterByTag('革兰阴性杆菌')">革兰阴性杆菌</span>
+            <span class="tag tag-bacteria" onclick="filterByTag('金黄色葡萄球菌')">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria" onclick="filterByTag('革兰阳性菌')">革兰阳性菌</span>
+            <span class="tag tag-bacteria" onclick="filterByTag('革兰阴性菌')">革兰阴性菌</span>
+            <span class="tag tag-bacteria" onclick="filterByTag('耐药细菌')">耐药细菌</span>
+            <span class="tag tag-bacteria" onclick="filterByTag('流感嗜血杆菌')">流感嗜血杆菌</span>
+            <span class="tag tag-bacteria" onclick="filterByTag('卡他莫拉菌')">卡他莫拉菌</span>
+            <span class="tag tag-bacteria" onclick="filterByTag('肠杆菌科细菌')">肠杆菌科细菌</span>
+            <span class="tag tag-bacteria" onclick="filterByTag('不动杆菌')">不动杆菌</span>
+            <span class="tag tag-bacteria" onclick="filterByTag('铜绿假单胞菌')">铜绿假单胞菌</span>
+            <span class="tag tag-bacteria" onclick="filterByTag('脆弱拟杆菌')">脆弱拟杆菌</span>
+            <span class="tag tag-bacteria" onclick="filterByTag('葡萄球菌')">葡萄球菌</span>
+            <span class="tag tag-bacteria" onclick="filterByTag('肺炎链球菌')">肺炎链球菌</span>
+            <span class="tag tag-bacteria" onclick="filterByTag('化脓性链球菌')">化脓性链球菌</span>
+            <span class="tag tag-bacteria" onclick="filterByTag('肺炎支原体')">肺炎支原体</span>
+            <span class="tag tag-bacteria" onclick="filterByTag('肺炎衣原体')">肺炎衣原体</span>
+            <span class="tag tag-bacteria" onclick="filterByTag('嗜肺军团菌')">嗜肺军团菌</span>
+        </div>
+        
+        <div class="tag-category">💊 抗菌药物</div>
+        <div class="tags-container">
+            <span class="tag tag-drug" onclick="filterByTag('头孢菌素')">头孢菌素</span>
+            <span class="tag tag-drug" onclick="filterByTag('第三代头孢')">第三代头孢</span>
+            <span class="tag tag-drug" onclick="filterByTag('第四代头孢')">第四代头孢</span>
+            <span class="tag tag-drug" onclick="filterByTag('β-内酰胺酶')">β-内酰胺酶</span>
+            <span class="tag tag-drug" onclick="filterByTag('ESBL')">ESBL</span>
+            <span class="tag tag-drug" onclick="filterByTag('AmpC酶')">AmpC酶</span>
+            <span class="tag tag-drug" onclick="filterByTag('β-内酰胺酶抑制剂')">β-内酰胺酶抑制剂</span>
+            <span class="tag tag-drug" onclick="filterByTag('β-内酰胺类抗生素')">β-内酰胺类抗生素</span>
+            <span class="tag tag-drug" onclick="filterByTag('阿莫西林/克拉维酸')">阿莫西林/克拉维酸</span>
+            <span class="tag tag-drug" onclick="filterByTag('氨苄西林/舒巴坦')">氨苄西林/舒巴坦</span>
+            <span class="tag tag-drug" onclick="filterByTag('头孢哌酮/舒巴坦')">头孢哌酮/舒巴坦</span>
+            <span class="tag tag-drug" onclick="filterByTag('替卡西林/克拉维酸')">替卡西林/克拉维酸</span>
+            <span class="tag tag-drug" onclick="filterByTag('哌拉西林/他唑巴坦')">哌拉西林/他唑巴坦</span>
+            <span class="tag tag-drug" onclick="filterByTag('头孢他啶/阿维巴坦')">头孢他啶/阿维巴坦</span>
+            <span class="tag tag-drug" onclick="filterByTag('舒巴坦')">舒巴坦</span>
+            <span class="tag tag-drug" onclick="filterByTag('碳青霉烯类')">碳青霉烯类</span>
+            <span class="tag tag-drug" onclick="filterByTag('硫霉素')">硫霉素</span>
+            <span class="tag tag-drug" onclick="filterByTag('亚胺培南/西司他丁')">亚胺培南/西司他丁</span>
+            <span class="tag tag-drug" onclick="filterByTag('美罗培南')">美罗培南</span>
+            <span class="tag tag-drug" onclick="filterByTag('厄他培南')">厄他培南</span>
+            <span class="tag tag-drug" onclick="filterByTag('比阿培南')">比阿培南</span>
+            <span class="tag tag-drug" onclick="filterByTag('喹诺酮类')">喹诺酮类</span>
+            <span class="tag tag-drug" onclick="filterByTag('环丙沙星')">环丙沙星</span>
+            <span class="tag tag-drug" onclick="filterByTag('左氧氟沙星')">左氧氟沙星</span>
+            <span class="tag tag-drug" onclick="filterByTag('莫西沙星')">莫西沙星</span>
+            <span class="tag tag-drug" onclick="filterByTag('奈洛沙星')">奈洛沙星</span>
+            <span class="tag tag-drug" onclick="filterByTag('加替沙星')">加替沙星</span>
+            <span class="tag tag-drug" onclick="filterByTag('吉米沙星')">吉米沙星</span>
+            <span class="tag tag-drug" onclick="filterByTag('呼吸喹诺酮')">呼吸喹诺酮</span>
+            <span class="tag tag-drug" onclick="filterByTag('大环内酯类')">大环内酯类</span>
+            <span class="tag tag-drug" onclick="filterByTag('红霉素')">红霉素</span>
+            <span class="tag tag-drug" onclick="filterByTag('克拉霉素')">克拉霉素</span>
+            <span class="tag tag-drug" onclick="filterByTag('阿奇霉素')">阿奇霉素</span>
+            <span class="tag tag-drug" onclick="filterByTag('抗生素后效应')">抗生素后效应</span>
+            <span class="tag tag-drug" onclick="filterByTag('PAE')">PAE</span>
+        </div>
+        
+        <div class="tag-category">🏥 疾病/临床情况</div>
+        <div class="tags-container">
+            <span class="tag tag-disease" onclick="filterByTag('肺炎')">肺炎</span>
+            <span class="tag tag-disease" onclick="filterByTag('社区获得性肺炎')">社区获得性肺炎</span>
+            <span class="tag tag-disease" onclick="filterByTag('上尿路感染')">上尿路感染</span>
+            <span class="tag tag-disease" onclick="filterByTag('下尿路感染')">下尿路感染</span>
+            <span class="tag tag-disease" onclick="filterByTag('尿路感染')">尿路感染</span>
+        </div>
+    </div>
+    
+    <!-- 关键词区域 -->
+    <div class="keywords-section">
+        <div class="keywords-title">🔑 关键词</div>
+        <div class="keywords-list">
+            <span class="keyword">头孢菌素四代</span>
+            <span class="keyword">β-内酰胺酶抑制剂</span>
+            <span class="keyword">碳青霉烯类</span>
+            <span class="keyword">喹诺酮类</span>
+            <span class="keyword">大环内酯类</span>
+            <span class="keyword">ESBL</span>
+            <span class="keyword">AmpC酶</span>
+            <span class="keyword">呼吸喹诺酮</span>
+            <span class="keyword">PAE</span>
+            <span class="keyword">耐药菌</span>
+        </div>
+    </div>
+    
+    <!-- 提示框 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 页面信息
+        const pageInfo = {
+            title: "头孢菌素四代特点与β-内酰胺类、碳青霉烯类、喹诺酮类、大环内酯类药物详解",
+            subtitle: "头孢四代对比、β-内酰胺酶抑制剂合剂、碳青霉烯类、喹诺酮类、大环内酯类药物特点",
+            keywords: "头孢菌素;β-内酰胺酶抑制剂;碳青霉烯类;喹诺酮类;大环内酯类;ESBL;AmpC酶;呼吸喹诺酮;PAE;耐药菌",
+            pageNum: "353"
+        };
+        
+        // 初始化复制框内容
+        const copyContentText = `${pageInfo.title};${pageInfo.subtitle};${pageInfo.keywords}=${pageInfo.pageNum}`;
+        document.getElementById('copyInput').value = copyContentText;
+        
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('✓ 已复制到剪贴板');
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '已复制';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.textContent = '复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                }).catch(() => {
+                    fallbackCopy(input);
+                });
+            } else {
+                fallbackCopy(input);
+            }
+        }
+        
+        function fallbackCopy(input) {
+            try {
+                document.execCommand('copy');
+                showToast('✓ 已复制到剪贴板');
+            } catch (e) {
+                showToast('复制失败，请手动复制');
+            }
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+        
+        // 标签筛选功能
+        function filterByTag(tag) {
+            showToast(`正在筛选: ${tag}`);
+            highlightText(tag);
+        }
+        
+        // 高亮页面内匹配文本
+        function highlightText(text) {
+            document.querySelectorAll('.temp-highlight').forEach(el => {
+                el.outerHTML = el.innerHTML;
+            });
+            
+            const walker = document.createTreeWalker(
+                document.body,
+                NodeFilter.SHOW_TEXT,
+                null,
+                false
+            );
+            
+            const nodes = [];
+            let node;
+            while (node = walker.nextNode()) {
+                if (node.textContent.includes(text) && node.parentElement.tagName !== 'SCRIPT' && node.parentElement.tagName !== 'STYLE') {
+                    nodes.push(node);
+                }
+            }
+            
+            nodes.forEach(node => {
+                const span = document.createElement('span');
+                span.className = 'temp-highlight';
+                span.style.background = '#fef3c7';
+                span.style.padding = '2px 4px';
+                span.style.borderRadius = '4px';
+                const regex = new RegExp(`(${text})`, 'g');
+                span.innerHTML = node.textContent.replace(regex, '<mark style="background:#fbbf24;padding:2px 4px;border-radius:4px;">$1</mark>');
+                node.parentNode.replaceChild(span, node);
+            });
+            
+            if (nodes.length > 0) {
+                showToast(`✓ 找到 ${nodes.length} 处匹配`);
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                showToast('⭐ 已添加到收藏');
+                
+                const favData = {
+                    title: pageInfo.title,
+                    url: '353.html',
+                    pageNum: '353',
+                    category: '急诊用药指南',
+                    timestamp: new Date().toISOString()
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '353.html');
+                favorites.push(favData);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                window.dispatchEvent(new CustomEvent('favoriteUpdated', { detail: favData }));
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                showToast('已取消收藏');
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '353.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.addEventListener('DOMContentLoaded', function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '353.html');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        });
+    </script>
+</body>
+</html>
