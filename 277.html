@@ -1,0 +1,399 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~异位妊娠*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5ee 100%);
+            min-height: 100vh;
+            padding: 10px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .fav-btn {
+            background: #f0ad4e;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        
+        .fav-btn.active {
+            background: #d9534f;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #2874a6;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        thead tr {
+            background: #2e86c1 !important;
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 12px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:nth-child(odd) {
+            background: #ffffff;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #dee2e6;
+            font-size: 14px;
+            line-height: 1.7;
+            color: #333;
+            vertical-align: top;
+        }
+        
+        .section-title {
+            background: #d4edda !important;
+            font-weight: bold;
+            color: #155724;
+        }
+        
+        .section-title td {
+            font-size: 15px;
+            padding: 10px 12px;
+        }
+        
+        .bullet {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .check {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .diamond {
+            color: #9b59b6;
+            font-weight: bold;
+        }
+        
+        .copy-section {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            width: calc(100% - 120px);
+            max-width: 600px;
+            padding: 12px 15px;
+            border: 2px solid #2e86c1;
+            border-radius: 8px;
+            font-size: 13px;
+            background: white;
+        }
+        
+        .copy-btn {
+            background: #2e86c1;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .tags-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #e3f2fd;
+            color: #1565c0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            border: 1px solid #bbdefb;
+        }
+        
+        .tag.disease {
+            background: #ffebee;
+            color: #c62828;
+            border-color: #ef9a9a;
+        }
+        
+        .tag.drug {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-color: #a5d6a7;
+        }
+        
+        .tag.bacteria {
+            background: #fff3e0;
+            color: #ef6c00;
+            border-color: #ffcc80;
+        }
+        
+        .page-num {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .keywords {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 12px;
+            color: #888;
+            padding: 10px;
+        }
+        
+        @media (max-width: 600px) {
+            h1 { font-size: 18px; }
+            thead th { font-size: 15px; padding: 12px 8px; }
+            td { font-size: 13px; padding: 10px 8px; }
+            #copyInput { width: calc(100% - 100px); font-size: 12px; }
+            .copy-btn { padding: 10px 18px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-btns">
+            <a href="276.html" class="nav-btn">上一页</a>
+            <a href="278.html" class="nav-btn">下一页</a>
+            <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~异位妊娠*****</h1>
+    <p class="subtitle">妇产科急诊</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">异位妊娠 - 临床诊疗要点</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="section-title">
+                <td colspan="2">1. 定义</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <span class="bullet">●</span> 异位妊娠指发育中的胚胎在宫腔子宫内膜以外的部位植入。<br>
+                    <span class="bullet">●</span> 最常见的宫外植入部位是输卵管，其他部位包括宫颈、宫角、子宫切开术瘢痕、子宫肌壁间、卵巢或腹腔。极少数多胎妊娠可能为宫内、宫外同时妊娠。
+                </td>
+            </tr>
+            <tr class="section-title">
+                <td colspan="2">2. 危险因素</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <span class="bullet">●</span> 高风险因素：异位妊娠病史，输卵管病变，绝育术，宫内节育器植入，体外受精和其他辅助生殖技术。<br>
+                    <span class="bullet">●</span> 中风险因素：吸烟，避孕药使用，性传播疾病病史，盆腔炎病史，己烯雌酚宫腔暴露史，盆腹腔手术史，自然流产史。<br>
+                    <span class="bullet">●</span> 低风险因素：药物流产史，不孕症，年龄≥40岁，阴道冲洗，初次性行为年龄<18岁，阑尾切除术后。
+                </td>
+            </tr>
+            <tr class="section-title">
+                <td colspan="2">3. 临床表现</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <b>症状</b><br>
+                    <span class="check">✓</span> 阴道出血和/或腹痛最常见，也可无症状。<br>
+                    <span class="check">✓</span> 症状一般发生在末次月经后6～8周。<br>
+                    <span class="check">✓</span> 阴道出血缺乏固定特异性形式。
+                </td>
+            </tr>
+            <tr class="section-title">
+                <td colspan="2">附录：过敏性休克肾上腺素用法（前文延续）</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    释10倍使用，浓度为0.1mg/ml（1:10000）。<br><br>
+                    <span class="check">✓</span> 数次肌内注射肾上腺素且积极液体复苏治疗无效、低血压仍持续存在，可考虑使用肾上腺素中心静脉持续输注。<br>
+                    <span class="diamond">◇</span> 成人以0.1μg/(kg·min)的速率开始静脉输注肾上腺素，每2～3分钟增加0.05μg/(kg·min)，直至血压和灌注改善。<br>
+                    <span class="diamond">◇</span> 参考配液方案：体重60kg患者，予肾上腺素9mg＋NS 500ml，20ml/h起始。<br><br>
+                    <span class="bullet">●</span> 抗组胺药物和糖皮质激素：苯海拉明20mg肌内注射；糖皮质激素静脉输注，如地塞米松10～20mg，或氢化可的松200～300mg，或甲泼尼龙1～2mg/kg。<br>
+                    <span class="bullet">●</span> 若发生呼吸衰竭，简易呼吸器辅助通气，有条件时行气管插管。<br>
+                    <span class="bullet">●</span> 若出现呼吸心搏骤停，立即进行心肺复苏。<br>
+                    <span class="bullet">●</span> 部分患者可在初次发作后数小时内出现二次发作，因此出现过敏性休克的患者建议观察24小时。<br>
+                    <div style="text-align:right;color:#666;font-size:12px;">（刘业成）</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="page-num">页码：277</div>
+    
+    <div class="copy-section">
+        <input type="text" id="copyInput" value="异位妊娠；妇产科急诊；定义；危险因素；临床表现；症状；过敏性休克；肾上腺素；苯海拉明；地塞米松；氢化可的松；甲泼尼龙；=277" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签：</div>
+        <span class="tag disease">异位妊娠</span>
+        <span class="tag disease">过敏性休克</span>
+        <span class="tag drug">肾上腺素</span>
+        <span class="tag drug">苯海拉明</span>
+        <span class="tag drug">地塞米松</span>
+        <span class="tag drug">氢化可的松</span>
+        <span class="tag drug">甲泼尼龙</span>
+    </div>
+    
+    <div class="keywords">
+        关键词：异位妊娠 | 妇产科急诊 | 输卵管妊娠 | 阴道出血 | 腹痛 | 肾上腺素 | 过敏性休克 | 糖皮质激素
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '已复制';
+                setTimeout(() => btn.textContent = '复制', 1500);
+            });
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            if (isFav) {
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+                localStorage.removeItem('fav_277');
+            } else {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                localStorage.setItem('fav_277', JSON.stringify({
+                    title: '异位妊娠',
+                    url: '277.html',
+                    category: '妇产科急诊'
+                }));
+                
+                // 添加到index的收藏类目
+                let favorites = JSON.parse(localStorage.getItem('favorites_index') || '[]');
+                const exists = favorites.find(f => f.url === '277.html');
+                if (!exists) {
+                    favorites.push({
+                        title: '异位妊娠',
+                        url: '277.html',
+                        category: '妇产科急诊',
+                        addTime: new Date().toISOString()
+                    });
+                    localStorage.setItem('favorites_index', JSON.stringify(favorites));
+                }
+            }
+        }
+        
+        // 初始化收藏状态
+        window.onload = function() {
+            if (localStorage.getItem('fav_277')) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+            }
+        }
+    </script>
+</body>
+</html>
