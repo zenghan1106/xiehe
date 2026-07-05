@@ -1,0 +1,464 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~感染性疾病诊断与特殊人群感染*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 20px;
+        }
+        
+        /* 顶部导航 */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: rgba(255,255,255,0.9);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 5px;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .fav-btn {
+            background: #f0ad4e;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            padding: 20px 15px;
+            font-size: 22px;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            margin: 0 10px;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        /* 表头 */
+        thead tr {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 12px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        /* 表格内容 */
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 14px;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4fd;
+        }
+        
+        /* 小标题样式 */
+        .section-title {
+            color: #2c3e50;
+            font-weight: bold;
+            font-size: 15px;
+            margin: 10px 0 5px;
+        }
+        
+        .sub-item {
+            color: #555;
+            margin: 5px 0;
+            padding-left: 15px;
+            position: relative;
+        }
+        
+        .sub-item::before {
+            content: "•";
+            color: #4a90d9;
+            position: absolute;
+            left: 0;
+        }
+        
+        .highlight-box {
+            background: #e8f4fd;
+            padding: 10px;
+            border-radius: 6px;
+            margin: 8px 0;
+            border-left: 3px solid #4a90d9;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            font-size: 16px;
+            color: #666;
+        }
+        
+        /* 底部编辑框区域 */
+        .bottom-section {
+            margin: 20px 10px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .copy-area {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 20px 10px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+        
+        /* 关键词 */
+        .keywords-section {
+            margin: 20px 10px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .keywords-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .keywords-content {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 16px;
+            }
+            
+            tbody td {
+                font-size: 13px;
+                padding: 10px;
+            }
+            
+            .copy-area {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="top-nav">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-right">
+            <a href="191.html" class="nav-btn">上一页</a>
+            <a href="193.html" class="nav-btn">下一页</a>
+            <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~感染性疾病诊断与特殊人群感染*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~感染性疾病诊断与特殊人群感染*****、感染性疾病诊断要点与特殊人群感染、需要注意的特殊人群感染</div>
+    
+    <!-- 主表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>感染性疾病诊断要点与特殊人群感染</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="highlight-box">
+                            <strong>概述：</strong>热，病毒和细菌是主要病原体，非感染者仅占少数。非感染性疾病，起病相对较缓慢，病程偏长，但临床上不能以发病的急缓作为重要的鉴别诊断依据。
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">一、感染性疾病诊断原则</div>
+                        <div class="sub-item">感染性疾病的诊断应该以全面采集病史，仔细查体为基础，有目的地选择实验室和特殊检查</div>
+                        <div class="sub-item">充分利用病原学检查，流行病学资料与调查对寻找感染源、传播途径，特别是新出现的感染性疾病的诊断具有重要作用</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">二、流行病学资料的重要性</div>
+                        <div class="sub-item">充分利用流行病学资料，对感染性疾病的诊断有重要帮助</div>
+                        <div class="sub-item">感染性疾病尤其是传染病只在特定的地区季节和人群发生，需要特殊的传播媒介</div>
+                        <div class="sub-item">虽然现代医学发展迅速，但是流行病学作为感染性疾病的基础，依然非常重要</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">三、病原微生物检查</div>
+                        <div class="sub-item">病原微生物检查对于细菌性感染的诊断尤为重要</div>
+                        <div class="sub-item">无菌体液组织检查获得的病原学结果对感染有确诊价值</div>
+                        <div class="sub-item">部分病原微生物的检查对于诊断只具有参考价值，需要结合临床加以判断</div>
+                        <div class="sub-item">例如：痰培养易受到污染，支气管肺泡灌洗、支气管镜下吸痰取得的病原学更有意义</div>
+                        <div class="sub-item">基因诊断技术是近年来发展应用于临床的先进手段，但是其试验方法条件要求较高，易受污染，需要紧密结合临床考虑</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">四、诊治感染性疾病时需要把握两点</div>
+                        <div class="highlight-box">
+                            <strong>① 定位：</strong>感染性疾病通常有其常见的受累部位，即具备一定特征性的定位表现。<br>
+                            例如：心脏杂音——心内膜炎；肝大、肝区叩痛——肝脓肿；黄疸、Murphy征阳性——胆系感染。明确感染部位有助于对病原菌进行估计。
+                        </div>
+                        <div class="highlight-box">
+                            <strong>② 明确病原学：</strong>病原学非常重要，对后续选择治疗方案、评估疗效、确定疗程都非常重要。<br>
+                            取得病原学包括各种培养（血、尿、便、脓液、伤口分泌物及其他各种体液）、核酸检测及血清学检测。
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">五、评估疑难患者时需要把握两点</div>
+                        <div class="sub-item">① 有的放矢，关注重要的阳性症状体征，重要的阴性症状体征也需要覆盖</div>
+                        <div class="sub-item">② 重复重要的临床症状及化验检查</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title" style="color: #c0392b; font-size: 16px;">■ 需要注意的特殊人群感染</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">1. 粒细胞缺乏患者</div>
+                        <div class="sub-item">粒细胞缺乏患者易合并感染，主要病原学为胃肠道细菌易位，革兰阴性菌最常见，近年来革兰阳性菌逐渐增多，长期粒细胞缺乏以及应用广谱抗生素治疗的患者真菌感染的风险可能增加</div>
+                        <div class="sub-item">重点检查皮肤、咽喉部、肺部、肛周、静脉导管</div>
+                        <div class="sub-item">患者均需要血培养、尿培养、痰培养，有腹泻的患者需要便培养，艰难梭菌毒素检查。胸片及特殊影像学检查</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">— 180 —</div>
+    
+    <!-- 底部编辑框 -->
+    <div class="bottom-section">
+        <div style="margin-bottom: 10px; font-weight: bold; color: #2c3e50;">编辑框（可复制内容）</div>
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyContent" value="感染性疾病诊断与特殊人群感染；粒细胞缺乏患者；革兰阴性菌；革兰阳性菌；真菌感染；血培养；尿培养；痰培养；便培养；艰难梭菌；=180" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div class="tags-container">
+            <span class="tag">感染性疾病</span>
+            <span class="tag">传染病</span>
+            <span class="tag">心内膜炎</span>
+            <span class="tag">肝脓肿</span>
+            <span class="tag">胆系感染</span>
+            <span class="tag">粒细胞缺乏</span>
+            <span class="tag">革兰阴性菌</span>
+            <span class="tag">革兰阳性菌</span>
+            <span class="tag">真菌感染</span>
+            <span class="tag">艰难梭菌</span>
+            <span class="tag">血培养</span>
+            <span class="tag">尿培养</span>
+            <span class="tag">痰培养</span>
+            <span class="tag">便培养</span>
+            <span class="tag">基因检测</span>
+            <span class="tag">核酸检测</span>
+            <span class="tag">血清学检测</span>
+            <span class="tag">广谱抗生素</span>
+            <span class="tag">支气管肺泡灌洗</span>
+        </div>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">🔑 关键词</div>
+        <div class="keywords-content">
+            180 | 感染性疾病诊断 | 特殊人群感染 | 粒细胞缺乏 | 病原学检查 | 流行病学 | 定位诊断 | 革兰阴性菌 | 革兰阳性菌 | 真菌 | 艰难梭菌 | 血培养 | 尿培养 | 痰培养 | 便培养 | 基因检测 | 核酸检测
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyContent');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                alert('已复制到剪贴板：' + input.value);
+            }).catch(err => {
+                document.execCommand('copy');
+                alert('已复制到剪贴板');
+            });
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            // 获取当前页面信息
+            const title = document.title.replace(/~~~~~|\\\\*\\\\*/g, '');
+            const url = window.location.href;
+            const pageNum = '180';
+            
+            // 尝试使用localStorage保存收藏信息（用于index.html读取）
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            // 添加收藏
+            favorites.push({
+                title: title,
+                url: url,
+                pageNum: pageNum,
+                category: '感染性疾病',
+                date: new Date().toLocaleString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert('已成功添加到收藏夹！\n标题：' + title + '\n页码：' + pageNum);
+        }
+    </script>
+</body>
+</html>
