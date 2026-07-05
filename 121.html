@@ -1,0 +1,550 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~休克诊断与血流动力学分析*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-home {
+            background: #4a90d9;
+            color: white;
+        }
+
+        .btn-home:hover {
+            background: #357abd;
+        }
+
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+
+        .btn-page {
+            background: #5cb85c;
+            color: white;
+            min-width: 80px;
+        }
+
+        .btn-page:hover {
+            background: #4cae4c;
+        }
+
+        .btn-fav {
+            background: #f0ad4e;
+            color: white;
+            min-width: 80px;
+        }
+
+        .btn-fav:hover {
+            background: #ec971f;
+        }
+
+        .btn-fav.active {
+            background: #d9534f;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 22px;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            line-height: 1.6;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        thead th {
+            background: #2e5c8a;
+            color: white;
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+
+        .section-title {
+            font-weight: 700;
+            color: #1a5276;
+            font-size: 15px;
+        }
+
+        .check-item {
+            color: #27ae60;
+            font-weight: 600;
+        }
+
+        .sub-item {
+            padding-left: 20px;
+            color: #555;
+        }
+
+        .highlight-box {
+            background: #e8f6f3;
+            border-left: 4px solid #1abc9c;
+            padding: 10px 12px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .tags-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.85);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .tags-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tag-disease {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+
+        .tag-disease:hover {
+            background: #c62828;
+            color: white;
+        }
+
+        .tag-drug {
+            background: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #90caf9;
+        }
+
+        .tag-drug:hover {
+            background: #1565c0;
+            color: white;
+        }
+
+        .tag-bacteria {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+
+        .tag-bacteria:hover {
+            background: #2e7d32;
+            color: white;
+        }
+
+        .keywords-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(255,255,255,0.85);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            text-align: center;
+        }
+
+        .keywords-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+
+        .keywords-content {
+            font-size: 14px;
+            color: #555;
+            line-height: 2;
+        }
+
+        .keyword {
+            display: inline-block;
+            padding: 4px 12px;
+            margin: 4px;
+            background: #fff3e0;
+            color: #e65100;
+            border-radius: 16px;
+            font-size: 13px;
+        }
+
+        .page-number {
+            margin-top: 15px;
+            font-size: 20px;
+            font-weight: 700;
+            color: #2e5c8a;
+        }
+
+        .copy-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background: #fafafa;
+        }
+
+        .btn-copy {
+            background: #6c5ce7;
+            color: white;
+            padding: 12px 28px;
+            white-space: nowrap;
+        }
+
+        .btn-copy:hover {
+            background: #5b4cdb;
+        }
+
+        .btn-copy.copied {
+            background: #00b894;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .btn {
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-top">
+        <a href="index.html" class="btn btn-home">← 返回首页</a>
+        <div class="nav-right">
+            <a href="120.html" class="btn btn-page">上一页</a>
+            <a href="122.html" class="btn btn-page">下一页</a>
+            <button class="btn btn-fav" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+
+    <h1>~~~~~休克诊断与血流动力学分析*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~休克诊断与血流动力学分析*****、休克类型、诊断标准与血流动力学特征</div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>休克类型、诊断标准与血流动力学特征</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="section-title">一、右心衰竭血流动力学特点</div>
+                        <div class="highlight-box">
+                            表现出明显的局限性。不同心室的功能衰竭也会有不同的血流动力学改变和不同的治疗要求。
+                        </div>
+                        <div class="check-item">✓ 右心衰竭时中心静脉压升高，体循环淤血，右心室前负荷增加</div>
+                        <div class="sub-item">但由于右心室输出量减少，而不能为左心室提供足够的前负荷</div>
+                        <div class="sub-item">这时左心室与右心室的前负荷可能处于不同状态</div>
+                        <div class="sub-item">所以，在监测时应注意血流动力学参数的系统性和不同参数的不同意义</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">二、分布性休克</div>
+                        <div class="check-item">✓ 基本机制为血管收缩舒张调节功能异常</div>
+                        <div class="sub-item">这类休克中，一部分表现为体循环阻力正常或增高，主要由于容量血管扩张、循环血量相对不足所致</div>
+                        <div class="sub-item">常见原因是神经节阻断、脊髓休克等神经性损伤或麻醉药物过量等</div>
+                        <div class="sub-item">另一部分是以体循环阻力降低为主要表现，导致血液重新分布，主要由感染性因素所致，临床上称为感染性休克</div>
+                        <div class="check-item">✓ 感染性休克的血流动力学特点</div>
+                        <div class="sub-item">体循环阻力下降、心输出量增高、肺循环阻力增加和心率改变</div>
+                        <div class="sub-item">感染性休克时血压下降主要是继发于阻力血管扩张</div>
+                        <div class="sub-item">导致组织灌注不良的基本原因是血流分布异常</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">三、梗阻性休克</div>
+                        <div class="check-item">✓ 基本机制为血流的主要通道受阻</div>
+                        <div class="sub-item">如腔静脉梗阻、心包缩窄、心脏压塞、心瓣膜狭窄、肺动脉栓塞及主动脉夹层动脉瘤等</div>
+                        <div class="check-item">✓ 血流动力学特点因梗阻部位不同而异</div>
+                        <div class="sub-item">大都是由于血流通道受阻导致心输出量减少，氧输送下降，引起循环灌注不良，组织缺血缺氧</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">四、诊断</div>
+                        <div class="check-item">• 临床上诊断休克多包括4方面内容：</div>
+                        <div class="sub-item">① 导致休克的病因</div>
+                        <div class="sub-item">② 一定程度的血压下降</div>
+                        <div class="sub-item">③ 组织灌注不良</div>
+                        <div class="sub-item">④ 组织缺氧表现、器官功能改变</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">五、休克诊断标准</div>
+                        <div class="check-item">✓ 出现低血压：</div>
+                        <div class="sub-item">表现为收缩压＜90mmHg或较原基础值下降的幅度＞40mmHg，至少1小时，或血压依赖输液或药物维持</div>
+                        <div class="check-item">✓ 有组织低灌注的表现：</div>
+                        <div class="sub-item">肾 [少尿＜0.5ml/(kg·h) 超过1小时]</div>
+                        <div class="sub-item">或神经系统（精神改变，典型的包括思维迟钝、定向障碍、意识错乱）</div>
+                        <div class="sub-item">或皮肤（皮肤湿冷、血管收缩、发绀，在低血流状态下最显著）</div>
+                        <div class="sub-item">以及高乳酸血症（＞1.5mmol/L）</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">六、反映指标</div>
+                        <div class="check-item">✓ 混合静脉血氧饱和度（SvO₂）或中心静脉血氧饱和度</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">休克</span>
+            <span class="tag tag-disease">右心衰竭</span>
+            <span class="tag tag-disease">分布性休克</span>
+            <span class="tag tag-disease">感染性休克</span>
+            <span class="tag tag-disease">梗阻性休克</span>
+            <span class="tag tag-disease">心脏压塞</span>
+            <span class="tag tag-disease">肺动脉栓塞</span>
+            <span class="tag tag-disease">主动脉夹层动脉瘤</span>
+            <span class="tag tag-disease">脊髓休克</span>
+            <span class="tag tag-disease">神经性损伤</span>
+            <span class="tag tag-disease">组织灌注不良</span>
+            <span class="tag tag-disease">组织缺氧</span>
+            <span class="tag tag-disease">高乳酸血症</span>
+            <span class="tag tag-disease">少尿</span>
+            <span class="tag tag-drug">麻醉药物</span>
+            <span class="tag tag-drug">输液</span>
+            <span class="tag tag-bacteria">感染性因素</span>
+        </div>
+    </div>
+
+    <div class="keywords-section">
+        <div class="keywords-title">🔍 关键词</div>
+        <div class="keywords-content">
+            <span class="keyword">休克</span>
+            <span class="keyword">血流动力学</span>
+            <span class="keyword">诊断标准</span>
+            <span class="keyword">中心静脉压</span>
+            <span class="keyword">体循环阻力</span>
+            <span class="keyword">心输出量</span>
+            <span class="keyword">组织灌注</span>
+            <span class="keyword">血氧饱和度</span>
+            <span class="keyword">低血压</span>
+            <span class="keyword">乳酸血症</span>
+        </div>
+        <div class="page-number">121</div>
+    </div>
+
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" readonly>
+        <button class="btn btn-copy" id="copyBtn" onclick="copyToClipboard()">复制</button>
+    </div>
+
+    <script>
+        // 设置复制输入框内容
+        const title = "~~~~~休克诊断与血流动力学分析*****";
+        const subtitle = "休克类型、诊断标准与血流动力学特征";
+        const keywords = "休克；血流动力学；诊断标准；中心静脉压；体循环阻力；心输出量；组织灌注；血氧饱和度；低血压；乳酸血症";
+        const pageNum = "121";
+        document.getElementById('copyInput').value = title + "；" + subtitle + "；" + keywords + "；=" + pageNum;
+
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+
+        // 收藏功能
+        let isFavorited = false;
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            isFavorited = !isFavorited;
+            
+            if (isFavorited) {
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+                
+                // 保存到localStorage，用于index.html读取
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const currentPage = {
+                    title: '休克诊断与血流动力学分析',
+                    url: window.location.pathname.split('/').pop() || '121.html',
+                    category: '急诊疾病'
+                };
+                
+                // 避免重复添加
+                const exists = favorites.some(f => f.url === currentPage.url);
+                if (!exists) {
+                    favorites.push(currentPage);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                // 触发index.html更新（如果打开的话）
+                localStorage.setItem('favoritesUpdated', Date.now().toString());
+            } else {
+                btn.textContent = '☆ 收藏';
+                btn.classList.remove('active');
+                
+                // 从收藏中移除
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const currentUrl = window.location.pathname.split('/').pop() || '121.html';
+                favorites = favorites.filter(f => f.url !== currentUrl);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                localStorage.setItem('favoritesUpdated', Date.now().toString());
+            }
+        }
+
+        // 页面加载时检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const currentUrl = window.location.pathname.split('/').pop() || '121.html';
+            const exists = favorites.some(f => f.url === currentUrl);
+            if (exists) {
+                isFavorited = true;
+                document.getElementById('favBtn').textContent = '★ 已收藏';
+                document.getElementById('favBtn').classList.add('active');
+            }
+        };
+    </script>
+
+</body>
+</html>
