@@ -1,0 +1,701 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊气道管理-崩溃气道低氧血症及面罩通气分级*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        
+        /* 导航按钮区域 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.4);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(17, 153, 142, 0.6);
+        }
+        
+        .nav-btn.next {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+        }
+        
+        .nav-btn.next:hover {
+            box-shadow: 0 6px 20px rgba(79, 172, 254, 0.6);
+        }
+        
+        /* 收藏按钮 */
+        .favorite-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+        }
+        
+        .favorite-btn:hover {
+            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.6);
+        }
+        
+        .favorite-btn.active {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            color: #d63031;
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px 40px;
+        }
+        
+        /* 标题样式 */
+        .main-title {
+            text-align: center;
+            font-size: 28px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .sub-title {
+            text-align: center;
+            font-size: 20px;
+            color: #3498db;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        
+        /* 表格样式 - 所有内容放在一个表格 */
+        .table-wrapper {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #1e5799 0%, #2989d8 50%, #207cca 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 18px 15px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+            border-right: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        thead th:last-child {
+            border-right: none;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+            transition: background 0.3s ease;
+        }
+        
+        tbody tr:hover {
+            background: #f0f7ff;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        
+        tbody tr:nth-child(even):hover {
+            background: #f0f7ff;
+        }
+        
+        tbody td {
+            padding: 15px;
+            font-size: 15px;
+            color: #444;
+            border-right: 1px solid #e8e8e8;
+            vertical-align: top;
+        }
+        
+        tbody td:last-child {
+            border-right: none;
+        }
+        
+        /* 第一行字体加大 */
+        .first-row {
+            font-size: 17px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        /* 内容区块样式 */
+        .section-header {
+            background: #e8f4f8;
+            font-weight: bold;
+            color: #1e5799;
+            font-size: 16px;
+        }
+        
+        .highlight-term {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .highlight-note {
+            color: #3498db;
+            font-weight: 500;
+        }
+        
+        /* 注释区域 */
+        .note-section {
+            background: #fff9e6;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+            border-left: 4px solid #f39c12;
+        }
+        
+        .note-title {
+            font-size: 16px;
+            color: #e67e22;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .note-content {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #ffeaa7;
+            color: #d63031;
+        }
+        
+        .tag-procedure {
+            background: #74b9ff;
+            color: #0984e3;
+        }
+        
+        .tag-equipment {
+            background: #55efc4;
+            color: #00b894;
+        }
+        
+        .tag-assessment {
+            background: #dfe6e9;
+            color: #636e72;
+        }
+        
+        .tag-anatomy {
+            background: #fab1a0;
+            color: #e17055;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .keywords-title {
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .keywords-content {
+            color: #555;
+            font-size: 15px;
+            line-height: 2;
+        }
+        
+        .keywords-content span {
+            display: inline-block;
+            margin-right: 15px;
+            background: #f0f0f0;
+            padding: 5px 12px;
+            border-radius: 10px;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .copy-title {
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .copy-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #555;
+            background: #fafafa;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .copy-btn.copied {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 70px 10px 30px;
+            }
+            
+            .main-title {
+                font-size: 20px;
+            }
+            
+            .sub-title {
+                font-size: 16px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            .first-row {
+                font-size: 14px;
+            }
+            
+            .nav-buttons {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .nav-btn, .home-btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                top: 10px;
+                left: 10px;
+            }
+            
+            .copy-container {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            table {
+                font-size: 12px;
+            }
+            
+            thead th, tbody td {
+                padding: 8px 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="313.html" class="nav-btn">⬅ 上一页</a>
+        <a href="315.html" class="nav-btn next">下一页 ➡</a>
+        <button class="nav-btn favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <div class="container">
+        <!-- 标题 -->
+        <h1 class="main-title">~~~~~急诊气道管理-崩溃气道低氧血症及面罩通气分级*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~急诊气道管理-崩溃气道低氧血症及面罩通气分级*****、分类/项目、详细内容、表39 面罩通气分级、C（crash airway，崩溃气道）、H（hypoxia，低氧血症）、球囊面罩通气、注 释、Sellick手法、1级 - 通气顺畅、2级 - 轻微受阻、3级 - 显著受阻、4级 - 通气失败</div>
+        <h2 class="sub-title">C（crash airway）与H（hypoxia）处理及表39 面罩通气分级</h2>
+        
+        <!-- 所有内容整合在一个表格中 -->
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 20%;">分类/项目</th>
+                        <th style="width: 80%;">详细内容</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="first-row section-header">C（crash airway，崩溃气道）</td>
+                        <td class="first-row">指患者处于<span class="highlight-term">深昏迷</span>、<span class="highlight-term">濒临死亡</span>、<span class="highlight-term">循环崩溃</span>时，不能保证基本的通气氧合。此时需按<span class="highlight-term">紧急气道</span>处置。</td>
+                    </tr>
+                    <tr>
+                        <td class="section-header">H（hypoxia，低氧血症）</td>
+                        <td>急诊气道管理首先需要纠正低氧血症。对于自主呼吸节律尚稳定的患者，可经<span class="highlight-note">鼻导管</span>或<span class="highlight-note">面罩</span>进行氧疗；若自主呼吸不稳定或通气氧合情况仍不正常，需给予<span class="highlight-note">球囊面罩通气</span>。所有通气均应注意气道开放，避免<span class="highlight-term">CO₂潴留</span>。以上方法不能纠正低氧血症时，可判断为<span class="highlight-term">紧急气道</span>。紧急气道重点在于尽快建立有效人工气道，按困难气道流程处理，必要时直接选用<span class="highlight-term">有创气道</span>技术。</td>
+                    </tr>
+                    <tr>
+                        <td class="section-header">球囊面罩通气</td>
+                        <td>操作关键是<span class="highlight-note">密闭</span>和<span class="highlight-note">开放气道</span>。若单人操作时通气不满意，则考虑<span class="highlight-note">双人加压辅助通气</span>，配合手法开放气道、<span class="highlight-note">口咽</span>或<span class="highlight-note">鼻咽通气道</span>同时使用。若患者存在误吸和反流风险，应予<span class="highlight-term">环状软骨压迫</span>。患者<span class="highlight-term">年龄＞55岁</span>、<span class="highlight-term">肥胖（BMI＞26）</span>、<span class="highlight-term">络腮胡</span>、<span class="highlight-term">无牙</span>、<span class="highlight-term">鼾症</span>者易出现困难面罩通气。球囊面罩通气分为4级，1～2级可获得良好通气，3～4级为困难面罩通气（表39）。</td>
+                    </tr>
+                    <tr>
+                        <td class="section-header" colspan="2" style="text-align: center; font-size: 18px;">表39 面罩通气分级</td>
+                    </tr>
+                    <tr>
+                        <td class="first-row">1级 - 通气顺畅</td>
+                        <td class="first-row">仰卧嗅物位，单手扣面罩即可获得良好通气</td>
+                    </tr>
+                    <tr>
+                        <td>2级 - 轻微受阻</td>
+                        <td>置入口咽/鼻咽通气道单手扣面罩；或单人双手托下颌扣紧面罩，即可获得良好通气*</td>
+                    </tr>
+                    <tr>
+                        <td>3级 - 显著受阻</td>
+                        <td>以上方法无法获得良好通气，需要双人加压辅助通气**，能够维持SpO₂≥90%</td>
+                    </tr>
+                    <tr>
+                        <td>4级 - 通气失败</td>
+                        <td>双人加压辅助通气下不能维持SpO₂≥90%</td>
+                    </tr>
+                    <tr>
+                        <td class="section-header">注 释</td>
+                        <td>* 良好通气指排除面罩密封不严、过度漏气等因素，3次面罩正压通气的阻力适当（气道阻力≤20cmH₂O）、胸腹起伏良好、呼气末CO₂分压波形规则。<br>** 双人加压辅助通气指在嗅物位下置入口咽/鼻咽通气道，由双人四手，用力托下颌扣面罩并加压通气。</td>
+                    </tr>
+                    <tr>
+                        <td class="section-header">Sellick手法</td>
+                        <td>对于气道自我保护能力不足的患者，尤其合并<span class="highlight-term">饱腹</span>情况，建议人手充足时，使用Sellick手法压迫<span class="highlight-note">环状软骨</span>以防止反流误吸。使用<span class="highlight-note">示指</span>和<span class="highlight-note">拇指</span>下压环状软骨，封闭<span class="highlight-note">食管</span>防止反流。需要注意正确动作。该手法至气管插管完成、气囊充气后停止。在环状软骨环使用<span class="highlight-term">20～40N</span>（10N≈1kg）的力量将其压向<span class="highlight-note">椎体</span>即可产生足够的压力封闭食管防止反流。部分患者使用Sellick手法时可能影响插管或球囊面罩通气，暂停压迫环状软骨</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- 特色检索标签 -->
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 特色检索标签</div>
+            <div class="tags-container">
+                <!-- 疾病/状态标签 -->
+                <span class="tag tag-disease">深昏迷</span>
+                <span class="tag tag-disease">濒临死亡</span>
+                <span class="tag tag-disease">循环崩溃</span>
+                <span class="tag tag-disease">低氧血症</span>
+                <span class="tag tag-disease">紧急气道</span>
+                <span class="tag tag-disease">困难面罩通气</span>
+                <span class="tag tag-disease">肥胖</span>
+                <span class="tag tag-disease">鼾症</span>
+                <span class="tag tag-disease">饱腹</span>
+                <!-- 操作/程序标签 -->
+                <span class="tag tag-procedure">球囊面罩通气</span>
+                <span class="tag tag-procedure">双人加压辅助通气</span>
+                <span class="tag tag-procedure">环状软骨压迫</span>
+                <span class="tag tag-procedure">Sellick手法</span>
+                <span class="tag tag-procedure">气管插管</span>
+                <span class="tag tag-procedure">有创气道</span>
+                <!-- 设备/工具标签 -->
+                <span class="tag tag-equipment">鼻导管</span>
+                <span class="tag tag-equipment">面罩</span>
+                <span class="tag tag-equipment">口咽通气道</span>
+                <span class="tag tag-equipment">鼻咽通气道</span>
+                <!-- 评估标签 -->
+                <span class="tag tag-assessment">面罩通气分级</span>
+                <span class="tag tag-assessment">SpO₂</span>
+                <span class="tag tag-assessment">CO₂潴留</span>
+                <span class="tag tag-assessment">气道阻力</span>
+                <span class="tag tag-assessment">呼气末CO₂分压</span>
+                <!-- 解剖标签 -->
+                <span class="tag tag-anatomy">环状软骨</span>
+                <span class="tag tag-anatomy">食管</span>
+                <span class="tag tag-anatomy">椎体</span>
+            </div>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">页码：314</div>
+        
+        <!-- 关键词 -->
+        <div class="keywords-section">
+            <div class="keywords-title">🔑 关键词</div>
+            <div class="keywords-content">
+                <span>急诊气道管理</span>
+                <span>崩溃气道</span>
+                <span>crash airway</span>
+                <span>低氧血症</span>
+                <span>hypoxia</span>
+                <span>深昏迷</span>
+                <span>濒临死亡</span>
+                <span>循环崩溃</span>
+                <span>紧急气道</span>
+                <span>鼻导管</span>
+                <span>面罩</span>
+                <span>球囊面罩通气</span>
+                <span>CO₂潴留</span>
+                <span>有创气道</span>
+                <span>口咽通气道</span>
+                <span>鼻咽通气道</span>
+                <span>双人加压辅助通气</span>
+                <span>环状软骨压迫</span>
+                <span>困难面罩通气</span>
+                <span>年龄＞55岁</span>
+                <span>肥胖</span>
+                <span>BMI＞26</span>
+                <span>络腮胡</span>
+                <span>无牙</span>
+                <span>鼾症</span>
+                <span>面罩通气分级</span>
+                <span>SpO₂</span>
+                <span>Sellick手法</span>
+                <span>饱腹</span>
+                <span>食管</span>
+                <span>椎体</span>
+                <span>气道阻力</span>
+                <span>呼气末CO₂分压</span>
+            </div>
+        </div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <div class="copy-title">📋 快速复制</div>
+            <div class="copy-container">
+                <input type="text" class="copy-input" id="copyInput" value="急诊气道管理-崩溃气道低氧血症及面罩通气分级-C（crash airway）与H（hypoxia）处理及表39面罩通气分级；急诊气道管理、崩溃气道、crash airway、低氧血症、hypoxia、深昏迷、濒临死亡、循环崩溃、紧急气道、鼻导管、面罩、球囊面罩通气、CO₂潴留、有创气道、口咽通气道、鼻咽通气道、双人加压辅助通气、环状软骨压迫、困难面罩通气、年龄＞55岁、肥胖、BMI＞26、络腮胡、无牙、鼾症、面罩通气分级、SpO₂、Sellick手法、饱腹、食管、椎体、气道阻力、呼气末CO₂分压=314" readonly>
+                <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '✓ 已复制';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                alert('复制失败，请手动复制');
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isActive = btn.classList.contains('active');
+            
+            if (!isActive) {
+                btn.classList.add('active');
+                btn.innerHTML = '❤️ 已收藏';
+                
+                // 保存到localStorage
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '急诊气道管理-崩溃气道低氧血症及面罩通气分级',
+                    url: '314.html',
+                    category: '急诊医学'
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.url === '314.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                // 更新index.html的收藏（通过localStorage实现）
+                updateIndexFavorites();
+                
+                alert('已添加到收藏！');
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = '⭐ 收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '314.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                alert('已取消收藏！');
+            }
+        }
+        
+        // 更新index.html的收藏列表
+        function updateIndexFavorites() {
+            // 将收藏数据存储在localStorage中，index.html页面可以读取
+            localStorage.setItem('indexNeedsUpdate', 'true');
+        }
+        
+        // 检查收藏状态
+        function checkFavoriteStatus() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.url === '314.html');
+            
+            if (isFavorited) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('active');
+                btn.innerHTML = '❤️ 已收藏';
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            checkFavoriteStatus();
+        };
+    </script>
+</body>
+</html>
