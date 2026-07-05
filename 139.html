@@ -1,0 +1,543 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急性肝衰竭临床表现与检查*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #2c3e50;
+        }
+        
+        .header {
+            position: relative;
+            margin-bottom: 20px;
+            padding-top: 50px;
+        }
+        
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 8px rgba(52,152,219,0.3);
+            z-index: 100;
+        }
+        
+        .home-btn:hover {
+            background: #2980b9;
+        }
+        
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(52,152,219,0.3);
+            min-width: 80px;
+        }
+        
+        .nav-btn:hover {
+            background: #2980b9;
+        }
+        
+        .fav-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(231,76,60,0.3);
+            min-width: 80px;
+        }
+        
+        .fav-btn:hover {
+            background: #c0392b;
+        }
+        
+        .fav-btn.added {
+            background: #27ae60;
+        }
+        
+        h1.main-title {
+            text-align: center;
+            color: #1a5276;
+            font-size: 24px;
+            margin-bottom: 5px;
+            padding: 0 100px;
+            line-height: 1.4;
+        }
+        
+        h2.sub-title {
+            text-align: center;
+            color: #2874a6;
+            font-size: 16px;
+            margin-bottom: 20px;
+            font-weight: normal;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        
+        thead {
+            background: #2e86c1;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: 600;
+            border: 1px solid #2471a3;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e8e8e8;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        tbody td {
+            padding: 14px 12px;
+            border: 1px solid #e0e0e0;
+            vertical-align: top;
+            color: #2c3e50;
+        }
+        
+        .section-title {
+            font-weight: 700;
+            color: #1a5276;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+        
+        .bullet {
+            color: #2e86c1;
+            font-weight: bold;
+            margin-right: 4px;
+        }
+        
+        .check-mark {
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 4px;
+        }
+        
+        .tags-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1a5276;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #d4e6f1;
+            color: #1a5276;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid #aed6f1;
+        }
+        
+        .tag.disease {
+            background: #fadbd8;
+            color: #922b21;
+            border-color: #f5b7b1;
+        }
+        
+        .tag.drug {
+            background: #d5f5e3;
+            color: #1e8449;
+            border-color: #abebc6;
+        }
+        
+        .tag.bacteria {
+            background: #fdebd0;
+            color: #9c640c;
+            border-color: #f9e79f;
+        }
+        
+        .keywords-section {
+            margin: 20px 0;
+            padding: 18px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .keywords-title {
+            font-size: 15px;
+            color: #1a5276;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .keywords-content {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        
+        .page-number {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 18px;
+            color: #1a5276;
+            font-weight: 600;
+        }
+        
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 20px 0;
+            padding: 0 10px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 14px 16px;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #2c3e50;
+            background: white;
+            outline: none;
+        }
+        
+        .copy-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 15px;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(52,152,219,0.3);
+        }
+        
+        .copy-btn:hover {
+            background: #2980b9;
+        }
+        
+        .copy-btn.copied {
+            background: #27ae60;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 15px 10px;
+            }
+            
+            h1.main-title {
+                font-size: 20px;
+                padding: 0 90px;
+            }
+            
+            h2.sub-title {
+                font-size: 14px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+                font-size: 14px;
+            }
+            
+            .nav-buttons {
+                gap: 6px;
+            }
+            
+            .nav-btn, .fav-btn, .home-btn {
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+                padding: 0;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 右上角导航按钮 -->
+    <div class="nav-buttons">
+        <a href="138.html" class="nav-btn">← 上一页</a>
+        <a href="140.html" class="nav-btn">下一页 →</a>
+        <button class="fav-btn" id="favBtn" onclick="addToFavorites()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="header">
+        <h1 class="main-title">~~~~~急性肝衰竭*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~急性肝衰竭*****、分类、详细内容、病因（续）、3. 临床表现、4. 必做检查</div>
+        <h2 class="sub-title">临床表现与必做检查</h2>
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 25%;">分类</th>
+                    <th style="width: 75%;">详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="section-title">病因（续）</span></td>
+                    <td>
+                        药物、抗肿瘤药物、部分中草药、抗风湿病药物、抗代谢药物，其中对乙酰氨基酚最常见。<br><br>
+                        <span class="bullet">●</span> <b>肝毒性物质：</b>如酒精、毒蕈、有毒的化学物质等，酒精常引起慢性或慢加急性肝衰竭。<br>
+                        <span class="bullet">●</span> <b>细菌及寄生虫：</b>严重或持续感染（如脓毒症、血吸虫病等）。<br>
+                        <span class="bullet">●</span> <b>肝其他疾病：</b>肝肿瘤、肝脏手术、妊娠期急性脂肪肝、自身免疫性肝病、肝移植术后等。<br>
+                        <span class="bullet">●</span> <b>胆道疾病：</b>先天性胆道闭锁、胆汁淤积性肝病等。<br>
+                        <span class="bullet">●</span> <b>代谢异常：</b>肝豆状核变性、遗传性糖代谢障碍等。<br>
+                        <span class="bullet">●</span> <b>循环衰竭：</b>缺血缺氧、休克、充血性心力衰竭等。<br>
+                        <span class="bullet">●</span> <b>遗传代谢性疾病：</b>多见于儿童肝衰竭。<br>
+                        <span class="bullet">●</span> <b>其他：</b>创伤、热射病等。<br>
+                        <span class="bullet">●</span> <b>原因不明。</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="section-title">3. 临床表现</span></td>
+                    <td>
+                        <span class="bullet">●</span> <b>病史：</b>多为非特异性，包括乏力、嗜睡、食欲减退、恶心、呕吐、右上腹不适、瘙痒、黄疸、腹部膨隆、神志改变（嗜睡或昏迷）。询问病史时容易疏漏的部分，如饮酒史及用药史。<br><br>
+                        <span class="bullet">●</span> <b>查体：</b>黄疸，腹水，直立性低血压（血管内容量不足），皮下瘀点、瘀斑（凝血功能紊乱）。<br><br>
+                        <span class="bullet">●</span> <b>神经系统检查：</b>肝性脑病表现多样，临床分为4期。<br>
+                        <span class="check-mark">✓</span> <b>I期：</b>行为改变、言语不清、睡眠障碍。<br>
+                        <span class="check-mark">✓</span> <b>II期：</b>精神错乱、意识模糊、嗜睡。常出现扑翼样震颤，腱反射亢进，肌张力增高，锥体束征阳性。<br>
+                        <span class="check-mark">✓</span> <b>III期：</b>昏睡期。昏睡为主，患者可被唤醒，可引出扑翼样震颤。<br>
+                        <span class="check-mark">✓</span> <b>IV期：</b>昏迷期。对疼痛反应差或无反应。<br><br>
+                        <span class="bullet">●</span> <b>急性肝衰竭患者肝性脑病可能并发脑水肿，颅内压升高</b>（表现包括体循环高血压、心动过缓、呼吸抑制、癫痫发作及脑干反射异常），需关注患者瞳孔变化，警惕脑疝出现。
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="section-title">4. 必做检查</span></td>
+                    <td>
+                        <span class="bullet">●</span> <b>实验室检查</b><br>
+                        <span class="check-mark">✓</span> <b>血常规：</b>可能存在贫血，血小板计数减少。<br>
+                        <span class="check-mark">✓</span> <b>肝功能检查：</b>转氨酶、直接胆红素和间接胆红素水平均显著升高。若出现胆-酶分离现象，即胆红素水平持续上升，而酶学指标反而下降甚至恢复正常，高度提示预后不良。<br>
+                        <span class="check-mark">✓</span> <b>肾功能检查：</b>血清BUN和Cr水平升高（ALF多并发急性肾损伤）。<br>
+                        <span class="check-mark">✓</span> <b>生化检查：</b>可有低血糖、低钾血症等。<br>
+                        <span class="check-mark">✓</span> <b>凝血功能检查：</b>PT延长，INR≥1.5。
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">139</div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag disease">急性肝衰竭</span>
+            <span class="tag disease">肝性脑病</span>
+            <span class="tag disease">脑水肿</span>
+            <span class="tag disease">脓毒症</span>
+            <span class="tag disease">血吸虫病</span>
+            <span class="tag disease">肝肿瘤</span>
+            <span class="tag disease">妊娠期急性脂肪肝</span>
+            <span class="tag disease">自身免疫性肝病</span>
+            <span class="tag disease">先天性胆道闭锁</span>
+            <span class="tag disease">胆汁淤积性肝病</span>
+            <span class="tag disease">肝豆状核变性</span>
+            <span class="tag disease">遗传性糖代谢障碍</span>
+            <span class="tag disease">充血性心力衰竭</span>
+            <span class="tag disease">热射病</span>
+            <span class="tag disease">贫血</span>
+            <span class="tag disease">低钾血症</span>
+            <span class="tag disease">急性肾损伤</span>
+            <span class="tag drug">对乙酰氨基酚</span>
+            <span class="tag drug">抗肿瘤药物</span>
+            <span class="tag drug">中草药</span>
+            <span class="tag drug">抗风湿病药物</span>
+            <span class="tag drug">抗代谢药物</span>
+            <span class="tag drug">酒精</span>
+            <span class="tag bacteria">细菌</span>
+            <span class="tag bacteria">寄生虫</span>
+        </div>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">🔍 关键词</div>
+        <div class="keywords-content">
+            急性肝衰竭；肝性脑病；胆-酶分离；凝血功能障碍；脑水肿；颅内压升高；扑翼样震颤；对乙酰氨基酚；酒精；脓毒症
+        </div>
+    </div>
+    
+    <!-- 复制功能区 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="急性肝衰竭；临床表现与必做检查；急性肝衰竭、肝性脑病、胆-酶分离、凝血功能障碍、脑水肿、颅内压升高、扑翼样震颤、对乙酰氨基酚、酒精、脓毒症；=139" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            const btn = document.getElementById('favBtn');
+            const title = '~~~~~急性肝衰竭*****';
+            const url = window.location.href;
+            
+            // 获取已收藏的列表
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === url);
+            
+            if (!exists) {
+                favorites.push({
+                    title: title,
+                    url: url,
+                    page: '139'
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                btn.textContent = '✓ 已收藏';
+                btn.classList.add('added');
+                
+                // 尝试更新index.html的收藏（通过localStorage通知）
+                localStorage.setItem('newFavorite', JSON.stringify({
+                    title: title,
+                    url: url,
+                    page: '139',
+                    time: new Date().toLocaleString()
+                }));
+            } else {
+                btn.textContent = '✓ 已收藏';
+                btn.classList.add('added');
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === window.location.href);
+            if (exists) {
+                const btn = document.getElementById('favBtn');
+                btn.textContent = '✓ 已收藏';
+                btn.classList.add('added');
+            }
+        };
+    </script>
+</body>
+</html>
