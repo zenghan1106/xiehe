@@ -1,0 +1,571 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~糖皮质激素急诊使用指南与不良反应应对措施*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #333;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-top: 10px;
+        }
+        
+        .main-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .sub-title {
+            font-size: 14px;
+            color: #5d6d7e;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #2980b9;
+        }
+        
+        .btn-nav {
+            background: #5dade2;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background: #3498db;
+        }
+        
+        .btn-favorite {
+            background: #e74c3c;
+            color: white;
+            font-size: 12px;
+            padding: 6px 14px;
+        }
+        
+        .btn-favorite:hover {
+            background: #c0392b;
+        }
+        
+        .btn-favorite.active {
+            background: #27ae60;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        thead th {
+            background: #2e86c1;
+            color: white;
+            padding: 14px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e8e8e8;
+            line-height: 1.7;
+            color: #444;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 15px;
+        }
+        
+        .highlight-box {
+            background: #eaf2f8;
+            border-left: 4px solid #2e86c1;
+            padding: 10px 12px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .tags-section {
+            margin: 25px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            padding: 6px 14px;
+            border-radius: 16px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #fdebd0;
+            color: #9a7d0a;
+            border: 1px solid #f9e79f;
+        }
+        
+        .tag-drug {
+            background: #d5f5e3;
+            color: #1e8449;
+            border: 1px solid #abebc6;
+        }
+        
+        .tag-bacteria {
+            background: #fadbd8;
+            color: #943126;
+            border: 1px solid #f5b7b1;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .copy-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .copy-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 14px;
+            border: 2px solid #d5dbdb;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background: #fafafa;
+        }
+        
+        .btn-copy {
+            background: #27ae60;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+        
+        .btn-copy:hover {
+            background: #229954;
+        }
+        
+        .btn-copy.copied {
+            background: #8e44ad;
+        }
+        
+        .page-number {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 16px;
+            color: #5d6d7e;
+            font-weight: bold;
+        }
+        
+        .keywords-section {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .keywords-title {
+            font-size: 13px;
+            color: #7f8c8d;
+            margin-bottom: 8px;
+        }
+        
+        .keywords-list {
+            font-size: 13px;
+            color: #5d6d7e;
+            line-height: 1.8;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 14px;
+            display: none;
+            z-index: 1000;
+        }
+        
+        @media (max-width: 600px) {
+            .main-title {
+                font-size: 18px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">← 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="363.html" class="btn btn-nav">← 上一页</a>
+            <a href="365.html" class="btn btn-nav">下一页 →</a>
+            <button class="btn btn-favorite" id="favoriteBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <div class="header">
+        <h1 class="main-title">~~~~~糖皮质激素急诊使用指南与不良反应应对措施*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~糖皮质激素急诊使用指南与不良反应应对措施*****、糖皮质激素急诊使用要点与不良反应应对、一、不同糖皮质激素特点比较、二、糖皮质激素急诊使用时应注意的主要不良反应及应对措施、氢化可的松、泼尼松、倍他米松/地塞米松、诱发和加重感染、诱发和加重溃疡、医源性肾上腺皮质功能亢进、其他需注意的副作用</div>
+        <p class="sub-title">HPA轴 | 氢化可的松 | 泼尼松 | 倍他米松 | 地塞米松</p>
+    </div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">糖皮质激素急诊使用要点与不良反应应对</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        <div class="section-title">一、不同糖皮质激素特点比较</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 25%; font-weight: bold; color: #1a5276;">氢化可的松</td>
+                    <td>
+                        下丘脑-垂体-肾上腺轴（HPA轴）的危害较轻，临床上主要用于肾上腺皮质功能不全的替代治疗。但因其抗炎效力弱，作用时间短，不适用治疗慢性自身免疫病。氢化可的松较可的松更适用于肝功能障碍患者。其中，氢化可的松琥珀酸钠溶媒为水，氢化可的松注射液溶媒为乙醇，后者用于乙醇过敏者可能引起过敏反应，且与部分头孢类抗生素合用时可能导致双硫仑样反应。
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: #1a5276;">泼尼松</td>
+                    <td>
+                        外源性泼尼松等加强抗炎作用，降低水钠潴留，且作用时间延长，为中效制剂，是治疗自身免疫病的主要剂型。其中泼尼松龙比泼尼松更适用于肝功能障碍患者。
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: #1a5276;">倍他米松/地塞米松</td>
+                    <td>
+                        外源性的倍他米松和地塞米松更加强化抗炎作用，进一步降低了水钠潴留，并且作用时间更长，为长效制剂。但HPA轴抑制作用长且强，不宜长期使用，只适合短期使用，因此不适用于治疗慢性自身免疫病。倍他米松和地塞米松都可安全地用于肝功能障碍患者。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="section-title">二、糖皮质激素急诊使用时应注意的主要不良反应及应对措施</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: #c0392b;">诱发和加重感染</td>
+                    <td>
+                        是急诊使用糖皮质激素最担心的副作用。应用糖皮质激素使机体防御功能降低，易诱发感染和使潜在的病灶扩散。尤其是当泼尼松＞15mg/d时，可能损伤机体抗感染的免疫功能。常见有金黄色葡萄球菌、真菌和病毒感染，以及结核病灶扩散。<br><br>
+                        <div class="highlight-box">
+                            <strong>建议：</strong>糖皮质激素剂量越大，疗程越长，诱发和加重感染的风险越高。使用时需警惕感染，一旦有相关证据，及时加用抗生素。
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: #c0392b;">诱发和加重溃疡</td>
+                    <td>
+                        消化性溃疡是糖皮质激素常见的不良反应之一，与剂量有关。<br><br>
+                        <div class="highlight-box">
+                            <strong>建议：</strong>每日10mg泼尼松的胃肠道副作用远低于各种常用的NSAID，无须特殊用药。但大剂量使用糖皮质激素时建议加用胃黏膜保护剂或抑酸药。
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: #c0392b;">医源性肾上腺皮质功能亢进</td>
+                    <td>
+                        急性期应注意低钾血症、水肿、高血压、高血糖。另外，肾上腺皮质功能亢进还表现为向心性肥胖、满月脸、皮肤紫纹、痤疮、多毛、乏力等。这些副作用多在停药后逐渐自行消失或减轻。<br><br>
+                        <div class="highlight-box">
+                            <strong>建议：</strong>使用糖皮质激素期间应监测电解质、血压、血糖以及容量状况。
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: #c0392b;">其他需注意的副作用</td>
+                    <td>
+                        无菌性股骨头坏死、对生殖功能的影响、对儿童生长发育的影响、行为与精神异常等。糖皮质激素可能引起骨质疏松与自发性骨折，因此长期使用者，不论剂量大小，均应常规补充钙盐及维生素D制剂，必要时加用。
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">肾上腺皮质功能不全</span>
+            <span class="tag tag-disease">慢性自身免疫病</span>
+            <span class="tag tag-disease">肝功能障碍</span>
+            <span class="tag tag-disease">消化性溃疡</span>
+            <span class="tag tag-disease">低钾血症</span>
+            <span class="tag tag-disease">水肿</span>
+            <span class="tag tag-disease">高血压</span>
+            <span class="tag tag-disease">高血糖</span>
+            <span class="tag tag-disease">向心性肥胖</span>
+            <span class="tag tag-disease">满月脸</span>
+            <span class="tag tag-disease">皮肤紫纹</span>
+            <span class="tag tag-disease">痤疮</span>
+            <span class="tag tag-disease">多毛</span>
+            <span class="tag tag-disease">乏力</span>
+            <span class="tag tag-disease">无菌性股骨头坏死</span>
+            <span class="tag tag-disease">骨质疏松</span>
+            <span class="tag tag-disease">自发性骨折</span>
+            <span class="tag tag-drug">氢化可的松</span>
+            <span class="tag tag-drug">氢化可的松琥珀酸钠</span>
+            <span class="tag tag-drug">泼尼松</span>
+            <span class="tag tag-drug">泼尼松龙</span>
+            <span class="tag tag-drug">倍他米松</span>
+            <span class="tag tag-drug">地塞米松</span>
+            <span class="tag tag-drug">头孢类抗生素</span>
+            <span class="tag tag-drug">抗生素</span>
+            <span class="tag tag-drug">胃黏膜保护剂</span>
+            <span class="tag tag-drug">抑酸药</span>
+            <span class="tag tag-drug">NSAID</span>
+            <span class="tag tag-drug">钙盐</span>
+            <span class="tag tag-drug">维生素D</span>
+            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria">真菌</span>
+            <span class="tag tag-bacteria">病毒</span>
+            <span class="tag tag-bacteria">结核</span>
+        </div>
+    </div>
+    
+    <div class="page-number">— 364 —</div>
+    
+    <div class="keywords-section">
+        <div class="keywords-title">关键词</div>
+        <div class="keywords-list">
+            糖皮质激素 | HPA轴 | 氢化可的松 | 泼尼松 | 倍他米松 | 地塞米松 | 不良反应 | 感染 | 溃疡 | 肾上腺皮质功能亢进 | 骨质疏松 | 急诊用药
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <div class="copy-wrapper">
+            <input type="text" class="copy-input" id="copyInput" value="糖皮质激素急诊使用指南与不良反应应对措施；HPA轴、氢化可的松、泼尼松、倍他米松、地塞米松、不良反应、感染、溃疡、肾上腺皮质功能亢进、骨质疏松=364" readonly>
+            <button class="btn-copy" id="copyBtn" onclick="copyContent()">复制</button>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '已复制';
+                    btn.classList.add('copied');
+                    showToast('内容已复制到剪贴板');
+                    setTimeout(() => {
+                        btn.textContent = '复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            } else {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制';
+                btn.classList.add('copied');
+                showToast('内容已复制到剪贴板');
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFavorited = btn.classList.contains('active');
+            
+            if (!isFavorited) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                showToast('已添加到收藏');
+                
+                // 尝试添加到index.html的收藏类目
+                try {
+                    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                    const pageInfo = {
+                        title: '糖皮质激素急诊使用指南与不良反应应对措施',
+                        url: '364.html',
+                        pageNum: '364'
+                    };
+                    const exists = favorites.some(f => f.url === '364.html');
+                    if (!exists) {
+                        favorites.push(pageInfo);
+                        localStorage.setItem('favorites', JSON.stringify(favorites));
+                    }
+                } catch(e) {
+                    console.log('localStorage not available');
+                }
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+                showToast('已取消收藏');
+                
+                try {
+                    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                    const filtered = favorites.filter(f => f.url !== '364.html');
+                    localStorage.setItem('favorites', JSON.stringify(filtered));
+                } catch(e) {
+                    console.log('localStorage not available');
+                }
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            try {
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const isFavorited = favorites.some(f => f.url === '364.html');
+                const btn = document.getElementById('favoriteBtn');
+                if (isFavorited) {
+                    btn.classList.add('active');
+                    btn.textContent = '★ 已收藏';
+                }
+            } catch(e) {
+                console.log('localStorage not available');
+            }
+        };
+    </script>
+</body>
+</html>
