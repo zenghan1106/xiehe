@@ -1,0 +1,611 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊医学书籍目录-急诊症状与急诊疾病*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(17, 153, 142, 0.4);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(245, 87, 108, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .fav-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        .fav-btn.active {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 800px;
+            margin: 60px auto 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        /* 标题样式 */
+        .page-title {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+        }
+        
+        .page-title h1 {
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        /* 表格样式 */
+        .content-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .content-table thead {
+            background: linear-gradient(135deg, #2196F3 0%, #21CBF3 100%);
+        }
+        
+        .content-table thead th {
+            color: white;
+            padding: 18px 15px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .content-table tbody td {
+            padding: 12px 15px;
+            font-size: 15px;
+            line-height: 1.6;
+            color: #444;
+            border-bottom: 1px solid #e8e8e8;
+        }
+        
+        .content-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .content-table tbody tr:nth-child(even) {
+            background-color: #f8fbff;
+        }
+        
+        .content-table tbody tr:hover {
+            background-color: #e3f2fd;
+            transition: background-color 0.3s ease;
+        }
+        
+        /* 目录层级样式 */
+        .toc-chapter {
+            font-weight: bold;
+            font-size: 16px;
+            color: #1e3c72;
+            background-color: #e8f0fe;
+        }
+        
+        .toc-section {
+            padding-left: 25px;
+            color: #333;
+        }
+        
+        .toc-subsection {
+            padding-left: 50px;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        .toc-page {
+            text-align: right;
+            color: #2a5298;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        
+        /* 页码显示 */
+        .page-number {
+            text-align: center;
+            padding: 20px;
+            color: #888;
+            font-size: 16px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            padding: 20px;
+            background: #f8fbff;
+            border-top: 2px solid #e3f2fd;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        /* 底部编辑框区域 */
+        .footer-section {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e8e8e8;
+        }
+        
+        .copy-box-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #555;
+            background: #fafafa;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .copy-btn.copied {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            padding: 15px;
+            color: #888;
+            font-size: 13px;
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 14px;
+            display: none;
+            z-index: 2000;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .page-title h1 {
+                font-size: 18px;
+            }
+            
+            .content-table thead th {
+                font-size: 16px;
+                padding: 15px 12px;
+            }
+            
+            .content-table tbody td {
+                font-size: 14px;
+                padding: 10px 12px;
+            }
+            
+            .toc-section {
+                padding-left: 15px;
+            }
+            
+            .toc-subsection {
+                padding-left: 30px;
+            }
+            
+            .nav-btn, .home-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <button class="home-btn" onclick="window.location.href='index.html'">🏠 返回首页</button>
+    
+    <!-- 上一页下一页按钮 -->
+    <div class="nav-btns">
+        <button class="nav-btn" onclick="window.location.href='9.html'">⬅ 上一页</button>
+        <button class="nav-btn" onclick="window.location.href='11.html'">下一页 ➡</button>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="点击收藏">⭐</button>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 标题 -->
+        <div class="page-title">
+            <h1>~~~~~急诊医学书籍目录-急诊症状与急诊疾病*****</h1>
+        </div>
+        
+        <!-- 表格内容 -->
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th colspan="2">📖 目 录</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="toc-chapter">
+                    <td>急诊症状</td>
+                    <td class="toc-page">(1)</td>
+                </tr>
+                <tr>
+                    <td class="toc-section">呼吸困难</td>
+                    <td class="toc-page">(3)</td>
+                </tr>
+                <tr>
+                    <td class="toc-section">咯血</td>
+                    <td class="toc-page">(6)</td>
+                </tr>
+                <tr>
+                    <td class="toc-section">胸痛</td>
+                    <td class="toc-page">(8)</td>
+                </tr>
+                <tr>
+                    <td class="toc-section">腹痛</td>
+                    <td class="toc-page">(14)</td>
+                </tr>
+                <tr>
+                    <td class="toc-section">腹泻</td>
+                    <td class="toc-page">(17)</td>
+                </tr>
+                <tr>
+                    <td class="toc-section">呕吐</td>
+                    <td class="toc-page">(18)</td>
+                </tr>
+                <tr>
+                    <td class="toc-section">黄疸</td>
+                    <td class="toc-page">(22)</td>
+                </tr>
+                <tr>
+                    <td class="toc-section">昏迷</td>
+                    <td class="toc-page">(24)</td>
+                </tr>
+                <tr>
+                    <td class="toc-section">抽搐</td>
+                    <td class="toc-page">(28)</td>
+                </tr>
+                <tr>
+                    <td class="toc-section">晕厥</td>
+                    <td class="toc-page">(30)</td>
+                </tr>
+                <tr>
+                    <td class="toc-section">头晕</td>
+                    <td class="toc-page">(35)</td>
+                </tr>
+                <tr>
+                    <td class="toc-section">头痛</td>
+                    <td class="toc-page">(38)</td>
+                </tr>
+                <tr>
+                    <td class="toc-section">发热</td>
+                    <td class="toc-page">(43)</td>
+                </tr>
+                <tr>
+                    <td class="toc-section">腰痛</td>
+                    <td class="toc-page">(45)</td>
+                </tr>
+                <tr>
+                    <td class="toc-section">血尿</td>
+                    <td class="toc-page">(47)</td>
+                </tr>
+                <tr>
+                    <td class="toc-section">少尿</td>
+                    <td class="toc-page">(49)</td>
+                </tr>
+                <tr>
+                    <td class="toc-section">急诊常见疾病在症状鉴别中的陷阱</td>
+                    <td class="toc-page">(51)</td>
+                </tr>
+                <tr class="toc-chapter">
+                    <td>急诊疾病</td>
+                    <td class="toc-page">(55)</td>
+                </tr>
+                <tr>
+                    <td class="toc-section">呼吸系统疾病急诊</td>
+                    <td class="toc-page">(57)</td>
+                </tr>
+                <tr>
+                    <td class="toc-subsection">慢性阻塞性肺疾病急性加重</td>
+                    <td class="toc-page">(57)</td>
+                </tr>
+                <tr>
+                    <td class="toc-subsection">哮喘急性发作</td>
+                    <td class="toc-page">(61)</td>
+                </tr>
+                <tr>
+                    <td class="toc-subsection">肺栓塞</td>
+                    <td class="toc-page">(66)</td>
+                </tr>
+                <tr>
+                    <td class="toc-subsection">社区获得性肺炎</td>
+                    <td class="toc-page">(69)</td>
+                </tr>
+                <tr>
+                    <td class="toc-subsection">医院获得性肺炎</td>
+                    <td class="toc-page">(72)</td>
+                </tr>
+                <tr>
+                    <td class="toc-subsection">气胸</td>
+                    <td class="toc-page">(76)</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align:center; color:#999; padding:20px;">— 第 1 页 —</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 标签区域 -->
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 检索标签（来源于正文内容）：</div>
+            <div class="tags-container">
+                <span class="tag">急诊症状</span>
+                <span class="tag">呼吸困难</span>
+                <span class="tag">咯血</span>
+                <span class="tag">胸痛</span>
+                <span class="tag">腹痛</span>
+                <span class="tag">腹泻</span>
+                <span class="tag">呕吐</span>
+                <span class="tag">黄疸</span>
+                <span class="tag">昏迷</span>
+                <span class="tag">抽搐</span>
+                <span class="tag">晕厥</span>
+                <span class="tag">头晕</span>
+                <span class="tag">头痛</span>
+                <span class="tag">发热</span>
+                <span class="tag">腰痛</span>
+                <span class="tag">血尿</span>
+                <span class="tag">少尿</span>
+                <span class="tag">急诊疾病</span>
+                <span class="tag">呼吸系统疾病急诊</span>
+                <span class="tag">慢性阻塞性肺疾病急性加重</span>
+                <span class="tag">哮喘急性发作</span>
+                <span class="tag">肺栓塞</span>
+                <span class="tag">社区获得性肺炎</span>
+                <span class="tag">医院获得性肺炎</span>
+                <span class="tag">气胸</span>
+            </div>
+        </div>
+        
+        <!-- 底部编辑框区域 -->
+        <div class="footer-section">
+            <div class="copy-box-wrapper">
+                <input type="text" class="copy-input" id="copyInput" value="急诊医学书籍目录-急诊症状与急诊疾病；急诊症状；呼吸困难；咯血；胸痛；腹痛；腹泻；呕吐；黄疸；昏迷；抽搐；晕厥；头晕；头痛；发热；腰痛；血尿；少尿；急诊疾病；呼吸系统疾病急诊；慢性阻塞性肺疾病急性加重；哮喘急性发作；肺栓塞；社区获得性肺炎；医院获得性肺炎；气胸；=10" readonly>
+                <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">📋 复制</button>
+            </div>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">页码：10</div>
+        
+        <!-- 关键词 -->
+        <div class="keywords">关键词：急诊症状 | 呼吸困难 | 咯血 | 胸痛 | 腹痛 | 腹泻 | 呕吐 | 黄疸 | 昏迷 | 抽搐 | 晕厥 | 头晕 | 头痛 | 发热 | 腰痛 | 血尿 | 少尿 | 急诊疾病 | 呼吸系统疾病急诊 | 慢性阻塞性肺疾病急性加重 | 哮喘急性发作 | 肺栓塞 | 社区获得性肺炎 | 医院获得性肺炎 | 气胸</div>
+    </div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✅ 已复制';
+            btn.classList.add('copied');
+            showToast('内容已复制到剪贴板！');
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = localStorage.getItem('fav_10') === 'true';
+            
+            if (!isFav) {
+                localStorage.setItem('fav_10', 'true');
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+                showToast('已添加到收藏！');
+                
+                // 添加到index的收藏类目
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    id: '10',
+                    title: '急诊医学书籍目录-急诊症状与急诊疾病',
+                    url: '10.html',
+                    date: '2021年7月1日'
+                };
+                const exists = favorites.find(f => f.id === '10');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            } else {
+                localStorage.setItem('fav_10', 'false');
+                btn.classList.remove('active');
+                btn.innerHTML = '⭐';
+                showToast('已取消收藏');
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.id !== '10');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const isFav = localStorage.getItem('fav_10') === 'true';
+            const btn = document.getElementById('favBtn');
+            if (isFav) {
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+            }
+        };
+    </script>
+</body>
+</html>
