@@ -1,0 +1,659 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~医学缩略语续表396页*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimSun", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 顶部导航区域 */
+        .nav-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .left-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .right-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #4a90d9;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 3px 8px rgba(74, 144, 217, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页下一页按钮 */
+        .page-btn {
+            display: inline-block;
+            padding: 8px 18px;
+            background: #5cb85c;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            box-shadow: 0 2px 6px rgba(92, 184, 92, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .page-btn:hover {
+            background: #4cae4c;
+            transform: translateY(-2px);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            display: inline-block;
+            padding: 8px 18px;
+            background: #f0ad4e;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(240, 173, 78, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .fav-btn:hover {
+            background: #ec971f;
+            transform: translateY(-2px);
+        }
+        
+        /* 标题样式 */
+        .main-title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 15px 0 25px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            letter-spacing: 2px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        /* 表头样式 - 蓝色 */
+        thead th {
+            background: linear-gradient(180deg, #4a90d9 0%, #357abd 100%);
+            color: #fff;
+            padding: 15px 12px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        
+        thead th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+        
+        thead th:last-child {
+            border-radius: 0 12px 0 0;
+        }
+        
+        /* 表格内容样式 */
+        tbody td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4fd;
+            transition: background 0.3s ease;
+        }
+        
+        tbody td:first-child {
+            font-weight: bold;
+            color: #2c3e50;
+            width: 18%;
+        }
+        
+        tbody td:nth-child(2) {
+            color: #555;
+            width: 42%;
+            word-break: break-all;
+        }
+        
+        tbody td:nth-child(3) {
+            color: #444;
+            width: 40%;
+        }
+        
+        /* 标签区域 */
+        .tag-section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .tag-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4a90d9;
+        }
+        
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.4);
+        }
+        
+        .tag.disease {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .tag.bacteria {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .tag.drug {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+        
+        /* 底部编辑框区域 */
+        .bottom-section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .copy-area {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #555;
+            background: #fafafa;
+        }
+        
+        .copy-btn {
+            padding: 12px 25px;
+            background: #5cb85c;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #4cae4c;
+        }
+        
+        .copy-btn.copied {
+            background: #5bc0de;
+        }
+        
+        /* 页码显示 */
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #777;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #ddd;
+        }
+        
+        .page-number span {
+            color: #4a90d9;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        
+        /* 关键词区域 */
+        .keywords {
+            text-align: center;
+            margin-top: 15px;
+            padding: 15px;
+            background: #f0f4f8;
+            border-radius: 8px;
+        }
+        
+        .keywords-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .keywords-content {
+            font-size: 13px;
+            color: #888;
+            line-height: 1.8;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 20px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 8px;
+                font-size: 13px;
+            }
+            
+            .copy-area {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航区域 -->
+    <div class="nav-area">
+        <div class="left-nav">
+            <a href="index.html" class="home-btn">← 返回首页</a>
+        </div>
+        <div class="right-nav">
+            <a href="402.html" class="page-btn">上一页</a>
+            <a href="404.html" class="page-btn">下一页</a>
+            <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~医学缩略语续表396页*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~医学缩略语续表396页*****、英文缩略语、英文全称、中文全称、MDR、MFI、MG、MODS、MOF、MRA、MRCP、MRI、MRSA、MSAP、MSSA、NCPE、NDI、NIHSS、NOAC、NS、NSAID、NSTEMI、NSTI、NT-proBNP、OLV、OPI、PAWP、PC、PCC、PCCO</div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>英文缩略语</th>
+                    <th>英文全称</th>
+                    <th>中文全称</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>MDR</td>
+                    <td>multidrug resistant</td>
+                    <td>多重耐药</td>
+                </tr>
+                <tr>
+                    <td>MFI</td>
+                    <td>microvascular flow index</td>
+                    <td>微血管流动指数</td>
+                </tr>
+                <tr>
+                    <td>MG</td>
+                    <td>myasthenia gravis</td>
+                    <td>重症肌无力</td>
+                </tr>
+                <tr>
+                    <td>MODS</td>
+                    <td>multiple organ dysfunction syndrome</td>
+                    <td>多器官功能障碍综合征</td>
+                </tr>
+                <tr>
+                    <td>MOF</td>
+                    <td>multiple organ failure</td>
+                    <td>多器官功能衰竭</td>
+                </tr>
+                <tr>
+                    <td>MRA</td>
+                    <td>magnetic resonance angiography</td>
+                    <td>磁共振血管造影</td>
+                </tr>
+                <tr>
+                    <td>MRCP</td>
+                    <td>magnetic resonance cholangiopancreatography</td>
+                    <td>磁共振胆胰管造影</td>
+                </tr>
+                <tr>
+                    <td>MRI</td>
+                    <td>magnetic resonance imaging</td>
+                    <td>磁共振成像</td>
+                </tr>
+                <tr>
+                    <td>MRSA</td>
+                    <td>methicillin resistant Staphylococcus aureus</td>
+                    <td>耐甲氧西林金黄色葡萄球菌</td>
+                </tr>
+                <tr>
+                    <td>MSAP</td>
+                    <td>moderate severe acute pancreatitis</td>
+                    <td>中度重症急性胰腺炎</td>
+                </tr>
+                <tr>
+                    <td>MSSA</td>
+                    <td>methicillin sensitive Staphylococcus aureus</td>
+                    <td>甲氧西林敏感的金黄色葡萄球菌</td>
+                </tr>
+                <tr>
+                    <td>NCPE</td>
+                    <td>non-cardiogenic pulmonary edema</td>
+                    <td>非心源性肺水肿</td>
+                </tr>
+                <tr>
+                    <td>NDI</td>
+                    <td>renal diabetes insipidus</td>
+                    <td>肾性尿崩症</td>
+                </tr>
+                <tr>
+                    <td>NIHSS</td>
+                    <td>National Institutes of Health Stroke Scale</td>
+                    <td>美国国立卫生研究院脑卒中量表</td>
+                </tr>
+                <tr>
+                    <td>NOAC</td>
+                    <td>new oral anticoagulant</td>
+                    <td>非维生素K口服抗凝药</td>
+                </tr>
+                <tr>
+                    <td>NS</td>
+                    <td>normal saline</td>
+                    <td>生理盐水</td>
+                </tr>
+                <tr>
+                    <td>NS</td>
+                    <td>normal saline</td>
+                    <td>生理盐水</td>
+                </tr>
+                <tr>
+                    <td>NSAID</td>
+                    <td>nonsteroidal anti-inflammatory drug</td>
+                    <td>非甾体抗炎药</td>
+                </tr>
+                <tr>
+                    <td>NSTEMI</td>
+                    <td>non-ST segment elevation myocardial infarction</td>
+                    <td>非ST段抬高心肌梗死</td>
+                </tr>
+                <tr>
+                    <td>NSTI</td>
+                    <td>necrotizing soft tissue infection</td>
+                    <td>坏死性软组织感染</td>
+                </tr>
+                <tr>
+                    <td>NT-proBNP</td>
+                    <td>N-terminal pro-brain natriuretic peptide</td>
+                    <td>N-末端脑钠肽前蛋白</td>
+                </tr>
+                <tr>
+                    <td>OLV</td>
+                    <td>open lung ventilation</td>
+                    <td>开放性肺通气</td>
+                </tr>
+                <tr>
+                    <td>OPI</td>
+                    <td>organic phosphorus insecticides</td>
+                    <td>有机磷杀虫药</td>
+                </tr>
+                <tr>
+                    <td>PAWP</td>
+                    <td>pulmonary capillary wedge pressure</td>
+                    <td>肺毛细血管楔压</td>
+                </tr>
+                <tr>
+                    <td>PC</td>
+                    <td>pressure control</td>
+                    <td>压力控制</td>
+                </tr>
+                <tr>
+                    <td>PCC</td>
+                    <td>phaeochromocytoma crisis</td>
+                    <td>嗜铬细胞瘤危象</td>
+                </tr>
+                <tr>
+                    <td>PCCO</td>
+                    <td>pulse contour cardiac output</td>
+                    <td>每次心脏搏动的心输出量</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tag-section">
+        <div class="tag-title">🏷️ 特色检索标签</div>
+        <div class="tag-container">
+            <span class="tag disease">重症肌无力</span>
+            <span class="tag disease">多器官功能障碍综合征</span>
+            <span class="tag disease">多器官功能衰竭</span>
+            <span class="tag disease">中度重症急性胰腺炎</span>
+            <span class="tag disease">非心源性肺水肿</span>
+            <span class="tag disease">肾性尿崩症</span>
+            <span class="tag disease">非ST段抬高心肌梗死</span>
+            <span class="tag disease">坏死性软组织感染</span>
+            <span class="tag disease">嗜铬细胞瘤危象</span>
+            <span class="tag bacteria">耐甲氧西林金黄色葡萄球菌</span>
+            <span class="tag bacteria">甲氧西林敏感的金黄色葡萄球菌</span>
+            <span class="tag drug">多重耐药</span>
+            <span class="tag drug">微血管流动指数</span>
+            <span class="tag drug">磁共振血管造影</span>
+            <span class="tag drug">磁共振胆胰管造影</span>
+            <span class="tag drug">磁共振成像</span>
+            <span class="tag drug">美国国立卫生研究院脑卒中量表</span>
+            <span class="tag drug">非维生素K口服抗凝药</span>
+            <span class="tag drug">生理盐水</span>
+            <span class="tag drug">非甾体抗炎药</span>
+            <span class="tag drug">N-末端脑钠肽前蛋白</span>
+            <span class="tag drug">开放性肺通气</span>
+            <span class="tag drug">有机磷杀虫药</span>
+            <span class="tag drug">肺毛细血管楔压</span>
+            <span class="tag drug">压力控制</span>
+            <span class="tag drug">每次心脏搏动的心输出量</span>
+        </div>
+    </div>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <!-- 复制编辑框 -->
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyText" value="医学缩略语续表396页；MDR,MFI,MG,MODS,MOF,MRA,MRCP,MRI,MRSA,MSAP,MSSA,NCPE,NDI,NIHSS,NOAC,NS,NSAID,NSTEMI,NSTI,NT-proBNP,OLV,OPI,PAWP,PC,PCC,PCCO；多重耐药,微血管流动指数,重症肌无力,多器官功能障碍综合征,多器官功能衰竭,磁共振血管造影,磁共振胆胰管造影,磁共振成像,耐甲氧西林金黄色葡萄球菌,中度重症急性胰腺炎,甲氧西林敏感的金黄色葡萄球菌,非心源性肺水肿,肾性尿崩症,美国国立卫生研究院脑卒中量表,非维生素K口服抗凝药,生理盐水,非甾体抗炎药,非ST段抬高心肌梗死,坏死性软组织感染,N-末端脑钠肽前蛋白,开放性肺通气,有机磷杀虫药,肺毛细血管楔压,压力控制,嗜铬细胞瘤危象,每次心脏搏动的心输出量=396" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+        
+        <!-- 关键词 -->
+        <div class="keywords">
+            <div class="keywords-title">🔍 关键词</div>
+            <div class="keywords-content">
+                MDR | MFI | MG | MODS | MOF | MRA | MRCP | MRI | MRSA | MSAP | MSSA | NCPE | NDI | NIHSS | NOAC | NS | NSAID | NSTEMI | NSTI | NT-proBNP | OLV | OPI | PAWP | PC | PCC | PCCO
+            </div>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">
+            页码：<span>396</span>
+        </div>
+    </div>
+    
+    <script>
+        // 复制到剪贴板功能
+        function copyToClipboard() {
+            const copyInput = document.getElementById('copyText');
+            copyInput.select();
+            copyInput.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyInput.value).then(function() {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            
+            setTimeout(function() {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            const btn = document.querySelector('.fav-btn');
+            const title = document.querySelector('.main-title').textContent.replace(/[~*]/g, '');
+            const url = window.location.href;
+            
+            // 尝试使用本地存储模拟收藏功能
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === url);
+            
+            if (!exists) {
+                favorites.push({
+                    title: title,
+                    url: url,
+                    page: '396'
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                btn.textContent = '★ 已收藏';
+                btn.style.background = '#d9534f';
+                
+                // 尝试更新index.html的收藏（通过localStorage通知）
+                localStorage.setItem('newFavorite', JSON.stringify({
+                    title: title,
+                    url: url,
+                    page: '396',
+                    time: new Date().toLocaleString()
+                }));
+                
+                alert('已成功添加到收藏！请在首页查看。');
+            } else {
+                alert('该页面已在收藏夹中！');
+            }
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const url = window.location.href;
+            const exists = favorites.some(f => f.url === url);
+            
+            if (exists) {
+                const btn = document.querySelector('.fav-btn');
+                btn.textContent = '★ 已收藏';
+                btn.style.background = '#d9534f';
+            }
+        };
+        
+        // 标签点击搜索功能
+        document.querySelectorAll('.tag').forEach(function(tag) {
+            tag.addEventListener('click', function() {
+                const text = this.textContent;
+                alert('搜索标签: ' + text + '\n（可在此实现跳转或筛选功能）');
+            });
+        });
+    </script>
+</body>
+</html>
