@@ -1,0 +1,384 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~细菌性痢疾与感染性心内膜炎*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 15px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .back-btn {
+            background-color: #1976d2;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background-color: #1976d2;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .fav-btn {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1565c0;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 12px;
+            background-color: #e3f2fd;
+            border-radius: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        thead {
+            background-color: #1976d2;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 17px;
+            font-weight: bold;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+            font-size: 14px;
+        }
+        
+        tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            color: #1565c0;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        
+        .sub-item {
+            color: #424242;
+        }
+        
+        .check {
+            color: #2e7d32;
+        }
+        
+        .tags-container {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            color: #1565c0;
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: #e3f2fd;
+            color: #1565c0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 4px;
+            font-size: 13px;
+            border: 1px solid #bbdefb;
+        }
+        
+        .tag.disease {
+            background-color: #ffebee;
+            color: #c62828;
+            border-color: #ffcdd2;
+        }
+        
+        .tag.drug {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border-color: #c8e6c9;
+        }
+        
+        .tag.bacteria {
+            background-color: #fff3e0;
+            color: #ef6c00;
+            border-color: #ffe0b2;
+        }
+        
+        .copy-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #bbdefb;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+        
+        #copyInput:focus {
+            border-color: #1976d2;
+        }
+        
+        .copy-btn {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .copy-btn:active {
+            background-color: #388e3c;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #757575;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #9e9e9e;
+            font-size: 12px;
+            margin-top: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="208.html" class="nav-btn">上一页</a>
+            <a href="210.html" class="nav-btn">下一页</a>
+            <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~细菌性痢疾与感染性心内膜炎*****</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>分类</th>
+                <th>内容详情</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="section-title">细菌性痢疾 - 流行病学</td>
+                <td>
+                    <span class="check">✓</span> 常年散发，夏、秋季多见<br>
+                    <span class="check">✓</span> 可通过污染手、食品、水源或生活接触，或苍蝇、蟑螂等间接方式传播
+                </td>
+            </tr>
+            <tr>
+                <td class="section-title">细菌性痢疾 - 临床表现（症状）</td>
+                <td>
+                    <span class="check">✓</span> 潜伏期1～7天，平均3天<br>
+                    <span class="check">✓</span> 通常以全身症状起病，典型表现为高热、腹部绞痛，以及血性、黏液性腹泻<br>
+                    <span class="check">✓</span> 里急后重常见
+                </td>
+            </tr>
+            <tr>
+                <td class="section-title">细菌性痢疾 - 并发症</td>
+                <td>
+                    <span class="check">✓</span> 肠道并发症：直肠炎、直肠脱垂、中毒性巨结肠、肠梗阻和结肠穿孔<br>
+                    <span class="check">✓</span> 全身并发症：①菌血症；②代谢紊乱（低血容量、低钠血症和蛋白丢失性肠病）；③类白血病反应；④神经系统疾病（癫痫发作和脑病）；⑤反应性关节炎；⑥痢疾杆菌菌所致溶血性尿毒综合征（HUS）
+                </td>
+            </tr>
+            <tr>
+                <td class="section-title">细菌性痢疾 - 诊断</td>
+                <td>
+                    • 对于有频繁少量血样便、腹部绞痛、里急后重和发热（尤其是伴粪便白细胞）的患者，应怀疑志贺菌感染<br>
+                    • 粪便培养可确诊
+                </td>
+            </tr>
+            <tr>
+                <td class="section-title">细菌性痢疾 - 急诊处理</td>
+                <td>
+                    <b>抗生素治疗：</b>适用于已证实为有症状的志贺菌属感染的成人患者<br>
+                    <span class="check">✓</span> 可选择药物通常包括喹诺酮类、阿奇霉素和第三代头孢菌素（头孢克肟或头孢曲松）<br>
+                    <span class="check">✓</span> 若证实分离株对复方磺胺甲噁唑和氨苄西林敏感，也可使用这些药物<br><br>
+                    <b>对症治疗：</b>补液，多数病例口服补液即足够
+                </td>
+            </tr>
+            <tr>
+                <td class="section-title">感染性心内膜炎 - 定义</td>
+                <td>
+                    • 感染性心内膜炎（IE）：心内膜炎感染分为急性感染性心内膜炎（AIE）和亚急性感染性心内膜炎（SIE）<br><br>
+                    <b>AIE：</b>正常瓣膜的强侵袭性感染（如金黄色葡萄球菌、乙型溶血性链球菌、肺炎链球菌）<br><br>
+                    <b>SIE：</b>异常瓣膜的弱侵袭性感染（如草绿色链球菌）
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="tags-container">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <span class="tag disease">细菌性痢疾</span>
+        <span class="tag disease">志贺菌感染</span>
+        <span class="tag disease">感染性心内膜炎</span>
+        <span class="tag disease">急性感染性心内膜炎</span>
+        <span class="tag disease">亚急性感染性心内膜炎</span>
+        <span class="tag disease">直肠炎</span>
+        <span class="tag disease">直肠脱垂</span>
+        <span class="tag disease">中毒性巨结肠</span>
+        <span class="tag disease">肠梗阻</span>
+        <span class="tag disease">结肠穿孔</span>
+        <span class="tag disease">菌血症</span>
+        <span class="tag disease">类白血病反应</span>
+        <span class="tag disease">癫痫发作</span>
+        <span class="tag disease">脑病</span>
+        <span class="tag disease">反应性关节炎</span>
+        <span class="tag disease">溶血性尿毒综合征</span>
+        <span class="tag disease">HUS</span>
+        <span class="tag drug">喹诺酮类</span>
+        <span class="tag drug">阿奇霉素</span>
+        <span class="tag drug">第三代头孢菌素</span>
+        <span class="tag drug">头孢克肟</span>
+        <span class="tag drug">头孢曲松</span>
+        <span class="tag drug">复方磺胺甲噁唑</span>
+        <span class="tag drug">氨苄西林</span>
+        <span class="tag bacteria">志贺菌</span>
+        <span class="tag bacteria">痢疾杆菌</span>
+        <span class="tag bacteria">金黄色葡萄球菌</span>
+        <span class="tag bacteria">乙型溶血性链球菌</span>
+        <span class="tag bacteria">肺炎链球菌</span>
+        <span class="tag bacteria">草绿色链球菌</span>
+    </div>
+    
+    <div class="copy-section">
+        <div class="copy-box">
+            <input type="text" id="copyInput" value="细菌性痢疾与感染性心内膜炎；志贺菌感染、感染性心内膜炎、喹诺酮类、阿奇霉素、头孢克肟、头孢曲松、金黄色葡萄球菌、草绿色链球菌；=209" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <div class="page-number">页码：209</div>
+    
+    <div class="keywords">
+        关键词：细菌性痢疾 | 志贺菌 | 感染性心内膜炎 | 喹诺酮类 | 阿奇霉素 | 头孢克肟 | 头孢曲松 | 金黄色葡萄球菌 | 草绿色链球菌 | HUS
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                alert('已复制到剪贴板！');
+            });
+        }
+        
+        function addToFavorites() {
+            const title = document.title;
+            const url = window.location.href;
+            
+            // 尝试使用本地存储模拟收藏功能
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === url);
+            
+            if (!exists) {
+                favorites.push({
+                    title: title,
+                    url: url,
+                    page: '209'
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已添加到收藏！');
+            } else {
+                alert('该页面已在收藏中！');
+            }
+        }
+    </script>
+</body>
+</html>
