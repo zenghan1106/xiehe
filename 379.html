@@ -1,0 +1,507 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~异丙肾上腺素与多巴酚丁胺药理作用及临床应用*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 144, 217, 0.3);
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .btn-nav {
+            background: #5cb85c;
+            color: white;
+            padding: 8px 18px;
+            font-size: 13px;
+        }
+        
+        .btn-nav:hover {
+            background: #4cae4c;
+            transform: translateY(-2px);
+        }
+        
+        .btn-favorite {
+            background: #f0ad4e;
+            color: white;
+            padding: 8px 18px;
+            font-size: 13px;
+        }
+        
+        .btn-favorite:hover {
+            background: #ec971f;
+            transform: translateY(-2px);
+        }
+        
+        .btn-favorite.active {
+            background: #d9534f;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 22px;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        thead th {
+            background: #4a90d9;
+            color: white;
+            padding: 16px 12px;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: left;
+        }
+        
+        tbody td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #444;
+        }
+        
+        tbody tr:hover {
+            background: #f8fbff;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        
+        tbody tr:nth-child(even):hover {
+            background: #f0f7ff;
+        }
+        
+        .section-title {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .drug-name {
+            color: #c0392b;
+            font-weight: 600;
+        }
+        
+        .highlight-box {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #856404;
+        }
+        
+        .tags-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+        
+        .tag-disease:hover {
+            background: #c62828;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #90caf9;
+        }
+        
+        .tag-drug:hover {
+            background: #1565c0;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .tag-bacteria:hover {
+            background: #2e7d32;
+            color: white;
+        }
+        
+        .bottom-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .keywords {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .keywords strong {
+            color: #2c3e50;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background: #fafafa;
+        }
+        
+        .btn-copy {
+            background: #6c5ce7;
+            color: white;
+            padding: 12px 25px;
+            white-space: nowrap;
+        }
+        
+        .btn-copy:hover {
+            background: #5b4cdb;
+            transform: translateY(-2px);
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 1000;
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            .btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-top">
+        <a href="index.html" class="btn btn-home">← 返回首页</a>
+        <div class="nav-right">
+            <a href="378.html" class="btn btn-nav">上一页</a>
+            <a href="380.html" class="btn btn-nav">下一页</a>
+            <button class="btn btn-favorite" id="favoriteBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~异丙肾上腺素与多巴酚丁胺药理作用及临床应用*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类与药物</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2" class="section-title">【多巴酚丁胺临床应用】</td>
+                </tr>
+                <tr>
+                    <td>主要适应症</td>
+                    <td>主要用于治疗难治性心力衰竭和心源性休克，多巴酚丁胺可增加心肌收缩力，增加心输出量和降低肺毛细血管楔压，并使左心室充盈压明显减低，使心功能改善，继发促进排钠、排水以消除水肿。</td>
+                </tr>
+                <tr>
+                    <td>禁忌情况</td>
+                    <td>由于有低血压的风险，<span class="highlight-box">不用于感染性休克的治疗</span>。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">【多巴酚丁胺不良反应】</td>
+                </tr>
+                <tr>
+                    <td>常见反应</td>
+                    <td>用药期间可引起血压升高、心悸、头痛、气短等不良反应，偶致室性心律失常。</td>
+                </tr>
+                <tr>
+                    <td>禁忌与慎用</td>
+                    <td>梗阻性肥厚型心肌病患者禁用，心房颤动、高血压患者慎用。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">【异丙肾上腺素】</td>
+                </tr>
+                <tr>
+                    <td>药物来源</td>
+                    <td>人工合成品，化学结构是去甲肾上腺素氨基上的氢原子被异丙基取代，是经典的β₁、β₂受体激动药。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">【异丙肾上腺素药理作用】</td>
+                </tr>
+                <tr>
+                    <td>总体特点</td>
+                    <td>主要激动β受体，对β₁和β₂受体选择性很低，对α受体几乎无作用。</td>
+                </tr>
+                <tr>
+                    <td>心脏作用</td>
+                    <td>对心脏β₁受体具有强大的激动作用，表现为正性肌力和正性频率作用，缩短收缩期和舒张期。与肾上腺素相比，异丙肾上腺素加快心率、加速传导的作用较强，心肌耗氧量明显增加，对窦房结有显著兴奋作用，也能引起心律失常，较少产生心室颤动。</td>
+                </tr>
+                <tr>
+                    <td>血管作用</td>
+                    <td>对血管有舒张作用，主要激动β₂受体使骨骼肌血管舒张，对肾血管和肠系膜血管舒张作用较弱，对冠状动脉也有舒张作用，也有增加组织血流量作用。由于心脏兴奋和外周血管舒张，使收缩压升高而舒张压略下降，此时冠状动脉血流量增加；但如静脉注射给药，则可引起舒张压明显下降，降低了冠状血管灌注压，冠状动脉有效血流量不增加。</td>
+                </tr>
+                <tr>
+                    <td>支气管平滑肌</td>
+                    <td>可激动β₂受体，舒张支气管平滑肌，作用比肾上腺素略强，并具有抑制组胺等过敏性物质释放的作用，对支气管黏膜血管无收缩作用，因此消除黏膜水肿的作用不如肾上腺素，久用可产生耐受性。</td>
+                </tr>
+                <tr>
+                    <td>其他作用</td>
+                    <td>可增加肝糖原、肌糖原分解，增加组织耗氧量，其升高血中游离脂肪酸作用与肾上腺素相似，而升高血糖作用较弱。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">【异丙肾上腺素体内过程】</td>
+                </tr>
+                <tr>
+                    <td>吸收代谢</td>
+                    <td>口服易在肠黏膜与硫酸基结合而失效；气雾剂吸入给药，吸收较快；舌下含药因能舒张局部血管，少量可从黏膜下舌下静脉丛迅速吸收。吸收后主要在肝及其他组织中被COMT所代谢。异丙肾上腺素较少被MAO代谢，也较少被去甲肾上腺素能神经所摄取，因此维持时间较肾上腺素略长。</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">难治性心力衰竭</span>
+            <span class="tag tag-disease">心源性休克</span>
+            <span class="tag tag-disease">感染性休克</span>
+            <span class="tag tag-disease">室性心律失常</span>
+            <span class="tag tag-disease">梗阻性肥厚型心肌病</span>
+            <span class="tag tag-disease">心房颤动</span>
+            <span class="tag tag-disease">高血压</span>
+            <span class="tag tag-disease">低血压</span>
+            <span class="tag tag-drug">异丙肾上腺素</span>
+            <span class="tag tag-drug">多巴酚丁胺</span>
+            <span class="tag tag-drug">肾上腺素</span>
+            <span class="tag tag-drug">去甲肾上腺素</span>
+        </div>
+    </div>
+    
+    <div class="bottom-section">
+        <div class="keywords">
+            <strong>关键词：</strong>异丙肾上腺素；多巴酚丁胺；β受体激动药；难治性心力衰竭；心源性休克；感染性休克；心肌收缩力；肺毛细血管楔压；室性心律失常；梗阻性肥厚型心肌病；支气管平滑肌；COMT；MAO；组胺；糖原分解
+        </div>
+        
+        <div class="page-number">页码：379</div>
+        
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="异丙肾上腺素与多巴酚丁胺药理作用及临床应用；异丙肾上腺素、多巴酚丁胺、β受体激动药、难治性心力衰竭、心源性休克、感染性休克、室性心律失常、梗阻性肥厚型心肌病；=379" readonly>
+            <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFavorited = btn.classList.contains('active');
+            
+            if (!isFavorited) {
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+                showToast('已添加到收藏！');
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const currentPage = {
+                    title: '异丙肾上腺素与多巴酚丁胺药理作用及临床应用',
+                    url: '379.html',
+                    category: 'β受体激动药'
+                };
+                
+                const exists = favorites.some(f => f.url === '379.html');
+                if (!exists) {
+                    favorites.push(currentPage);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = '☆ 收藏';
+                showToast('已取消收藏！');
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '379.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.url === '379.html');
+            const btn = document.getElementById('favoriteBtn');
+            
+            if (isFavorited) {
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
