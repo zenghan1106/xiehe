@@ -1,0 +1,702 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊症状-发热急诊处理与腰痛定义病因*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background-color: #f5f9ff;
+            background-image: linear-gradient(180deg, #f5f9ff 0%, #edf3ff 50%, #f0f7ff 100%);
+            color: #2c3e50;
+            line-height: 1.7;
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #3498db;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 3px 12px rgba(52, 152, 219, 0.35);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 18px rgba(52, 152, 219, 0.45);
+        }
+        
+        /* 导航按钮容器 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #3498db;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+            box-shadow: 0 3px 12px rgba(52, 152, 219, 0.35);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .nav-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 18px rgba(52, 152, 219, 0.45);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            top: 130px;
+            right: 15px;
+            background: #e74c3c;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 3px 12px rgba(231, 76, 60, 0.35);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .fav-btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 18px rgba(231, 76, 60, 0.45);
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            font-size: 26px;
+            color: #1a5276;
+            margin: 70px 0 25px;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.08);
+            line-height: 1.4;
+        }
+        
+        /* 副标题 */
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #5d6d7e;
+            margin-bottom: 25px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-bottom: 25px;
+            border-radius: 15px;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: #2e86de;
+            color: white;
+            padding: 16px 14px;
+            text-align: center;
+            font-size: 19px;
+            font-weight: bold;
+            white-space: nowrap;
+            letter-spacing: 1px;
+        }
+        
+        /* 表格第一行 */
+        tbody tr:first-child td {
+            font-size: 16px;
+            font-weight: bold;
+            background: #e8f4fd;
+            color: #1a5276;
+        }
+        
+        /* 表格单元格 */
+        td {
+            padding: 14px;
+            border: 1px solid #d6eaf8;
+            text-align: left;
+            vertical-align: top;
+            word-wrap: break-word;
+            max-width: 100%;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        tr:hover {
+            background: #e0f0ff;
+            transition: background 0.2s;
+        }
+        
+        /* 章节标题样式 */
+        .section-header {
+            background: #d4edda !important;
+            font-weight: bold;
+            font-size: 16px;
+            color: #155724;
+        }
+        
+        .section-header td {
+            border-left: 4px solid #28a745;
+        }
+        
+        /* 小标题 */
+        .item-title {
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 18px;
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #2e86de;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+        
+        .tag:hover {
+            background: #1a5276;
+            transform: scale(1.05);
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+        
+        .copy-title {
+            font-size: 16px;
+            color: #1a5276;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .copy-box-wrapper {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 14px;
+            border: 2px solid #d6eaf8;
+            border-radius: 10px;
+            font-size: 14px;
+            background: #fafcff;
+            transition: border-color 0.3s;
+        }
+        
+        #copyInput:focus {
+            outline: none;
+            border-color: #2e86de;
+        }
+        
+        #copyBtn {
+            background: #27ae60;
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+        
+        #copyBtn:hover {
+            background: #219a52;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.35);
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            color: #2c3e50;
+            margin: 20px 0;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            padding: 20px;
+            color: #5d6d7e;
+            font-size: 14px;
+            line-height: 2;
+        }
+        
+        .keywords span {
+            display: inline-block;
+            margin: 4px 10px;
+            color: #2e86de;
+            font-weight: 500;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .page-title {
+                font-size: 20px;
+                margin-top: 80px;
+            }
+            
+            .subtitle {
+                font-size: 14px;
+            }
+            
+            .home-btn, .nav-btn, .fav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .nav-btns {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .home-btn {
+                top: 10px;
+                left: 10px;
+            }
+            
+            .fav-btn {
+                top: 105px;
+                right: 10px;
+            }
+            
+            table {
+                font-size: 13px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 10px;
+            }
+            
+            td {
+                padding: 12px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 14px;
+            }
+            
+            .tags-container {
+                gap: 8px;
+            }
+            
+            .tag {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+            
+            .copy-box-wrapper {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            #copyInput {
+                width: 100%;
+            }
+            
+            #copyBtn {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 17px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 上一页/下一页 -->
+    <div class="nav-btns">
+        <a href="57.html" class="nav-btn">← 上一页</a>
+        <a href="59.html" class="nav-btn">下一页 →</a>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">~~~~~急诊症状-发热急诊处理与腰痛定义病因*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~急诊症状-发热急诊处理与腰痛定义病因*****、章节、项目、内容详情、发热-辅助检查、6. 急诊处理、发热-急诊处理、发热、腰痛、腰痛-定义、2. 常见病因及临床表现、腰痛-常见病因</div>
+    <p class="subtitle">急诊症状 | 发热 | 腰痛 | 临床诊断与处理</p>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 20%;">章节</th>
+                    <th style="width: 25%;">项目</th>
+                    <th style="width: 55%;">内容详情</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>发热-辅助检查</td>
+                    <td>骨髓检查</td>
+                    <td>帮助诊断血液系统疾病</td>
+                </tr>
+                <tr>
+                    <td>发热-辅助检查</td>
+                    <td>腰穿</td>
+                    <td>帮助诊断中枢神经系统感染，可同时留取病原学</td>
+                </tr>
+                <tr>
+                    <td>发热-辅助检查</td>
+                    <td>超声心动图</td>
+                    <td>帮助诊断感染性心内膜炎</td>
+                </tr>
+                <tr class="section-header">
+                    <td colspan="3">6. 急诊处理</td>
+                </tr>
+                <tr>
+                    <td>发热-急诊处理</td>
+                    <td>退热治疗原则</td>
+                    <td>本身不能改善预后，治疗重点应针对导致发热的原发病</td>
+                </tr>
+                <tr>
+                    <td>发热-急诊处理</td>
+                    <td>物理降温</td>
+                    <td>包括饮水、冰袋、酒精擦浴。体温＞38.5℃时可酌情使用退热药物（口服、置肛、肌注、静脉）</td>
+                </tr>
+                <tr>
+                    <td>发热-急诊处理</td>
+                    <td>退热注意事项</td>
+                    <td>退热时大汗可以引起血容量不足，尤其是老年人，需注意补液。尽量避免使用糖皮质激素退热</td>
+                </tr>
+                <tr>
+                    <td>发热-急诊处理</td>
+                    <td>警惕报警症状</td>
+                    <td>如生命体征异常、高龄、高热、头痛、颈强直、意识障碍，需要紧急对症处理</td>
+                </tr>
+                <tr>
+                    <td>发热-急诊处理</td>
+                    <td>关注特殊人群</td>
+                    <td>使用免疫抑制药、糖皮质激素及粒细胞缺乏的患者；腹痛合并有外科体征的患者；高龄、孕妇、有心肌缺血症状、体温＞40℃</td>
+                </tr>
+                <tr>
+                    <td>发热-急诊处理</td>
+                    <td>抗生素使用原则</td>
+                    <td>在急诊，发热患者中急性感染的患者最多见，但应避免盲目使用抗生素（抗生素的使用具体见感染相关章节）</td>
+                </tr>
+                <tr>
+                    <td>发热-急诊处理</td>
+                    <td>传染性疾病防护</td>
+                    <td>需注意可能的传染性疾病，最常见的是呼吸道传染性疾病。在疫情期间，诊疗患者前需要做好相应防护和隔离</td>
+                </tr>
+                <tr>
+                    <td>发热</td>
+                    <td>作者</td>
+                    <td>黎波</td>
+                </tr>
+                <tr class="section-header">
+                    <td colspan="3">■ 腰痛</td>
+                </tr>
+                <tr>
+                    <td>腰痛-定义</td>
+                    <td>定义概述</td>
+                    <td>是临床常见的症状，以腰部一侧或两侧器官疾病引起的疼痛为主，常放射至腿部，也可以放射至腹部</td>
+                </tr>
+                <tr>
+                    <td>腰痛-定义</td>
+                    <td>腹盆腔病因</td>
+                    <td>除运动系统疾病与外伤以外，腹盆腔器官的疾病也可引起腰痛，如泌尿系炎症或结石、肾小球肾炎、妇科疾病（盆腔炎、子宫后倾等）、妊娠、腰部神经根炎和胆石症等</td>
+                </tr>
+                <tr>
+                    <td>腰痛-定义</td>
+                    <td>慢性腰痛常见病因</td>
+                    <td>慢性腰痛最常见于运动系统疾病，如腰椎骨质增生、椎间盘突出症、椎管狭窄、椎管肿瘤、腰肌劳损、强直性脊柱炎等。该类腰痛多为慢性，反复发作，可伴不对称性下肢放射痛、无力、感觉异常等，劳累、久站后可加重，休息后可部分缓解。该类患者均可至门诊就诊</td>
+                </tr>
+                <tr>
+                    <td>腰痛-定义</td>
+                    <td>急诊就诊原则</td>
+                    <td>慢性腰痛通常无须至急诊就诊，因为绝大多数是非特异性腰痛，重要的是识别需立即处理的急性腰痛</td>
+                </tr>
+                <tr class="section-header">
+                    <td colspan="3">2. 常见病因及临床表现</td>
+                </tr>
+                <tr>
+                    <td>腰痛-常见病因</td>
+                    <td>泌尿系结石</td>
+                    <td>疼痛常剧烈，难以忍受，伴大汗，辗转反侧</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签（图片原文提取）</div>
+        <div class="tags-container">
+            <span class="tag">发热</span>
+            <span class="tag">腰痛</span>
+            <span class="tag">骨髓检查</span>
+            <span class="tag">腰穿</span>
+            <span class="tag">超声心动图</span>
+            <span class="tag">感染性心内膜炎</span>
+            <span class="tag">中枢神经系统感染</span>
+            <span class="tag">血液系统疾病</span>
+            <span class="tag">急诊处理</span>
+            <span class="tag">退热治疗</span>
+            <span class="tag">物理降温</span>
+            <span class="tag">糖皮质激素</span>
+            <span class="tag">抗生素</span>
+            <span class="tag">传染性疾病</span>
+            <span class="tag">呼吸道传染性疾病</span>
+            <span class="tag">腰椎骨质增生</span>
+            <span class="tag">椎间盘突出症</span>
+            <span class="tag">椎管狭窄</span>
+            <span class="tag">椎管肿瘤</span>
+            <span class="tag">腰肌劳损</span>
+            <span class="tag">强直性脊柱炎</span>
+            <span class="tag">泌尿系结石</span>
+            <span class="tag">泌尿系炎症</span>
+            <span class="tag">肾小球肾炎</span>
+            <span class="tag">盆腔炎</span>
+            <span class="tag">子宫后倾</span>
+            <span class="tag">腰部神经根炎</span>
+            <span class="tag">胆石症</span>
+        </div>
+    </div>
+    
+    <!-- 编辑框和复制按钮 -->
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制</div>
+        <div class="copy-box-wrapper">
+            <input type="text" id="copyInput" value="急诊症状-发热急诊处理与腰痛定义病因；发热急诊处理、腰痛定义、常见病因及临床表现；骨髓检查、腰穿、超声心动图、感染性心内膜炎、中枢神经系统感染、血液系统疾病、退热治疗、物理降温、糖皮质激素、抗生素、传染性疾病、呼吸道传染性疾病、腰椎骨质增生、椎间盘突出症、椎管狭窄、椎管肿瘤、腰肌劳损、强直性脊柱炎、泌尿系结石、泌尿系炎症、肾小球肾炎、盆腔炎、子宫后倾、腰部神经根炎、胆石症；=58" readonly>
+            <button id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">58</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        <span>发热</span>
+        <span>腰痛</span>
+        <span>急诊处理</span>
+        <span>骨髓检查</span>
+        <span>腰穿</span>
+        <span>超声心动图</span>
+        <span>感染性心内膜炎</span>
+        <span>中枢神经系统感染</span>
+        <span>退热治疗</span>
+        <span>物理降温</span>
+        <span>糖皮质激素</span>
+        <span>抗生素</span>
+        <span>传染性疾病</span>
+        <span>呼吸道传染性疾病</span>
+        <span>腰椎骨质增生</span>
+        <span>椎间盘突出症</span>
+        <span>椎管狭窄</span>
+        <span>椎管肿瘤</span>
+        <span>腰肌劳损</span>
+        <span>强直性脊柱炎</span>
+        <span>泌尿系结石</span>
+        <span>泌尿系炎症</span>
+        <span>肾小球肾炎</span>
+        <span>盆腔炎</span>
+        <span>子宫后倾</span>
+        <span>腰部神经根炎</span>
+        <span>胆石症</span>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopySuccess();
+                }).catch(() => {
+                    document.execCommand('copy');
+                    showCopySuccess();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopySuccess();
+            }
+        }
+        
+        function showCopySuccess() {
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制!';
+            btn.style.background = '#219a52';
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = '#27ae60';
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            const titleElement = document.querySelector('.page-title');
+            const title = titleElement ? titleElement.textContent.trim() : '急诊症状-发热急诊处理与腰痛定义病因';
+            const currentUrl = window.location.href;
+            const pageName = window.location.pathname.split('/').pop() || '58.html';
+            const pageNum = pageName.replace('.html', '');
+            
+            let favorites = JSON.parse(localStorage.getItem('kimi_favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === currentUrl || f.pageNum === pageNum);
+            if (exists) {
+                alert('该页面已在收藏中！');
+                return;
+            }
+            
+            const favoriteItem = {
+                title: title,
+                url: currentUrl,
+                pageNum: pageNum,
+                addTime: new Date().toISOString()
+            };
+            
+            favorites.push(favoriteItem);
+            localStorage.setItem('kimi_favorites', JSON.stringify(favorites));
+            
+            // 同时更新index.html的收藏（如果存在）
+            try {
+                updateIndexFavorites(favoriteItem);
+            } catch(e) {
+                console.log('Index update skipped');
+            }
+            
+            alert('⭐ 已添加到收藏！\n标题：' + title + '\n页码：' + pageNum);
+        }
+        
+        // 尝试更新index页面的收藏数据
+        function updateIndexFavorites(item) {
+            // 通过localStorage共享收藏数据给index页面
+            const indexData = JSON.parse(localStorage.getItem('index_favorites_data') || '[]');
+            const exists = indexData.some(f => f.pageNum === item.pageNum);
+            if (!exists) {
+                indexData.push(item);
+                localStorage.setItem('index_favorites_data', JSON.stringify(indexData));
+            }
+        }
+        
+        // 页面加载时检查是否已收藏
+        window.addEventListener('load', function() {
+            const currentUrl = window.location.href;
+            const favorites = JSON.parse(localStorage.getItem('kimi_favorites') || '[]');
+            const exists = favorites.some(f => f.url === currentUrl);
+            if (exists) {
+                const btn = document.querySelector('.fav-btn');
+                btn.textContent = '✓ 已收藏';
+                btn.style.background = '#95a5a6';
+            }
+        });
+    </script>
+</body>
+</html>
