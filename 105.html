@@ -1,0 +1,556 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急性心肌炎症状与检查*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        /* 左上角返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            z-index: 1000;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 右上角按钮组 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(92,184,92,0.3);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+        }
+        
+        .nav-btn.next {
+            background: #f0ad4e;
+        }
+        
+        .nav-btn.next:hover {
+            background: #ec971f;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #d9534f;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(217,83,79,0.3);
+        }
+        
+        .fav-btn:hover {
+            background: #c9302c;
+        }
+        
+        .fav-btn.active {
+            background: #5cb85c;
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            font-size: 26px;
+            color: #2c3e50;
+            margin: 60px 0 25px 0;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            max-width: 900px;
+            margin: 0 auto 30px auto;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        
+        /* 表头 - 蓝色 */
+        thead th {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        /* 表格第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 15px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        td, th {
+            padding: 12px;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4fd;
+        }
+        
+        /* 分类标题行 */
+        .section-row {
+            background: #e3f2fd !important;
+        }
+        
+        .section-row td {
+            color: #1565c0;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        
+        /* 子项目 */
+        .sub-item {
+            color: #555;
+            padding-left: 8px;
+        }
+        
+        /* 底部区域 */
+        .bottom-area {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* 标签区域 */
+        .tags-area {
+            margin-bottom: 20px;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #e3f2fd;
+            color: #1565c0;
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 13px;
+            margin: 4px;
+            border: 1px solid #bbdefb;
+        }
+        
+        .tag.disease {
+            background: #ffebee;
+            color: #c62828;
+            border-color: #ef9a9a;
+        }
+        
+        .tag.drug {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-color: #a5d6a7;
+        }
+        
+        .tag.bacteria {
+            background: #fff3e0;
+            color: #ef6c00;
+            border-color: #ffcc80;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+            margin: 15px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+        }
+        
+        /* 页码 */
+        .page-num {
+            text-align: center;
+            font-size: 18px;
+            color: #4a90d9;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        
+        /* 复制区域 */
+        .copy-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #4a90d9;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            display: none;
+            z-index: 2000;
+        }
+        
+        /* 手机适配 */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 20px;
+                margin-top: 80px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            td, th {
+                padding: 8px;
+            }
+            
+            .home-btn, .nav-btn, .fav-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-area {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 右上角导航按钮 -->
+    <div class="nav-buttons">
+        <a href="104.html" class="nav-btn">← 上一页</a>
+        <a href="106.html" class="nav-btn next">下一页 →</a>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~急性心肌炎症状与检查*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:25%">分类</th>
+                    <th style="width:75%">详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-row">
+                    <td colspan="2">❤️ 急性心肌炎（续）</td>
+                </tr>
+                <tr>
+                    <td><strong>CAD相关表现</strong></td>
+                    <td>新发心力衰竭或心力衰竭恶化，但无CAD，也无明确的心力衰竭原因；突发猝死，但无CAD和明确心力衰竭原因</td>
+                </tr>
+                
+                <tr class="section-row">
+                    <td colspan="2">🔍 症状</td>
+                </tr>
+                <tr>
+                    <td><strong>非特异性表现</strong></td>
+                    <td>肌痛、近期上呼吸道感染或肠炎，不能用发热解释的心动过速</td>
+                </tr>
+                <tr>
+                    <td><strong>心力衰竭</strong></td>
+                    <td>呼吸困难（72%）、乏力、活动耐量下降，可表现为左心衰竭、右心衰竭或全心衰竭</td>
+                </tr>
+                <tr>
+                    <td><strong>胸痛（32%）</strong></td>
+                    <td>类似于心肌缺血或心肌梗死，可能伴心包炎</td>
+                </tr>
+                <tr>
+                    <td><strong>心律失常（18%）</strong></td>
+                    <td>窦速比严重的房性或室性心律失常更常见，而继发于房性或室性期前收缩的心悸亦常见。新发不明原因心脏阻滞引起的缓慢性心律失常和晕厥也可发生于心肌炎中</td>
+                </tr>
+                <tr>
+                    <td><strong>心脏性猝死</strong></td>
+                    <td>推测由室性心动过速或室颤所致</td>
+                </tr>
+                
+                <tr class="section-row">
+                    <td colspan="2">🩺 查体</td>
+                </tr>
+                <tr>
+                    <td><strong>一般表现</strong></td>
+                    <td>无特异性表现</td>
+                </tr>
+                <tr>
+                    <td><strong>心力衰竭体征</strong></td>
+                    <td>心力衰竭患者可能发现液体过剩的征象，如颈静脉压升高、水肿等，以及其他心脏功能不全的体征，如第三心音。若心脏扩大，听诊可能闻及二尖瓣或三尖瓣关闭不全的杂音</td>
+                </tr>
+                
+                <tr class="section-row">
+                    <td colspan="2">📋 必做检查</td>
+                </tr>
+                <tr>
+                    <td><strong>心肌损伤标志物检测</strong></td>
+                    <td>心肌炎患者的血清cTn水平常升高，特别是症状持续时间不长的患者。心肌酶持续升高提示持续性坏死</td>
+                </tr>
+                <tr>
+                    <td><strong>BNP或NT-proBNP检测</strong></td>
+                    <td>若怀疑心力衰竭，应检测BNP或NT-proBNP水平，是心力衰竭敏感的初始检查</td>
+                </tr>
+                <tr>
+                    <td><strong>ECG</strong></td>
+                    <td>诊断心肌炎并不需要做心电图，但一般用于排除心脏症状的其他原因，评估是否存在心律失常</td>
+                </tr>
+                <tr>
+                    <td><strong>胸片</strong></td>
+                    <td>部分患者心脏不同程度扩大，可见肺淤血或胸腔积液等征象</td>
+                </tr>
+                <tr>
+                    <td><strong>超声心动图</strong></td>
+                    <td>所有疑似心肌炎患者都应接受超声心动图检查，以评估节段性和全心室功能、瓣膜功能、心腔大小及心功能不全其他可能原因</td>
+                </tr>
+                
+                <tr class="section-row">
+                    <td colspan="2">🔬 选做检查</td>
+                </tr>
+                <tr>
+                    <td><strong>病毒学检查</strong></td>
+                    <td>心肌或心包检出病毒核酸，血清病毒特异性抗体出现或效价改变，可提示病因学诊断</td>
+                </tr>
+                <tr>
+                    <td><strong>MRI</strong></td>
+                    <td>通常可进一步评估心肌水肿和坏死情况，提供支持心肌炎诊断的证据</td>
+                </tr>
+                <tr>
+                    <td><strong>心导管术</strong></td>
+                    <td>临床表现不能与ACS区分，CAD经内科治疗后仍</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-area">
+        <!-- 检索标签 -->
+        <div class="tags-area">
+            <div class="tags-title">🔖 检索标签：</div>
+            <span class="tag disease">急性心肌炎</span>
+            <span class="tag disease">心肌炎</span>
+            <span class="tag disease">心力衰竭</span>
+            <span class="tag disease">左心衰竭</span>
+            <span class="tag disease">右心衰竭</span>
+            <span class="tag disease">全心衰竭</span>
+            <span class="tag disease">心包炎</span>
+            <span class="tag disease">心律失常</span>
+            <span class="tag disease">心脏性猝死</span>
+            <span class="tag disease">室性心动过速</span>
+            <span class="tag disease">室颤</span>
+            <span class="tag disease">缓慢性心律失常</span>
+            <span class="tag disease">晕厥</span>
+            <span class="tag disease">心肌梗死</span>
+            <span class="tag disease">心肌缺血</span>
+            <span class="tag disease">ACS</span>
+            <span class="tag disease">CAD</span>
+            <span class="tag drug">cTn</span>
+            <span class="tag drug">BNP</span>
+            <span class="tag drug">NT-proBNP</span>
+        </div>
+        
+        <!-- 关键词 -->
+        <div class="keywords">
+            <strong>关键词：</strong>急性心肌炎、心力衰竭、呼吸困难、胸痛、心律失常、心脏性猝死、室性心动过速、室颤、cTn、BNP、NT-proBNP、ECG、超声心动图、MRI、心导管术、病毒学检查、CAD、ACS、心肌梗死、心包炎、颈静脉压升高、第三心音、二尖瓣关闭不全、三尖瓣关闭不全
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-num">105</div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyInput" value="急性心肌炎症状与检查；急性心肌炎症状、查体、必做检查、选做检查；急性心肌炎、心力衰竭、左心衰竭、右心衰竭、全心衰竭、呼吸困难、胸痛、心律失常、心脏性猝死、室性心动过速、室颤、cTn、BNP、NT-proBNP、ECG、超声心动图、胸片、MRI、心导管术、病毒学检查、CAD、ACS、心肌梗死、心包炎、颈静脉压升高、第三心音、二尖瓣关闭不全、三尖瓣关闭不全；=105" readonly>
+            <button class="copy-btn" onclick="copyContent()">📋 复制</button>
+        </div>
+    </div>
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                showToast('✅ 已复制到剪贴板');
+            }).catch(() => {
+                document.execCommand('copy');
+                showToast('✅ 已复制到剪贴板');
+            });
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                
+                // 保存到localStorage，index.html可读取
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '~~~~~急性心肌炎症状与检查*****',
+                    url: '105.html',
+                    pageNum: '105',
+                    tags: ['急性心肌炎', '心力衰竭', '心律失常', '心脏性猝死', '室性心动过速', 'cTn', 'BNP', 'NT-proBNP']
+                };
+                
+                // 避免重复
+                const exists = favorites.some(f => f.url === '105.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                showToast('⭐ 已添加到收藏');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '105.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                showToast('💔 已取消收藏');
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const btn = document.getElementById('favBtn');
+            if (favorites.some(f => f.url === '105.html')) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
