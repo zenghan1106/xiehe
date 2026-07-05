@@ -1,0 +1,367 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~感染性心内膜炎危险因素临床表现与检查*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .back-btn {
+            background-color: #1976d2;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background-color: #1976d2;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .fav-btn {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1565c0;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 12px;
+            background-color: #e3f2fd;
+            border-radius: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        thead {
+            background-color: #1976d2;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 17px;
+            font-weight: bold;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+            font-size: 14px;
+        }
+        
+        tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            color: #1565c0;
+            font-weight: bold;
+            font-size: 15px;
+            white-space: nowrap;
+        }
+        
+        .check {
+            color: #2e7d32;
+        }
+        
+        .tags-container {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            color: #1565c0;
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: #e3f2fd;
+            color: #1565c0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 4px;
+            font-size: 13px;
+            border: 1px solid #bbdefb;
+        }
+        
+        .tag.disease {
+            background-color: #ffebee;
+            color: #c62828;
+            border-color: #ffcdd2;
+        }
+        
+        .tag.drug {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border-color: #c8e6c9;
+        }
+        
+        .tag.bacteria {
+            background-color: #fff3e0;
+            color: #ef6c00;
+            border-color: #ffe0b2;
+        }
+        
+        .copy-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #bbdefb;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+        
+        #copyInput:focus {
+            border-color: #1976d2;
+        }
+        
+        .copy-btn {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .copy-btn:active {
+            background-color: #388e3c;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #757575;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #9e9e9e;
+            font-size: 12px;
+            margin-top: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="209.html" class="nav-btn">上一页</a>
+            <a href="211.html" class="nav-btn">下一页</a>
+            <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~感染性心内膜炎危险因素临床表现与检查*****</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>分类</th>
+                <th>内容详情</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="section-title">感染性心内膜炎 - 危险因素</td>
+                <td>
+                    <b>患者因素：</b>年龄＞60岁、男性、不洁注射（毒品等）、牙列不齐或牙源性感染等<br><br>
+                    <b>共存疾病：</b>结构性心脏病、瓣膜病、先天性心脏病、人工心脏瓣膜、经导管主动脉瓣置换术、IE病史、血管内装置、心内植入式电子装置、长期血液透析、HIV感染等
+                </td>
+            </tr>
+            <tr>
+                <td class="section-title">感染性心内膜炎 - 临床表现（症状）</td>
+                <td>
+                    <span class="check">✓</span> 持续菌血症表现：如发热、寒战、盗汗、食欲减退、乏力、体重下降<br>
+                    <span class="check">✓</span> 心力衰竭表现：如喘憋、呼吸困难、咯血、心律失常、水肿等<br>
+                    <span class="check">✓</span> 感染性栓塞：如体循环栓塞（外周血管、中枢神经系统、肾、脾、肝、骨关节、肠系膜）、真菌性动脉瘤、心肌梗死、肺栓塞等<br>
+                    <span class="check">✓</span> 免疫反应：如肾小球肾炎、关节炎、ESR增快、类风湿因子阳性等
+                </td>
+            </tr>
+            <tr>
+                <td class="section-title">感染性心内膜炎 - 体征</td>
+                <td>
+                    <span class="check">✓</span> 五官：如Roth斑、瘀斑等<br>
+                    <span class="check">✓</span> 心脏：如瓣膜杂音、奔马律等<br>
+                    <span class="check">✓</span> 腹部：如脾大伴触痛<br>
+                    <span class="check">✓</span> 骨骼肌肉：如关节炎、脊柱压痛等<br>
+                    <span class="check">✓</span> 四肢：如Janeway病变（感染性栓塞导致手掌或足底无痛性、出血性斑）、Osler结节（免疫复合物导致指/趾皮下痛性结节）、甲床线状出血<br>
+                    <span class="check">✓</span> 神经系统：如神志改变或局部定位体征<br>
+                    <span class="check">✓</span> 其他：如导管穿刺处红肿痛性分泌物，起搏器等部位触痛等
+                </td>
+            </tr>
+            <tr>
+                <td class="section-title">感染性心内膜炎 - 必做检查</td>
+                <td>
+                    • <b>血培养：</b>应用抗生素前，不同部位抽取至少3套（需氧＋厌氧），间隔≥1小时<br><br>
+                    • <b>TEE：</b>①临床高度可疑IE；②经胸超声心动图显示不清或阴性但仍高度怀疑IE；③可疑侵袭性感染或病情进展等<br><br>
+                    • <b>ECG：</b>定期监测新发心律失常及传导阻滞等<br><br>
+                    • <b>血常规及分类＋ESR＋RF＋肾功能＋尿常规＋尿培养</b><br><br>
+                    <i>检查意义：首要检查是临床确诊或者疑诊IE的必备条件，也是根据培养结果指导下一步诊疗的关键。</i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="tags-container">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <span class="tag disease">感染性心内膜炎</span>
+        <span class="tag disease">IE</span>
+        <span class="tag disease">AIE</span>
+        <span class="tag disease">SIE</span>
+        <span class="tag disease">结构性心脏病</span>
+        <span class="tag disease">瓣膜病</span>
+        <span class="tag disease">先天性心脏病</span>
+        <span class="tag disease">人工心脏瓣膜</span>
+        <span class="tag disease">HIV感染</span>
+        <span class="tag disease">心力衰竭</span>
+        <span class="tag disease">感染性栓塞</span>
+        <span class="tag disease">真菌性动脉瘤</span>
+        <span class="tag disease">心肌梗死</span>
+        <span class="tag disease">肺栓塞</span>
+        <span class="tag disease">肾小球肾炎</span>
+        <span class="tag disease">关节炎</span>
+        <span class="tag disease">Roth斑</span>
+        <span class="tag disease">Janeway病变</span>
+        <span class="tag disease">Osler结节</span>
+        <span class="tag disease">甲床线状出血</span>
+        <span class="tag bacteria">金黄色葡萄球菌</span>
+        <span class="tag bacteria">乙型溶血性链球菌</span>
+        <span class="tag bacteria">肺炎链球菌</span>
+        <span class="tag bacteria">草绿色链球菌</span>
+    </div>
+    
+    <div class="copy-section">
+        <div class="copy-box">
+            <input type="text" id="copyInput" value="感染性心内膜炎危险因素临床表现与检查；感染性心内膜炎、IE、AIE、SIE、结构性心脏病、瓣膜病、心力衰竭、感染性栓塞、Roth斑、Janeway病变、Osler结节、血培养、TEE、ECG、金黄色葡萄球菌、草绿色链球菌；=210" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <div class="page-number">页码：210</div>
+    
+    <div class="keywords">
+        关键词：感染性心内膜炎 | IE | 危险因素 | 临床表现 | 血培养 | TEE | ECG | Roth斑 | Janeway病变 | Osler结节 | 金黄色葡萄球菌 | 草绿色链球菌
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                alert('已复制到剪贴板！');
+            });
+        }
+        
+        function addToFavorites() {
+            const title = document.title;
+            const url = window.location.href;
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === url);
+            
+            if (!exists) {
+                favorites.push({
+                    title: title,
+                    url: url,
+                    page: '210'
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已添加到收藏！');
+            } else {
+                alert('该页面已在收藏中！');
+            }
+        }
+    </script>
+</body>
+</html>
