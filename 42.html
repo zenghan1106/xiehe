@@ -1,0 +1,443 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊抽搐病因检查与处理指南*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5ee 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-top: 60px;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            color: #1a5276;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .left-nav {
+            position: fixed;
+            top: 20px;
+            left: 10px;
+            z-index: 100;
+        }
+        
+        .right-nav {
+            position: fixed;
+            top: 20px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-home {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn-nav {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+        
+        .btn-fav {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            color: white;
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
+        }
+        
+        .btn-copy {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+        
+        .main-content {
+            margin-top: 60px;
+        }
+        
+        table {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        thead tr {
+            background: linear-gradient(135deg, #1a5276, #2980b9);
+            color: white;
+        }
+        
+        thead th {
+            padding: 20px 15px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        tbody td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            color: #2c3e50;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+        
+        tbody tr:hover {
+            background: rgba(52, 152, 219, 0.05);
+        }
+        
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            color: #1a5276;
+            font-weight: bold;
+            font-size: 17px;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+        
+        .bullet {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .check {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .tags-section {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 18px;
+            color: #1a5276;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a5a);
+            color: white;
+        }
+        
+        .tag-drug {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: linear-gradient(45deg, #a8edea, #fed6e3);
+            color: #2c3e50;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+        }
+        
+        .footer-section {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 28px;
+            color: #1a5276;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #2c3e50;
+            background: #f8f9fa;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 18px;
+                padding: 10px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 15px 10px;
+            }
+            
+            tbody td {
+                font-size: 14px;
+                padding: 12px 10px;
+            }
+            
+            .btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .left-nav, .right-nav {
+                position: relative;
+                top: auto;
+                left: auto;
+                right: auto;
+            }
+            
+            .nav-buttons {
+                position: static;
+            }
+            
+            .main-content {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <div class="left-nav">
+            <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+        </div>
+        <div class="right-nav">
+            <a href="41.html" class="btn btn-nav">⬆ 上一页</a>
+            <a href="43.html" class="btn btn-nav">⬇ 下一页</a>
+            <button class="btn btn-fav" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="header main-content">
+        <h1>~~~~~急诊抽搐病因检查与处理指南*****</h1>
+    </div>
+    
+    <!-- 主表格 -->
+    <table>
+        <thead>
+            <tr>
+                <th>急诊抽搐其他病因、检查与急诊处理要点</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <p><span class="bullet">●</span> <strong>其他抽搐</strong></p>
+                    <p><span class="check">✓</span> <strong>低钙性搐搦：</strong>见于低钙血症、过度通气状态（因呼吸性碱中毒，血中游离钙降低）。表现为双侧对称性拇指内收，其余四指伸展并拢。</p>
+                    <p><span class="check">✓</span> <strong>抗NMDA受体脑炎：</strong>常表现为"难治性抽搐"（联用数种抗癫痫药仍难控制）。除痫性发作外，其更多表现为肌张力障碍和不自主运动。</p>
+                    <p><span class="check">✓</span> <strong>破伤风：</strong>由破伤风毒素引起的骨骼肌持续性强直和阵发性痉挛。常先出现牙关紧闭，继之全身骨骼持续性强直收缩，以躯干肌为重，形成"角弓反张"体态，外界刺激会引发阵挛。</p>
+                    <p><span class="check">✓</span> <strong>狂犬病：</strong>见水、饮水、听流水声均可引起咽喉肌痉挛，严重者还可引起全身疼痛性抽搐。</p>
+                    <p><span class="check">✓</span> <strong>癔症性抽搐：</strong>常于情绪激动或受到暗示时突然发生，缓慢倒地或卧于床上，呼之不应、全身僵直、肢体抖动等，无尿便失禁。也有患者酷似惊厥发作，但抽搐发作无明确强直阵挛规律，常为搐搦样拇指内收、掌指关节屈曲，指骨间关节伸直，不咬舌。发作时瞳孔大小正常，角膜反射存在甚至反而敏感，意识虽似不清，但可受暗示使抽搐暂停。</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="section-title">3. 必做检查</p>
+                    <p><span class="bullet">●</span> <strong>血常规、生化检查：</strong>可了解躯体基本状况，识别低血糖、高钠血症或低钠血症，低钙血症或低镁血症，有无肝肾功能障碍和血浆渗透压改变。</p>
+                    <p><span class="bullet">●</span> <strong>ABG：</strong>可识别低氧血症、高碳酸血症和酸中毒。</p>
+                    <p><span class="bullet">●</span> <strong>ECG：</strong>心律失常、ST-T改变提示心源性问题。</p>
+                    <p><span class="bullet">●</span> <strong>头颅CT：</strong>对确定病变性质、部位和病变范围很有帮助。宜在癫痫持续状态控制后和生命体征平稳后进行。</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="section-title">4. 选做检查</p>
+                    <p><span class="bullet">●</span> <strong>血/尿毒物筛查：</strong>根据病史及症状，必要时进行。</p>
+                    <p><span class="bullet">●</span> <strong>头颅MRI：</strong>对于判断颅内组织病变价值很高，但检查过程难于监控支持，需警惕再次抽搐致误吸。</p>
+                    <p><span class="bullet">●</span> <strong>脑脊液检查：</strong>脑脊液压力、性状、生化、常规、培养等对抽搐患者鉴别诊断非常重要，尤其是怀疑中枢神经系统感染或狼疮脑病者。</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="section-title">5. 抽搐发作的急诊处理</p>
+                    <p><span class="bullet">●</span> <strong>一般处理</strong></p>
+                    <p><span class="check">✓</span> 立即将患者移至监护区监护，或至少在床旁进行SpO₂</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <p class="tags-title">🏷️ 特色检索标签</p>
+        <div class="tags-container">
+            <span class="tag tag-disease">抽搐</span>
+            <span class="tag tag-disease">低钙性搐搦</span>
+            <span class="tag tag-disease">低钙血症</span>
+            <span class="tag tag-disease">呼吸性碱中毒</span>
+            <span class="tag tag-disease">抗NMDA受体脑炎</span>
+            <span class="tag tag-disease">破伤风</span>
+            <span class="tag tag-disease">狂犬病</span>
+            <span class="tag tag-disease">癔症性抽搐</span>
+            <span class="tag tag-disease">低血糖</span>
+            <span class="tag tag-disease">高钠血症</span>
+            <span class="tag tag-disease">低钠血症</span>
+            <span class="tag tag-disease">低镁血症</span>
+            <span class="tag tag-disease">低氧血症</span>
+            <span class="tag tag-disease">高碳酸血症</span>
+            <span class="tag tag-disease">酸中毒</span>
+            <span class="tag tag-disease">癫痫持续状态</span>
+            <span class="tag tag-disease">中枢神经系统感染</span>
+            <span class="tag tag-disease">狼疮脑病</span>
+            <span class="tag tag-disease">心源性问题</span>
+        </div>
+    </div>
+    
+    <!-- 底部区域 -->
+    <div class="footer-section">
+        <p class="keywords">关键词：急诊抽搐；低钙性搐搦；抗NMDA受体脑炎；破伤风；狂犬病；癔症性抽搐；血常规；生化检查；ABG；ECG；头颅CT；头颅MRI；脑脊液检查；SpO₂</p>
+        <p class="page-number">42</p>
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="急诊抽搐病因检查与处理指南；急诊抽搐其他病因必做检查选做检查及急诊处理要点；低钙性搐搦；抗NMDA受体脑炎；破伤风；狂犬病；癔症性抽搐；癫痫持续状态；中枢神经系统感染；狼疮脑病；=42" readonly>
+            <button class="btn btn-copy" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            }, function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板！");
+            });
+        }
+        
+        // 添加到收藏
+        function addToFavorites() {
+            // 获取当前页面信息
+            const title = document.title.replace(/~~~~~|\\\\*\\\\*/g, '');
+            const url = window.location.href;
+            
+            // 尝试添加到本地存储的收藏列表
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已存在
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                category: '急诊症状',
+                date: new Date().toLocaleDateString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试更新index.html的收藏（通过控制台提示）
+            alert('收藏成功！\n标题：' + title + '\n请确保index.html页面能够读取localStorage中的收藏数据。');
+            
+            // 同时尝试打开index.html并传递收藏信息
+            const indexUrl = 'index.html?action=addFavorite&title=' + encodeURIComponent(title) + '&url=' + encodeURIComponent(url);
+            console.log('收藏信息已保存，请刷新首页查看：', indexUrl);
+        }
+    </script>
+</body>
+</html>

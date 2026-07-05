@@ -1,0 +1,472 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~咯血诊断流程与胸痛*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5ee 100%);
+            min-height: 100vh;
+            padding: 20px 15px 30px;
+            color: #333;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .back-btn {
+            background: linear-gradient(135deg, #4a90d9, #357abd);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 3px 10px rgba(74, 144, 217, 0.3);
+            transition: transform 0.2s;
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #5cb85c, #4cae4c);
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+        }
+        
+        .nav-btn.next {
+            background: linear-gradient(135deg, #f0ad4e, #ec971f);
+            box-shadow: 0 2px 8px rgba(240, 173, 78, 0.3);
+        }
+        
+        .favorite-btn {
+            background: linear-gradient(135deg, #d9534f, #c9302c);
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(217, 83, 79, 0.3);
+        }
+        
+        .favorite-btn.active {
+            background: linear-gradient(135deg, #5bc0de, #46b8da);
+        }
+        
+        .main-title {
+            text-align: center;
+            font-size: 28px;
+            color: #1a5276;
+            margin: 15px 0 25px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            font-weight: bold;
+        }
+        
+        .content-table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 25px;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+        }
+        
+        .content-table th {
+            background: linear-gradient(135deg, #1e5799, #2989d8);
+            color: white;
+            padding: 18px 15px;
+            font-size: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .content-table td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #2c3e50;
+        }
+        
+        .content-table tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        .content-table tr:hover {
+            background: #e8f4fd;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 16px;
+        }
+        
+        .flow-chart {
+            background: #f0f7ff;
+            border: 2px solid #4a90d9;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            text-align: center;
+            font-family: "Courier New", monospace;
+            font-size: 14px;
+            line-height: 2;
+            color: #1a5276;
+        }
+        
+        .flow-box {
+            display: inline-block;
+            border: 2px solid #1a5276;
+            padding: 8px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            background: white;
+        }
+        
+        .bottom-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #4a90d9;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #2c3e50;
+            background: white;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 0 3px 10px rgba(155, 89, 182, 0.3);
+        }
+        
+        .tags-section {
+            margin-bottom: 20px;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            box-shadow: 0 2px 6px rgba(231, 76, 60, 0.2);
+        }
+        
+        .tag.disease {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+        
+        .tag.bacteria {
+            background: linear-gradient(135deg, #16a085, #1abc9c);
+        }
+        
+        .tag.drug {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #1a5276;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+        }
+        
+        .keywords {
+            text-align: center;
+            font-size: 13px;
+            color: #7f8c8d;
+            padding: 15px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 10px;
+            line-height: 2;
+        }
+        
+        .keyword-label {
+            color: #1a5276;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 600px) {
+            .main-title {
+                font-size: 22px;
+            }
+            .content-table th {
+                font-size: 17px;
+                padding: 14px 10px;
+            }
+            .content-table td {
+                font-size: 14px;
+                padding: 12px 10px;
+            }
+            .copy-section {
+                flex-direction: column;
+            }
+            .copy-input {
+                width: 100%;
+            }
+            .header-nav {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .nav-buttons {
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .flow-chart {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-nav">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="20.html" class="nav-btn">上一页</a>
+            <a href="22.html" class="nav-btn next">下一页</a>
+            <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <h1 class="main-title">~~~~~咯血诊断流程与胸痛*****</h1>
+    
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th>咯血诊断流程与胸痛</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span class="section-title">图2 咯血诊断流程</span><br><br>
+                    <div class="flow-chart">
+                        <div class="flow-box">咯血</div><br>
+                        ↓<br>
+                        <div class="flow-box">排除假性咯血<br>（鼻出血/呕血等）</div><br>
+                        ↙&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↘<br>
+                        <div class="flow-box">CT正常</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div class="flow-box">CT异常</div><br>
+                        ↓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+                        <div style="display:inline-block;vertical-align:top;">
+                        <div class="flow-box">• 急性气管炎<br>• 月经性咯血<br>• 异物<br>• 肺动静脉畸形<br>肺栓塞</div>
+                        </div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <div style="display:inline-block;vertical-align:top;">
+                        <div class="flow-box">支气管扩张：<br>感染？</div><br>
+                        ↓<br>
+                        <div class="flow-box">心源性/<br>心力衰竭</div>
+                        </div>
+                        &nbsp;&nbsp;
+                        <div style="display:inline-block;vertical-align:top;">
+                        <div class="flow-box">弥漫性磨玻璃<br>结节或实变</div><br>
+                        ↓<br>
+                        <div class="flow-box">• 肺泡出血<br>• 肺出血-肾炎<br>&nbsp;&nbsp;综合征<br>• 特发性含铁血<br>&nbsp;&nbsp;黄素沉着症</div>
+                        </div>
+                        &nbsp;&nbsp;
+                        <div style="display:inline-block;vertical-align:top;">
+                        <div class="flow-box">空洞形成：<br>感染/肿瘤？</div><br>
+                        ↓<br>
+                        <div class="flow-box">凝血<br>功能异常</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    管插管，条件允许时可行选择性双腔支气管内导管插管，用于保护健侧肺。<br>
+                    • 选择性造影栓塞：用于寻找出血部位，行动脉栓塞治疗。<br>
+                    • 有技术条件时，可考虑支气管镜下病变部位止血治疗。<br>
+                    • 大咯血治疗无效者，可考虑外科手术止血。<br><br>
+                    <div style="text-align:right;color:#7f8c8d;">（桂耀松）</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title" style="font-size:18px;">■ 胸痛</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">1. 定义</span><br>
+                    • 患者主观感受到胸部刺痛、锐痛、钝痛、闷痛或压迫感，有时伴放射性疼痛或呼吸困难。<br>
+                    • 心脏、主动脉、肺、食管、胃、纵隔、胸膜及腹腔内脏的疾病都可能引起胸部不适，主要包括急性冠脉综合征（ACS）、主动脉夹层、肺栓塞、气胸、心包炎、心脏压塞和食管破裂等。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">2. 常见病因及临床表现</span><br>
+                    • 心血管疾病<br>
+                    &nbsp;&nbsp;✓ ACS
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="bottom-section">
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="咯血诊断流程与胸痛；咯血诊断流程；胸痛；定义；常见病因及临床表现；心血管疾病；=21" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+        
+        <div class="tags-section">
+            <div class="tags-title">特色检索标签：</div>
+            <span class="tag disease">咯血</span>
+            <span class="tag disease">假性咯血</span>
+            <span class="tag disease">急性气管炎</span>
+            <span class="tag disease">月经性咯血</span>
+            <span class="tag disease">肺动静脉畸形</span>
+            <span class="tag disease">肺栓塞</span>
+            <span class="tag disease">支气管扩张</span>
+            <span class="tag disease">心源性</span>
+            <span class="tag disease">心力衰竭</span>
+            <span class="tag disease">肺泡出血</span>
+            <span class="tag disease">肺出血-肾炎综合征</span>
+            <span class="tag disease">特发性含铁血黄素沉着症</span>
+            <span class="tag disease">凝血功能异常</span>
+            <span class="tag disease">胸痛</span>
+            <span class="tag disease">急性冠脉综合征</span>
+            <span class="tag disease">ACS</span>
+            <span class="tag disease">主动脉夹层</span>
+            <span class="tag disease">气胸</span>
+            <span class="tag disease">心包炎</span>
+            <span class="tag disease">心脏压塞</span>
+            <span class="tag disease">食管破裂</span>
+            <span class="tag disease">大咯血</span>
+        </div>
+        
+        <div class="page-number">页码：21</div>
+        
+        <div class="keywords">
+            <span class="keyword-label">关键词：</span>咯血、假性咯血、鼻出血、呕血、CT正常、CT异常、急性气管炎、月经性咯血、异物、肺动静脉畸形、肺栓塞、支气管扩张、感染、心源性、心力衰竭、弥漫性磨玻璃、结节、实变、肺泡出血、肺出血-肾炎综合征、特发性含铁血黄素沉着症、空洞形成、感染、肿瘤、凝血功能异常、选择性双腔支气管内导管插管、选择性造影栓塞、动脉栓塞治疗、支气管镜、外科手术止血、胸痛、胸部刺痛、锐痛、钝痛、闷痛、压迫感、放射性疼痛、呼吸困难、心脏、主动脉、肺、食管、胃、纵隔、胸膜、腹腔内脏、急性冠脉综合征、ACS、主动脉夹层、气胸、心包炎、心脏压塞、食管破裂、心血管疾病
+        </div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                const btn = document.querySelector('.copy-btn');
+                const originalText = btn.textContent;
+                btn.textContent = '已复制!';
+                btn.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
+                setTimeout(function() {
+                    btn.textContent = originalText;
+                    btn.style.background = 'linear-gradient(135deg, #9b59b6, #8e44ad)';
+                }, 1500);
+            });
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            if (btn.classList.contains('active')) {
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+            } else {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                addToIndexFavorites();
+            }
+        }
+        
+        function addToIndexFavorites() {
+            const title = '咯血诊断流程与胸痛';
+            const url = window.location.href;
+            const pageNum = '21';
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === url);
+            if (!exists) {
+                favorites.push({
+                    title: title,
+                    url: url,
+                    pageNum: pageNum,
+                    category: '急诊症状'
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        window.onload = function() {
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const url = window.location.href;
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,503 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~编委会名单*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 144, 217, 0.3);
+        }
+        
+        .page-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .page-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .page-btn:hover {
+            background: #4cae4c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(92, 184, 92, 0.3);
+        }
+        
+        .main-table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+        }
+        
+        .table-header {
+            background: linear-gradient(135deg, #1e5799 0%, #2989d8 50%, #207cca 100%);
+            color: white;
+            text-align: center;
+            padding: 25px 20px;
+        }
+        
+        .table-header h1 {
+            font-size: 28px;
+            letter-spacing: 8px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .table-header .decor {
+            font-size: 20px;
+            margin: 0 10px;
+            opacity: 0.9;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .title-row {
+            background: #e8f4fd;
+            font-weight: bold;
+        }
+        
+        .title-row td {
+            padding: 15px 20px;
+            font-size: 18px;
+            color: #1e5799;
+            border-bottom: 2px solid #b8d4f0;
+        }
+        
+        .content-row td {
+            padding: 12px 20px;
+            font-size: 15px;
+            color: #444;
+            border-bottom: 1px solid #eef2f7;
+            line-height: 1.8;
+        }
+        
+        .content-row:hover {
+            background: #fafbfc;
+        }
+        
+        .label {
+            color: #1e5799;
+            font-weight: bold;
+            white-space: nowrap;
+            width: 100px;
+        }
+        
+        .names {
+            word-wrap: break-word;
+            word-break: break-all;
+        }
+        
+        .section-title {
+            background: #f0f7ff;
+            font-weight: bold;
+            color: #1e5799;
+        }
+        
+        .copy-section {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #555;
+            background: white;
+        }
+        
+        .copy-btn {
+            background: #f0ad4e;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #ec971f;
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn.copied {
+            background: #5cb85c;
+        }
+        
+        .tags-section {
+            max-width: 800px;
+            margin: 0 auto 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1e5799;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        .tag.disease {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .tag.drug {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .tag.bacteria {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+        
+        .keywords {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+            color: #888;
+            font-size: 13px;
+        }
+        
+        .page-number {
+            font-size: 18px;
+            color: #1e5799;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 4px 16px rgba(238, 90, 90, 0.4);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        .favorite-btn.active {
+            background: linear-gradient(135deg, #ffd93d 0%, #f6ad55 100%);
+        }
+        
+        @media (max-width: 600px) {
+            .table-header h1 {
+                font-size: 20px;
+                letter-spacing: 4px;
+            }
+            
+            .title-row td {
+                font-size: 15px;
+                padding: 12px 15px;
+            }
+            
+            .content-row td {
+                font-size: 13px;
+                padding: 10px 15px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .page-nav {
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航区域 -->
+    <div class="header-nav">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="page-nav">
+            <a href="4.html" class="page-btn">← 上一页</a>
+            <a href="6.html" class="page-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <!-- 主表格 -->
+    <div class="main-table">
+        <div class="table-header">
+            <h1><span class="decor">❀</span>编委会名单<span class="decor">❀</span></h1>
+        </div>
+        <table>
+            <tr class="title-row">
+                <td class="label">主 审</td>
+                <td class="names">于学忠</td>
+            </tr>
+            <tr class="content-row">
+                <td class="label">主 编</td>
+                <td class="names">朱华栋、刘业成</td>
+            </tr>
+            <tr class="content-row">
+                <td class="label">副主编</td>
+                <td class="names">刘继海、李毅、徐军</td>
+            </tr>
+            <tr class="title-row">
+                <td colspan="2" class="section-title">编委（按姓氏拼音排序）</td>
+            </tr>
+            <tr class="content-row">
+                <td colspan="2" class="names">
+                    柴晶晶、崔庆宏、戴佳原、杜铁宽、付阳阳、顾明、桂耀松、韩红、韩旭、姜辉、黎波、李妍、李毅、刘洁、刘霜、刘洋、刘安雷、刘继海、刘业成、毛笑飞、史迪、宋晓、孙翰、孙瑞雪、唐晗琪、王春婷、王亚、王江山、须晋、徐军、徐胜勇、杨惊、杨婧、张潇然、赵海平、朱华栋、宗良
+                </td>
+            </tr>
+            <tr class="title-row">
+                <td colspan="2" class="section-title">审校（按姓氏拼音排序）</td>
+            </tr>
+            <tr class="content-row">
+                <td colspan="2" class="names">
+                    戴毅、冯俊、冯云路、郭伏平、马杰、彭琳一、田然、王平、阳洪波
+                </td>
+            </tr>
+        </table>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="编委会名单；于学忠；朱华栋；刘业成；刘继海；李毅；徐军；柴晶晶；崔庆宏；戴佳原；杜铁宽；付阳阳；顾明；桂耀松；韩红；韩旭；姜辉；黎波；李妍；刘洁；刘霜；刘洋；刘安雷；毛笑飞；史迪；宋晓；孙翰；孙瑞雪；唐晗琪；王春婷；王亚；王江山；须晋；徐胜勇；杨惊；杨婧；张潇然；赵海平；宗良；戴毅；冯俊；冯云路；郭伏平；马杰；彭琳一；田然；王平；阳洪波=5" readonly>
+        <button class="copy-btn" onclick="copyText()">📋 复制</button>
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <button class="tag disease">于学忠</button>
+            <button class="tag disease">朱华栋</button>
+            <button class="tag drug">刘业成</button>
+            <button class="tag bacteria">刘继海</button>
+            <button class="tag drug">李毅</button>
+            <button class="tag bacteria">徐军</button>
+            <button class="tag disease">柴晶晶</button>
+            <button class="tag drug">崔庆宏</button>
+            <button class="tag bacteria">戴佳原</button>
+            <button class="tag disease">杜铁宽</button>
+            <button class="tag drug">付阳阳</button>
+            <button class="tag bacteria">顾明</button>
+            <button class="tag disease">桂耀松</button>
+            <button class="tag drug">韩红</button>
+            <button class="tag bacteria">韩旭</button>
+            <button class="tag disease">姜辉</button>
+            <button class="tag drug">黎波</button>
+            <button class="tag bacteria">李妍</button>
+            <button class="tag disease">刘洁</button>
+            <button class="tag drug">刘霜</button>
+            <button class="tag bacteria">刘洋</button>
+            <button class="tag disease">刘安雷</button>
+            <button class="tag drug">毛笑飞</button>
+            <button class="tag bacteria">史迪</button>
+            <button class="tag disease">宋晓</button>
+            <button class="tag drug">孙翰</button>
+            <button class="tag bacteria">孙瑞雪</button>
+            <button class="tag disease">唐晗琪</button>
+            <button class="tag drug">王春婷</button>
+            <button class="tag bacteria">王亚</button>
+            <button class="tag disease">王江山</button>
+            <button class="tag drug">须晋</button>
+            <button class="tag bacteria">徐胜勇</button>
+            <button class="tag disease">杨惊</button>
+            <button class="tag drug">杨婧</button>
+            <button class="tag bacteria">张潇然</button>
+            <button class="tag disease">赵海平</button>
+            <button class="tag drug">宗良</button>
+            <button class="tag bacteria">戴毅</button>
+            <button class="tag disease">冯俊</button>
+            <button class="tag drug">冯云路</button>
+            <button class="tag bacteria">郭伏平</button>
+            <button class="tag disease">马杰</button>
+            <button class="tag drug">彭琳一</button>
+            <button class="tag bacteria">田然</button>
+            <button class="tag disease">王平</button>
+            <button class="tag drug">阳洪波</button>
+        </div>
+    </div>
+    
+    <!-- 关键词和页码 -->
+    <div class="keywords">
+        <p>关键词：编委会名单、主审、主编、副主编、编委、审校</p>
+        <p class="page-number">5</p>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="favorite-btn" id="favBtn" onclick="toggleFavorite()" title="点击收藏">⭐</button>
+    
+    <script>
+        // 复制功能
+        function copyText() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '✓ 已复制';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '📋 复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            btn.classList.toggle('active');
+            
+            if (btn.classList.contains('active')) {
+                btn.innerHTML = '❤️';
+                btn.title = '已收藏';
+                
+                // 保存到localStorage，模拟添加到index收藏
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '编委会名单',
+                    url: '5.html',
+                    category: '编委会'
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.url === '5.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                    
+                    // 同时更新index.html的收藏（通过localStorage模拟）
+                    updateIndexFavorites(pageInfo);
+                }
+                
+                alert('已添加到收藏！');
+            } else {
+                btn.innerHTML = '⭐';
+                btn.title = '点击收藏';
+                
+                // 取消收藏
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '5.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 更新index收藏列表
+        function updateIndexFavorites(pageInfo) {
+            // 存储供index.html读取的数据
+            localStorage.setItem('index_favorite_' + Date.now(), JSON.stringify(pageInfo));
+        }
+        
+        // 检查收藏状态
+        window.onload = function() {
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '5.html');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+                btn.title = '已收藏';
+            }
+        };
+    </script>
+</body>
+</html>

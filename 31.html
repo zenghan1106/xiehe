@@ -1,0 +1,527 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表1(8)临床抗微生物治疗的初始选择-耳部感染*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimHei", "PingFang SC", sans-serif;
+            background-color: #f0f4f8;
+            color: #2c3e50;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 导航按钮 */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .btn-home {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .btn-page {
+            background-color: #27ae60;
+            color: white;
+        }
+        
+        .btn-page:hover {
+            background-color: #229954;
+            transform: translateY(-2px);
+        }
+        
+        .btn-favorite {
+            background-color: #e67e22;
+            color: white;
+            position: fixed;
+            bottom: 140px;
+            right: 20px;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(230, 126, 34, 0.4);
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            font-size: 13px;
+        }
+        
+        .btn-favorite:hover {
+            background-color: #d35400;
+            transform: scale(1.1);
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 20px 0 15px 0;
+            padding: 18px;
+            background-color: #d6eaf8;
+            border-radius: 10px;
+            border-left: 6px solid #2874a6;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px;
+        }
+        
+        /* 表头 */
+        thead th {
+            background-color: #2874a6;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 14px 12px;
+            text-align: center;
+            border: 1px solid #1a5276;
+            vertical-align: middle;
+        }
+        
+        /* 表头第一行更大字体 */
+        thead tr:first-child th {
+            font-size: 20px;
+            padding: 18px 12px;
+            background-color: #1a5276;
+        }
+        
+        /* 单元格 */
+        td, th {
+            padding: 12px;
+            border: 1px solid #bdc3c7;
+            vertical-align: top;
+            font-size: 13px;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f6f3;
+        }
+        
+        /* 列宽调整 */
+        .col-anatomy {
+            width: 15%;
+            min-width: 130px;
+        }
+        
+        .col-pathogen {
+            width: 16%;
+            min-width: 140px;
+        }
+        
+        .col-first {
+            width: 26%;
+            min-width: 220px;
+        }
+        
+        .col-alternative {
+            width: 20%;
+            min-width: 170px;
+        }
+        
+        .col-auxiliary {
+            width: 23%;
+            min-width: 190px;
+        }
+        
+        /* 分类行 */
+        .category-row {
+            background-color: #d4e6f1 !important;
+            font-weight: bold;
+            font-size: 16px;
+            color: #154360;
+        }
+        
+        .subcategory-row {
+            background-color: #e8daef !important;
+            font-weight: bold;
+            color: #4a235a;
+            font-size: 14px;
+        }
+        
+        /* 关键词标签区域 */
+        .tags-section {
+            margin-top: 20px;
+            padding: 22px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 17px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #aed6f1;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .tag-disease {
+            background-color: #fadbd8;
+            color: #922b21;
+            border: 1px solid #f5b7b1;
+        }
+        
+        .tag-disease:hover {
+            background-color: #e74c3c;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .tag-drug {
+            background-color: #d5f5e3;
+            color: #1e8449;
+            border: 1px solid #abebc6;
+        }
+        
+        .tag-drug:hover {
+            background-color: #27ae60;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .tag-bacteria {
+            background-color: #fdebd0;
+            color: #9c640c;
+            border: 1px solid #f9e79f;
+        }
+        
+        .tag-bacteria:hover {
+            background-color: #f39c12;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* 底部编辑框区域 */
+        .footer-section {
+            margin-top: 20px;
+            padding: 22px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .copy-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px 18px;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background-color: #fafafa;
+        }
+        
+        .btn-copy {
+            background-color: #17a2b8;
+            color: white;
+            padding: 12px 24px;
+            font-weight: 500;
+        }
+        
+        .btn-copy:hover {
+            background-color: #138496;
+            transform: translateY(-2px);
+        }
+        
+        /* 页码显示 */
+        .page-number {
+            text-align: center;
+            margin-top: 18px;
+            font-size: 15px;
+            color: #666;
+        }
+        
+        .page-num-highlight {
+            font-weight: bold;
+            color: #2874a6;
+            font-size: 18px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+                padding: 14px;
+            }
+            
+            thead th, thead tr:first-child th {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            thead tr:first-child th {
+                font-size: 16px;
+            }
+            
+            td, th {
+                padding: 10px 8px;
+                font-size: 12px;
+            }
+            
+            .btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .btn-favorite {
+                width: 50px;
+                height: 50px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="30.html" class="btn btn-page">◀ 上一页</a>
+            <a href="32.html" class="btn btn-page">下一页 ▶</a>
+        </div>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="btn btn-favorite" onclick="addToFavorites()">⭐<br>收藏</button>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~表1(8)临床抗微生物治疗的初始选择-耳部感染*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~表1(8)临床抗微生物治疗的初始选择-耳部感染*****、表1(8) 临床抗微生物治疗的初始选择、解剖学部位/诊断/特定情况、病原体(通常)、首选方案、备选方案、辅助诊断或治疗方法及说明、氟康唑200mg po首剂,随后100mg po×3~5d、外耳炎、慢性、真菌</div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="5">表1(8) 临床抗微生物治疗的初始选择</th>
+                </tr>
+                <tr>
+                    <th class="col-anatomy">解剖学部位/<br>诊断/特定情况</th>
+                    <th class="col-pathogen">病原体(通常)</th>
+                    <th class="col-first">首选方案</th>
+                    <th class="col-alternative">备选方案</th>
+                    <th class="col-auxiliary">辅助诊断或治疗方法及说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="5">耳</td>
+                </tr>
+                <tr class="subcategory-row">
+                    <td colspan="5">外耳炎</td>
+                </tr>
+                <tr>
+                    <td class="col-anatomy">急性<br>"游泳耳",耳塞,<br>耳机。参见:JAMA<br>2018;320;1375</td>
+                    <td class="col-pathogen">金黄色葡萄球菌,铜绿<br>假单胞菌</td>
+                    <td class="col-first">滴耳:①环丙沙星+(地塞米松或氢化可的松)<br>bid×7d;②氧氟沙星qd×7d;③环丙沙星单次剂量<br>氟喹诺酮滴耳与鼓膜穿孔风险升高相关(CID 70:<br>1103,2020)</td>
+                    <td class="col-alternative"></td>
+                    <td class="col-auxiliary">防腐剂、酸性滴剂、糖皮质激素和局部抗生素治疗效<br>果相当(Cochr Sys Rev 2010;1:CD004740)。局部抗生<br>素治疗更常用,治愈率为65%~90%;治疗费用昂贵<br>(70~300美元)</td>
+                </tr>
+                <tr>
+                    <td class="col-anatomy">慢性</td>
+                    <td class="col-pathogen">多继发于脂溢性皮肤病</td>
+                    <td class="col-first">滴耳:(多黏菌素B+新霉素+氢化可的松)qid+二硫<br>化硒洗液</td>
+                    <td class="col-alternative"></td>
+                    <td class="col-auxiliary">需控制皮肤脂溢:含有二硫化硒的皮屑洗液(Selsun)<br>或[酮康唑洗液+(中效糖皮质激素溶液,0.1%曲安西<br>龙)]</td>
+                </tr>
+                <tr>
+                    <td class="col-anatomy">真菌</td>
+                    <td class="col-pathogen">念珠菌属</td>
+                    <td class="col-first" colspan="2">氟康唑200mg po首剂,随后100mg po×3~5d</td>
+                    <td class="col-auxiliary"></td>
+                </tr>
+                <tr>
+                    <td class="col-anatomy">"坏死性(恶性)外<br>耳炎"<br>危险因素:糖尿病,<br>AIDS,化疗。参见<br>Am J Otolaryngol<br>37:425,2016</td>
+                    <td class="col-pathogen">铜绿假单胞菌>95%<br>(Otol & Neurotology 34:<br>620,2013)</td>
+                    <td class="col-first">环丙沙星400mg iv q8h;750mg<br>po q8~12h,仅适用于病程早<br>期;儿童:20~30mg/(kg·d)<br>iv分次q12h(最大剂量<br>800mg/d)</td>
+                    <td class="col-alternative">哌拉西林-他唑巴坦4.5g<br>iv输注30分钟以上,之后<br>4.5g iv输注4h以上,q8h+<br>妥布霉素5.1mg/(kg·d)</td>
+                    <td class="col-auxiliary">典型患者ESR很高,通常需要清创。排查骨髓炎;CT/<br>MRI扫描。如果累及骨骼,疗程6~8周。若铜绿假单<br>胞菌敏感,其他备选药物:亚胺培南0.5g iv q6h或美罗<br>培南1g iv q8h或头孢吡肟2g iv q12h或头孢他啶2g iv q8h</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 特色检索标签（仅含图片内文字）</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">外耳炎</span>
+            <span class="tag tag-disease">急性</span>
+            <span class="tag tag-disease">游泳耳</span>
+            <span class="tag tag-disease">慢性</span>
+            <span class="tag tag-disease">真菌</span>
+            <span class="tag tag-disease">坏死性外耳炎</span>
+            <span class="tag tag-disease">恶性外耳炎</span>
+            <!-- 抗生素/药物标签 -->
+            <span class="tag tag-drug">环丙沙星</span>
+            <span class="tag tag-drug">地塞米松</span>
+            <span class="tag tag-drug">氢化可的松</span>
+            <span class="tag tag-drug">氧氟沙星</span>
+            <span class="tag tag-drug">氟喹诺酮</span>
+            <span class="tag tag-drug">多黏菌素B</span>
+            <span class="tag tag-drug">新霉素</span>
+            <span class="tag tag-drug">二硫化硒</span>
+            <span class="tag tag-drug">氟康唑</span>
+            <span class="tag tag-drug">哌拉西林-他唑巴坦</span>
+            <span class="tag tag-drug">妥布霉素</span>
+            <span class="tag tag-drug">亚胺培南</span>
+            <span class="tag tag-drug">美罗培南</span>
+            <span class="tag tag-drug">头孢吡肟</span>
+            <span class="tag tag-drug">头孢他啶</span>
+            <span class="tag tag-drug">酮康唑</span>
+            <span class="tag tag-drug">曲安西龙</span>
+            <!-- 细菌标签 -->
+            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria">铜绿假单胞菌</span>
+            <span class="tag tag-bacteria">念珠菌属</span>
+        </div>
+    </div>
+    
+    <!-- 底部编辑框和页码 -->
+    <div class="footer-section">
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyText" value="表1(8)临床抗微生物治疗的初始选择；耳部感染；外耳炎；急性；游泳耳；慢性；真菌；坏死性外耳炎；恶性外耳炎；环丙沙星；地塞米松；氢化可的松；氧氟沙星；氟喹诺酮；多黏菌素B；新霉素；二硫化硒；氟康唑；哌拉西林-他唑巴坦；妥布霉素；亚胺培南；美罗培南；头孢吡肟；头孢他啶；酮康唑；曲安西龙；金黄色葡萄球菌；铜绿假单胞菌；念珠菌属=31" readonly>
+            <button class="btn btn-copy" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+        <div class="page-number">
+            页码: <span class="page-num-highlight">31</span>
+        </div>
+    </div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            var copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(function() {
+                    alert("✅ 已复制到剪贴板！\n\n" + copyText.value);
+                }).catch(function(err) {
+                    document.execCommand('copy');
+                    alert("✅ 已复制到剪贴板！\n\n" + copyText.value);
+                });
+            } else {
+                document.execCommand('copy');
+                alert("✅ 已复制到剪贴板！\n\n" + copyText.value);
+            }
+        }
+        
+        // 添加到收藏
+        function addToFavorites() {
+            var title = document.title;
+            var url = window.location.href;
+            
+            // 使用本地存储模拟添加到index的收藏类目
+            var favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            var exists = favorites.some(function(f) { return f.url === url; });
+            
+            if (!exists) {
+                favorites.push({
+                    title: title,
+                    url: url,
+                    category: '临床抗微生物治疗',
+                    page: '31'
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('⭐ 已添加到收藏！\n\n标题: ' + title + '\n页码: 31\n\n可在 index.html 的收藏类目下查看');
+            } else {
+                alert('⚠️ 该页面已在收藏列表中');
+            }
+        }
+    </script>
+</body>
+</html>

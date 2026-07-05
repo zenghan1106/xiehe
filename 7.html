@@ -1,0 +1,471 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~序（续）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimHei", "PingFang SC", sans-serif;
+            background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #333;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .home-btn {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+        }
+        
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(74, 144, 217, 0.4);
+        }
+        
+        .page-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .page-btn {
+            background: linear-gradient(135deg, #5cb85c 0%, #4cae4c 100%);
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+        }
+        
+        .page-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(92, 184, 92, 0.4);
+        }
+        
+        .main-table {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto 25px;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+        }
+        
+        .table-header {
+            background: linear-gradient(135deg, #1e5799 0%, #2989d8 50%, #207cca 100%);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+        
+        .table-header h1 {
+            font-size: 28px;
+            letter-spacing: 8px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .table-header .decor {
+            font-size: 22px;
+            margin: 0 12px;
+            opacity: 0.9;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .title-row {
+            background: #e8f4fd;
+        }
+        
+        .title-row td {
+            padding: 18px 25px;
+            font-size: 20px;
+            color: #1e5799;
+            border-bottom: 2px solid #b8d4f0;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .content-row td {
+            padding: 20px 25px;
+            font-size: 16px;
+            color: #444;
+            border-bottom: 1px solid #eef2f7;
+            line-height: 2;
+            text-indent: 2em;
+            text-align: justify;
+        }
+        
+        .content-row:hover {
+            background: #fafbfc;
+        }
+        
+        .signature-row td {
+            padding: 15px 25px;
+            font-size: 16px;
+            color: #444;
+            text-align: right;
+            line-height: 2;
+        }
+        
+        .date-row td {
+            padding: 0 25px 20px 25px;
+            font-size: 16px;
+            color: #444;
+            text-align: right;
+        }
+        
+        .copy-section {
+            max-width: 900px;
+            margin: 0 auto 25px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            padding: 0 10px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 14px 18px;
+            border: 2px solid #d0d7de;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #555;
+            background: white;
+            transition: border-color 0.3s;
+        }
+        
+        .copy-input:focus {
+            outline: none;
+            border-color: #4a90d9;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #f0ad4e 0%, #ec971f 100%);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(240, 173, 78, 0.3);
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(240, 173, 78, 0.4);
+        }
+        
+        .copy-btn.copied {
+            background: linear-gradient(135deg, #5cb85c 0%, #4cae4c 100%);
+        }
+        
+        .tags-section {
+            max-width: 900px;
+            margin: 0 auto 20px;
+            padding: 22px;
+            background: white;
+            border-radius: 14px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1e5799;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            color: white;
+            padding: 9px 20px;
+            border-radius: 25px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        
+        .tag:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+        
+        .tag.disease {
+            background: linear-gradient(135deg, #e85d75 0%, #c0392b 100%);
+        }
+        
+        .tag.drug {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        }
+        
+        .tag.bacteria {
+            background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
+        }
+        
+        .keywords {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+            color: #888;
+            font-size: 13px;
+        }
+        
+        .page-number {
+            font-size: 20px;
+            color: #1e5799;
+            font-weight: bold;
+            margin-top: 12px;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 26px;
+            box-shadow: 0 4px 20px rgba(238, 90, 90, 0.4);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        .favorite-btn.active {
+            background: linear-gradient(135deg, #ffd93d 0%, #f6ad55 100%);
+        }
+        
+        @media (max-width: 600px) {
+            .table-header {
+                padding: 22px 15px;
+            }
+            
+            .table-header h1 {
+                font-size: 22px;
+                letter-spacing: 6px;
+            }
+            
+            .title-row td {
+                font-size: 17px;
+                padding: 14px 18px;
+            }
+            
+            .content-row td {
+                font-size: 15px;
+                padding: 15px 18px;
+                line-height: 1.9;
+            }
+            
+            .signature-row td,
+            .date-row td {
+                font-size: 15px;
+                padding: 12px 18px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+                padding: 0 5px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .page-nav {
+                width: 100%;
+                justify-content: flex-end;
+            }
+            
+            .header-nav {
+                padding: 0 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航区域 -->
+    <div class="header-nav">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="page-nav">
+            <a href="6.html" class="page-btn">← 上一页</a>
+            <a href="8.html" class="page-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <!-- 主表格 -->
+    <div class="main-table">
+        <div class="table-header">
+            <h1><span class="decor">❀</span>序（续）<span class="decor">❀</span></h1>
+        </div>
+        <table>
+            <tr class="title-row">
+                <td>序</td>
+            </tr>
+            <tr class="content-row">
+                <td>
+                    新文献的基础上结合自己的临床实践汇总而成，贴近一线医师的工作需求。由于受到编写篇幅和临床经验的限制，本书不可避免有些缺陷，希望各位读者提出宝贵意见。
+                </td>
+            </tr>
+            <tr class="signature-row">
+                <td>于学忠</td>
+            </tr>
+            <tr class="date-row">
+                <td>2021年7月</td>
+            </tr>
+        </table>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="序（续）；于学忠；临床实践；新文献；编写；临床经验=7" readonly>
+        <button class="copy-btn" onclick="copyText()">📋 复制</button>
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <button class="tag disease">新文献</button>
+            <button class="tag drug">临床实践</button>
+            <button class="tag bacteria">一线医师</button>
+            <button class="tag disease">编写</button>
+            <button class="tag drug">临床经验</button>
+            <button class="tag bacteria">缺陷</button>
+            <button class="tag disease">读者</button>
+            <button class="tag drug">宝贵意见</button>
+            <button class="tag bacteria">于学忠</button>
+        </div>
+    </div>
+    
+    <!-- 关键词和页码 -->
+    <div class="keywords">
+        <p>关键词：序、于学忠、临床实践、新文献、编写、临床经验、2021年7月</p>
+        <p class="page-number">7</p>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="favorite-btn" id="favBtn" onclick="toggleFavorite()" title="点击收藏">⭐</button>
+    
+    <script>
+        // 复制功能
+        function copyText() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '✓ 已复制';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '📋 复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            btn.classList.toggle('active');
+            
+            if (btn.classList.contains('active')) {
+                btn.innerHTML = '❤️';
+                btn.title = '已收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '序（续）',
+                    url: '7.html',
+                    category: '序言'
+                };
+                
+                const exists = favorites.some(f => f.url === '7.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                    updateIndexFavorites(pageInfo);
+                }
+                
+                alert('已添加到收藏！');
+            } else {
+                btn.innerHTML = '⭐';
+                btn.title = '点击收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '7.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        function updateIndexFavorites(pageInfo) {
+            localStorage.setItem('index_favorite_' + Date.now(), JSON.stringify(pageInfo));
+        }
+        
+        // 检查收藏状态
+        window.onload = function() {
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '7.html');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+                btn.title = '已收藏';
+            }
+        };
+    </script>
+</body>
+</html>

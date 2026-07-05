@@ -1,0 +1,453 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊抽搐发作处理与晕厥诊疗指南*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5ee 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-top: 60px;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            color: #1a5276;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .left-nav {
+            position: fixed;
+            top: 20px;
+            left: 10px;
+            z-index: 100;
+        }
+        
+        .right-nav {
+            position: fixed;
+            top: 20px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-home {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn-nav {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+        
+        .btn-fav {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            color: white;
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
+        }
+        
+        .btn-copy {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+        
+        .main-content {
+            margin-top: 60px;
+        }
+        
+        table {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        thead tr {
+            background: linear-gradient(135deg, #1a5276, #2980b9);
+            color: white;
+        }
+        
+        thead th {
+            padding: 20px 15px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        tbody td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            color: #2c3e50;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+        
+        tbody tr:hover {
+            background: rgba(52, 152, 219, 0.05);
+        }
+        
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            color: #1a5276;
+            font-weight: bold;
+            font-size: 17px;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+        
+        .bullet {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .check {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .author {
+            text-align: right;
+            color: #7f8c8d;
+            font-style: italic;
+            margin-top: 10px;
+        }
+        
+        .tags-section {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 18px;
+            color: #1a5276;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a5a);
+            color: white;
+        }
+        
+        .tag-drug {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: linear-gradient(45deg, #a8edea, #fed6e3);
+            color: #2c3e50;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+        }
+        
+        .footer-section {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 28px;
+            color: #1a5276;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #2c3e50;
+            background: #f8f9fa;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 18px;
+                padding: 10px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 15px 10px;
+            }
+            
+            tbody td {
+                font-size: 14px;
+                padding: 12px 10px;
+            }
+            
+            .btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .left-nav, .right-nav {
+                position: relative;
+                top: auto;
+                left: auto;
+                right: auto;
+            }
+            
+            .nav-buttons {
+                position: static;
+            }
+            
+            .main-content {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <div class="left-nav">
+            <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+        </div>
+        <div class="right-nav">
+            <a href="42.html" class="btn btn-nav">⬆ 上一页</a>
+            <a href="44.html" class="btn btn-nav">⬇ 下一页</a>
+            <button class="btn btn-fav" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="header main-content">
+        <h1>~~~~~急诊抽搐发作处理与晕厥诊疗指南*****</h1>
+    </div>
+    
+    <!-- 主表格 -->
+    <table>
+        <thead>
+            <tr>
+                <th>急诊抽搐发作处理与晕厥诊疗要点</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <p>监测。</p>
+                    <p><span class="check">✓</span> 解开衣领、腰带，不要强行固定四肢（否则易导致骨折、脱臼），也不要在抽搐时向患者嘴里硬塞牙垫、毛巾等物。</p>
+                    <p><span class="check">✓</span> 紧急建立静脉通路，并检测床旁快速血糖。</p>
+                    <p><span class="bullet">●</span> <strong>保护气道</strong></p>
+                    <p><span class="check">✓</span> 注意观察呼吸是否通畅。</p>
+                    <p><span class="check">✓</span> 尽量留置口咽通气管，如放置困难，可改放鼻咽通气管。</p>
+                    <p><span class="check">✓</span> 若患者SaO₂持续＜90%，应紧急气管插管。</p>
+                    <p><span class="bullet">●</span> <strong>迅速控制抽搐</strong></p>
+                    <p><span class="check">✓</span> 大部分痫性发作，会在数分钟内终止抽搐。但因无法预判其终止时限，建议同时准备药物干预。</p>
+                    <p><span class="check">✓</span> 首选<strong>地西泮</strong>0.1～0.15mg/kg（每剂不超过10mg）或<strong>咪达唑仑</strong>0.15～0.2mg/kg缓慢静脉注射，常可迅速止抽。需注意有呼吸抑制风险，应准备简易呼吸器应急呼吸支持。</p>
+                    <p><span class="check">✓</span> 若建立静脉通路很困难，肌内注射<strong>咪达唑仑</strong>（0.2mg/kg，最大剂量10mg）能有效终止痫性发作。儿童常选用<strong>水合氯醛</strong>（0.3ml/kg）灌肠。</p>
+                    <p><span class="bullet">●</span> <strong>其他：</strong>注意循环功能，纠正水电解质紊乱及酸碱平衡失调，控制高热及感染等。</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="section-title">6. 发作间歇期的急诊处理</p>
+                    <p><span class="bullet">●</span> 宜加用口服或鼻饲抗癫痫药物，以控制痫性发作频率。常用<strong>左乙拉西坦</strong>500mg bid；或<strong>卡马西平</strong>100mg bid。若口服药物疗效不佳，可进一步加用静脉泵入的<strong>丙戊酸钠</strong>、<strong>丙泊酚</strong>等。</p>
+                    <p><span class="bullet">●</span> 其他有明确病因的抽搐，应尽早对因治疗。</p>
+                    <p class="author">（杜铁宽）</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="section-title">■ 晕厥</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="section-title">1. 定义</p>
+                    <p><span class="bullet">●</span> 一过性全脑血流低灌注所致短暂性意识丧失（TLOC）。</p>
+                    <p><span class="bullet">●</span> 发作时患者因肌张力消失不能保持正常姿势而倒地，一般为突然发作，意识恢复迅速且完全，很少持续超过2分钟。</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="section-title">2. 总体思路（图7）</p>
+                    <p><span class="bullet">●</span> <strong>第一步：</strong>是否为真性晕厥。晕厥易与头晕、痫性发作等混淆。患者常将头晕和晕厥混为一谈，笼统地称为"晕"。因此接诊时应首先确认，是否有明确的意识丧失过程。痫性发作时会伴短暂性意识丧失，若缺少癫痫病史和目击到抽搐体态，易被误认为"晕厥"。</p>
+                    <p><span class="bullet">●</span> <strong>第二步：</strong>初步评估。50%以上的晕厥患者可以通过基础的病</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <p class="tags-title">🏷️ 特色检索标签</p>
+        <div class="tags-container">
+            <span class="tag tag-disease">抽搐</span>
+            <span class="tag tag-disease">痫性发作</span>
+            <span class="tag tag-disease">晕厥</span>
+            <span class="tag tag-disease">TLOC</span>
+            <span class="tag tag-disease">短暂性意识丧失</span>
+            <span class="tag tag-disease">癫痫</span>
+            <span class="tag tag-drug">地西泮</span>
+            <span class="tag tag-drug">咪达唑仑</span>
+            <span class="tag tag-drug">水合氯醛</span>
+            <span class="tag tag-drug">左乙拉西坦</span>
+            <span class="tag tag-drug">卡马西平</span>
+            <span class="tag tag-drug">丙戊酸钠</span>
+            <span class="tag tag-drug">丙泊酚</span>
+        </div>
+    </div>
+    
+    <!-- 底部区域 -->
+    <div class="footer-section">
+        <p class="keywords">关键词：急诊抽搐；晕厥；TLOC；短暂性意识丧失；地西泮；咪达唑仑；水合氯醛；左乙拉西坦；卡马西平；丙戊酸钠；丙泊酚；气管插管；痫性发作</p>
+        <p class="page-number">43</p>
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="急诊抽搐发作处理与晕厥诊疗指南；急诊抽搐发作处理发作间歇期处理及晕厥定义总体思路；地西泮；咪达唑仑；水合氯醛；左乙拉西坦；卡马西平；丙戊酸钠；丙泊酚；晕厥；TLOC；痫性发作；=43" readonly>
+            <button class="btn btn-copy" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            }, function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板！");
+            });
+        }
+        
+        // 添加到收藏
+        function addToFavorites() {
+            // 获取当前页面信息
+            const title = document.title.replace(/~~~~~|\\\\*\\\\*/g, '');
+            const url = window.location.href;
+            
+            // 尝试添加到本地存储的收藏列表
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已存在
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                category: '急诊症状',
+                date: new Date().toLocaleDateString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试更新index.html的收藏（通过控制台提示）
+            alert('收藏成功！\n标题：' + title + '\n请确保index.html页面能够读取localStorage中的收藏数据。');
+            
+            // 同时尝试打开index.html并传递收藏信息
+            const indexUrl = 'index.html?action=addFavorite&title=' + encodeURIComponent(title) + '&url=' + encodeURIComponent(url);
+            console.log('收藏信息已保存，请刷新首页查看：', indexUrl);
+        }
+    </script>
+</body>
+</html>

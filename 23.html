@@ -1,0 +1,503 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊症状-胸痛（呼吸系统、胸壁、胃肠道疾病）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #f5f0ff 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .favorite-btn {
+            background: #f0ad4e;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        
+        .favorite-btn.active {
+            background: #d9534f;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #2e86de 0%, #1a5276 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        td {
+            padding: 12px;
+            vertical-align: top;
+            line-height: 1.7;
+        }
+        
+        .category {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 15px;
+        }
+        
+        .subcategory {
+            font-weight: bold;
+            color: #2874a6;
+        }
+        
+        .diamond {
+            color: #2e86de;
+        }
+        
+        .check {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            max-width: calc(100% - 100px);
+            padding: 12px 15px;
+            border: 2px solid #4a90d9;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .tags-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 10px;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+        }
+        
+        .tag.disease {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .tag.symptom {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .tag.bacteria {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+        
+        .keywords {
+            text-align: center;
+            margin-top: 15px;
+            padding: 10px;
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #1a5276;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            display: none;
+            z-index: 1000;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            td {
+                padding: 8px;
+            }
+            
+            #copyInput {
+                width: 100%;
+                max-width: none;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .header {
+                flex-direction: column;
+            }
+            
+            .nav-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="nav-buttons">
+            <a href="22.html" class="nav-btn">⬅ 上一页</a>
+            <a href="24.html" class="nav-btn">➡ 下一页</a>
+            <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~急诊症状-胸痛（呼吸系统、胸壁、胃肠道疾病）*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">急诊症状 - 胸痛相关疾病分类与特征</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        <span class="category">● 呼吸系统疾病</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="check">✓ 气胸</span><br>
+                        <span class="diamond">◇</span> 病史：高瘦的青年男性，有慢性阻塞性肺疾病、囊性纤维化和哮喘史。<br>
+                        <span class="diamond">◇</span> 症状：表现为突发极度呼吸困难，端坐呼吸。发绀、烦躁不安、昏迷，甚至窒息。<br>
+                        <span class="diamond">◇</span> 体征：患侧胸部饱胀，肋间隙增宽，呼吸幅度减低，可有皮下气肿。叩诊呈鼓音。听诊呼吸音减低或消失。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="check">✓ 呼吸道感染：</span>发热、呼吸道症状，深呼吸和咳嗽加重的胸痛。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="check">✓ 肺动脉高压：</span>有结缔组织病、先天性心脏病史或特发性肺动脉高压家族史。进行性活动耐量减低、心绞痛、声音嘶哑、咯血、右心衰竭的症状体征。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="check">✓ 肺部恶性肿瘤：</span>可伴咳嗽、咯血、声音嘶哑、呼吸音减低等。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="check">✓ 胸腔积液：</span>胸部沉闷或胸部不适，单侧呼吸音减低，量少时可有胸膜摩擦音。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="check">✓ 纵隔炎</span><br>
+                        <span class="diamond">◇</span> 病因：颈部、牙源性感染，食管异物穿孔，食管纵隔肿瘤，食管、心脏手术及胸部外伤史。<br>
+                        <span class="diamond">◇</span> 症状：发热、持续性胸骨后疼痛、吞咽困难，可有上腔静脉梗阻、膈肌麻痹症状。<br>
+                        <span class="diamond">◇</span> 体征：可有颌下、颈部脓肿，气管移位、颈静脉怒张、头面部水肿、胸骨压痛、纵隔浊音界增大。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="category">● 胸壁疾病</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="check">✓ 肌肉骨骼原因：</span>包括肋骨挫伤和骨折、肋间肌拉伤和肋软骨炎。外伤史、局部压痛，可有局部瘀斑、皮损。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="check">✓ 急性皮炎、皮下蜂窝织炎：</span>发热，皮肤红、肿、热、痛，脓肿可有波动感。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="check">✓ 带状疱疹：</span>水痘感染史，沿神经走行的成簇疱疹，可有部分破溃结痂。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="check">✓ 非化脓性肋软骨炎（Tietze综合征）：</span>肋软骨膨大、隆起、压痛，深呼吸/活动加重疼痛，局部皮肤无红肿及发热。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="check">✓ 肋间神经痛：</span>压缩性骨折、脊柱结核或肿瘤史，多为单侧沿神经走行的刺痛或灼痛，咳嗽、活动、深呼吸加重。查体可有椎体棘突或椎旁压痛、叩痛，沿受累神经分布的感觉异常。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="category">● 胃肠道疾病</span>（内容待续）
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" id="copyInput" value="急诊症状-胸痛（呼吸系统、胸壁、胃肠道疾病）；气胸、呼吸道感染、肺动脉高压、肺部恶性肿瘤、胸腔积液、纵隔炎、肌肉骨骼原因、急性皮炎、皮下蜂窝织炎、带状疱疹、非化脓性肋软骨炎、Tietze综合征、肋间神经痛；胸痛、呼吸困难、发绀、发热、咯血、吞咽困难、压痛、疱疹=10" readonly>
+        <button class="copy-btn" onclick="copyContent()">📋 复制</button>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签（点击筛选）</div>
+        <div class="tags-container">
+            <span class="tag disease" onclick="filterByTag('气胸')">气胸</span>
+            <span class="tag disease" onclick="filterByTag('呼吸道感染')">呼吸道感染</span>
+            <span class="tag disease" onclick="filterByTag('肺动脉高压')">肺动脉高压</span>
+            <span class="tag disease" onclick="filterByTag('肺部恶性肿瘤')">肺部恶性肿瘤</span>
+            <span class="tag disease" onclick="filterByTag('胸腔积液')">胸腔积液</span>
+            <span class="tag disease" onclick="filterByTag('纵隔炎')">纵隔炎</span>
+            <span class="tag disease" onclick="filterByTag('急性皮炎')">急性皮炎</span>
+            <span class="tag disease" onclick="filterByTag('皮下蜂窝织炎')">皮下蜂窝织炎</span>
+            <span class="tag disease" onclick="filterByTag('带状疱疹')">带状疱疹</span>
+            <span class="tag disease" onclick="filterByTag('非化脓性肋软骨炎')">非化脓性肋软骨炎</span>
+            <span class="tag disease" onclick="filterByTag('Tietze综合征')">Tietze综合征</span>
+            <span class="tag disease" onclick="filterByTag('肋间神经痛')">肋间神经痛</span>
+            <span class="tag symptom" onclick="filterByTag('胸痛')">胸痛</span>
+            <span class="tag symptom" onclick="filterByTag('呼吸困难')">呼吸困难</span>
+            <span class="tag symptom" onclick="filterByTag('发绀')">发绀</span>
+            <span class="tag symptom" onclick="filterByTag('发热')">发热</span>
+            <span class="tag symptom" onclick="filterByTag('咯血')">咯血</span>
+            <span class="tag symptom" onclick="filterByTag('吞咽困难')">吞咽困难</span>
+            <span class="tag symptom" onclick="filterByTag('压痛')">压痛</span>
+            <span class="tag symptom" onclick="filterByTag('疱疹')">疱疹</span>
+        </div>
+    </div>
+    
+    <div class="page-number">第 10 页</div>
+    
+    <div class="keywords">
+        关键词：急诊症状 | 胸痛 | 呼吸系统疾病 | 胸壁疾病 | 气胸 | 纵隔炎 | 带状疱疹 | Tietze综合征 | 肋间神经痛
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            document.execCommand('copy');
+            showToast('✅ 已复制到剪贴板！');
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isActive = btn.classList.contains('active');
+            
+            if (!isActive) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                
+                // 保存到localStorage，用于index页面读取
+                const favoriteData = {
+                    title: '急诊症状-胸痛（呼吸系统、胸壁、胃肠道疾病）',
+                    url: '10.html',
+                    page: '10',
+                    timestamp: new Date().toISOString()
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.find(f => f.url === '10.html');
+                if (!exists) {
+                    favorites.push(favoriteData);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                showToast('⭐ 已添加到收藏！');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '10.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                showToast('💔 已取消收藏');
+            }
+        }
+        
+        function filterByTag(tag) {
+            showToast('🔍 正在筛选: ' + tag);
+            // 实际筛选逻辑可根据需求实现
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.find(f => f.url === '10.html');
+            if (isFavorited) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>

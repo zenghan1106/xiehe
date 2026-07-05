@@ -1,0 +1,462 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~呕吐常见病因及临床表现（续）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 返回首页按钮 */
+        .back-home {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 100;
+        }
+        
+        .back-home a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #4a90d9;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+        }
+        
+        /* 右上角按钮组 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-buttons a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #4a90d9;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+        }
+        
+        .favorite-btn {
+            background-color: #e6a23c !important;
+        }
+        
+        /* 标题 */
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 22px;
+            margin: 60px 0 20px 0;
+            padding: 0 10px;
+        }
+        
+        /* 表格样式 */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        thead {
+            background-color: #2b6cb0;
+            color: #fff;
+        }
+        
+        thead th {
+            padding: 14px 12px;
+            font-size: 17px;
+            font-weight: 600;
+            text-align: left;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+            vertical-align: top;
+        }
+        
+        tbody tr:hover {
+            background-color: #f7fafc;
+        }
+        
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .category {
+            background-color: #ebf8ff;
+            font-weight: 600;
+            color: #2b6cb0;
+        }
+        
+        .sub-category {
+            background-color: #f0fff4;
+            font-weight: 500;
+            color: #276749;
+        }
+        
+        .indent-1 {
+            padding-left: 24px !important;
+        }
+        
+        .indent-2 {
+            padding-left: 40px !important;
+        }
+        
+        .check-mark {
+            color: #38a169;
+            font-weight: bold;
+        }
+        
+        /* 标签样式 */
+        .tags-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        .tags-section h3 {
+            color: #2b6cb0;
+            font-size: 15px;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            background-color: #e6fffa;
+            color: #234e52;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #b2f5ea;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        .copy-section h3 {
+            color: #2b6cb0;
+            font-size: 15px;
+            margin-bottom: 12px;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+        }
+        
+        .copy-box input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 14px;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-box button {
+            padding: 12px 24px;
+            background-color: #38a169;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-box button:active {
+            background-color: #2f855a;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            color: #718096;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            color: #a0aec0;
+            font-size: 12px;
+            margin: 10px 0 20px 0;
+            padding: 0 10px;
+        }
+        
+        /* 提示 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0,0,0,0.75);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            display: none;
+            z-index: 200;
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <div class="back-home">
+        <a href="index.html">返回首页</a>
+    </div>
+    
+    <!-- 右上角导航 -->
+    <div class="nav-buttons">
+        <a href="32.html">上一页</a>
+        <a href="34.html">下一页</a>
+        <a href="javascript:void(0)" class="favorite-btn" onclick="addFavorite()">收藏</a>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~呕吐常见病因及临床表现（续）*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">呕吐的病因及临床表现（续）</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2" class="indent-2">◇ 伴进食即有便意，每天排便次数多，查体腹部无压痛，肠鸣音活跃，粪便化验正常，提示肠易激综合征、非溃疡性消化不良等。</td>
+                </tr>
+                <tr class="sub-category">
+                    <td colspan="2" class="indent-1"><span class="check-mark">✓</span> 器质性妇科疾病</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-2">◇ 晨吐明显，提示妊娠孕吐。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-2">◇ 育龄期女性伴突发下腹痛，晕厥，贫血，血性腹水，查体有腹膜刺激征，提示异位妊娠破裂出血，或卵巢囊肿破裂出血。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-2">◇ 伴突发下腹痛，查体下腹可及包块，局部压痛，可有反跳痛、肌紧张，无明显游离腹水，考虑卵巢囊肿蒂扭转。</td>
+                </tr>
+                <tr class="sub-category">
+                    <td colspan="2" class="indent-1"><span class="check-mark">✓</span> 胸腔疾病</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-2">◇ 无腹部体征，伴胸闷、胸痛、心悸、出汗，需检查心电图及心肌酶，排除ACS。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-2">◇ 伴背痛、腰痛，疼痛剧烈，双上肢或下肢动脉搏动强弱不一，或伴高血压，提示主动脉夹层。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-2">◇ 伴胸痛、呼吸困难、低氧，应考虑肺栓塞。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-2">◇ 咳嗽、发热，应考虑肺炎。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-2">◇ 胸痛、发热，应考虑胸膜炎。</td>
+                </tr>
+                <tr class="sub-category">
+                    <td colspan="2" class="indent-1"><span class="check-mark">✓</span> 中枢神经系统疾病</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-2">◇ 伴持续头痛，喷射性呕吐，应考虑颅内压增高性疾病，如脑出血、脑梗死、脑脓肿、脑膜炎、颅内肿瘤。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-2">◇ 伴长期反复单侧波动性头痛，常伴睡眠障碍，有触发因素，应考虑偏头痛。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-2">◇ 伴意识障碍、肢体抽动、口吐白沫、牙关紧闭，应考虑癫痫。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-2">◇ 伴反复呕吐、呃逆，腹部查体阴性，有眼震、共济失调，应考虑韦尼克脑病、延髓病变、中枢性呕吐。</td>
+                </tr>
+                <tr class="sub-category">
+                    <td colspan="2" class="indent-1"><span class="check-mark">✓</span> 药物和毒物</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-2">◇ 呕吐在用药后出现，腹部体征阴性，应考虑药物反应，如化疗药、镇痛药、心血管药物、利尿药、降糖药、避孕药均可引起呕吐。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-2">◇ 呕吐在进食后出现，应考虑食物中毒，如不熟的扁豆、毒蘑菇、发芽土豆、假酒等。</td>
+                </tr>
+                <tr class="sub-category">
+                    <td colspan="2" class="indent-1"><span class="check-mark">✓</span> 全身及代谢性疾病</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-2">◇ 伴深大呼吸、精神差，提示酮症酸中毒。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-2">◇ 伴腹痛、癫痫、低钠血症、尿色发红，腹部查体多阴性，提示卟啉病。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-2">◇ 伴烦渴、多尿、腹痛、意识改变、心律失常及循环衰竭等表现，提示高钙血症。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-2">◇ 伴血便、紫癜性皮疹，应考虑腹型过敏性紫癜。</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <h3>特色检索标签</h3>
+        <div class="tags-container">
+            <span class="tag">肠易激综合征</span>
+            <span class="tag">非溃疡性消化不良</span>
+            <span class="tag">妊娠孕吐</span>
+            <span class="tag">异位妊娠破裂出血</span>
+            <span class="tag">卵巢囊肿破裂出血</span>
+            <span class="tag">卵巢囊肿蒂扭转</span>
+            <span class="tag">ACS</span>
+            <span class="tag">主动脉夹层</span>
+            <span class="tag">肺栓塞</span>
+            <span class="tag">肺炎</span>
+            <span class="tag">胸膜炎</span>
+            <span class="tag">脑出血</span>
+            <span class="tag">脑梗死</span>
+            <span class="tag">脑脓肿</span>
+            <span class="tag">脑膜炎</span>
+            <span class="tag">颅内肿瘤</span>
+            <span class="tag">偏头痛</span>
+            <span class="tag">癫痫</span>
+            <span class="tag">韦尼克脑病</span>
+            <span class="tag">延髓病变</span>
+            <span class="tag">中枢性呕吐</span>
+            <span class="tag">化疗药</span>
+            <span class="tag">镇痛药</span>
+            <span class="tag">心血管药物</span>
+            <span class="tag">利尿药</span>
+            <span class="tag">降糖药</span>
+            <span class="tag">避孕药</span>
+            <span class="tag">食物中毒</span>
+            <span class="tag">酮症酸中毒</span>
+            <span class="tag">卟啉病</span>
+            <span class="tag">高钙血症</span>
+            <span class="tag">腹型过敏性紫癜</span>
+        </div>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <h3>复制信息</h3>
+        <div class="copy-box">
+            <input type="text" id="copyInput" value="呕吐常见病因及临床表现（续）；肠易激综合征；非溃疡性消化不良；妊娠孕吐；异位妊娠破裂出血；卵巢囊肿破裂出血；卵巢囊肿蒂扭转；ACS；主动脉夹层；肺栓塞；肺炎；胸膜炎；脑出血；脑梗死；脑脓肿；脑膜炎；颅内肿瘤；偏头痛；癫痫；韦尼克脑病；延髓病变；中枢性呕吐；化疗药；镇痛药；心血管药物；利尿药；降糖药；避孕药；食物中毒；酮症酸中毒；卟啉病；高钙血症；腹型过敏性紫癜=33" readonly>
+            <button onclick="copyText()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">33</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">关键词：呕吐、病因、临床表现、妇科疾病、胸腔疾病、中枢神经系统疾病、药物和毒物、全身及代谢性疾病</div>
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        function showToast(msg) {
+            var toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(function() {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        function copyText() {
+            var input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(function() {
+                    showToast('复制成功');
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('复制成功');
+            }
+        }
+        
+        function addFavorite() {
+            var favorites = localStorage.getItem('favorites');
+            var favList = favorites ? JSON.parse(favorites) : [];
+            var currentPage = {
+                title: '呕吐常见病因及临床表现（续）',
+                url: '33.html',
+                category: '急诊症状'
+            };
+            var exists = false;
+            for (var i = 0; i < favList.length; i++) {
+                if (favList[i].url === '33.html') {
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists) {
+                favList.push(currentPage);
+                localStorage.setItem('favorites', JSON.stringify(favList));
+                showToast('收藏成功');
+            } else {
+                showToast('已收藏');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,527 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊医学目录-内分泌内环境皮肤妇产中毒环境创伤急诊*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .page-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .page-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .fav-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(255,107,107,0.3);
+            z-index: 1000;
+        }
+        
+        .fav-btn:hover {
+            background: #ee5a5a;
+        }
+        
+        .main-title {
+            text-align: center;
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .sub-title {
+            text-align: center;
+            font-size: 16px;
+            color: #5a6c7d;
+            margin-bottom: 25px;
+        }
+        
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead {
+            background: #4a90d9;
+        }
+        
+        th {
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .category {
+            background: #e3f2fd;
+            font-weight: bold;
+            color: #1565c0;
+        }
+        
+        .sub-item {
+            padding-left: 30px;
+            color: #444;
+        }
+        
+        .page-num {
+            text-align: right;
+            color: #666;
+            font-family: monospace;
+            white-space: nowrap;
+        }
+        
+        .tags-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #e3f2fd;
+            color: #1565c0;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid #bbdefb;
+        }
+        
+        .bottom-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .page-indicator {
+            text-align: center;
+            font-size: 18px;
+            color: #4a90d9;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            width: calc(100% - 120px);
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: monospace;
+        }
+        
+        .copy-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .copy-btn:hover {
+            background: #218838;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 18px;
+            }
+            
+            th {
+                font-size: 16px;
+                padding: 12px;
+            }
+            
+            td {
+                font-size: 14px;
+                padding: 10px;
+            }
+            
+            .sub-item {
+                padding-left: 15px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .fav-btn {
+                position: static;
+                margin-bottom: 10px;
+                align-self: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    
+    <div class="top-nav">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="page-nav">
+            <a href="12.html" class="page-btn">上一页</a>
+            <a href="14.html" class="page-btn">下一页</a>
+        </div>
+    </div>
+    
+    <h1 class="main-title">~~~~~急诊医学目录-内分泌内环境皮肤妇产中毒环境创伤急诊*****</h1>
+    <p class="sub-title">急诊内科学疾病分类目录</p>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>疾病名称</th>
+                    <th style="width: 80px; text-align: center;">页码</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category">
+                    <td>高渗性高血糖状态</td>
+                    <td class="page-num">225</td>
+                </tr>
+                <tr class="category">
+                    <td>低血糖症</td>
+                    <td class="page-num">227</td>
+                </tr>
+                <tr class="category">
+                    <td>甲状腺危象</td>
+                    <td class="page-num">229</td>
+                </tr>
+                <tr class="category">
+                    <td>黏液性水肿昏迷</td>
+                    <td class="page-num">232</td>
+                </tr>
+                <tr class="category">
+                    <td>肾上腺危象</td>
+                    <td class="page-num">233</td>
+                </tr>
+                <tr class="category">
+                    <td>嗜铬细胞瘤危象</td>
+                    <td class="page-num">235</td>
+                </tr>
+                <tr class="category">
+                    <td>尿崩症</td>
+                    <td class="page-num">237</td>
+                </tr>
+                <tr class="category">
+                    <td>内环境紊乱急诊</td>
+                    <td class="page-num">240</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>高钾血症</td>
+                    <td class="page-num">240</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>低钾血症</td>
+                    <td class="page-num">242</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>高钠血症</td>
+                    <td class="page-num">245</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>低钠血症</td>
+                    <td class="page-num">247</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>高钙血症</td>
+                    <td class="page-num">250</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>低钙血症</td>
+                    <td class="page-num">253</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>乳酸酸中毒</td>
+                    <td class="page-num">255</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>二甲双胍相关乳酸酸中毒</td>
+                    <td class="page-num">257</td>
+                </tr>
+                <tr class="category">
+                    <td>皮肤疾病急诊</td>
+                    <td class="page-num">258</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>重症药疹</td>
+                    <td class="page-num">258</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>感染性皮肤病</td>
+                    <td class="page-num">260</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>荨麻疹和血管性水肿</td>
+                    <td class="page-num">261</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>过敏性休克</td>
+                    <td class="page-num">263</td>
+                </tr>
+                <tr class="category">
+                    <td>妇产科急诊</td>
+                    <td class="page-num">265</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>异位妊娠</td>
+                    <td class="page-num">265</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>子痫前期/HELLP综合征</td>
+                    <td class="page-num">267</td>
+                </tr>
+                <tr class="category">
+                    <td>急性中毒</td>
+                    <td class="page-num">271</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>中毒</td>
+                    <td class="page-num">271</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>有机磷中毒</td>
+                    <td class="page-num">274</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>一氧化碳中毒</td>
+                    <td class="page-num">277</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>百草枯中毒</td>
+                    <td class="page-num">280</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>急性酒精中毒</td>
+                    <td class="page-num">282</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>镇静类药物过量</td>
+                    <td class="page-num">285</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>灭鼠药中毒</td>
+                    <td class="page-num">288</td>
+                </tr>
+                <tr class="category">
+                    <td>环境和创伤急诊</td>
+                    <td class="page-num">290</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>中暑</td>
+                    <td class="page-num">290</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div class="tags-container">
+            <span class="tag">高渗性高血糖状态</span>
+            <span class="tag">低血糖症</span>
+            <span class="tag">甲状腺危象</span>
+            <span class="tag">黏液性水肿昏迷</span>
+            <span class="tag">肾上腺危象</span>
+            <span class="tag">嗜铬细胞瘤危象</span>
+            <span class="tag">尿崩症</span>
+            <span class="tag">内环境紊乱急诊</span>
+            <span class="tag">高钾血症</span>
+            <span class="tag">低钾血症</span>
+            <span class="tag">高钠血症</span>
+            <span class="tag">低钠血症</span>
+            <span class="tag">高钙血症</span>
+            <span class="tag">低钙血症</span>
+            <span class="tag">乳酸酸中毒</span>
+            <span class="tag">二甲双胍相关乳酸酸中毒</span>
+            <span class="tag">皮肤疾病急诊</span>
+            <span class="tag">重症药疹</span>
+            <span class="tag">感染性皮肤病</span>
+            <span class="tag">荨麻疹和血管性水肿</span>
+            <span class="tag">过敏性休克</span>
+            <span class="tag">妇产科急诊</span>
+            <span class="tag">异位妊娠</span>
+            <span class="tag">子痫前期/HELLP综合征</span>
+            <span class="tag">急性中毒</span>
+            <span class="tag">中毒</span>
+            <span class="tag">有机磷中毒</span>
+            <span class="tag">一氧化碳中毒</span>
+            <span class="tag">百草枯中毒</span>
+            <span class="tag">急性酒精中毒</span>
+            <span class="tag">镇静类药物过量</span>
+            <span class="tag">灭鼠药中毒</span>
+            <span class="tag">环境和创伤急诊</span>
+            <span class="tag">中暑</span>
+        </div>
+    </div>
+    
+    <div class="bottom-section">
+        <div class="keywords">
+            关键词：急诊医学、内分泌急诊、内环境紊乱、皮肤疾病急诊、妇产科急诊、急性中毒、环境和创伤急诊、高渗性高血糖状态、低血糖症、甲状腺危象、肾上腺危象、嗜铬细胞瘤危象、尿崩症、高钾血症、低钾血症、高钠血症、低钠血症、高钙血症、低钙血症、乳酸酸中毒、二甲双胍相关乳酸酸中毒、重症药疹、感染性皮肤病、荨麻疹和血管性水肿、过敏性休克、异位妊娠、子痫前期、HELLP综合征、有机磷中毒、一氧化碳中毒、百草枯中毒、急性酒精中毒、镇静类药物过量、灭鼠药中毒、中暑
+        </div>
+        <div class="page-indicator">13</div>
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="急诊医学目录-内分泌内环境皮肤妇产中毒环境创伤急诊；急诊内科学疾病分类目录；急诊医学、内分泌急诊、内环境紊乱、皮肤疾病急诊、妇产科急诊、急性中毒、环境和创伤急诊、高渗性高血糖状态、低血糖症、甲状腺危象、肾上腺危象、嗜铬细胞瘤危象、尿崩症、高钾血症、低钾血症、高钠血症、低钠血症、高钙血症、低钙血症、乳酸酸中毒、二甲双胍相关乳酸酸中毒、重症药疹、感染性皮肤病、荨麻疹和血管性水肿、过敏性休克、异位妊娠、子痫前期、HELLP综合征、有机磷中毒、一氧化碳中毒、百草枯中毒、急性酒精中毒、镇静类药物过量、灭鼠药中毒、中暑；=13" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                alert('已复制到剪贴板！');
+            }).catch(function() {
+                document.execCommand('copy');
+                alert('已复制到剪贴板！');
+            });
+        }
+        
+        function addToFavorites() {
+            const title = document.title;
+            const url = window.location.href;
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const newFav = {
+                title: title,
+                url: url,
+                time: new Date().toISOString()
+            };
+            
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            favorites.push(newFav);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            alert('已添加到收藏！请确保index.html页面支持读取localStorage中的favorites数据。');
+            
+            try {
+                localStorage.setItem('addFavorite', JSON.stringify(newFav));
+            } catch(e) {}
+        }
+    </script>
+</body>
+</html>

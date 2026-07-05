@@ -1,0 +1,644 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急性意识障碍昏迷诊治流程与必做检查*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5f0 100%);
+            min-height: 100vh;
+            padding: 20px 15px 30px;
+            color: #333;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .back-btn {
+            background: linear-gradient(135deg, #4a90d9, #357abd);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 3px 10px rgba(74, 144, 217, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 144, 217, 0.4);
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        
+        .page-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .page-btn {
+            background: linear-gradient(135deg, #5cb85c, #449d44);
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .page-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(92, 184, 92, 0.4);
+        }
+        
+        .page-btn.next {
+            background: linear-gradient(135deg, #f0ad4e, #ec971f);
+            box-shadow: 0 2px 8px rgba(240, 173, 78, 0.3);
+        }
+        
+        .page-btn.next:hover {
+            box-shadow: 0 4px 12px rgba(240, 173, 78, 0.4);
+        }
+        
+        .fav-btn {
+            background: linear-gradient(135deg, #d9534f, #c9302c);
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(217, 83, 79, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .fav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(217, 83, 79, 0.4);
+        }
+        
+        .fav-btn.active {
+            background: linear-gradient(135deg, #5cb85c, #449d44);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #2874a6;
+            font-size: 14px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(31, 97, 141, 0.15);
+            margin-bottom: 20px;
+        }
+        
+        thead tr {
+            background: linear-gradient(135deg, #1a5276, #2874a6);
+        }
+        
+        thead th {
+            color: white;
+            padding: 18px 15px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid rgba(26, 82, 118, 0.1);
+            transition: background 0.3s ease;
+        }
+        
+        tbody tr:hover {
+            background: rgba(232, 244, 248, 0.6);
+        }
+        
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+        
+        tbody td {
+            padding: 14px 15px;
+            color: #2c3e50;
+            font-size: 14px;
+            line-height: 1.8;
+            vertical-align: top;
+        }
+        
+        tbody td:first-child {
+            font-weight: 600;
+            color: #1a5276;
+            white-space: nowrap;
+            width: 120px;
+            background: rgba(232, 244, 248, 0.4);
+        }
+        
+        .section-title {
+            background: linear-gradient(90deg, #d4e6f1, #eaf2f8);
+            font-weight: 700;
+            color: #1a5276;
+            font-size: 15px;
+        }
+        
+        .check-item {
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .check-item::before {
+            content: "●";
+            position: absolute;
+            left: 0;
+            color: #2874a6;
+        }
+        
+        .sub-item {
+            padding-left: 20px;
+            margin-top: 5px;
+            color: #5d6d7e;
+        }
+        
+        .sub-item::before {
+            content: "✓";
+            color: #27ae60;
+            margin-right: 5px;
+        }
+        
+        .flow-box {
+            background: rgba(212, 230, 241, 0.5);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #aed6f1;
+        }
+        
+        .flow-title {
+            font-weight: 700;
+            color: #1a5276;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .flow-step {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            margin: 8px 0;
+            padding: 8px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 8px;
+        }
+        
+        .flow-node {
+            background: linear-gradient(135deg, #5dade2, #3498db);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .flow-arrow {
+            color: #e74c3c;
+            font-size: 16px;
+        }
+        
+        .flow-result {
+            background: linear-gradient(135deg, #58d68d, #2ecc71);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .flow-diamond {
+            background: linear-gradient(135deg, #f5b041, #e67e22);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .tags-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            color: #1a5276;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tags-title::before {
+            content: "🏷️";
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .tag-disease {
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            color: #8b4513;
+        }
+        
+        .tag-drug {
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+            color: #2c5282;
+        }
+        
+        .tag-bacteria {
+            background: linear-gradient(135deg, #d299c2, #fef9d7);
+            color: #553c9a;
+        }
+        
+        .tag:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        
+        .copy-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .copy-title {
+            color: #1a5276;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #aed6f1;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #2c3e50;
+            background: rgba(255,255,255,0.9);
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        #copyInput:focus {
+            border-color: #2874a6;
+        }
+        
+        #copyBtn {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        #copyBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        #copyBtn.copied {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+        }
+        
+        .keywords-section {
+            margin-top: 20px;
+            text-align: center;
+            padding: 15px;
+        }
+        
+        .page-number {
+            color: #7f8c8d;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+        
+        .keywords {
+            color: #95a5a6;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+        
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 14px 10px;
+            }
+            
+            tbody td {
+                padding: 12px 10px;
+                font-size: 13px;
+            }
+            
+            tbody td:first-child {
+                width: 100px;
+            }
+            
+            .back-btn, .page-btn, .fav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-nav">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-right">
+            <div class="page-nav">
+                <a href="38.html" class="page-btn">← 上一页</a>
+                <a href="40.html" class="page-btn next">下一页 →</a>
+            </div>
+            <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~急性意识障碍昏迷诊治流程与必做检查*****</h1>
+    <p class="subtitle">鉴别思路 · 昏迷诊治流程图 · 必做检查 · 代谢性内环境紊乱</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">急性意识障碍——昏迷诊治流程与检查要点</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="2" class="section-title">3. 鉴别思路</td>
+            </tr>
+            <tr>
+                <td>鉴别思路</td>
+                <td>
+                    <div class="check-item">低血糖→局灶性→弥漫性（图6）</div>
+                    <div class="check-item">第一步：低血糖既常见，又易漏诊，若延迟治疗，会产生不可逆性脑损害。为此，应形成工作常规——所有意识障碍患者，在接诊第一时间，床旁检测快速血糖</div>
+                    <div class="check-item">第二步：与弥漫性病因相比，局灶性病因更易确认。通过基本查体和头颅CT，即可快速识别脑卒中、创伤、肿瘤、脓肿等</div>
+                    <div class="check-item">第三步：寻找弥漫性病因导致意识障碍的证据</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="section-title">图6 急性意识障碍——昏迷诊治流程</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="flow-box">
+                        <div class="flow-title">昏迷诊治流程图</div>
+                        <div class="flow-step">
+                            <span class="flow-node">评估ABC 对应处置</span>
+                            <span class="flow-arrow">↓</span>
+                            <span class="flow-node">A:气道 B:呼吸 C:循环</span>
+                        </div>
+                        <div class="flow-step">
+                            <span class="flow-diamond">低血糖？</span>
+                            <span class="flow-arrow">是→</span>
+                            <span class="flow-result">治疗低血糖</span>
+                        </div>
+                        <div class="flow-step">
+                            <span class="flow-diamond">低血糖？</span>
+                            <span class="flow-arrow">否→</span>
+                            <span class="flow-diamond">瞳孔、局灶性定位体征？</span>
+                        </div>
+                        <div class="flow-step">
+                            <span class="flow-diamond">瞳孔、局灶性定位体征？</span>
+                            <span class="flow-arrow">有异常→</span>
+                            <span class="flow-node">头颅CT</span>
+                        </div>
+                        <div class="flow-step">
+                            <span class="flow-diamond">瞳孔、局灶性定位体征？</span>
+                            <span class="flow-arrow">无异常→</span>
+                            <span class="flow-node">血常规 ABG 血氨 电解质 肝肾功 尿常规</span>
+                        </div>
+                        <div class="flow-step">
+                            <span class="flow-node">头颅CT</span>
+                            <span class="flow-arrow">↓</span>
+                            <span class="flow-diamond">是局灶病变吗？</span>
+                        </div>
+                        <div class="flow-step">
+                            <span class="flow-diamond">是局灶病变吗？</span>
+                            <span class="flow-arrow">是→</span>
+                            <span class="flow-result">相应治疗</span>
+                        </div>
+                        <div class="flow-step">
+                            <span class="flow-diamond">是局灶病变吗？</span>
+                            <span class="flow-arrow">否→</span>
+                            <span class="flow-node">血常规 ABG 血氨 电解质 肝肾功 尿常规</span>
+                        </div>
+                        <div class="flow-step">
+                            <span class="flow-node">血常规 ABG 血氨 电解质 肝肾功 尿常规</span>
+                            <span class="flow-arrow">↓</span>
+                            <span class="flow-diamond">能明确病因吗？</span>
+                        </div>
+                        <div class="flow-step">
+                            <span class="flow-diamond">能明确病因吗？</span>
+                            <span class="flow-arrow">是→</span>
+                            <span class="flow-result">相应治疗</span>
+                        </div>
+                        <div class="flow-step">
+                            <span class="flow-diamond">能明确病因吗？</span>
+                            <span class="flow-arrow">否→</span>
+                            <span class="flow-node">腰穿、毒物筛查 头颅CT、MRI</span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="section-title">4. 必做检查</td>
+            </tr>
+            <tr>
+                <td>生化检查</td>
+                <td>
+                    <div class="check-item">可发现尿毒症、高血氨、高CO₂、高血糖、钠/钙等代谢性内环境紊乱，或发现其他病因的线索</div>
+                </td>
+            </tr>
+            <tr>
+                <td>ABG</td>
+                <td>
+                    <div class="check-item">可识别严重酸碱平衡失调、CO₂潴留所致意识障碍。较</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">意识障碍</span>
+            <span class="tag tag-disease">昏迷</span>
+            <span class="tag tag-disease">低血糖</span>
+            <span class="tag tag-disease">脑卒中</span>
+            <span class="tag tag-disease">创伤</span>
+            <span class="tag tag-disease">肿瘤</span>
+            <span class="tag tag-disease">脓肿</span>
+            <span class="tag tag-disease">尿毒症</span>
+            <span class="tag tag-disease">高血氨</span>
+            <span class="tag tag-disease">酸碱平衡失调</span>
+            <span class="tag tag-disease">CO₂潴留</span>
+            <span class="tag tag-disease">电解质紊乱</span>
+            <span class="tag tag-drug">胰岛素</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制</div>
+        <div class="copy-box">
+            <input type="text" id="copyInput" readonly>
+            <button id="copyBtn" onclick="copyContent()">复制</button>
+        </div>
+    </div>
+    
+    <div class="keywords-section">
+        <div class="page-number">39</div>
+        <div class="keywords">关键词：急性意识障碍、昏迷、鉴别思路、低血糖、局灶性病因、弥漫性病因、头颅CT、ABG、尿毒症、高血氨、酸碱平衡失调</div>
+    </div>
+    
+    <script>
+        // 设置复制框内容
+        const title = "急性意识障碍昏迷诊治流程与必做检查";
+        const subtitle = "鉴别思路·昏迷诊治流程图·必做检查·代谢性内环境紊乱";
+        const keywords = "急性意识障碍、昏迷、鉴别思路、低血糖、局灶性病因、弥漫性病因、头颅CT、ABG、尿毒症、高血氨、酸碱平衡失调";
+        const pageNum = "39";
+        document.getElementById('copyInput').value = title + "；" + subtitle + "；" + keywords + "；" + "=" + pageNum;
+        
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制 ✓';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            if (!isFav) {
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+                // 保存到localStorage模拟添加到index收藏
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                if (!favorites.includes('39.html')) {
+                    favorites.push('39.html');
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                alert('已添加到收藏！');
+            } else {
+                btn.textContent = '☆ 收藏';
+                btn.classList.remove('active');
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f !== '39.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            if (favorites.includes('39.html')) {
+                const btn = document.getElementById('favBtn');
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+            }
+        };
+    </script>
+</body>
+</html>

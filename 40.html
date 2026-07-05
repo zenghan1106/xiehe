@@ -1,0 +1,458 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊昏迷诊疗指南*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5ee 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            color: #1a5276;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .left-nav {
+            position: fixed;
+            top: 20px;
+            left: 10px;
+            z-index: 100;
+        }
+        
+        .right-nav {
+            position: fixed;
+            top: 20px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-home {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn-nav {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+        
+        .btn-fav {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            color: white;
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
+        }
+        
+        .btn-copy {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+        
+        .main-content {
+            margin-top: 60px;
+        }
+        
+        table {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        thead tr {
+            background: linear-gradient(135deg, #1a5276, #2980b9);
+            color: white;
+        }
+        
+        thead th {
+            padding: 20px 15px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        tbody td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            color: #2c3e50;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+        
+        tbody tr:hover {
+            background: rgba(52, 152, 219, 0.05);
+        }
+        
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            color: #1a5276;
+            font-weight: bold;
+            font-size: 17px;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+        
+        .bullet {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .check {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .tags-section {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 18px;
+            color: #1a5276;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a5a);
+            color: white;
+        }
+        
+        .tag-drug {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: linear-gradient(45deg, #a8edea, #fed6e3);
+            color: #2c3e50;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+        }
+        
+        .footer-section {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 28px;
+            color: #1a5276;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #2c3e50;
+            background: #f8f9fa;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 18px;
+                padding: 10px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 15px 10px;
+            }
+            
+            tbody td {
+                font-size: 14px;
+                padding: 12px 10px;
+            }
+            
+            .btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .left-nav, .right-nav {
+                position: relative;
+                top: auto;
+                left: auto;
+                right: auto;
+            }
+            
+            .nav-buttons {
+                position: static;
+            }
+            
+            .main-content {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <div class="left-nav">
+            <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+        </div>
+        <div class="right-nav">
+            <a href="39.html" class="btn btn-nav">⬆ 上一页</a>
+            <a href="41.html" class="btn btn-nav">⬇ 下一页</a>
+            <button class="btn btn-fav" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="header main-content">
+        <h1>~~~~~急诊昏迷诊疗指南*****</h1>
+    </div>
+    
+    <!-- 主表格 -->
+    <table>
+        <thead>
+            <tr>
+                <th>急诊昏迷患者诊疗要点</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <p>先进的血气分析仪能定量测定碳氧血红蛋白（COHb）和高铁血红蛋白（MetHb），可快速诊断一氧化碳和亚硝酸盐中毒。</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p><span class="bullet">●</span> <strong>尿常规：</strong>检查尿糖、尿酮体，对于酮症酸中毒所致昏迷的诊断作用不可替代。</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p><span class="bullet">●</span> <strong>ECG：</strong>心律失常、ST-T改变可能提示曾发生过心源性的问题导致昏迷。</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p><span class="bullet">●</span> <strong>脑脊液检查：</strong>对意识障碍的诊断有重要价值，尤其是怀疑中枢神经系统感染或蛛网膜下腔出血时。</p>
+                    <div class="warning">
+                        <p>应注意，腰穿前应行CT检查，若有颅后窝占位性病变，应避免腰穿；怀疑有颅内压升高者应在甘露醇脱水降颅压后再穿刺，以免导致脑疝。</p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="section-title">5. 易漏诊的病因</p>
+                    <p><span class="bullet">●</span> 急诊常规检查无法确认病因时，应特别警惕中毒、内分泌性危象、抽搐后遗状态及少见的神经系统疾病。</p>
+                    <p><span class="bullet">●</span> 应考虑如下处置</p>
+                    <p><span class="check">✓</span> <strong>血/尿毒物筛查：</strong>病因不明的昏迷患者有必要鉴别中毒。中毒迹象较明显者，如为确认其中毒来源及程度，也会选做毒物筛查。</p>
+                    <p><span class="check">✓</span> <strong>内分泌检查：</strong>根据甲状腺、肾上腺、垂体等病史提示，进行相应的激素检验。</p>
+                    <p><span class="check">✓</span> <strong>头颅MRI：</strong>在判断神经系统疾病方面的价值较高。检查过程中难于监控和支持，需特别警惕患者出现痰堵窒息，做好充分评估和准备。</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="section-title">6. 急诊处理</p>
+                    <p><span class="bullet">●</span> 均应进行GCS评分，并动态重复评估。</p>
+                    <p><span class="bullet">●</span> 意识障碍患者有潜在气道风险，应立即保护气道、监测生命体征，继之对症治疗。</p>
+                    <p><span class="check">✓</span> 置入口咽通气管开放气道，方便吸引出口腔分泌物。</p>
+                    <p><span class="check">✓</span> 若患者呛咳反射消失，则应立即气管插管。</p>
+                    <p><span class="bullet">●</span> 严密监测生命体征。</p>
+                    <p><span class="bullet">●</span> 昏迷原因尚未明确的患者，建议应用颈托保护颈椎（尤其是在搬运、检查过程中），直至已确切排除颈椎损伤。</p>
+                    <p><span class="bullet">●</span> 若临床提示颅内压升高，有脑疝风险，宜予20%甘露醇125～250ml快速静脉滴注（q8h～q6h）。</p>
+                    <p><span class="bullet">●</span> 高热患者予药物加物理降温。药物降温不能替代物理降温。对于可疑热射病者（暑季来诊的所有高热伴意识障碍患者，都应警惕热射病），须立即应用冰毯、水浴等方式强化物理</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <p class="tags-title">🏷️ 特色检索标签</p>
+        <div class="tags-container">
+            <span class="tag tag-disease">昏迷</span>
+            <span class="tag tag-disease">酮症酸中毒</span>
+            <span class="tag tag-disease">一氧化碳中毒</span>
+            <span class="tag tag-disease">亚硝酸盐中毒</span>
+            <span class="tag tag-disease">中枢神经系统感染</span>
+            <span class="tag tag-disease">蛛网膜下腔出血</span>
+            <span class="tag tag-disease">脑疝</span>
+            <span class="tag tag-disease">热射病</span>
+            <span class="tag tag-disease">颅内压升高</span>
+            <span class="tag tag-disease">颈椎损伤</span>
+            <span class="tag tag-drug">甘露醇</span>
+            <span class="tag tag-drug">碳氧血红蛋白</span>
+            <span class="tag tag-drug">高铁血红蛋白</span>
+            <span class="tag tag-drug">尿糖</span>
+            <span class="tag tag-drug">尿酮体</span>
+        </div>
+    </div>
+    
+    <!-- 底部区域 -->
+    <div class="footer-section">
+        <p class="keywords">关键词：急诊昏迷；COHb；MetHb；酮症酸中毒；脑脊液检查；GCS评分；气管插管；甘露醇；热射病；物理降温</p>
+        <p class="page-number">40</p>
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="急诊昏迷诊疗指南；急诊昏迷患者血气分析尿常规ECG脑脊液检查及急诊处理要点；COHb；MetHb；酮症酸中毒；脑疝；GCS评分；甘露醇；热射病；=40" readonly>
+            <button class="btn btn-copy" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            }, function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板！");
+            });
+        }
+        
+        // 添加到收藏
+        function addToFavorites() {
+            // 获取当前页面信息
+            const title = document.title.replace(/~~~~~|\\\\*\\\\*/g, '');
+            const url = window.location.href;
+            
+            // 尝试添加到本地存储的收藏列表
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已存在
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                category: '急诊症状',
+                date: new Date().toLocaleDateString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试更新index.html的收藏（通过控制台提示）
+            alert('收藏成功！\n标题：' + title + '\n请确保index.html页面能够读取localStorage中的收藏数据。');
+            
+            // 同时尝试打开index.html并传递收藏信息
+            const indexUrl = 'index.html?action=addFavorite&title=' + encodeURIComponent(title) + '&url=' + encodeURIComponent(url);
+            console.log('收藏信息已保存，请刷新首页查看：', indexUrl);
+        }
+    </script>
+</body>
+</html>

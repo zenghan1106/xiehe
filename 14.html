@@ -1,0 +1,480 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊医学目录页(第14页)*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f8ff;
+            background-image: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background-color: #1e90ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background-color: #0066cc;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background-color: #4682b4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background-color: #2e5c8a;
+        }
+        
+        .title {
+            text-align: center;
+            color: #1a5276;
+            font-size: 28px;
+            font-weight: bold;
+            margin: 20px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .table-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead {
+            background-color: #1e90ff;
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        tbody td {
+            padding: 12px 15px;
+            color: #333;
+            font-size: 15px;
+        }
+        
+        .main-item {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 16px;
+        }
+        
+        .sub-item {
+            padding-left: 30px;
+            color: #555;
+        }
+        
+        .page-num {
+            text-align: right;
+            color: #666;
+            font-family: "Courier New", monospace;
+        }
+        
+        .tags-section {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            color: #1a5276;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background-color: #e3f2fd;
+            color: #1565c0;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid #bbdefb;
+            cursor: pointer;
+        }
+        
+        .tag:hover {
+            background-color: #1565c0;
+            color: white;
+        }
+        
+        .bottom-section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .keywords {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .keywords strong {
+            color: #1a5276;
+        }
+        
+        .page-id {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #bbdefb;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+        }
+        
+        .copy-btn {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background-color: #388e3c;
+        }
+        
+        .copy-btn.copied {
+            background-color: #2e7d32;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+            z-index: 1000;
+        }
+        
+        .favorite-btn:hover {
+            background-color: #ee5a5a;
+            transform: scale(1.1);
+        }
+        
+        .favorite-btn.added {
+            background-color: #4caf50;
+        }
+        
+        @media (max-width: 600px) {
+            .title {
+                font-size: 22px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 12px;
+            }
+            
+            tbody td {
+                font-size: 14px;
+                padding: 10px 12px;
+            }
+            
+            .sub-item {
+                padding-left: 20px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">返回首页</a>
+        <div class="nav-buttons">
+            <a href="13.html" class="nav-btn">上一页</a>
+            <a href="15.html" class="nav-btn">下一页</a>
+        </div>
+    </div>
+    
+    <h1 class="title">~~~~~急诊医学目录页(第14页)*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>内容</th>
+                    <th style="text-align:right; width:100px;">页码</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="sub-item">创伤</td>
+                    <td class="page-num">(294)</td>
+                </tr>
+                <tr>
+                    <td class="sub-item">电击伤</td>
+                    <td class="page-num">(296)</td>
+                </tr>
+                <tr>
+                    <td class="main-item">急救技术</td>
+                    <td class="page-num">(299)</td>
+                </tr>
+                <tr>
+                    <td class="sub-item">急诊气道管理</td>
+                    <td class="page-num">(301)</td>
+                </tr>
+                <tr>
+                    <td class="sub-item">急诊氧疗</td>
+                    <td class="page-num">(308)</td>
+                </tr>
+                <tr>
+                    <td class="sub-item">急诊循环监测与支持</td>
+                    <td class="page-num">(317)</td>
+                </tr>
+                <tr>
+                    <td class="sub-item">急诊呼吸支持</td>
+                    <td class="page-num">(323)</td>
+                </tr>
+                <tr>
+                    <td class="sub-item">急诊血液净化</td>
+                    <td class="page-num">(327)</td>
+                </tr>
+                <tr>
+                    <td class="sub-item">急诊营养支持</td>
+                    <td class="page-num">(329)</td>
+                </tr>
+                <tr>
+                    <td class="sub-item">心肺复苏</td>
+                    <td class="page-num">(331)</td>
+                </tr>
+                <tr>
+                    <td class="main-item">急诊常用药物</td>
+                    <td class="page-num">(345)</td>
+                </tr>
+                <tr>
+                    <td class="sub-item">急诊抗生素的使用</td>
+                    <td class="page-num">(347)</td>
+                </tr>
+                <tr>
+                    <td class="sub-item">急诊糖皮质激素的使用</td>
+                    <td class="page-num">(354)</td>
+                </tr>
+                <tr>
+                    <td class="sub-item">急诊血管活性药物的使用</td>
+                    <td class="page-num">(363)</td>
+                </tr>
+                <tr>
+                    <td class="sub-item">急诊抗心律失常药物的使用</td>
+                    <td class="page-num">(376)</td>
+                </tr>
+                <tr>
+                    <td class="sub-item">急诊常用止血药物的使用</td>
+                    <td class="page-num">(383)</td>
+                </tr>
+                <tr>
+                    <td class="sub-item">急诊科常用药物泵入用法</td>
+                    <td class="page-num">(386)</td>
+                </tr>
+                <tr>
+                    <td class="main-item">附录</td>
+                    <td class="page-num">(389)</td>
+                </tr>
+                <tr>
+                    <td class="sub-item">常用缩略语表</td>
+                    <td class="page-num">(391)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag">创伤</span>
+            <span class="tag">电击伤</span>
+            <span class="tag">急诊气道管理</span>
+            <span class="tag">急诊氧疗</span>
+            <span class="tag">急诊循环监测与支持</span>
+            <span class="tag">急诊呼吸支持</span>
+            <span class="tag">急诊血液净化</span>
+            <span class="tag">急诊营养支持</span>
+            <span class="tag">心肺复苏</span>
+            <span class="tag">急诊抗生素的使用</span>
+            <span class="tag">急诊糖皮质激素的使用</span>
+            <span class="tag">急诊血管活性药物的使用</span>
+            <span class="tag">急诊抗心律失常药物的使用</span>
+            <span class="tag">急诊常用止血药物的使用</span>
+            <span class="tag">急诊科常用药物泵入用法</span>
+            <span class="tag">常用缩略语表</span>
+        </div>
+    </div>
+    
+    <div class="bottom-section">
+        <div class="keywords">
+            <strong>关键词：</strong>急诊医学；急救技术；急诊常用药物；创伤；电击伤；急诊气道管理；急诊氧疗；急诊循环监测；急诊呼吸支持；急诊血液净化；急诊营养支持；心肺复苏；抗生素；糖皮质激素；血管活性药物；抗心律失常药物；止血药物；药物泵入；缩略语表
+        </div>
+        <div class="page-id">页码：14</div>
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="急诊医学目录页(第14页)；急救技术；急诊常用药物；创伤；电击伤；急诊气道管理；急诊氧疗；急诊循环监测与支持；急诊呼吸支持；急诊血液净化；急诊营养支持；心肺复苏；急诊抗生素的使用；急诊糖皮质激素的使用；急诊血管活性药物的使用；急诊抗心律失常药物的使用；急诊常用止血药物的使用；急诊科常用药物泵入用法；常用缩略语表；=14" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <button class="favorite-btn" id="favoriteBtn" onclick="addToFavorite()" title="收藏">★</button>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        function addToFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            btn.classList.add('added');
+            btn.innerHTML = '✓';
+            btn.title = '已收藏';
+            
+            // 模拟添加到index的收藏类目
+            const favoriteData = {
+                title: '急诊医学目录页(第14页)',
+                url: '14.html',
+                keywords: '急救技术,急诊常用药物,创伤,电击伤,心肺复苏,抗生素'
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === favoriteData.url);
+            if (!exists) {
+                favorites.push(favoriteData);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+            
+            setTimeout(function() {
+                alert('已添加到收藏！');
+            }, 100);
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === '14.html');
+            if (exists) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('added');
+                btn.innerHTML = '✓';
+                btn.title = '已收藏';
+            }
+        };
+    </script>
+</body>
+</html>

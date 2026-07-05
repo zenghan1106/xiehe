@@ -1,0 +1,458 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~腹痛定义与常见病因临床表现*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 100;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #5a9bd5;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(90, 155, 213, 0.3);
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .fav-btn {
+            background: #e8a838;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(232, 168, 56, 0.3);
+        }
+        
+        .fav-btn.active {
+            background: #d47676;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c5282;
+            font-size: 22px;
+            margin: 60px 0 25px 0;
+            padding: 0 10px;
+            line-height: 1.4;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 0 auto 25px;
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        thead tr {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 14px;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: left;
+        }
+        
+        tbody td {
+            padding: 14px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #444;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #eef4fb;
+        }
+        
+        .section-title {
+            color: #2c5282;
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .subsection-title {
+            color: #4a5568;
+            font-weight: 600;
+            font-size: 15px;
+            margin: 12px 0 8px 0;
+        }
+        
+        .bullet {
+            color: #666;
+            margin: 6px 0;
+        }
+        
+        .check-item {
+            color: #2d8a4e;
+            font-weight: 500;
+        }
+        
+        .disease-name {
+            color: #c53030;
+            font-weight: 600;
+        }
+        
+        .sign-name {
+            color: #744210;
+            font-weight: 500;
+        }
+        
+        .page-num {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+            max-width: calc(100% - 100px);
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #4a90d9;
+            border-radius: 8px;
+            font-size: 14px;
+            background: #fff;
+            color: #333;
+        }
+        
+        #copyBtn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        #copyBtn.copied {
+            background: #4caf50;
+        }
+        
+        .tags-section {
+            margin: 25px 0 15px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            color: #2c5282;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #e8f0fe;
+            color: #2c5282;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid #c5d9f8;
+        }
+        
+        .tag.disease {
+            background: #fde8e8;
+            color: #c53030;
+            border-color: #f5b5b5;
+        }
+        
+        .tag.drug {
+            background: #e6f4ea;
+            color: #2d8a4e;
+            border-color: #a8dab5;
+        }
+        
+        .tag.bacteria {
+            background: #fff4e6;
+            color: #b7791f;
+            border-color: #f5d0a0;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+            margin-top: 15px;
+            padding: 10px;
+        }
+        
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 18px;
+                margin-top: 70px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 12px 10px;
+            }
+            
+            tbody td {
+                padding: 12px 10px;
+                font-size: 14px;
+            }
+            
+            .copy-section {
+                max-width: 100%;
+                flex-direction: column;
+            }
+            
+            #copyInput {
+                width: 100%;
+            }
+            
+            .nav-btns {
+                position: relative;
+                top: 0;
+                right: 0;
+                flex-direction: row;
+                justify-content: center;
+                margin-bottom: 15px;
+                position: static;
+            }
+            
+            .home-btn {
+                position: relative;
+                top: 0;
+                left: 0;
+                margin: 0 auto 15px;
+                display: block;
+                position: static;
+            }
+            
+            body {
+                padding-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="home-btn">返回首页</a>
+    
+    <div class="nav-btns">
+        <a href="26.html" class="nav-btn">上一页</a>
+        <a href="28.html" class="nav-btn">下一页</a>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">收藏</button>
+    </div>
+    
+    <h1>~~~~~腹痛定义与常见病因临床表现*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>腹痛急诊评估与处理要点</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="section-title">■ 腹痛</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">1. 定义</div>
+                        <div class="bullet">● 腹痛多由腹内组织或器官受到某种强烈刺激或损伤所致，也可源于胸部疾病及全身性疾病。</div>
+                        <div class="bullet">● 腹痛性质和强度，不仅受病变情况和刺激程度的影响，而且受神经和心理等因素的影响。</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">2. 常见病因及临床表现</div>
+                        <div class="bullet">● 急性腹痛</div>
+                        <div class="check-item">✓ 急性胃肠炎：</div>
+                        <div>多伴有发热，呕吐或腹泻、腹胀，吐泻量多容易出现脱水、休克。体征压痛不明显，有肠鸣音亢进。</div>
+                        <div class="check-item">✓ 急性胆囊炎、胆管炎：</div>
+                        <div>突发腹痛，绞痛多见，可向右肩、后腰放射，可伴黄疸、发热，重者休克。体征可有黄疸，<span class="sign-name">Murphy征（+）</span>，可有反跳痛、肌紧张。</div>
+                        <div class="check-item">✓ 急性阑尾炎：</div>
+                        <div>早期可有上腹痛，恶心呕吐，发热，后出现转移性右下腹痛，体征有麦氏点固定压痛，可有反跳痛、肌紧张。</div>
+                        <div class="check-item">✓ 穿孔或破裂：</div>
+                        <div>腹痛发作突然、剧烈、持续，可快速进展致休克，出现血性或炎性腹水，伴发热。查体腹部常有弥漫压痛、反跳痛、肌紧张，甚至板状腹，移动性浊音（+），肠鸣音减弱。常见疾病：胃及十二指肠穿孔、肝破裂、脾破裂、肾破裂、异位妊娠破裂、卵巢破裂等。</div>
+                        <div class="check-item">✓ 空腔脏器阻塞或扩张：</div>
+                        <div>腹痛多为突发剧烈绞痛，伴恶心、呕吐，腹胀症状突出。伴黄疸，右肩放射痛考虑胆石症、胆道蛔虫病等胆道梗阻性疾病，伴腰背痛及下腹放射痛、尿痛、血尿考虑泌尿系结石；伴排便排气停止考虑肠梗阻。查体：肠梗阻时通常腹部膨隆，满腹鼓音，肠鸣音消失或亢进。右上腹压痛，Murphy征（+）考虑胆道病变，若腹股沟或阴囊发现肿物应考虑嵌顿疝。</div>
+                        <div class="check-item">✓ 腹腔脏器扭转：</div>
+                        <div>突发持续性剧烈腹痛，伴阵发性加重，可放射至腰背部。可有恶心、呕吐、腹胀，胃肠扭转时出现停止排气排便、下腹痛为著，并有包块，提示卵巢囊肿蒂扭转，扭转部位出现缺血坏死时有腹膜刺激征。查体：早期体征不明显，组织缺血坏死后腹部有弥漫或局部压痛、反跳痛和肌紧张，可有移动性浊音（+），肠鸣音减弱。</div>
+                        <div class="check-item">✓ 血管病变：</div>
+                        <div>早期症状重体征轻，腹痛可突然发作，剧烈、压榨性、撕裂样、刀割样痛，呈持续性，后期疼痛症状减轻，体征逐渐明显。查体：早期可无阳性体征，后期可有</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="page-num">14</div>
+    
+    <div class="copy-section">
+        <input type="text" id="copyInput" value="腹痛定义与常见病因临床表现；腹痛；急性腹痛；急性胃肠炎；急性胆囊炎；胆管炎；急性阑尾炎；穿孔；破裂；空腔脏器阻塞；腹腔脏器扭转；血管病变；=14" readonly>
+        <button id="copyBtn" onclick="copyText()">复制</button>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">检索标签</div>
+        <div class="tags">
+            <span class="tag disease">急性胃肠炎</span>
+            <span class="tag disease">急性胆囊炎</span>
+            <span class="tag disease">胆管炎</span>
+            <span class="tag disease">急性阑尾炎</span>
+            <span class="tag disease">胃及十二指肠穿孔</span>
+            <span class="tag disease">肝破裂</span>
+            <span class="tag disease">脾破裂</span>
+            <span class="tag disease">肾破裂</span>
+            <span class="tag disease">异位妊娠破裂</span>
+            <span class="tag disease">卵巢破裂</span>
+            <span class="tag disease">胆石症</span>
+            <span class="tag disease">胆道蛔虫病</span>
+            <span class="tag disease">泌尿系结石</span>
+            <span class="tag disease">肠梗阻</span>
+            <span class="tag disease">嵌顿疝</span>
+            <span class="tag disease">卵巢囊肿蒂扭转</span>
+            <span class="tag disease">胃肠扭转</span>
+            <span class="tag disease">腹膜刺激征</span>
+            <span class="tag disease">血管病变</span>
+        </div>
+    </div>
+    
+    <div class="keywords">
+        <strong>关键词：</strong>腹痛定义与常见病因临床表现 | 页码：14
+    </div>
+    
+    <script>
+        function copyText() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const title = '腹痛定义与常见病因临床表现';
+            const isFav = btn.classList.toggle('active');
+            
+            if (isFav) {
+                btn.textContent = '已收藏';
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                if (!favorites.find(f => f.title === title)) {
+                    favorites.push({
+                        title: title,
+                        url: '27.html',
+                        category: '急诊医学'
+                    });
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            } else {
+                btn.textContent = '收藏';
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.title !== title);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const title = '腹痛定义与常见病因临床表现';
+            if (favorites.find(f => f.title === title)) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '已收藏';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,608 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊黄疸诊疗指南*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5f0 100%);
+            min-height: 100vh;
+            padding: 20px 15px 30px;
+            color: #333;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .back-btn {
+            background: linear-gradient(135deg, #4a90d9, #357abd);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 3px 10px rgba(74, 144, 217, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 144, 217, 0.4);
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        
+        .page-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .page-btn {
+            background: linear-gradient(135deg, #5cb85c, #449d44);
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .page-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(92, 184, 92, 0.4);
+        }
+        
+        .page-btn.next {
+            background: linear-gradient(135deg, #f0ad4e, #ec971f);
+            box-shadow: 0 2px 8px rgba(240, 173, 78, 0.3);
+        }
+        
+        .page-btn.next:hover {
+            box-shadow: 0 4px 12px rgba(240, 173, 78, 0.4);
+        }
+        
+        .fav-btn {
+            background: linear-gradient(135deg, #d9534f, #c9302c);
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(217, 83, 79, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .fav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(217, 83, 79, 0.4);
+        }
+        
+        .fav-btn.active {
+            background: linear-gradient(135deg, #5cb85c, #449d44);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #2874a6;
+            font-size: 14px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(31, 97, 141, 0.15);
+            margin-bottom: 20px;
+        }
+        
+        thead tr {
+            background: linear-gradient(135deg, #1a5276, #2874a6);
+        }
+        
+        thead th {
+            color: white;
+            padding: 18px 15px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid rgba(26, 82, 118, 0.1);
+            transition: background 0.3s ease;
+        }
+        
+        tbody tr:hover {
+            background: rgba(232, 244, 248, 0.6);
+        }
+        
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+        
+        tbody td {
+            padding: 14px 15px;
+            color: #2c3e50;
+            font-size: 14px;
+            line-height: 1.8;
+            vertical-align: top;
+        }
+        
+        tbody td:first-child {
+            font-weight: 600;
+            color: #1a5276;
+            white-space: nowrap;
+            width: 120px;
+            background: rgba(232, 244, 248, 0.4);
+        }
+        
+        .section-title {
+            background: linear-gradient(90deg, #d4e6f1, #eaf2f8);
+            font-weight: 700;
+            color: #1a5276;
+            font-size: 15px;
+        }
+        
+        .check-item {
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .check-item::before {
+            content: "●";
+            position: absolute;
+            left: 0;
+            color: #2874a6;
+        }
+        
+        .sub-item {
+            padding-left: 20px;
+            margin-top: 5px;
+            color: #5d6d7e;
+        }
+        
+        .sub-item::before {
+            content: "✓";
+            color: #27ae60;
+            margin-right: 5px;
+        }
+        
+        .tags-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            color: #1a5276;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tags-title::before {
+            content: "🏷️";
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .tag-disease {
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            color: #8b4513;
+        }
+        
+        .tag-drug {
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+            color: #2c5282;
+        }
+        
+        .tag-bacteria {
+            background: linear-gradient(135deg, #d299c2, #fef9d7);
+            color: #553c9a;
+        }
+        
+        .tag:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        
+        .copy-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .copy-title {
+            color: #1a5276;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #aed6f1;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #2c3e50;
+            background: rgba(255,255,255,0.9);
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        #copyInput:focus {
+            border-color: #2874a6;
+        }
+        
+        #copyBtn {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        #copyBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        #copyBtn.copied {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+        }
+        
+        .keywords-section {
+            margin-top: 20px;
+            text-align: center;
+            padding: 15px;
+        }
+        
+        .page-number {
+            color: #7f8c8d;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+        
+        .keywords {
+            color: #95a5a6;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+        
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 14px 10px;
+            }
+            
+            tbody td {
+                padding: 12px 10px;
+                font-size: 13px;
+            }
+            
+            tbody td:first-child {
+                width: 100px;
+            }
+            
+            .back-btn, .page-btn, .fav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-nav">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-right">
+            <div class="page-nav">
+                <a href="35.html" class="page-btn">← 上一页</a>
+                <a href="37.html" class="page-btn next">下一页 →</a>
+            </div>
+            <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~急诊黄疸诊疗指南*****</h1>
+    <p class="subtitle">必做检查 · 选做检查 · 鉴别诊断 · 急诊处理</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">急诊黄疸临床诊疗要点</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="2" class="section-title">3. 必做检查</td>
+            </tr>
+            <tr>
+                <td>血常规</td>
+                <td>发现溶血性疾病、红细胞生成异常等血液系统疾病</td>
+            </tr>
+            <tr>
+                <td>生化检查</td>
+                <td>鉴别胆红素升高以非结合型为主还是以结合型为主，是否同时合并肝细胞损伤</td>
+            </tr>
+            <tr>
+                <td>凝血功能检查</td>
+                <td>若给予维生素K可纠正INR升高，提示肠道吸收脂溶性维生素受损，符合梗阻性黄疸；若无法纠正INR升高，提示中至重度肝细胞疾病伴合成功能受损</td>
+            </tr>
+            <tr>
+                <td>腹部超声</td>
+                <td>发现胆道梗阻性疾病，评估肝胆形态</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="section-title">4. 选做检查</td>
+            </tr>
+            <tr>
+                <td>溶血相关</td>
+                <td>
+                    <div class="check-item">血涂片、Coombs试验、血浆游离血红蛋白：发现破碎红细胞等溶血性疾病的定性诊断</div>
+                </td>
+            </tr>
+            <tr>
+                <td>病毒性肝炎</td>
+                <td>
+                    <div class="check-item">病毒性肝炎血清学检测：用于发现病毒性肝炎</div>
+                </td>
+            </tr>
+            <tr>
+                <td>肿瘤标志物</td>
+                <td>
+                    <div class="check-item">肿瘤标志物检测：用于发现胰腺或肝胆肿瘤，或其他部位肿瘤肝胆转移者</div>
+                </td>
+            </tr>
+            <tr>
+                <td>自身免疫</td>
+                <td>
+                    <div class="check-item">自身免疫性肝病抗体谱、血清免疫固定电泳：用于肝浸润性疾病的诊断与鉴别诊断</div>
+                </td>
+            </tr>
+            <tr>
+                <td>毒物检测</td>
+                <td>
+                    <div class="check-item">毒物检测：用于发现药物或毒物所致黄疸</div>
+                </td>
+            </tr>
+            <tr>
+                <td>寄生虫</td>
+                <td>
+                    <div class="check-item">寄生虫血清学检测：用于发现寄生虫所致黄疸</div>
+                </td>
+            </tr>
+            <tr>
+                <td>腹部CT</td>
+                <td>
+                    <div class="check-item">腹部CT：可更清晰地明确腹部病变</div>
+                </td>
+            </tr>
+            <tr>
+                <td>ERCP</td>
+                <td>
+                    <div class="check-item">ERCP：内镜直视下观察壶腹区、乳头部病变，必要时可同时内镜下取病理、治疗</div>
+                </td>
+            </tr>
+            <tr>
+                <td>肝活检</td>
+                <td>
+                    <div class="check-item">肝活检：若存在肝浸润性病变或考虑恶性肿瘤，可行肝活检明确诊断</div>
+                </td>
+            </tr>
+            <tr>
+                <td>基因检测</td>
+                <td>
+                    <div class="check-item">基因检测：多用于诊断高胆红素血症相关的遗传性疾病</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="section-title">5. 鉴别诊断（图4）</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:center; color:#7f8c8d;">详见图4流程图</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="section-title">6. 急诊处理</td>
+            </tr>
+            <tr>
+                <td>基础处理</td>
+                <td>
+                    <div class="check-item">心电监护、建立静脉通路、采集血液化验、腹部影像学</div>
+                </td>
+            </tr>
+            <tr>
+                <td>胆道梗阻</td>
+                <td>
+                    <div class="check-item">需尽快解除梗阻，如ERCP取石术、鼻胆管引流、胆道支架、十二指肠支架等，或介入留置经PTCD/PTBD等引流管，或外科手术处理</div>
+                    <div class="sub-item">胆道梗阻者常合并胆系感染，易进展为感染性休克，需积极抗感染治疗</div>
+                    <div class="sub-item">对肝内胆汁淤积者，可考虑使用口服促胆汁排泄药物，如熊去氧胆酸（优思弗）</div>
+                </td>
+            </tr>
+            <tr>
+                <td>药物/中毒</td>
+                <td>
+                    <div class="check-item">药物性或中毒相关：避免进一步接触相关药物或毒物，视病情考虑是否行连续性肾脏替代治疗（CRRT）或血液灌流等治疗</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">黄疸</span>
+            <span class="tag tag-disease">溶血性疾病</span>
+            <span class="tag tag-disease">梗阻性黄疸</span>
+            <span class="tag tag-disease">肝细胞损伤</span>
+            <span class="tag tag-disease">胆道梗阻</span>
+            <span class="tag tag-disease">病毒性肝炎</span>
+            <span class="tag tag-disease">肝胆肿瘤</span>
+            <span class="tag tag-disease">肝浸润性病变</span>
+            <span class="tag tag-disease">肝内胆汁淤积</span>
+            <span class="tag tag-disease">感染性休克</span>
+            <span class="tag tag-disease">高胆红素血症</span>
+            <span class="tag tag-drug">维生素K</span>
+            <span class="tag tag-drug">熊去氧胆酸</span>
+            <span class="tag tag-drug">优思弗</span>
+            <span class="tag tag-drug">促胆汁排泄药物</span>
+            <span class="tag tag-bacteria">胆系感染</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制</div>
+        <div class="copy-box">
+            <input type="text" id="copyInput" readonly>
+            <button id="copyBtn" onclick="copyContent()">复制</button>
+        </div>
+    </div>
+    
+    <div class="keywords-section">
+        <div class="page-number">36</div>
+        <div class="keywords">关键词：急诊黄疸、胆红素、胆道梗阻、溶血、ERCP、凝血功能、腹部超声</div>
+    </div>
+    
+    <script>
+        // 设置复制框内容
+        const title = "急诊黄疸诊疗指南";
+        const subtitle = "必做检查·选做检查·鉴别诊断·急诊处理";
+        const keywords = "急诊黄疸、胆红素、胆道梗阻、溶血、ERCP、凝血功能、腹部超声";
+        const pageNum = "36";
+        document.getElementById('copyInput').value = title + "；" + subtitle + "；" + keywords + "；" + "=" + pageNum;
+        
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制 ✓';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            if (!isFav) {
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+                // 保存到localStorage模拟添加到index收藏
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                if (!favorites.includes('36.html')) {
+                    favorites.push('36.html');
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                alert('已添加到收藏！');
+            } else {
+                btn.textContent = '☆ 收藏';
+                btn.classList.remove('active');
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f !== '36.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            if (favorites.includes('36.html')) {
+                const btn = document.getElementById('favBtn');
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,679 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~头晕诊断续表周围性与中枢性眩晕鉴别及必做检查*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #2c3e50;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(52,152,219,0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        /* 右上角导航按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+        }
+        
+        .nav-btns a, .nav-btns button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(52,152,219,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btns a:hover, .nav-btns button:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .nav-btns .fav-btn {
+            background: #e74c3c;
+            box-shadow: 0 2px 8px rgba(231,76,60,0.3);
+        }
+        
+        .nav-btns .fav-btn:hover {
+            background: #c0392b;
+        }
+        
+        /* 标题 */
+        h1 {
+            text-align: center;
+            padding: 80px 20px 20px;
+            font-size: 22px;
+            color: #1a5276;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        /* 副标题 */
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #5d6d7e;
+            margin-bottom: 25px;
+            padding: 0 20px;
+        }
+        
+        /* 主表格容器 */
+        .table-container {
+            width: 95%;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        /* 表格头部 */
+        thead tr {
+            background: #2e86de;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            font-size: 17px;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        /* 表格内容 */
+        tbody tr {
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        td {
+            padding: 14px 12px;
+            vertical-align: top;
+            word-break: break-word;
+        }
+        
+        td:first-child {
+            font-weight: 600;
+            color: #1a5276;
+            background: #ebf5fb;
+            width: 22%;
+        }
+        
+        /* 续表标记 */
+        .continued-label {
+            text-align: right;
+            padding: 8px 15px;
+            font-size: 14px;
+            color: #5d6d7e;
+            background: #f8f9fa;
+        }
+        
+        /* 疾病说明区块 */
+        .disease-section {
+            padding: 15px;
+            background: #fefefe;
+        }
+        
+        .disease-title {
+            font-weight: 700;
+            color: #1a5276;
+            font-size: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .disease-title::before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .disease-item {
+            margin: 10px 0;
+            padding-left: 20px;
+            position: relative;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+        
+        .disease-item::before {
+            content: "◇";
+            position: absolute;
+            left: 5px;
+            color: #3498db;
+        }
+        
+        .disease-name {
+            font-weight: 600;
+            color: #c0392b;
+        }
+        
+        /* 检查列表 */
+        .check-section {
+            padding: 15px;
+            background: #fef9e7;
+            border-left: 4px solid #f39c12;
+            margin: 10px;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .check-title {
+            font-weight: 700;
+            color: #d68910;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+        
+        .check-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .check-list li {
+            padding: 6px 0;
+            padding-left: 20px;
+            position: relative;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+        
+        .check-list li::before {
+            content: "•";
+            position: absolute;
+            left: 5px;
+            color: #f39c12;
+            font-weight: bold;
+        }
+        
+        /* 检索标签 */
+        .tags-section {
+            width: 95%;
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1a5276;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #fadbd8;
+            color: #c0392b;
+        }
+        
+        .tag-disease:hover {
+            background: #f1948a;
+            color: white;
+        }
+        
+        .tag-symptom {
+            background: #d5f5e3;
+            color: #27ae60;
+        }
+        
+        .tag-symptom:hover {
+            background: #82e0aa;
+            color: white;
+        }
+        
+        .tag-check {
+            background: #d6eaf8;
+            color: #2e86de;
+        }
+        
+        .tag-check:hover {
+            background: #85c1e9;
+            color: white;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            width: 95%;
+            max-width: 800px;
+            margin: 25px auto;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 10px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            height: 44px;
+            padding: 0 15px;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #2c3e50;
+            background: white;
+        }
+        
+        .copy-btn {
+            height: 44px;
+            padding: 0 22px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn.copied {
+            background: #7f8c8d;
+        }
+        
+        /* 页码 */
+        .page-num {
+            text-align: center;
+            font-size: 15px;
+            color: #5d6d7e;
+            margin: 20px 0 10px;
+            font-weight: 600;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            font-size: 12px;
+            color: #7f8c8d;
+            padding: 0 20px 30px;
+            line-height: 1.8;
+        }
+        
+        .keywords span {
+            display: inline-block;
+            margin: 2px 5px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 18px;
+                padding-top: 90px;
+            }
+            
+            .subtitle {
+                font-size: 14px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            
+            td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .nav-btns a, .nav-btns button {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 右上角导航 -->
+    <div class="nav-btns">
+        <a href="49.html">← 上一页</a>
+        <a href="51.html">下一页 →</a>
+        <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    </div>
+
+    <!-- 标题 -->
+    <h1>~~~~~头晕诊断续表周围性与中枢性眩晕鉴别及必做检查*****</h1>
+    <p class="subtitle">续表 中枢性和周围性眩晕区分 | 周围性眩晕与中枢性眩晕疾病详解 | 必做检查</p>
+
+    <!-- 主表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="3">头晕诊断续表——周围性与中枢性眩晕鉴别及检查</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 续表标记 -->
+                <tr>
+                    <td colspan="3" class="continued-label">续 表</td>
+                </tr>
+                <!-- 表头行 -->
+                <tr style="background:#5dade2; color:white; font-weight:600;">
+                    <td style="background:#5dade2; color:white;">特点</td>
+                    <td style="background:#5dade2; color:white;">周围性眩晕</td>
+                    <td style="background:#5dade2; color:white;">中枢性眩晕</td>
+                </tr>
+                <tr>
+                    <td>与头位关系</td>
+                    <td>头位变化可使眩晕加重</td>
+                    <td>无关</td>
+                </tr>
+                <tr>
+                    <td>程度（恶心呕吐）</td>
+                    <td>重度，伴明显恶心甚至呕吐</td>
+                    <td>轻至中度</td>
+                </tr>
+                <tr>
+                    <td>耳鸣、听力下降</td>
+                    <td>常见</td>
+                    <td>很少</td>
+                </tr>
+                <tr>
+                    <td>共济失调</td>
+                    <td>无</td>
+                    <td>可有</td>
+                </tr>
+                <tr>
+                    <td>神经系统体征</td>
+                    <td>无</td>
+                    <td>常有</td>
+                </tr>
+                <!-- 周围性眩晕详解 -->
+                <tr>
+                    <td colspan="3">
+                        <div class="disease-section">
+                            <div class="disease-title">周围性眩晕</div>
+                            <div class="disease-item">
+                                <span class="disease-name">良性阵发性位置性眩晕（BPPV）：</span>很常见，又称耳石症。在做Dix-Hallpike动作时，常可诱发眩晕。典型者为20～60秒的旋转性眩晕，并有稍延迟出现的衰减眼震。BPPV为自限性，在急诊以安抚和对症治疗为主。本病虽可行耳石手法复位治疗，但需一定经验，可建议患者专科就诊。
+                            </div>
+                            <div class="disease-item">
+                                <span class="disease-name">急性迷路炎：</span>病因大多为病毒感染，50%患者为上呼吸道感染。治疗重点在于用抗眩晕药物减轻症状。
+                            </div>
+                            <div class="disease-item">
+                                <span class="disease-name">梅尼埃病：</span>病因是内淋巴积水。限盐和利尿脱水是主要治疗方法。
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <!-- 中枢性眩晕详解 -->
+                <tr>
+                    <td colspan="3">
+                        <div class="disease-section">
+                            <div class="disease-title">中枢性眩晕</div>
+                            <div class="disease-item">
+                                <span class="disease-name">椎基底动脉供血不足：</span>脑干、小脑卒中脑干的前庭神经核缺血可致急性眩晕，伴定位性神经功能障碍，如复视、偏瘫、构音障碍、头痛、视物模糊。可由椎基底动脉粥样硬化和颈椎病压迫椎动脉所致。头颅MRI可用于发现血管情况及梗塞灶。
+                            </div>
+                            <div class="disease-item">
+                                <span class="disease-name">小脑出血或梗死：</span>可能引起突然的、强烈的眩晕。肢体共济失调提示小脑受累。
+                            </div>
+                            <div class="disease-item">
+                                <span class="disease-name">颈性眩晕：</span>为颈椎病引起的一过性眩晕，与颈部动作相关，尤其是伸颈动作。可有两类表现：①由椎动脉受压致脑部低灌注引起；②由颈部关节和肌肉牵拉感受器的本体感觉反馈异常所致，常与慢性颈椎病有关（如小面关节、骨关节炎压迫脊髓）。
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <!-- 必做检查 -->
+                <tr>
+                    <td colspan="3">
+                        <div class="check-section">
+                            <div class="check-title">3. 必做检查</div>
+                            <ul class="check-list">
+                                <li><b>快速血糖检测：</b>低血糖患者可出现非特异性头晕、眩晕或晕厥前兆。</li>
+                                <li><b>血常规＋生化检查：</b>了解患者的基础状态。</li>
+                                <li><b>ECG：</b>除外心源性因素导致的脑供血不足等情况。</li>
+                                <li><b>头颅CT：</b>对确定病变性质、部位和病变范围很有帮助。</li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 检索标签（点击图片中的文字检索）</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">周围性眩晕</span>
+            <span class="tag tag-disease">中枢性眩晕</span>
+            <span class="tag tag-disease">良性阵发性位置性眩晕</span>
+            <span class="tag tag-disease">BPPV</span>
+            <span class="tag tag-disease">耳石症</span>
+            <span class="tag tag-disease">急性迷路炎</span>
+            <span class="tag tag-disease">梅尼埃病</span>
+            <span class="tag tag-disease">椎基底动脉供血不足</span>
+            <span class="tag tag-disease">小脑出血</span>
+            <span class="tag tag-disease">小脑梗死</span>
+            <span class="tag tag-disease">颈性眩晕</span>
+            <span class="tag tag-disease">颈椎病</span>
+            <span class="tag tag-symptom">眩晕</span>
+            <span class="tag tag-symptom">恶心呕吐</span>
+            <span class="tag tag-symptom">耳鸣</span>
+            <span class="tag tag-symptom">听力下降</span>
+            <span class="tag tag-symptom">共济失调</span>
+            <span class="tag tag-symptom">神经系统体征</span>
+            <span class="tag tag-symptom">复视</span>
+            <span class="tag tag-symptom">偏瘫</span>
+            <span class="tag tag-symptom">构音障碍</span>
+            <span class="tag tag-symptom">头痛</span>
+            <span class="tag tag-symptom">视物模糊</span>
+            <span class="tag tag-symptom">眼震</span>
+            <span class="tag tag-check">快速血糖检测</span>
+            <span class="tag tag-check">血常规</span>
+            <span class="tag tag-check">生化检查</span>
+            <span class="tag tag-check">ECG</span>
+            <span class="tag tag-check">头颅CT</span>
+            <span class="tag tag-check">头颅MRI</span>
+        </div>
+    </div>
+
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="头晕诊断续表周围性与中枢性眩晕鉴别及必做检查；续表、中枢性眩晕、周围性眩晕、BPPV、耳石症、急性迷路炎、梅尼埃病、椎基底动脉供血不足、小脑出血、小脑梗死、颈性眩晕、颈椎病、低血糖、ECG、头颅CT、头颅MRI=50" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+
+    <!-- 页码 -->
+    <div class="page-num">50</div>
+
+    <!-- 关键词 -->
+    <div class="keywords">
+        <span>关键词：</span>
+        <span>周围性眩晕</span>
+        <span>中枢性眩晕</span>
+        <span>良性阵发性位置性眩晕</span>
+        <span>BPPV</span>
+        <span>耳石症</span>
+        <span>急性迷路炎</span>
+        <span>梅尼埃病</span>
+        <span>椎基底动脉供血不足</span>
+        <span>小脑出血</span>
+        <span>小脑梗死</span>
+        <span>颈性眩晕</span>
+        <span>颈椎病</span>
+        <span>共济失调</span>
+        <span>耳鸣</span>
+        <span>听力下降</span>
+        <span>恶心呕吐</span>
+        <span>神经系统体征</span>
+        <span>复视</span>
+        <span>偏瘫</span>
+        <span>构音障碍</span>
+        <span>头痛</span>
+        <span>视物模糊</span>
+        <span>眼震</span>
+        <span>快速血糖检测</span>
+        <span>血常规</span>
+        <span>生化检查</span>
+        <span>ECG</span>
+        <span>头颅CT</span>
+        <span>头颅MRI</span>
+        <span>Dix-Hallpike</span>
+        <span>内淋巴积水</span>
+    </div>
+
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            const pageInfo = {
+                title: '头晕诊断续表周围性与中枢性眩晕鉴别及必做检查',
+                url: window.location.href,
+                pageNum: '50'
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.pageNum === pageInfo.pageNum);
+            
+            if (!exists) {
+                favorites.push(pageInfo);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('⭐ 已收藏！页面已添加到收藏列表。\n（请确保index.html页面已配置读取localStorage的收藏数据）');
+            } else {
+                alert('该页面已在收藏列表中');
+            }
+            
+            try {
+                const indexWindow = window.open('index.html?action=addFavorite&title=' + encodeURIComponent(pageInfo.title) + '&page=50', '_blank');
+                if (!indexWindow) {
+                    console.log('弹窗被阻止，请手动刷新index.html查看收藏');
+                }
+            } catch(e) {
+                console.log('跨域或弹窗限制，收藏信息已保存到本地存储');
+            }
+        }
+    </script>
+
+</body>
+</html>

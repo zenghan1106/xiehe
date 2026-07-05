@@ -1,0 +1,579 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~协和急诊住院医师手册版权页*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8f0fe 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 - 左上方 */
+        .home-btn {
+            position: fixed;
+            top: 12px;
+            left: 12px;
+            background: #1a5276;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(26, 82, 118, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .home-btn:hover {
+            background: #154360;
+            transform: translateY(-1px);
+        }
+        
+        /* 导航按钮 - 右上角 */
+        .nav-btns {
+            position: fixed;
+            top: 12px;
+            right: 12px;
+            display: flex;
+            gap: 8px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #2874a6;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(40, 116, 166, 0.3);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .nav-btn:hover {
+            background: #1a5276;
+            transform: translateY(-1px);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 320px;
+            right: 15px;
+            background: #e74c3c;
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(231, 76, 60, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .fav-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .fav-btn.active {
+            background: #f1c40f;
+            color: #333;
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 750px;
+            margin: 55px auto 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+        
+        /* 页面标题 */
+        .page-title {
+            background: linear-gradient(90deg, #1a5276, #2e86c1);
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        /* 表格样式 */
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .info-table thead th {
+            background: #2e86c1;
+            color: white;
+            padding: 16px 12px;
+            text-align: center;
+            font-size: 17px;
+            font-weight: bold;
+        }
+        
+        .info-table tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #eaf2f8;
+            font-size: 14px;
+            line-height: 1.7;
+            color: #444;
+            word-break: break-all;
+        }
+        
+        .info-table tbody tr:nth-child(even) {
+            background: #f8fbfd;
+        }
+        
+        .info-table tbody tr:hover {
+            background: #edf5fc;
+        }
+        
+        .info-table tbody td:first-child {
+            font-weight: 600;
+            color: #1a5276;
+            width: 110px;
+            background: #f4f9fd;
+            text-align: right;
+            padding-right: 14px;
+            white-space: nowrap;
+            vertical-align: top;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            padding: 20px;
+            background: #fafbfc;
+            border-top: 1px solid #eaf2f8;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 7px 14px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #fdedec;
+            color: #c0392b;
+            border: 1px solid #f5b7b1;
+        }
+        
+        .tag-drug {
+            background: #eafaf1;
+            color: #27ae60;
+            border: 1px solid #abebc6;
+        }
+        
+        .tag-bacteria {
+            background: #fef9e7;
+            color: #d68910;
+            border: 1px solid #f9e79f;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+        }
+        
+        /* 底部编辑框区域 */
+        .bottom-section {
+            background: #f4f7f9;
+            padding: 18px 15px;
+            border-top: 1px solid #dde5ed;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .copy-input {
+            flex: 1;
+            width: calc(100% - 100px);
+            padding: 12px 14px;
+            border: 2px solid #dde5ed;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background: white;
+            outline: none;
+        }
+        
+        .copy-input:focus {
+            border-color: #2e86c1;
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            padding: 12px 22px;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        .copy-btn:hover {
+            background: #219a52;
+        }
+        
+        .copy-btn.copied {
+            background: #7f8c8d;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            padding: 12px;
+            color: #888;
+            font-size: 13px;
+            background: #f8f9fa;
+            border-top: 1px solid #eaf2f8;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            padding: 10px 15px 18px;
+            color: #666;
+            font-size: 12px;
+            background: #f8f9fa;
+        }
+        
+        .keywords span {
+            color: #2e86c1;
+            font-weight: 500;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .page-title {
+                font-size: 17px;
+                padding: 18px 12px;
+            }
+            
+            .info-table thead th {
+                font-size: 15px;
+                padding: 14px 10px;
+            }
+            
+            .info-table tbody td {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            .info-table tbody td:first-child {
+                width: 85px;
+                padding-right: 10px;
+                font-size: 12px;
+            }
+            
+            .nav-btn, .home-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                font-size: 12px;
+                padding: 10px;
+            }
+            
+            .copy-btn {
+                padding: 10px 16px;
+                font-size: 12px;
+            }
+            
+            .container {
+                margin-top: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">← 首页</a>
+    
+    <!-- 上一页下一页按钮 -->
+    <div class="nav-btns">
+        <a href="2.html" class="nav-btn">← 上一页</a>
+        <a href="4.html" class="nav-btn">下一页 →</a>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="点击收藏">☆</button>
+    
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 标题 -->
+        <div class="page-title">~~~~~协和急诊住院医师手册版权页*****</div>
+        
+        <!-- 表格 -->
+        <table class="info-table">
+            <thead>
+                <tr>
+                    <th colspan="2">📖 图书在版编目(CIP)数据</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>书名</td>
+                    <td>协和急诊住院医师手册</td>
+                </tr>
+                <tr>
+                    <td>CIP数据</td>
+                    <td>协和急诊住院医师手册 / 朱华栋, 刘业成主编. —北京: 中国协和医科大学出版社, 2021.9</td>
+                </tr>
+                <tr>
+                    <td>ISBN</td>
+                    <td>978-7-5679-1780-4</td>
+                </tr>
+                <tr>
+                    <td>分类号</td>
+                    <td>Ⅰ.①协… Ⅱ.①朱…②刘… Ⅲ.①急诊—诊疗—手册 Ⅳ.①R459.7-62</td>
+                </tr>
+                <tr>
+                    <td>CIP核字</td>
+                    <td>中国版本图书馆CIP数据核字(2021)第139414号</td>
+                </tr>
+                <tr>
+                    <td>主编</td>
+                    <td>朱华栋 刘业成</td>
+                </tr>
+                <tr>
+                    <td>责任编辑</td>
+                    <td>沈冰冰</td>
+                </tr>
+                <tr>
+                    <td>封面设计</td>
+                    <td>许晓晨</td>
+                </tr>
+                <tr>
+                    <td>责任校对</td>
+                    <td>张麓</td>
+                </tr>
+                <tr>
+                    <td>责任印制</td>
+                    <td>张岱</td>
+                </tr>
+                <tr>
+                    <td>出版发行</td>
+                    <td>中国协和医科大学出版社（北京市东城区东单三条9号 邮编100730 电话010-65260431）</td>
+                </tr>
+                <tr>
+                    <td>网址</td>
+                    <td>www.pumcp.com</td>
+                </tr>
+                <tr>
+                    <td>经销</td>
+                    <td>新华书店总店北京发行所</td>
+                </tr>
+                <tr>
+                    <td>印刷</td>
+                    <td>三河市龙大印装有限公司</td>
+                </tr>
+                <tr>
+                    <td>开本</td>
+                    <td>787mm×1092mm 1/32</td>
+                </tr>
+                <tr>
+                    <td>印张</td>
+                    <td>13</td>
+                </tr>
+                <tr>
+                    <td>字数</td>
+                    <td>415千字</td>
+                </tr>
+                <tr>
+                    <td>版次</td>
+                    <td>2021年9月第1版</td>
+                </tr>
+                <tr>
+                    <td>印次</td>
+                    <td>2021年12月第2次印刷</td>
+                </tr>
+                <tr>
+                    <td>定价</td>
+                    <td>68.00元</td>
+                </tr>
+                <tr>
+                    <td>ISBN</td>
+                    <td>978-7-5679-1780-4</td>
+                </tr>
+                <tr>
+                    <td>版权声明</td>
+                    <td>版权所有，侵权必究，如有印装质量问题，由本社发行部调换</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 标签区域 - 仅使用图片中出现的文字 -->
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 特色检索标签</div>
+            <div class="tags-container">
+                <span class="tag tag-disease">急诊</span>
+                <span class="tag tag-disease">诊疗</span>
+                <span class="tag tag-disease">住院</span>
+                <span class="tag tag-disease">医师</span>
+            </div>
+        </div>
+        
+        <!-- 底部编辑框区域 -->
+        <div class="bottom-section">
+            <div class="copy-box">
+                <input type="text" class="copy-input" id="copyInput" readonly>
+                <button class="copy-btn" id="copyBtn" onclick="copyContent()">复制</button>
+            </div>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">页码：3</div>
+        
+        <!-- 关键词 -->
+        <div class="keywords">
+            关键词：<span>协和急诊住院医师手册、朱华栋、刘业成、沈冰冰、许晓晨、张麓、张岱、中国协和医科大学出版社、北京、ISBN、CIP、R459.7-62、2021</span>
+        </div>
+    </div>
+    
+    <script>
+        // 设置编辑框内容：标题；副标题；关键词；=页码
+        const title = "协和急诊住院医师手册版权页";
+        const subtitle = "图书在版编目CIP数据";
+        const keywords = "协和、急诊、住院、医师、手册、朱华栋、刘业成、中国协和医科大学出版社、ISBN、CIP";
+        const pageNum = "3";
+        document.getElementById('copyInput').value = title + "；" + subtitle + "；" + keywords + "；" + "=" + pageNum;
+        
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                }).catch(() => {
+                    document.execCommand('copy');
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '已复制!';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        let isFavorited = false;
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            isFavorited = !isFavorited;
+            
+            if (isFavorited) {
+                btn.innerHTML = '★';
+                btn.classList.add('active');
+                btn.title = '已收藏';
+                addToIndexFavorites();
+            } else {
+                btn.innerHTML = '☆';
+                btn.classList.remove('active');
+                btn.title = '点击收藏';
+                removeFromFavorites();
+            }
+        }
+        
+        function addToIndexFavorites() {
+            const favData = {
+                title: '~~~~~协和急诊住院医师手册版权页*****',
+                url: window.location.href.split('/').pop() || '3.html',
+                pageNum: '3',
+                timestamp: new Date().toISOString()
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.title === favData.title);
+            if (!exists) {
+                favorites.push(favData);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已收藏！请在 index.html 查看收藏列表。');
+            }
+        }
+        
+        function removeFromFavorites() {
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            favorites = favorites.filter(f => f.title !== '~~~~~协和急诊住院医师手册版权页*****');
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.title === '~~~~~协和急诊住院医师手册版权页*****');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.innerHTML = '★';
+                btn.classList.add('active');
+                btn.title = '已收藏';
+                isFavorited = true;
+            }
+        };
+    </script>
+</body>
+</html>

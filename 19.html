@@ -1,0 +1,445 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~咯血*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5ee 100%);
+            min-height: 100vh;
+            padding: 20px 15px 30px;
+            color: #333;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .back-btn {
+            background: linear-gradient(135deg, #4a90d9, #357abd);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 3px 10px rgba(74, 144, 217, 0.3);
+            transition: transform 0.2s;
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #5cb85c, #4cae4c);
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+        }
+        
+        .nav-btn.next {
+            background: linear-gradient(135deg, #f0ad4e, #ec971f);
+            box-shadow: 0 2px 8px rgba(240, 173, 78, 0.3);
+        }
+        
+        .favorite-btn {
+            background: linear-gradient(135deg, #d9534f, #c9302c);
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(217, 83, 79, 0.3);
+        }
+        
+        .favorite-btn.active {
+            background: linear-gradient(135deg, #5bc0de, #46b8da);
+        }
+        
+        .main-title {
+            text-align: center;
+            font-size: 28px;
+            color: #1a5276;
+            margin: 15px 0 25px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            font-weight: bold;
+        }
+        
+        .content-table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 25px;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+        }
+        
+        .content-table th {
+            background: linear-gradient(135deg, #1e5799, #2989d8);
+            color: white;
+            padding: 18px 15px;
+            font-size: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .content-table td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #2c3e50;
+        }
+        
+        .content-table tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        .content-table tr:hover {
+            background: #e8f4fd;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 16px;
+        }
+        
+        .sub-item {
+            padding-left: 20px;
+            color: #34495e;
+        }
+        
+        .sub-item::before {
+            content: "✓ ";
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .bottom-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #4a90d9;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #2c3e50;
+            background: white;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 0 3px 10px rgba(155, 89, 182, 0.3);
+        }
+        
+        .tags-section {
+            margin-bottom: 20px;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            box-shadow: 0 2px 6px rgba(231, 76, 60, 0.2);
+        }
+        
+        .tag.disease {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+        
+        .tag.bacteria {
+            background: linear-gradient(135deg, #16a085, #1abc9c);
+        }
+        
+        .tag.drug {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #1a5276;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+        }
+        
+        .keywords {
+            text-align: center;
+            font-size: 13px;
+            color: #7f8c8d;
+            padding: 15px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 10px;
+            line-height: 2;
+        }
+        
+        .keyword-label {
+            color: #1a5276;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 600px) {
+            .main-title {
+                font-size: 22px;
+            }
+            .content-table th {
+                font-size: 17px;
+                padding: 14px 10px;
+            }
+            .content-table td {
+                font-size: 14px;
+                padding: 12px 10px;
+            }
+            .copy-section {
+                flex-direction: column;
+            }
+            .copy-input {
+                width: 100%;
+            }
+            .header-nav {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .nav-buttons {
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-nav">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="18.html" class="nav-btn">上一页</a>
+            <a href="20.html" class="nav-btn next">下一页</a>
+            <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <h1 class="main-title">~~~~~咯血*****</h1>
+    
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th>咯血</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span class="section-title">1. 定义</span><br>
+                    • 声门以下的呼吸道（气管、支气管、肺）出血经口腔咳出。<br>
+                    • 大咯血为咯血量不少于500ml/24h，或咯血量不少于100ml/h。<br>
+                    • 来自上呼吸道及上消化道的出血有时也可从口腔咳出，称为假性咯血。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">2. 常见病因</span><br><br>
+                    <span class="section-title">• 气道疾病</span><br>
+                    <span class="sub-item">支气管炎：急性或慢性支气管炎均可引起，为少量咯血的最常见原因。</span><br>
+                    <span class="sub-item">支气管扩张：常为慢性病程，反复急性发作，表现为咯血伴频繁咳嗽和大量咳痰，原因包括囊性纤维化、支气管肺曲霉菌病、既往肺炎等。</span><br>
+                    <span class="sub-item">气道异物。</span><br>
+                    <span class="sub-item">肿瘤：如原发性支气管肺癌、支气管内转移癌等。</span><br>
+                    <span class="sub-item">外伤：胸部创伤累及气道。</span><br>
+                    <span class="sub-item">其他少见原因：如主动脉和气道之间的瘘、Dieulafoy病变累及气道等。</span><br><br>
+                    <span class="section-title">• 肺实质疾病</span><br>
+                    <span class="sub-item">感染：各类肺部感染性炎症侵犯及肺部血管。</span><br>
+                    <span class="sub-item">凝血功能异常：如使用抗凝药物或血小板减少导致肺实质出血。</span><br>
+                    <span class="sub-item">风湿免疫性疾病：肺出血-肾炎综合征（Goodpasture综合征）、系统性红斑狼疮、肉芽肿性多血管炎、贝赫切特（Behçet）综合征和特发性肺含铁血黄素沉着症等引起的肺实质损害。</span><br>
+                    <span class="sub-item">医源性因素：包括支气管镜检查、肺穿刺活检等。</span><br>
+                    <span class="sub-item">职业病：肺尘埃沉着病等。</span><br>
+                    <span class="sub-item">月经性咯血：咯血与月经同时发生，病因是子宫内膜异位症累及肺实质。</span><br>
+                    <span class="sub-item">肺血管疾病：包括肺栓塞、肺毛细血管压升高（如二尖瓣狭窄引起左心衰竭）、肺动静脉畸形、肺动脉瘤等。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">3. 必做检查</span><br>
+                    • 血型、输血相关项目检查：理论上所有咯血患者均存在大咯血风险，均应行该检查。<br>
+                    • 血常规：白细胞计数及分类计数有助于寻找感染证据，血红蛋白和血细胞比容用于评价出血程度，血小板计数可判断止
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="bottom-section">
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="咯血；定义；常见病因；必做检查；气道疾病；肺实质疾病；支气管炎；支气管扩张；=19" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+        
+        <div class="tags-section">
+            <div class="tags-title">特色检索标签：</div>
+            <span class="tag disease">咯血</span>
+            <span class="tag disease">支气管炎</span>
+            <span class="tag disease">支气管扩张</span>
+            <span class="tag disease">支气管肺癌</span>
+            <span class="tag disease">囊性纤维化</span>
+            <span class="tag disease">支气管肺曲霉菌病</span>
+            <span class="tag disease">Dieulafoy病变</span>
+            <span class="tag disease">肺出血-肾炎综合征</span>
+            <span class="tag disease">Goodpasture综合征</span>
+            <span class="tag disease">系统性红斑狼疮</span>
+            <span class="tag disease">肉芽肿性多血管炎</span>
+            <span class="tag disease">贝赫切特综合征</span>
+            <span class="tag disease">Behçet综合征</span>
+            <span class="tag disease">特发性肺含铁血黄素沉着症</span>
+            <span class="tag disease">肺尘埃沉着病</span>
+            <span class="tag disease">月经性咯血</span>
+            <span class="tag disease">子宫内膜异位症</span>
+            <span class="tag disease">肺栓塞</span>
+            <span class="tag disease">二尖瓣狭窄</span>
+            <span class="tag disease">左心衰竭</span>
+            <span class="tag disease">肺动静脉畸形</span>
+            <span class="tag disease">肺动脉瘤</span>
+            <span class="tag disease">假性咯血</span>
+            <span class="tag disease">大咯血</span>
+            <span class="tag disease">气道异物</span>
+            <span class="tag disease">原发性支气管肺癌</span>
+            <span class="tag disease">转移癌</span>
+            <span class="tag disease">主动脉气道瘘</span>
+            <span class="tag disease">肺部感染</span>
+            <span class="tag disease">凝血功能异常</span>
+            <span class="tag disease">血小板减少</span>
+            <span class="tag disease">风湿免疫性疾病</span>
+        </div>
+        
+        <div class="page-number">页码：19</div>
+        
+        <div class="keywords">
+            <span class="keyword-label">关键词：</span>咯血、大咯血、假性咯血、支气管炎、支气管扩张、气道异物、支气管肺癌、肺实质疾病、肺出血-肾炎综合征、Goodpasture综合征、系统性红斑狼疮、肉芽肿性多血管炎、贝赫切特综合征、肺栓塞、二尖瓣狭窄、左心衰竭、月经性咯血、子宫内膜异位症、肺尘埃沉着病、支气管镜检查、肺穿刺活检、Dieulafoy病变、主动脉气道瘘、囊性纤维化、支气管肺曲霉菌病、特发性肺含铁血黄素沉着症、肺动静脉畸形、肺动脉瘤、凝血功能异常、抗凝药物、血小板减少
+        </div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                const btn = document.querySelector('.copy-btn');
+                const originalText = btn.textContent;
+                btn.textContent = '已复制!';
+                btn.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
+                setTimeout(function() {
+                    btn.textContent = originalText;
+                    btn.style.background = 'linear-gradient(135deg, #9b59b6, #8e44ad)';
+                }, 1500);
+            });
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            if (btn.classList.contains('active')) {
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+            } else {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                // 自动添加到index.html的收藏类目下
+                addToIndexFavorites();
+            }
+        }
+        
+        function addToIndexFavorites() {
+            // 获取当前页面信息
+            const title = '咯血';
+            const url = window.location.href;
+            const pageNum = '19';
+            
+            // 存储到localStorage，供index.html读取
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === url);
+            if (!exists) {
+                favorites.push({
+                    title: title,
+                    url: url,
+                    pageNum: pageNum,
+                    category: '急诊症状'
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 页面加载时检查是否已收藏
+        window.onload = function() {
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const url = window.location.href;
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>

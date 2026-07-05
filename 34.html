@@ -1,0 +1,437 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~呕吐的必做检查、选做检查及急诊处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 返回首页按钮 */
+        .back-home {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 100;
+        }
+        
+        .back-home a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #4a90d9;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+        }
+        
+        /* 右上角按钮组 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-buttons a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #4a90d9;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+        }
+        
+        .favorite-btn {
+            background-color: #e6a23c !important;
+        }
+        
+        /* 标题 */
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 22px;
+            margin: 60px 0 20px 0;
+            padding: 0 10px;
+        }
+        
+        /* 表格样式 */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        thead {
+            background-color: #2b6cb0;
+            color: #fff;
+        }
+        
+        thead th {
+            padding: 14px 12px;
+            font-size: 17px;
+            font-weight: 600;
+            text-align: left;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+            vertical-align: top;
+        }
+        
+        tbody tr:hover {
+            background-color: #f7fafc;
+        }
+        
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .category {
+            background-color: #ebf8ff;
+            font-weight: 600;
+            color: #2b6cb0;
+        }
+        
+        .sub-category {
+            background-color: #f0fff4;
+            font-weight: 500;
+            color: #276749;
+        }
+        
+        .indent-1 {
+            padding-left: 24px !important;
+        }
+        
+        .indent-2 {
+            padding-left: 40px !important;
+        }
+        
+        .check-mark {
+            color: #38a169;
+            font-weight: bold;
+        }
+        
+        /* 标签样式 */
+        .tags-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        .tags-section h3 {
+            color: #2b6cb0;
+            font-size: 15px;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            background-color: #e6fffa;
+            color: #234e52;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #b2f5ea;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        .copy-section h3 {
+            color: #2b6cb0;
+            font-size: 15px;
+            margin-bottom: 12px;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+        }
+        
+        .copy-box input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 14px;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-box button {
+            padding: 12px 24px;
+            background-color: #38a169;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-box button:active {
+            background-color: #2f855a;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            color: #718096;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            color: #a0aec0;
+            font-size: 12px;
+            margin: 10px 0 20px 0;
+            padding: 0 10px;
+        }
+        
+        /* 提示 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0,0,0,0.75);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            display: none;
+            z-index: 200;
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <div class="back-home">
+        <a href="index.html">返回首页</a>
+    </div>
+    
+    <!-- 右上角导航 -->
+    <div class="nav-buttons">
+        <a href="33.html">上一页</a>
+        <a href="35.html">下一页</a>
+        <a href="javascript:void(0)" class="favorite-btn" onclick="addFavorite()">收藏</a>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~呕吐的必做检查、选做检查及急诊处理*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">呕吐的检查与急诊处理</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category">
+                    <td colspan="2">3. 必做检查</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-1">● 血常规、尿常规、粪便常规：鉴别感染和非感染性疾病，发现贫血等血液系统疾病。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-1">● 生化检查：了解肝肾功能、电解质紊乱、血糖异常、胰功等。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-1">● 心肌酶检测：了解冠状动脉和心肌病变。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-1">● ABG：判断有无低氧、过度通气或CO₂潴留、酸碱平衡失调、电解质紊乱。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-1">● 心电图：了解有无心肌缺血、心肌梗死、心律失常。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-1">● 腹部超声：了解肝胆胰脾肾，阑尾，腹腔血管，腹水，小肠壁局部病变。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-1">● 胸片：了解肺及胸膜病变及隔下游离气体。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-1">● 立位腹平片：了解有无膈下游离气体，判断消化道穿孔，有无气液平，判断肠梗阻。有无结石影，判断尿路结石。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-1">● 腹部CT：明确有无胃潴留、肠梗阻、胆石症、胆管肿瘤、胆囊炎、胰腺炎、腹腔占位病变、腹水等。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-1">● 头部CT：明确有无脑积水，脑实质有无病变如出血、梗死、占位、水肿等。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-1">● 尿HCG测定：育龄期妇女需警惕妊娠相关疾病。建议除外妊娠状态后再做放射性影像学检查。</td>
+                </tr>
+                <tr class="category">
+                    <td colspan="2">4. 选做检查</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-1">● 超声心动图：了解心脏结构及心包病变。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-1">● 胃镜或结肠镜：明确胃结肠黏膜病变病因，可以取病理证实。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-1">● MRI：明确胆道肝脏疾病，颅内病变。</td>
+                </tr>
+                <tr class="category">
+                    <td colspan="2">5. 急诊处理</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-1">● 稳定生命体征，纠正脱水和电解质紊乱，加强补液。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-1">● 止吐药物治疗：止吐药如甲氧氯普胺、多潘立酮、昂丹司琼等，促胃肠动力药，红霉素等。需注意，在不能除外肠梗阻的情况下慎用促胃肠动力药物。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-1">● 应用镇静类药物，如氯丙嗪、地西泮、劳拉西泮等。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-1">● 呕吐症状好转，无进食禁忌者，尽早恢复肠内营养，可以用胃管重力滴注开始逐渐过渡到顿服。若只能肠外营养，要注意在能量补充同时，补充微量营养素。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-1">● 病因治疗：控制感染，胃肠减压，解除梗阻，降低颅内压，胆道引流，补充B族维生素等。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-1">● 外科妇科评估手术干预指征：胆囊切除术、阑尾切除术、胃造瘘术、空肠造口术和胃切除术等。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: right; color: #718096;">（韩 红）</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <h3>特色检索标签</h3>
+        <div class="tags-container">
+            <span class="tag">甲氧氯普胺</span>
+            <span class="tag">多潘立酮</span>
+            <span class="tag">昂丹司琼</span>
+            <span class="tag">红霉素</span>
+            <span class="tag">氯丙嗪</span>
+            <span class="tag">地西泮</span>
+            <span class="tag">劳拉西泮</span>
+        </div>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <h3>复制信息</h3>
+        <div class="copy-box">
+            <input type="text" id="copyInput" value="呕吐的必做检查、选做检查及急诊处理；必做检查；选做检查；急诊处理；甲氧氯普胺；多潘立酮；昂丹司琼；红霉素；氯丙嗪；地西泮；劳拉西泮=34" readonly>
+            <button onclick="copyText()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">34</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">关键词：呕吐、必做检查、选做检查、急诊处理、止吐药、甲氧氯普胺、多潘立酮、昂丹司琼、红霉素、镇静类药物、病因治疗</div>
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        function showToast(msg) {
+            var toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(function() {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        function copyText() {
+            var input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(function() {
+                    showToast('复制成功');
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('复制成功');
+            }
+        }
+        
+        function addFavorite() {
+            var favorites = localStorage.getItem('favorites');
+            var favList = favorites ? JSON.parse(favorites) : [];
+            var currentPage = {
+                title: '呕吐的必做检查、选做检查及急诊处理',
+                url: '34.html',
+                category: '急诊症状'
+            };
+            var exists = false;
+            for (var i = 0; i < favList.length; i++) {
+                if (favList[i].url === '34.html') {
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists) {
+                favList.push(currentPage);
+                localStorage.setItem('favorites', JSON.stringify(favList));
+                showToast('收藏成功');
+            } else {
+                showToast('已收藏');
+            }
+        }
+    </script>
+</body>
+</html>

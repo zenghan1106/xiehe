@@ -1,0 +1,448 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~黄疸的定义及常见病因*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 返回首页按钮 */
+        .back-home {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 100;
+        }
+        
+        .back-home a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #4a90d9;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+        }
+        
+        /* 右上角按钮组 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-buttons a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #4a90d9;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+        }
+        
+        .favorite-btn {
+            background-color: #e6a23c !important;
+        }
+        
+        /* 标题 */
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 22px;
+            margin: 60px 0 20px 0;
+            padding: 0 10px;
+        }
+        
+        /* 表格样式 */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        thead {
+            background-color: #2b6cb0;
+            color: #fff;
+        }
+        
+        thead th {
+            padding: 14px 12px;
+            font-size: 17px;
+            font-weight: 600;
+            text-align: left;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+            vertical-align: top;
+        }
+        
+        tbody tr:hover {
+            background-color: #f7fafc;
+        }
+        
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .category {
+            background-color: #ebf8ff;
+            font-weight: 600;
+            color: #2b6cb0;
+        }
+        
+        .sub-category {
+            background-color: #f0fff4;
+            font-weight: 500;
+            color: #276749;
+        }
+        
+        .indent-1 {
+            padding-left: 24px !important;
+        }
+        
+        .indent-2 {
+            padding-left: 40px !important;
+        }
+        
+        .check-mark {
+            color: #38a169;
+            font-weight: bold;
+        }
+        
+        /* 标签样式 */
+        .tags-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        .tags-section h3 {
+            color: #2b6cb0;
+            font-size: 15px;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            background-color: #e6fffa;
+            color: #234e52;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #b2f5ea;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        .copy-section h3 {
+            color: #2b6cb0;
+            font-size: 15px;
+            margin-bottom: 12px;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+        }
+        
+        .copy-box input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 14px;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-box button {
+            padding: 12px 24px;
+            background-color: #38a169;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-box button:active {
+            background-color: #2f855a;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            color: #718096;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            color: #a0aec0;
+            font-size: 12px;
+            margin: 10px 0 20px 0;
+            padding: 0 10px;
+        }
+        
+        /* 提示 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0,0,0,0.75);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            display: none;
+            z-index: 200;
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <div class="back-home">
+        <a href="index.html">返回首页</a>
+    </div>
+    
+    <!-- 右上角导航 -->
+    <div class="nav-buttons">
+        <a href="34.html">上一页</a>
+        <a href="36.html">下一页</a>
+        <a href="javascript:void(0)" class="favorite-btn" onclick="addFavorite()">收藏</a>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~黄疸的定义及常见病因*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">黄疸的定义及常见病因</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category">
+                    <td colspan="2">■ 黄疸</td>
+                </tr>
+                <tr class="category">
+                    <td colspan="2">1. 定义</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-1">● 血清中胆红素升高致使巩膜、黏膜、皮肤发黄的症状和体征。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-1">● 其发生源于胆红素代谢障碍而引起血清内胆红素浓度升高。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-1">● 若血清总胆红素在17.1～34.2μmol/L，而肉眼看不出黄疸，称隐性黄疸或亚临床黄疸。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-1">● 若血清总胆红素＞34.2μmol/L，临床上即可发现黄疸，又称显性黄疸。</td>
+                </tr>
+                <tr class="category">
+                    <td colspan="2">2. 常见病因及临床表现</td>
+                </tr>
+                <tr class="sub-category">
+                    <td colspan="2">● 溶血性黄疸</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-1">凡能引起溶血的疾病都可引起溶血性黄疸，包括先天性溶血性贫血和后天获得性溶血性贫血。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-2"><span class="check-mark">✓</span> 先天性溶血性贫血：包括珠蛋白生成障碍性贫血、遗传性球形细胞增多症等。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-2"><span class="check-mark">✓</span> 后天获得性溶血性贫血：包括自身免疫性溶血性贫血、新生儿溶血、阵发性睡眠性血红蛋白尿症、葡萄糖-6-磷酸脱氢酶缺乏症（俗称蚕豆病）、血栓性微血管病，以及伯氨喹、蛇毒、毒蕈等药物和毒物相关的溶血性贫血。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-2"><span class="check-mark">✓</span> 急性溶血时可出现发热、寒战、头痛、呕吐、腰痛，伴贫血和血红蛋白尿（酱油色或茶色）；慢性溶血多为先天性，常伴脾大。</td>
+                </tr>
+                <tr class="sub-category">
+                    <td colspan="2">● 肝细胞性黄疸</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-2"><span class="check-mark">✓</span> 任何导致肝细胞广泛损害的疾病均可发生肝细胞性黄疸，如病毒性肝炎、肝硬化、中毒性肝炎、钩端螺旋体病、败血症等。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-2"><span class="check-mark">✓</span> 临床表现为皮肤、黏膜浅黄至深黄色，乏力、食欲减退，肝功能严重受损者可伴出血倾向。</td>
+                </tr>
+                <tr class="sub-category">
+                    <td colspan="2">● 胆汁淤积性黄疸</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-2"><span class="check-mark">✓</span> 肝内性胆汁淤积：见于肝内泥沙样结石、癌栓、寄生虫病、药物性胆汁淤积、原发性胆汁性肝硬化等。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-2"><span class="check-mark">✓</span> 肝外性胆汁淤积：见于胆总管结石、狭窄、炎性水肿、胰头占位、蛔虫等胆道梗阻性疾病。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-2"><span class="check-mark">✓</span> 临床表现为皮肤暗黄色或黄绿色，伴皮肤瘙痒、尿色深，粪便颜色变浅或白陶土样便。</td>
+                </tr>
+                <tr class="sub-category">
+                    <td colspan="2">● 先天性非溶血性黄疸</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-2"><span class="check-mark">✓</span> 较少见，可见于Gilbert综合征、Crigler-Najjar综合征、Rotor综合征、Dubin-Johnson综合征等。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent-2"><span class="check-mark">✓</span> 是肝细胞对胆红素的摄取、结合和排泄缺陷所致黄疸。</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <h3>特色检索标签</h3>
+        <div class="tags-container">
+            <span class="tag">溶血性黄疸</span>
+            <span class="tag">先天性溶血性贫血</span>
+            <span class="tag">珠蛋白生成障碍性贫血</span>
+            <span class="tag">遗传性球形细胞增多症</span>
+            <span class="tag">自身免疫性溶血性贫血</span>
+            <span class="tag">新生儿溶血</span>
+            <span class="tag">阵发性睡眠性血红蛋白尿症</span>
+            <span class="tag">葡萄糖-6-磷酸脱氢酶缺乏症</span>
+            <span class="tag">蚕豆病</span>
+            <span class="tag">血栓性微血管病</span>
+            <span class="tag">肝细胞性黄疸</span>
+            <span class="tag">病毒性肝炎</span>
+            <span class="tag">肝硬化</span>
+            <span class="tag">中毒性肝炎</span>
+            <span class="tag">钩端螺旋体病</span>
+            <span class="tag">败血症</span>
+            <span class="tag">胆汁淤积性黄疸</span>
+            <span class="tag">原发性胆汁性肝硬化</span>
+            <span class="tag">胆总管结石</span>
+            <span class="tag">先天性非溶血性黄疸</span>
+            <span class="tag">Gilbert综合征</span>
+            <span class="tag">Crigler-Najjar综合征</span>
+            <span class="tag">Rotor综合征</span>
+            <span class="tag">Dubin-Johnson综合征</span>
+        </div>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <h3>复制信息</h3>
+        <div class="copy-box">
+            <input type="text" id="copyInput" value="黄疸的定义及常见病因；黄疸；溶血性黄疸；先天性溶血性贫血；珠蛋白生成障碍性贫血；遗传性球形细胞增多症；自身免疫性溶血性贫血；新生儿溶血；阵发性睡眠性血红蛋白尿症；葡萄糖-6-磷酸脱氢酶缺乏症；蚕豆病；血栓性微血管病；肝细胞性黄疸；病毒性肝炎；肝硬化；中毒性肝炎；钩端螺旋体病；败血症；胆汁淤积性黄疸；原发性胆汁性肝硬化；胆总管结石；先天性非溶血性黄疸；Gilbert综合征；Crigler-Najjar综合征；Rotor综合征；Dubin-Johnson综合征=35" readonly>
+            <button onclick="copyText()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">35</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">关键词：黄疸、胆红素、溶血性黄疸、肝细胞性黄疸、胆汁淤积性黄疸、先天性非溶血性黄疸、贫血、病毒性肝炎、肝硬化</div>
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        function showToast(msg) {
+            var toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(function() {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        function copyText() {
+            var input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(function() {
+                    showToast('复制成功');
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('复制成功');
+            }
+        }
+        
+        function addFavorite() {
+            var favorites = localStorage.getItem('favorites');
+            var favList = favorites ? JSON.parse(favorites) : [];
+            var currentPage = {
+                title: '黄疸的定义及常见病因',
+                url: '35.html',
+                category: '急诊症状'
+            };
+            var exists = false;
+            for (var i = 0; i < favList.length; i++) {
+                if (favList[i].url === '35.html') {
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists) {
+                favList.push(currentPage);
+                localStorage.setItem('favorites', JSON.stringify(favList));
+                showToast('收藏成功');
+            } else {
+                showToast('已收藏');
+            }
+        }
+    </script>
+</body>
+</html>

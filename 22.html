@@ -1,0 +1,435 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~胸痛常见病因及临床表现*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5ee 100%);
+            min-height: 100vh;
+            padding: 20px 15px 30px;
+            color: #333;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .back-btn {
+            background: linear-gradient(135deg, #4a90d9, #357abd);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 3px 10px rgba(74, 144, 217, 0.3);
+            transition: transform 0.2s;
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #5cb85c, #4cae4c);
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+        }
+        
+        .nav-btn.next {
+            background: linear-gradient(135deg, #f0ad4e, #ec971f);
+            box-shadow: 0 2px 8px rgba(240, 173, 78, 0.3);
+        }
+        
+        .favorite-btn {
+            background: linear-gradient(135deg, #d9534f, #c9302c);
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(217, 83, 79, 0.3);
+        }
+        
+        .favorite-btn.active {
+            background: linear-gradient(135deg, #5bc0de, #46b8da);
+        }
+        
+        .main-title {
+            text-align: center;
+            font-size: 28px;
+            color: #1a5276;
+            margin: 15px 0 25px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            font-weight: bold;
+        }
+        
+        .content-table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 25px;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+        }
+        
+        .content-table th {
+            background: linear-gradient(135deg, #1e5799, #2989d8);
+            color: white;
+            padding: 18px 15px;
+            font-size: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .content-table td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #2c3e50;
+        }
+        
+        .content-table tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        .content-table tr:hover {
+            background: #e8f4fd;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 16px;
+        }
+        
+        .sub-item {
+            padding-left: 20px;
+            color: #34495e;
+        }
+        
+        .sub-item::before {
+            content: "✓ ";
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .diamond-item {
+            padding-left: 20px;
+            color: #34495e;
+        }
+        
+        .diamond-item::before {
+            content: "◇ ";
+            color: #e74c3c;
+        }
+        
+        .bottom-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #4a90d9;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #2c3e50;
+            background: white;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 0 3px 10px rgba(155, 89, 182, 0.3);
+        }
+        
+        .tags-section {
+            margin-bottom: 20px;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            box-shadow: 0 2px 6px rgba(231, 76, 60, 0.2);
+        }
+        
+        .tag.disease {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+        
+        .tag.bacteria {
+            background: linear-gradient(135deg, #16a085, #1abc9c);
+        }
+        
+        .tag.drug {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #1a5276;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+        }
+        
+        .keywords {
+            text-align: center;
+            font-size: 13px;
+            color: #7f8c8d;
+            padding: 15px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 10px;
+            line-height: 2;
+        }
+        
+        .keyword-label {
+            color: #1a5276;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 600px) {
+            .main-title {
+                font-size: 22px;
+            }
+            .content-table th {
+                font-size: 17px;
+                padding: 14px 10px;
+            }
+            .content-table td {
+                font-size: 14px;
+                padding: 12px 10px;
+            }
+            .copy-section {
+                flex-direction: column;
+            }
+            .copy-input {
+                width: 100%;
+            }
+            .header-nav {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .nav-buttons {
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-nav">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="21.html" class="nav-btn">上一页</a>
+            <a href="23.html" class="nav-btn next">下一页</a>
+            <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <h1 class="main-title">~~~~~胸痛常见病因及临床表现*****</h1>
+    
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th>胸痛常见病因及临床表现</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span class="section-title">ACS</span><br>
+                    <span class="diamond-item">危险因素：绝经期女性或年龄＞45岁、高血压、糖尿病、高脂血症、吸烟、有家族史。</span><br>
+                    <span class="diamond-item">症状：寒冷、激动或劳力诱发，胸骨后或心前区压榨样疼痛或闷痛，可伴左肩及左臂甚至后背、下颌放射痛。心绞痛持续2～10分钟，休息或含硝酸甘油3～5分钟可缓解。心肌梗死胸痛持续时间常超过30分钟，硝酸甘油无缓解，可伴恶心、大汗、呼吸困难。老年、糖尿病者症状常不典型。</span><br>
+                    <span class="diamond-item">体征：可有面色苍白、皮肤湿冷、发绀、颈静脉充盈或怒张、低血压、心率变化、心律失常、心脏杂音（乳头肌断裂的二尖瓣杂音、室间隔穿孔的新发胸骨左缘收缩期杂音）、肺部啰音等。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sub-item">急性主动脉夹层</span><br>
+                    <span class="diamond-item">高危因素：马方（Marfan）综合征、主动脉瓣二瓣畸形、埃勒斯-当洛斯（Ehlers-Danlos）综合征、梅毒等；导管介入诊疗、心脏瓣膜及大血管手术损伤；急进型及恶性高血压，顽固性高血压；妊娠晚期。</span><br>
+                    <span class="diamond-item">症状体征：突发尖锐、撕裂或撕扯性胸痛/腹痛，疼痛可随血管蔓延。可伴烦躁、面色苍白、大汗、四肢厥冷等休克表现，并可能出现特征性双侧脉搏不一致（一侧近端肢体或颈动脉搏动缺失）和/或双侧血压差＞20mmHg。常会出现受累脏器本身的表现：累及肾动脉，可引起腰痛、少尿、无尿、血尿，甚至急性肾衰竭；累及腹腔动脉，可引起腹痛、便血；累及无名动脉或颈总动脉，可导致脑血流灌注障碍，出现头晕、嗜睡、失语、定向障碍、肢体瘫痪等；累及脊髓供给血管，可出现截瘫；累及主动脉瓣，可闻及舒张期杂音；累及心包可出现心脏压塞体征。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sub-item">肺栓塞</span><br>
+                    <span class="diamond-item">症状：呼吸困难及气促，可出现烦躁不安、惊恐甚至濒死感，晕厥或意识丧失，难以纠正的低氧血症。严重者伴发绀。</span><br>
+                    <span class="diamond-item">体征：心动过速、P2亢进或分裂、颈静脉充盈或异常搏动、三尖瓣反流产生的心脏杂音、右心奔马律、肝大、肝颈静脉回流征阳性、下肢水肿等，少数可有心包摩擦音。血压下降、休克提示大面积肺栓塞。下肢肿胀、双侧周径不对称、腓肠肌压痛提示下肢深静脉血栓形成（DVT）。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sub-item">急性心包炎</span><br>
+                    <span class="diamond-item">症状：发热、盗汗、持续性胸痛、呼吸困难，甚至发绀、</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="bottom-section">
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="胸痛常见病因及临床表现；ACS；急性主动脉夹层；肺栓塞；急性心包炎；=22" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+        
+        <div class="tags-section">
+            <div class="tags-title">特色检索标签：</div>
+            <span class="tag disease">胸痛</span>
+            <span class="tag disease">ACS</span>
+            <span class="tag disease">急性冠脉综合征</span>
+            <span class="tag disease">心绞痛</span>
+            <span class="tag disease">心肌梗死</span>
+            <span class="tag disease">高血压</span>
+            <span class="tag disease">糖尿病</span>
+            <span class="tag disease">高脂血症</span>
+            <span class="tag disease">急性主动脉夹层</span>
+            <span class="tag disease">马方综合征</span>
+            <span class="tag disease">Marfan综合征</span>
+            <span class="tag disease">主动脉瓣二瓣畸形</span>
+            <span class="tag disease">埃勒斯-当洛斯综合征</span>
+            <span class="tag disease">Ehlers-Danlos综合征</span>
+            <span class="tag disease">梅毒</span>
+            <span class="tag disease">妊娠晚期</span>
+            <span class="tag disease">急性肾衰竭</span>
+            <span class="tag disease">心脏压塞</span>
+            <span class="tag disease">肺栓塞</span>
+            <span class="tag disease">低氧血症</span>
+            <span class="tag disease">下肢深静脉血栓形成</span>
+            <span class="tag disease">DVT</span>
+            <span class="tag disease">急性心包炎</span>
+        </div>
+        
+        <div class="page-number">页码：22</div>
+        
+        <div class="keywords">
+            <span class="keyword-label">关键词：</span>胸痛、ACS、急性冠脉综合征、心绞痛、心肌梗死、硝酸甘油、危险因素、高血压、糖尿病、高脂血症、吸烟、家族史、急性主动脉夹层、马方综合征、Marfan综合征、主动脉瓣二瓣畸形、埃勒斯-当洛斯综合征、Ehlers-Danlos综合征、梅毒、妊娠晚期、肾动脉、急性肾衰竭、腹腔动脉、无名动脉、颈总动脉、脑血流灌注障碍、截瘫、主动脉瓣、心脏压塞、肺栓塞、呼吸困难、低氧血症、发绀、P2亢进、三尖瓣反流、右心奔马律、肝颈静脉回流征、DVT、下肢深静脉血栓形成、腓肠肌压痛、急性心包炎、发热、盗汗
+        </div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                const btn = document.querySelector('.copy-btn');
+                const originalText = btn.textContent;
+                btn.textContent = '已复制!';
+                btn.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
+                setTimeout(function() {
+                    btn.textContent = originalText;
+                    btn.style.background = 'linear-gradient(135deg, #9b59b6, #8e44ad)';
+                }, 1500);
+            });
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            if (btn.classList.contains('active')) {
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+            } else {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                addToIndexFavorites();
+            }
+        }
+        
+        function addToIndexFavorites() {
+            const title = '胸痛常见病因及临床表现';
+            const url = window.location.href;
+            const pageNum = '22';
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === url);
+            if (!exists) {
+                favorites.push({
+                    title: title,
+                    url: url,
+                    pageNum: pageNum,
+                    category: '急诊症状'
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        window.onload = function() {
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const url = window.location.href;
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>

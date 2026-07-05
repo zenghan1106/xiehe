@@ -1,0 +1,531 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~晕厥总体思路与危险分层评估表*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background-color: #4a90d9;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+        }
+        
+        .home-btn:hover {
+            background-color: #357abd;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background-color: #4a90d9;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .nav-btn:hover {
+            background-color: #357abd;
+        }
+        
+        .favorite-btn {
+            background-color: #e8a838;
+        }
+        
+        .favorite-btn:hover {
+            background-color: #d4952e;
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 800px;
+            margin: 80px auto 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 30px;
+        }
+        
+        /* 标题样式 */
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 24px;
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #ebf5fb;
+            border-radius: 10px;
+            border-left: 5px solid #4a90d9;
+        }
+        
+        /* 流程图说明区域 */
+        .flow-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .flow-title {
+            font-size: 18px;
+            color: #2c3e50;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .flow-content {
+            font-size: 14px;
+            line-height: 2;
+            color: #444;
+        }
+        
+        .flow-content p {
+            margin-bottom: 10px;
+            text-indent: 2em;
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        /* 表头样式 */
+        thead tr {
+            background-color: #4a90d9 !important;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        /* 表格单元格 */
+        th, td {
+            padding: 12px;
+            border: 1px solid #e0e6ed;
+            vertical-align: top;
+        }
+        
+        /* 分类行样式 */
+        .category-row {
+            background-color: #e8f4f8;
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        /* 低危因素列 */
+        .low-risk {
+            background-color: #e8f8e8;
+            color: #27ae60;
+        }
+        
+        /* 高危因素列 */
+        .high-risk {
+            background-color: #fde8e8;
+            color: #c0392b;
+        }
+        
+        /* 交替行背景 */
+        tbody tr:nth-child(even):not(.category-row) {
+            background-color: #fafbfc;
+        }
+        
+        tbody tr:hover:not(.category-row) {
+            background-color: #f0f7ff;
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #4a90d9;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background-color: #27ae60;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .copy-btn:hover {
+            background-color: #219a52;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 20px 0;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: white;
+            background-color: #4a90d9;
+        }
+        
+        .tag-disease {
+            background-color: #e74c3c;
+        }
+        
+        .tag-bacteria {
+            background-color: #9b59b6;
+        }
+        
+        .tag-drug {
+            background-color: #27ae60;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            text-align: center;
+            padding: 15px;
+            background-color: #ebf5fb;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        .keywords {
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .page-number {
+            font-size: 16px;
+            color: #1a5276;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                margin: 70px auto 20px;
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            
+            th, td {
+                padding: 8px;
+                font-size: 12px;
+            }
+            
+            .nav-buttons {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .nav-btn, .home-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 右上角导航按钮 -->
+    <div class="nav-buttons">
+        <a href="43.html" class="nav-btn">← 上一页</a>
+        <a href="45.html" class="nav-btn">下一页 →</a>
+        <button class="nav-btn favorite-btn" onclick="addToFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <div class="container">
+        <!-- 标题 -->
+        <h1>~~~~~晕厥总体思路与危险分层评估表*****</h1>
+        
+        <!-- 流程图说明 -->
+        <div class="flow-section">
+            <div class="flow-title">图7 晕厥总体思路</div>
+            <div class="flow-content">
+                <p><strong>疑似TLOC来诊</strong> → <strong>真性晕厥？</strong></p>
+                <p>① 无TLOC → 对应处置</p>
+                <p>② 晕厥 → <strong>初步评估</strong>（病史、查体、卧立位血压、ECG）</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;→ 诊断明确或高度可能 → 对应处置</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;→ 原因不明确 → <strong>危险分层</strong>（高危/中危/低危）</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• 高危：监护+进一步评估</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• 中危：留观+进一步评估</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• 低危：观察≥2小时+宣教指导</p>
+                <p>③ 非晕厥性TLOC → 痫性发作、头部外伤、心因性、少见病因 → 对应处置</p>
+                <p><em>注：史、查体、ECG等基本确认病因。第三步危险分层：初步评估后，至少有1/3患者原因仍不明确，有必要对这部分患者做危险分层（表1），进行对应层级的处理。</em></p>
+            </div>
+        </div>
+        
+        <!-- 表格 -->
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 15%;">项目</th>
+                    <th style="width: 42.5%;">低危因素</th>
+                    <th style="width: 42.5%;">高危因素</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td>年龄</td>
+                    <td class="low-risk">&lt; 40岁</td>
+                    <td class="high-risk">—</td>
+                </tr>
+                <tr>
+                    <td rowspan="7" class="category-row">晕厥特点</td>
+                    <td class="low-risk">只在站立位时出现</td>
+                    <td class="high-risk">在运动中或仰卧时晕厥</td>
+                </tr>
+                <tr>
+                    <td class="low-risk">从仰卧/坐位站起时出现</td>
+                    <td class="high-risk">新发胸部不适</td>
+                </tr>
+                <tr>
+                    <td class="low-risk">晕厥前有恶心/呕吐</td>
+                    <td class="high-risk">晕厥前心悸</td>
+                </tr>
+                <tr>
+                    <td class="low-risk">晕厥前有燥热感</td>
+                    <td class="high-risk">伴呼吸困难</td>
+                </tr>
+                <tr>
+                    <td class="low-risk">由痛苦等不适刺激诱发</td>
+                    <td class="high-risk">—</td>
+                </tr>
+                <tr>
+                    <td class="low-risk">由咳嗽/排便/排尿诱发</td>
+                    <td class="high-risk">—</td>
+                </tr>
+                <tr>
+                    <td class="low-risk">—</td>
+                    <td class="high-risk">—</td>
+                </tr>
+                <tr>
+                    <td rowspan="2" class="category-row">既往史</td>
+                    <td class="low-risk">多年反复晕厥史，<br>且具有与本次发作相同特征</td>
+                    <td class="high-risk">猝死家族史</td>
+                </tr>
+                <tr>
+                    <td class="low-risk">—</td>
+                    <td class="high-risk">器质性心脏病</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 底部功能区域 -->
+        <div class="bottom-section">
+            <!-- 复制功能 -->
+            <div class="copy-section">
+                <input type="text" class="copy-input" id="copyText" value="晕厥总体思路与危险分层评估表；TLOC；真性晕厥；危险分层；高危因素；低危因素；初步评估；ECG；卧立位血压；=44" readonly>
+                <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+            </div>
+            
+            <!-- 标签区域 -->
+            <div class="tags-section">
+                <div class="tags-title">检索标签</div>
+                <span class="tag tag-disease">晕厥</span>
+                <span class="tag tag-disease">TLOC</span>
+                <span class="tag tag-disease">痫性发作</span>
+                <span class="tag tag-disease">器质性心脏病</span>
+                <span class="tag tag-disease">猝死</span>
+                <span class="tag tag-disease">心悸</span>
+                <span class="tag tag-disease">呼吸困难</span>
+                <span class="tag tag-disease">胸部不适</span>
+                <span class="tag tag-disease">恶心</span>
+                <span class="tag tag-disease">呕吐</span>
+                <span class="tag tag-disease">头部外伤</span>
+            </div>
+            
+            <!-- 关键词与页码 -->
+            <div class="keywords-section">
+                <div class="keywords">
+                    <strong>关键词：</strong>晕厥、TLOC、真性晕厥、非晕厥性TLOC、危险分层、高危因素、低危因素、初步评估、ECG、卧立位血压、器质性心脏病、猝死家族史、痫性发作、头部外伤、心因性
+                </div>
+                <div class="page-number">页码：44</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(function() {
+                    alert("已复制到剪贴板！");
+                }, function(err) {
+                    document.execCommand("copy");
+                    alert("已复制到剪贴板！");
+                });
+            } else {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            }
+        }
+        
+        // 添加到收藏
+        function addToFavorite() {
+            // 获取当前页面信息
+            const title = document.title;
+            const url = window.location.href;
+            const pageName = url.substring(url.lastIndexOf('/') + 1) || '44.html';
+            
+            // 尝试使用localStorage存储收藏信息
+            try {
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                
+                // 检查是否已收藏
+                const exists = favorites.some(f => f.url === url);
+                if (exists) {
+                    alert('该页面已在收藏夹中！');
+                    return;
+                }
+                
+                favorites.push({
+                    title: title,
+                    url: url,
+                    pageName: pageName,
+                    category: '急诊症状',
+                    addTime: new Date().toLocaleString()
+                });
+                
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已添加到收藏！\n标题：' + title + '\n页面：' + pageName);
+                
+                // 尝试向index.html发送消息（如果同域）
+                if (window.opener) {
+                    window.opener.postMessage({
+                        type: 'addFavorite',
+                        data: { title, url, pageName, category: '急诊症状' }
+                    }, '*');
+                }
+            } catch(e) {
+                // 备用方案：尝试使用cookie或打开index.html
+                alert('收藏功能：\n标题：' + title + '\nURL：' + url + '\n\n请手动在index.html中添加此页面到收藏类目。');
+            }
+        }
+        
+        // 页面加载时设置编辑框宽度
+        window.addEventListener('load', function() {
+            const container = document.querySelector('.container');
+            const copyInput = document.querySelector('.copy-input');
+            if (container && copyInput) {
+                const containerWidth = container.offsetWidth;
+                copyInput.style.width = (containerWidth - 100) + 'px';
+            }
+        });
+        
+        // 窗口大小改变时调整编辑框宽度
+        window.addEventListener('resize', function() {
+            const container = document.querySelector('.container');
+            const copyInput = document.querySelector('.copy-input');
+            if (container && copyInput) {
+                const containerWidth = container.offsetWidth;
+                copyInput.style.width = (containerWidth - 100) + 'px';
+            }
+        });
+    </script>
+</body>
+</html>

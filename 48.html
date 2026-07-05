@@ -1,0 +1,342 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~头晕的概述与诊断思路*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #2c5282;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #3182ce;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .fav-btn {
+            background: #d69e2e;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a365d;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 12px;
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        thead tr {
+            background: #2b6cb0 !important;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        tbody tr:nth-child(odd) {
+            background: #ffffff;
+        }
+        
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+            vertical-align: top;
+        }
+        
+        .category {
+            color: #2b6cb0;
+            font-weight: bold;
+        }
+        
+        .sub-category {
+            color: #38a169;
+            font-weight: 600;
+        }
+        
+        .detail {
+            color: #744210;
+        }
+        
+        .tags-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #ebf8ff;
+            color: #2b6cb0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            border: 1px solid #bee3f8;
+        }
+        
+        .copy-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 14px;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-btn {
+            background: #38a169;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .page-num {
+            text-align: center;
+            color: #718096;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #4a5568;
+            font-size: 13px;
+            padding: 10px;
+            background: #edf2f7;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="47.html" class="nav-btn">上一页</a>
+            <a href="49.html" class="nav-btn">下一页</a>
+            <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~头晕的概述与诊断思路*****</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>分类</th>
+                <th>类型/项目</th>
+                <th>详细内容</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">概述</td>
+                <td class="sub-category">头晕</td>
+                <td>语义十分含混。患者常将虚弱、眼花、头重脚轻、站立不稳、黑矇、天旋地转，甚至晕厥等不适均描述为"晕"。在实践中，需要将"头晕"进一步区分为：眩晕、晕厥前兆、不平衡感和非特异性头晕。</td>
+            </tr>
+            <tr>
+                <td class="category">概述</td>
+                <td class="sub-category">眩晕</td>
+                <td>眩晕的定义是明确的，指患者在实际未动的情况下，感到自身或周围环境在动。眩晕是患者的位置觉发生异常，常表现为旋转感，也可为下落感，常伴明显的恶心甚至呕吐。病变与负责位置觉的内耳前庭感受器、上传神经通路及相应中枢受损有关。</td>
+            </tr>
+            <tr>
+                <td class="category">概述</td>
+                <td class="sub-category">晕厥前兆</td>
+                <td>是接近晕厥的表现。患者常描述为"眼前发黑"（黑矇）或"就要昏倒了"，提示弥漫性脑部缺血，但未引起意识丧失。通常持续数秒到数分钟。</td>
+            </tr>
+            <tr>
+                <td class="category">概述</td>
+                <td class="sub-category">不平衡感</td>
+                <td>常表述为"不稳""控制不住平衡"。主要发生在站立和行走时，坐下或躺下后即可缓解。</td>
+            </tr>
+            <tr>
+                <td class="category">概述</td>
+                <td class="sub-category">非特异性头晕</td>
+                <td>包括不能明确界定为眩晕、晕厥前兆和不平衡感的头晕感觉。患者描述为头重脚轻的模糊感觉，会用"头沉""头木""脚发飘"等词汇来形容自己的感受。</td>
+            </tr>
+            <tr>
+                <td class="category">概述</td>
+                <td class="sub-category">晕厥与头晕的区别</td>
+                <td>患者常将晕厥过程称作"晕了一下"。而"晕厥"区别于"头晕"的关键在于有无完全性意识丧失。晕厥患者的意识丧失过程虽然短暂，但却有确切的、完全无法回忆的意识空白。</td>
+            </tr>
+            <tr>
+                <td class="category">概述</td>
+                <td class="sub-category">接诊要点</td>
+                <td>接触头晕患者的第一步是进一步追问症状细节，即确认有无完全性意识丧失过程，并根据症状细节，将患者归入上述4类之一。</td>
+            </tr>
+            <tr>
+                <td class="category">诊断思路</td>
+                <td class="sub-category">晕厥前兆</td>
+                <td>头晕的4类表现中，最需急诊医师警惕的是晕厥前兆，其潜在的致死风险较高。晕厥前兆的病因和评估思路与晕厥相同，具体详见晕厥章节。</td>
+            </tr>
+            <tr>
+                <td class="category">补充内容</td>
+                <td class="sub-category">变和倾斜训练</td>
+                <td>对发作频繁、不可预测、有外伤风险或高危作业者，需安排进一步治疗。</td>
+            </tr>
+            <tr>
+                <td class="category">补充内容</td>
+                <td class="sub-category">离院患者提醒</td>
+                <td>提醒离院患者，未明确病因前，晕厥有复发可能。反复发作和不可预测的发作可能导致伤残。驾驶、高空作业等活动需特别警惕风险。</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <span class="tag">头晕</span>
+        <span class="tag">眩晕</span>
+        <span class="tag">晕厥前兆</span>
+        <span class="tag">不平衡感</span>
+        <span class="tag">非特异性头晕</span>
+        <span class="tag">晕厥</span>
+        <span class="tag">黑矇</span>
+        <span class="tag">内耳前庭</span>
+        <span class="tag">意识丧失</span>
+    </div>
+    
+    <div class="copy-section">
+        <div class="copy-box">
+            <input type="text" id="copyInput" value="头晕的概述与诊断思路；头晕、眩晕、晕厥前兆、不平衡感、非特异性头晕、晕厥、黑矇、内耳前庭、意识丧失=48" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <div class="page-num">页码：48</div>
+    
+    <div class="keywords">
+        关键词：头晕、眩晕、晕厥前兆、不平衡感、非特异性头晕、晕厥、黑矇、内耳前庭、意识丧失、诊断思路、急诊
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                alert('已复制到剪贴板！');
+            }, function() {
+                document.execCommand('copy');
+                alert('已复制到剪贴板！');
+            });
+        }
+        
+        function addToFavorites() {
+            const title = document.title;
+            const url = window.location.href;
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === url);
+            if (!exists) {
+                favorites.push({title: title, url: url, page: '48'});
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已添加到收藏！');
+            } else {
+                alert('已在收藏中！');
+            }
+        }
+    </script>
+</body>
+</html>

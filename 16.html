@@ -1,0 +1,578 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~呼吸困难*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5ee 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 导航按钮区域 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 13px;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(92,184,92,0.3);
+            transition: all 0.3s;
+        }
+        .nav-btn:hover {
+            background: #4cae4c;
+            transform: translateY(-2px);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #f0ad4e;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(240,173,78,0.3);
+            transition: all 0.3s;
+        }
+        .fav-btn:hover {
+            background: #ec971f;
+            transform: translateY(-2px);
+        }
+        .fav-btn.active {
+            background: #d9534f;
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 900px;
+            margin: 60px auto 30px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 30px 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            font-size: 28px;
+            color: #2c5aa0;
+            margin-bottom: 10px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        .sub-title {
+            text-align: center;
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 25px;
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        /* 表头蓝色 */
+        thead tr {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+        }
+        thead th {
+            padding: 16px 12px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        /* 表格第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c5aa0;
+            background: #f8fbff;
+        }
+        
+        /* 表格内容行 */
+        tbody tr {
+            border-bottom: 1px solid #e8e8e8;
+            transition: background 0.2s;
+        }
+        tbody tr:hover {
+            background: #f5f9ff;
+        }
+        tbody td {
+            padding: 14px 12px;
+            text-align: left;
+            line-height: 1.8;
+            color: #444;
+            word-break: break-all;
+            vertical-align: top;
+        }
+        
+        /* 斑马纹 */
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        tbody tr:nth-child(even):hover {
+            background: #f0f5ff;
+        }
+        
+        /* 分类标题行 */
+        .category-row td {
+            background: #e3f2fd !important;
+            color: #1565c0 !important;
+            font-weight: bold;
+            font-size: 15px !important;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 30px 0 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+        .tags-title {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 12px;
+        }
+        .tag {
+            display: inline-block;
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            border: 1px solid #bbdefb;
+            cursor: pointer;
+        }
+        .tag:hover {
+            background: #1976d2;
+            color: white;
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .keywords span {
+            color: #4a90d9;
+            margin: 0 5px;
+        }
+        
+        /* 页码 */
+        .page-num {
+            text-align: center;
+            font-size: 15px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .copy-input {
+            width: calc(100% - 100px);
+            max-width: 700px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background: #fafafa;
+        }
+        .copy-btn {
+            background: #5bc0de;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .copy-btn:hover {
+            background: #46b8da;
+        }
+        .copy-btn.copied {
+            background: #5cb85c;
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 200;
+        }
+        .toast.show {
+            opacity: 1;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                margin: 55px auto 20px;
+                padding: 20px 12px;
+            }
+            .main-title {
+                font-size: 22px;
+            }
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            tbody td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            tbody tr:first-child td {
+                font-size: 14px;
+            }
+            .copy-input {
+                width: calc(100% - 80px);
+                font-size: 12px;
+            }
+            .home-btn, .nav-btn, .fav-btn {
+                font-size: 12px;
+                padding: 8px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 右上角导航 -->
+    <div class="nav-buttons">
+        <a href="15.html" class="nav-btn">← 上一页</a>
+        <a href="17.html" class="nav-btn">下一页 →</a>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+    </div>
+    
+    <!-- 主内容 -->
+    <div class="container">
+        <h1 class="main-title">~~~~~呼吸困难*****</h1>
+        <p class="sub-title">急诊症状——呼吸困难的定义、病因及临床表现</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:22%">分类</th>
+                    <th style="width:30%">疾病/病因</th>
+                    <th style="width:48%">临床表现</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="3"><strong>定义：患者感觉空气不足或呼吸费力，出现呼吸形式、频率、深度变化，伴或不伴低氧血症。严重者可出现发绀等。</strong></td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="3">呼吸系统疾病</td>
+                </tr>
+                <tr>
+                    <td>小气道塌陷和/或痉挛性疾病</td>
+                    <td>慢性阻塞性肺疾病（COPD）急性加重、哮喘</td>
+                    <td>多表现为呼气相延长，听诊可闻及呼气相哮鸣音，称为肺源性哮喘</td>
+                </tr>
+                <tr>
+                    <td>大气道梗阻</td>
+                    <td>异物、过敏反应</td>
+                    <td>多表现为吸气性呼吸困难，三凹征明显，可伴喉鸣</td>
+                </tr>
+                <tr>
+                    <td>大叶性肺炎</td>
+                    <td>肺炎链球菌等感染</td>
+                    <td>多有发热、咳嗽、病变部位湿啰音</td>
+                </tr>
+                <tr>
+                    <td>肺栓塞</td>
+                    <td>肺动脉栓塞</td>
+                    <td>除呼吸困难外，还可出现咯血、胸痛，但三联征同时出现的概率较低</td>
+                </tr>
+                <tr>
+                    <td>气胸</td>
+                    <td>自发性/外伤性气胸、大量胸腔积液</td>
+                    <td>呼吸困难通常突然出现，伴一侧呼吸音消失，叩诊呈鼓音。大量胸腔积液导致的呼吸困难通常症状逐渐加重，呼吸音减低或消失，叩诊呈实音</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="3">心血管疾病</td>
+                </tr>
+                <tr>
+                    <td>急性左心衰竭</td>
+                    <td>心源性哮喘</td>
+                    <td>最常见，可造成小气道黏膜水肿，同样可表现为呼气相延长，听诊可及双肺湿啰音和/或呼气相哮鸣音，称为心源性哮喘。呼吸困难常与体位有关，坐位缓解，卧位加重。可伴咳嗽、咳白色或粉红色泡沫痰</td>
+                </tr>
+                <tr>
+                    <td>心脏压塞、心律失常、器质性心脏病</td>
+                    <td>心包填塞、各类心律失常</td>
+                    <td>也可出现呼吸困难，心脏查体会有心音遥远、心律不齐等对应发现</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="3">代谢性疾病</td>
+                </tr>
+                <tr>
+                    <td>糖尿病酮症酸中毒</td>
+                    <td>代谢性酸中毒</td>
+                    <td>不论何种诱因，都会有呼吸代偿，通常表现为呼吸加快，严重的深大呼吸有时甚至导致自发性纵隔气肿</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="3">其他原因</td>
+                </tr>
+                <tr>
+                    <td>神经肌肉疾病</td>
+                    <td>重症肌无力、吉兰-巴雷综合征</td>
+                    <td>除呼吸困难外，还伴呼吸肌和其他肌无力的症状</td>
+                </tr>
+                <tr>
+                    <td>中枢神经系统疾病</td>
+                    <td>脑卒中等</td>
+                    <td>累及呼吸中枢时可表现为深大呼吸，通常伴神志改变</td>
+                </tr>
+                <tr>
+                    <td>血液系统疾病</td>
+                    <td>严重贫血</td>
+                    <td>严重贫血时也可出现呼吸困难，可见结膜苍白</td>
+                </tr>
+                <tr>
+                    <td>中毒</td>
+                    <td>有机磷中毒、有毒刺激性气体</td>
+                    <td>有机磷中毒可合并大汗、瞳孔缩小等其他表现。吸入有毒性刺激性气体导致呼吸困难者多有相关病史</td>
+                </tr>
+                <tr>
+                    <td>癔症</td>
+                    <td>功能性呼吸困难</td>
+                    <td>为除外性诊断，多为青年女性，有一定诱因，如情绪激动等</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 检索标签 -->
+        <div class="tags-section">
+            <div class="tags-title">🔍 检索标签（点击可检索）</div>
+            <span class="tag">呼吸困难</span>
+            <span class="tag">COPD</span>
+            <span class="tag">哮喘</span>
+            <span class="tag">肺栓塞</span>
+            <span class="tag">气胸</span>
+            <span class="tag">胸腔积液</span>
+            <span class="tag">急性左心衰竭</span>
+            <span class="tag">心源性哮喘</span>
+            <span class="tag">心脏压塞</span>
+            <span class="tag">心律失常</span>
+            <span class="tag">糖尿病酮症酸中毒</span>
+            <span class="tag">代谢性酸中毒</span>
+            <span class="tag">重症肌无力</span>
+            <span class="tag">吉兰-巴雷综合征</span>
+            <span class="tag">脑卒中</span>
+            <span class="tag">贫血</span>
+            <span class="tag">有机磷中毒</span>
+            <span class="tag">癔症</span>
+        </div>
+        
+        <!-- 底部区域 -->
+        <div class="bottom-section">
+            <div class="keywords">
+                关键词：<span>呼吸困难</span><span>急诊症状</span><span>低氧血症</span><span>发绀</span><span>三凹征</span><span>哮鸣音</span><span>湿啰音</span><span>心源性哮喘</span><span>肺源性哮喘</span><span>深大呼吸</span>
+            </div>
+            <div class="page-num">页码：16</div>
+            
+            <!-- 复制功能 -->
+            <div class="copy-section">
+                <input type="text" class="copy-input" id="copyInput" readonly>
+                <button class="copy-btn" id="copyBtn" onclick="copyContent()">复制</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 页面信息配置
+        const pageInfo = {
+            title: '呼吸困难',
+            subtitle: '急诊症状——呼吸困难的定义、病因及临床表现',
+            keywords: '呼吸困难;急诊症状;低氧血症;发绀;三凹征;哮鸣音;湿啰音;心源性哮喘;肺源性哮喘;深大呼吸',
+            pageNum: '16'
+        };
+        
+        // 初始化复制框内容
+        const copyContentText = `${pageInfo.title}；${pageInfo.subtitle}；${pageInfo.keywords}=${pageInfo.pageNum}`;
+        document.getElementById('copyInput').value = copyContentText;
+        
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                    document.getElementById('copyBtn').classList.add('copied');
+                    document.getElementById('copyBtn').textContent = '已复制';
+                    setTimeout(() => {
+                        document.getElementById('copyBtn').classList.remove('copied');
+                        document.getElementById('copyBtn').textContent = '复制';
+                    }, 2000);
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 提示框
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                // 添加到收藏
+                const favData = {
+                    title: '~~~~~呼吸困难*****',
+                    url: window.location.href,
+                    pageNum: '16',
+                    addTime: new Date().toLocaleString()
+                };
+                
+                // 获取已有收藏
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.find(f => f.pageNum === '16');
+                
+                if (!exists) {
+                    favorites.push(favData);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                    
+                    // 同时更新index.html的收藏（通过localStorage通信）
+                    localStorage.setItem('index_fav_update', JSON.stringify({
+                        action: 'add',
+                        data: favData,
+                        timestamp: Date.now()
+                    }));
+                }
+                
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                showToast('已添加到收藏！');
+            } else {
+                // 取消收藏
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.pageNum !== '16');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                localStorage.setItem('index_fav_update', JSON.stringify({
+                    action: 'remove',
+                    pageNum: '16',
+                    timestamp: Date.now()
+                }));
+                
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+                showToast('已取消收藏');
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.find(f => f.pageNum === '16');
+            if (isFav) {
+                document.getElementById('favBtn').classList.add('active');
+                document.getElementById('favBtn').textContent = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>

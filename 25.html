@@ -1,0 +1,451 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~胸痛急诊处理与高危胸痛鉴别*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 100;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+        }
+        
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #5a9bd5;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(90, 155, 213, 0.3);
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .fav-btn {
+            background: #e8a838;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(232, 168, 56, 0.3);
+        }
+        
+        .fav-btn.active {
+            background: #d47676;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c5282;
+            font-size: 22px;
+            margin: 60px 0 25px 0;
+            padding: 0 10px;
+            line-height: 1.4;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 0 auto 25px;
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        thead tr {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 14px;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: left;
+        }
+        
+        tbody td {
+            padding: 14px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #444;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #eef4fb;
+        }
+        
+        .section-title {
+            color: #2c5282;
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+        
+        .check-item {
+            color: #2d8a4e;
+            font-weight: 500;
+        }
+        
+        .bullet {
+            color: #666;
+        }
+        
+        .page-num {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+            max-width: calc(100% - 100px);
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #4a90d9;
+            border-radius: 8px;
+            font-size: 14px;
+            background: #fff;
+            color: #333;
+        }
+        
+        #copyBtn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        #copyBtn.copied {
+            background: #4caf50;
+        }
+        
+        .tags-section {
+            margin: 25px 0 15px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            color: #2c5282;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #e8f0fe;
+            color: #2c5282;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid #c5d9f8;
+        }
+        
+        .tag.disease {
+            background: #fde8e8;
+            color: #c53030;
+            border-color: #f5b5b5;
+        }
+        
+        .tag.drug {
+            background: #e6f4ea;
+            color: #2d8a4e;
+            border-color: #a8dab5;
+        }
+        
+        .tag.bacteria {
+            background: #fff4e6;
+            color: #b7791f;
+            border-color: #f5d0a0;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+            margin-top: 15px;
+            padding: 10px;
+        }
+        
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 18px;
+                margin-top: 70px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 12px 10px;
+            }
+            
+            tbody td {
+                padding: 12px 10px;
+                font-size: 14px;
+            }
+            
+            .copy-section {
+                max-width: 100%;
+                flex-direction: column;
+            }
+            
+            #copyInput {
+                width: 100%;
+            }
+            
+            .nav-btns {
+                position: relative;
+                top: 0;
+                right: 0;
+                flex-direction: row;
+                justify-content: center;
+                margin-bottom: 15px;
+                position: static;
+            }
+            
+            .home-btn {
+                position: relative;
+                top: 0;
+                left: 0;
+                margin: 0 auto 15px;
+                display: block;
+                position: static;
+            }
+            
+            body {
+                padding-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="home-btn" onclick="location.href='index.html'">返回首页</button>
+    
+    <div class="nav-btns">
+        <a href="24.html" class="nav-btn">上一页</a>
+        <a href="26.html" class="nav-btn">下一页</a>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">收藏</button>
+    </div>
+    
+    <h1>~~~~~胸痛急诊处理与高危胸痛鉴别*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>胸痛急诊评估与处理要点</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="section-title">动脉瘤破裂</div>
+                        <div>动脉瘤破裂也可迅速出现血红蛋白减少。</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">4. 选做检查</div>
+                        <div class="bullet">● <strong>胸腹CT</strong></div>
+                        <div class="check-item">✓ 平扫：</div>
+                        <div>可更好显示食管外气体、食管周围液体、纵隔占位以及胸膜腔、腹膜后腔或小网膜囊的积气积液。可初步判断主动脉夹层（主动脉增粗、周围渗出，内膜钙化与外膜分离）。</div>
+                        <div class="check-item">✓ 增强CT：</div>
+                        <div>（对于造影剂不过敏及肾损伤风险较小的血流动力学稳定患者）：主动脉CTA可明确诊断主动脉夹层。CTPA是诊断肺栓塞最广泛使用的检查，可见到肺动脉亚段的栓子。CTPA联合CTV可检测血栓来源。</div>
+                        <div class="bullet">● <strong>超声心动图：</strong></div>
+                        <div>急诊FAST超声诊断流程，若发现新发室壁矛盾运动、主动脉内出现游离内膜瓣、右心扩张并室间隔左移呈"D"字形等，有助于急性心肌梗死、主动脉夹层及急性肺栓塞的诊断。对于其他非致命性胸痛，如应激性心肌病、心包积液等，超声具有重要的诊断价值。对于肺水肿、胸腔积液及气胸也有快速鉴别诊断的作用。对于血流动力学不稳定的升主动脉夹层，经食管超声心动图（TEE）可快速床旁诊断（但需要操作者有丰富的心脏超声经验）。</div>
+                        <div class="bullet">● <strong>ABG：</strong></div>
+                        <div>对于诊断或排除肺栓塞，或鉴别通气灌注不匹配的其他原因。</div>
+                        <div class="bullet">● <strong>CRP/hs-CRP检测：</strong></div>
+                        <div>感染及无菌性炎症（急性心肌梗死、肺栓塞）均增高，且有动态改变。</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">5. 高危胸痛的鉴别诊断（图3）</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">6. 急诊处理</div>
+                        <div class="bullet">● <strong>原则：</strong></div>
+                        <div>对急诊胸痛患者进行评估的同时需维持气道、呼吸和循环稳定。立即处理危及生命的问题，不能因确诊性检查而延迟治疗。对于有危及生命的急性胸痛患者，需立即监护、吸氧，同时建立静脉通路。</div>
+                        <div class="bullet">● <strong>胸腔穿刺减压：</strong></div>
+                        <div>气胸肺压缩＞30%的患者给予胸腔闭式引流。若为张力性气胸，应于患侧第2肋间锁骨中线用14号粗针头立即穿刺减压。</div>
+                        <div class="bullet">● <strong>硝酸酯类药物：</strong></div>
+                        <div>缓解平滑肌痉挛，如心绞痛、食管痉挛可缓解疼痛。收缩压＜90mmHg或右心室梗死者慎用。</div>
+                        <div class="bullet">● <strong>ST段抬高心肌梗死（STEMI）：</strong></div>
+                        <div>需要通过经皮介入或溶栓进行紧急血运重建。口服他汀类药物负荷量强力降脂，倍他乐克控制心室率，阿司匹林＋氯吡格雷（或替格瑞洛）负荷量抗血小板聚集，低分子肝素抗凝，吗啡镇痛。胸痛缓解复查ECG并记录病程。若患者合并心力衰竭，立即使用不同水平</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="page-num">12</div>
+    
+    <div class="copy-section">
+        <input type="text" id="copyInput" value="胸痛急诊处理与高危胸痛鉴别；胸腹CT；超声心动图；ABG；CRP/hs-CRP；急诊处理；STEMI；胸腔穿刺减压；硝酸酯类药物；=12" readonly>
+        <button id="copyBtn" onclick="copyText()">复制</button>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">检索标签</div>
+        <div class="tags">
+            <span class="tag disease">主动脉夹层</span>
+            <span class="tag disease">肺栓塞</span>
+            <span class="tag disease">急性心肌梗死</span>
+            <span class="tag disease">张力性气胸</span>
+            <span class="tag disease">心绞痛</span>
+            <span class="tag disease">食管痉挛</span>
+            <span class="tag disease">右心室梗死</span>
+            <span class="tag disease">心力衰竭</span>
+            <span class="tag disease">应激性心肌病</span>
+            <span class="tag disease">心包积液</span>
+            <span class="tag disease">肺水肿</span>
+            <span class="tag disease">气胸</span>
+            <span class="tag disease">动脉瘤破裂</span>
+            <span class="tag drug">硝酸酯类药物</span>
+            <span class="tag drug">他汀类药物</span>
+            <span class="tag drug">倍他乐克</span>
+            <span class="tag drug">阿司匹林</span>
+            <span class="tag drug">氯吡格雷</span>
+            <span class="tag drug">替格瑞洛</span>
+            <span class="tag drug">低分子肝素</span>
+            <span class="tag drug">吗啡</span>
+            <span class="tag drug">造影剂</span>
+        </div>
+    </div>
+    
+    <div class="keywords">
+        <strong>关键词：</strong>胸痛急诊处理与高危胸痛鉴别 | 页码：12
+    </div>
+    
+    <script>
+        function copyText() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const title = '胸痛急诊处理与高危胸痛鉴别';
+            const isFav = btn.classList.toggle('active');
+            
+            if (isFav) {
+                btn.textContent = '已收藏';
+                // 保存到localStorage，用于index.html读取
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                if (!favorites.find(f => f.title === title)) {
+                    favorites.push({
+                        title: title,
+                        url: '25.html',
+                        category: '急诊医学'
+                    });
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            } else {
+                btn.textContent = '收藏';
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.title !== title);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const title = '胸痛急诊处理与高危胸痛鉴别';
+            if (favorites.find(f => f.title === title)) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '已收藏';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,519 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊症状-胸痛必做检查（ECG、胸片、心肌损伤标志物、D-Dimer、全血细胞计数）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #f5f0ff 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .favorite-btn {
+            background: #f0ad4e;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        
+        .favorite-btn.active {
+            background: #d9534f;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #2e86de 0%, #1a5276 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        td {
+            padding: 12px;
+            vertical-align: top;
+            line-height: 1.7;
+        }
+        
+        .category {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 15px;
+        }
+        
+        .subcategory {
+            font-weight: bold;
+            color: #2874a6;
+        }
+        
+        .check {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            max-width: calc(100% - 100px);
+            padding: 12px 15px;
+            border: 2px solid #4a90d9;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .tags-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 10px;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+        }
+        
+        .tag.disease {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .tag.symptom {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .tag.exam {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+        
+        .keywords {
+            text-align: center;
+            margin-top: 15px;
+            padding: 10px;
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #1a5276;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            display: none;
+            z-index: 1000;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            td {
+                padding: 8px;
+            }
+            
+            #copyInput {
+                width: 100%;
+                max-width: none;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .header {
+                flex-direction: column;
+            }
+            
+            .nav-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="nav-buttons">
+            <a href="23.html" class="nav-btn">⬅ 上一页</a>
+            <a href="25.html" class="nav-btn">➡ 下一页</a>
+            <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~急诊症状-胸痛必做检查（ECG、胸片、心肌损伤标志物、D-Dimer、全血细胞计数）*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">急诊症状 - 胸痛必做检查项目与特征</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        <span class="check">✓ 胃食管反流、食管痉挛或食管炎症：</span>胸骨后烧灼痛，伴反酸、烧心、呃逆，可有吞咽疼痛、呕吐。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="check">✓ 食管裂孔疝：</span>胃部烧灼感、反酸、吞咽疼痛、呕吐，严重者可有呼吸困难、呕血、黑便。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="category">● 精神性原因：</span>惊恐发作患者常诉有胸闷和感觉厄运来临，为排除性诊断。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="category">● 3. 必做检查</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="category">● ECG：</span>所有胸痛患者均需在就诊10分钟内完成。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="check">✓ ACS（18导联ECG）：</span>超急性期T波高耸；随后2个或2个以上相邻导联ST段弓背向上抬高≥1mm，对应导联ST段压低；新发LBBB（对应若初始心电图不能做出诊断，但患者仍有症状且临床上仍高度怀疑为AMI，则可重复行心电图检查，频率可为每10分钟1次）。既往ECG检查对确定异常是否为新发很重要。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="check">✓ 肺栓塞：</span>窦性心动过速，SⅠQⅢTⅢ（Ⅰ导联出现显著的S波、Ⅲ导联出现Q波和Ⅲ导联T波倒置），但可能有范围广泛的不典型表现（电轴右偏、右束支传导阻滞、肺型P波）及心房颤动。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="check">✓ 心脏压塞：</span>低电压和电交替。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="check">✓ 心包炎：</span>广泛PR段压低、ST段抬高及T波倒置，无血供分布特征。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="category">● 胸片</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="check">✓ 主动脉夹层：</span>可存在增宽的纵隔，主动脉内膜钙化及分离，主动脉增宽移位，心包积液，胸腔积液。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="check">✓ 肺栓塞：</span>绝大多数患者胸片正常或出现肺不张，伴膈肌升高及胸腔积液等非特异性表现。少数典型表现为以胸膜表面为底的楔状缺损（Hampton驼峰征）或栓子远端的血管纹理稀疏（Westermark征）。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="check">✓ 肺炎、胸膜炎、肺部肿瘤、肺脓肿、气胸、胸椎与肋骨骨折：</span>心包积液均有特异表现。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="category">● 心肌损伤标志物检测：</span>cTnI/cTnT、CK-MB、肌红蛋白是最早的标志物，约2小时开始进行性升高，一组心脏损伤标志物为阴性不足以排除心肌梗死。胸痛不缓解者间隔2～4小时需复查，若症状发作6小时后cTnI/cTnT仍未升高，急性心肌梗死可能性小。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="category">● D-Dimer检测：</span>阴性可以基本除外急性肺血栓栓塞症，主动脉夹层的可能性也较小。老年患者以及恶性肿瘤、脓毒症、近期重大手术或外伤或妊娠患者可能有基线D-Dimer水平升高。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="category">● 全血细胞计数：</span>炎症性或感染性病因中，白细胞计数大都升高。劳力性心绞痛患者若有新发贫血可以出现心肌缺血，主
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" id="copyInput" value="急诊症状-胸痛必做检查（ECG、胸片、心肌损伤标志物、D-Dimer、全血细胞计数）；胃食管反流、食管痉挛、食管炎症、食管裂孔疝、精神性原因、ACS、肺栓塞、心脏压塞、心包炎、主动脉夹层、肺炎、胸膜炎、肺部肿瘤、肺脓肿、气胸、胸椎与肋骨骨折、心肌梗死；胸痛、烧灼痛、反酸、烧心、呃逆、吞咽疼痛、呕吐、呼吸困难、呕血、黑便、胸闷、窦性心动过速、低电压、电交替、肺不张、膈肌升高、白细胞计数升高=11" readonly>
+        <button class="copy-btn" onclick="copyContent()">📋 复制</button>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签（点击筛选）</div>
+        <div class="tags-container">
+            <span class="tag disease" onclick="filterByTag('胃食管反流')">胃食管反流</span>
+            <span class="tag disease" onclick="filterByTag('食管痉挛')">食管痉挛</span>
+            <span class="tag disease" onclick="filterByTag('食管炎症')">食管炎症</span>
+            <span class="tag disease" onclick="filterByTag('食管裂孔疝')">食管裂孔疝</span>
+            <span class="tag disease" onclick="filterByTag('ACS')">ACS</span>
+            <span class="tag disease" onclick="filterByTag('肺栓塞')">肺栓塞</span>
+            <span class="tag disease" onclick="filterByTag('心脏压塞')">心脏压塞</span>
+            <span class="tag disease" onclick="filterByTag('心包炎')">心包炎</span>
+            <span class="tag disease" onclick="filterByTag('主动脉夹层')">主动脉夹层</span>
+            <span class="tag disease" onclick="filterByTag('肺炎')">肺炎</span>
+            <span class="tag disease" onclick="filterByTag('胸膜炎')">胸膜炎</span>
+            <span class="tag disease" onclick="filterByTag('肺部肿瘤')">肺部肿瘤</span>
+            <span class="tag disease" onclick="filterByTag('肺脓肿')">肺脓肿</span>
+            <span class="tag disease" onclick="filterByTag('气胸')">气胸</span>
+            <span class="tag disease" onclick="filterByTag('心肌梗死')">心肌梗死</span>
+            <span class="tag exam" onclick="filterByTag('ECG')">ECG</span>
+            <span class="tag exam" onclick="filterByTag('胸片')">胸片</span>
+            <span class="tag exam" onclick="filterByTag('cTnI')">cTnI</span>
+            <span class="tag exam" onclick="filterByTag('cTnT')">cTnT</span>
+            <span class="tag exam" onclick="filterByTag('CK-MB')">CK-MB</span>
+            <span class="tag exam" onclick="filterByTag('肌红蛋白')">肌红蛋白</span>
+            <span class="tag exam" onclick="filterByTag('D-Dimer')">D-Dimer</span>
+            <span class="tag exam" onclick="filterByTag('全血细胞计数')">全血细胞计数</span>
+            <span class="tag symptom" onclick="filterByTag('胸痛')">胸痛</span>
+            <span class="tag symptom" onclick="filterByTag('烧灼痛')">烧灼痛</span>
+            <span class="tag symptom" onclick="filterByTag('反酸')">反酸</span>
+            <span class="tag symptom" onclick="filterByTag('烧心')">烧心</span>
+            <span class="tag symptom" onclick="filterByTag('呃逆')">呃逆</span>
+            <span class="tag symptom" onclick="filterByTag('吞咽疼痛')">吞咽疼痛</span>
+            <span class="tag symptom" onclick="filterByTag('呕吐')">呕吐</span>
+            <span class="tag symptom" onclick="filterByTag('呼吸困难')">呼吸困难</span>
+            <span class="tag symptom" onclick="filterByTag('呕血')">呕血</span>
+            <span class="tag symptom" onclick="filterByTag('黑便')">黑便</span>
+            <span class="tag symptom" onclick="filterByTag('胸闷')">胸闷</span>
+            <span class="tag symptom" onclick="filterByTag('窦性心动过速')">窦性心动过速</span>
+            <span class="tag symptom" onclick="filterByTag('低电压')">低电压</span>
+            <span class="tag symptom" onclick="filterByTag('电交替')">电交替</span>
+            <span class="tag symptom" onclick="filterByTag('肺不张')">肺不张</span>
+            <span class="tag symptom" onclick="filterByTag('白细胞计数升高')">白细胞计数升高</span>
+        </div>
+    </div>
+    
+    <div class="page-number">第 11 页</div>
+    
+    <div class="keywords">
+        关键词：急诊症状 | 胸痛 | 必做检查 | ECG | 胸片 | 心肌损伤标志物 | D-Dimer | 全血细胞计数 | ACS | 肺栓塞 | 心脏压塞 | 心包炎 | 主动脉夹层 | 胃食管反流 | 食管裂孔疝
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            document.execCommand('copy');
+            showToast('✅ 已复制到剪贴板！');
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isActive = btn.classList.contains('active');
+            
+            if (!isActive) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                
+                const favoriteData = {
+                    title: '急诊症状-胸痛必做检查（ECG、胸片、心肌损伤标志物、D-Dimer、全血细胞计数）',
+                    url: '11.html',
+                    page: '11',
+                    timestamp: new Date().toISOString()
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.find(f => f.url === '11.html');
+                if (!exists) {
+                    favorites.push(favoriteData);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                showToast('⭐ 已添加到收藏！');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '11.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                showToast('💔 已取消收藏');
+            }
+        }
+        
+        function filterByTag(tag) {
+            showToast('🔍 正在筛选: ' + tag);
+        }
+        
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.find(f => f.url === '11.html');
+            if (isFavorited) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>

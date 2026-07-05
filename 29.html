@@ -1,0 +1,590 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~腹痛鉴别诊断-检查与急诊处理（第16页）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8f0e8 100%);
+            min-height: 100vh;
+            padding: 20px 15px 140px 15px;
+            color: #2c3e50;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(52,152,219,0.3);
+            z-index: 100;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background: #2980b9;
+            transform: translateY(-1px);
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .nav-btns a {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(52,152,219,0.3);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .nav-btns a:hover {
+            background: #2980b9;
+            transform: translateY(-1px);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            top: 130px;
+            right: 15px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(231,76,60,0.3);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .fav-btn:hover {
+            background: #c0392b;
+            transform: translateY(-1px);
+        }
+        
+        .fav-btn.collected {
+            background: #95a5a6;
+        }
+        
+        /* 标题 */
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 70px 0 25px 0;
+            padding: 0 10px;
+            line-height: 1.4;
+            font-weight: 700;
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            max-width: 850px;
+            margin: 0 auto 30px auto;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        thead tr {
+            background: #2e86de !important;
+            color: white;
+        }
+        
+        thead th {
+            padding: 20px 15px;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: left;
+            line-height: 1.5;
+        }
+        
+        tbody tr:nth-child(odd) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #ffffff;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        td {
+            padding: 14px 15px;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #34495e;
+            border-bottom: 1px solid #ecf0f1;
+            vertical-align: top;
+        }
+        
+        td:first-child {
+            font-weight: 600;
+            color: #2e86de;
+            white-space: nowrap;
+            width: 140px;
+        }
+        
+        /* 标记符号样式 */
+        .check-mark {
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 4px;
+        }
+        
+        .dot-mark {
+            color: #e74c3c;
+            font-weight: bold;
+            margin-right: 4px;
+        }
+        
+        /* 页码显示 */
+        .page-num {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 16px;
+            margin: 25px 0;
+            font-weight: 500;
+        }
+        
+        /* 底部编辑框区域 */
+        .copy-section {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 15px;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 99;
+        }
+        
+        .copy-section input {
+            flex: 1;
+            height: 44px;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            padding: 0 15px;
+            font-size: 13px;
+            color: #2c3e50;
+            margin-right: 50px;
+        }
+        
+        .copy-section button {
+            height: 44px;
+            padding: 0 20px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+        
+        .copy-section button:hover {
+            background: #219a52;
+            transform: translateY(-1px);
+        }
+        
+        .copy-section button.copied {
+            background: #95a5a6;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            max-width: 850px;
+            margin: 0 auto 20px auto;
+            padding: 0 10px;
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            color: #7f8c8d;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            background: #e8f4f8;
+            color: #2e86de;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #bee5eb;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            background: #2e86de;
+            color: white;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            max-width: 850px;
+            margin: 0 auto 100px auto;
+            padding: 0 10px;
+            text-align: center;
+        }
+        
+        .keywords-title {
+            font-size: 15px;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .keywords-content {
+            font-size: 13px;
+            color: #95a5a6;
+            line-height: 1.8;
+        }
+        
+        /* 子标题样式 */
+        .section-title {
+            background: #e8f4f8 !important;
+        }
+        
+        .section-title td {
+            color: #1a5276;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 16px 15px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 17px;
+                margin-top: 85px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 16px 10px;
+            }
+            
+            td {
+                font-size: 13px;
+                padding: 12px 10px;
+                line-height: 1.7;
+            }
+            
+            td:first-child {
+                width: 110px;
+            }
+            
+            .home-btn, .nav-btns a, .fav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                padding: 10px;
+            }
+            
+            .copy-section input {
+                font-size: 11px;
+                margin-right: 0;
+            }
+            
+            .section-title td {
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .nav-btns {
+                top: 60px;
+                right: 10px;
+            }
+            
+            .fav-btn {
+                top: 175px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 上一页下一页 -->
+    <div class="nav-btns">
+        <a href="28.html">↑ 上一页</a>
+        <a href="30.html">↓ 下一页</a>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+    
+    <!-- 标题 -->
+    <h1>~~~~~腹痛鉴别诊断-检查与急诊处理（第16页）*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~腹痛鉴别诊断-检查与急诊处理（）*****、腹痛鉴别诊断 - 功能性胃肠病、必做检查、选做检查与急诊处理、3. 必做检查、4. 选做检查、5. 急诊处理、胃肠运动功能障碍、肠易激综合征、血常规、尿常规、粪便常规、肝肾功能、胰酶、腹部B超检查、腹部立位平片、心肌酶检测和心电图、妊娠试验、胸片、ABG、平扫或增强CT、腹腔穿刺+腹水化验、胃镜或结肠镜、超声心动图、尿卟胆原+尿卟啉原检测、免疫学检查、毒物检测、MRI、消化道造影、维持生命体征稳定、梗阻性疾病处理</div>
+    
+    <!-- 表格 -->
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">腹痛鉴别诊断 - 功能性胃肠病、必做检查、选做检查与急诊处理</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="check-mark">✓</span>胃肠运动功能障碍</td>
+                <td>胀痛、恶心、早饱、反复呕吐、腹胀感和体重减轻。查体：可有营养不良，腹部无阳性体征。常见于胃轻瘫、功能性消化不良。</td>
+            </tr>
+            <tr>
+                <td><span class="check-mark">✓</span>肠易激综合征</td>
+                <td>3个月内每个月至少有3天出现反复发作的腹痛或不适症状，排便后腹痛减轻，腹痛时伴排便次数增多；腹痛发作时大便变稀，明显腹胀。查体：腹部压痛不明显，肠鸣音活跃。</td>
+            </tr>
+            <tr class="section-title">
+                <td colspan="2"><span class="dot-mark">●</span>3. 必做检查</td>
+            </tr>
+            <tr>
+                <td><span class="dot-mark">●</span>血常规、尿常规、粪便常规</td>
+                <td>对感染和非感染性疾病的鉴别有提示作用。</td>
+            </tr>
+            <tr>
+                <td><span class="dot-mark">●</span>肝肾功能、胰酶</td>
+                <td>异常提示肝胆胰腺病变。</td>
+            </tr>
+            <tr>
+                <td><span class="dot-mark">●</span>腹部B超检查</td>
+                <td>（包括泌尿系统及妇科超声、血管超声）：了解肝、胆、胰、脾、肾、输尿管、膀胱、子宫、双附件、腹部血管情况，还可了解有无腹水、腹水范围和定位。</td>
+            </tr>
+            <tr>
+                <td><span class="dot-mark">●</span>腹部立位平片</td>
+                <td>提示肠梗阻、肠穿孔。</td>
+            </tr>
+            <tr>
+                <td><span class="dot-mark">●</span>心肌酶检测和心电图</td>
+                <td>明确心脏疾病。</td>
+            </tr>
+            <tr>
+                <td><span class="dot-mark">●</span>妊娠试验</td>
+                <td>适用于育龄期女性，下腹痛患者排查妊娠相关急症。</td>
+            </tr>
+            <tr>
+                <td><span class="dot-mark">●</span>胸片</td>
+                <td>了解肺部、胸膜病变。</td>
+            </tr>
+            <tr>
+                <td><span class="dot-mark">●</span>ABG</td>
+                <td>了解有无酸碱平衡失调和呼吸系统疾病。</td>
+            </tr>
+            <tr class="section-title">
+                <td colspan="2"><span class="dot-mark">●</span>4. 选做检查</td>
+            </tr>
+            <tr>
+                <td><span class="dot-mark">●</span>平扫或增强CT</td>
+                <td>了解胸腹盆脏器病变，增强CT可提示血管病变、组织坏死、脏器破裂等。</td>
+            </tr>
+            <tr>
+                <td><span class="dot-mark">●</span>腹腔穿刺+腹水化验</td>
+                <td>对于明确腹水性质、来源意义很大，若发现腹水一定要创造条件穿刺。</td>
+            </tr>
+            <tr>
+                <td><span class="dot-mark">●</span>胃镜或结肠镜</td>
+                <td>了解胃结肠病变。</td>
+            </tr>
+            <tr>
+                <td><span class="dot-mark">●</span>超声心动图</td>
+                <td>了解心脏结构及功能。</td>
+            </tr>
+            <tr>
+                <td><span class="dot-mark">●</span>尿卟胆原+尿卟啉原检测</td>
+                <td>明确有无卟啉病。</td>
+            </tr>
+            <tr>
+                <td><span class="dot-mark">●</span>免疫学检查</td>
+                <td>了解有无免疫相关疾病。</td>
+            </tr>
+            <tr>
+                <td><span class="dot-mark">●</span>毒物检测</td>
+                <td>明确有无中毒。</td>
+            </tr>
+            <tr>
+                <td><span class="dot-mark">●</span>MRI</td>
+                <td>了解肝胆疾病。</td>
+            </tr>
+            <tr>
+                <td><span class="dot-mark">●</span>消化道造影</td>
+                <td>了解胃肠道结构及动力。</td>
+            </tr>
+            <tr class="section-title">
+                <td colspan="2"><span class="dot-mark">●</span>5. 急诊处理</td>
+            </tr>
+            <tr>
+                <td><span class="dot-mark">●</span>维持生命体征稳定</td>
+                <td>必要时吸氧，监护。</td>
+            </tr>
+            <tr>
+                <td><span class="dot-mark">●</span>梗阻性疾病处理</td>
+                <td>禁食水、补液，下胃管胃肠减压，低位肠梗阻可行肠梗阻导管减压，胆道梗阻可行内镜逆行性胆胰管造影（ERCP）或经皮经肝胆管穿刺引流术（PTCD），胆囊病变必要时行经皮经肝胆囊穿刺引流术（PTBD）治疗。</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 页码 -->
+    <div class="page-num">— 16 —</div>
+    
+    <!-- 标签 -->
+    <div class="tags-section">
+        <div class="tags-title">检索标签</div>
+        <div class="tags-container">
+            <span class="tag">胃轻瘫</span>
+            <span class="tag">功能性消化不良</span>
+            <span class="tag">肠易激综合征</span>
+            <span class="tag">肠梗阻</span>
+            <span class="tag">肠穿孔</span>
+            <span class="tag">卟啉病</span>
+            <span class="tag">ERCP</span>
+            <span class="tag">PTCD</span>
+            <span class="tag">PTBD</span>
+        </div>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        <div class="keywords-title">关键词</div>
+        <div class="keywords-content">腹痛、胃肠运动功能障碍、肠易激综合征、必做检查、选做检查、急诊处理、血常规、尿常规、粪便常规、肝肾功能、胰酶、腹部B超、腹部立位平片、心肌酶、心电图、妊娠试验、胸片、ABG、CT、腹腔穿刺、腹水化验、胃镜、结肠镜、超声心动图、尿卟胆原、尿卟啉原、免疫学检查、毒物检测、MRI、消化道造影、ERCP、PTCD、PTBD</div>
+    </div>
+    
+    <!-- 底部编辑框 -->
+    <div class="copy-section">
+        <input type="text" id="copyInput" value="腹痛鉴别诊断-检查与急诊处理（第16页）；腹痛、胃肠运动功能障碍、肠易激综合征、必做检查、选做检查、急诊处理、血常规、尿常规、粪便常规、肝肾功能、胰酶、腹部B超、腹部立位平片、心肌酶、心电图、妊娠试验、胸片、ABG、CT、腹腔穿刺、腹水化验、胃镜、结肠镜、超声心动图、尿卟胆原、尿卟啉原、免疫学检查、毒物检测、MRI、消化道造影、ERCP、PTCD、PTBD；=16" readonly>
+        <button id="copyBtn" onclick="copyContent()">复制</button>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            const btn = document.getElementById('copyBtn');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    btn.textContent = '已复制';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.textContent = '复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            } else {
+                document.execCommand('copy');
+                btn.textContent = '已复制';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const title = document.querySelector('h1').textContent;
+            const pageId = '16';
+            
+            // 获取已有收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const index = favorites.findIndex(f => f.pageId === pageId);
+            
+            if (index === -1) {
+                // 添加收藏
+                favorites.push({
+                    pageId: pageId,
+                    title: title,
+                    url: '16.html',
+                    category: '腹痛鉴别诊断'
+                });
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('collected');
+                
+                // 更新index.html的收藏（通过localStorage通知）
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                localStorage.setItem('favoriteUpdate', Date.now().toString());
+                
+                alert('已添加到收藏！');
+            } else {
+                // 取消收藏
+                favorites.splice(index, 1);
+                btn.textContent = '☆ 收藏';
+                btn.classList.remove('collected');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                localStorage.setItem('favoriteUpdate', Date.now().toString());
+            }
+        }
+        
+        // 检查收藏状态
+        function checkFavoriteStatus() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const pageId = '16';
+            const btn = document.getElementById('favBtn');
+            if (favorites.find(f => f.pageId === pageId)) {
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('collected');
+            }
+        }
+        
+        // 页面加载时检查
+        checkFavoriteStatus();
+    </script>
+</body>
+</html>

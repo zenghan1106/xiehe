@@ -1,0 +1,660 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~晕厥进一步评估流程*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5ee 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        /* 顶部导航栏 */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .left-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 100;
+        }
+        
+        .right-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+            align-items: flex-end;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-home {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-home:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        
+        .btn-page {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            min-width: 80px;
+            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+        }
+        
+        .btn-page:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.6);
+        }
+        
+        .btn-fav {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: #333;
+            font-size: 13px;
+            padding: 8px 16px;
+            margin-top: 5px;
+        }
+        
+        .btn-fav:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(250, 112, 154, 0.6);
+        }
+        
+        /* 主标题 */
+        .main-title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 70px 0 25px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            letter-spacing: 2px;
+        }
+        
+        .sub-title {
+            text-align: center;
+            font-size: 18px;
+            color: #2874a6;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        /* 表头蓝色 */
+        thead th {
+            background: linear-gradient(135deg, #1e88e5 0%, #0d47a1 100%);
+            color: white;
+            padding: 18px 12px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 16px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        }
+        
+        th, td {
+            padding: 14px 12px;
+            text-align: left;
+            border: 1px solid #90caf9;
+            vertical-align: top;
+            line-height: 1.8;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: linear-gradient(135deg, #f5f5f5 0%, #fafafa 100%);
+        }
+        
+        tbody tr:nth-child(odd):not(:first-child) {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%);
+        }
+        
+        tbody tr:hover {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%) !important;
+            transition: background 0.3s ease;
+        }
+        
+        td {
+            color: #2c3e50;
+            word-break: break-all;
+            white-space: pre-wrap;
+        }
+        
+        /* 流程步骤标记 */
+        .step-num {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            line-height: 28px;
+            text-align: center;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-right: 8px;
+            font-size: 14px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .tags-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+        
+        .tag {
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        
+        .tag-disease {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+        
+        .tag-drug {
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+        }
+        
+        .tag-bacteria {
+            background: linear-gradient(135deg, #27ae60 0%, #1e8449 100%);
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .keywords {
+            text-align: center;
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 2;
+        }
+        
+        .keywords span {
+            display: inline-block;
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin: 3px;
+            font-size: 13px;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #e74c3c;
+            margin: 15px 0;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            max-width: calc(100% - 130px);
+            padding: 15px;
+            border: 2px solid #74b9ff;
+            border-radius: 15px;
+            font-size: 14px;
+            background: #f8f9fa;
+            color: #2c3e50;
+            outline: none;
+        }
+        
+        .btn-copy {
+            background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+            color: white;
+            padding: 15px 30px;
+            font-size: 16px;
+            box-shadow: 0 4px 15px rgba(0, 184, 148, 0.4);
+        }
+        
+        .btn-copy:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 184, 148, 0.6);
+        }
+        
+        .btn-copy.copied {
+            background: linear-gradient(135deg, #00cec9 0%, #55efc4 100%);
+        }
+        
+        /* 页脚 */
+        .footer {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 12px;
+            margin-top: 20px;
+            padding: 15px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 20px;
+                margin-top: 80px;
+            }
+            
+            .sub-title {
+                font-size: 14px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            th, td {
+                padding: 10px 8px;
+            }
+            
+            thead th {
+                font-size: 14px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 13px;
+            }
+            
+            .btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                width: 100%;
+                max-width: none;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .btn-copy {
+                width: 100%;
+            }
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+            pointer-events: none;
+        }
+        
+        .toast.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <div class="left-btn">
+        <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+    </div>
+    
+    <!-- 右侧按钮组 -->
+    <div class="right-btns">
+        <a href="45.html" class="btn btn-page">⬆ 上一页</a>
+        <a href="47.html" class="btn btn-page">⬇ 下一页</a>
+        <button class="btn btn-fav" onclick="addToFavorites()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~晕厥进一步评估流程*****</h1>
+    <p class="sub-title">图8 晕厥进一步评估流程 | 临床诊断决策路径</p>
+    
+    <!-- 主表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 8%;">步骤</th>
+                    <th style="width: 22%;">评估项目/检查</th>
+                    <th style="width: 15%;">结果判断</th>
+                    <th style="width: 55%;">后续处理/诊断方向</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="step-num">1</span></td>
+                    <td>初始评估</td>
+                    <td>—</td>
+                    <td>开始晕厥评估流程，进行全面初步评估</td>
+                </tr>
+                <tr>
+                    <td><span class="step-num">2</span></td>
+                    <td>心电图</td>
+                    <td>异常</td>
+                    <td>心律失常 → 进一步行 Loop/Holter 心律监测</td>
+                </tr>
+                <tr>
+                    <td><span class="step-num">3</span></td>
+                    <td>心电图</td>
+                    <td>正常</td>
+                    <td>心肌缺血：如存在冠脉风险，即便初始心电图正常，也应进一步评估</td>
+                </tr>
+                <tr>
+                    <td><span class="step-num">4</span></td>
+                    <td>直立位血压改变</td>
+                    <td>有</td>
+                    <td>容量不足、药物性、神经源性</td>
+                </tr>
+                <tr>
+                    <td><span class="step-num">5</span></td>
+                    <td>直立位血压改变</td>
+                    <td>无</td>
+                    <td>继续进行血常规等后续评估</td>
+                </tr>
+                <tr>
+                    <td><span class="step-num">6</span></td>
+                    <td>血常规</td>
+                    <td>正常</td>
+                    <td>继续进行代谢性等后续评估</td>
+                </tr>
+                <tr>
+                    <td><span class="step-num">7</span></td>
+                    <td>血常规</td>
+                    <td>异常</td>
+                    <td>贫血</td>
+                </tr>
+                <tr>
+                    <td><span class="step-num">8</span></td>
+                    <td>代谢性评估</td>
+                    <td>—</td>
+                    <td>血生化检查：低血糖、肾上腺皮质功能减退</td>
+                </tr>
+                <tr>
+                    <td><span class="step-num">9</span></td>
+                    <td>局灶神经表现</td>
+                    <td>—</td>
+                    <td>头颅CT检查：脑卒中、TIA、SAH、复杂性偏头痛</td>
+                </tr>
+                <tr>
+                    <td><span class="step-num">10</span></td>
+                    <td>流出道梗阻</td>
+                    <td>—</td>
+                    <td>CTA、心脏超声检查：肺栓塞、主动脉夹层、瓣膜狭窄、肥厚型心肌病</td>
+                </tr>
+                <tr>
+                    <td><span class="step-num">11</span></td>
+                    <td>静脉回流</td>
+                    <td>—</td>
+                    <td>β-HCG、腹部超声检查：妊娠压迫</td>
+                </tr>
+                <tr>
+                    <td><span class="step-num">12</span></td>
+                    <td>神经介导的反射性晕厥</td>
+                    <td>—</td>
+                    <td>颈动脉窦按摩：(+) → 颈动脉窦过敏；(-) → 血管迷走性晕厥、情境性晕厥</td>
+                </tr>
+                <tr>
+                    <td><span class="step-num">13</span></td>
+                    <td>青少年无合并症及危险因素</td>
+                    <td>—</td>
+                    <td>每次症状相似，不支持器质性疾病：考虑神经介导性晕厥</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 特色检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">心律失常</span>
+            <span class="tag tag-disease">心肌缺血</span>
+            <span class="tag tag-disease">贫血</span>
+            <span class="tag tag-disease">低血糖</span>
+            <span class="tag tag-disease">肾上腺皮质功能减退</span>
+            <span class="tag tag-disease">脑卒中</span>
+            <span class="tag tag-disease">TIA</span>
+            <span class="tag tag-disease">SAH</span>
+            <span class="tag tag-disease">复杂性偏头痛</span>
+            <span class="tag tag-disease">肺栓塞</span>
+            <span class="tag tag-disease">主动脉夹层</span>
+            <span class="tag tag-disease">瓣膜狭窄</span>
+            <span class="tag tag-disease">肥厚型心肌病</span>
+            <span class="tag tag-disease">颈动脉窦过敏</span>
+            <span class="tag tag-disease">血管迷走性晕厥</span>
+            <span class="tag tag-disease">情境性晕厥</span>
+            <!-- 药物标签 -->
+            <span class="tag tag-drug">β-HCG</span>
+            <!-- 细菌标签（本图无明确细菌相关，保留结构） -->
+        </div>
+    </div>
+    
+    <!-- 底部区域：关键词、页码、复制功能 -->
+    <div class="bottom-section">
+        <div class="keywords">
+            <strong>关键词：</strong>
+            <span>晕厥</span>
+            <span>初始评估</span>
+            <span>心电图</span>
+            <span>心律失常</span>
+            <span>心肌缺血</span>
+            <span>直立位血压</span>
+            <span>血常规</span>
+            <span>贫血</span>
+            <span>代谢性</span>
+            <span>血生化</span>
+            <span>低血糖</span>
+            <span>局灶神经</span>
+            <span>头颅CT</span>
+            <span>脑卒中</span>
+            <span>流出道梗阻</span>
+            <span>CTA</span>
+            <span>心脏超声</span>
+            <span>静脉回流</span>
+            <span>腹部超声</span>
+            <span>神经介导</span>
+            <span>反射性晕厥</span>
+            <span>颈动脉窦按摩</span>
+            <span>颈动脉窦过敏</span>
+            <span>血管迷走性晕厥</span>
+            <span>情境性晕厥</span>
+            <span>青少年</span>
+            <span>Loop监测</span>
+            <span>Holter</span>
+        </div>
+        
+        <div class="page-number">页码：46</div>
+        
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" readonly>
+            <button class="btn btn-copy" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <div class="footer">
+        <p>晕厥进一步评估流程 | 临床诊断决策支持系统</p>
+    </div>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 设置复制框内容
+        const title = "晕厥进一步评估流程";
+        const subtitle = "图8 晕厥进一步评估流程 | 临床诊断决策路径";
+        const keywords = "晕厥,初始评估,心电图,心律失常,心肌缺血,直立位血压,血常规,贫血,代谢性,血生化,低血糖,局灶神经,头颅CT,脑卒中,流出道梗阻,CTA,心脏超声,静脉回流,腹部超声,神经介导,反射性晕厥,颈动脉窦按摩,颈动脉窦过敏,血管迷走性晕厥,情境性晕厥,青少年,Loop监测,Holter";
+        const pageNum = "46";
+        
+        document.getElementById('copyText').value = title + "；" + subtitle + "；" + keywords + "=" + pageNum;
+        
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('✅ 已复制到剪贴板！');
+                    document.querySelector('.btn-copy').classList.add('copied');
+                    setTimeout(() => {
+                        document.querySelector('.btn-copy').classList.remove('copied');
+                    }, 2000);
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('✅ 已复制到剪贴板！');
+            }
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+        
+        // 添加到收藏
+        function addToFavorites() {
+            // 获取当前页面信息
+            const pageInfo = {
+                title: title,
+                url: window.location.href,
+                pageNum: pageNum,
+                timestamp: new Date().toISOString()
+            };
+            
+            // 从localStorage获取已有收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === pageInfo.url);
+            if (exists) {
+                showToast('⚠️ 该页面已在收藏夹中！');
+                return;
+            }
+            
+            // 添加到收藏
+            favorites.push(pageInfo);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 同时更新index.html的收藏（通过localStorage共享）
+            showToast('⭐ 已添加到收藏！请在首页查看');
+        }
+    </script>
+</body>
+</html>

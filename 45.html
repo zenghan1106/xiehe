@@ -1,0 +1,562 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊症状-晕厥高危因素与致命性病因*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            z-index: 1000;
+        }
+        
+        /* 右上角导航按钮组 */
+        .nav-right {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+        }
+        
+        .nav-right a {
+            background: #4a90d9;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #ff9500 !important;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+        
+        .fav-btn:hover {
+            background: #e68600 !important;
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 900px;
+            margin: 70px auto 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 25px 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 标题 */
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #5d6d7e;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #2e86c1 0%, #1a5276 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            font-size: 17px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        tbody td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #2c3e50;
+            vertical-align: top;
+        }
+        
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 15px;
+            font-weight: 500;
+        }
+        
+        /* 注释区域 */
+        .note {
+            background: #eaf2f8;
+            border-left: 4px solid #2e86c1;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 13px;
+            line-height: 1.8;
+            color: #1a5276;
+        }
+        
+        /* 小标题 */
+        .section-title {
+            color: #1a5276;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 20px 0 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #2e86c1;
+        }
+        
+        /* 列表项 */
+        .list-item {
+            padding: 8px 0 8px 20px;
+            position: relative;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #2c3e50;
+        }
+        
+        .list-item::before {
+            content: "●";
+            position: absolute;
+            left: 0;
+            color: #2e86c1;
+        }
+        
+        /* 页码 */
+        .page-num {
+            text-align: center;
+            font-size: 16px;
+            color: #5d6d7e;
+            margin: 25px 0 15px;
+            font-weight: bold;
+        }
+        
+        /* 关键词区域 */
+        .keywords {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .keywords-title {
+            font-size: 13px;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+        
+        .keyword-tag {
+            display: inline-block;
+            background: #2e86c1;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+        }
+        
+        /* 检索标签 */
+        .search-tags {
+            margin: 25px 0;
+            padding: 20px;
+            background: #fef9e7;
+            border-radius: 12px;
+            border: 1px solid #f9e79f;
+        }
+        
+        .search-tags-title {
+            font-size: 15px;
+            color: #9a7d0a;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        .tag-group {
+            margin-bottom: 12px;
+        }
+        
+        .tag-label {
+            display: inline-block;
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #fff;
+            border: 1px solid #d4ac0d;
+            color: #9a7d0a;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 13px;
+            margin: 3px;
+            cursor: pointer;
+        }
+        
+        .tag:hover {
+            background: #f9e79f;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f0f3f4;
+            border-radius: 10px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #2c3e50;
+            background: white;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #229954;
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.96);
+        }
+        
+        /* 提示 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #27ae60;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 14px;
+            display: none;
+            z-index: 2000;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .container {
+                margin-top: 65px;
+                padding: 18px 12px;
+            }
+            
+            h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .home-btn, .nav-right a {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 右上导航 -->
+    <div class="nav-right">
+        <a href="44.html">← 上一页</a>
+        <a href="46.html">下一页 →</a>
+        <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 主内容 -->
+    <div class="container">
+        <h1>~~~~~急诊症状-晕厥高危因素与致命性病因*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~急诊症状-晕厥高危因素与致命性病因*****、项目、低危因素、高危因素、类别、亚类、查体、检验、心电图、心肺疾病、脑部疾病、低血容量、其他</div>
+        <p class="subtitle">续表 | 基本检查 | 致命性晕厥病因 | 常见晕厥</p>
+        
+        <!-- 表格1：低危/高危因素 -->
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:25%">项目</th>
+                    <th style="width:37.5%">低危因素</th>
+                    <th style="width:37.5%">高危因素</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>查体、检验</td>
+                    <td>—</td>
+                    <td>贫血（Hb &lt; 90g/L）、急诊时最低SBP &lt; 90mmHg、心动过缓（&lt; 40次/分）</td>
+                </tr>
+                <tr>
+                    <td>心电图</td>
+                    <td>—</td>
+                    <td>新发LBBB、双束支传导阻滞、心肌缺血、非窦性心律（新发）、QTc延长（&gt; 450ms）、Brugada心电图模式</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="note">
+            <strong>注：</strong>低危：具有一种或多种低危因素，且无任何高危因素。高危：具有至少一种高危因素。中危或不确定：无任何高危或低危因素，或仅具有低危因素和某些合并症，如慢性肾衰竭、呼吸衰竭、脑血管疾病等。
+        </div>
+        
+        <!-- 基本检查 -->
+        <div class="section-title">3. 基本检查</div>
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="list-item">血常规：可发现贫血或出血性疾病。</div>
+                        <div class="list-item">生化检查 + ABG：了解基础代谢情况。</div>
+                        <div class="list-item">ECG + 心肌损伤标志物检测 + 超声心动图：可发现心律失常和心脏疾病线索。</div>
+                        <div class="list-item">D-Dimer检测：若为阴性，可基本除外肺栓塞。</div>
+                        <div class="list-item">尿妊娠试验：适用于有低血容量迹象的育龄期女性。</div>
+                        <div class="list-item">头颅CT：有助于除外颅内出血等。</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="note">
+            <strong>注意：</strong>在急诊留观期间，要优先排查致命性病因（表2）。
+        </div>
+        
+        <!-- 表2：致命性晕厥病因 -->
+        <div class="section-title">表2 致命性晕厥病因</div>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:30%">类别</th>
+                    <th style="width:70%">亚类</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>心肺疾病</td>
+                    <td>心律失常、结构性心肺疾病</td>
+                </tr>
+                <tr>
+                    <td>脑部疾病</td>
+                    <td>脑卒中、短暂性脑缺血发作</td>
+                </tr>
+                <tr>
+                    <td>低血容量</td>
+                    <td>失血、脱水</td>
+                </tr>
+                <tr>
+                    <td>其他</td>
+                    <td>中毒、低血糖</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 选做检查 -->
+        <div class="section-title">4. 选做检查（图8）</div>
+        
+        <!-- 常见晕厥 -->
+        <div class="section-title">5. 常见晕厥</div>
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="list-item">神经介导的反射性晕厥：潜在机制涉及神经系统减慢心率和扩张血管，导致血压降低，因此无足够的血液流向大脑。大多数反射性晕厥通过问诊、查体即可初步拟诊，但还需注意排除其他可能原因。分3种类型：</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 页码 -->
+        <div class="page-num">页码：45</div>
+        
+        <!-- 关键词 -->
+        <div class="keywords">
+            <div class="keywords-title">关键词</div>
+            <span class="keyword-tag">急诊症状</span>
+            <span class="keyword-tag">晕厥</span>
+            <span class="keyword-tag">高危因素</span>
+            <span class="keyword-tag">低危因素</span>
+            <span class="keyword-tag">致命性病因</span>
+            <span class="keyword-tag">基本检查</span>
+            <span class="keyword-tag">反射性晕厥</span>
+        </div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="急诊症状-晕厥高危因素与致命性病因；急诊症状、晕厥、高危因素、低危因素、致命性病因、基本检查、反射性晕厥=45" readonly>
+            <button class="copy-btn" onclick="copyText()">复制</button>
+        </div>
+        
+        <!-- 检索标签 -->
+        <div class="search-tags">
+            <div class="search-tags-title">🔍 检索标签（仅图片内文字）</div>
+            <div class="tag-group">
+                <span class="tag-label">疾病：</span>
+                <span class="tag">贫血</span>
+                <span class="tag">出血性疾病</span>
+                <span class="tag">肺栓塞</span>
+                <span class="tag">颅内出血</span>
+                <span class="tag">心律失常</span>
+                <span class="tag">结构性心肺疾病</span>
+                <span class="tag">脑卒中</span>
+                <span class="tag">短暂性脑缺血发作</span>
+                <span class="tag">中毒</span>
+                <span class="tag">低血糖</span>
+                <span class="tag">慢性肾衰竭</span>
+                <span class="tag">呼吸衰竭</span>
+                <span class="tag">脑血管疾病</span>
+                <span class="tag">反射性晕厥</span>
+            </div>
+            <div class="tag-group">
+                <span class="tag-label">检查/药物相关：</span>
+                <span class="tag">血常规</span>
+                <span class="tag">ABG</span>
+                <span class="tag">ECG</span>
+                <span class="tag">D-Dimer</span>
+                <span class="tag">Brugada</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast">已复制到剪贴板！</div>
+    
+    <script>
+        // 复制功能
+        function copyText() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                showToast('已复制到剪贴板！');
+            });
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            const title = '急诊症状-晕厥高危因素与致命性病因';
+            const url = window.location.href;
+            
+            // 尝试使用本地存储模拟添加到index收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === url);
+            
+            if (!exists) {
+                favorites.push({
+                    title: title,
+                    url: url,
+                    page: '45'
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                showToast('已添加到收藏！');
+            } else {
+                showToast('已在收藏中！');
+            }
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

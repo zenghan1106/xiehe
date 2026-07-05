@@ -1,0 +1,731 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~呼吸困难鉴别诊断流程与急诊处理指南*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            min-height: 100vh;
+            padding: 20px 15px 30px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-1px);
+        }
+        
+        /* 导航按钮区域 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #5a9bd5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(90,155,213,0.3);
+            transition: all 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background: #4a8bc5;
+            transform: translateY(-1px);
+        }
+        
+        .fav-btn {
+            background: #e8a838;
+            margin-top: 5px;
+        }
+        
+        .fav-btn:hover {
+            background: #d4982f;
+        }
+        
+        .fav-btn.active {
+            background: #c17a1f;
+        }
+        
+        /* 标题样式 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a3a5c;
+            margin: 60px 0 25px 0;
+            padding: 15px 20px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            line-height: 1.6;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        /* 表头 */
+        thead tr {
+            background: linear-gradient(135deg, #2c5f8e 0%, #4a90d9 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            border: 1px solid #357abd;
+        }
+        
+        /* 表格内容 */
+        td, th {
+            padding: 12px 10px;
+            border: 1px solid #d0d8e8;
+            vertical-align: top;
+            line-height: 1.7;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #eef4fb;
+        }
+        
+        /* 分类标题行 */
+        .category-row {
+            background: #e8f0f8 !important;
+            font-weight: bold;
+            color: #1a3a5c;
+        }
+        
+        .category-row td {
+            font-size: 15px;
+            padding: 14px 10px;
+        }
+        
+        /* 重点标记 */
+        .highlight {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        
+        .highlight-blue {
+            color: #2980b9;
+            font-weight: bold;
+        }
+        
+        /* 列表样式 */
+        .item-list {
+            margin: 0;
+            padding-left: 18px;
+        }
+        
+        .item-list li {
+            margin-bottom: 5px;
+        }
+        
+        /* 治疗措施特殊样式 */
+        .treatment-box {
+            background: #f0f7ff;
+            border-left: 4px solid #4a90d9;
+            padding: 10px 12px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #5a6a7a;
+            margin: 20px 0;
+            font-weight: 500;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .keywords-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c5f8e;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f0f8;
+        }
+        
+        .keywords-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .keyword-tag {
+            background: #e8f0f8;
+            color: #2c5f8e;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #c8d8e8;
+            transition: all 0.3s;
+        }
+        
+        .keyword-tag:hover {
+            background: #4a90d9;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* 特色检索标签 */
+        .special-tags {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .special-tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #8b4513;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0e8d8;
+        }
+        
+        .tag-group {
+            margin-bottom: 15px;
+        }
+        
+        .tag-group-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .special-tag {
+            display: inline-block;
+            background: #fff5e6;
+            color: #8b4513;
+            padding: 6px 14px;
+            border-radius: 16px;
+            font-size: 13px;
+            margin: 4px 6px 4px 0;
+            border: 1px solid #e8d5b5;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .special-tag:hover {
+            background: #8b4513;
+            color: white;
+        }
+        
+        .special-tag.disease {
+            background: #ffe8e8;
+            color: #c0392b;
+            border-color: #f0c0c0;
+        }
+        
+        .special-tag.disease:hover {
+            background: #c0392b;
+            color: white;
+        }
+        
+        .special-tag.drug {
+            background: #e8f5e9;
+            color: #27ae60;
+            border-color: #b8e0c0;
+        }
+        
+        .special-tag.drug:hover {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .special-tag.bacteria {
+            background: #e8eaf6;
+            color: #3f51b5;
+            border-color: #c0c8e8;
+        }
+        
+        .special-tag.bacteria:hover {
+            background: #3f51b5;
+            color: white;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .copy-section-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c5f8e;
+            margin-bottom: 15px;
+        }
+        
+        .copy-input-group {
+            display: flex;
+            gap: 12px;
+            align-items: stretch;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 14px 16px;
+            border: 2px solid #d0d8e8;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #333;
+            background: #fafbfc;
+            width: calc(100% - 100px);
+            min-height: 50px;
+            resize: vertical;
+            font-family: inherit;
+        }
+        
+        .copy-input:focus {
+            outline: none;
+            border-color: #4a90d9;
+            background: white;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(39,174,96,0.3);
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(39,174,96,0.4);
+        }
+        
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+        
+        .copy-success {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #27ae60;
+            color: white;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 16px;
+            z-index: 2000;
+            display: none;
+            box-shadow: 0 8px 32px rgba(39,174,96,0.4);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            
+            td, th {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .copy-input-group {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .nav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <button class="home-btn" onclick="location.href='index.html'">← 返回首页</button>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="17.html" class="nav-btn">← 上一页</a>
+        <a href="19.html" class="nav-btn">下一页 →</a>
+        <button class="nav-btn fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~呼吸困难鉴别诊断流程与急诊处理指南*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~呼吸困难鉴别诊断流程与急诊处理指南*****、呼吸困难鉴别诊断流程与急诊处理、📌 即将心搏骤停的标志、意识状态下降 不能维持有效呼吸 发绀、📊 呼吸困难分类、📋 病史及查体 / 基础疾病、🔍 病因分类与鉴别诊断、🚨 紧急处理措施、急性、创伤/中毒/过敏 已有心肺及神经系统疾病、中毒或代谢性酸中毒等、气道/肺、心源性、神经肌肉、血液</div>
+    
+    <!-- 主表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">呼吸困难鉴别诊断流程与急诊处理</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="2">📌 即将心搏骤停的标志</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <ul class="item-list">
+                            <li>意识状态下降</li>
+                            <li>不能维持有效呼吸</li>
+                            <li>发绀</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="2">📊 呼吸困难分类</td>
+                </tr>
+                <tr>
+                    <td width="50%"><strong style="color:#2980b9;">急性</strong></td>
+                    <td width="50%"><strong style="color:#27ae60;">慢性</strong></td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="2">📋 病史及查体 / 基础疾病</td>
+                </tr>
+                <tr>
+                    <td>
+                        <ul class="item-list">
+                            <li>创伤/中毒/过敏</li>
+                            <li>已有心肺及神经系统疾病</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul class="item-list">
+                            <li>哮喘</li>
+                            <li>COPD</li>
+                            <li>间质性肺疾病</li>
+                            <li>心力衰竭</li>
+                            <li>肥胖</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="2">🔍 病因分类与鉴别诊断</td>
+                </tr>
+                <tr>
+                    <td><strong class="highlight-blue">中毒或代谢性酸中毒等</strong></td>
+                    <td>CO中毒等，建议给予高压氧治疗。若无条件，应给予尽可能高浓度氧气，以加快CO解离，改善组织缺氧。</td>
+                </tr>
+                <tr>
+                    <td><strong class="highlight-blue">气道/肺</strong></td>
+                    <td>
+                        <div style="margin-bottom:10px;"><strong>上气道：</strong>异物、感染、过敏</div>
+                        <div><strong>下气道/肺实质：</strong>AECOPD、哮喘急性发作、肺炎、气胸、肺栓塞、胸腔积液</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong class="highlight-blue">心源性</strong></td>
+                    <td>急性心肌梗死、急性心力衰竭、心脏压塞</td>
+                </tr>
+                <tr>
+                    <td><strong class="highlight-blue">神经肌肉</strong></td>
+                    <td>重症肌无力、膈肌麻痹</td>
+                </tr>
+                <tr>
+                    <td><strong class="highlight-blue">血液</strong></td>
+                    <td>重度贫血</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="2">🚨 紧急处理措施</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="treatment-box">
+                            <strong>基础处理：</strong>心电监护、建立静脉通路、采集血液化验、床旁胸片
+                        </div>
+                        <div style="margin-top:15px;"><strong>根据疾病的初步判断予相应治疗：</strong></div>
+                        <div class="treatment-box">
+                            <strong>✓ 严重哮喘或COPD急性加重：</strong>立即给予雾化β受体激动药、M受体阻断药等支气管舒张药，同时静脉输入茶碱、甲泼尼龙等，必要时气管插管、机械通气。
+                        </div>
+                        <div class="treatment-box">
+                            <strong>✓ 急性左心衰竭：</strong>患者坐位、双下肢下垂，利尿、扩血管、强心，必要时使用吗啡皮下注射。病情严重者可早期行无创呼吸机辅助通气。
+                        </div>
+                        <div class="treatment-box">
+                            <strong>✓ 心脏压塞：</strong>尽快行心包穿刺引流。
+                        </div>
+                        <div class="treatment-box">
+                            <strong>✓ 肺栓塞：</strong>若伴低血压，尽快给予静脉溶栓治疗。
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align:right;color:#888;font-size:13px;">（刘业成）</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">页码：18</div>
+    
+    <!-- 关键词区域 -->
+    <div class="keywords-section">
+        <div class="keywords-title">🔑 关键词</div>
+        <div class="keywords-list">
+            <span class="keyword-tag">呼吸困难</span>
+            <span class="keyword-tag">鉴别诊断</span>
+            <span class="keyword-tag">急诊处理</span>
+            <span class="keyword-tag">心搏骤停</span>
+            <span class="keyword-tag">急性左心衰竭</span>
+            <span class="keyword-tag">肺栓塞</span>
+            <span class="keyword-tag">心脏压塞</span>
+            <span class="keyword-tag">COPD急性加重</span>
+            <span class="keyword-tag">哮喘急性发作</span>
+            <span class="keyword-tag">CO中毒</span>
+            <span class="keyword-tag">高压氧治疗</span>
+            <span class="keyword-tag">支气管舒张药</span>
+            <span class="keyword-tag">机械通气</span>
+            <span class="keyword-tag">心包穿刺</span>
+            <span class="keyword-tag">静脉溶栓</span>
+        </div>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="special-tags">
+        <div class="special-tags-title">🏷️ 特色检索标签</div>
+        
+        <div class="tag-group">
+            <div class="tag-group-label">疾病</div>
+            <span class="special-tag disease">哮喘</span>
+            <span class="special-tag disease">COPD</span>
+            <span class="special-tag disease">AECOPD</span>
+            <span class="special-tag disease">肺炎</span>
+            <span class="special-tag disease">气胸</span>
+            <span class="special-tag disease">肺栓塞</span>
+            <span class="special-tag disease">胸腔积液</span>
+            <span class="special-tag disease">急性心肌梗死</span>
+            <span class="special-tag disease">急性心力衰竭</span>
+            <span class="special-tag disease">心脏压塞</span>
+            <span class="special-tag disease">重症肌无力</span>
+            <span class="special-tag disease">膈肌麻痹</span>
+            <span class="special-tag disease">重度贫血</span>
+            <span class="special-tag disease">CO中毒</span>
+            <span class="special-tag disease">间质性肺疾病</span>
+            <span class="special-tag disease">心力衰竭</span>
+            <span class="special-tag disease">肥胖</span>
+            <span class="special-tag disease">创伤</span>
+            <span class="special-tag disease">中毒</span>
+            <span class="special-tag disease">过敏</span>
+        </div>
+        
+        <div class="tag-group">
+            <div class="tag-group-label">药物/治疗</div>
+            <span class="special-tag drug">β受体激动药</span>
+            <span class="special-tag drug">M受体阻断药</span>
+            <span class="special-tag drug">茶碱</span>
+            <span class="special-tag drug">甲泼尼龙</span>
+            <span class="special-tag drug">吗啡</span>
+            <span class="special-tag drug">支气管舒张药</span>
+            <span class="special-tag drug">高压氧</span>
+            <span class="special-tag drug">利尿剂</span>
+            <span class="special-tag drug">扩血管药物</span>
+            <span class="special-tag drug">强心药</span>
+            <span class="special-tag drug">溶栓药物</span>
+        </div>
+        
+        <div class="tag-group">
+            <div class="tag-group-label">细菌（相关感染性疾病）</div>
+            <span class="special-tag bacteria">肺炎链球菌</span>
+            <span class="special-tag bacteria">流感嗜血杆菌</span>
+            <span class="special-tag bacteria">卡他莫拉菌</span>
+            <span class="special-tag bacteria">铜绿假单胞菌</span>
+            <span class="special-tag bacteria">金黄色葡萄球菌</span>
+            <span class="special-tag bacteria">肺炎克雷伯菌</span>
+        </div>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <div class="copy-section-title">📋 快速复制</div>
+        <div class="copy-input-group">
+            <textarea class="copy-input" id="copyText" rows="3">呼吸困难鉴别诊断流程与急诊处理指南；呼吸困难、鉴别诊断、急诊处理、心搏骤停、急性左心衰竭、肺栓塞、心脏压塞、COPD急性加重、哮喘急性发作、CO中毒、高压氧治疗、支气管舒张药、机械通气、心包穿刺、静脉溶栓；=18</textarea>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 复制成功提示 -->
+    <div class="copy-success" id="copySuccess">✓ 复制成功！</div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const text = document.getElementById('copyText');
+            text.select();
+            text.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(text.value).then(() => {
+                    showSuccess();
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                showSuccess();
+            }
+        }
+        
+        function showSuccess() {
+            const success = document.getElementById('copySuccess');
+            success.style.display = 'block';
+            setTimeout(() => {
+                success.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+                
+                // 保存到localStorage，用于index页面读取
+                const favData = {
+                    title: '呼吸困难鉴别诊断流程与急诊处理指南',
+                    url: '18.html',
+                    pageNum: '18',
+                    timestamp: new Date().toISOString()
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.find(f => f.url === '18.html');
+                if (!exists) {
+                    favorites.push(favData);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                // 尝试向index页面发送消息（同域情况下）
+                try {
+                    window.parent.postMessage({
+                        type: 'addFavorite',
+                        data: favData
+                    }, '*');
+                } catch(e) {}
+                
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = '☆ 收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '18.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 检查是否已收藏
+        function checkFavorite() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.find(f => f.url === '18.html');
+            if (exists) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        document.addEventListener('DOMContentLoaded', checkFavorite);
+    </script>
+</body>
+</html>

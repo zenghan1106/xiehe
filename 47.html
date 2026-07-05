@@ -1,0 +1,374 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~晕厥的急诊处理与分类*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #2c5282;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #3182ce;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .fav-btn {
+            background: #d69e2e;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a365d;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 12px;
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        thead tr {
+            background: #2b6cb0 !important;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        tbody tr:nth-child(odd) {
+            background: #ffffff;
+        }
+        
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+            vertical-align: top;
+        }
+        
+        .category {
+            color: #2b6cb0;
+            font-weight: bold;
+        }
+        
+        .sub-category {
+            color: #38a169;
+            font-weight: 600;
+        }
+        
+        .detail {
+            color: #744210;
+        }
+        
+        .tags-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #ebf8ff;
+            color: #2b6cb0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            border: 1px solid #bee3f8;
+        }
+        
+        .copy-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 14px;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-btn {
+            background: #38a169;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .page-num {
+            text-align: center;
+            color: #718096;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #4a5568;
+            font-size: 13px;
+            padding: 10px;
+            background: #edf2f7;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="46.html" class="nav-btn">上一页</a>
+            <a href="48.html" class="nav-btn">下一页</a>
+            <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~晕厥的急诊处理与分类*****</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>分类</th>
+                <th>类型/处理</th>
+                <th>详细内容</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">反射性晕厥</td>
+                <td class="sub-category">血管迷走性晕厥（VVS）</td>
+                <td>最常见的反射性晕厥。通常由见到血液、疼痛、情绪紧张或长时间站立引起。</td>
+            </tr>
+            <tr>
+                <td class="category">反射性晕厥</td>
+                <td class="sub-category">情境性晕厥</td>
+                <td>通常由排尿、吞咽或咳嗽引起。</td>
+            </tr>
+            <tr>
+                <td class="category">反射性晕厥</td>
+                <td class="sub-category">颈动脉窦晕厥</td>
+                <td>源于颈动脉窦受压。</td>
+            </tr>
+            <tr>
+                <td class="category">直立性晕厥</td>
+                <td class="sub-category">直立性低血压</td>
+                <td>晕厥出现在卧位变为直立位数十秒或数分钟后，SBP下降＞20mmHg、DBP下降＞10mmHg，或SBP降至＜90mmHg。见于以下情况：①血容量不足：如出血、腹泻、呕吐等；②药物：最常见，如血管扩张药、利尿药、吩噻嗪类药物、抗抑郁药；③神经源性：存在自主神经功能障碍。卧立位试验、倾斜试验和自主神经功能检测可协助诊断。</td>
+            </tr>
+            <tr>
+                <td class="category">直立性晕厥</td>
+                <td class="sub-category">体位性心动过速综合征（POTS）</td>
+                <td>是一种特殊类型，发病机制不清。在直立倾斜试验的10分钟内心率较平卧位增加＞30次/分，同时SBP下降＜20mmHg。</td>
+            </tr>
+            <tr>
+                <td class="category">急诊处理</td>
+                <td class="sub-category">疑有猝死风险者</td>
+                <td>需进行心电、血压监护，建立静脉通路。</td>
+            </tr>
+            <tr>
+                <td class="category">急诊处理</td>
+                <td class="sub-category">心源性晕厥 - 快速性心律失常</td>
+                <td>可予胺碘酮等药物治疗。</td>
+            </tr>
+            <tr>
+                <td class="category">急诊处理</td>
+                <td class="sub-category">心源性晕厥 - 缓慢性心律失常</td>
+                <td>可用阿托品提高心率。根据需要安装心脏起搏器、埋藏式自动除颤仪或行导管射频消融术。</td>
+            </tr>
+            <tr>
+                <td class="category">急诊处理</td>
+                <td class="sub-category">心源性晕厥 - 肥厚型心肌病</td>
+                <td>应予药物治疗，如β受体阻断药、维拉帕米等。</td>
+            </tr>
+            <tr>
+                <td class="category">急诊处理</td>
+                <td class="sub-category">心源性晕厥 - 梗阻性心血管疾病</td>
+                <td>通常需要请心内科、心外科会诊，考虑进一步治疗。</td>
+            </tr>
+            <tr>
+                <td class="category">急诊处理</td>
+                <td class="sub-category">直立性晕厥 - 纠正血容量不足</td>
+                <td>纠正可能存在的血容量不足。</td>
+            </tr>
+            <tr>
+                <td class="category">急诊处理</td>
+                <td class="sub-category">直立性晕厥 - 药源性晕厥</td>
+                <td>去除致病药物，调整药物剂量或给药方式。减量或停用降压药，SBP以140～150mmHg为宜，降压药优先选择ACEI、ARB和CCB类，避免使用利尿药和β受体阻断药。</td>
+            </tr>
+            <tr>
+                <td class="category">急诊处理</td>
+                <td class="sub-category">直立性晕厥 - 自主神经功能障碍</td>
+                <td>给予盐皮质激素治疗（氟氢可的松）或高盐饮食。戴腹带或穿弹力袜。使用α受体激动药（盐酸米多君2.5～10mg tid）。安装心脏起搏器（频率反应性起搏器）。</td>
+            </tr>
+            <tr>
+                <td class="category">急诊处理</td>
+                <td class="sub-category">反射性晕厥</td>
+                <td>非药物治疗是主要治疗方法，包括健康教育、生活方式改</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <span class="tag">晕厥</span>
+        <span class="tag">血管迷走性晕厥</span>
+        <span class="tag">VVS</span>
+        <span class="tag">情境性晕厥</span>
+        <span class="tag">颈动脉窦晕厥</span>
+        <span class="tag">直立性低血压</span>
+        <span class="tag">POTS</span>
+        <span class="tag">体位性心动过速综合征</span>
+        <span class="tag">心源性晕厥</span>
+        <span class="tag">心律失常</span>
+        <span class="tag">胺碘酮</span>
+        <span class="tag">阿托品</span>
+        <span class="tag">心脏起搏器</span>
+        <span class="tag">肥厚型心肌病</span>
+        <span class="tag">β受体阻断药</span>
+        <span class="tag">维拉帕米</span>
+        <span class="tag">ACEI</span>
+        <span class="tag">ARB</span>
+        <span class="tag">CCB</span>
+        <span class="tag">氟氢可的松</span>
+        <span class="tag">盐酸米多君</span>
+    </div>
+    
+    <div class="copy-section">
+        <div class="copy-box">
+            <input type="text" id="copyInput" value="晕厥的急诊处理与分类；反射性晕厥、直立性晕厥、心源性晕厥、血管迷走性晕厥、情境性晕厥、颈动脉窦晕厥、直立性低血压、POTS、体位性心动过速综合征、胺碘酮、阿托品、β受体阻断药、维拉帕米、ACEI、ARB、CCB、氟氢可的松、盐酸米多君=47" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <div class="page-num">页码：47</div>
+    
+    <div class="keywords">
+        关键词：晕厥、急诊处理、反射性晕厥、直立性晕厥、心源性晕厥、血管迷走性晕厥、情境性晕厥、颈动脉窦晕厥、直立性低血压、POTS、体位性心动过速综合征、胺碘酮、阿托品、心脏起搏器、肥厚型心肌病、β受体阻断药、维拉帕米、ACEI、ARB、CCB、氟氢可的松、盐酸米多君
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                alert('已复制到剪贴板！');
+            }, function() {
+                document.execCommand('copy');
+                alert('已复制到剪贴板！');
+            });
+        }
+        
+        function addToFavorites() {
+            const title = document.title;
+            const url = window.location.href;
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === url);
+            if (!exists) {
+                favorites.push({title: title, url: url, page: '47'});
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已添加到收藏！');
+            } else {
+                alert('已在收藏中！');
+            }
+        }
+    </script>
+</body>
+</html>
