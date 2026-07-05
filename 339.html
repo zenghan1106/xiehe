@@ -1,0 +1,585 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊血液净化操作与并发症*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #e6f3ff 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .nav-btn {
+            position: fixed;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(145deg, #4a90d9, #357abd);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(74, 144, 217, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 144, 217, 0.4);
+        }
+        
+        .home-btn {
+            top: 15px;
+            left: 15px;
+        }
+        
+        .prev-btn {
+            top: 15px;
+            right: 15px;
+        }
+        
+        .next-btn {
+            top: 60px;
+            right: 15px;
+        }
+        
+        .fav-btn {
+            top: 105px;
+            right: 15px;
+            background: linear-gradient(145deg, #f5a623, #e09400);
+            box-shadow: 0 3px 10px rgba(245, 166, 35, 0.3);
+        }
+        
+        .fav-btn:hover {
+            box-shadow: 0 5px 15px rgba(245, 166, 35, 0.4);
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 80px auto 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(31, 110, 180, 0.15);
+            overflow: hidden;
+        }
+        
+        .page-header {
+            background: linear-gradient(145deg, #1e6db5, #2980d9);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .table-wrapper {
+            padding: 20px;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        thead tr {
+            background: linear-gradient(145deg, #1e6db5, #2980d9);
+            color: white;
+        }
+        
+        thead th {
+            padding: 18px 15px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+            border-bottom: 3px solid #f0f8ff;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e8f0f8;
+            transition: background 0.2s;
+        }
+        
+        tbody tr:hover {
+            background: #f5faff;
+        }
+        
+        tbody td {
+            padding: 14px 15px;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #2c3e50;
+            vertical-align: top;
+        }
+        
+        .section-title {
+            background: #e8f4fc;
+            font-weight: bold;
+            color: #1e6db5;
+        }
+        
+        .sub-item {
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .sub-item::before {
+            content: "•";
+            position: absolute;
+            left: 5px;
+            color: #2980d9;
+        }
+        
+        .highlight-box {
+            background: #fff8e7;
+            border-left: 4px solid #f5a623;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .formula {
+            background: #f0f8ff;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-family: "Courier New", monospace;
+            color: #1e6db5;
+            margin: 8px 0;
+        }
+        
+        .bottom-section {
+            padding: 20px;
+            background: #f8fbff;
+            border-top: 2px solid #e0ecf8;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 14px 18px;
+            border: 2px solid #b8d4f0;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #2c3e50;
+            background: white;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        #copyInput:focus {
+            border-color: #2980d9;
+        }
+        
+        .copy-btn {
+            padding: 14px 28px;
+            background: linear-gradient(145deg, #27ae60, #219a52);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(39, 174, 96, 0.3);
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .tags-section {
+            margin: 20px 0;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1e6db5;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 18px;
+            margin: 6px;
+            background: linear-gradient(145deg, #e8f4fc, #d0e8f7);
+            color: #1e6db5;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid #b8d4f0;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            background: linear-gradient(145deg, #1e6db5, #2980d9);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .keywords-section {
+            text-align: center;
+            padding: 20px;
+            background: #e8f4fc;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        
+        .keywords-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1e6db5;
+            margin-bottom: 10px;
+        }
+        
+        .keywords-list {
+            font-size: 14px;
+            color: #4a6580;
+            line-height: 2;
+        }
+        
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            font-size: 16px;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #27ae60;
+            color: white;
+            padding: 14px 35px;
+            border-radius: 30px;
+            font-size: 15px;
+            opacity: 0;
+            transition: all 0.4s;
+            z-index: 2000;
+            box-shadow: 0 5px 20px rgba(39, 174, 96, 0.3);
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                margin-top: 70px;
+            }
+            
+            .page-header h1 {
+                font-size: 20px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 14px 12px;
+            }
+            
+            tbody td {
+                font-size: 14px;
+                padding: 12px;
+            }
+            
+            .nav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                top: 10px;
+                left: 10px;
+            }
+            
+            .prev-btn {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .next-btn {
+                top: 50px;
+                right: 10px;
+            }
+            
+            .fav-btn {
+                top: 90px;
+                right: 10px;
+            }
+            
+            #copyInput {
+                width: 100%;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航按钮 -->
+    <a href="index.html" class="nav-btn home-btn">🏠 返回首页</a>
+    <a href="338.html" class="nav-btn prev-btn">← 上一页</a>
+    <a href="340.html" class="nav-btn next-btn">下一页 →</a>
+    <button class="nav-btn fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    
+    <div class="container">
+        <!-- 标题 -->
+        <div class="page-header">
+            <h1>~~~~~急诊血液净化操作与并发症*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~急诊血液净化操作与并发症*****、急诊血液净化操作要点与并发症、血液灌流选择灌流器、4. 急诊血液净化的并发症、上机和下机：需注意无菌操作，防止引起血流感染。</div>
+        </div>
+        
+        <!-- 表格内容 -->
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>急诊血液净化操作要点与并发症</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="section-title">血液灌流选择灌流器</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sub-item">配制置换液：根据患者情况配制置换液，目前大部分选择基础血液净化基础置换液，需加入氯化钾配制成目标的置换液钾离子浓度，如高钾血症患者配制成低钾或无钾置换液，一般患者配制成正常血钾4.0mmol/L左右的置换液，一般不使用高钾置换液，即使对于低钾血症患者也只使用正常钾离子浓度置换液。</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sub-item">5% NaHCO₃：置换液的pH多＜7.0，需要额外加入5% NaHCO₃调节pH，一般不加入置换液中，而是在患者外周血管另外输液途径补充，可按照与置换液1:20的初始速度补充，如置换液2000ml/h，5% NaHCO₃则给予100ml/h的速度输注，并根据患者的pH进行调整输液速度。</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sub-item">设置抗凝方式：有条件均需要抗凝，目前主流的抗凝方法包括两种：①首选枸橼酸抗凝，需要监测血气钙离子浓度；②普通肝素抗凝，需要监测APTT。某些特殊患者因各种禁忌可能选择无抗凝CRRT，但一般容易凝血，难以长时间进行。</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sub-item">设置血液净化的参数：需根据患者的具体情况进行，包括血流速度、脱水速度、前置换液速度、后置换液速度等。</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sub-item">液体平衡管理：出入量平衡＝同期入量（置换液量＋静脉输液量＋口服服量）－同期出量（同期超滤液量＋尿量＋引流量＋其他液体丢失量），有多种液体管理方式，如24小时总出入量平衡目标、每小时的出入量平衡目标、根据CVP等血流动力学的设定目标等。</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sub-item">上机和下机：需注意无菌操作，防止引起血流感染。</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="section-title">4. 急诊血液净化的并发症</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sub-item">感染：血液净化过程需要置管和血液接触操作，易发生院内感染。</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sub-item">出血：置管穿刺和血液净化中的抗凝药使用，均易出现出血并发症。</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sub-item">营养物质丢失：绝大部分置换液中只包括主要的钠、钾、钙、镁、葡萄糖物质，特殊的置换液还包含更多的人体血浆成分，但不可能包括所有血液中的正常成分。血液净化时间越长，丢失的氨基酸、磷、微量元素、维生素等越多，一般持续进行24～72小时的CRRT需考虑补充这些丢失的营养成分。</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sub-item">血钠变化过快：对于严重高钠血症和低钠血症患者，需监测血钠变化。目标是每日血钠变化不超过10mmol/L。</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sub-item">凝血：凝血使CRRT目标未完成、丢失管路中的血液、浪费一次性耗材，增加花费。</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sub-item">枸橼酸相关合并症：枸橼酸通过肝脏代谢，超过机体代谢能</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- 复制功能区 -->
+        <div class="bottom-section">
+            <div class="copy-section">
+                <input type="text" id="copyInput" value="急诊血液净化操作与并发症；血液灌流、置换液配制、抗凝方式、液体平衡、感染、出血、营养物质丢失、血钠变化、凝血、枸橼酸合并症；=339" readonly>
+                <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+            </div>
+            
+            <!-- 检索标签 -->
+            <div class="tags-section">
+                <div class="tags-title">🏷️ 检索标签</div>
+                <span class="tag">感染</span>
+                <span class="tag">出血</span>
+                <span class="tag">凝血</span>
+                <span class="tag">枸橼酸</span>
+                <span class="tag">高钾血症</span>
+                <span class="tag">低钾血症</span>
+                <span class="tag">高钠血症</span>
+                <span class="tag">低钠血症</span>
+                <span class="tag">CRRT</span>
+                <span class="tag">肝素</span>
+                <span class="tag">APTT</span>
+                <span class="tag">CVP</span>
+                <span class="tag">NaHCO₃</span>
+                <span class="tag">氯化钾</span>
+                <span class="tag">钙离子</span>
+            </div>
+            
+            <!-- 关键词 -->
+            <div class="keywords-section">
+                <div class="keywords-title">🔍 关键词</div>
+                <div class="keywords-list">
+                    急诊血液净化 | 置换液配制 | 抗凝方式 | 枸橼酸抗凝 | 肝素抗凝 | 液体平衡 | CRRT并发症 | 感染 | 出血 | 营养丢失 | 血钠变化 | 凝血 | 枸橼酸合并症
+                </div>
+            </div>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">— 第 339 页 —</div>
+    </div>
+    
+    <!-- 提示框 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('✓ 已复制到剪贴板');
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('✓ 已复制到剪贴板');
+            }
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            // 获取当前页面信息
+            const title = '急诊血液净化操作与并发症';
+            const url = window.location.href;
+            
+            // 尝试添加到浏览器收藏夹
+            if (window.sidebar && window.sidebar.addPanel) {
+                window.sidebar.addPanel(title, url, '');
+                showToast('✓ 已添加到收藏夹');
+            } else if (window.external && ('AddFavorite' in window.external)) {
+                window.external.AddFavorite(url, title);
+                showToast('✓ 已添加到收藏夹');
+            } else {
+                // 保存到localStorage，供index.html读取
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '~~~~~急诊血液净化操作与并发症*****',
+                    url: '339.html',
+                    category: '急诊血液净化',
+                    tags: ['感染', '出血', '凝血', '枸橼酸', 'CRRT', '肝素', '高钾血症', '低钾血症', '高钠血症', '低钠血症']
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.url === pageInfo.url);
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                    showToast('✓ 已添加到收藏（本地存储）');
+                } else {
+                    showToast('⚠ 该页面已在收藏中');
+                }
+            }
+        }
+        
+        // 显示提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+        
+        // 页面加载时设置输入框宽度
+        window.addEventListener('load', function() {
+            const container = document.querySelector('.container');
+            const input = document.getElementById('copyInput');
+            if (container && input) {
+                const containerWidth = container.offsetWidth;
+                input.style.width = (containerWidth - 140) + 'px';
+            }
+        });
+        
+        // 窗口大小改变时调整输入框宽度
+        window.addEventListener('resize', function() {
+            const container = document.querySelector('.container');
+            const input = document.getElementById('copyInput');
+            if (container && input) {
+                const containerWidth = container.offsetWidth;
+                const newWidth = Math.max(200, containerWidth - 140);
+                input.style.width = newWidth + 'px';
+            }
+        });
+    </script>
+</body>
+</html>
