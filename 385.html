@@ -1,0 +1,464 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊抗心律失常药物的使用*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-home {
+            background-color: #2196F3;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background-color: #1976D2;
+        }
+        
+        .btn-nav {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background-color: #45a049;
+        }
+        
+        .btn-favorite {
+            background-color: #FF9800;
+            color: white;
+        }
+        
+        .btn-favorite:hover {
+            background-color: #F57C00;
+        }
+        
+        .btn-copy {
+            background-color: #9C27B0;
+            color: white;
+            padding: 10px 20px;
+        }
+        
+        .btn-copy:hover {
+            background-color: #7B1FA2;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1565C0;
+            font-size: 22px;
+            margin: 15px 0 20px 0;
+            padding: 12px;
+            background-color: #E3F2FD;
+            border-radius: 8px;
+            word-break: break-all;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        thead {
+            background-color: #1976D2;
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 14px;
+            color: #444;
+            vertical-align: top;
+        }
+        
+        tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            color: #1565C0;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .bullet {
+            color: #1976D2;
+            margin-right: 4px;
+        }
+        
+        .checkmark {
+            color: #2E7D32;
+            margin-right: 4px;
+        }
+        
+        .number-title {
+            color: #1565C0;
+            font-weight: bold;
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+        
+        .main-title {
+            color: #C62828;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        
+        .tags-section {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            color: #1565C0;
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 4px;
+            background-color: #E8F5E9;
+            color: #2E7D32;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #C8E6C9;
+        }
+        
+        .tag-disease {
+            background-color: #FFEBEE;
+            color: #C62828;
+            border-color: #EF9A9A;
+        }
+        
+        .tag-drug {
+            background-color: #E3F2FD;
+            color: #1565C0;
+            border-color: #90CAF9;
+        }
+        
+        .tag-bacteria {
+            background-color: #FFF3E0;
+            color: #EF6C00;
+            border-color: #FFCC80;
+        }
+        
+        .keywords-section {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .keywords-title {
+            color: #1565C0;
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .copy-section {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 12px;
+            border: 2px solid #BBDEFB;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #555;
+            background-color: #FAFAFA;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            border-radius: 6px;
+            color: white;
+            font-size: 14px;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .notification.success {
+            background-color: #4CAF50;
+        }
+        
+        .notification.info {
+            background-color: #2196F3;
+        }
+        
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            
+            tbody td {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="notification" id="notification"></div>
+    
+    <div class="header-nav">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="384.html" class="btn btn-nav">上一页</a>
+            <a href="386.html" class="btn btn-nav">下一页</a>
+            <button class="btn btn-favorite" onclick="addFavorite()">收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~急诊抗心律失常药物的使用*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~急诊抗心律失常药物的使用*****、急诊抗心律失常药物概述、作用机制与分类详解、急诊抗心律失常药物的使用</div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>急诊抗心律失常药物概述、作用机制与分类详解</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    心肌耗氧量，且患者若出现心动过速，可导致冠状动脉舒张期充盈不足，加重心肌缺血缺氧。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="bullet">●</span><span class="section-title">局部影响：</span><br>
+                    血管加压药若通过外周输注，可渗出进入周围结缔组织，导致局部血管过度收缩，出现皮肤坏死。因此血管加压药应尽量通过中心静脉输注。如果外周输注出现渗出，可采取皮下注射酚妥拉明（5～10mg溶于10ml NS）进行局部治疗，最大限度减轻局部血管收缩。
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right; color: #666; font-style: italic;">
+                    （刘 霜）
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="main-title">■ 急诊抗心律失常药物的使用</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="number-title">1. 概述</span><br>
+                    心律失常是心脏搏动的节律和频率异常。心脏搏动是通过细胞膜、肌质网和细胞外间隙的有序离子流产生的。通过离子的流动造成细胞去极化，动作电位传递，引起兴奋-收缩偶联，顺利完成泵血功能。心律失常时心脏泵血发生障碍，严重可危及生命。心律失常的治疗分为药物治疗和非药物治疗（电复律、起搏器、导管消融等），药物治疗在抗心律失常方面发挥了重要的作用，但是抗心律失常药也存在导致心律失常的副作用。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="number-title">2. 抗心律失常药的基本作用机制</span><br>
+                    抗心律失常药主要通过降低心肌组织的异常自律性、减少后除极、调节传导性或有效不应期以消除折返。可通过阻滞钠通道、钾通道、钙通道以及拮抗心脏的交感效应等来实现。其影响多种离子通道，因此也具有潜在的导致心律失常作用。当酸中毒、高钾血症、心肌缺血时，单纯使用抗心律失常药一方面可能无法起到相应的作用，另一方面治疗浓度的抗心律失常药也可诱发新的心律失常。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="number-title">3. 抗心律失常药的分类</span><br>
+                    根据药物的主要作用位点和机制，将抗心律失常药分为4类：Ⅰ类为钠通道阻滞药，Ⅱ类为β受体阻断药，Ⅲ类为钾通道阻滞药，Ⅳ类为钙通道阻滞药。<br><br>
+                    <span class="bullet">●</span><span class="section-title">Ⅰ类抗心律失常药（钠通道阻滞药）：</span><br>
+                    Ⅰ类药物通过阻滞钠离子通道从而抑制0期除极而发挥作用。根据对钠通道的阻滞强度及阻滞后通道的复活时间，目前有Ⅰa、Ⅰb及Ⅰc 3个不同亚类。<br><br>
+                    <span class="checkmark">✓</span><span class="section-title">Ⅰa类药物：</span><br>
+                    适度阻滞钠通道，降低0期上升速率，不同程度抑制心肌细胞钾及钙通道，延长复极并延长有效不应期。代表药物为奎尼丁、普鲁卡因胺、丙吡胺等。<br><br>
+                    <span class="checkmark">✓</span><span class="section-title">Ⅰb类药物：</span><br>
+                    轻度阻滞钠通道，与钠通道解离速度较Ⅰa类
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <span class="tag tag-disease">心律失常</span>
+        <span class="tag tag-disease">心动过速</span>
+        <span class="tag tag-disease">心肌缺血</span>
+        <span class="tag tag-disease">皮肤坏死</span>
+        <span class="tag tag-disease">酸中毒</span>
+        <span class="tag tag-disease">高钾血症</span>
+        <span class="tag tag-drug">酚妥拉明</span>
+        <span class="tag tag-drug">奎尼丁</span>
+        <span class="tag tag-drug">普鲁卡因胺</span>
+        <span class="tag tag-drug">丙吡胺</span>
+        <span class="tag tag-drug">钠通道阻滞药</span>
+        <span class="tag tag-drug">β受体阻断药</span>
+        <span class="tag tag-drug">钾通道阻滞药</span>
+        <span class="tag tag-drug">钙通道阻滞药</span>
+    </div>
+    
+    <div class="page-number">页码：385</div>
+    
+    <div class="keywords-section">
+        <div class="keywords-title">关键词</div>
+        <div style="color: #555; font-size: 14px;">
+            急诊抗心律失常药物、心律失常、心肌缺血、心动过速、酚妥拉明、奎尼丁、普鲁卡因胺、丙吡胺、钠通道阻滞药、β受体阻断药、钾通道阻滞药、钙通道阻滞药、电复律、起搏器、导管消融、酸中毒、高钾血症
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="~~~~~急诊抗心律失常药物的使用*****；急诊抗心律失常药物、心律失常、心肌缺血、心动过速、酚妥拉明、奎尼丁、普鲁卡因胺、丙吡胺、钠通道阻滞药、β受体阻断药、钾通道阻滞药、钙通道阻滞药、电复律、起搏器、导管消融、酸中毒、高钾血症；=385" readonly>
+        <button class="btn btn-copy" onclick="copyContent()">复制</button>
+    </div>
+
+    <script>
+        function showNotification(message, type) {
+            const notif = document.getElementById('notification');
+            notif.textContent = message;
+            notif.className = 'notification ' + type;
+            notif.style.display = 'block';
+            setTimeout(() => {
+                notif.style.display = 'none';
+            }, 2000);
+        }
+        
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showNotification('复制成功！', 'success');
+                }).catch(() => {
+                    document.execCommand('copy');
+                    showNotification('复制成功！', 'success');
+                });
+            } else {
+                document.execCommand('copy');
+                showNotification('复制成功！', 'success');
+            }
+        }
+        
+        function addFavorite() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const currentPage = {
+                title: '~~~~~急诊抗心律失常药物的使用*****',
+                url: window.location.href,
+                pageNum: '385'
+            };
+            
+            const exists = favorites.some(f => f.url === currentPage.url);
+            if (!exists) {
+                favorites.push(currentPage);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                showNotification('已添加到收藏！', 'success');
+            } else {
+                showNotification('已在收藏列表中！', 'info');
+            }
+        }
+    </script>
+</body>
+</html>
