@@ -1,0 +1,414 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊经验性抗菌药物治疗原则*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f0ff;
+            background-image: linear-gradient(160deg, #f0e6ff 0%, #f5f0ff 50%, #faf5ff 100%);
+            color: #2c3e50;
+            line-height: 1.8;
+            padding: 12px;
+            min-height: 100vh;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .home-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 6px rgba(52,152,219,0.3);
+        }
+        .home-btn:hover {
+            background-color: #2980b9;
+        }
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        .nav-btn {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 5px rgba(39,174,96,0.3);
+        }
+        .nav-btn:hover {
+            background-color: #219a52;
+        }
+        .fav-btn {
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(243,156,18,0.3);
+        }
+        .fav-btn:hover {
+            background-color: #e67e22;
+        }
+        .fav-btn.active {
+            background-color: #e74c3c;
+        }
+        h1 {
+            text-align: center;
+            color: #5b2c6f;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 12px;
+            background-color: #e8daef;
+            border-radius: 12px;
+            border-left: 5px solid #8e44ad;
+            border-right: 5px solid #8e44ad;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            font-size: 14px;
+        }
+        thead {
+            background-color: #2e86de;
+            color: white;
+        }
+        thead th {
+            padding: 16px 12px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        tbody td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f8f5ff;
+        }
+        tbody tr:hover {
+            background-color: #e8daef;
+        }
+        .section-title {
+            font-weight: bold;
+            color: #5b2c6f;
+            font-size: 15px;
+            background-color: #e8daef;
+            padding: 8px;
+            border-radius: 6px;
+            margin: 6px 0;
+        }
+        .highlight-box {
+            background-color: #eafaf1;
+            border-left: 4px solid #27ae60;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 0 6px 6px 0;
+        }
+        .warning-box {
+            background-color: #fadbd8;
+            border-left: 4px solid #e74c3c;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 0 6px 6px 0;
+        }
+        .number-highlight {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        .term-highlight {
+            color: #8e44ad;
+            font-weight: bold;
+        }
+        .tags-container {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+        }
+        .tags-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        .tag {
+            display: inline-block;
+            background-color: #e74c3c;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            box-shadow: 0 2px 4px rgba(231,76,60,0.2);
+        }
+        .bottom-section {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+        }
+        .keywords {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 12px;
+            word-break: break-all;
+            line-height: 1.8;
+        }
+        .page-number {
+            text-align: center;
+            font-size: 20px;
+            color: #2e86de;
+            font-weight: bold;
+            margin: 12px 0;
+            padding: 8px;
+            background-color: #eaf2f8;
+            border-radius: 8px;
+        }
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            font-size: 13px;
+            background-color: #f8fbff;
+        }
+        .copy-btn {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 0 2px 6px rgba(39,174,96,0.3);
+        }
+        .copy-btn:hover {
+            background-color: #219a52;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 8px;
+            }
+            h1 {
+                font-size: 17px;
+                padding: 10px;
+            }
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            tbody td {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            .home-btn, .nav-btn, .fav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            .copy-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="357.html" class="nav-btn">上一页</a>
+            <a href="359.html" class="nav-btn">下一页</a>
+            <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+        </div>
+    </div>
+
+    <h1>~~~~~急诊经验性抗菌药物治疗原则*****</h1>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        能不允许进行更为充分的病原学诊断，建议采用积极的抗感染策略，应尽早启动抗感染治疗，可使用相对广谱的抗生素以覆盖最可能的病原菌。而对于非重症感染，则应充分评估可能的病原微生物，采用相对保守的治疗策略。关于感染严重程度的评估目前缺乏一致的意见，本共识建议，如果感染导致急性或进展性器官功能不全、血流动力学不稳定或需要机械通气支持时应视为重症感染。在急诊科，如果在患者接诊早期缺乏全面的临床资料的情况下，建议使用快速序贯器官衰竭评分（<span class="term-highlight">qSOFA</span>）来识别重症感染的患者。qSOFA评分包括3项指标：呼吸频率≥22次/分、意识改变、收缩压≤100mmHg（1mmHg＝0.133kPa），每项计1分。如果感染所致的qSOFA评分≥2分，患者死亡风险明显增加，应视为重症感染。该评分主要用于重症感染的早期识别，具有方便、快捷的特点。对于临床资料相对较全的患者（如留观、住院或EICU患者），建议采用更为详细的序贯器官衰竭评分（<span class="term-highlight">SOFA</span>），该评分是目前急诊和危重症患者中较常规使用的区分患者感染严重程度的评分系统，如果感染患者SOFA评分≥2分，应视为重症感染。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">2. 急诊经验性抗菌药物治疗原则</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        急诊抗感染治疗分为经验性治疗和目标治疗。由于实验室检查的病原和药敏结果常滞后于临床需求，且受到标本质量、检验条件、治疗干扰等因素的影响，急诊病原学结果常难以获取。然而，更多的循证医学证据表明初始抗菌药物治疗时间点与危重患者的预后息息相关。因此，经验性抗菌药物治疗是急危重症患者常用的抗感染治疗策略。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        经验性抗菌药物治疗绝不是没有目标的盲目治疗，经验性治疗前，临床医师应结合流行病学接触史、发病环境、临床表现、感染部位及宿主等因素对可能的病原微生物进行推断，同时评估其发生耐药性风险，进行综合判断和治疗决策。经验治疗不等于广谱覆盖治疗，而是应当根据患者病史、感染部位及所有可获取的资料覆盖最为可能的病原菌，经验性治疗应当考虑以下几个方面。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="highlight-box">
+                            ● 患者发病与治疗所处环境的细菌谱和耐药谱是经验性抗菌药物应用重要的参考依据（<span class="term-highlight">Location & Environment，L&E</span>）：当地的细菌谱和耐药情况的流行病学数据是急诊经验性抗菌药物治疗临床决策的重要参考依据。不同地区、不同级别医院、不同来源患者的急诊经验性抗菌药物治疗需要覆盖的病原体也不相同。如经验性治疗感染性休克患者时，若<span class="term-highlight">MRSA</span>当地
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tags-container">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <span class="tag">感染</span>
+        <span class="tag">抗生素</span>
+        <span class="tag">病原菌</span>
+        <span class="tag">重症感染</span>
+        <span class="tag">qSOFA</span>
+        <span class="tag">SOFA</span>
+        <span class="tag">器官功能不全</span>
+        <span class="tag">血流动力学不稳定</span>
+        <span class="tag">机械通气</span>
+        <span class="tag">EICU</span>
+        <span class="tag">抗菌药物</span>
+        <span class="tag">经验性治疗</span>
+        <span class="tag">目标治疗</span>
+        <span class="tag">病原微生物</span>
+        <span class="tag">耐药性</span>
+        <span class="tag">细菌谱</span>
+        <span class="tag">耐药谱</span>
+        <span class="tag">MRSA</span>
+        <span class="tag">感染性休克</span>
+    </div>
+
+    <div class="bottom-section">
+        <div class="keywords">
+            <strong>关键词：</strong>急诊经验性抗菌药物治疗原则；感染；抗生素；病原菌；广谱抗生素；病原微生物；重症感染；qSOFA；SOFA；序贯器官衰竭评分；呼吸频率；意识改变；收缩压；器官功能不全；血流动力学不稳定；机械通气；EICU；经验性治疗；目标治疗；药敏；耐药性；流行病学接触史；感染部位；细菌谱；耐药谱；L&E；Location & Environment；MRSA；感染性休克
+        </div>
+        <div class="page-number">358</div>
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="急诊经验性抗菌药物治疗原则；急诊经验性抗菌药物治疗原则、感染、抗生素、病原菌、广谱抗生素、病原微生物、重症感染、qSOFA、SOFA、序贯器官衰竭评分、呼吸频率、意识改变、收缩压、器官功能不全、血流动力学不稳定、机械通气、EICU、经验性治疗、目标治疗、药敏、耐药性、流行病学接触史、感染部位、细菌谱、耐药谱、L&E、Location & Environment、MRSA、感染性休克；=358" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            var input = document.getElementById("copyInput");
+            input.select();
+            input.setSelectionRange(0, 99999);
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(function() {
+                    alert("已复制到剪贴板！");
+                });
+            } else {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            }
+        }
+
+        function toggleFavorite() {
+            var btn = document.getElementById("favBtn");
+            var title = document.title.replace(/~~~~~|\*\*\*\*\*/g, "");
+            var url = window.location.href;
+            var favData = {
+                title: title,
+                url: url,
+                page: "358"
+            };
+            
+            var favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+            var index = favorites.findIndex(function(f) { return f.url === url; });
+            
+            if (index === -1) {
+                favorites.push(favData);
+                btn.textContent = "❤️ 已收藏";
+                btn.classList.add("active");
+                alert("已添加到收藏！");
+            } else {
+                favorites.splice(index, 1);
+                btn.textContent = "⭐ 收藏";
+                btn.classList.remove("active");
+                alert("已取消收藏！");
+            }
+            
+            localStorage.setItem("favorites", JSON.stringify(favorites));
+            
+            updateIndexFavorites(favorites);
+        }
+
+        function updateIndexFavorites(favorites) {
+            localStorage.setItem("page358_favorite", JSON.stringify({
+                title: "急诊经验性抗菌药物治疗原则",
+                url: "358.html",
+                added: new Date().toLocaleString()
+            }));
+        }
+
+        window.onload = function() {
+            var favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+            var url = window.location.href;
+            var index = favorites.findIndex(function(f) { return f.url === url; });
+            var btn = document.getElementById("favBtn");
+            if (index !== -1) {
+                btn.textContent = "❤️ 已收藏";
+                btn.classList.add("active");
+            }
+        };
+    </script>
+</body>
+</html>
