@@ -1,0 +1,442 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急性胰腺炎评分系统与改良Marshall评分*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            color: #333;
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .page-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .page-btn {
+            background: #6ab04c;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .fav-btn {
+            background: #f39c12;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 22px;
+            margin: 15px 0 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            word-break: break-all;
+        }
+        
+        .main-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        .main-table thead {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+        }
+        
+        .main-table th {
+            padding: 14px 10px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .main-table td {
+            padding: 10px;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        
+        .main-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .main-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .score-system {
+            font-weight: bold;
+            color: #2c3e50;
+            background: #e8f4f8;
+        }
+        
+        .criteria {
+            color: #444;
+        }
+        
+        .hint {
+            color: #c0392b;
+            font-weight: 500;
+            background: #fdf2f2;
+        }
+        
+        .sub-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .sub-table th {
+            background: #5dade2;
+            color: white;
+            padding: 10px 8px;
+            font-size: 14px;
+        }
+        
+        .sub-table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: center;
+            font-size: 12px;
+        }
+        
+        .sub-table .organ-name {
+            text-align: left;
+            font-weight: 500;
+            background: #f0f7ff;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #4a90d9;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .tags-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin: 4px;
+            cursor: pointer;
+        }
+        
+        .tag:hover {
+            background: #c0392b;
+        }
+        
+        .keywords {
+            text-align: center;
+            padding: 15px;
+            color: #7f8c8d;
+            font-size: 13px;
+            background: white;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #4a90d9;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-nav">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="page-nav">
+            <a href="128.html" class="page-btn">上一页</a>
+            <a href="130.html" class="page-btn">下一页</a>
+            <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~急性胰腺炎评分系统与改良Marshall评分*****</h1>
+    
+    <table class="main-table">
+        <thead>
+            <tr>
+                <th style="width:18%">评分系统</th>
+                <th style="width:52%">标准</th>
+                <th style="width:30%">提示SAP</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="score-system" rowspan="9">BISAP</td>
+                <td class="criteria">LDH > 350U/L</td>
+                <td class="hint" rowspan="9">评分>2</td>
+            </tr>
+            <tr>
+                <td class="criteria">入院后48小时：Hct下降>10%</td>
+            </tr>
+            <tr>
+                <td class="criteria">体液丢失>6L</td>
+            </tr>
+            <tr>
+                <td class="criteria">Ca²⁺ < 2.0mmol/L</td>
+            </tr>
+            <tr>
+                <td class="criteria">PaO₂ < 60mmHg</td>
+            </tr>
+            <tr>
+                <td class="criteria">BUN ↑ > 1.79mmol/L</td>
+            </tr>
+            <tr>
+                <td class="criteria">-BE > 4mmol/L</td>
+            </tr>
+            <tr>
+                <td class="criteria">BUN > 8.93mmol/L</td>
+            </tr>
+            <tr>
+                <td class="criteria">精神障碍、存在SIRS、年龄>60岁、胸腔积液</td>
+            </tr>
+            <tr>
+                <td class="score-system" rowspan="5">CT</td>
+                <td class="criteria">A. 正常</td>
+                <td class="hint" rowspan="5">级别>C</td>
+            </tr>
+            <tr>
+                <td class="criteria">B. 局部或弥散胰腺增大</td>
+            </tr>
+            <tr>
+                <td class="criteria">C. B+胰腺和/或胰腺周围炎症，轻度渗出</td>
+            </tr>
+            <tr>
+                <td class="criteria">D. C+单个液体积聚</td>
+            </tr>
+            <tr>
+                <td class="criteria">E. 多个液体积聚，胰腺和脂肪坏死，胰腺肿胀</td>
+            </tr>
+            <tr>
+                <td class="score-system">CT严重指数</td>
+                <td class="criteria">CT等级：A-E=0-4<br>坏死等级：无坏死=0，<30%坏死=2，30%~50%坏死=4，>50%坏死=6</td>
+                <td class="hint">总评分=CT等级+坏死等级>5</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <table class="main-table">
+        <thead>
+            <tr>
+                <th colspan="6">表19 改良的Marshall评分系统</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="6">
+                    <table class="sub-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">器官系统</th>
+                                <th colspan="5">得分</th>
+                            </tr>
+                            <tr>
+                                <th>0</th>
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
+                                <th>4</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="organ-name">呼吸（PaO₂/FiO₂，mmHg）</td>
+                                <td>>400</td>
+                                <td>300~400</td>
+                                <td>200~300</td>
+                                <td>100~200</td>
+                                <td><100</td>
+                            </tr>
+                            <tr>
+                                <td class="organ-name">循环（SBP，mmHg）</td>
+                                <td>>90</td>
+                                <td><90，可补液纠正</td>
+                                <td><90，不可补液纠正</td>
+                                <td><90，pH<7.3</td>
+                                <td><90，pH<7.2</td>
+                            </tr>
+                            <tr>
+                                <td class="organ-name">肾脏（Cr，μmol/L）</td>
+                                <td><134</td>
+                                <td>134~169</td>
+                                <td>170~310</td>
+                                <td>311~439</td>
+                                <td>>439</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="急性胰腺炎评分系统与改良Marshall评分；BISAP；CT；CT严重指数；Marshall评分；LDH；Hct；SIRS；PaO₂；BUN；=129" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签（点击检索）：</div>
+        <span class="tag" onclick="searchTag('急性胰腺炎')">急性胰腺炎</span>
+        <span class="tag" onclick="searchTag('SAP')">SAP</span>
+        <span class="tag" onclick="searchTag('BISAP')">BISAP</span>
+        <span class="tag" onclick="searchTag('CT')">CT</span>
+        <span class="tag" onclick="searchTag('Marshall')">Marshall</span>
+        <span class="tag" onclick="searchTag('SIRS')">SIRS</span>
+        <span class="tag" onclick="searchTag('PaO₂')">PaO₂</span>
+        <span class="tag" onclick="searchTag('BUN')">BUN</span>
+        <span class="tag" onclick="searchTag('LDH')">LDH</span>
+        <span class="tag" onclick="searchTag('Hct')">Hct</span>
+        <span class="tag" onclick="searchTag('Ca²⁺')">Ca²⁺</span>
+        <span class="tag" onclick="searchTag('Cr')">Cr</span>
+        <span class="tag" onclick="searchTag('SBP')">SBP</span>
+        <span class="tag" onclick="searchTag('FiO₂')">FiO₂</span>
+        <span class="tag" onclick="searchTag('BE')">BE</span>
+        <span class="tag" onclick="searchTag('胸腔积液')">胸腔积液</span>
+        <span class="tag" onclick="searchTag('胰腺坏死')">胰腺坏死</span>
+        <span class="tag" onclick="searchTag('液体积聚')">液体积聚</span>
+    </div>
+    
+    <div class="page-number">129</div>
+    
+    <div class="keywords">
+        关键词：急性胰腺炎评分系统与改良Marshall评分 | BISAP | CT严重指数 | Marshall评分 | SAP评估 | 器官功能评分 | 胰腺炎预后
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(() => {
+                alert("已复制到剪贴板：" + copyText.value);
+            });
+        }
+        
+        function addToFavorites() {
+            const title = document.title.replace(/~~~~~|*****|/g, '').trim();
+            const url = window.location.href;
+            
+            // 尝试使用本地存储模拟收藏功能
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === url);
+            
+            if (!exists) {
+                favorites.push({
+                    title: title,
+                    url: url,
+                    date: new Date().toLocaleString()
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已添加到收藏！\n标题：' + title + '\n请在index.html查看收藏列表');
+            } else {
+                alert('该页面已在收藏中');
+            }
+        }
+        
+        function searchTag(tag) {
+            alert('检索标签：' + tag + '\n（实际应用中可跳转至搜索结果页）');
+        }
+    </script>
+</body>
+</html>
