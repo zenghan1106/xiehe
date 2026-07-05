@@ -1,0 +1,463 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~糖皮质激素在感染性疾病中的应用*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .nav-left {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .btn-home {
+            background-color: #4a90d9;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background-color: #357abd;
+        }
+        
+        .btn-page {
+            background-color: #5cb85c;
+            color: white;
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        .btn-page:hover {
+            background-color: #4cae4c;
+        }
+        
+        .btn-fav {
+            background-color: #f0ad4e;
+            color: white;
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        .btn-fav:hover {
+            background-color: #ec971f;
+        }
+        
+        .btn-fav.active {
+            background-color: #d9534f;
+        }
+        
+        /* 标题区域 */
+        .title-area {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #e8f4fd;
+            border-radius: 8px;
+            border-left: 5px solid #4a90d9;
+        }
+        
+        .main-title {
+            font-size: 22px;
+            color: #1a5276;
+            font-weight: bold;
+        }
+        
+        .sub-title {
+            font-size: 14px;
+            color: #5d6d7e;
+            margin-top: 5px;
+        }
+        
+        /* 表格样式 */
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            font-size: 14px;
+        }
+        
+        thead {
+            background-color: #2e75b6;
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 10px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f4fd;
+        }
+        
+        tbody td {
+            padding: 12px 10px;
+            vertical-align: top;
+        }
+        
+        .disease-name {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            color: #2874a6;
+        }
+        
+        /* 复制区域 */
+        .copy-area {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 12px;
+            border: 2px solid #4a90d9;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #555;
+            background-color: #fff;
+        }
+        
+        .btn-copy {
+            background-color: #5bc0de;
+            color: white;
+            padding: 10px 20px;
+            white-space: nowrap;
+        }
+        
+        .btn-copy:hover {
+            background-color: #46b8da;
+        }
+        
+        /* 标签区域 */
+        .tags-area {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 5px 12px;
+            margin: 4px;
+            background-color: #e1f0fa;
+            color: #2e75b6;
+            border-radius: 15px;
+            font-size: 13px;
+            border: 1px solid #b8d4e8;
+        }
+        
+        /* 关键词和页码 */
+        .footer-info {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+        }
+        
+        .keywords {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .page-number {
+            font-size: 18px;
+            color: #2e75b6;
+            font-weight: bold;
+        }
+        
+        /* 移动端优化 */
+        @media (max-width: 600px) {
+            body {
+                padding: 8px;
+            }
+            
+            .main-title {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .disease-name {
+                font-size: 14px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+            
+            .copy-area {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航区域 -->
+    <div class="nav-area">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="366.html" class="btn btn-page">上一页</a>
+            <a href="368.html" class="btn btn-page">下一页</a>
+            <button class="btn btn-fav" id="favBtn" onclick="toggleFavorite()">收藏</button>
+        </div>
+    </div>
+    
+    <!-- 标题区域 -->
+    <div class="title-area">
+        <div class="main-title">~~~~~糖皮质激素在感染性疾病中的应用*****</div>
+        <div class="sub-title">急诊常用药物 | 第358页</div>
+    </div>
+    
+    <!-- 表格内容 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:25%">疾病名称</th>
+                    <th style="width:75%">建议与用法用量</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="disease-name">肺孢子菌肺炎（PCP）</div>
+                    </td>
+                    <td>
+                        <div><span class="section-title">建议：</span>对于HIV感染的中或重度PCP患者，推荐辅助使用糖皮质激素治疗，因为使用糖皮质激素可改善临床结局并降低死亡率，同时又不增加其他机会性感染的风险。</div>
+                        <div style="margin-top:8px">由于非HIV感染的中至重度PCP患者具有暴发性病程和高病死率，建议对以下非HIV感染患者使用糖皮质激素治疗：</div>
+                        <div style="margin-top:5px">① 呼吸室内空气时ABG测量显示PaO₂≤70mmHg或P₍ₐ₋ₐ₎O₂≥35mmHg的患者；</div>
+                        <div>② SpO₂测定提示低氧血症的患者。但对于未感染HIV的PCP患者，糖皮质激素辅助治疗PCP的有效性数据有限。</div>
+                        <div style="margin-top:8px"><span class="section-title">用法及剂量：</span>标准用法为21天疗法：甲泼尼龙40mg bid×5天＋40mg qd×5天＋20mg qd×11天。</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="disease-name">慢性阻塞性肺疾病急性加重（AECOPD）</div>
+                    </td>
+                    <td>
+                        <div><span class="section-title">建议：</span>推荐所有AECOPD患者接受全身性糖皮质激素治疗。</div>
+                        <div style="margin-top:8px"><span class="section-title">用法及剂量：</span>泼尼松40～60mg qd，疗程5～7天。疗程结束时，若患者已明显恢复，则可直接停用糖皮质激素，而不是逐渐减量至停药。</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="disease-name">脓毒症休克</div>
+                    </td>
+                    <td>
+                        <div><span class="section-title">建议：</span>对于成人严重脓毒症休克患者（定义为给予充分液体复苏和血管加压药后，收缩压＜90mmHg仍持续1小时以上），建议视患者具体情况静脉给予糖皮质激素治疗。不应根据ACTH刺激试验的结果选择糖皮质激素治疗的对象。没有单一的检测能够筛选出适宜用糖皮质激素的患者，还是应根据临床情况使用。</div>
+                        <div style="margin-top:8px"><span class="section-title">用法及剂量：</span>通常静脉给予氢化可的松200～300mg/d，分次给药（50mg q6h；或100mg q8h）或连续输注。治疗5～7天，并根据临床反应逐渐减量至最终停药。</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="disease-name">病毒性心肌炎</div>
+                    </td>
+                    <td>
+                        <div><span class="section-title">建议：</span>对于严重的暴发性心肌炎可以尝试使用糖皮质激素，以改善左心室收缩功能，但不推荐对所有病毒性心肌炎常规使用糖皮质激素。</div>
+                        <div style="margin-top:8px"><span class="section-title">用法及剂量：</span>氢化可的松5～10mg/(kg·d)，或泼尼松1.0～2.0mg/(kg·d)，疗程2～4周，之后逐渐减量。</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="disease-name">急性细菌性脑膜炎（ABM）</div>
+                    </td>
+                    <td>
+                        <div><span class="section-title">建议：</span>对于怀疑急性细菌性脑膜炎的患者，在开始抗生素治疗前或首剂抗生素应用后的短时间内可给予地塞米松辅助治疗，一旦病原学确定不是肺炎链球菌感染，应立即停止激素治疗。若无病原学证据，临床表现及脑脊液检查倾向于</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-area">
+        <input type="text" class="copy-input" id="copyText" value="糖皮质激素在感染性疾病中的应用；急诊常用药物；PCP、AECOPD、脓毒症休克、病毒性心肌炎、急性细菌性脑膜炎、甲泼尼龙、泼尼松、氢化可的松、地塞米松；=367" readonly>
+        <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-area">
+        <div class="tags-title">检索标签：</div>
+        <span class="tag">肺孢子菌肺炎</span>
+        <span class="tag">PCP</span>
+        <span class="tag">慢性阻塞性肺疾病急性加重</span>
+        <span class="tag">AECOPD</span>
+        <span class="tag">脓毒症休克</span>
+        <span class="tag">病毒性心肌炎</span>
+        <span class="tag">急性细菌性脑膜炎</span>
+        <span class="tag">ABM</span>
+        <span class="tag">甲泼尼龙</span>
+        <span class="tag">泼尼松</span>
+        <span class="tag">氢化可的松</span>
+        <span class="tag">地塞米松</span>
+        <span class="tag">糖皮质激素</span>
+        <span class="tag">肺炎链球菌</span>
+    </div>
+    
+    <!-- 底部关键词和页码 -->
+    <div class="footer-info">
+        <div class="keywords">关键词：糖皮质激素、感染性疾病、PCP、AECOPD、脓毒症休克、病毒性心肌炎、急性细菌性脑膜炎、甲泼尼龙、泼尼松、氢化可的松、地塞米松</div>
+        <div class="page-number">367</div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(function() {
+                    alert("已复制到剪贴板！");
+                });
+            } else {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const favBtn = document.getElementById("favBtn");
+            const title = document.querySelector(".main-title").textContent.replace(/~~~~~|***** /g, "");
+            const pageNum = "367";
+            const url = window.location.href;
+            
+            // 获取已有收藏
+            let favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+            
+            // 检查是否已收藏
+            const index = favorites.findIndex(f => f.pageNum === pageNum);
+            
+            if (index === -1) {
+                // 添加收藏
+                favorites.push({
+                    title: title,
+                    pageNum: pageNum,
+                    url: url,
+                    category: "急诊常用药物"
+                });
+                favBtn.textContent = "已收藏";
+                favBtn.classList.add("active");
+                alert("已添加到收藏！");
+            } else {
+                // 取消收藏
+                favorites.splice(index, 1);
+                favBtn.textContent = "收藏";
+                favBtn.classList.remove("active");
+                alert("已取消收藏！");
+            }
+            
+            localStorage.setItem("favorites", JSON.stringify(favorites));
+            
+            // 同步到index.html的收藏列表（通过localStorage）
+            localStorage.setItem("favoritesUpdated", Date.now());
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+            const pageNum = "367";
+            const favBtn = document.getElementById("favBtn");
+            
+            if (favorites.find(f => f.pageNum === pageNum)) {
+                favBtn.textContent = "已收藏";
+                favBtn.classList.add("active");
+            }
+        };
+    </script>
+</body>
+</html>
