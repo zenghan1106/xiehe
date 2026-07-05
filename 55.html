@@ -1,0 +1,545 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~头痛急诊诊疗指南*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .back-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            z-index: 100;
+        }
+        
+        .back-btn:hover {
+            background: #357abd;
+        }
+        
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #357abd;
+        }
+        
+        .favorite-btn {
+            background: #e8a838;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(232, 168, 56, 0.3);
+        }
+        
+        .favorite-btn:hover {
+            background: #d4952f;
+        }
+        
+        .favorite-btn.active {
+            background: #c9302c;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 60px auto 30px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        .page-header {
+            background: #2c5aa0;
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        .content-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .content-table th {
+            background: #2c5aa0;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .content-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #e8eef5;
+            font-size: 15px;
+            line-height: 1.7;
+            color: #444;
+        }
+        
+        .content-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        .content-table tr:hover {
+            background: #edf4fc;
+        }
+        
+        .section-title {
+            background: #e3f0ff !important;
+            color: #2c5aa0;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .sub-item {
+            padding-left: 20px;
+            color: #555;
+        }
+        
+        .check-mark {
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+        
+        .warning {
+            color: #c9302c;
+            font-weight: 500;
+        }
+        
+        .tags-section {
+            padding: 20px;
+            background: #f8fafc;
+            border-top: 2px solid #e8eef5;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #e3f0ff;
+            color: #2c5aa0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #b8d4f0;
+            cursor: default;
+        }
+        
+        .tag.disease {
+            background: #ffe3e3;
+            color: #c53030;
+            border-color: #feb2b2;
+        }
+        
+        .tag.drug {
+            background: #e6fffa;
+            color: #234e52;
+            border-color: #81e6d9;
+        }
+        
+        .tag.bacteria {
+            background: #fef5e7;
+            color: #744210;
+            border-color: #fbd38d;
+        }
+        
+        .copy-section {
+            padding: 20px;
+            background: white;
+            border-top: 2px solid #e8eef5;
+        }
+        
+        .copy-row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #d0d7de;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #444;
+            background: #f8fafc;
+        }
+        
+        .copy-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(40, 167, 69, 0.25);
+        }
+        
+        .copy-btn:hover {
+            background: #218838;
+        }
+        
+        .copy-btn.copied {
+            background: #6c757d;
+        }
+        
+        .page-footer {
+            text-align: center;
+            padding: 15px;
+            background: #f8fafc;
+            color: #666;
+            font-size: 14px;
+            border-top: 1px solid #e8eef5;
+        }
+        
+        .page-number {
+            font-weight: 600;
+            color: #2c5aa0;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                margin: 55px auto 20px;
+                border-radius: 12px;
+            }
+            
+            .page-header h1 {
+                font-size: 18px;
+            }
+            
+            .content-table th {
+                font-size: 16px;
+                padding: 12px;
+            }
+            
+            .content-table td {
+                padding: 12px;
+                font-size: 14px;
+            }
+            
+            .back-btn, .nav-btn, .favorite-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-row {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← 返回首页</a>
+    
+    <div class="nav-buttons">
+        <a href="54.html" class="nav-btn">← 上一页</a>
+        <a href="56.html" class="nav-btn">下一页 →</a>
+        <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">☆ 收藏</button>
+    </div>
+    
+    <div class="container">
+        <div class="page-header">
+            <h1>~~~~~头痛急诊诊疗指南*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~头痛急诊诊疗指南*****、急诊症状 - 头痛、3. 必做检查、4. 选做检查、5. 急诊处理、病史、查体、头颅CT、血常规、ESR、ABG、腰穿、头颅MRI、CTA或血管造影、静脉窦造影、会诊、缓解头痛、脱水治疗、止吐、小剂量镇静药或抗抑郁药</div>
+        </div>
+        
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th colspan="2">急诊症状 - 头痛</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-title">
+                    <td colspan="2">3. 必做检查</td>
+                </tr>
+                <tr>
+                    <td width="80"><strong>病史</strong></td>
+                    <td>问诊时建议用1～10分的视觉模拟评分（VAS），对患者的头痛程度定量记录。并可以此为基础，对疗效进行动态评估。</td>
+                </tr>
+                <tr>
+                    <td><strong>查体</strong></td>
+                    <td>建议包括下列项目：
+                        <div class="sub-item"><span class="check-mark">✓</span>一般状态（包括意识状态）</div>
+                        <div class="sub-item"><span class="check-mark">✓</span>生命体征（体温、血压等）</div>
+                        <div class="sub-item"><span class="check-mark">✓</span>HEENT（头眼耳鼻喉）检查：注意是否有颞动脉触痛伴搏动减弱、眼底（缺少自发静脉搏动或出现视盘水肿、眼底出血）、睫状充血、瞳孔反射迟钝或散大、鼻旁窦区压痛</div>
+                        <div class="sub-item"><span class="check-mark">✓</span>神经系统查体：双侧运动、感觉是否对称，有无病理征或共济失调</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>头颅CT</strong></td>
+                    <td>可迅速识别出血、梗死、脓肿、占位等颅内局灶性病变。</td>
+                </tr>
+                
+                <tr class="section-title">
+                    <td colspan="2">4. 选做检查</td>
+                </tr>
+                <tr>
+                    <td><strong>血常规</strong></td>
+                    <td>可发现感染性疾病、贫血。</td>
+                </tr>
+                <tr>
+                    <td><strong>ESR</strong></td>
+                    <td>怀疑颞动脉炎时。</td>
+                </tr>
+                <tr>
+                    <td><strong>ABG</strong></td>
+                    <td>怀疑CO中毒时检测碳氧血红蛋白（COHb）。</td>
+                </tr>
+                <tr>
+                    <td><strong>腰穿</strong></td>
+                    <td>脑脊液压力、性状、生化、常规、培养等是诊断的重要依据。应注意，怀疑有颅内压升高者应先行甘露醇脱水降颅压后再穿刺，以免导致脑疝形成。腰穿前一般应先行CT检查。有颅后窝局灶性病变者<span class="warning">禁忌腰穿</span>。</td>
+                </tr>
+                <tr>
+                    <td><strong>头颅MRI</strong></td>
+                    <td>可获得比CT更多的信息，尤其对于神经组织疾病。</td>
+                </tr>
+                <tr>
+                    <td><strong>CTA或血管造影</strong></td>
+                    <td>疑诊非偏头痛性血管性头痛者可考虑。</td>
+                </tr>
+                <tr>
+                    <td><strong>静脉窦造影</strong></td>
+                    <td>疑诊静脉窦血栓者可考虑。</td>
+                </tr>
+                <tr>
+                    <td><strong>会诊</strong></td>
+                    <td>考虑眼部、鼻部、牙科疾病，请相关科室会诊进一步检查。</td>
+                </tr>
+                
+                <tr class="section-title">
+                    <td colspan="2">5. 急诊处理</td>
+                </tr>
+                <tr>
+                    <td><strong>缓解头痛</strong></td>
+                    <td>NSAID、5-羟色胺受体阻断药（<span class="warning">禁忌证是冠心病和未控制的高血压</span>）、麦角胺类（<span class="warning">禁忌证是冠心病、外周血管疾病、肝肾功能不全、孕妇</span>）。严重者可应用阿片类注射剂镇痛。</td>
+                </tr>
+                <tr>
+                    <td><strong>脱水治疗</strong></td>
+                    <td>若怀疑头痛与颅内压升高有关，可予甘露醇/甘油果糖试验性脱水治疗（<span class="warning">注意肾功能</span>）。密切监护生命体征，注意脑疝形成，并请神经外科会诊，有手术适应证立即行手术治疗。</td>
+                </tr>
+                <tr>
+                    <td><strong>止吐</strong></td>
+                    <td>可应用甲氧氯普胺、昂丹司琼。</td>
+                </tr>
+                <tr>
+                    <td><strong>小剂量镇静药或抗抑郁药</strong></td>
+                    <td>对伴焦虑和紧张者有效。</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="tags-section">
+            <div class="tags-title">检索标签（疾病 / 药物 / 细菌）</div>
+            <div class="tags-container">
+                <span class="tag disease">头痛</span>
+                <span class="tag disease">颞动脉炎</span>
+                <span class="tag disease">CO中毒</span>
+                <span class="tag disease">颅内压升高</span>
+                <span class="tag disease">脑疝</span>
+                <span class="tag disease">静脉窦血栓</span>
+                <span class="tag disease">冠心病</span>
+                <span class="tag disease">高血压</span>
+                <span class="tag disease">外周血管疾病</span>
+                <span class="tag disease">肝肾功能不全</span>
+                <span class="tag disease">焦虑</span>
+                <span class="tag disease">紧张</span>
+                <span class="tag drug">NSAID</span>
+                <span class="tag drug">5-羟色胺受体阻断药</span>
+                <span class="tag drug">麦角胺类</span>
+                <span class="tag drug">阿片类</span>
+                <span class="tag drug">甘露醇</span>
+                <span class="tag drug">甘油果糖</span>
+                <span class="tag drug">甲氧氯普胺</span>
+                <span class="tag drug">昂丹司琼</span>
+                <span class="tag drug">镇静药</span>
+                <span class="tag drug">抗抑郁药</span>
+                <span class="tag drug">COHb</span>
+            </div>
+        </div>
+        
+        <div class="copy-section">
+            <div class="copy-row">
+                <input type="text" class="copy-input" id="copyInput" readonly>
+                <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+            </div>
+        </div>
+        
+        <div class="page-footer">
+            页码：<span class="page-number">55</span>
+        </div>
+    </div>
+    
+    <script>
+        // 设置复制输入框内容
+        const title = "头痛急诊诊疗指南";
+        const subtitle = "急诊症状-头痛诊疗流程";
+        const keywords = "头痛,颞动脉炎,CO中毒,颅内压升高,脑疝,静脉窦血栓,NSAID,5-羟色胺受体阻断药,麦角胺类,阿片类,甘露醇,甘油果糖,甲氧氯普胺,昂丹司琼,镇静药,抗抑郁药";
+        const pageNum = "55";
+        document.getElementById('copyInput').value = title + "；" + subtitle + "；" + keywords + "；" + "=" + pageNum;
+        
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.textContent;
+            btn.textContent = '已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isActive = btn.classList.contains('active');
+            
+            if (!isActive) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                
+                // 保存到localStorage，模拟添加到index的收藏类目
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '~~~~~头痛急诊诊疗指南*****',
+                    url: window.location.href,
+                    pageNum: '55'
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.pageNum === '55');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                // 尝试向index.html发送消息（同源情况下）
+                try {
+                    if (window.parent !== window) {
+                        window.parent.postMessage({type: 'addFavorite', data: pageInfo}, '*');
+                    }
+                } catch(e) {}
+                
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+                
+                // 从收藏中移除
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const filtered = favorites.filter(f => f.pageNum !== '55');
+                localStorage.setItem('favorites', JSON.stringify(filtered));
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.pageNum === '55');
+            if (isFavorited) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
