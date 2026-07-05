@@ -1,0 +1,513 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~破伤风急诊处理与狂犬病诊疗指南*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        .nav-btn {
+            position: fixed;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .home-btn {
+            top: 15px;
+            left: 15px;
+            background: #28a745;
+            color: white;
+        }
+        
+        .prev-btn {
+            top: 15px;
+            right: 15px;
+            background: #ff6b6b;
+            color: white;
+        }
+        
+        .next-btn {
+            top: 60px;
+            right: 15px;
+            background: #4ecdc4;
+            color: white;
+        }
+        
+        .fav-btn {
+            top: 105px;
+            right: 15px;
+            background: #ffd93d;
+            color: #333;
+        }
+        
+        .fav-btn.active {
+            background: #ff6b6b;
+            color: white;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 80px auto 30px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(31, 97, 141, 0.15);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e5799 0%, #2989d8 50%, #207cca 100%);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header .subtitle {
+            font-size: 14px;
+            margin-top: 8px;
+            opacity: 0.9;
+        }
+        
+        .content-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+        
+        .content-table thead {
+            background: linear-gradient(135deg, #1e5799 0%, #2989d8 100%);
+            color: white;
+        }
+        
+        .content-table thead th {
+            padding: 18px 15px;
+            font-size: 18px;
+            font-weight: 700;
+            text-align: left;
+        }
+        
+        .content-table tbody tr {
+            border-bottom: 1px solid #e8f0f8;
+        }
+        
+        .content-table tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        .content-table tbody tr:hover {
+            background: #e8f4fd;
+        }
+        
+        .content-table td {
+            padding: 14px 15px;
+            line-height: 1.8;
+            color: #2c3e50;
+        }
+        
+        .section-title {
+            color: #1e5799;
+            font-weight: 700;
+            font-size: 16px;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .sub-section {
+            color: #c0392b;
+            font-weight: 700;
+            font-size: 15px;
+            display: block;
+            margin: 8px 0 5px;
+        }
+        
+        .check-mark {
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .diamond {
+            color: #2989d8;
+            margin-left: 20px;
+        }
+        
+        .bullet {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .highlight-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 10px 15px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .tags-section {
+            padding: 20px;
+            background: #f0f7ff;
+            border-top: 2px solid #2989d8;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1e5799;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #ffe0e0;
+            color: #c0392b;
+            border: 1px solid #f5b7b1;
+        }
+        
+        .tag-bacteria {
+            background: #e8f8f5;
+            color: #1e8449;
+            border: 1px solid #a9dfbf;
+        }
+        
+        .tag-drug {
+            background: #eaf2ff;
+            color: #2874a6;
+            border: 1px solid #aed6f1;
+        }
+        
+        .tag-symptom {
+            background: #fef9e7;
+            color: #b7950b;
+            border: 1px solid #f9e79f;
+        }
+        
+        .tag-virus {
+            background: #f3e5f5;
+            color: #7b1fa2;
+            border: 1px solid #ce93d8;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .keywords-section {
+            padding: 20px;
+            background: #fff;
+            border-top: 1px solid #e8f0f8;
+        }
+        
+        .keywords-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .keywords {
+            color: #2989d8;
+            font-size: 13px;
+            line-height: 2;
+        }
+        
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e5799;
+            background: #f0f7ff;
+        }
+        
+        .copy-section {
+            padding: 20px;
+            background: #fff;
+            border-top: 2px solid #e8f0f8;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #2989d8;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background: #f8fbff;
+        }
+        
+        .copy-btn {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #2989d8, #1e5799);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(41, 137, 216, 0.3);
+        }
+        
+        .copy-btn.copied {
+            background: #28a745;
+        }
+        
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 20px;
+            }
+            .content-table {
+                font-size: 13px;
+            }
+            .content-table thead th {
+                font-size: 15px;
+                padding: 12px 10px;
+            }
+            .content-table td {
+                padding: 10px;
+                line-height: 1.6;
+            }
+            .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            .copy-section {
+                flex-direction: column;
+            }
+            .copy-input {
+                width: 100%;
+            }
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="nav-btn home-btn">🏠 返回首页</a>
+    <a href="194.html" class="nav-btn prev-btn">← 上一页</a>
+    <a href="196.html" class="nav-btn next-btn">下一页 →</a>
+    <button class="nav-btn fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+
+    <div class="container">
+        <div class="header">
+            <h1>~~~~~破伤风急诊处理与狂犬病诊疗指南*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~破伤风急诊处理与狂犬病诊疗指南*****、项目分类、详细内容、6. 急诊处理、狂犬病、1. 定义、2. 临床表现</div>
+            <div class="subtitle">急诊疾病 | 潜在致命性疾病 | 细菌感染 | 病毒感染</div>
+        </div>
+
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>项目分类</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="section-title">6. 急诊处理</span></td>
+                    <td>
+                        <span class="sub-section">阻止毒素产生</span>
+                        <span class="check-mark">✓</span> 伤口处理：所有患者应行充分的伤口清创，清除芽胞和坏死组织，伤口可不行缝合或包扎，若伤口已愈合，可不行清创<br><br>
+                        
+                        <span class="sub-section">抗菌药物治疗</span>
+                        <span class="diamond">◇</span> 首选甲硝唑（0.5g iv q6h或q8h），备选青霉素G（200万～400万U iv q4h或q6h）<br>
+                        <span class="diamond">◇</span> 怀疑混合感染者，可选择第二代、第三代头孢菌素（如头孢曲松，1～2g iv qd）<br><br>
+                        
+                        <span class="bullet">●</span> 中和非结合毒素：一旦怀疑该病，应尽快多点注射人破伤风免疫球蛋白，3000～6000U<br><br>
+                        
+                        <span class="bullet">●</span> 主动免疫：所有破伤风患者一旦确诊，应立即进行主动免疫，完成含破伤风和白喉类毒素疫苗的全程免疫接种<br><br>
+                        
+                        <span class="sub-section">控制肌肉痉挛</span>
+                        <span class="check-mark">✓</span> 镇静，尽量避免外界刺激<br>
+                        <span class="check-mark">✓</span> 镇静药：首选苯二氮䓬类，如地西泮（10～30mg iv q1～q4h重复给药）<br>
+                        <span class="check-mark">✓</span> 神经肌肉阻滞药：单独使用镇静药效果不充分后使用。必须在监护和可靠的机械性通气的前提下实施，多采取长效药物（如泮库溴铵），也可采取短效药物连续输注（如维库溴铵），但应注意使用时间不宜过长<br><br>
+                        
+                        <span class="bullet">●</span> 自主神经功能紊乱治疗：可选用硫酸镁、β受体阻断药<br><br>
+                        
+                        <span class="bullet">●</span> 气道管理：支持治疗的核心。多数患者需要机械通气，建议早期气管切开，并注意预防院内感染、压疮、应激性溃疡和血栓栓塞<br><br>
+                        
+                        <span class="bullet">●</span> 支持治疗：营养支持，纠正水电解质紊乱。优选肠内营养，清醒患者若抽搐频繁应禁食，放管前应加强镇静，以免诱发喉痉挛窒息。重型患者可选静脉营养
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="section-title">■ 狂犬病</span></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><span class="section-title">1. 定义</span></td>
+                    <td>
+                        <span class="bullet">●</span> 狂犬病是由狂犬病毒侵犯人和动物的中枢神经系统引起的人畜共患急性致死性传染病<br>
+                        <span class="bullet">●</span> 感染后一旦出现临床症状，病死率几乎100%，是世界上病死率最高的传染病
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="section-title">2. 临床表现</span></td>
+                    <td>
+                        <span class="bullet">●</span> 一旦出现典型临床表现，通常会出现进行性脑病，多数患者
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 检索标签</div>
+            <div>
+                <span class="tag tag-disease">破伤风</span>
+                <span class="tag tag-disease">狂犬病</span>
+                <span class="tag tag-bacteria">破伤风梭菌</span>
+                <span class="tag tag-bacteria">芽胞</span>
+                <span class="tag tag-virus">狂犬病毒</span>
+                <span class="tag tag-drug">甲硝唑</span>
+                <span class="tag tag-drug">青霉素G</span>
+                <span class="tag tag-drug">头孢曲松</span>
+                <span class="tag tag-drug">地西泮</span>
+                <span class="tag tag-drug">泮库溴铵</span>
+                <span class="tag tag-drug">维库溴铵</span>
+                <span class="tag tag-drug">硫酸镁</span>
+                <span class="tag tag-drug">β受体阻断药</span>
+                <span class="tag tag-drug">人破伤风免疫球蛋白</span>
+                <span class="tag tag-drug">白喉类毒素疫苗</span>
+                <span class="tag tag-symptom">肌肉痉挛</span>
+                <span class="tag tag-symptom">自主神经功能紊乱</span>
+                <span class="tag tag-symptom">喉痉挛</span>
+                <span class="tag tag-symptom">进行性脑病</span>
+            </div>
+        </div>
+
+        <div class="keywords-section">
+            <div class="keywords-title">🔍 关键词</div>
+            <div class="keywords">
+                破伤风 | 狂犬病 | 急诊处理 | 伤口清创 | 甲硝唑 | 青霉素G | 头孢曲松 | 人破伤风免疫球蛋白 | 地西泮 | 泮库溴铵 | 维库溴铵 | 硫酸镁 | β受体阻断药 | 机械通气 | 气管切开 | 肠内营养 | 狂犬病毒 | 人畜共患 | 急性致死性传染病 | 进行性脑病
+            </div>
+        </div>
+
+        <div class="page-number">195</div>
+
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="破伤风急诊处理与狂犬病诊疗指南；急诊疾病；潜在致命性疾病；细菌感染；病毒感染；破伤风；狂犬病；甲硝唑；青霉素G；头孢曲松；地西泮；泮库溴铵；维库溴铵；硫酸镁；β受体阻断药；人破伤风免疫球蛋白；狂犬病毒；进行性脑病；=195" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✅ 已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const pageInfo = {
+                title: '~~~~~破伤风急诊处理与狂犬病诊疗指南*****',
+                url: window.location.href,
+                pageNum: '195'
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const index = favorites.findIndex(f => f.url === pageInfo.url);
+            
+            if (index === -1) {
+                favorites.push(pageInfo);
+                btn.innerHTML = '❤️ 已收藏';
+                btn.classList.add('active');
+                alert('已添加到收藏！');
+            } else {
+                favorites.splice(index, 1);
+                btn.innerHTML = '⭐ 收藏';
+                btn.classList.remove('active');
+                alert('已取消收藏！');
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            localStorage.setItem('favorites_updated', Date.now());
+        }
+
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const currentUrl = window.location.href;
+            const btn = document.getElementById('favBtn');
+            
+            if (favorites.some(f => f.url === currentUrl)) {
+                btn.innerHTML = '❤️ 已收藏';
+                btn.classList.add('active');
+            }
+        };
+    </script>
+</body>
+</html>
