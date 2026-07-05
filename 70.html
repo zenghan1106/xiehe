@@ -1,0 +1,396 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~慢性阻塞性肺疾病急性加重-检查与分级*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        .header-btns {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .nav-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            min-width: 80px;
+            text-align: center;
+        }
+        .fav-btn {
+            background: #f0ad4e;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            min-width: 80px;
+        }
+        .fav-btn.active {
+            background: #d9534f;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 26px;
+            margin: 15px 0;
+            padding: 10px;
+            background: #e8f4fd;
+            border-radius: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        thead {
+            background: #4a90d9;
+            color: white;
+        }
+        thead th {
+            padding: 18px 12px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+        tbody td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 15px;
+            vertical-align: top;
+        }
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        tbody tr:hover {
+            background: #f0f7ff;
+        }
+        .section-title {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 17px;
+            white-space: nowrap;
+            width: 120px;
+        }
+        .content-cell {
+            color: #444;
+            line-height: 1.8;
+        }
+        .sub-item {
+            margin-left: 0;
+            padding-left: 15px;
+            position: relative;
+        }
+        .sub-item::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #4a90d9;
+        }
+        .sub-sub {
+            margin-left: 20px;
+            color: #555;
+        }
+        .check-mark {
+            color: #5cb85c;
+            font-weight: bold;
+        }
+        .tags-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .tags-title {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .tag {
+            display: inline-block;
+            background: #e8f4fd;
+            color: #4a90d9;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin: 4px;
+            border: 1px solid #b8daff;
+        }
+        .tag.disease {
+            background: #fde8e8;
+            color: #d9534f;
+            border-color: #f5c6cb;
+        }
+        .tag.bacteria {
+            background: #e8fdef;
+            color: #5cb85c;
+            border-color: #c3e6cb;
+        }
+        .bottom-section {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            margin-bottom: 15px;
+        }
+        .keywords {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+            word-break: break-all;
+        }
+        .page-num {
+            text-align: center;
+            font-size: 18px;
+            color: #4a90d9;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: monospace;
+        }
+        .copy-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .copy-btn:active {
+            background: #357abd;
+        }
+        @media (max-width: 600px) {
+            h1 { font-size: 20px; }
+            thead th { font-size: 17px; padding: 14px 8px; }
+            tbody td { font-size: 14px; padding: 10px 8px; }
+            .section-title { font-size: 15px; width: 100px; }
+            .home-btn, .nav-btn, .fav-btn { padding: 8px 14px; font-size: 13px; }
+            .copy-section { flex-direction: column; }
+            .copy-input { width: 100%; }
+            .copy-btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部按钮 -->
+    <div class="header-btns">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-btns">
+            <a href="69.html" class="nav-btn">上一页</a>
+            <a href="71.html" class="nav-btn">下一页</a>
+            <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+
+    <!-- 标题 -->
+    <h1>~~~~~慢性阻塞性肺疾病急性加重-检查与分级*****</h1>
+
+    <!-- 主表格 -->
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">慢性阻塞性肺疾病急性加重 — 检查与分级</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="section-title">必做检查<br>(续)</td>
+                <td class="content-cell">
+                    <div class="sub-item">胸片：以排除肺炎、气胸、肺水肿、胸腔积液等。</div>
+                    <div class="sub-item">血常规＋CRP＋PCT：了解感染情况。</div>
+                    <div class="sub-item">ABG：怀疑有急性或慢加急性呼吸性酸中毒，或预计进行通气支持。</div>
+                    <div class="sub-item">肝肾功能检查：监测血糖及电解质情况，同时可辅助指导抗生素治疗方案。</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="section-title">6. 选做检查</td>
+                <td class="content-cell">
+                    <div class="sub-item">ECG＋cTnI/cTnT检测：评估心动过速或潜在的心肌缺血。</div>
+                    <div class="sub-item">BNP检测：若患者存在某些特征，如胸部听诊发现湿啰音、外周性水肿、提示性的胸片表现（血管淤血、胸腔积液），则需检测血浆BNP，以评估是否存在心力衰竭。</div>
+                    <div class="sub-item">凝血功能检查：检测D-Dimer以评估是否存在血栓栓塞性疾病。</div>
+                    <div class="sub-item">痰液检测
+                        <div class="sub-sub"><span class="check-mark">✓</span> 大多数门诊COPD急性发作患者不常规进行痰液革兰染色和痰培养。</div>
+                        <div class="sub-sub"><span class="check-mark">✓</span> 对于住院患者或强烈怀疑细菌感染但初始抗生素治疗无效的患者，建议留取痰培养。</div>
+                    </div>
+                    <div class="sub-item">病毒检测：大多数患者没有必要评估是否可能存在呼吸道病毒感染，但对住院患者和临床表现提示流感的患者（如流感暴发时出现急性发热、肌痛、鼻卡他）可能有用。快速抗原检测及免疫荧光试验有助于筛查是否感染流感，但敏感性有限。基于聚合酶链反应（PCR）的检查，如流感病毒、腺病毒、副流感病毒、呼吸道合胞病毒、人类偏肺病毒、冠状病毒及鼻病毒PCR检测，敏感性和特异性更高。</div>
+                    <div class="sub-item">胸部CT：能反映肺组织的实际状况，定量显示肺气肿并准确分级。胸高分辨率CT（HRCT）对辨别小叶中心型和全小叶型肺气肿以及确定肺大疱的大小和数量，有很高的敏感性及特异性。</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="section-title">7. AECOPD的急性加重严重程度分级</td>
+                <td class="content-cell">
+                    <div class="sub-item">AECOPD Ⅰ级：无呼吸衰竭。呼吸频率20～30次/分；未应用辅助呼吸肌群；无精神意识状态改变；低氧血症可以通过鼻导管吸氧或文丘里（Venturi）面罩28%～35%浓度吸氧而改善；无PaCO₂升高。</div>
+                    <div class="sub-item">AECOPD Ⅱ级：急性呼吸衰竭－无生命危险。呼吸频率＞30次/分；应用辅助呼吸肌群；无精神意识状态改变；低氧血症可以通过文丘里面罩25%～30%浓度吸氧而改善；高碳酸血症即PaCO₂较基础值升高或升高至50～60mmHg。适合普通病房治疗。</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 检索标签（疾病 / 抗生素药物 / 细菌）</div>
+        <span class="tag disease">慢性阻塞性肺疾病急性加重</span>
+        <span class="tag disease">AECOPD</span>
+        <span class="tag disease">COPD</span>
+        <span class="tag disease">肺炎</span>
+        <span class="tag disease">气胸</span>
+        <span class="tag disease">肺水肿</span>
+        <span class="tag disease">胸腔积液</span>
+        <span class="tag disease">呼吸性酸中毒</span>
+        <span class="tag disease">心力衰竭</span>
+        <span class="tag disease">血栓栓塞性疾病</span>
+        <span class="tag disease">肺气肿</span>
+        <span class="tag disease">肺大疱</span>
+        <span class="tag disease">呼吸衰竭</span>
+        <span class="tag disease">低氧血症</span>
+        <span class="tag disease">高碳酸血症</span>
+        <span class="tag">流感</span>
+        <span class="tag bacteria">细菌</span>
+        <span class="tag bacteria">病毒感染</span>
+        <span class="tag bacteria">革兰染色</span>
+        <span class="tag bacteria">痰培养</span>
+        <span class="tag bacteria">腺病毒</span>
+        <span class="tag bacteria">副流感病毒</span>
+        <span class="tag bacteria">呼吸道合胞病毒</span>
+        <span class="tag bacteria">人类偏肺病毒</span>
+        <span class="tag bacteria">冠状病毒</span>
+        <span class="tag bacteria">鼻病毒</span>
+        <span class="tag">抗生素</span>
+        <span class="tag">CRP</span>
+        <span class="tag">PCT</span>
+        <span class="tag">ABG</span>
+        <span class="tag">ECG</span>
+        <span class="tag">cTnI</span>
+        <span class="tag">cTnT</span>
+        <span class="tag">BNP</span>
+        <span class="tag">D-Dimer</span>
+        <span class="tag">PCR</span>
+        <span class="tag">HRCT</span>
+        <span class="tag">PaCO₂</span>
+        <span class="tag">SpO₂</span>
+    </div>
+
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <div class="keywords">
+            <strong>关键词：</strong>慢性阻塞性肺疾病急性加重；AECOPD；COPD；胸片；血常规；CRP；PCT；ABG；肝肾功能；抗生素；ECG；cTnI；cTnT；BNP；D-Dimer；痰液检测；革兰染色；痰培养；病毒检测；PCR；流感；腺病毒；副流感病毒；呼吸道合胞病毒；人类偏肺病毒；冠状病毒；鼻病毒；胸部CT；HRCT；肺气肿；肺大疱；AECOPD分级；呼吸衰竭；低氧血症；高碳酸血症；PaCO₂；Venturi面罩
+        </div>
+        <div class="page-num">70</div>
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="慢性阻塞性肺疾病急性加重-检查与分级；AECOPD；COPD；胸片；血常规；CRP；PCT；ABG；肝肾功能；抗生素；ECG；cTnI；cTnT；BNP；D-Dimer；痰液检测；革兰染色；痰培养；病毒检测；PCR；流感；腺病毒；副流感病毒；呼吸道合胞病毒；人类偏肺病毒；冠状病毒；鼻病毒；胸部CT；HRCT；肺气肿；肺大疱；AECOPD分级；呼吸衰竭；低氧血症；高碳酸血症；PaCO₂；Venturi面罩；=70" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value);
+            } else {
+                document.execCommand('copy');
+            }
+            const btn = document.querySelector('.copy-btn');
+            btn.textContent = '✓ 已复制';
+            setTimeout(() => btn.textContent = '📋 复制', 1500);
+        }
+
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const title = document.querySelector('h1').textContent;
+            const page = '70';
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const existing = favorites.findIndex(f => f.page === page);
+            
+            if (existing >= 0) {
+                favorites.splice(existing, 1);
+                btn.textContent = '☆ 收藏';
+                btn.classList.remove('active');
+                alert('已取消收藏');
+            } else {
+                favorites.push({ title: title, page: page, url: '70.html', time: new Date().toLocaleString() });
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+                alert('已添加到收藏！');
+            }
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+        }
+
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const btn = document.getElementById('favBtn');
+            if (favorites.find(f => f.page === '70')) {
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+            }
+        };
+    </script>
+</body>
+</html>
