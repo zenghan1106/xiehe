@@ -1,0 +1,586 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~抗磷脂综合征(APS)*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .nav-btn {
+            position: fixed;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .home-btn {
+            top: 15px;
+            left: 15px;
+            background-color: #28a745;
+        }
+        
+        .prev-btn {
+            top: 15px;
+            right: 15px;
+            background-color: #6c757d;
+        }
+        
+        .next-btn {
+            top: 60px;
+            right: 15px;
+            background-color: #007bff;
+        }
+        
+        .fav-btn {
+            position: fixed;
+            top: 105px;
+            right: 15px;
+            padding: 10px 18px;
+            border-radius: 8px;
+            border: none;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            background-color: #ffc107;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .fav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .fav-btn.active {
+            background-color: #ff6b6b;
+            color: white;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 26px;
+            margin: 80px 0 20px;
+            padding: 15px;
+            background-color: #d6eaf8;
+            border-radius: 12px;
+            border-left: 5px solid #2874a6;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        thead {
+            background-color: #2874a6;
+            color: white;
+        }
+        
+        thead th {
+            padding: 18px 15px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f4f8;
+        }
+        
+        td {
+            padding: 14px 15px;
+            font-size: 15px;
+            vertical-align: top;
+        }
+        
+        td:first-child {
+            font-weight: bold;
+            color: #2874a6;
+            width: 120px;
+            background-color: #ebf5fb;
+        }
+        
+        .section-title {
+            background-color: #d4e6f1;
+            color: #1a5276;
+            font-size: 17px;
+            font-weight: bold;
+        }
+        
+        .bullet {
+            color: #2874a6;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+        
+        .sub-item {
+            margin-left: 20px;
+            margin-top: 6px;
+            color: #555;
+        }
+        
+        .check-mark {
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+        
+        .author {
+            text-align: right;
+            color: #6c757d;
+            font-style: italic;
+            margin: 10px 0;
+        }
+        
+        .tags-container {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 18px;
+            color: #2874a6;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 6px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background-color: #ffeaa7;
+            color: #d63031;
+        }
+        
+        .tag-drug {
+            background-color: #dfe6e9;
+            color: #2d3436;
+        }
+        
+        .tag-bacteria {
+            background-color: #fab1a0;
+            color: #c0392b;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .copy-section {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #2874a6;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            padding: 12px 25px;
+            background-color: #2874a6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background-color: #1a5276;
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn.copied {
+            background-color: #28a745;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #6c757d;
+            margin: 15px 0;
+            font-weight: 500;
+        }
+        
+        .keywords {
+            text-align: center;
+            padding: 15px;
+            color: #6c757d;
+            font-size: 14px;
+        }
+        
+        .keywords span {
+            display: inline-block;
+            margin: 4px 8px;
+            padding: 4px 12px;
+            background-color: #e9ecef;
+            border-radius: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 20px;
+                margin-top: 140px;
+            }
+            
+            thead th {
+                font-size: 17px;
+                padding: 14px 10px;
+            }
+            
+            td {
+                padding: 12px 10px;
+                font-size: 14px;
+            }
+            
+            td:first-child {
+                width: 100px;
+            }
+            
+            .nav-btn, .fav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                top: 10px;
+                left: 10px;
+            }
+            
+            .prev-btn {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .next-btn {
+                top: 50px;
+                right: 10px;
+            }
+            
+            .fav-btn {
+                top: 90px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航按钮 -->
+    <a href="index.html" class="nav-btn home-btn">🏠 返回首页</a>
+    <a href="232.html" class="nav-btn prev-btn">← 上一页</a>
+    <a href="234.html" class="nav-btn next-btn">下一页 →</a>
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    
+    <!-- 标题 -->
+    <h1>~~~~~抗磷脂综合征(APS)*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~抗磷脂综合征(APS)*****、抗磷脂综合征（APS）— 急诊处理要点、前接：硬皮病肾危象（SRC）补充、1. 定义、2. 病因、3. 临床表现、4. 必做检查、补充说明、作者、APS定义、主要表现、发病特点、病因、血栓形成、病态妊娠、血小板减少、非特异性表现、灾难性APS、常规检查、APS相关抗体筛查</div>
+    
+    <!-- 主表格 -->
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">抗磷脂综合征（APS）— 急诊处理要点</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="2" class="section-title">前接：硬皮病肾危象（SRC）补充</td>
+            </tr>
+            <tr>
+                <td>补充说明</td>
+                <td>中枢神经系统受累的高血压患者，予相同卡托普利剂量递增方案，且可加用静脉硝普钠</td>
+            </tr>
+            <tr>
+                <td>作者</td>
+                <td class="author">（杨 婧）</td>
+            </tr>
+            
+            <tr>
+                <td colspan="2" class="section-title">1. 定义</td>
+            </tr>
+            <tr>
+                <td>APS定义</td>
+                <td>抗磷脂综合征（APS）是体内多种抗磷脂成分与磷脂结合蛋白的抗体引起的获得性易栓症</td>
+            </tr>
+            <tr>
+                <td>主要表现</td>
+                <td>动静脉血栓形成、习惯性流产、血小板减少，伴抗磷脂抗体或狼疮抗凝物高效价阳性</td>
+            </tr>
+            <tr>
+                <td>发病特点</td>
+                <td>可单独存在，也可继发于系统性红斑狼疮或其他风湿性疾病</td>
+            </tr>
+            
+            <tr>
+                <td colspan="2" class="section-title">2. 病因</td>
+            </tr>
+            <tr>
+                <td>病因</td>
+                <td>病因未明，目前认为与抗磷脂抗体介导的血栓形成有关</td>
+            </tr>
+            
+            <tr>
+                <td colspan="2" class="section-title">3. 临床表现</td>
+            </tr>
+            <tr>
+                <td>血栓形成</td>
+                <td>
+                    <span class="check-mark">✓</span>静脉血栓形成（更多见）：下肢深静脉（发生率20%～30%）、肾静脉、盆腔静脉、肺静脉、肝静脉、肝门静脉、锁骨下静脉、肠系膜静脉、颅内静脉窦<br>
+                    <span class="check-mark">✓</span>动脉血栓形成：脑卒中或短暂性脑缺血发作，视网膜动脉、冠状动脉、肠系膜动脉、肾动脉血栓形成
+                </td>
+            </tr>
+            <tr>
+                <td>病态妊娠</td>
+                <td>
+                    <span class="check-mark">✓</span>1次或多次无法解释的形态正常的胎龄≥10周的胎儿死亡<br>
+                    <span class="check-mark">✓</span>重度子痫前期或胎盘功能不全所致早产<br>
+                    <span class="check-mark">✓</span>发生3次以上10周以内的自发流产且无法用其他原因解释
+                </td>
+            </tr>
+            <tr>
+                <td>血小板减少</td>
+                <td>发生率22%～42%，SLE相关APS患者血小板减低更常发生；很少发生出血事件</td>
+            </tr>
+            <tr>
+                <td>非特异性表现</td>
+                <td>网状青斑、心脏瓣膜病（赘生物、增厚）</td>
+            </tr>
+            <tr>
+                <td>灾难性APS</td>
+                <td>
+                    <span class="check-mark">✓</span>常突然发生，是罕见的危及生命的并发症<br>
+                    <span class="check-mark">✓</span>数天内出现中、小动脉广泛血栓（尽管使用足量抗凝治疗），引起多脏器缺血和坏死<br>
+                    <span class="check-mark">✓</span>包括脑卒中，心脏、肝、肾上腺、肾和肠梗死，外周组织坏疽等
+                </td>
+            </tr>
+            
+            <tr>
+                <td colspan="2" class="section-title">4. 必做检查</td>
+            </tr>
+            <tr>
+                <td>常规检查</td>
+                <td>血常规、尿常规、凝血功能、D-Dimer、正浆纠正试验、ESR、肾功能</td>
+            </tr>
+            <tr>
+                <td>APS相关抗体筛查</td>
+                <td>抗心磷脂抗体（aCL）、抗β₂糖蛋白1抗体（β₂GP1）、狼疮抗凝物（LA）</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 页码 -->
+    <div class="page-number">页码：233</div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-container">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div>
+            <span class="tag tag-disease">抗磷脂综合征</span>
+            <span class="tag tag-disease">APS</span>
+            <span class="tag tag-disease">获得性易栓症</span>
+            <span class="tag tag-disease">动静脉血栓形成</span>
+            <span class="tag tag-disease">习惯性流产</span>
+            <span class="tag tag-disease">血小板减少</span>
+            <span class="tag tag-disease">系统性红斑狼疮</span>
+            <span class="tag tag-disease">SLE</span>
+            <span class="tag tag-disease">病态妊娠</span>
+            <span class="tag tag-disease">灾难性APS</span>
+            <span class="tag tag-disease">脑卒中</span>
+            <span class="tag tag-disease">短暂性脑缺血发作</span>
+            <span class="tag tag-disease">子痫前期</span>
+            <span class="tag tag-disease">网状青斑</span>
+            <span class="tag tag-disease">心脏瓣膜病</span>
+            <span class="tag tag-disease">多脏器缺血</span>
+            <span class="tag tag-disease">肠梗死</span>
+            <span class="tag tag-disease">外周组织坏疽</span>
+            <span class="tag tag-drug">卡托普利</span>
+            <span class="tag tag-drug">硝普钠</span>
+            <span class="tag tag-bacteria">抗磷脂抗体</span>
+            <span class="tag tag-bacteria">狼疮抗凝物</span>
+            <span class="tag tag-bacteria">抗心磷脂抗体</span>
+            <span class="tag tag-bacteria">aCL</span>
+            <span class="tag tag-bacteria">抗β₂糖蛋白1抗体</span>
+            <span class="tag tag-bacteria">β₂GP1</span>
+            <span class="tag tag-bacteria">LA</span>
+            <span class="tag tag-bacteria">D-Dimer</span>
+            <span class="tag tag-bacteria">ESR</span>
+        </div>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="抗磷脂综合征(APS)；获得性易栓症；动静脉血栓形成；习惯性流产；血小板减少；灾难性APS；卡托普利；硝普钠；抗心磷脂抗体；aCL；β₂GP1；狼疮抗凝物；LA；=233" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        <span>抗磷脂综合征</span>
+        <span>APS</span>
+        <span>易栓症</span>
+        <span>血栓形成</span>
+        <span>习惯性流产</span>
+        <span>血小板减少</span>
+        <span>灾难性APS</span>
+        <span>抗心磷脂抗体</span>
+        <span>狼疮抗凝物</span>
+    </div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '✅ 已复制';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.textContent = '📋 复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '✅ 已复制';
+                    btn.classList.add('copied');
+                    
+                    setTimeout(() => {
+                        btn.textContent = '📋 复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFavorited = btn.classList.contains('active');
+            
+            if (!isFavorited) {
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '抗磷脂综合征(APS)',
+                    url: '233.html',
+                    pageNum: '233'
+                };
+                
+                const exists = favorites.some(f => f.url === pageInfo.url);
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                
+                try {
+                    updateIndexFavorites(pageInfo);
+                } catch(e) {
+                    console.log('无法直接更新index.html，收藏已保存到本地');
+                }
+            } else {
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '233.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+            }
+        }
+        
+        function updateIndexFavorites(pageInfo) {
+            localStorage.setItem('newFavorite', JSON.stringify({
+                ...pageInfo,
+                timestamp: Date.now()
+            }));
+        }
+        
+        function checkFavoriteStatus() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.url === '233.html');
+            const btn = document.getElementById('favBtn');
+            
+            if (isFavorited) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        }
+        
+        checkFavoriteStatus();
+    </script>
+</body>
+</html>
