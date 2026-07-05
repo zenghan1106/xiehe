@@ -1,0 +1,665 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~医学缩略语续表395页*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimSun", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 顶部导航区域 */
+        .nav-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .left-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .right-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #4a90d9;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 3px 8px rgba(74, 144, 217, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页下一页按钮 */
+        .page-btn {
+            display: inline-block;
+            padding: 8px 18px;
+            background: #5cb85c;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            box-shadow: 0 2px 6px rgba(92, 184, 92, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .page-btn:hover {
+            background: #4cae4c;
+            transform: translateY(-2px);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            display: inline-block;
+            padding: 8px 18px;
+            background: #f0ad4e;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(240, 173, 78, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .fav-btn:hover {
+            background: #ec971f;
+            transform: translateY(-2px);
+        }
+        
+        /* 标题样式 */
+        .main-title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 15px 0 25px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            letter-spacing: 2px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        /* 表头样式 - 蓝色 */
+        thead th {
+            background: linear-gradient(180deg, #4a90d9 0%, #357abd 100%);
+            color: #fff;
+            padding: 15px 12px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        
+        thead th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+        
+        thead th:last-child {
+            border-radius: 0 12px 0 0;
+        }
+        
+        /* 表格内容样式 */
+        tbody td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4fd;
+            transition: background 0.3s ease;
+        }
+        
+        tbody td:first-child {
+            font-weight: bold;
+            color: #2c3e50;
+            width: 18%;
+        }
+        
+        tbody td:nth-child(2) {
+            color: #555;
+            width: 42%;
+            word-break: break-all;
+        }
+        
+        tbody td:nth-child(3) {
+            color: #444;
+            width: 40%;
+        }
+        
+        /* 标签区域 */
+        .tag-section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .tag-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4a90d9;
+        }
+        
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.4);
+        }
+        
+        .tag.disease {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .tag.bacteria {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .tag.drug {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+        
+        /* 底部编辑框区域 */
+        .bottom-section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .copy-area {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #555;
+            background: #fafafa;
+        }
+        
+        .copy-btn {
+            padding: 12px 25px;
+            background: #5cb85c;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #4cae4c;
+        }
+        
+        .copy-btn.copied {
+            background: #5bc0de;
+        }
+        
+        /* 页码显示 */
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #777;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #ddd;
+        }
+        
+        .page-number span {
+            color: #4a90d9;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        
+        /* 关键词区域 */
+        .keywords {
+            text-align: center;
+            margin-top: 15px;
+            padding: 15px;
+            background: #f0f4f8;
+            border-radius: 8px;
+        }
+        
+        .keywords-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .keywords-content {
+            font-size: 13px;
+            color: #888;
+            line-height: 1.8;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 20px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 8px;
+                font-size: 13px;
+            }
+            
+            .copy-area {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航区域 -->
+    <div class="nav-area">
+        <div class="left-nav">
+            <a href="index.html" class="home-btn">← 返回首页</a>
+        </div>
+        <div class="right-nav">
+            <a href="401.html" class="page-btn">上一页</a>
+            <a href="403.html" class="page-btn">下一页</a>
+            <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~医学缩略语续表395页*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~医学缩略语续表395页*****、英文缩略语、英文全称、中文全称、IBW、ICH、ICP、ICU、IE、IFI、IgAV、IGF、IGRA、IHD、INR、IO、IRIS、IVH、IVIG、JE、JEV、KDIGO、LABA、LBP、LDH、LRINEC、MAHA、MALA、MAP、MCFP、MCV</div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>英文缩略语</th>
+                    <th>英文全称</th>
+                    <th>中文全称</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>IBW</td>
+                    <td>ideal body weight</td>
+                    <td>理想体重</td>
+                </tr>
+                <tr>
+                    <td>ICH</td>
+                    <td>intracerebral hemorrhage</td>
+                    <td>脑出血</td>
+                </tr>
+                <tr>
+                    <td>ICP</td>
+                    <td>intracranial pressure</td>
+                    <td>颅内压</td>
+                </tr>
+                <tr>
+                    <td>ICU</td>
+                    <td>intensive care unit</td>
+                    <td>重症监护病房</td>
+                </tr>
+                <tr>
+                    <td>IE</td>
+                    <td>infective endocarditis</td>
+                    <td>感染性心内膜炎</td>
+                </tr>
+                <tr>
+                    <td>IFI</td>
+                    <td>invasive fungal infection</td>
+                    <td>侵袭性真菌感染</td>
+                </tr>
+                <tr>
+                    <td>IgAV</td>
+                    <td>IgA vasculitis</td>
+                    <td>IgA血管炎</td>
+                </tr>
+                <tr>
+                    <td>IGF</td>
+                    <td>insulin-like growth factor</td>
+                    <td>胰岛素样生长因子</td>
+                </tr>
+                <tr>
+                    <td>IGRA</td>
+                    <td>interferon-γ release assay</td>
+                    <td>γ-干扰素释放试验</td>
+                </tr>
+                <tr>
+                    <td>IHD</td>
+                    <td>intermittent hemodialysis</td>
+                    <td>间歇性血液透析</td>
+                </tr>
+                <tr>
+                    <td>INR</td>
+                    <td>international normalized ratio</td>
+                    <td>国际标准化比值</td>
+                </tr>
+                <tr>
+                    <td>IO</td>
+                    <td>intraosseous</td>
+                    <td>骨髓腔内注射</td>
+                </tr>
+                <tr>
+                    <td>IRIS</td>
+                    <td>immune reconstitution inflammatory syndrome</td>
+                    <td>免疫重建炎症综合征</td>
+                </tr>
+                <tr>
+                    <td>IVH</td>
+                    <td>intraventricular hemorrhage</td>
+                    <td>脑室内出血</td>
+                </tr>
+                <tr>
+                    <td>IVIG</td>
+                    <td>intravenous immunoglobulin</td>
+                    <td>静脉注射免疫球蛋白</td>
+                </tr>
+                <tr>
+                    <td>JE</td>
+                    <td>Japanese encephalitis</td>
+                    <td>流行性乙型脑炎</td>
+                </tr>
+                <tr>
+                    <td>JEV</td>
+                    <td>Japanese encephalitis virus</td>
+                    <td>乙型脑炎病毒</td>
+                </tr>
+                <tr>
+                    <td>KDIGO</td>
+                    <td>Kidney Disease: Improving Global Outcomes</td>
+                    <td>改善全球肾病预后组织</td>
+                </tr>
+                <tr>
+                    <td>LABA</td>
+                    <td>long-acting β₂ agonist</td>
+                    <td>长效β₂受体激动药</td>
+                </tr>
+                <tr>
+                    <td>LBP</td>
+                    <td>lipopolysaccharide binding protein</td>
+                    <td>脂多糖结合蛋白</td>
+                </tr>
+                <tr>
+                    <td>LDH</td>
+                    <td>lactate dehydrogenase</td>
+                    <td>乳酸脱氢酶</td>
+                </tr>
+                <tr>
+                    <td>LRINEC</td>
+                    <td>Laboratory Risk Indicator for Necrotizing Fasciitis</td>
+                    <td>坏死性筋膜炎实验室风险指标评分</td>
+                </tr>
+                <tr>
+                    <td>MAHA</td>
+                    <td>microangiopathic hemolytic anemia</td>
+                    <td>微血管病性溶血性贫血</td>
+                </tr>
+                <tr>
+                    <td>MALA</td>
+                    <td>metformin associated lactic acidosis</td>
+                    <td>二甲双胍相关乳酸酸中毒</td>
+                </tr>
+                <tr>
+                    <td>MALA</td>
+                    <td>metformin associated lactic acidosis</td>
+                    <td>二甲双胍相关乳酸酸中毒</td>
+                </tr>
+                <tr>
+                    <td>MAP</td>
+                    <td>mild acute pancreatitis</td>
+                    <td>轻症急性胰腺炎</td>
+                </tr>
+                <tr>
+                    <td>MCFP</td>
+                    <td>mean circulatory filling pressure</td>
+                    <td>体循环平均充盈压</td>
+                </tr>
+                <tr>
+                    <td>MCV</td>
+                    <td>mean corpuscular volume</td>
+                    <td>平均红细胞容积</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tag-section">
+        <div class="tag-title">🏷️ 特色检索标签</div>
+        <div class="tag-container">
+            <span class="tag disease">脑出血</span>
+            <span class="tag disease">感染性心内膜炎</span>
+            <span class="tag disease">侵袭性真菌感染</span>
+            <span class="tag disease">IgA血管炎</span>
+            <span class="tag disease">免疫重建炎症综合征</span>
+            <span class="tag disease">脑室内出血</span>
+            <span class="tag disease">流行性乙型脑炎</span>
+            <span class="tag disease">坏死性筋膜炎</span>
+            <span class="tag disease">微血管病性溶血性贫血</span>
+            <span class="tag disease">二甲双胍相关乳酸酸中毒</span>
+            <span class="tag disease">轻症急性胰腺炎</span>
+            <span class="tag drug">理想体重</span>
+            <span class="tag drug">颅内压</span>
+            <span class="tag drug">重症监护病房</span>
+            <span class="tag drug">胰岛素样生长因子</span>
+            <span class="tag drug">间歇性血液透析</span>
+            <span class="tag drug">国际标准化比值</span>
+            <span class="tag drug">骨髓腔内注射</span>
+            <span class="tag drug">静脉注射免疫球蛋白</span>
+            <span class="tag drug">长效β₂受体激动药</span>
+            <span class="tag drug">脂多糖结合蛋白</span>
+            <span class="tag drug">乳酸脱氢酶</span>
+            <span class="tag drug">体循环平均充盈压</span>
+            <span class="tag drug">平均红细胞容积</span>
+            <span class="tag bacteria">乙型脑炎病毒</span>
+            <span class="tag bacteria">γ-干扰素释放试验</span>
+            <span class="tag bacteria">改善全球肾病预后组织</span>
+        </div>
+    </div>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <!-- 复制编辑框 -->
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyText" value="医学缩略语续表395页；IBW,ICH,ICP,ICU,IE,IFI,IgAV,IGF,IGRA,IHD,INR,IO,IRIS,IVH,IVIG,JE,JEV,KDIGO,LABA,LBP,LDH,LRINEC,MAHA,MALA,MAP,MCFP,MCV；理想体重,脑出血,颅内压,重症监护病房,感染性心内膜炎,侵袭性真菌感染,IgA血管炎,胰岛素样生长因子,γ-干扰素释放试验,间歇性血液透析,国际标准化比值,骨髓腔内注射,免疫重建炎症综合征,脑室内出血,静脉注射免疫球蛋白,流行性乙型脑炎,乙型脑炎病毒,改善全球肾病预后组织,长效β₂受体激动药,脂多糖结合蛋白,乳酸脱氢酶,坏死性筋膜炎实验室风险指标评分,微血管病性溶血性贫血,二甲双胍相关乳酸酸中毒,轻症急性胰腺炎,体循环平均充盈压,平均红细胞容积=395" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+        
+        <!-- 关键词 -->
+        <div class="keywords">
+            <div class="keywords-title">🔍 关键词</div>
+            <div class="keywords-content">
+                IBW | ICH | ICP | ICU | IE | IFI | IgAV | IGF | IGRA | IHD | INR | IO | IRIS | IVH | IVIG | JE | JEV | KDIGO | LABA | LBP | LDH | LRINEC | MAHA | MALA | MAP | MCFP | MCV
+            </div>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">
+            页码：<span>395</span>
+        </div>
+    </div>
+    
+    <script>
+        // 复制到剪贴板功能
+        function copyToClipboard() {
+            const copyInput = document.getElementById('copyText');
+            copyInput.select();
+            copyInput.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyInput.value).then(function() {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            
+            setTimeout(function() {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            const btn = document.querySelector('.fav-btn');
+            const title = document.querySelector('.main-title').textContent.replace(/[~*]/g, '');
+            const url = window.location.href;
+            
+            // 尝试使用本地存储模拟收藏功能
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === url);
+            
+            if (!exists) {
+                favorites.push({
+                    title: title,
+                    url: url,
+                    page: '395'
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                btn.textContent = '★ 已收藏';
+                btn.style.background = '#d9534f';
+                
+                // 尝试更新index.html的收藏（通过localStorage通知）
+                localStorage.setItem('newFavorite', JSON.stringify({
+                    title: title,
+                    url: url,
+                    page: '395',
+                    time: new Date().toLocaleString()
+                }));
+                
+                alert('已成功添加到收藏！请在首页查看。');
+            } else {
+                alert('该页面已在收藏夹中！');
+            }
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const url = window.location.href;
+            const exists = favorites.some(f => f.url === url);
+            
+            if (exists) {
+                const btn = document.querySelector('.fav-btn');
+                btn.textContent = '★ 已收藏';
+                btn.style.background = '#d9534f';
+            }
+        };
+        
+        // 标签点击搜索功能
+        document.querySelectorAll('.tag').forEach(function(tag) {
+            tag.addEventListener('click', function() {
+                const text = this.textContent;
+                alert('搜索标签: ' + text + '\n（可在此实现跳转或筛选功能）');
+            });
+        });
+    </script>
+</body>
+</html>
