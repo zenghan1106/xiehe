@@ -1,0 +1,377 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~复苏药物与心搏骤停处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f8ff;
+            background-image: linear-gradient(135deg, #e6f3ff 0%, #f0f8ff 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+            min-height: 100vh;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .home-btn {
+            background-color: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        .nav-btn {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .fav-btn {
+            background-color: #f0ad4e;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .fav-btn.active {
+            background-color: #d9534f;
+        }
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #d6eaf8;
+            border-radius: 10px;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            font-size: 14px;
+        }
+        thead {
+            background-color: #2e86de;
+            color: white;
+        }
+        thead th {
+            padding: 14px 10px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        tbody td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f8fbff;
+        }
+        tbody tr:hover {
+            background-color: #e8f4fd;
+        }
+        .section-title {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 15px;
+        }
+        .drug-name {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        .highlight-box {
+            background-color: #fef9e7;
+            border-left: 4px solid #f39c12;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 0 6px 6px 0;
+        }
+        .tags-container {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .tags-title {
+            font-size: 15px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .tag {
+            display: inline-block;
+            background-color: #e74c3c;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+        }
+        .bottom-section {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .keywords {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 10px;
+            word-break: break-all;
+        }
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            color: #2e86de;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px;
+            border: 2px solid #2e86de;
+            border-radius: 6px;
+            font-size: 13px;
+            background-color: #f8fbff;
+        }
+        .copy-btn {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 8px;
+            }
+            h1 {
+                font-size: 18px;
+            }
+            thead th {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            tbody td {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            .home-btn, .nav-btn, .fav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            .copy-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="351.html" class="nav-btn">上一页</a>
+            <a href="353.html" class="nav-btn">下一页</a>
+            <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+        </div>
+    </div>
+
+    <h1>~~~~~复苏药物与心搏骤停处理*****</h1>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类/药物名称</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2" class="section-title">✓ 复苏药物</td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">肾上腺素</span></td>
+                    <td>可提高心肌的收缩力，增加心输出量，适用于各种类型的心搏骤停。标准用法：标准剂量1mg/次，IV/IO（静脉途径/骨髓腔内给药），如未建立IV/IO通路，气管内给药2～2.5mg，每3～5分钟重复，到目前为止尚无大规模临床试验证实更大剂量的肾上腺素能提高存活率和改善神经系统恢复。</td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">胺碘酮</span></td>
+                    <td>可用于对胸外按压，除颤和缩血管药等治疗无反应的心室颤动或无脉搏心动过速患者。用法：首剂300mg，静脉或骨髓腔内快速推注给药，如无效，可追加150mg。</td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">利多卡因</span></td>
+                    <td>顽固性心室颤动或无脉室性心动过速而无胺碘酮可使用时，可考虑静脉推注利多卡因100mg（1～1.5mg/kg），若心室颤动或心动过速持续存在，予第二剂0.5～0.75mg/kg。</td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">硫酸镁</span></td>
+                    <td>镁剂使用的指征包括如下几点。①对电击无效的顽固性心室颤动并可能有低镁血症；②室性心动过速并可能伴有低镁血症；③尖端扭转型室性心动过速；④洋地黄中毒。剂量为2g，1～2分钟注射完毕，10～15分钟后可酌情重复。</td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">碳酸氢钠</span></td>
+                    <td>对心搏骤停患者，不推荐常规使用碳酸氢钠。没有证据表明碳酸氢钠增加心室颤动性心搏骤停患者抢救成功率和存活率。在心搏骤停期间，有很多副作用与使用碳酸氢钠有关。碳酸氢钠可引起细胞外碱中毒，使血红蛋白氧解离曲线左移，抑制氧的解离释放；可产生过多的CO₂，并自由扩散入心肌和脑细胞，反会加重细胞内酸中毒。<br><br><div class="highlight-box">在一些特殊复苏情况，如原本就有代谢性酸中毒、高钾血症、三环类抑郁药过量，碳酸氢钠可能有益。这些特殊情况下使用碳酸氢钠，常规起始剂量为1～2mmol/kg。</div></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">● 心搏骤停的常见原因及高危因素</td>
+                </tr>
+                <tr>
+                    <td>原因分析</td>
+                    <td>ACLS阶段应注意分析患者心搏骤停的原因，予针对性处理。心搏骤停病因包括心脏病变与非心脏病变（表42）。按照年龄分析病因：婴幼儿以呼吸道感染、窒息多见，青年人以心肌疾病多见，老年人以冠心病和脑卒中多见。</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tags-container">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <span class="tag">心搏骤停</span>
+        <span class="tag">心室颤动</span>
+        <span class="tag">心动过速</span>
+        <span class="tag">低镁血症</span>
+        <span class="tag">洋地黄中毒</span>
+        <span class="tag">代谢性酸中毒</span>
+        <span class="tag">高钾血症</span>
+        <span class="tag">三环类抑郁药过量</span>
+        <span class="tag">呼吸道感染</span>
+        <span class="tag">窒息</span>
+        <span class="tag">心肌疾病</span>
+        <span class="tag">冠心病</span>
+        <span class="tag">脑卒中</span>
+    </div>
+
+    <div class="bottom-section">
+        <div class="keywords">
+            <strong>关键词：</strong>复苏药物；肾上腺素；胺碘酮；利多卡因；硫酸镁；碳酸氢钠；心搏骤停；心室颤动；心动过速；ACLS；低镁血症；洋地黄中毒；代谢性酸中毒；高钾血症；三环类抑郁药过量；呼吸道感染；窒息；心肌疾病；冠心病；脑卒中
+        </div>
+        <div class="page-number">352</div>
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="复苏药物与心搏骤停处理；复苏药物、肾上腺素、胺碘酮、利多卡因、硫酸镁、碳酸氢钠、心搏骤停、心室颤动、心动过速、ACLS、低镁血症、洋地黄中毒、代谢性酸中毒、高钾血症、三环类抑郁药过量、呼吸道感染、窒息、心肌疾病、冠心病、脑卒中；=352" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            var input = document.getElementById("copyInput");
+            input.select();
+            input.setSelectionRange(0, 99999);
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(function() {
+                    alert("已复制到剪贴板！");
+                });
+            } else {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            }
+        }
+
+        function toggleFavorite() {
+            var btn = document.getElementById("favBtn");
+            var title = document.title.replace(/~~~~~|\\*\\*\\*\\*\\*/g, "");
+            var url = window.location.href;
+            var favData = {
+                title: title,
+                url: url,
+                page: "352"
+            };
+            
+            var favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+            var index = favorites.findIndex(function(f) { return f.url === url; });
+            
+            if (index === -1) {
+                favorites.push(favData);
+                btn.textContent = "❤️ 已收藏";
+                btn.classList.add("active");
+                alert("已添加到收藏！");
+            } else {
+                favorites.splice(index, 1);
+                btn.textContent = "⭐ 收藏";
+                btn.classList.remove("active");
+                alert("已取消收藏！");
+            }
+            
+            localStorage.setItem("favorites", JSON.stringify(favorites));
+            
+            // 同步到index.html的收藏类目
+            updateIndexFavorites(favorites);
+        }
+
+        function updateIndexFavorites(favorites) {
+            // 将收藏数据存储到localStorage，供index.html读取
+            localStorage.setItem("page352_favorite", JSON.stringify({
+                title: "复苏药物与心搏骤停处理",
+                url: "352.html",
+                added: new Date().toLocaleString()
+            }));
+        }
+
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            var favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+            var url = window.location.href;
+            var index = favorites.findIndex(function(f) { return f.url === url; });
+            var btn = document.getElementById("favBtn");
+            if (index !== -1) {
+                btn.textContent = "❤️ 已收藏";
+                btn.classList.add("active");
+            }
+        };
+    </script>
+</body>
+</html>
