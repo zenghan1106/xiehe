@@ -1,0 +1,555 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急性酒精中毒临床表现与戒断综合征*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #e6f3ff 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 13px;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(92,184,92,0.3);
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .nav-btn:hover {
+            background: #449d44;
+            transform: translateY(-2px);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            top: 130px;
+            right: 15px;
+            background: #f0ad4e;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(240,173,78,0.3);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .fav-btn:hover {
+            background: #ec971f;
+            transform: translateY(-2px);
+        }
+        
+        .fav-btn.active {
+            background: #d9534f;
+        }
+        
+        /* 标题样式 */
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 60px 0 25px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            word-break: break-all;
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+        
+        /* 表头蓝色 */
+        thead tr {
+            background: #2e86de;
+            color: white;
+        }
+        
+        thead th {
+            padding: 18px 12px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        /* 表格内容 */
+        tbody td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e0e8f0;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #2c3e50;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4ff;
+        }
+        
+        /* 特殊标记样式 */
+        .check-mark {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .diamond {
+            color: #2980b9;
+        }
+        
+        .section-title {
+            color: #c0392b;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .sub-section {
+            color: #8e44ad;
+            font-weight: bold;
+        }
+        
+        .note-box {
+            background: #fff8e6;
+            border-left: 4px solid #f0ad4e;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 25px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .copy-section h3 {
+            color: #2c3e50;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+        }
+        
+        #copyInput {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #2c3e50;
+            background: #fafafa;
+            width: calc(100% - 100px);
+            min-height: 45px;
+        }
+        
+        #copyBtn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+        
+        #copyBtn:hover {
+            background: #2980b9;
+        }
+        
+        #copyBtn.copied {
+            background: #27ae60;
+        }
+        
+        /* 页码 */
+        .page-num {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin: 20px 0;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            color: #95a5a6;
+            font-size: 13px;
+            margin-bottom: 20px;
+            padding: 0 10px;
+            word-break: break-all;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-section h3 {
+            color: #2c3e50;
+            font-size: 16px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .tag {
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .tag.disease {
+            background: #e74c3c;
+        }
+        
+        .tag.drug {
+            background: #9b59b6;
+        }
+        
+        .tag.bacteria {
+            background: #16a085;
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2c3e50;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 200;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 14px 10px;
+            }
+            
+            tbody td {
+                font-size: 14px;
+                padding: 12px 10px;
+            }
+            
+            .home-btn, .nav-btn, .fav-btn {
+                font-size: 12px;
+                padding: 8px 12px;
+            }
+            
+            .copy-box {
+                flex-direction: column;
+            }
+            
+            #copyInput {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-btns">
+        <a href="294.html" class="nav-btn">⬅ 上一页</a>
+        <a href="296.html" class="nav-btn">下一页 ➡</a>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    
+    <!-- 标题 -->
+    <h1>~~~~~急性酒精中毒临床表现与戒断综合征*****</h1>
+    
+    <!-- 主表格 -->
+    <table>
+        <thead>
+            <tr>
+                <th>急性酒精中毒——临床表现与戒断综合征</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span class="check-mark">✓ 兴奋期</span><br>
+                    <span class="diamond">◇</span> 血清乙醇浓度达到11mmol/L（50mg/dl）：即感头痛、欣快、兴奋。<br>
+                    <span class="diamond">◇</span> 血清乙醇浓度＞16mmol/L（75mg/dl）：健谈、饶舌、情绪不稳定、自负、易激怒，可有粗鲁行为或攻击行动，也可沉默、孤僻。<br>
+                    <span class="diamond">◇</span> 血清乙醇浓度达到22mmol/L（100mg/dl）：驾车易发生车祸。<br><br>
+                    
+                    <span class="check-mark">✓ 共济失调期</span><br>
+                    <span class="diamond">◇</span> 血清乙醇浓度达到33mmol/L（150mg/dl）：肌肉运动不协调，行动笨拙，言语含糊不清，眼球震颤，视物模糊，复视，步态不稳，出现明显共济失调。<br>
+                    <span class="diamond">◇</span> 血清乙醇浓度达到43mmol/L（200mg/dl）：出现恶心、呕吐、困倦。<br><br>
+                    
+                    <span class="check-mark">✓ 昏迷期</span><br>
+                    <span class="diamond">◇</span> 血清乙醇浓度升至54mmol/L（250mg/dl）：患者进入昏迷期，表现为昏睡、瞳孔散大、体温降低。<br>
+                    <span class="diamond">◇</span> 血清乙醇浓度＞87mmol/L（400mg/dl）：陷入深昏迷，心率快、血压下降，呼吸慢而有鼾音，可出现呼吸、循环麻痹而危及生命。<br><br>
+                    
+                    <div class="note-box">
+                        需注意，重症患者可并发意外损伤、酸碱平衡失调、水电解质紊乱、低血糖症、肺炎、急性肌病，甚至出现急性肾衰竭。
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">● 戒断综合征：</span>长期酗酒者在突然停止饮酒或减少酒量后，可发生4种类型戒断反应。<br><br>
+                    
+                    <span class="check-mark">✓ 单纯性戒断反应：</span>在减少饮酒后6～24小时发病。出现震颤、焦虑不安、兴奋、失眠、心动过速、血压升高、大量出汗、恶心、呕吐，多在2～5天缓解自愈。<br><br>
+                    
+                    <span class="check-mark">✓ 酒精性幻觉反应：</span>患者意识清晰，定向力完整。以幻听为主，也可见幻视、错觉及视物变形。多为被害妄想，一般3～4周后缓解。<br><br>
+                    
+                    <span class="check-mark">✓ 戒断性惊厥反应：</span>通常与单纯性戒断反应同时发生，也可在其后发生癫痫大发作。多数只发作1～2次，每次数分钟。也可数日内多次发作。<br><br>
+                    
+                    <span class="check-mark">✓ 震颤谵妄反应：</span>在停止饮酒24～72小时后，也可在7～10小时后发生。患者精神错乱，全身肌肉出现粗大震颤。谵妄是在意识模糊的情况下出现生动、恐惧的幻视，可有大量出汗、心动过速、血压升高等交感神经兴奋表现。
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 页码 -->
+    <div class="page-num">283</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">关键词：急性酒精中毒；兴奋期；共济失调期；昏迷期；戒断综合征；单纯性戒断反应；酒精性幻觉反应；戒断性惊厥反应；震颤谵妄反应；乙醇中毒</div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <h3>📋 快速复制</h3>
+        <div class="copy-box">
+            <input type="text" id="copyInput" readonly>
+            <button id="copyBtn" onclick="copyContent()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <h3>🏷️ 特色检索标签</h3>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag disease">急性酒精中毒</span>
+            <span class="tag disease">戒断综合征</span>
+            <span class="tag disease">单纯性戒断反应</span>
+            <span class="tag disease">酒精性幻觉反应</span>
+            <span class="tag disease">戒断性惊厥反应</span>
+            <span class="tag disease">震颤谵妄反应</span>
+            <span class="tag disease">乙醇中毒</span>
+            <span class="tag disease">低血糖症</span>
+            <span class="tag disease">肺炎</span>
+            <span class="tag disease">急性肌病</span>
+            <span class="tag disease">急性肾衰竭</span>
+            <span class="tag disease">癫痫大发作</span>
+        </div>
+    </div>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 设置复制框内容
+        const title = "急性酒精中毒临床表现与戒断综合征";
+        const subtitle = "急性酒精中毒——临床表现与戒断综合征";
+        const keywords = "急性酒精中毒；兴奋期；共济失调期；昏迷期；戒断综合征；单纯性戒断反应；酒精性幻觉反应；戒断性惊厥反应；震颤谵妄反应；乙醇中毒";
+        const pageNum = "283";
+        const currentPage = "295"; // 当前页面名称去掉.html
+        
+        document.getElementById('copyInput').value = title + "；" + subtitle + "；" + keywords + "；=" + pageNum;
+        
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            showToast('内容已复制到剪贴板！');
+            
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 提示消息
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = localStorage.getItem('fav_' + currentPage) === 'true';
+            
+            if (!isFav) {
+                // 添加到收藏
+                localStorage.setItem('fav_' + currentPage, 'true');
+                
+                // 保存收藏信息到index可用格式
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const favItem = {
+                    page: currentPage,
+                    title: title,
+                    url: currentPage + '.html',
+                    date: new Date().toLocaleString('zh-CN')
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.page === currentPage);
+                if (!exists) {
+                    favorites.push(favItem);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                btn.textContent = '❤️ 已收藏';
+                btn.classList.add('active');
+                showToast('已添加到收藏！');
+            } else {
+                // 取消收藏
+                localStorage.removeItem('fav_' + currentPage);
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.page !== currentPage);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                btn.textContent = '⭐ 收藏';
+                btn.classList.remove('active');
+                showToast('已取消收藏！');
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const isFav = localStorage.getItem('fav_' + currentPage) === 'true';
+            const btn = document.getElementById('favBtn');
+            if (isFav) {
+                btn.textContent = '❤️ 已收藏';
+                btn.classList.add('active');
+            }
+        };
+    </script>
+</body>
+</html>
