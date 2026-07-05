@@ -1,0 +1,605 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~二甲双胍相关乳酸酸中毒急诊处理与皮肤疾病急诊*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(180deg, #f0f4f8 0%, #e8eef5 100%);
+            min-height: 100vh;
+            padding: 20px 15px 30px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 - 左上角 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2b6cb0;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 8px rgba(43, 108, 176, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #1a5276;
+            transform: translateY(-2px);
+        }
+        
+        /* 右上角导航按钮容器 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #38a169;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(56, 161, 105, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #2f855a;
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn.next {
+            background: #e53e3e;
+            box-shadow: 0 2px 8px rgba(229, 62, 62, 0.3);
+        }
+        
+        .nav-btn.next:hover {
+            background: #c53030;
+        }
+        
+        /* 收藏按钮 - 在下一页下方 */
+        .favorite-btn {
+            background: #d69e2e;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(214, 158, 46, 0.3);
+            transition: all 0.3s ease;
+            margin-top: 5px;
+        }
+        
+        .favorite-btn:hover {
+            background: #b7791f;
+            transform: translateY(-2px);
+        }
+        
+        .favorite-btn.active {
+            background: #e53e3e;
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2b6cb0;
+            margin: 70px 0 25px 0;
+            padding: 0 10px;
+            line-height: 1.5;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        /* 主表格 - 所有内容在一个表格中 */
+        .content-table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .content-table thead {
+            background: #2b6cb0;
+        }
+        
+        .content-table thead th {
+            color: white;
+            padding: 20px 15px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        .content-table tbody tr {
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .content-table tbody tr:last-child {
+            border-bottom: none;
+        }
+        
+        .content-table td {
+            padding: 14px 15px;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #444;
+            vertical-align: top;
+            word-break: break-all;
+        }
+        
+        .check-item {
+            color: #38a169;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .dot-item {
+            color: #e53e3e;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .section-title {
+            background: #ebf8ff;
+            font-weight: bold;
+            color: #2b6cb0;
+            font-size: 16px;
+        }
+        
+        .sub-section {
+            background: #f7fafc;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        
+        .author {
+            text-align: right;
+            color: #888;
+            font-size: 13px;
+            display: block;
+            margin-top: 8px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            max-width: 800px;
+            margin: 0 auto 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2b6cb0;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .tag-disease {
+            background: #fed7d7;
+            color: #c53030;
+        }
+        
+        .tag-disease:hover {
+            background: #c53030;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #bee3f8;
+            color: #2b6cb0;
+        }
+        
+        .tag-drug:hover {
+            background: #2b6cb0;
+            color: white;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            max-width: 800px;
+            margin: 0 auto 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .copy-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2b6cb0;
+            margin-bottom: 15px;
+        }
+        
+        .copy-box-wrapper {
+            display: flex;
+            gap: 12px;
+            align-items: stretch;
+        }
+        
+        .copy-input {
+            flex: 1;
+            width: calc(100% - 100px);
+            padding: 14px 16px;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #444;
+            background: #f7fafc;
+            outline: none;
+            transition: border-color 0.3s;
+            min-height: 50px;
+            resize: vertical;
+            font-family: inherit;
+        }
+        
+        .copy-input:focus {
+            border-color: #2b6cb0;
+        }
+        
+        .copy-btn {
+            padding: 14px 24px;
+            background: #2b6cb0;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .copy-btn:hover {
+            background: #1a5276;
+        }
+        
+        .copy-btn.copied {
+            background: #38a169;
+        }
+        
+        /* 关键词与页码 - 底部 */
+        .keywords-section {
+            max-width: 800px;
+            margin: 0 auto 20px;
+            text-align: center;
+            padding: 15px;
+        }
+        
+        .page-number {
+            font-size: 16px;
+            color: #2b6cb0;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        .keywords {
+            font-size: 14px;
+            color: #666;
+            line-height: 2;
+        }
+        
+        .keyword-item {
+            display: inline-block;
+            margin: 3px 6px;
+            padding: 5px 14px;
+            background: #ebf8ff;
+            color: #2b6cb0;
+            border-radius: 15px;
+            font-size: 13px;
+        }
+        
+        /* 移动端适配 */
+        @media (max-width: 600px) {
+            .main-title {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            
+            .content-table thead th {
+                font-size: 17px;
+                padding: 16px 12px;
+            }
+            
+            .content-table td {
+                padding: 12px;
+                font-size: 14px;
+            }
+            
+            .copy-box-wrapper {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                justify-content: center;
+            }
+            
+            .home-btn, .nav-btn, .favorite-btn {
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 右上角导航按钮 -->
+    <div class="nav-buttons">
+        <a href="269.html" class="nav-btn">← 上一页</a>
+        <a href="271.html" class="nav-btn next">下一页 →</a>
+        <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~二甲双胍相关乳酸酸中毒急诊处理与皮肤疾病急诊*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~二甲双胍相关乳酸酸中毒急诊处理与皮肤疾病急诊*****、急诊疾病诊疗要点、二甲双胍相关乳酸酸中毒 - 3. 急诊处理、碳酸氢盐：给药原则同前述乳酸酸中毒情况。、目标：血乳酸浓度＜3mmol/L且pH＞7.35，可停止血液透析。（王春婷）、皮肤疾病急诊、重症药疹、1. 定义、重症药疹指药物经由口服或输注进入体内，引起大面积皮肤受累并合并系统表现。、2. 常见疾病及临床表现、皮疹多始发于面部及间擦部位，如颈部、腋窝、腹股沟区等，之后迅速扩散。、脓疱非常细小（＜5mm），伴烧灼和/或瘙痒感。、多伴高热，部分可出现肝肾损害及急性呼吸窘迫综合征。、眼部、口腔、外阴黏膜通常出现糜烂及血痂。、常合并发热、电解质紊乱、感染等。、TEN病死率高达30%。</div>
+    
+    <!-- 主表格 - 所有内容在一个表格中 -->
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th colspan="2">急诊疾病诊疗要点</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="2" class="section-title">二甲双胍相关乳酸酸中毒 - 3. 急诊处理</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="dot-item">●</span>胃肠道去污：急性摄入者建议应用活性炭，除非存在禁忌证（如肠梗阻、急腹症）。慢性摄入者获益不多。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="dot-item">●</span>碳酸氢盐：给药原则同前述乳酸酸中毒情况。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="dot-item">●</span>MALA出现下述情况可考虑血液透析：①血乳酸＞20mmol/L；②pH＜7.0；③支持治疗和碳酸氢盐治疗2～4小时病情无改善。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="dot-item">●</span>目标：血乳酸浓度＜3mmol/L且pH＞7.35，可停止血液透析。<span class="author">（王春婷）</span></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="section-title" style="background: #c3dafe; color: #3730a3;">皮肤疾病急诊</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="section-title">重症药疹</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="sub-section">1. 定义</td>
+            </tr>
+            <tr>
+                <td colspan="2">重症药疹指药物经由口服或输注进入体内，引起大面积皮肤受累并合并系统表现。</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="sub-section">2. 常见疾病及临床表现</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="dot-item">●</span>急性泛发性发疹性脓疱病（AGEP）：一种急性发热性药疹，皮肤表现为大面积水肿性红斑，其上许多小的非毛囊性无菌性脓疱。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="check-item">✓</span>皮疹多始发于面部及间擦部位，如颈部、腋窝、腹股沟区等，之后迅速扩散。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="check-item">✓</span>脓疱非常细小（＜5mm），伴烧灼和/或瘙痒感。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="check-item">✓</span>多伴高热，部分可出现肝肾损害及急性呼吸窘迫综合征。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="dot-item">●</span>Stevens-Johnson综合征（SJS）及中毒性表皮坏死松解症（TEN）：严重的皮肤黏膜急性疾病。一般认为两者均为多形红斑的重症阶段，区别在于表皮受累面积不同。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="check-item">✓</span>体表面积（BSA）＜10%为SJS，BSA在10%～30%为SJS/TEN重叠，BSA＞30%为TEN。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="check-item">✓</span>两者初始症状为发热、眼部刺痛、吞咽困难，早期皮损为红斑、暗红斑，可见靶形皮损，之后迅速融合为大面积红斑。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="check-item">✓</span>红斑之上的水疱、大疱极易破溃形成大面积糜烂面，尼氏征阳性（在无自发剥离的表皮上手指推压红斑，如发生表皮真皮分离即为阳性），"烫伤样"或"湿烟纸"样外观。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="check-item">✓</span>眼部、口腔、外阴黏膜通常出现糜烂及血痂。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="check-item">✓</span>常合并发热、电解质紊乱、感染等。</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="check-item">✓</span>TEN病死率高达30%。</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 特色检索标签 - 网页最下方，仅图片中的文字 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">MALA</span>
+            <span class="tag tag-disease">乳酸酸中毒</span>
+            <span class="tag tag-disease">重症药疹</span>
+            <span class="tag tag-disease">急性泛发性发疹性脓疱病</span>
+            <span class="tag tag-disease">AGEP</span>
+            <span class="tag tag-disease">Stevens-Johnson综合征</span>
+            <span class="tag tag-disease">SJS</span>
+            <span class="tag tag-disease">中毒性表皮坏死松解症</span>
+            <span class="tag tag-disease">TEN</span>
+            <span class="tag tag-disease">多形红斑</span>
+            <span class="tag tag-disease">急性呼吸窘迫综合征</span>
+            <span class="tag tag-disease">肠梗阻</span>
+            <span class="tag tag-disease">急腹症</span>
+            <!-- 药物标签 -->
+            <span class="tag tag-drug">二甲双胍</span>
+            <span class="tag tag-drug">活性炭</span>
+            <span class="tag tag-drug">碳酸氢盐</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制</div>
+        <div class="copy-box-wrapper">
+            <textarea class="copy-input" id="copyInput" readonly>二甲双胍相关乳酸酸中毒急诊处理与皮肤疾病急诊；急诊疾病诊疗要点、MALA、乳酸酸中毒、重症药疹、AGEP、SJS、TEN、二甲双胍、活性炭、碳酸氢盐、血液透析=270</textarea>
+            <button class="copy-btn" id="copyBtn" onclick="copyContent()">📄 复制</button>
+        </div>
+    </div>
+    
+    <!-- 关键词与页码 - 网页底部 -->
+    <div class="keywords-section">
+        <div class="page-number">页码：270</div>
+        <div class="keywords">
+            <span class="keyword-item">MALA</span>
+            <span class="keyword-item">乳酸酸中毒</span>
+            <span class="keyword-item">重症药疹</span>
+            <span class="keyword-item">AGEP</span>
+            <span class="keyword-item">SJS</span>
+            <span class="keyword-item">TEN</span>
+            <span class="keyword-item">二甲双胍</span>
+            <span class="keyword-item">活性炭</span>
+            <span class="keyword-item">碳酸氢盐</span>
+            <span class="keyword-item">血液透析</span>
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            const btn = document.getElementById('copyBtn');
+            
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    btn.textContent = '✓ 已复制';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.textContent = '📄 复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            } else {
+                document.execCommand('copy');
+                btn.textContent = '✓ 已复制';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '📄 复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFavorited = localStorage.getItem('fav_270') === 'true';
+            
+            if (!isFavorited) {
+                localStorage.setItem('fav_270', 'true');
+                localStorage.setItem('fav_270_title', '二甲双胍相关乳酸酸中毒急诊处理与皮肤疾病急诊');
+                localStorage.setItem('fav_270_url', '270.html');
+                btn.textContent = '❤️ 已收藏';
+                btn.classList.add('active');
+                
+                // 添加到index的收藏类目
+                let favorites = JSON.parse(localStorage.getItem('index_favorites') || '[]');
+                const exists = favorites.find(f => f.url === '270.html');
+                if (!exists) {
+                    favorites.push({
+                        title: '二甲双胍相关乳酸酸中毒急诊处理与皮肤疾病急诊',
+                        url: '270.html',
+                        date: new Date().toISOString()
+                    });
+                    localStorage.setItem('index_favorites', JSON.stringify(favorites));
+                }
+                
+                alert('已添加到收藏！');
+            } else {
+                localStorage.removeItem('fav_270');
+                localStorage.removeItem('fav_270_title');
+                localStorage.removeItem('fav_270_url');
+                btn.textContent = '⭐ 收藏';
+                btn.classList.remove('active');
+                
+                let favorites = JSON.parse(localStorage.getItem('index_favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '270.html');
+                localStorage.setItem('index_favorites', JSON.stringify(favorites));
+                
+                alert('已取消收藏！');
+            }
+        }
+        
+        // 初始化收藏状态
+        document.addEventListener('DOMContentLoaded', function() {
+            const isFavorited = localStorage.getItem('fav_270') === 'true';
+            const btn = document.getElementById('favoriteBtn');
+            if (isFavorited) {
+                btn.textContent = '❤️ 已收藏';
+                btn.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
