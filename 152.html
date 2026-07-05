@@ -1,0 +1,396 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~泌尿系结石*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e3f2fd 0%, #f0f8ff 50%, #fff8e1 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+            color: #333;
+        }
+        .header-btns {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .btn-home {
+            background: #2196F3;
+            color: white;
+        }
+        .btn-home:hover {
+            background: #1976D2;
+        }
+        .nav-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        .btn-nav {
+            background: #FF9800;
+            color: white;
+            min-width: 80px;
+            text-align: center;
+        }
+        .btn-nav:hover {
+            background: #F57C00;
+        }
+        .btn-fav {
+            background: #E91E63;
+            color: white;
+            font-size: 13px;
+            padding: 8px 14px;
+        }
+        .btn-fav:hover {
+            background: #C2185B;
+        }
+        .btn-fav.active {
+            background: #9C27B0;
+        }
+        h1 {
+            text-align: center;
+            color: #1565C0;
+            font-size: 28px;
+            margin: 20px 0 15px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin: 0 -5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        thead {
+            background: linear-gradient(135deg, #1976D2, #2196F3);
+            color: white;
+        }
+        thead th {
+            padding: 16px 12px;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: left;
+        }
+        tbody td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 15px;
+            line-height: 1.8;
+            vertical-align: top;
+        }
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        .section-title {
+            font-weight: bold;
+            color: #1565C0;
+            font-size: 16px;
+        }
+        .item-title {
+            font-weight: 600;
+            color: #333;
+        }
+        .indent {
+            padding-left: 20px;
+            display: block;
+        }
+        .tags-section {
+            margin-top: 25px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+        }
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 4px;
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+            color: white;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .tag:hover {
+            transform: scale(1.05);
+        }
+        .tag.disease {
+            background: linear-gradient(135deg, #f44336, #ef5350);
+        }
+        .tag.drug {
+            background: linear-gradient(135deg, #9C27B0, #AB47BC);
+        }
+        .tag.bacteria {
+            background: linear-gradient(135deg, #FF9800, #FFA726);
+        }
+        .bottom-section {
+            margin-top: 25px;
+            text-align: center;
+        }
+        .keywords {
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 8px;
+        }
+        .page-num {
+            font-size: 18px;
+            color: #1976D2;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .copy-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding: 0 10px;
+        }
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            max-width: calc(100% - 100px);
+            padding: 12px 15px;
+            border: 2px solid #2196F3;
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+        }
+        .btn-copy {
+            background: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            white-space: nowrap;
+        }
+        .btn-copy:hover {
+            background: #388E3C;
+        }
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            display: none;
+            z-index: 1000;
+        }
+        @media (max-width: 600px) {
+            h1 { font-size: 22px; }
+            thead th { font-size: 16px; padding: 12px 8px; }
+            tbody td { font-size: 14px; padding: 10px 8px; }
+            .btn { padding: 8px 12px; font-size: 13px; }
+            .copy-input { max-width: calc(100% - 80px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部按钮区 -->
+    <div class="header-btns">
+        <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+        <div class="nav-btns">
+            <a href="151.html" class="btn btn-nav">← 上一页</a>
+            <a href="153.html" class="btn btn-nav">下一页 →</a>
+            <button class="btn btn-fav" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+        </div>
+    </div>
+
+    <!-- 标题 -->
+    <h1>~~~~~泌尿系结石*****</h1>
+    <div class="subtitle">泌尿系统疾病 | 页码 140</div>
+
+    <!-- 表格内容 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="section-title">定义</td>
+                    <td>
+                        <span class="item-title">• 泌尿系统内任何部位的结石都可称泌尿系结石。</span><br>
+                        <span class="indent">• 按部位分为肾和输尿管的上尿路结石，以及膀胱和尿道的下尿路结石。</span><br>
+                        <span class="indent">• 按成分分为钙质结石（草酸钙、磷酸钙结石）和非钙质结石（尿酸盐结石、磷酸镁铵结石、胱氨酸结石等）。</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">病因</td>
+                    <td>
+                        <span class="item-title">• 疾病：</span>甲状腺功能亢进症，各种原因引起的高钙尿症、高尿酸尿症和高草酸盐尿症，肾小管性酸中毒，海绵肾，痛风，尿路感染、梗阻，尿路异物等。<br>
+                        <span class="item-title">• 气候、饮食和药物也是可能原因。</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">临床表现</td>
+                    <td>
+                        <span class="item-title">• 症状</span><br>
+                        <span class="indent">✓ 疼痛：疼痛时重时轻，阵发性发作。发作性剧痛常持续20～60分钟。疼痛位置与梗阻位置相关，患者常有大汗、面色发白、辗转反侧。</span><br>
+                        <span class="indent">✓ 血尿：有症状的肾结石患者大部分存在肉眼或镜下血尿，红细胞正常形态，也可出现在无症状的患者中。</span><br>
+                        <span class="indent">✓ 排石：从尿路中排出结石。</span><br>
+                        <span class="indent">✓ 其他：恶心、呕吐、排尿困难、尿急。</span><br>
+                        <span class="item-title">• 体征：</span>患侧肾区叩击痛。若出现严重肾积水，可在上腹部触及增大的肾脏，输尿管走行区相应部位的压痛。
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 特色检索标签（点击筛选）</div>
+        <span class="tag disease">泌尿系结石</span>
+        <span class="tag disease">肾结石</span>
+        <span class="tag disease">输尿管结石</span>
+        <span class="tag disease">膀胱结石</span>
+        <span class="tag disease">尿道结石</span>
+        <span class="tag disease">上尿路结石</span>
+        <span class="tag disease">下尿路结石</span>
+        <span class="tag disease">钙质结石</span>
+        <span class="tag disease">草酸钙结石</span>
+        <span class="tag disease">磷酸钙结石</span>
+        <span class="tag disease">非钙质结石</span>
+        <span class="tag disease">尿酸盐结石</span>
+        <span class="tag disease">磷酸镁铵结石</span>
+        <span class="tag disease">胱氨酸结石</span>
+        <span class="tag disease">甲状腺功能亢进症</span>
+        <span class="tag disease">高钙尿症</span>
+        <span class="tag disease">高尿酸尿症</span>
+        <span class="tag disease">高草酸盐尿症</span>
+        <span class="tag disease">肾小管性酸中毒</span>
+        <span class="tag disease">海绵肾</span>
+        <span class="tag disease">痛风</span>
+        <span class="tag disease">尿路感染</span>
+        <span class="tag disease">尿路梗阻</span>
+        <span class="tag disease">肾积水</span>
+    </div>
+
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <div class="keywords">
+            <strong>关键词：</strong>泌尿系结石、肾结石、输尿管结石、膀胱结石、尿道结石、草酸钙、磷酸钙、尿酸盐、尿路感染、肾积水、疼痛、血尿、排石
+        </div>
+        <div class="page-num">152</div>
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" 
+                   value="泌尿系结石；定义、病因、临床表现；泌尿系结石、肾结石、输尿管结石、膀胱结石、尿道结石、草酸钙、磷酸钙、尿酸盐、尿路感染、肾积水、疼痛、血尿、排石=152" 
+                   readonly>
+            <button class="btn btn-copy" onclick="copyText()">📋 复制</button>
+        </div>
+    </div>
+
+    <!-- 提示框 -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // 复制功能
+        function copyText() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value);
+            } else {
+                document.execCommand('copy');
+            }
+            showToast('✅ 已复制到剪贴板');
+        }
+
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.toggle('active');
+            if (isFav) {
+                btn.innerHTML = '❤️ 已收藏';
+                // 添加到index.html的收藏类目（通过localStorage模拟）
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '泌尿系结石',
+                    url: '152.html',
+                    pageNum: '152'
+                };
+                if (!favorites.find(f => f.url === '152.html')) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                showToast('⭐ 已添加到收藏');
+            } else {
+                btn.innerHTML = '⭐ 收藏';
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '152.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                showToast('❌ 已取消收藏');
+            }
+        }
+
+        // 检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            if (favorites.find(f => f.url === '152.html')) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.innerHTML = '❤️ 已收藏';
+            }
+        };
+
+        // 提示框
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 2000);
+        }
+    </script>
+</body>
+</html>
