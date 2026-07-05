@@ -1,0 +1,630 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急性肠梗阻检查处理与腹水病因*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 80px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1000;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 收藏按钮 */
+        .favorite-btn {
+            background: #e8a838;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(232, 168, 56, 0.3);
+        }
+        
+        .favorite-btn:hover {
+            background: #d49a2f;
+        }
+        
+        .favorite-btn.active {
+            background: #c9302c;
+        }
+        
+        /* 标题 */
+        h1 {
+            text-align: center;
+            padding: 80px 20px 25px;
+            font-size: 22px;
+            color: #2c5282;
+            font-weight: bold;
+        }
+        
+        /* 副标题 */
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+            padding: 0 20px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            width: 95%;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        /* 表头 */
+        thead tr {
+            background: #2b6cb0;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 14px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+            border: 1px solid #2c5282;
+        }
+        
+        /* 表格主体 */
+        tbody td {
+            padding: 12px 14px;
+            border: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #edf2f7;
+        }
+        
+        /* 层级缩进 */
+        .level-1 {
+            font-weight: bold;
+            color: #2c5282;
+            font-size: 15px;
+        }
+        
+        .level-2 {
+            padding-left: 20px;
+            color: #4a5568;
+        }
+        
+        .level-3 {
+            padding-left: 40px;
+            color: #4a5568;
+            font-size: 13px;
+        }
+        
+        /* 符号样式 */
+        .bullet {
+            color: #2b6cb0;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+        
+        .diamond {
+            color: #718096;
+            margin-right: 6px;
+        }
+        
+        .check {
+            color: #38a169;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+        
+        .section-title {
+            background: #e2e8f0;
+            font-weight: bold;
+            font-size: 16px;
+            color: #2c5282;
+        }
+        
+        /* 页码显示 */
+        .page-number {
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+            margin: 20px 0;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            width: 95%;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #4a5568;
+            background: white;
+        }
+        
+        .copy-btn {
+            background: #48bb78;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #38a169;
+        }
+        
+        .copy-btn.copied {
+            background: #38a169;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            width: 95%;
+            max-width: 800px;
+            margin: 0 auto 25px;
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            color: #2c5282;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #fed7d7;
+            color: #c53030;
+        }
+        
+        .tag-disease:hover {
+            background: #fc8181;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .tag-drug:hover {
+            background: #68d391;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #bee3f8;
+            color: #2c5282;
+        }
+        
+        .tag-bacteria:hover {
+            background: #63b3ed;
+            color: white;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            width: 95%;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .keywords-title {
+            font-size: 15px;
+            color: #2c5282;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .keywords-content {
+            color: #4a5568;
+            font-size: 13px;
+            line-height: 2;
+        }
+        
+        .keyword {
+            display: inline-block;
+            margin-right: 15px;
+            color: #4a5568;
+        }
+        
+        /* 页码链接 */
+        .page-link {
+            text-align: center;
+            color: #999;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 18px;
+                padding-top: 100px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 12px 10px;
+            }
+            
+            tbody td {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            .level-3 {
+                padding-left: 30px;
+            }
+            
+            .nav-buttons {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .nav-btn, .favorite-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="143.html" class="nav-btn">上一页</a>
+        <a href="145.html" class="nav-btn">下一页</a>
+        <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~急性肠梗阻检查处理与腹水病因*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~急性肠梗阻检查处理与腹水病因*****、急性肠梗阻检查处理与腹水病因、腹水、5.选做检查、尿常规：脱水时尿比重升高。、6.急诊处理、1.常见病因</div>
+    <p class="subtitle">急诊疾病 · 第132页</p>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>急性肠梗阻检查处理与腹水病因</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="level-2"><span class="bullet">●</span>腹部CT：可以识别具体部位（近端肠扩张伴远端肠塌陷）、确定部分病因（肠腔占位、肠扭转等）、识别并发症。"靶征"提示肠套叠，"漩涡征"提示肠扭转。有人认为可取代腹部平片。</td>
+                </tr>
+                <tr>
+                    <td class="level-1"><span class="bullet">5.</span>选做检查</td>
+                </tr>
+                <tr>
+                    <td class="level-2"><span class="bullet">●</span>腹部增强CT或CTA：适用于疑诊血管疾病所致肠梗阻。某些情况下协助明确占位性质。</td>
+                </tr>
+                <tr>
+                    <td class="level-2"><span class="bullet">●</span>ABG及乳酸测定：有全身症状患者，如神志改变、低血压、心动过速、尿量减少。</td>
+                </tr>
+                <tr>
+                    <td class="level-2"><span class="bullet">●</span>尿常规：脱水时尿比重升高。</td>
+                </tr>
+                <tr>
+                    <td class="level-1"><span class="bullet">6.</span>急诊处理</td>
+                </tr>
+                <tr>
+                    <td class="level-2"><span class="bullet">●</span>外科会诊：对于症状严重患者，建议立刻外科会诊以帮助确定是否需立即手术。</td>
+                </tr>
+                <tr>
+                    <td class="level-2"><span class="bullet">●</span>液体治疗：纠正可能存在的容量不足、电解质紊乱、代谢性酸中毒或代谢性碱中毒。</td>
+                </tr>
+                <tr>
+                    <td class="level-2"><span class="bullet">●</span>饮食：一般机械性肠梗阻患者均应禁食。少数不完全性肠梗阻患者可少量液体摄入。</td>
+                </tr>
+                <tr>
+                    <td class="level-2"><span class="bullet">●</span>胃肠减压：有腹胀、恶心、呕吐患者建议鼻胃管减压。有条件者可考虑肠梗阻导管减压。</td>
+                </tr>
+                <tr>
+                    <td class="level-2"><span class="bullet">●</span>抗生素：无并发症的小肠梗阻不需应用抗生素，憩室导致肠梗阻或有穿孔等并发症者需要应用抗生素。发热患者通常提示感染，不发热患者也不能排除感染，须仔细评估。手术探查患者应预防性使用抗生素。</td>
+                </tr>
+                <tr>
+                    <td class="level-2"><span class="bullet">●</span>疼痛治疗：镇痛药效果一般较差。持续重度疼痛需考虑手术，姑息治疗时可用阿片类或其他药物。</td>
+                </tr>
+                <tr>
+                    <td class="level-2"><span class="bullet">●</span>手术探查：所有根据临床和放射学检查怀疑存在复杂性肠梗阻（完全性梗阻、闭袢性梗阻、肠缺血、肠坏死、肠穿孔）的患者，均应进行剖腹探查术。非手术治疗无效者应手术治疗。</td>
+                </tr>
+                <tr>
+                    <td class="level-2"><span class="bullet">●</span>支架置入：近端小肠肿瘤导致梗阻且不适合手术可考虑十二指肠支架置入。结肠支架置入有两个主要用途：作为手术的过渡，为急性机械性梗阻患者进行术前减压；晚期患者的舒缓疗法。</td>
+                </tr>
+                <tr>
+                    <td class="section-title">■ 腹水</td>
+                </tr>
+                <tr>
+                    <td class="level-1"><span class="bullet">1.</span>常见病因</td>
+                </tr>
+                <tr>
+                    <td class="level-2"><span class="bullet">●</span>门静脉高压：肝硬化（75%）、酒精性肝炎、急性肝衰竭、肝静脉闭塞（如布-加综合征）、心力衰竭、缩窄性心包炎、血</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <p class="page-number">— 132 —</p>
+    <p class="page-link">132</p>
+    
+    <!-- 复制功能 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="急性肠梗阻检查处理与腹水病因；急诊疾病；急性肠梗阻、机械性肠梗阻、不完全性肠梗阻、复杂性肠梗阻、完全性梗阻、闭袢性梗阻、肠缺血、肠坏死、肠穿孔、腹水、门静脉高压、肝硬化、酒精性肝炎、急性肝衰竭、布-加综合征、心力衰竭、缩窄性心包炎、肠套叠、肠扭转、憩室、十二指肠支架、结肠支架、腹部CT、CTA、ABG、乳酸；=132" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyContent()">复制</button>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <p class="tags-title">🔖 特色检索标签</p>
+        <div class="tags-container">
+            <span class="tag tag-disease">急性肠梗阻</span>
+            <span class="tag tag-disease">机械性肠梗阻</span>
+            <span class="tag tag-disease">不完全性肠梗阻</span>
+            <span class="tag tag-disease">复杂性肠梗阻</span>
+            <span class="tag tag-disease">完全性梗阻</span>
+            <span class="tag tag-disease">闭袢性梗阻</span>
+            <span class="tag tag-disease">肠缺血</span>
+            <span class="tag tag-disease">肠坏死</span>
+            <span class="tag tag-disease">肠穿孔</span>
+            <span class="tag tag-disease">腹水</span>
+            <span class="tag tag-disease">门静脉高压</span>
+            <span class="tag tag-disease">肝硬化</span>
+            <span class="tag tag-disease">酒精性肝炎</span>
+            <span class="tag tag-disease">急性肝衰竭</span>
+            <span class="tag tag-disease">布-加综合征</span>
+            <span class="tag tag-disease">心力衰竭</span>
+            <span class="tag tag-disease">缩窄性心包炎</span>
+            <span class="tag tag-disease">肠套叠</span>
+            <span class="tag tag-disease">肠扭转</span>
+            <span class="tag tag-disease">憩室</span>
+            <span class="tag tag-drug">抗生素</span>
+            <span class="tag tag-drug">阿片类</span>
+            <span class="tag tag-drug">镇痛药</span>
+        </div>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <p class="keywords-title">🔑 关键词</p>
+        <div class="keywords-content">
+            <span class="keyword">急性肠梗阻</span>
+            <span class="keyword">机械性肠梗阻</span>
+            <span class="keyword">不完全性肠梗阻</span>
+            <span class="keyword">复杂性肠梗阻</span>
+            <span class="keyword">完全性梗阻</span>
+            <span class="keyword">闭袢性梗阻</span>
+            <span class="keyword">肠缺血</span>
+            <span class="keyword">肠坏死</span>
+            <span class="keyword">肠穿孔</span>
+            <span class="keyword">腹水</span>
+            <span class="keyword">门静脉高压</span>
+            <span class="keyword">肝硬化</span>
+            <span class="keyword">酒精性肝炎</span>
+            <span class="keyword">急性肝衰竭</span>
+            <span class="keyword">布-加综合征</span>
+            <span class="keyword">心力衰竭</span>
+            <span class="keyword">缩窄性心包炎</span>
+            <span class="keyword">肠套叠</span>
+            <span class="keyword">肠扭转</span>
+            <span class="keyword">憩室</span>
+            <span class="keyword">十二指肠支架</span>
+            <span class="keyword">结肠支架</span>
+            <span class="keyword">腹部CT</span>
+            <span class="keyword">CTA</span>
+            <span class="keyword">ABG</span>
+            <span class="keyword">乳酸</span>
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                const originalText = btn.textContent;
+                btn.textContent = '已复制!';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '已复制!';
+                    setTimeout(() => {
+                        btn.textContent = '复制';
+                    }, 2000);
+                });
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isActive = btn.classList.contains('active');
+            
+            if (!isActive) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '急性肠梗阻检查处理与腹水病因',
+                    url: '132.html',
+                    pageNum: '132',
+                    category: '急诊疾病'
+                };
+                
+                const exists = favorites.some(f => f.url === '132.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                try {
+                    updateIndexFavorite(pageInfo);
+                } catch(e) {
+                    console.log('无法直接更新index.html');
+                }
+                
+                alert('已添加到收藏！');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const filtered = favorites.filter(f => f.url !== '132.html');
+                localStorage.setItem('favorites', JSON.stringify(filtered));
+            }
+        }
+        
+        function updateIndexFavorite(pageInfo) {
+            localStorage.setItem('favoriteUpdate', JSON.stringify({
+                action: 'add',
+                data: pageInfo,
+                timestamp: Date.now()
+            }));
+        }
+        
+        function checkFavoriteStatus() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.url === '132.html');
+            
+            if (isFavorited) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        }
+        
+        window.onload = function() {
+            checkFavoriteStatus();
+        };
+    </script>
+</body>
+</html>
