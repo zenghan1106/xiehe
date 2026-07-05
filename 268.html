@@ -1,0 +1,498 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊疾病-乳酸酸中毒与休克处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .nav-btn {
+            position: fixed;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            z-index: 100;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn {
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        .prev-btn {
+            top: 15px;
+            right: 15px;
+            background: #5a6c7d;
+            color: white;
+        }
+        
+        .prev-btn:hover {
+            background: #4a5a6a;
+        }
+        
+        .next-btn {
+            top: 55px;
+            right: 15px;
+            background: #5a6c7d;
+            color: white;
+        }
+        
+        .next-btn:hover {
+            background: #4a5a6a;
+        }
+        
+        .fav-btn {
+            top: 95px;
+            right: 15px;
+            background: #e8a838;
+            color: white;
+        }
+        
+        .fav-btn:hover {
+            background: #d49a2a;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 60px auto 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        .page-title {
+            text-align: center;
+            padding: 25px 20px;
+            background: linear-gradient(90deg, #1e5799 0%, #2989d8 50%, #207cca 100%);
+            color: white;
+        }
+        
+        .page-title h1 {
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .page-title .subtitle {
+            font-size: 14px;
+            margin-top: 8px;
+            opacity: 0.9;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        .table-header {
+            background: #1e5799;
+            color: white;
+        }
+        
+        .table-header th {
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tr:nth-child(odd) {
+            background: #ffffff;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e8ecf1;
+            line-height: 1.8;
+            vertical-align: top;
+        }
+        
+        .section-title {
+            background: #e8f0f8 !important;
+            font-weight: bold;
+            color: #1e5799;
+            font-size: 15px;
+        }
+        
+        .check-mark {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+        
+        .bullet {
+            color: #1e5799;
+            font-weight: bold;
+        }
+        
+        .sub-bullet {
+            color: #666;
+            padding-left: 20px;
+        }
+        
+        .highlight-box {
+            background: #fff8e1;
+            padding: 10px;
+            border-radius: 6px;
+            margin: 5px 0;
+        }
+        
+        .tags-section {
+            padding: 20px;
+            background: #f0f4f8;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #bbdefb;
+        }
+        
+        .tag-disease:hover {
+            background: #1565c0;
+            color: white;
+        }
+        
+        .tag-antibiotic {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+        }
+        
+        .tag-antibiotic:hover {
+            background: #2e7d32;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #fce4ec;
+            color: #c2185b;
+            border: 1px solid #f8bbd9;
+        }
+        
+        .tag-bacteria:hover {
+            background: #c2185b;
+            color: white;
+        }
+        
+        .copy-section {
+            padding: 20px;
+            background: #fafafa;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .copy-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background: white;
+            width: calc(100% - 110px);
+        }
+        
+        .copy-btn {
+            padding: 12px 25px;
+            background: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #45a049;
+        }
+        
+        .copy-btn.copied {
+            background: #2196f3;
+        }
+        
+        .keywords {
+            text-align: center;
+            padding: 15px;
+            color: #888;
+            font-size: 13px;
+        }
+        
+        .page-number {
+            text-align: center;
+            padding: 10px;
+            color: #aaa;
+            font-size: 12px;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                margin: 55px auto 20px;
+            }
+            
+            .page-title h1 {
+                font-size: 18px;
+            }
+            
+            td {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-wrapper {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航按钮 -->
+    <a href="index.html" class="nav-btn home-btn">← 返回首页</a>
+    <a href="267.html" class="nav-btn prev-btn">上一页</a>
+    <a href="269.html" class="nav-btn next-btn">下一页</a>
+    <button class="nav-btn fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <div class="page-title">
+            <h1>~~~~~急诊疾病-乳酸酸中毒与休克处理*****</h1>
+            <div class="subtitle">发作性代谢性酸中毒 | 神经系统异常 | 急诊处理流程</div>
+        </div>
+        
+        <!-- 主表格 -->
+        <table>
+            <tr class="table-header">
+                <th>项目分类</th>
+                <th>详细内容</th>
+            </tr>
+            
+            <tr class="section-title">
+                <td colspan="2">临床表现</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <span class="check-mark">✓</span> 通常表现为<span style="color:#c62828;font-weight:bold;">发作性代谢性酸中毒</span>（通常发生于高糖饮食后）和特征性<span style="color:#c62828;font-weight:bold;">神经系统异常</span>，包括意识模糊、小脑共济失调、言语不清、记忆丧失。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <span class="check-mark">✓</span> 乳酸的标准实验室酶测定采用的是<span style="color:#1565c0;font-weight:bold;">L-乳酸脱氢酶</span>，因此常规不会检测到D-乳酸，确诊有赖于<span style="color:#1565c0;font-weight:bold;">D-乳酸脱氢酶测定</span>。
+                </td>
+            </tr>
+            
+            <tr class="section-title">
+                <td colspan="2">3. 必做检查</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <span class="bullet">●</span> <span style="color:#c62828;font-weight:bold;">ABG</span>、<span style="color:#c62828;font-weight:bold;">乳酸</span>、<span style="color:#c62828;font-weight:bold;">电解质</span>
+                </td>
+            </tr>
+            
+            <tr class="section-title">
+                <td colspan="2">4. 选做检查</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <span class="bullet">●</span> 血常规，肝肾功能、血糖检测<br>
+                    <span class="bullet">●</span> 心肌损伤标志物、NT-proBNP检测<br>
+                    <span class="bullet">●</span> 感染指标筛查（如HIV）<br>
+                    <span class="bullet">●</span> CRP、ESR、PCT检测<br>
+                    <span class="bullet">●</span> 影像学检查
+                </td>
+            </tr>
+            
+            <tr class="section-title">
+                <td colspan="2">5. 急诊处理</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <span class="bullet">●</span> <span style="font-weight:bold;color:#333;">改善基础疾病状态，纠正病因</span><br><br>
+                    
+                    <span class="check-mark">✓</span> <span style="color:#c62828;font-weight:bold;">低血容量</span>：积极补液、容量复苏，如存在持续失血因素，如消化道出血，积极评估出血原因、部位，完善胃镜/结肠镜检查，内科保守治疗无效者需考虑介入/手术治疗。<br><br>
+                    
+                    <span class="check-mark">✓</span> <span style="color:#c62828;font-weight:bold;">脓毒症休克</span>：初始复苏治疗（快速恢复灌注及早期给予<span style="color:#2e7d32;font-weight:bold;">抗生素</span>）对纠正酸中毒、改善患者预后起至关重要的作用。<br><br>
+                    
+                    <span class="check-mark">✓</span> <span style="color:#c62828;font-weight:bold;">恢复组织灌注</span>：积极给予静脉液体输注，通常是晶体液（平衡晶体液或生理盐水），用量<span style="color:#1565c0;font-weight:bold;">30ml/kg</span>（实际体重），起病后<span style="color:#1565c0;font-weight:bold;">1小时内</span>开始，并于<span style="color:#1565c0;font-weight:bold;">3小时内</span>完成。<br><br>
+                    
+                    <span class="check-mark">✓</span> <span style="color:#c62828;font-weight:bold;">经验性抗生素治疗</span>以感染的疑似微生物及部位为目标，最好在<span style="color:#1565c0;font-weight:bold;">第1小时内</span>给予。<br><br>
+                    
+                    <span class="check-mark">✓</span> 治疗过程中监测患者生命体征、MAP、CVP、ScvO₂、尿量、乳酸等变化情况，观察有无肺水肿表现。<br><br>
+                    
+                    <span class="check-mark">✓</span> 若初始复苏治疗失败，需及时应用血管活性药物（一线药物为<span style="color:#c62828;font-weight:bold;">去甲肾上腺素</span>）。<br><br>
+                    
+                    <span class="bullet">●</span> <span style="font-weight:bold;color:#333;">心源性休克</span>：常见原因为急性心肌梗死。<br><br>
+                    
+                    <span class="check-mark">✓</span> <span style="font-weight:bold;">容量管理</span><br>
+                    <span class="sub-bullet">◇</span> 对于右心室梗死、休克患者，如胸片/胸部CT无肺淤血证据，且无呼吸窘迫，可考虑补充容量，需密切观察有无肺水肿表现。<br>
+                    <span class="sub-bullet">◇</span> 对于广泛前壁心肌梗死，尤其老年患者，应避免过度补液致肺水肿。<br><br>
+                    
+                    <span class="check-mark">✓</span> <span style="font-weight:bold;">血管活性药及正性肌力药物</span>：首选<span style="color:#c62828;font-weight:bold;">去甲肾上腺素</span>，应使用所需的最小剂量。可联合<span style="color:#2e7d32;font-weight:bold;">多巴胺</span>、<span style="color:#2e7d32;font-weight:bold;">多巴酚丁胺</span>。
+                </td>
+            </tr>
+        </table>
+        
+        <!-- 标签区域 -->
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 特色检索标签（点击筛选）</div>
+            <span class="tag tag-disease">代谢性酸中毒</span>
+            <span class="tag tag-disease">脓毒症休克</span>
+            <span class="tag tag-disease">心源性休克</span>
+            <span class="tag tag-disease">低血容量</span>
+            <span class="tag tag-disease">急性心肌梗死</span>
+            <span class="tag tag-disease">右心室梗死</span>
+            <span class="tag tag-disease">消化道出血</span>
+            <span class="tag tag-antibiotic">抗生素</span>
+            <span class="tag tag-antibiotic">去甲肾上腺素</span>
+            <span class="tag tag-antibiotic">多巴胺</span>
+            <span class="tag tag-antibiotic">多巴酚丁胺</span>
+            <span class="tag tag-bacteria">HIV</span>
+        </div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <div class="copy-wrapper">
+                <input type="text" class="copy-input" id="copyText" value="急诊疾病-乳酸酸中毒与休克处理；发作性代谢性酸中毒；神经系统异常；脓毒症休克；心源性休克；抗生素；去甲肾上腺素；多巴胺；多巴酚丁胺；=256" readonly>
+                <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+            </div>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">第 256 页</div>
+        
+        <!-- 关键词 -->
+        <div class="keywords">
+            关键词：乳酸酸中毒 | 休克 | 急诊处理 | 代谢性酸中毒 | 去甲肾上腺素 | 脓毒症 | 心源性休克 | 容量复苏 | 抗生素
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '已复制!';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            const pageData = {
+                title: '急诊疾病-乳酸酸中毒与休克处理',
+                url: '256.html',
+                pageNum: '256',
+                category: '急诊疾病',
+                tags: ['代谢性酸中毒', '脓毒症休克', '心源性休克', '抗生素', '去甲肾上腺素']
+            };
+            
+            // 获取已有收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === pageData.url);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            // 添加到收藏
+            favorites.push(pageData);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试更新index.html的收藏区域（如果同域）
+            alert('⭐ 已添加到收藏！\n页面：' + pageData.title + '\n请在首页查看收藏列表。');
+            
+            const btn = document.querySelector('.fav-btn');
+            btn.textContent = '已收藏';
+            btn.style.background = '#4caf50';
+        }
+        
+        // 标签点击搜索功能
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const keyword = this.textContent;
+                alert('正在搜索标签: ' + keyword + '\n（实际应用中可跳转至搜索结果页）');
+            });
+        });
+    </script>
+</body>
+</html>
