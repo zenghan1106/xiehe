@@ -1,0 +1,636 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~特殊疾病的氧疗*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 50%, #fef3c7 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+            z-index: 100;
+        }
+        
+        .home-btn:hover {
+            background: #2563eb;
+        }
+        
+        /* 导航按钮容器 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #059669;
+        }
+        
+        .nav-btn.next {
+            background: #f59e0b;
+            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+        }
+        
+        .nav-btn.next:hover {
+            background: #d97706;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #ef4444;
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+        }
+        
+        .fav-btn:hover {
+            background: #dc2626;
+        }
+        
+        .fav-btn.active {
+            background: #10b981;
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1e40af;
+            margin: 70px 0 10px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        /* 副标题 */
+        .subtitle {
+            text-align: center;
+            font-size: 15px;
+            color: #4b5563;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 8px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            padding: 15px 10px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+        }
+        
+        /* 第一行特殊样式 */
+        .section-header td {
+            background: #dbeafe;
+            color: #1e3a8a;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 12px;
+        }
+        
+        /* 单元格 */
+        td, th {
+            border: 1px solid #d1d5db;
+            padding: 10px;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        /* 疾病名称列 */
+        td:first-child {
+            font-weight: 600;
+            color: #1f2937;
+            background: #f9fafb;
+            min-width: 120px;
+            white-space: nowrap;
+        }
+        
+        /* 内容列 */
+        .content-cell {
+            color: #374151;
+            text-align: justify;
+        }
+        
+        /* zebra条纹 */
+        tbody tr:nth-child(even):not(.section-header) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover:not(.section-header) {
+            background: #e0f2fe;
+        }
+        
+        /* 重点标记 */
+        .highlight {
+            color: #dc2626;
+            font-weight: 600;
+        }
+        
+        .target-range {
+            color: #059669;
+            font-weight: 600;
+            background: #d1fae5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+        
+        /* 列表样式 */
+        .content-cell ul {
+            margin: 0;
+            padding-left: 0;
+            list-style: none;
+        }
+        
+        .content-cell li {
+            margin-bottom: 8px;
+            padding-left: 16px;
+            position: relative;
+        }
+        
+        .content-cell li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+        }
+        
+        /* 子要点 */
+        .sub-point {
+            margin-left: 16px;
+            margin-top: 4px;
+            color: #4b5563;
+        }
+        
+        /* 来源标注 */
+        .source {
+            text-align: right;
+            color: #6b7280;
+            font-size: 13px;
+            font-style: italic;
+            margin-top: 10px;
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.85);
+            border-radius: 12px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #93c5fd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #374151;
+            background: #fff;
+        }
+        
+        .copy-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #2563eb;
+        }
+        
+        .copy-btn.copied {
+            background: #10b981;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            color: #1f2937;
+            font-weight: bold;
+            margin: 15px 0;
+            padding: 10px;
+            background: #e5e7eb;
+            border-radius: 8px;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            padding: 15px;
+            background: #fef3c7;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        .keywords-title {
+            font-weight: bold;
+            color: #92400e;
+            margin-bottom: 10px;
+        }
+        
+        .keyword-tag {
+            display: inline-block;
+            background: #fbbf24;
+            color: #78350f;
+            padding: 6px 14px;
+            margin: 4px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        /* 特色标签 */
+        .feature-tags {
+            margin-top: 25px;
+            padding: 20px;
+            background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
+            border-radius: 12px;
+        }
+        
+        .feature-tags-title {
+            font-weight: bold;
+            color: #5b21b6;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 16px;
+        }
+        
+        .tag-category {
+            margin-bottom: 15px;
+        }
+        
+        .tag-category-name {
+            font-weight: 600;
+            color: #6d28d9;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .tag-item {
+            display: inline-block;
+            background: white;
+            color: #5b21b6;
+            padding: 8px 16px;
+            margin: 4px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 2px solid #a78bfa;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .tag-item:hover {
+            background: #5b21b6;
+            color: white;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 17px;
+                margin-top: 80px;
+            }
+            
+            .nav-buttons {
+                position: relative;
+                top: auto;
+                right: auto;
+                flex-direction: row;
+                justify-content: center;
+                margin-bottom: 15px;
+                flex-wrap: wrap;
+            }
+            
+            .home-btn {
+                position: relative;
+                top: auto;
+                left: auto;
+                display: block;
+                width: fit-content;
+                margin: 0 auto 10px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            td, th {
+                padding: 8px;
+            }
+            
+            td:first-child {
+                white-space: normal;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="326.html" class="nav-btn">↑ 上一页</a>
+        <a href="328.html" class="nav-btn next">↓ 下一页</a>
+        <button class="nav-btn fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~特殊疾病的氧疗*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~特殊疾病的氧疗*****、疾病/情况、氧疗要点与目标、5. 特殊疾病的氧疗、（急诊氧气治疗专家共识组）、COPD、急性心肌梗死、休克、急性脑卒中、一氧化碳（CO）中毒的氧疗</div>
+    <div class="subtitle">COPD、急性心肌梗死、休克、急性脑卒中、CO中毒的氧疗策略</div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>疾病/情况</th>
+                    <th>氧疗要点与目标</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-header">
+                    <td colspan="2">5. 特殊疾病的氧疗</td>
+                </tr>
+                <tr>
+                    <td>COPD</td>
+                    <td class="content-cell">
+                        是一种慢性呼吸系统疾病，特点为不完全可逆的气流受限。COPD急性加重期：推荐初始SpO₂为<span class="target-range">88%～92%</span>。通过鼻导管的低流量氧疗是最简单的氧疗方式，适用于多数轻中度COPD患者，在应用氧疗后需对患者SpO₂进行再评估，调整氧疗方式以达到目标SpO₂。由于存在重复吸入CO₂及吸入氧体积分数过高因素，普通面罩及储氧面罩不推荐用于COPD患者，可考虑使用文丘里面罩或HHFNC。
+                    </td>
+                </tr>
+                <tr>
+                    <td>急性心肌梗死</td>
+                    <td class="content-cell">
+                        对于怀疑或确诊心肌梗死的患者，在无低氧血症的情况下，尚不能确定对缺血部位的心肌提供高浓度的氧是否可使患者获益。但局部的高氧体积分数可能导致血管收缩，增加血管阻力，从而减少心肌氧供。建议心肌梗死时无ESCAPE风险的患者维持血氧饱和度<span class="target-range">94%～98%</span>，有ESCAPE风险的患者维持血氧饱和度<span class="target-range">88%～92%</span>，氧疗应基于以上目标谨慎使用。
+                    </td>
+                </tr>
+                <tr>
+                    <td>休克</td>
+                    <td class="content-cell">
+                        有证据表明早期纠正休克，患者的低氧可改善预后，但无证据表明高于正常的氧输送可使患者获益。对于休克患者的血氧饱和度目标仍有争议，大多数指南认为休克患者的SaO₂不应低于90%，建议将SpO₂<span class="target-range">94%～98%</span>作为理想目标。可首先使用储氧面罩15L/min开始氧疗，连续监测动脉血气变化。若循环稳定可考虑降低吸入氧体积分数。对于存在CO₂潴留风险的患者，则需要临床医师仔细权衡低氧与呼吸性酸中毒的风险，必要时考虑使用无创或有创通气辅助呼吸。
+                    </td>
+                </tr>
+                <tr>
+                    <td>急性脑卒中</td>
+                    <td class="content-cell">
+                        急性脑卒中伴低氧血症多发生于夜间，常由呼吸中枢受损、气道保护功能缺失所致，临床较常见，可加重患者脑缺血缺氧状态，增加患者病死率。但对于SpO₂正常的非缺氧患者，持续氧疗或夜间氧疗并不能使患者获益。对于无CO₂潴留高危因素的脑卒中患者SpO₂目标为<span class="target-range">94%～98%</span>，对于存在CO₂潴留的脑卒中患者SpO₂目标为<span class="target-range">88%～93%</span>。可由鼻导管开始给予低浓度氧疗，并根据上文原则选择氧疗工具。
+                    </td>
+                </tr>
+                <tr>
+                    <td>一氧化碳（CO）中毒的氧疗</td>
+                    <td class="content-cell">
+                        CO中毒的患者因SpO₂监测不能区分碳氧血红蛋白和氧合血红蛋白，因此不能正确反映患者的血氧情况。血气分析时氧分压显示正常，但实际可携氧血红蛋白的数量不足。同时COHb的半衰期与吸入氧体积分数呈反比，因此，对于CO中毒的患者，急诊初始治疗通过储氧面罩给予高浓度氧至关重要。根据中毒严重程度决定是否选择高压氧治疗。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="source">（急诊氧气治疗专家共识组）</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <!-- 复制功能 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyContent()">复制</button>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">页码：316</div>
+        
+        <!-- 关键词 -->
+        <div class="keywords">
+            <div class="keywords-title">关键词</div>
+            <span class="keyword-tag">COPD</span>
+            <span class="keyword-tag">急性心肌梗死</span>
+            <span class="keyword-tag">休克</span>
+            <span class="keyword-tag">急性脑卒中</span>
+            <span class="keyword-tag">CO中毒</span>
+            <span class="keyword-tag">氧疗</span>
+            <span class="keyword-tag">SpO₂</span>
+            <span class="keyword-tag">ESCAPE</span>
+            <span class="keyword-tag">HHFNC</span>
+            <span class="keyword-tag">高压氧</span>
+        </div>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="feature-tags">
+        <div class="feature-tags-title">🔍 特色检索标签</div>
+        
+        <div class="tag-category">
+            <div class="tag-category-name">疾病相关：</div>
+            <span class="tag-item">COPD</span>
+            <span class="tag-item">急性心肌梗死</span>
+            <span class="tag-item">休克</span>
+            <span class="tag-item">急性脑卒中</span>
+            <span class="tag-item">CO中毒</span>
+            <span class="tag-item">呼吸性酸中毒</span>
+            <span class="tag-item">低氧血症</span>
+            <span class="tag-item">脑缺血缺氧</span>
+        </div>
+        
+        <div class="tag-category">
+            <div class="tag-category-name">细菌相关：</div>
+            <span class="tag-item">无</span>
+        </div>
+        
+        <div class="tag-category">
+            <div class="tag-category-name">药物/治疗相关：</div>
+            <span class="tag-item">氧疗</span>
+            <span class="tag-item">鼻导管</span>
+            <span class="tag-item">文丘里面罩</span>
+            <span class="tag-item">储氧面罩</span>
+            <span class="tag-item">HHFNC</span>
+            <span class="tag-item">无创通气</span>
+            <span class="tag-item">有创通气</span>
+            <span class="tag-item">高压氧</span>
+        </div>
+    </div>
+    
+    <script>
+        // 页面信息
+        const pageInfo = {
+            title: "特殊疾病的氧疗",
+            subtitle: "COPD、急性心肌梗死、休克、急性脑卒中、CO中毒的氧疗策略",
+            keywords: "COPD；急性心肌梗死；休克；急性脑卒中；CO中毒；氧疗；SpO₂；ESCAPE；HHFNC；高压氧",
+            pageNum: "316"
+        };
+        
+        // 设置复制输入框内容
+        document.getElementById('copyInput').value = 
+            pageInfo.title + "；" + 
+            pageInfo.subtitle + "；" + 
+            pageInfo.keywords + "；" + 
+            "=" + pageInfo.pageNum;
+        
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isActive = btn.classList.contains('active');
+            
+            if (!isActive) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                
+                // 保存到localStorage
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const currentPage = {
+                    title: '~~~~~' + pageInfo.title + '*****',
+                    url: window.location.pathname.split('/').pop() || '316.html',
+                    category: '急救技术'
+                };
+                
+                const exists = favorites.some(f => f.url === currentPage.url);
+                if (!exists) {
+                    favorites.push(currentPage);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                alert('已添加到收藏！请在 index.html 的收藏类目下查看。');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '316.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const currentUrl = window.location.pathname.split('/').pop() || '316.html';
+            const isFav = favorites.some(f => f.url === currentUrl);
+            
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
