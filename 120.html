@@ -1,0 +1,569 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~休克分类与临床表现*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8f0fe 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #2d3748;
+        }
+        
+        .header {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .btn-home {
+            background: #3182ce;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #2c5282;
+            transform: translateY(-2px);
+        }
+        
+        .page-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .btn-page {
+            background: #38a169;
+            color: white;
+            min-width: 75px;
+            text-align: center;
+        }
+        
+        .btn-page:hover {
+            background: #2f855a;
+        }
+        
+        .btn-favorite {
+            background: #ed8936;
+            color: white;
+            min-width: 75px;
+            text-align: center;
+        }
+        
+        .btn-favorite:hover {
+            background: #dd6b20;
+        }
+        
+        .btn-favorite.active {
+            background: #e53e3e;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2b6cb0;
+            font-size: 26px;
+            margin: 15px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.08);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        thead th {
+            background: #2b6cb0;
+            color: white;
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        tbody td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+            line-height: 1.7;
+        }
+        
+        tbody tr:hover {
+            background: #f7fafc;
+        }
+        
+        .section-title {
+            background: #ebf8ff;
+            color: #2b6cb0;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        
+        .sub-section {
+            background: #f0fff4;
+            color: #276749;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .indent {
+            padding-left: 28px !important;
+        }
+        
+        .double-indent {
+            padding-left: 48px !important;
+        }
+        
+        .triple-indent {
+            padding-left: 68px !important;
+        }
+        
+        .bullet::before {
+            content: "● ";
+            color: #3182ce;
+            font-weight: bold;
+        }
+        
+        .diamond::before {
+            content: "◇ ";
+            color: #3182ce;
+        }
+        
+        .check::before {
+            content: "✓ ";
+            color: #38a169;
+            font-weight: bold;
+        }
+        
+        .author {
+            text-align: right;
+            color: #718096;
+            font-style: italic;
+            padding: 12px;
+        }
+        
+        .tags-section {
+            background: white;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            color: #2b6cb0;
+            font-size: 15px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 7px 14px;
+            border-radius: 18px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #fed7d7;
+            color: #c53030;
+        }
+        
+        .tag-disease:hover {
+            background: #fc8181;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .tag-drug:hover {
+            background: #68d391;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #feebc8;
+            color: #c05621;
+        }
+        
+        .tag-bacteria:hover {
+            background: #f6ad55;
+            color: white;
+        }
+        
+        .copy-section {
+            background: white;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .copy-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        #copyInput {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        #copyInput:focus {
+            border-color: #2b6cb0;
+        }
+        
+        .btn-copy {
+            background: #805ad5;
+            color: white;
+            padding: 12px 22px;
+            white-space: nowrap;
+        }
+        
+        .btn-copy:hover {
+            background: #6b46c1;
+        }
+        
+        .btn-copy.copied {
+            background: #38a169;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #718096;
+            font-size: 14px;
+            margin-top: 12px;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #a0aec0;
+            font-size: 12px;
+            margin-top: 8px;
+            padding-bottom: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 20px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 8px;
+                font-size: 12px;
+            }
+            
+            .indent {
+                padding-left: 18px !important;
+            }
+            
+            .double-indent {
+                padding-left: 32px !important;
+            }
+            
+            .triple-indent {
+                padding-left: 46px !important;
+            }
+            
+            .btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-row {
+                flex-direction: column;
+            }
+            
+            #copyInput {
+                width: 100%;
+            }
+            
+            .btn-copy {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="nav-buttons">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+            <div class="page-nav">
+                <a href="119.html" class="btn btn-page">上一页</a>
+                <a href="121.html" class="btn btn-page">下一页</a>
+                <button class="btn btn-favorite" id="favoriteBtn" onclick="toggleFavorite()">收藏</button>
+            </div>
+        </div>
+    </div>
+    
+    <h1>~~~~~休克分类与临床表现*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">休克分类与临床表现 - 急诊疾病诊疗要点</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">循环功能不全到细胞功能障碍，休克表现为一个连续的过程。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent bullet">组织低灌注是休克的血流动力学特征，组织细胞缺氧是休克的本质。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent bullet">休克的血流动力学变化可以表现为不同特征。为区分这些特征，可以将循环系统中主要影响血流动力学的因素分为5部分：<strong>①阻力血管：</strong>包括动脉和小动脉；<strong>②毛细血管；③容量血管；④血容量；⑤心脏。</strong>几乎所有类型的休克都是通过对这5部分的不同影响而导致循环功能紊乱。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent bullet">基于血流动力学特征，休克可被分为<strong>低容量性、心源性、分布性和梗阻性休克4类。</strong></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">2. 临床表现分类</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="sub-section">● 低容量性休克</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent check">基本机制为循环容量丢失，包括外源性丢失和内源性丢失。外源性丢失指循环容量丢失至体外，包括失血、烧伤或感染所致血容量丢失，呕吐、腹泻、脱水、利尿等原因所致水和电解质的丢失；内源性容量丢失指循环容量丢失到循环系统之外，但仍然在体内，其原因主要为血管通透性增高，循环容量的血管外渗出或循环容量进入体腔内，可由过敏、虫或蛇毒素和一些内分泌功能紊乱引起。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent check">低血容量性休克时的氧输送下降，其基本原因是循环容量不足，心脏前负荷不足，导致心输出量下降，组织灌注减少。肺循环灌注减少使肺气体交换发生障碍，氧合功能受损，导致氧输送进一步下降。在低容量性休克的早期，机体可通过代偿性心率加快和体循环阻力增高维持心输出量和循环灌注压。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent check">血流动力学监测可发现中心静脉压下降、肺动脉楔压下降、每搏量减少、心率加快和体循环阻力增高等参数改变。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent check">若容量丢失的原因可及时去除，容量得以及时补充，低容量性休克可很快得到纠正。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="sub-section">● 心源性休克</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent check">基本机制为泵功能衰竭，其原因主要为心肌梗死、心力衰竭和严重心律失常等。心脏泵功能衰竭而导致心输出量下降，引起循环灌注不良，组织细胞缺血缺氧。所以，心输出量下降是氧输送减少的基本原因。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent check">血流动力学监测可发现中心静脉压升高、肺动脉楔压升高、心输出量下降、体循环阻力升高等参数改变。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent check">心输出量下降是心源性休克的基本原因，但多种心脏疾病都可能导致心输出量下降，所以心源性休克时可能会出现不同的血流动力学表现，尤其应注意某些血流动力学参数</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease" onclick="filterByTag('休克')">休克</span>
+            <span class="tag tag-disease" onclick="filterByTag('低容量性休克')">低容量性休克</span>
+            <span class="tag tag-disease" onclick="filterByTag('心源性休克')">心源性休克</span>
+            <span class="tag tag-disease" onclick="filterByTag('分布性休克')">分布性休克</span>
+            <span class="tag tag-disease" onclick="filterByTag('梗阻性休克')">梗阻性休克</span>
+            <span class="tag tag-disease" onclick="filterByTag('心肌梗死')">心肌梗死</span>
+            <span class="tag tag-disease" onclick="filterByTag('心力衰竭')">心力衰竭</span>
+            <span class="tag tag-disease" onclick="filterByTag('严重心律失常')">严重心律失常</span>
+            <span class="tag tag-disease" onclick="filterByTag('组织低灌注')">组织低灌注</span>
+            <span class="tag tag-disease" onclick="filterByTag('组织细胞缺氧')">组织细胞缺氧</span>
+            <span class="tag tag-disease" onclick="filterByTag('循环功能紊乱')">循环功能紊乱</span>
+            <span class="tag tag-disease" onclick="filterByTag('失血')">失血</span>
+            <span class="tag tag-disease" onclick="filterByTag('烧伤')">烧伤</span>
+            <span class="tag tag-disease" onclick="filterByTag('感染')">感染</span>
+            <span class="tag tag-disease" onclick="filterByTag('呕吐')">呕吐</span>
+            <span class="tag tag-disease" onclick="filterByTag('腹泻')">腹泻</span>
+            <span class="tag tag-disease" onclick="filterByTag('脱水')">脱水</span>
+            <span class="tag tag-disease" onclick="filterByTag('过敏')">过敏</span>
+            <span class="tag tag-disease" onclick="filterByTag('虫或蛇毒素')">虫或蛇毒素</span>
+            <span class="tag tag-disease" onclick="filterByTag('内分泌功能紊乱')">内分泌功能紊乱</span>
+            <span class="tag tag-disease" onclick="filterByTag('血管通透性增高')">血管通透性增高</span>
+            <span class="tag tag-disease" onclick="filterByTag('肺气体交换障碍')">肺气体交换障碍</span>
+            <span class="tag tag-disease" onclick="filterByTag('氧合功能受损')">氧合功能受损</span>
+            <span class="tag tag-disease" onclick="filterByTag('代偿性心率加快')">代偿性心率加快</span>
+            <span class="tag tag-disease" onclick="filterByTag('体循环阻力增高')">体循环阻力增高</span>
+            <span class="tag tag-disease" onclick="filterByTag('中心静脉压下降')">中心静脉压下降</span>
+            <span class="tag tag-disease" onclick="filterByTag('肺动脉楔压下降')">肺动脉楔压下降</span>
+            <span class="tag tag-disease" onclick="filterByTag('每搏量减少')">每搏量减少</span>
+            <span class="tag tag-disease" onclick="filterByTag('中心静脉压升高')">中心静脉压升高</span>
+            <span class="tag tag-disease" onclick="filterByTag('肺动脉楔压升高')">肺动脉楔压升高</span>
+            <span class="tag tag-disease" onclick="filterByTag('心输出量下降')">心输出量下降</span>
+            <span class="tag tag-disease" onclick="filterByTag('体循环阻力升高')">体循环阻力升高</span>
+            <span class="tag tag-disease" onclick="filterByTag('泵功能衰竭')">泵功能衰竭</span>
+            <span class="tag tag-disease" onclick="filterByTag('循环灌注不良')">循环灌注不良</span>
+            <span class="tag tag-disease" onclick="filterByTag('组织细胞缺血缺氧')">组织细胞缺血缺氧</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <div class="copy-row">
+            <input type="text" id="copyInput" readonly>
+            <button class="btn btn-copy" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <div class="page-number">页码：120</div>
+    <div class="keywords">关键词：休克；低容量性休克；心源性休克；分布性休克；梗阻性休克；血流动力学；组织低灌注；心输出量下降；心肌梗死；心力衰竭</div>
+
+    <script>
+        // 设置复制输入框内容
+        const pageNum = '120';
+        const title = '休克分类与临床表现';
+        const subtitle = '急诊疾病';
+        const keywords = '休克；低容量性休克；心源性休克；分布性休克；梗阻性休克；血流动力学；组织低灌注；心输出量下降；心肌梗死；心力衰竭';
+        document.getElementById('copyInput').value = `${title}；${subtitle}；${keywords}=${pageNum}`;
+        
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制!';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '已复制!';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.textContent = '复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFavorited = btn.classList.contains('active');
+            
+            if (!isFavorited) {
+                btn.classList.add('active');
+                btn.textContent = '已收藏';
+                
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '~~~~~休克分类与临床表现*****',
+                    url: '120.html',
+                    pageNum: '120',
+                    category: '急诊疾病'
+                };
+                
+                const exists = favorites.some(f => f.url === pageInfo.url);
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                    
+                    try {
+                        updateIndexFavorites(pageInfo);
+                    } catch(e) {
+                        console.log('无法直接更新index.html，收藏信息已保存到本地存储');
+                    }
+                }
+                
+                alert('已收藏到收藏列表！');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '收藏';
+                
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const updated = favorites.filter(f => f.url !== '120.html');
+                localStorage.setItem('favorites', JSON.stringify(updated));
+            }
+        }
+        
+        function updateIndexFavorites(pageInfo) {
+            localStorage.setItem('favoriteUpdate', JSON.stringify({
+                action: 'add',
+                data: pageInfo,
+                timestamp: Date.now()
+            }));
+        }
+        
+        function filterByTag(tag) {
+            alert('正在检索标签: ' + tag);
+        }
+        
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.url === '120.html');
+            if (isFavorited) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('active');
+                btn.textContent = '已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
