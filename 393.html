@@ -1,0 +1,471 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊止血药物与抗纤溶药物*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.7;
+            padding-bottom: 40px;
+        }
+        .header {
+            background-color: #fff;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .back-btn {
+            background-color: #1976D2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        .back-btn:hover {
+            background-color: #1565C0;
+        }
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        .nav-btn {
+            background-color: #43A047;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        .nav-btn:hover {
+            background-color: #388E3C;
+        }
+        .fav-btn {
+            background-color: #FF8F00;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .fav-btn:hover {
+            background-color: #F57C00;
+        }
+        .fav-btn.active {
+            background-color: #E53935;
+        }
+        .title {
+            text-align: center;
+            padding: 28px 15px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #0D47A1;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        .table-container {
+            margin: 0 15px;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        thead {
+            background-color: #1565C0;
+            color: white;
+        }
+        thead th {
+            padding: 18px 14px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+        }
+        tbody td {
+            padding: 14px 14px;
+            border-bottom: 1px solid #e8eaf6;
+            font-size: 14px;
+            vertical-align: top;
+        }
+        tbody tr:hover {
+            background-color: #f5f7ff;
+        }
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .section-title {
+            background-color: #e8eaf6;
+            color: #1565C0;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .drug-name {
+            color: #0D47A1;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        .highlight-box {
+            background-color: #e3f2fd;
+            padding: 14px;
+            border-radius: 8px;
+            margin: 8px 0;
+            border-left: 4px solid #1976D2;
+        }
+        .warning-box {
+            background-color: #ffebee;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 8px 0;
+            border-left: 4px solid #E53935;
+            color: #c62828;
+        }
+        .page-number {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 15px;
+            color: #555;
+            font-weight: 500;
+        }
+        .tags-section {
+            margin: 28px 15px;
+            padding: 22px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        }
+        .tags-title {
+            font-size: 17px;
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .tag {
+            display: inline-block;
+            background-color: #e8eaf6;
+            color: #1565C0;
+            padding: 7px 16px;
+            border-radius: 24px;
+            font-size: 13px;
+            margin: 5px;
+            border: 1px solid #c5cae9;
+            transition: all 0.3s;
+        }
+        .tag:hover {
+            background-color: #1565C0;
+            color: white;
+        }
+        .copy-section {
+            margin: 28px 15px;
+            padding: 22px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        }
+        .copy-title {
+            font-size: 17px;
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .copy-box {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 14px;
+            border: 2px solid #c5cae9;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        #copyInput:focus {
+            border-color: #1565C0;
+        }
+        #copyBtn {
+            background-color: #43A047;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+        #copyBtn:hover {
+            background-color: #388E3C;
+        }
+        .keywords {
+            text-align: center;
+            margin-top: 16px;
+            font-size: 13px;
+            color: #777;
+            padding: 0 15px;
+            line-height: 1.8;
+        }
+        @media (max-width: 600px) {
+            .title {
+                font-size: 19px;
+                padding: 20px 10px;
+            }
+            thead th {
+                font-size: 16px;
+                padding: 14px 10px;
+            }
+            tbody td {
+                padding: 12px 10px;
+                font-size: 13px;
+            }
+            .header {
+                padding: 10px 12px;
+            }
+            .back-btn, .nav-btn, .fav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            .table-container {
+                margin: 0 10px;
+            }
+            .tags-section, .copy-section {
+                margin: 20px 10px;
+                padding: 16px;
+            }
+            .copy-box {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            #copyInput {
+                width: 100%;
+            }
+            #copyBtn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="392.html" class="nav-btn">上一页</a>
+            <a href="394.html" class="nav-btn">下一页</a>
+            <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+        </div>
+    </div>
+
+    <div class="title">~~~~~急诊止血药物与抗纤溶药物*****</div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">急诊止血药物详细说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        <div class="highlight-box">
+                            <span class="drug-name">✓ 重组活化因子Ⅶ（rFⅦa）</span><br>
+                            对于致命性出血，推荐早期应用联合凝血酶原复合物及rFⅦa。rFⅦa的应用效果与个体产生凝血酶后形成血凝块的能力有一定关系，是广谱止血药，有增加血栓栓塞风险，因此在急性上消化道出血或其他严重出血常规方法无法控制时可用作挽救性治疗，不推荐常规应用。rFⅦa的使用方法：静脉推注给药，推荐起始剂量为80μg/kg。初次注射后可能需再次注射，用药最初间隔2～3小时，以达到止血效果。
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="highlight-box">
+                            <span class="drug-name">● 促进凝血因子合成或释放</span><br>
+                            代表药物<span class="drug-name">酚磺乙胺</span>。本品能使血管收缩，降低毛细血管通透性，也能增强血小板聚集性和黏附性，缩短凝血时间，达到止血效果。临床用于防治各种手术前后的出血，或用于血小板功能不良、血管脆性增加引起的出血。但有研究证实对于早产儿应用酚磺乙胺治疗脑出血并继续随访，酚磺乙胺并不改变2岁时早产儿因脑出血造成的死亡率或致残率。
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="highlight-box">
+                            <span class="drug-name">● 血凝酶</span><br>
+                            注射用矛头蝮蛇血凝酶含自巴西矛头蝮蛇的蛇毒中分离和纯化的血凝酶。可用于需减少流血或止血的医疗情况；也可用来预防出血。可以静脉注射、肌内注射或皮下注射，也可局部用药（如消化道出血患者可口服、胃管推注，或内镜下出血部位局部注射、喷洒等）。大样本回顾性研究证实其无深静脉血栓形成和重度不良事件报告，异常出血时剂量加倍，连续使用3～5天。静脉注射后5分钟，健康成人血浆纤维蛋白原浓度显著下降，相应测定其出血时间可缩短1/3～1/2，止血效应持续48小时。因其有效降解纤维蛋白原成为纤维蛋白，连续使用不宜超过7天。
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">
+                        2. 作用于血管及血管壁的药物
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="drug-name">● 卡络磺钠</span><br>
+                        能增加毛细血管对损伤的抵抗力，降低毛细血管的通透性，促进毛细血管断裂端的回缩而止血，但临床止血效果还缺少相关研究证据支持。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="drug-name">● 去甲肾上腺素</span><br>
+                        因其具有收缩血管作用，在上消化道出血中常作为止血药局部应用。使用方法为去甲肾上腺素8mg，加入冰生理盐水100～200ml胃管推注。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">
+                        3. 抗纤维蛋白溶解的药物
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        竞争性阻止纤溶酶原水解，主要用于纤溶亢进或原发性纤溶活性过强所引起的出血。常用的抗纤溶药物有<span class="drug-name">6-氨基己酸</span>、<span class="drug-name">氨甲环酸</span>与<span class="drug-name">氨甲苯酸</span>。<br><br>
+                        氨甲环酸可直接抑制纤溶酶活动，但减少纤溶酶形成则需要更高的剂量才能起效。氨甲环酸体外活性约是6-氨基己酸的10
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center; color: #666; font-size: 13px; padding: 16px;">— 第384页 —</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div>
+            <span class="tag">出血</span>
+            <span class="tag">致命性出血</span>
+            <span class="tag">急性上消化道出血</span>
+            <span class="tag">消化道出血</span>
+            <span class="tag">脑出血</span>
+            <span class="tag">早产儿</span>
+            <span class="tag">血栓栓塞</span>
+            <span class="tag">深静脉血栓形成</span>
+            <span class="tag">纤溶亢进</span>
+            <span class="tag">原发性纤溶</span>
+            <span class="tag">重组活化因子Ⅶ</span>
+            <span class="tag">rFⅦa</span>
+            <span class="tag">凝血酶原复合物</span>
+            <span class="tag">酚磺乙胺</span>
+            <span class="tag">血凝酶</span>
+            <span class="tag">矛头蝮蛇血凝酶</span>
+            <span class="tag">巴西矛头蝮蛇</span>
+            <span class="tag">卡络磺钠</span>
+            <span class="tag">去甲肾上腺素</span>
+            <span class="tag">6-氨基己酸</span>
+            <span class="tag">氨甲环酸</span>
+            <span class="tag">氨甲苯酸</span>
+            <span class="tag">纤溶酶</span>
+            <span class="tag">纤溶酶原</span>
+            <span class="tag">纤维蛋白原</span>
+            <span class="tag">纤维蛋白</span>
+            <span class="tag">血小板</span>
+            <span class="tag">毛细血管</span>
+        </div>
+    </div>
+
+    <div class="copy-section">
+        <div class="copy-title">📋 复制信息</div>
+        <div class="copy-box">
+            <input type="text" id="copyInput" value="急诊止血药物与抗纤溶药物；急诊常用止血药物的使用；促进凝血因子合成或释放；作用于血管及血管壁的药物；抗纤维蛋白溶解的药物；重组活化因子Ⅶ；rFⅦa；酚磺乙胺；血凝酶；矛头蝮蛇血凝酶；卡络磺钠；去甲肾上腺素；6-氨基己酸；氨甲环酸；氨甲苯酸；出血；致命性出血；急性上消化道出血；消化道出血；脑出血；早产儿；血栓栓塞；深静脉血栓形成；纤溶亢进；原发性纤溶；凝血酶原复合物；纤溶酶；纤溶酶原；纤维蛋白原；纤维蛋白；血小板；毛细血管；=384" readonly>
+            <button id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+
+    <div class="page-number">页码：384</div>
+    <div class="keywords">关键词：急诊止血 | 出血 | 致命性出血 | 急性上消化道出血 | 消化道出血 | 脑出血 | 早产儿 | 血栓栓塞 | 深静脉血栓形成 | 纤溶亢进 | 原发性纤溶 | 重组活化因子Ⅶ | rFⅦa | 凝血酶原复合物 | 酚磺乙胺 | 血凝酶 | 矛头蝮蛇血凝酶 | 巴西矛头蝮蛇 | 卡络磺钠 | 去甲肾上腺素 | 6-氨基己酸 | 氨甲环酸 | 氨甲苯酸 | 纤溶酶 | 纤溶酶原 | 纤维蛋白原 | 纤维蛋白 | 血小板 | 毛细血管</div>
+
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '✓ 已复制!';
+                btn.style.backgroundColor = '#1976D2';
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.style.backgroundColor = '#43A047';
+                }, 2000);
+            });
+        }
+
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '急诊止血药物与抗纤溶药物',
+                    url: '384.html',
+                    pageNum: '384',
+                    category: '急诊止血药物'
+                };
+                
+                const exists = favorites.some(f => f.url === pageInfo.url);
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                alert('已添加到收藏！请在首页查看。');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '384.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '384.html');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
