@@ -1,0 +1,463 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~强心苷类药物的药理作用、体内过程与临床应用*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #357abd;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        
+        .btn-nav {
+            background: #6c757d;
+            color: white;
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        .btn-nav:hover {
+            background: #5a6268;
+        }
+        
+        .btn-favorite {
+            background: #ffc107;
+            color: #333;
+        }
+        
+        .btn-favorite:hover {
+            background: #e0a800;
+        }
+        
+        .btn-favorite.active {
+            background: #28a745;
+            color: white;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 22px;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            word-break: break-all;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        thead {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        tbody td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e9ecef;
+            line-height: 1.8;
+            vertical-align: top;
+        }
+        
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 8px;
+        }
+        
+        .sub-item {
+            margin-left: 0;
+            padding-left: 16px;
+            position: relative;
+        }
+        
+        .sub-item::before {
+            content: "•";
+            position: absolute;
+            left: 4px;
+            color: #4a90d9;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #6c757d;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        .tag-disease {
+            background: #ffe0e0;
+            color: #c0392b;
+        }
+        
+        .tag-drug {
+            background: #e0f0ff;
+            color: #2980b9;
+        }
+        
+        .tag-bacteria {
+            background: #e0ffe0;
+            color: #27ae60;
+        }
+        
+        .copy-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 16px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: monospace;
+            background: #f8f9fa;
+        }
+        
+        .btn-copy {
+            background: #28a745;
+            color: white;
+            padding: 12px 24px;
+        }
+        
+        .btn-copy:hover {
+            background: #218838;
+        }
+        
+        .keywords-section {
+            text-align: center;
+            padding: 20px;
+            color: #6c757d;
+            font-size: 13px;
+        }
+        
+        .keywords-section span {
+            margin: 0 8px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <div class="nav-bar">
+        <a href="index.html" class="btn btn-home">← 返回首页</a>
+        <div class="nav-right">
+            <a href="380.html" class="btn btn-nav">上一页</a>
+            <a href="382.html" class="btn btn-nav">下一页</a>
+            <button class="btn btn-favorite" id="favoriteBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~强心苷类药物的药理作用、体内过程与临床应用*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类</th>
+                    <th>内容详情</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>对神经和内分泌系统的作用</strong></td>
+                    <td>
+                        中毒剂量的强心苷可兴奋延髓极后区催吐化学感受区而引起呕吐，还可兴奋交感神经中枢，明显增加交感神经冲动发放，而引起快速性心律失常。强心苷的减慢心率和抑制房室传导作用也与其脑干副交感神经中枢有关。强心苷还能降低慢性心力衰竭患者血浆肾素活性，进而减少血管紧张素Ⅱ及醛固酮含量，对心功能不全时过度激活的RAAS产生拮抗作用。
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>对心脏电生理特性的影响</strong></td>
+                    <td>
+                        强心苷可兴奋迷走神经，促进K⁺外流，使心房肌细胞静息电位加大，加快心房的传导速度。高浓度时，强心苷可过度抑制Na⁺-K⁺-ATP酶，使细胞失去钾，最大舒张电位减小，自律性提高，K⁺外流减少而使ERP缩短，细胞内Ca²⁺增加可引起早后除极、迟后除极等；中毒剂量下，强心苷也可增强中枢交感活动，因此强心苷中毒可出现各种心律失常，常见为室性期前收缩、室性心动过速。
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>利尿作用</strong></td>
+                    <td>
+                        强心苷对心功能不全患者有明显的利尿作用。主要是心功能改善后增加了肾血流量和肾小球滤过功能。此外，强心苷可直接抑制肾小管Na⁺-K⁺-ATP酶，减少肾小管对Na⁺的重吸收，促进钠和水排出，发挥利尿作用。
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>血管作用</strong></td>
+                    <td>
+                        强心苷能直接收缩血管平滑肌，使外周阻力上升，这一作用与交感神经及心输出量变化无关。但慢性心力衰竭患者用药后，因交感神经活性降低的作用超过直接收缩血管的效应，因此血管阻力下降，心输出量及组织灌流增加，动脉压不变或略升。
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>体内过程</strong></td>
+                    <td>
+                        强心苷类药物化学结构相似，由于侧链的不同，导致其药代动力学的差异。洋地黄毒苷脂溶性高，口服吸收好，大多经肝代谢后代谢产物经肾排出，也有相当一部分经胆道排出而形成肝肠循环，半衰期长达5～7天，故作用维持时间较长，属于长效强心苷。中效类地高辛口服生物利用度个体差异大，应监测血药浓度，避免毒性反应。口服吸收的地高辛分布广泛，能通过血脑屏障，约2/3地高辛以原形经肾排出，肾功能不良者应适当减量。毛花苷丙及毒毛花苷K口服不吸收，需静脉用药，绝大部分以原形经肾脏排出，显效快，属短效类。
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>临床应用</strong></td>
+                    <td>
+                        <div class="sub-item">心力衰竭：强心苷现多用于治疗收缩功能障碍为主，对利尿药、ACEI、β受体阻断药疗效欠佳的心力衰竭。不同原因所致的心力衰竭因病情不同，疗效有一定差</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">372</div>
+    
+    <!-- 标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">心力衰竭</span>
+            <span class="tag tag-disease">慢性心力衰竭</span>
+            <span class="tag tag-disease">心功能不全</span>
+            <span class="tag tag-disease">心律失常</span>
+            <span class="tag tag-disease">室性期前收缩</span>
+            <span class="tag tag-disease">室性心动过速</span>
+            <span class="tag tag-disease">快速性心律失常</span>
+            <span class="tag tag-drug">强心苷</span>
+            <span class="tag tag-drug">洋地黄毒苷</span>
+            <span class="tag tag-drug">地高辛</span>
+            <span class="tag tag-drug">毛花苷丙</span>
+            <span class="tag tag-drug">毒毛花苷K</span>
+            <span class="tag tag-drug">利尿药</span>
+            <span class="tag tag-drug">ACEI</span>
+            <span class="tag tag-drug">β受体阻断药</span>
+            <span class="tag tag-drug">血管紧张素Ⅱ</span>
+            <span class="tag tag-drug">醛固酮</span>
+            <span class="tag tag-drug">阿托品</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="强心苷类药物的药理作用、体内过程与临床应用；强心苷、洋地黄毒苷、地高辛、毛花苷丙、毒毛花苷K、心力衰竭、心律失常、ACEI、β受体阻断药；=372" readonly>
+        <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <strong>关键词：</strong>
+        <span>强心苷</span>
+        <span>洋地黄毒苷</span>
+        <span>地高辛</span>
+        <span>毛花苷丙</span>
+        <span>毒毛花苷K</span>
+        <span>心力衰竭</span>
+        <span>心律失常</span>
+        <span>ACEI</span>
+        <span>β受体阻断药</span>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                const btn = document.querySelector('.btn-copy');
+                btn.textContent = '已复制';
+                btn.style.background = '#17a2b8';
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.style.background = '#28a745';
+                }, 2000);
+            });
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const title = document.querySelector('h1').textContent;
+            const url = window.location.href;
+            const pageNum = '372';
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const index = favorites.findIndex(f => f.url === url);
+            
+            if (index === -1) {
+                favorites.push({
+                    title: title.replace(/~~~~~|*****$/g, ''),
+                    url: url,
+                    pageNum: pageNum,
+                    date: new Date().toISOString()
+                });
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+                alert('已添加到收藏！');
+            } else {
+                favorites.splice(index, 1);
+                btn.textContent = '☆ 收藏';
+                btn.classList.remove('active');
+                alert('已取消收藏！');
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 同步到index.html（通过localStorage）
+            localStorage.setItem('favoriteUpdate', JSON.stringify({
+                action: index === -1 ? 'add' : 'remove',
+                data: {
+                    title: title.replace(/~~~~~|*****$/g, ''),
+                    url: url,
+                    pageNum: pageNum
+                }
+            }));
+        }
+        
+        // 初始化收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const btn = document.getElementById('favoriteBtn');
+            if (favorites.find(f => f.url === window.location.href)) {
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+            }
+        };
+    </script>
+</body>
+</html>
