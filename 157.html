@@ -1,0 +1,443 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~血小板减少症续表与急诊处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: #f0f5ff;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .nav-btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .home-btn {
+            background-color: #4a90d9;
+            color: white;
+        }
+        
+        .home-btn:hover {
+            background-color: #357abd;
+        }
+        
+        .page-nav {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        
+        .page-btn-row {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .page-btn {
+            background-color: #52c41a;
+            color: white;
+        }
+        
+        .page-btn:hover {
+            background-color: #389e0d;
+        }
+        
+        .fav-btn {
+            background-color: #faad14;
+            color: white;
+            margin-top: 4px;
+        }
+        
+        .fav-btn:hover {
+            background-color: #d48806;
+        }
+        
+        .fav-btn.active {
+            background-color: #ff4d4f;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 24px;
+            margin: 15px 0;
+            padding: 14px;
+            background-color: #d6eaf8;
+            border-radius: 10px;
+            border-left: 6px solid #2e86c1;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        thead {
+            background-color: #2e86c1;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 14px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: 700;
+        }
+        
+        tbody td {
+            padding: 12px 14px;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+            font-size: 14px;
+        }
+        
+        tbody tr:hover {
+            background-color: #f0f7ff;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fbff;
+        }
+        
+        .section-title {
+            color: #1a5276;
+            font-weight: 700;
+            font-size: 16px;
+            background-color: #e8f4f8;
+        }
+        
+        .sub-item {
+            color: #2874a6;
+            font-weight: 600;
+            padding-left: 20px;
+        }
+        
+        .check-mark {
+            color: #27ae60;
+            margin-right: 6px;
+            font-weight: bold;
+        }
+        
+        .bullet {
+            color: #e74c3c;
+            margin-right: 6px;
+            font-weight: bold;
+        }
+        
+        .diamond {
+            color: #9b59b6;
+            margin-right: 6px;
+        }
+        
+        .table-header-row {
+            background-color: #5dade2;
+            color: white;
+            font-weight: 700;
+            font-size: 15px;
+        }
+        
+        .table-header-row td {
+            background-color: #5dade2;
+            color: white;
+        }
+        
+        .nested-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 8px 0;
+        }
+        
+        .nested-table td, .nested-table th {
+            padding: 8px 10px;
+            border: 1px solid #d0d0d0;
+            font-size: 13px;
+        }
+        
+        .nested-table th {
+            background-color: #85c1e9;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .nested-table tr:nth-child(even) {
+            background-color: #f0f8ff;
+        }
+        
+        .copy-section {
+            background-color: #fff;
+            padding: 18px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .copy-section input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #d9d9d9;
+            border-radius: 8px;
+            font-size: 13px;
+            background-color: #fafafa;
+        }
+        
+        .copy-section button {
+            padding: 12px 24px;
+            background-color: #52c41a;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        .copy-section button:hover {
+            background-color: #389e0d;
+        }
+        
+        .tags-section {
+            background-color: #fff;
+            padding: 18px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+        
+        .tags-section h3 {
+            color: #1a5276;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 5px;
+            background-color: #e3f2fd;
+            color: #1565c0;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #90caf9;
+            transition: all 0.2s;
+        }
+        
+        .tag:hover {
+            background-color: #bbdefb;
+            transform: translateY(-1px);
+        }
+        
+        .page-num {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #888;
+            font-size: 12px;
+            padding: 12px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-bar">
+        <a href="index.html" class="nav-btn home-btn">← 返回首页</a>
+        <div class="page-nav">
+            <div class="page-btn-row">
+                <a href="156.html" class="nav-btn page-btn">↑ 上一页</a>
+                <a href="158.html" class="nav-btn page-btn">↓ 下一页</a>
+            </div>
+            <button class="nav-btn fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+
+    <h1>~~~~~血小板减少症续表与急诊处理*****</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 30%;">分类</th>
+                <th style="width: 70%;">详细内容</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="section-title" colspan="2">续表</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table class="nested-table">
+                        <tr class="table-header-row">
+                            <td style="width: 40%;">症状及病史</td>
+                            <td style="width: 60%;">可能病因</td>
+                        </tr>
+                        <tr>
+                            <td>合并肝、肾、胃肠道、中枢神经系统、发热两种或两种以上受累表现</td>
+                            <td>感染、自身免疫病、血液系统肿瘤</td>
+                        </tr>
+                        <tr>
+                            <td>血涂片见破碎红细胞</td>
+                            <td>TMA或DIC</td>
+                        </tr>
+                        <tr>
+                            <td>大量补液</td>
+                            <td>血液稀释</td>
+                        </tr>
+                        <tr>
+                            <td>新发血栓形成</td>
+                            <td>消耗性血小板减少</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td class="section-title" colspan="2">7. 急诊处理</td>
+            </tr>
+            <tr>
+                <td class="sub-item">无症状、偶然发现的轻度血小板减少</td>
+                <td>
+                    <span class="bullet">●</span>PLT＞30×10⁹/L，无紧急出血表现，停用一切可疑药物，建议血液科门诊就诊，无须任何急诊处理
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item">是否需要输注血小板</td>
+                <td>
+                    <span class="bullet">●</span>无论患者为何种基础病因引起的血小板减少，重度血小板减少情况下发生严重出血的紧急处理都需要立即输注血小板<br><br>
+                    <span class="check-mark">✓</span>出现中枢神经系统的出血或各脏器的伴急性贫血的出血（消化道、肾脏等），或出现脏器或黏膜两处以上的出血均可以认为是严重出血<br><br>
+                    <span class="check-mark">✓</span>伴血小板减少的活动性出血者，建议立即输注血小板，使其计数维持在50×10⁹/L以上，而中枢神经系统出血时应使其维持在100×10⁹/L以上<br><br>
+                    <span class="check-mark">✓</span>重度血小板减少者，若急需侵入性操作，应输注血小板<br><br>
+                    <span class="check-mark">✓</span>无出血表现及无须侵入性操作，输注血小板需慎重
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item">血小板减少伴出血或其他症状</td>
+                <td>
+                    <span class="bullet">●</span>停用抗凝抗血小板药物<br><br>
+                    <span class="check-mark">✓</span>有单纯性血小板减少和出血的患者，缺少全身疾病征象或其他的全血细胞计数异常，则可能为药物引起的血小板减少或原发性ITP<br>
+                    <span class="diamond">◇</span>停用所有可疑药物，血小板＜30×10⁹/L，进行HIV和HCV检测后，可予口服或静脉足量糖皮质激素，如泼尼松口服1mg/(kg·d)或等量其他激素<br>
+                    <span class="diamond">◇</span>若患者经济能力足够，可予IVIG 0.4g/(kg·d)，3～5天。IVIG可在1～4天内提升血小板计数，疗效持续1～2周，建议联合糖皮质激素使用<br><br>
+                    <span class="check-mark">✓</span>重症患者合并的血小板减少：除进行原发病治疗与血小板输注外，若存在糖皮质激素使用的顾虑和禁忌，可考虑IVIG合用血小板生成素（TPO）或TPO受体激动药
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item">重度血小板减少不伴出血或其他症状</td>
+                <td>
+                    <span class="bullet">●</span>亦考虑药物引起的血
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="copy-section">
+        <input type="text" id="copyText" value="血小板减少症续表与急诊处理；续表、急诊处理、血小板输注、ITP、糖皮质激素、IVIG、TPO、TPO受体激动药；=145" readonly>
+        <button onclick="copyToClipboard()">复制</button>
+    </div>
+
+    <div class="tags-section">
+        <h3>🔖 特色检索标签</h3>
+        <span class="tag">TMA</span>
+        <span class="tag">DIC</span>
+        <span class="tag">血液稀释</span>
+        <span class="tag">消耗性血小板减少</span>
+        <span class="tag">自身免疫病</span>
+        <span class="tag">血液系统肿瘤</span>
+        <span class="tag">ITP</span>
+        <span class="tag">HIV</span>
+        <span class="tag">HCV</span>
+        <span class="tag">糖皮质激素</span>
+        <span class="tag">泼尼松</span>
+        <span class="tag">IVIG</span>
+        <span class="tag">TPO</span>
+        <span class="tag">TPO受体激动药</span>
+    </div>
+
+    <div class="page-num">页码：145</div>
+    <div class="keywords">
+        关键词：血小板减少症 | TMA | DIC | ITP | 糖皮质激素 | IVIG | TPO | 输血 | 出血 | 急诊处理
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(() => {
+                alert("已复制到剪贴板：" + copyText.value);
+            });
+        }
+
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = localStorage.getItem('fav_145') === 'true';
+            
+            if (isFav) {
+                localStorage.removeItem('fav_145');
+                localStorage.removeItem('fav_145_title');
+                localStorage.removeItem('fav_145_url');
+                btn.textContent = '☆ 收藏';
+                btn.classList.remove('active');
+                alert('已取消收藏');
+            } else {
+                localStorage.setItem('fav_145', 'true');
+                localStorage.setItem('fav_145_title', '~~~~~血小板减少症续表与急诊处理*****');
+                localStorage.setItem('fav_145_url', '145.html');
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+                alert('已添加到收藏！');
+            }
+        }
+
+        window.onload = function() {
+            const isFav = localStorage.getItem('fav_145') === 'true';
+            const btn = document.getElementById('favBtn');
+            if (isFav) {
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
