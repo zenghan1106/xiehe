@@ -1,0 +1,553 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急性肾损伤病因与检查*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: linear-gradient(135deg, #4a90d9, #357abd);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 15px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(74, 144, 217, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 144, 217, 0.4);
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #5cb85c, #449d44);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 3px 10px rgba(92, 184, 92, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(92, 184, 92, 0.4);
+        }
+        
+        .nav-btn.next {
+            background: linear-gradient(135deg, #f0ad4e, #ec971f);
+            box-shadow: 0 3px 10px rgba(240, 173, 78, 0.3);
+        }
+        
+        .nav-btn.next:hover {
+            box-shadow: 0 5px 15px rgba(240, 173, 78, 0.4);
+        }
+        
+        .favorite-btn {
+            background: linear-gradient(135deg, #d9534f, #c9302c);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(217, 83, 79, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .favorite-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(217, 83, 79, 0.4);
+        }
+        
+        .favorite-btn.active {
+            background: linear-gradient(135deg, #5bc0de, #46b8da);
+        }
+        
+        .main-title {
+            text-align: center;
+            font-size: 28px;
+            color: #2c3e50;
+            margin: 20px 0;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .table-container {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #4a90d9, #357abd);
+        }
+        
+        thead th {
+            color: white;
+            padding: 18px 15px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e8e8e8;
+            transition: background 0.3s ease;
+        }
+        
+        tbody tr:hover {
+            background: #f8f9ff;
+        }
+        
+        tbody td {
+            padding: 15px;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #444;
+            vertical-align: top;
+        }
+        
+        .section-title {
+            color: #2c3e50;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .check-item {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .bullet-item {
+            position: relative;
+            padding-left: 15px;
+            margin: 5px 0;
+        }
+        
+        .bullet-item::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #4a90d9;
+            font-weight: bold;
+        }
+        
+        .sub-item {
+            padding-left: 20px;
+            margin: 3px 0;
+            color: #555;
+        }
+        
+        .highlight-box {
+            background: #e8f4f8;
+            border-left: 4px solid #4a90d9;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .tag:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .tag.disease {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+        }
+        
+        .tag.drug {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+        }
+        
+        .tag.bacteria {
+            background: linear-gradient(135deg, #43e97b, #38f9d7);
+        }
+        
+        .bottom-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .keywords-area {
+            margin-bottom: 20px;
+        }
+        
+        .keywords-label {
+            font-size: 16px;
+            color: #2c3e50;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .keywords-content {
+            color: #555;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 20px;
+            color: #4a90d9;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        
+        .copy-input:focus {
+            border-color: #4a90d9;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #4a90d9, #357abd);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 144, 217, 0.4);
+        }
+        
+        .copy-btn.copied {
+            background: linear-gradient(135deg, #5cb85c, #449d44);
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 22px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 14px 10px;
+            }
+            
+            tbody td {
+                padding: 12px 10px;
+                font-size: 14px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-nav">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="nav-right">
+            <a href="62.html" class="nav-btn">← 上一页</a>
+            <a href="64.html" class="nav-btn next">下一页 →</a>
+            <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <h1 class="main-title">~~~~~急性肾损伤病因与检查*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~急性肾损伤病因与检查*****、急性肾损伤病因分类与必做检查</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>急性肾损伤病因分类与必做检查</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="section-title">一、肾前性因素（肾灌注不足）</div>
+                        <div class="check-item">✓ 容量不足：</div>
+                        <div class="sub-item">包括利尿过度、经口摄入减少、腹泻或补液不足</div>
+                        
+                        <div class="check-item">✓ 高容量状态下肾灌注压下降：</div>
+                        <div class="sub-item">如心力衰竭时射血分数降低、肝硬化门静脉高压，患者可能存在容量负荷过重，氧合下降、呼吸音减低、移动性浊音(+)、蛙腹等体征异常</div>
+                        
+                        <div class="check-item">✓ 肾血管自身调节的改变：</div>
+                        <div class="sub-item">常见药物为NSAID和ACEI/ARB，病史询问时需要重点寻找服药史，可能导致服药的临床表现，疼痛和发热等</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">二、肾血管性疾病</div>
+                        <div class="sub-item">通常肾脏疾病会影响肾内的大小血管，包括免疫病(硬皮病)、动脉粥样硬化栓子、恶性高血压、微血管病性溶血性贫血、肾梗死、双肾静脉血栓形成</div>
+                        <div class="sub-item">应了解患者是否存在突发腰痛、皮疹、黄疸、系统性病变的其他临床表现</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">三、肾小球疾病</div>
+                        <div class="sub-item">可以为原发性或继发性，继发性疾病常见的是肿瘤性疾病、免疫病和药物诱导</div>
+                        <div class="sub-item">因此在病史中应重点询问上述继发性疾病的临床表现，查体中注重原发病的全身表现，了解患者血尿、蛋白尿以进行鉴别</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">四、肾小管及肾间质疾病</div>
+                        <div class="sub-item">间质性肾炎的常见病因包括药物引起、多发性骨髓瘤等，在病史中关注患者的用药史</div>
+                        <div class="sub-item">最常见的用药为ACEI或ARB联合NSAID，其次为静脉应用阿昔洛韦、碘造影剂和磷盐制剂灌肠治疗</div>
+                        <div class="sub-item">应注意询问肿瘤患者近期化疗情况，注意是否存在溶瘤综合征</div>
+                        <div class="sub-item">对于多发性骨髓瘤患者应询问是否存在贫血、感染、病理性骨折、骨痛等临床表现</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">五、肾后梗阻性疾病</div>
+                        <div class="sub-item">梗阻性肾病可以出现在尿路的各个部位，结石嵌顿、血凝块堵塞、肿瘤压迫、膀胱病变、前列腺病变、腹膜后病变等都可以造成肾后梗阻而导致急性少尿</div>
+                        <div class="sub-item">应注意，单侧输尿管、肾盂梗阻较少引起尿量变化</div>
+                        <div class="sub-item">病史获取时应重点评估是否存在腰痛、手术史、泌尿系结石病史、前列腺增生病史，了解患者是否存在血尿、尿流中断、腰痛、发热等</div>
+                        <div class="sub-item">盆腹腔肿瘤亦可引起少尿，非泌尿系来源肿瘤通常为妇产科、血液系统来源肿瘤</div>
+                        <div class="sub-item">查体应关注肾区叩击痛、输尿管压痛部位、淋巴结肿大情况、是否存在皮下出血等</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">3. 必做检查</div>
+                        <div class="bullet-item"><strong>血常规：</strong>是否存在贫血、血液浓缩和稀释状态，是否存在继发感染(白细胞增多或减少)，是否存在血小板减少</div>
+                        <div class="bullet-item"><strong>尿常规：</strong>通过尿比重、尿蛋白、红细胞、白细胞等鉴别肾前性或肾后性因素</div>
+                        <div class="bullet-item"><strong>肝肾功能检查：</strong>发现肾功能不全、电解质紊乱、蛋白水平、酸碱平衡状态、黄疸水平和原因</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag disease">急性肾损伤</span>
+            <span class="tag disease">肾前性因素</span>
+            <span class="tag disease">肾血管性疾病</span>
+            <span class="tag disease">肾小球疾病</span>
+            <span class="tag disease">肾小管及肾间质疾病</span>
+            <span class="tag disease">肾后梗阻性疾病</span>
+            <span class="tag disease">间质性肾炎</span>
+            <span class="tag disease">多发性骨髓瘤</span>
+            <span class="tag disease">梗阻性肾病</span>
+            <span class="tag disease">溶瘤综合征</span>
+            <span class="tag disease">心力衰竭</span>
+            <span class="tag disease">肝硬化</span>
+            <span class="tag disease">恶性高血压</span>
+            <span class="tag disease">硬皮病</span>
+            <span class="tag disease">动脉粥样硬化</span>
+            <span class="tag drug">NSAID</span>
+            <span class="tag drug">ACEI</span>
+            <span class="tag drug">ARB</span>
+            <span class="tag drug">阿昔洛韦</span>
+            <span class="tag drug">碘造影剂</span>
+            <span class="tag drug">磷盐制剂</span>
+        </div>
+    </div>
+    
+    <div class="bottom-section">
+        <div class="keywords-area">
+            <div class="keywords-label">🔑 关键词</div>
+            <div class="keywords-content">
+                急性肾损伤、肾前性因素、容量不足、肾灌注压、肾血管自身调节、NSAID、ACEI、ARB、肾血管性疾病、硬皮病、动脉粥样硬化、恶性高血压、微血管病性溶血性贫血、肾梗死、肾静脉血栓、肾小球疾病、肿瘤性疾病、免疫病、药物诱导、血尿、蛋白尿、肾小管疾病、肾间质疾病、间质性肾炎、多发性骨髓瘤、阿昔洛韦、碘造影剂、磷盐制剂、溶瘤综合征、肾后梗阻、结石嵌顿、血凝块堵塞、肿瘤压迫、前列腺增生、血常规、尿常规、肝肾功能检查
+            </div>
+        </div>
+        
+        <div class="page-number">63</div>
+        
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="急性肾损伤病因与检查；肾前性因素、肾血管性疾病、肾小球疾病、肾小管及肾间质疾病、肾后梗阻性疾病、必做检查；NSAID、ACEI、ARB、阿昔洛韦、碘造影剂、磷盐制剂；急性肾损伤、肾前性因素、肾血管性疾病、肾小球疾病、肾小管及肾间质疾病、肾后梗阻性疾病、间质性肾炎、多发性骨髓瘤、梗阻性肾病、溶瘤综合征、心力衰竭、肝硬化、恶性高血压、硬皮病、动脉粥样硬化=63" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyContent()">📋 复制</button>
+        </div>
+    </div>
+    
+    <script>
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '✅ 已复制';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.textContent = '📋 复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '✅ 已复制';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '📋 复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFavorited = btn.classList.contains('active');
+            
+            if (!isFavorited) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                
+                // 保存到localStorage，模拟添加到index收藏类目
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '急性肾损伤病因与检查',
+                    url: '63.html',
+                    pageNum: '63'
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.url === '63.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                alert('已添加到收藏！可在首页收藏类目查看');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '63.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.url === '63.html');
+            const btn = document.getElementById('favoriteBtn');
+            
+            if (isFavorited) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
