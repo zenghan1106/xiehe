@@ -1,0 +1,527 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~拟交感神经药与多巴胺受体作用机制及临床应用*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 144, 217, 0.3);
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .btn-nav {
+            background: #5cb85c;
+            color: white;
+            padding: 8px 18px;
+            font-size: 13px;
+        }
+        
+        .btn-nav:hover {
+            background: #4cae4c;
+            transform: translateY(-2px);
+        }
+        
+        .btn-favorite {
+            background: #f0ad4e;
+            color: white;
+            padding: 8px 18px;
+            font-size: 13px;
+        }
+        
+        .btn-favorite:hover {
+            background: #ec971f;
+            transform: translateY(-2px);
+        }
+        
+        .btn-favorite.active {
+            background: #d9534f;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 22px;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        thead th {
+            background: #4a90d9;
+            color: white;
+            padding: 16px 12px;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: left;
+        }
+        
+        tbody td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #444;
+        }
+        
+        tbody tr:hover {
+            background: #f8fbff;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        
+        tbody tr:nth-child(even):hover {
+            background: #f0f7ff;
+        }
+        
+        .section-title {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .drug-name {
+            color: #c0392b;
+            font-weight: 600;
+        }
+        
+        .highlight-box {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #856404;
+        }
+        
+        .tags-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+        
+        .tag-disease:hover {
+            background: #c62828;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #90caf9;
+        }
+        
+        .tag-drug:hover {
+            background: #1565c0;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .tag-bacteria:hover {
+            background: #2e7d32;
+            color: white;
+        }
+        
+        .bottom-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .keywords {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .keywords strong {
+            color: #2c3e50;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background: #fafafa;
+        }
+        
+        .btn-copy {
+            background: #6c5ce7;
+            color: white;
+            padding: 12px 25px;
+            white-space: nowrap;
+        }
+        
+        .btn-copy:hover {
+            background: #5b4cdb;
+            transform: translateY(-2px);
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 1000;
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            .btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-top">
+        <a href="index.html" class="btn btn-home">← 返回首页</a>
+        <div class="nav-right">
+            <a href="377.html" class="btn btn-nav">上一页</a>
+            <a href="379.html" class="btn btn-nav">下一页</a>
+            <button class="btn btn-favorite" id="favoriteBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~拟交感神经药与多巴胺受体作用机制及临床应用*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类与药物</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2" class="section-title">【多巴胺受体作用机制】</td>
+                </tr>
+                <tr>
+                    <td>脉血管床作用</td>
+                    <td>多巴胺受体，从而引起选择性血管扩张。有报道表示该药可通过增加肾血流量和肾小球滤过率而增加尿量，并通过抑制醛固酮和肾小管钠转运而增加尿钠排泄。</td>
+                </tr>
+                <tr>
+                    <td>剂量效应关系</td>
+                    <td>剂量5～10μg/(kg·min)时，多巴胺可刺激β₁受体增加心输出量。而剂量＞10μg/(kg·min)时，该药主要是刺激α受体引起血管收缩。但该药对于α受体的整体作用弱于去甲肾上腺素。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">【体内过程】</td>
+                </tr>
+                <tr>
+                    <td>吸收代谢</td>
+                    <td>口服后易在肠和肝中被破坏，一般使用静脉滴注给药，体内迅速经过MAO和COMT代谢灭活，作用时间短暂。不易透过血脑屏障，无中枢作用。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">【临床应用】</td>
+                </tr>
+                <tr>
+                    <td>适应症</td>
+                    <td>用于心肌梗死、创伤、内毒素败血症、心脏手术、肾衰竭、充血性心力衰竭等引起的休克。用于补充血容量疗效不佳的休克，尤其有少尿及周围血管阻力正常或较低的休克。由于本药可增加心输出量，也可用于洋地黄及利尿药无效的心功能不全。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">【不良反应】</td>
+                </tr>
+                <tr>
+                    <td>常见反应</td>
+                    <td>一般较轻，偶见恶心、呕吐，如剂量过大可出现心动过速等心律失常的情况，若出现应减量或停药。</td>
+                </tr>
+                <tr>
+                    <td>禁忌与慎用</td>
+                    <td>室性心律失常、闭塞性血管病、心肌梗死、动脉硬化和高血压患者慎用，嗜铬细胞瘤患者禁用。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">【麻黄碱】</td>
+                </tr>
+                <tr>
+                    <td>药物特性</td>
+                    <td>一种人工合成的直接或间接起效的拟交感神经药。作用于α和β受体，但作用较弱，除了在麻醉诱导后低血压的情况下，极少使用麻黄碱。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">【β受体激动药 — 多巴酚丁胺】</td>
+                </tr>
+                <tr>
+                    <td>基本信息</td>
+                    <td>人工合成品，其化学结构和体内过程与多巴胺类似，<span class="highlight-box">口服无效，仅供静脉给药</span>。</td>
+                </tr>
+                <tr>
+                    <td>药理作用</td>
+                    <td>对β₁、β₂和α₁受体均有作用，但主要激动β₁受体。</td>
+                </tr>
+                <tr>
+                    <td>消旋体特性</td>
+                    <td>多巴酚丁胺是含有右旋多巴酚丁胺和左旋多巴酚丁胺的消旋体。前者阻断α₁受体，后者激动α₁受体，对α受体的作用因此而抵消。两者都激动β受体，但前者激动β受体作用为后者的10倍。消旋多巴酚丁胺的作用为两者叠加，表现为激动β₁受体。</td>
+                </tr>
+                <tr>
+                    <td>与异丙肾上腺素比较</td>
+                    <td>多巴酚丁胺的正性肌力作用比正性频率作用显著，很少增加心肌耗氧量，也较少引起心动过速；静滴速度过快或浓度过高时，引起心率加快，可能是由于外周阻力变化不大和心脏β₁受体激动时正性肌力作用的参与。而外周阻力的稳定又可能是因为α₁受体介导的血管收缩作用与β₂受体介导的血管舒张作用相抵消所致。</td>
+                </tr>
+                <tr>
+                    <td>心力衰竭效应</td>
+                    <td>在心力衰竭患者中其净效应是心输出量增加，外周阻力降低，伴或不伴血压小幅</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">心肌梗死</span>
+            <span class="tag tag-disease">创伤</span>
+            <span class="tag tag-disease">内毒素败血症</span>
+            <span class="tag tag-disease">休克</span>
+            <span class="tag tag-disease">肾衰竭</span>
+            <span class="tag tag-disease">充血性心力衰竭</span>
+            <span class="tag tag-disease">心功能不全</span>
+            <span class="tag tag-disease">室性心律失常</span>
+            <span class="tag tag-disease">闭塞性血管病</span>
+            <span class="tag tag-disease">动脉硬化</span>
+            <span class="tag tag-disease">高血压</span>
+            <span class="tag tag-disease">嗜铬细胞瘤</span>
+            <span class="tag tag-disease">低血压</span>
+            <span class="tag tag-disease">心力衰竭</span>
+            <span class="tag tag-drug">多巴胺</span>
+            <span class="tag tag-drug">麻黄碱</span>
+            <span class="tag tag-drug">多巴酚丁胺</span>
+            <span class="tag tag-drug">异丙肾上腺素</span>
+            <span class="tag tag-drug">去甲肾上腺素</span>
+            <span class="tag tag-drug">洋地黄</span>
+            <span class="tag tag-drug">利尿药</span>
+            <span class="tag tag-drug">醛固酮</span>
+        </div>
+    </div>
+    
+    <div class="bottom-section">
+        <div class="keywords">
+            <strong>关键词：</strong>多巴胺；多巴酚丁胺；麻黄碱；β受体激动药；α受体；休克；心力衰竭；心肌梗死；肾衰竭；心律失常；拟交感神经药；MAO；COMT；消旋体；心输出量；外周阻力
+        </div>
+        
+        <div class="page-number">页码：378</div>
+        
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="拟交感神经药与多巴胺受体作用机制及临床应用；多巴胺、多巴酚丁胺、麻黄碱、β受体激动药、休克、心力衰竭、心肌梗死、肾衰竭、心律失常；=378" readonly>
+            <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFavorited = btn.classList.contains('active');
+            
+            if (!isFavorited) {
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+                showToast('已添加到收藏！');
+                
+                // 保存收藏信息到localStorage，供index.html读取
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const currentPage = {
+                    title: '拟交感神经药与多巴胺受体作用机制及临床应用',
+                    url: '378.html',
+                    category: '拟交感神经药'
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.url === '378.html');
+                if (!exists) {
+                    favorites.push(currentPage);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = '☆ 收藏';
+                showToast('已取消收藏！');
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '378.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 页面加载时检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.url === '378.html');
+            const btn = document.getElementById('favoriteBtn');
+            
+            if (isFavorited) {
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
