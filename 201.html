@@ -1,0 +1,406 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~鼠疫与流行性脑脊髓膜炎诊疗指南*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-home {
+            background-color: #4a90d9;
+            color: white;
+        }
+        
+        .btn-nav {
+            background-color: #5a9bd5;
+            color: white;
+        }
+        
+        .btn-favorite {
+            background-color: #e8b339;
+            color: #333;
+            font-size: 13px;
+            padding: 8px 14px;
+        }
+        
+        .btn-copy {
+            background-color: #4caf50;
+            color: white;
+            padding: 12px 20px;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .btn:hover {
+            opacity: 0.85;
+            transform: translateY(-1px);
+        }
+        
+        /* 标题样式 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            color: #1a5276;
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #d6eaf8;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        
+        /* 表格样式 */
+        .content-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        .content-table thead tr {
+            background-color: #2e75b6;
+            color: white;
+        }
+        
+        .content-table thead th {
+            padding: 16px 12px;
+            font-size: 18px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        .content-table tbody td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 15px;
+            vertical-align: top;
+        }
+        
+        .content-table tbody tr:hover {
+            background-color: #f8fbff;
+        }
+        
+        .content-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        /* 内容中的标题样式 */
+        .section-title {
+            color: #1a5276;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+        
+        .subsection {
+            color: #2874a6;
+            font-weight: 600;
+            margin: 4px 0;
+        }
+        
+        .check-item {
+            color: #27ae60;
+        }
+        
+        .diamond-item {
+            color: #555;
+            padding-left: 20px;
+        }
+        
+        .author {
+            text-align: right;
+            color: #666;
+            font-style: italic;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1a5276;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background-color: #e8f4f8;
+            color: #2e75b6;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid #b8d4e8;
+        }
+        
+        /* 底部编辑框区域 */
+        .bottom-section {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .copy-area {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+            margin-bottom: 12px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 14px;
+            border: 2px solid #c5e0f7;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+            background-color: #f8fbff;
+        }
+        
+        .page-info {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            padding: 10px;
+        }
+        
+        /* 关键词 */
+        .keywords-section {
+            text-align: center;
+            padding: 15px;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        .keywords-title {
+            color: #1a5276;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="200.html" class="btn btn-nav">上一页</a>
+            <a href="202.html" class="btn btn-nav">下一页</a>
+            <button class="btn btn-favorite" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="main-title">~~~~~鼠疫与流行性脑脊髓膜炎诊疗指南*****</div>
+    
+    <!-- 主内容表格 -->
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th>鼠疫与流行性脑脊髓膜炎 - 诊断策略、急诊处理及临床要点</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="section-title">4. 诊断策略</div>
+                    <div>发现以下线索时临床上应高度警觉。</div>
+                    <div class="check-item">✓ 发病前14天内接触过死亡啮齿类动物或到过鼠疫流行区。</div>
+                    <div class="check-item">✓ 发热、低血压合并无法解释的局部淋巴结炎。</div>
+                    <div class="check-item">✓ 以咯血为表现的肺炎，痰病原学提示革兰阴性杆菌，影像学与临床症状不相称。</div>
+                    <div>鼠疫的诊断基于病原学分离/血清学检测。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="section-title">5. 急诊处理</div>
+                    <div>• 立即隔离、报传染病卡。</div>
+                    <div>• 急性期应卧床，监护吸氧，保证热量及入量。</div>
+                    <div>• 烦躁或局部疼痛者，应予镇静、镇痛等对症治疗。</div>
+                    <div>• 早期应用抗生素是降低病死率的关键。</div>
+                    <div class="check-item">✓ 氨基糖苷类：是首选药物。链霉素2g/d，分次肌内注射。肺型和败血症型首日用量5～7g。</div>
+                    <div class="check-item">✓ 链霉素：具有耳毒性和肾毒性，应密切监测。</div>
+                    <div>• 庆大霉素、多西环素、四环素可作为替代药物。</div>
+                    <div>• 磺胺为非一线用药，常被作为预防用药。</div>
+                    <div>• 抗感染疗程：体温正常、全身症状好转后，应持续给药3～5天。因多西环素和四环素是抑菌药，疗程应延长至10～14天。</div>
+                    <div>• 若出现呼吸衰竭、败血症休克、DIC等并发症，应积极给予相应支持治疗。</div>
+                    <div>• 转诊至传染病专科医院。</div>
+                    <div class="author">（刘 洋）</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="section-title">■ 流行性脑脊髓膜炎</div>
+                    <br>
+                    <div class="section-title">1. 定义</div>
+                    <div>• 流行性脑脊髓膜炎简称流脑，是由脑膜炎双球菌引起的化脓性脑膜炎。</div>
+                    <div>• 主要临床表现有发热、头痛、呕吐、皮肤瘀点及颈强直等脑膜刺激征，脑脊液呈化脓性改变。</div>
+                    <br>
+                    <div class="section-title">2. 临床表现</div>
+                    <div>• 差异性很大，轻者一过性发热和菌血症，重者临床症状出现后数小时内死亡。</div>
+                    <div>• 典型临床表现可分为4期。</div>
+                    <div class="check-item">✓ 前驱期（上呼吸道感染期）</div>
+                    <div class="diamond-item">◇ 1～2天，可有低热、咽痛、咳嗽等上呼吸道感染症状。</div>
+                    <div class="diamond-item">◇ 多数患者无此期表现。</div>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: center; color: #888; font-size: 13px;">
+                    页码：189
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag">鼠疫</span>
+            <span class="tag">流行性脑脊髓膜炎</span>
+            <span class="tag">流脑</span>
+            <span class="tag">链霉素</span>
+            <span class="tag">氨基糖苷类</span>
+            <span class="tag">庆大霉素</span>
+            <span class="tag">多西环素</span>
+            <span class="tag">四环素</span>
+            <span class="tag">磺胺</span>
+            <span class="tag">革兰阴性杆菌</span>
+            <span class="tag">脑膜炎双球菌</span>
+            <span class="tag">败血症</span>
+            <span class="tag">DIC</span>
+        </div>
+    </div>
+    
+    <!-- 复制编辑框区域 -->
+    <div class="bottom-section">
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyText" value="鼠疫与流行性脑脊髓膜炎诊疗指南；诊断策略、急诊处理、临床表现；鼠疫、流行性脑脊髓膜炎、流脑、链霉素、氨基糖苷类、庆大霉素、多西环素、四环素、磺胺、革兰阴性杆菌、脑膜炎双球菌、败血症、DIC；=201" readonly>
+            <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 页码信息 -->
+    <div class="page-info">
+        页码：201
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">关键词</div>
+        <div>鼠疫 | 流行性脑脊髓膜炎 | 流脑 | 链霉素 | 氨基糖苷类 | 庆大霉素 | 多西环素 | 四环素 | 磺胺 | 革兰阴性杆菌 | 脑膜炎双球菌 | 败血症 | DIC | 诊断策略 | 急诊处理 | 临床表现</div>
+    </div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(function() {
+                    alert("已复制到剪贴板！");
+                });
+            } else {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            }
+        }
+        
+        // 添加到收藏
+        function addToFavorites() {
+            // 获取当前页面信息
+            const title = "鼠疫与流行性脑脊髓膜炎诊疗指南";
+            const url = window.location.href;
+            const pageNum = "201";
+            
+            // 尝试使用localStorage保存收藏信息
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert("该页面已在收藏夹中！");
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                pageNum: pageNum,
+                category: "传染病诊疗"
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试打开index.html并添加收藏（同源情况下）
+            alert("已添加到收藏！\n标题：" + title + "\n页码：" + pageNum);
+        }
+    </script>
+<div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~鼠疫与流行性脑脊髓膜炎诊疗指南*****、鼠疫与流行性脑脊髓膜炎 - 诊断策略、急诊处理及临床要点、页码：189</div></body>
+</html>
