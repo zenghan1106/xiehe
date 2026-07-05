@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~ACS分类及诊断标准*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 按钮区域 */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 500;
+        }
+        
+        .btn-home {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #357abd;
+        }
+        
+        .btn-page {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-page:hover {
+            background: #5a6268;
+        }
+        
+        .btn-fav {
+            background: #f0ad4e;
+            color: white;
+            position: fixed;
+            right: 15px;
+            bottom: 80px;
+            z-index: 100;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .btn-fav:hover {
+            background: #ec971f;
+        }
+        
+        .btn-fav.active {
+            background: #d9534f;
+        }
+        
+        .page-btns {
+            display: flex;
+            gap: 10px;
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 22px;
+            font-weight: bold;
+            margin: 15px 0 25px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .main-title .tag {
+            color: #e74c3c;
+            font-size: 26px;
+        }
+        
+        /* 内容区域 */
+        .content-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .section-title {
+            color: #2980b9;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e8f4f8;
+        }
+        
+        .text-content {
+            line-height: 1.8;
+            color: #444;
+            font-size: 15px;
+        }
+        
+        .text-content p {
+            margin-bottom: 12px;
+        }
+        
+        .text-content ul {
+            margin-left: 20px;
+            margin-bottom: 12px;
+        }
+        
+        .text-content li {
+            margin-bottom: 8px;
+        }
+        
+        .check-item {
+            color: #27ae60;
+            font-weight: 500;
+        }
+        
+        /* 表格样式 */
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        thead th {
+            background: #5dade2;
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        tbody td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #eef2f7;
+            vertical-align: top;
+            line-height: 1.7;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbfd;
+        }
+        
+        tbody tr:hover {
+            background: #e8f6ff;
+        }
+        
+        .col-acs {
+            width: 18%;
+            min-width: 90px;
+            font-weight: bold;
+            color: #c0392b;
+            font-size: 15px;
+        }
+        
+        .col-standard {
+            width: 82%;
+            color: #2c3e50;
+        }
+        
+        /* 疾病高亮 */
+        .disease {
+            color: #8e44ad;
+            font-weight: 600;
+        }
+        
+        .symptom {
+            color: #d35400;
+        }
+        
+        .exam {
+            color: #27ae60;
+        }
+        
+        /* 图片区域 */
+        .image-section {
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .image-section img {
+            max-width: 100%;
+            width: 95%;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .image-section img:hover {
+            transform: scale(1.02);
+        }
+        
+        /* 图片放大模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .modal img {
+            max-width: 95%;
+            max-height: 95%;
+            border-radius: 8px;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .copy-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .btn-copy {
+            background: #5cb85c;
+            color: white;
+            padding: 12px 24px;
+            white-space: nowrap;
+        }
+        
+        .btn-copy:hover {
+            background: #4cae4c;
+        }
+        
+        .btn-copy.copied {
+            background: #5bc0de;
+        }
+        
+        /* 标签 */
+        .tags-section {
+            margin-top: 20px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag-item {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            color: white;
+            display: inline-block;
+        }
+        
+        .tag-disease {
+            background: #8e44ad;
+        }
+        
+        .tag-symptom {
+            background: #d35400;
+        }
+        
+        .tag-exam {
+            background: #27ae60;
+        }
+        
+        /* 页码 */
+        .page-num {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+            }
+            
+            .top-nav {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .page-btns {
+                justify-content: center;
+            }
+            
+            table {
+                font-size: 13px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+            }
+            
+            .col-acs {
+                min-width: 75px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 收藏按钮 -->
+    <button class="btn btn-fav" id="favBtn" onclick="toggleFavorite()" title="收藏">☆</button>
+    
+    <!-- 顶部导航 -->
+    <div class="top-nav">
+        <a href="index.html" class="btn btn-home">← 返回首页</a>
+        <div class="page-btns">
+            <a href="84.html" class="btn btn-page">上一页</a>
+            <a href="86.html" class="btn btn-page">下一页</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">
+        <span class="tag">~~~~~</span>ACS分类及诊断标准<span class="tag">*****</span>
+    </h1>
+    
+    <!-- 常规检查 -->
+    <div class="content-section">
+        <h2 class="section-title">常规检查</h2>
+        <div class="text-content">
+            <p>• 心肌损伤标志物（如<span class="exam">cTnI</span>或<span class="exam">cTnT</span>、<span class="exam">CK</span>、<span class="exam">CK-MB</span>）、电解质、凝血功能、肝肾功能、血脂谱；对于已存在或高风险心力衰竭和心源性休克行<span class="exam">ABG</span>和乳酸等检查。</p>
+            <p>• 超声心动图：诊断心肌梗死程度、部位、左心室功能，发现器质性并发症。</p>
+        </div>
+    </div>
+    
+    <!-- 选做检查 -->
+    <div class="content-section">
+        <h2 class="section-title">5. 选做检查</h2>
+        <div class="text-content">
+            <p>影像学检查如胸片、肺部CT对于疑似<span class="disease">ACS</span>的患者有一定鉴别诊断意义，同时可以协助判断病情的危重程度。</p>
+        </div>
+    </div>
+    
+    <!-- 诊断策略 -->
+    <div class="content-section">
+        <h2 class="section-title">6. 诊断策略</h2>
+        <div class="text-content">
+            <p>• <span class="disease">ACS</span>分类及诊断标准（表12）</p>
+        </div>
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th class="col-acs">ACS分类</th>
+                    <th class="col-standard">诊断标准</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col-acs"><span class="disease">STEMI</span></td>
+                    <td class="col-standard">
+                        <span class="exam">cTnI/cTnT</span>＞正常参考值上限或者<span class="exam">CK-MB</span>＞正常参考值上限；
+                        <span class="exam">ECG</span>表现为<span class="symptom">ST段弓背向上抬高</span>，伴下列情况之一或以上者；
+                        <span class="symptom">持续缺血性胸痛</span>；
+                        超声心动图显示<span class="symptom">节段性室壁活动异常</span>；
+                        冠状动脉造影异常
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-acs"><span class="disease">NSTEMI</span></td>
+                    <td class="col-standard">
+                        <span class="exam">cTnI/cTnT</span>＞99ᵗʰ正常参考值上限或者<span class="exam">CK-MB</span>＞99ᵗʰ正常参考值上限，伴下列情况之一或以上者：
+                        <span class="symptom">持续缺血性胸痛</span>；
+                        <span class="exam">ECG</span>表现为新发的<span class="symptom">ST段压低</span>或<span class="symptom">T波低平、倒置</span>；
+                        超声心动图显示<span class="symptom">节段性室壁活动异常</span>；
+                        冠状动脉造影异常
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-acs"><span class="disease">UA</span></td>
+                    <td class="col-standard">
+                        <span class="exam">cTn</span>阴性；
+                        <span class="symptom">缺血性胸痛</span>；
+                        <span class="exam">ECG</span>表现为<span class="symptom">一过性ST段压低</span>或<span class="symptom">低平、倒置</span>，少见<span class="symptom">ST段抬高</span>（<span class="disease">血管痉挛性心绞痛</span>）
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 需鉴别的其他诊断 -->
+    <div class="content-section">
+        <h2 class="section-title">需鉴别的其他诊断</h2>
+        <div class="text-content">
+            <p>• <span class="disease">主动脉夹层</span>、<span class="disease">急性肺栓塞</span>、<span class="disease">急性心脏压塞</span>、<span class="disease">张力性气胸</span>、<span class="disease">食管破裂</span>等急重症。</p>
+        </div>
+    </div>
+    
+    <!-- 急诊处理 -->
+    <div class="content-section">
+        <h2 class="section-title">7. 急诊处理（图13）</h2>
+        <div class="text-content">
+            <p>• 初始评估：对任何有显著<span class="disease">ACS</span>风险的患者，应完成以下处理。</p>
+            <ul>
+                <li><span class="check-item">✓</span> 评估气道、呼吸和循环。</li>
+                <li><span class="check-item">✓</span> 开展初步的病史采集：主要确认主诉症状、疼痛特点和重要的相关症状、心血管疾病的既往史或危险因素，以及溶栓治疗的可能禁忌证。</li>
+                <li><span class="check-item">✓</span> 查体：包括评估血流动力学状态和筛查性神经系统查体，尤其是拟行溶栓治疗时。同时注意鉴别可能紧急的非心脏性胸痛的病因。</li>
+                <li><span class="check-item">✓</span> 解读12导联ECG。</li>
+                <li><span class="check-item">✓</span> 准备床旁复苏设备。</li>
+                <li><span class="check-item">✓</span> 心电监护。</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- 图片区域 -->
+    <div class="image-section">
+        <img src="88.jpg" alt="ACS分类及诊断标准图示" onclick="openModal(this)">
+    </div>
+    
+    <!-- 图片放大模态框 -->
+    <div class="modal" id="imageModal" onclick="closeModal()">
+        <img src="88.jpg" alt="放大图片">
+    </div>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <!-- 复制功能 -->
+        <div class="copy-box">
+            <input type="text" id="copyInput" value="ACS分类及诊断标准；急诊住院医师手册；STEMI；NSTEMI；UA；急性冠脉综合征；心肌损伤标志物；cTnI；cTnT；CK-MB；主动脉夹层；急性肺栓塞；急性心脏压塞；张力性气胸；食管破裂；血管痉挛性心绞痛；=85" readonly>
+            <button class="btn btn-copy" onclick="copyText()">复制</button>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-num">85</div>
+        
+        <!-- 检索标签 -->
+        <div class="tags-section">
+            <div class="tags-title">检索标签（仅图片中出现的术语）：</div>
+            <div class="tags-container">
+                <span class="tag-item tag-disease">STEMI</span>
+                <span class="tag-item tag-disease">NSTEMI</span>
+                <span class="tag-item tag-disease">UA</span>
+                <span class="tag-item tag-disease">急性冠脉综合征</span>
+                <span class="tag-item tag-disease">主动脉夹层</span>
+                <span class="tag-item tag-disease">急性肺栓塞</span>
+                <span class="tag-item tag-disease">急性心脏压塞</span>
+                <span class="tag-item tag-disease">张力性气胸</span>
+                <span class="tag-item tag-disease">食管破裂</span>
+                <span class="tag-item tag-disease">血管痉挛性心绞痛</span>
+                <span class="tag-item tag-symptom">心肌损伤标志物</span>
+                <span class="tag-item tag-exam">cTnI</span>
+                <span class="tag-item tag-exam">cTnT</span>
+                <span class="tag-item tag-exam">CK-MB</span>
+                <span class="tag-item tag-exam">ECG</span>
+                <span class="tag-item tag-exam">ABG</span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyText() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.btn-copy');
+            const originalText = btn.textContent;
+            btn.textContent = '已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 图片放大
+        function openModal(img) {
+            document.getElementById('imageModal').classList.add('active');
+        }
+        
+        function closeModal() {
+            document.getElementById('imageModal').classList.remove('active');
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = localStorage.getItem('fav_85') === 'true';
+            
+            if (!isFav) {
+                localStorage.setItem('fav_85', 'true');
+                localStorage.setItem('fav_85_title', 'ACS分类及诊断标准');
+                localStorage.setItem('fav_85_url', '85.html');
+                btn.textContent = '★';
+                btn.classList.add('active');
+                alert('已收藏到index收藏类目');
+            } else {
+                localStorage.removeItem('fav_85');
+                localStorage.removeItem('fav_85_title');
+                localStorage.removeItem('fav_85_url');
+                btn.textContent = '☆';
+                btn.classList.remove('active');
+                alert('已取消收藏');
+            }
+        }
+        
+        // 初始化收藏状态
+        window.onload = function() {
+            const isFav = localStorage.getItem('fav_85') === 'true';
+            const btn = document.getElementById('favBtn');
+            if (isFav) {
+                btn.textContent = '★';
+                btn.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
