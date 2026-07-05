@@ -1,0 +1,514 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~去甲肾上腺素、间羟胺、去氧肾上腺素药理说明*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #fefce8 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+            color: #1e293b;
+        }
+        
+        /* 导航按钮 */
+        .nav-btn {
+            position: fixed;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+        }
+        
+        .home-btn {
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .prev-btn {
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        
+        .next-btn {
+            top: 60px;
+            right: 15px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+        
+        .fav-btn {
+            top: 105px;
+            right: 15px;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 900px;
+            margin: 85px auto 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            padding: 28px 20px;
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #06b6d4 100%);
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            line-height: 1.6;
+        }
+        
+        /* 表格样式 */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        .data-table thead {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            color: white;
+        }
+        
+        .data-table thead th {
+            padding: 18px 14px;
+            font-size: 17px;
+            font-weight: bold;
+            text-align: center;
+            border: 1px solid #3b82f6;
+        }
+        
+        .data-table tbody td {
+            padding: 14px 12px;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+            color: #334155;
+            line-height: 1.8;
+            vertical-align: top;
+        }
+        
+        .data-table tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        .data-table tbody tr:hover {
+            background-color: #dbeafe;
+            transition: background-color 0.3s;
+        }
+        
+        /* 药物名称高亮 */
+        .drug-name {
+            color: #1e40af;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        
+        /* 不良反应高亮 */
+        .adverse {
+            color: #dc2626;
+        }
+        
+        /* 临床应用高亮 */
+        .clinical {
+            color: #059669;
+        }
+        
+        /* 机制说明 */
+        .mechanism {
+            color: #7c3aed;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            padding: 24px 20px;
+            background: #f0f9ff;
+            border-top: 2px solid #e0e7ff;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 14px;
+            font-weight: 500;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 7px 18px;
+            margin: 6px;
+            border-radius: 24px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1.5px solid;
+        }
+        
+        .disease-tag {
+            background: #fef3c7;
+            color: #92400e;
+            border-color: #fcd34d;
+        }
+        
+        .drug-tag {
+            background: #dbeafe;
+            color: #1e40af;
+            border-color: #93c5fd;
+        }
+        
+        .symptom-tag {
+            background: #fce7f3;
+            color: #be185d;
+            border-color: #f9a8d4;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            padding: 24px 20px;
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .keywords {
+            font-size: 12px;
+            color: #64748b;
+            text-align: center;
+            margin-bottom: 16px;
+            line-height: 2;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 15px;
+            color: #3b82f6;
+            font-weight: bold;
+            margin-bottom: 22px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            max-width: calc(100% - 100px);
+            margin: 0 auto;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 14px 16px;
+            border: 2px solid #3b82f6;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #475569;
+            background: white;
+            outline: none;
+        }
+        
+        .copy-btn {
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%) translateY(120px);
+            background: #1e293b;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 2000;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 640px) {
+            .page-title {
+                font-size: 16px;
+                padding: 20px 15px;
+            }
+            
+            .data-table {
+                font-size: 12px;
+            }
+            
+            .data-table thead th {
+                font-size: 14px;
+                padding: 14px 8px;
+            }
+            
+            .data-table tbody td {
+                padding: 10px 8px;
+                line-height: 1.7;
+            }
+            
+            .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                top: 10px;
+                left: 10px;
+            }
+            
+            .prev-btn, .next-btn, .fav-btn {
+                right: 10px;
+            }
+            
+            .prev-btn { top: 10px; }
+            .next-btn { top: 50px; }
+            .fav-btn { top: 90px; }
+            
+            .copy-section {
+                flex-direction: column;
+                max-width: 100%;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+            
+            .container {
+                margin-top: 135px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航按钮 -->
+    <button class="nav-btn home-btn" onclick="location.href='index.html'">🏠 返回首页</button>
+    <button class="nav-btn prev-btn" onclick="location.href='374.html'">← 上一页</button>
+    <button class="nav-btn next-btn" onclick="location.href='376.html'">下一页 →</button>
+    <button class="nav-btn fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 标题 -->
+        <div class="page-title">~~~~~去甲肾上腺素、间羟胺、去氧肾上腺素药理说明*****</div>
+        
+        <!-- 数据表格 -->
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th style="width: 18%;">药物名称</th>
+                    <th style="width: 82%;">详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="drug-name">去甲肾上腺素</td>
+                    <td>
+                        <span class="mechanism">【代谢特点】</span>进入机体迅速被摄取和代谢，作用短暂。内源性和外源性去甲肾上腺素大部分被神经末梢摄取后，进入囊泡贮存；被非神经细胞摄取者，大部分被儿茶酚-O-甲基转移酶（COMT）和单胺氧化酶（MAO）代谢失活。<br><br>
+                        <span class="clinical">【临床应用】</span>用于治疗急性心肌梗死、体外循环等引起的低血压。对血容量不足所致休克、低血压，或嗜铬细胞瘤切除术后低血压，可作为急救时补充血容量的辅助治疗，以使血压回升，暂时维持脑与冠状动脉灌注，直到补充血容量的治疗发生作用，并用于椎管内阻滞时的低血压及心脏停搏复苏后血压维持。去甲肾上腺素是治疗感染性休克的首选血管活性药。<br><br>
+                        <span class="adverse">【不良反应】</span>①去甲肾上腺素强烈的血管收缩作用可使器官血流减少，组织供血不足导致缺氧和酸中毒；持久或大量使用时，可使回心血量减少，外周血管阻力增高，心输出量减少。在缺氧、电解质紊乱、器质性心脏病患者中或过量时，可出现心律失常；血压升高后可出现反射性心率减慢。②去甲肾上腺素滴注时间过长或剂量过大时，可使肾血管剧烈收缩，产生无尿和肾实质损伤，以致出现急性肾衰竭。③过敏反应，个别患者因过敏而出现皮疹、面部水肿。④药液外漏可引起局部组织坏死。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="drug-name">间羟胺</td>
+                    <td>
+                        <span class="mechanism">【作用机制】</span>直接激动α受体，对β₁受体作用较弱。间羟胺也可被肾上腺素能神经末梢摄取入囊泡，通过置换作用促使囊泡中去甲肾上腺素释放，间接发挥作用。短时间连续使用，可使囊泡内去甲肾上腺素减少，效应逐渐减弱，产生快速耐受性。<br><br>
+                        <span class="clinical">【药理作用与临床应用】</span>间羟胺收缩血管，升高血压的作用较去甲肾上腺素弱而持久，略增加心肌收缩性，对心率影响不明显，有时因血压升高反射性减慢心率，但很少引起心律失常；对肾血管的收缩作用较去甲肾上腺素弱，但也可显著减少肾脏血流量。间羟胺可静脉滴注也可肌内注射，可用于各种休克早期及手术后或麻醉后的休克。可用于阵发性房性心动过速，特别是伴有低血压的患者，反射性减慢心率，并对窦房结有直接的抑制作用，使心率恢复正常。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="drug-name">去氧肾上腺素</td>
+                    <td>
+                        <span class="mechanism">【药物特点】</span>是人工合成品。作用机制与间羟胺类似，不容易被MAO代谢，可直接和间接激动α₁受体，又称α₁受体激动药，作用和去甲肾上腺素相似但较弱，一般剂量对β受体作用不明显。在升高血压同时，肾血流减少比...
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 标签区域 -->
+        <div class="tags-section">
+            <div class="tags-title">🔖 检索标签（点击可筛选，仅含图片内文字）：</div>
+            <div>
+                <span class="disease-tag">急性心肌梗死</span>
+                <span class="disease-tag">低血压</span>
+                <span class="disease-tag">休克</span>
+                <span class="disease-tag">感染性休克</span>
+                <span class="disease-tag">心脏停搏复苏</span>
+                <span class="disease-tag">阵发性房性心动过速</span>
+                <span class="disease-tag">心律失常</span>
+                <span class="disease-tag">急性肾衰竭</span>
+                <span class="disease-tag">过敏反应</span>
+                <span class="drug-tag">去甲肾上腺素</span>
+                <span class="drug-tag">间羟胺</span>
+                <span class="drug-tag">去氧肾上腺素</span>
+                <span class="drug-tag">COMT</span>
+                <span class="drug-tag">MAO</span>
+                <span class="drug-tag">α受体</span>
+                <span class="drug-tag">β₁受体</span>
+                <span class="drug-tag">α₁受体</span>
+                <span class="symptom-tag">儿茶酚-O-甲基转移酶</span>
+                <span class="symptom-tag">单胺氧化酶</span>
+                <span class="symptom-tag">嗜铬细胞瘤</span>
+                <span class="symptom-tag">椎管内阻滞</span>
+                <span class="symptom-tag">囊泡</span>
+                <span class="symptom-tag">快速耐受性</span>
+                <span class="symptom-tag">窦房结</span>
+            </div>
+        </div>
+        
+        <!-- 底部区域 -->
+        <div class="bottom-section">
+            <div class="keywords">
+                <strong>关键词：</strong>去甲肾上腺素、间羟胺、去氧肾上腺素、α受体激动药、感染性休克、急性心肌梗死、低血压、心脏停搏复苏、COMT、MAO、快速耐受性、阵发性房性心动过速、窦房结、急性肾衰竭、血管收缩、儿茶酚胺
+            </div>
+            <div class="page-number">页码：375</div>
+            
+            <!-- 复制区域 -->
+            <div class="copy-section">
+                <input type="text" class="copy-input" id="copyInput" readonly>
+                <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 提示框 -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // 页面信息
+        const pageInfo = {
+            title: "去甲肾上腺素、间羟胺、去氧肾上腺素药理说明",
+            subtitle: "α受体激动药、血管收缩药、抗休克药",
+            keywords: "去甲肾上腺素、间羟胺、去氧肾上腺素、α受体激动药、感染性休克、急性心肌梗死、低血压、COMT、MAO",
+            pageNum: "375"
+        };
+        
+        // 设置复制输入框内容
+        const copyContent = `${pageInfo.title}；${pageInfo.subtitle}；${pageInfo.keywords}=${pageInfo.pageNum}`;
+        document.getElementById('copyInput').value = copyContent;
+        
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('✅ 已复制到剪贴板！');
+                }).catch(() => {
+                    document.execCommand('copy');
+                    showToast('✅ 已复制到剪贴板！');
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('✅ 已复制到剪贴板！');
+            }
+        }
+        
+        // 显示提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            const favItem = {
+                title: document.title,
+                url: window.location.href,
+                pageNum: pageInfo.pageNum,
+                addTime: new Date().toLocaleString('zh-CN')
+            };
+            
+            const exists = favorites.some(f => f.pageNum === pageInfo.pageNum);
+            if (exists) {
+                showToast('⚠️ 该页面已在收藏中！');
+                return;
+            }
+            
+            favorites.push(favItem);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            localStorage.setItem('newFavorite', JSON.stringify(favItem));
+            
+            showToast('⭐ 已添加到收藏！');
+        }
+        
+        // 标签点击
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                showToast(`🔍 标签: ${this.textContent}`);
+            });
+        });
+    </script>
+</body>
+</html>
