@@ -1,0 +1,444 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~强心苷药物临床应用与不良反应*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-home {
+            background-color: #2196F3;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background-color: #1976D2;
+        }
+        
+        .btn-nav {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background-color: #45a049;
+        }
+        
+        .btn-favorite {
+            background-color: #FF9800;
+            color: white;
+        }
+        
+        .btn-favorite:hover {
+            background-color: #F57C00;
+        }
+        
+        .btn-copy {
+            background-color: #9C27B0;
+            color: white;
+            padding: 10px 20px;
+        }
+        
+        .btn-copy:hover {
+            background-color: #7B1FA2;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1565C0;
+            font-size: 22px;
+            margin: 15px 0 20px 0;
+            padding: 12px;
+            background-color: #E3F2FD;
+            border-radius: 8px;
+            word-break: break-all;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        thead {
+            background-color: #1976D2;
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 14px;
+            color: #444;
+            vertical-align: top;
+        }
+        
+        tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            color: #1565C0;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .checkbox {
+            color: #1976D2;
+            margin-right: 4px;
+        }
+        
+        .diamond {
+            color: #D32F2F;
+            margin-right: 4px;
+        }
+        
+        .tags-section {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            color: #1565C0;
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 4px;
+            background-color: #E8F5E9;
+            color: #2E7D32;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #C8E6C9;
+        }
+        
+        .tag-disease {
+            background-color: #FFEBEE;
+            color: #C62828;
+            border-color: #EF9A9A;
+        }
+        
+        .tag-drug {
+            background-color: #E3F2FD;
+            color: #1565C0;
+            border-color: #90CAF9;
+        }
+        
+        .tag-bacteria {
+            background-color: #FFF3E0;
+            color: #EF6C00;
+            border-color: #FFCC80;
+        }
+        
+        .keywords-section {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .keywords-title {
+            color: #1565C0;
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .copy-section {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 12px;
+            border: 2px solid #BBDEFB;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #555;
+            background-color: #FAFAFA;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            border-radius: 6px;
+            color: white;
+            font-size: 14px;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .notification.success {
+            background-color: #4CAF50;
+        }
+        
+        .notification.info {
+            background-color: #2196F3;
+        }
+        
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            
+            tbody td {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="notification" id="notification"></div>
+    
+    <div class="header-nav">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="381.html" class="btn btn-nav">上一页</a>
+            <a href="383.html" class="btn btn-nav">下一页</a>
+            <button class="btn btn-favorite" onclick="addFavorite()">收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~强心苷药物临床应用与不良反应*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~强心苷药物临床应用与不良反应*****、强心苷药物临床应用要点与不良反应详解</div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>强心苷药物临床应用要点与不良反应详解</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span class="section-title">适应证差异：</span><br>
+                    对有心房颤动伴快速心室率的心力衰竭疗效最佳；对瓣膜病、风湿性心脏病、冠状动脉粥样硬化性心脏病和高血压性心脏病所致的心功能不全疗效较好；对肺源性心脏病、活动性心肌炎或严重心肌损伤疗效较差，且容易发生中毒；对扩张型心肌病、心肌肥厚、舒张性心力衰竭不应选用强心苷，应首选β受体阻断药及ACEI。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="checkbox">□</span><span class="section-title">心房颤动和心房扑动：</span><br>
+                    强心苷可通过兴奋迷走神经或对房室结的直接作用减慢房室传导，增加房室结隐匿性传导，减慢心室率，增加心输出量，从而改善循环障碍，但对于大多数患者不能终止心房颤动，而部分心房扑动的患者可能在应用强心苷后转为心房颤动。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="checkbox">□</span><span class="section-title">阵发性室上性心动过速：</span><br>
+                    强心苷可增强迷走神经功能，降低心房的兴奋性，终止阵发性室上性心动过速的发生。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="diamond">◇</span><span class="section-title">不良反应：</span><br>
+                    强心苷治疗安全范围小，一般治疗量已接近中毒剂量的60%，且生物利用度及个体对强心苷的敏感性差异较大，故易发生不同程度的毒性反应。特别是当低血钾、高血钙、低血镁、心肌缺氧、酸碱平衡失调、发热、高龄等因素存在时更容易发生。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="checkbox">□</span><span class="section-title">心脏反应：</span><br>
+                    强心苷最严重危险的不良反应，约50%的患者发生各种类型的心律失常。<br>
+                    ①快速性心律失常，强心苷中毒最多见和最早见的是室性期前收缩，约占心脏毒性发生率1/3，也可发生二联律、三联律及心动过速，甚至发生心室颤动；<br>
+                    ②房室传导阻滞，强心苷引起房室传导阻滞与提高迷走神经兴奋性及抑制Na⁺-K⁺-ATP酶有关；<br>
+                    ③窦性心动过缓，强心苷可因抑制窦房结，降低自律性而发生窦性心动过缓，若心率＜60次/分，一般作为停药指征之一。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">心律失常的解救措施：</span><br>
+                    ①氯化钾，是治疗由强心苷中毒所导致的快速性心律失常有效药物。钾离子可与强心苷竞争心肌细胞膜上Na⁺-K⁺-ATP酶，减少强心苷与酶的结合，从而减轻或阻止毒性的发生和发展。但强心苷中毒后补钾只能阻止强心苷继续与心肌细胞的结合，不能将已与心肌细胞结合的强心苷置换出来，因此早期防止低钾血症比治疗补钾更重要。补钾不可过量，同时还要注意患者的肾功能情况，以防止高钾血症发生。对并发传导阻滞的强心苷中毒不能补钾盐，否则可致心脏停搏。<br>
+                    ②苯妥英钠，对于严重心律失常可使用苯妥英钠，苯妥英钠不仅有抗心律失常作用，
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <span class="tag tag-disease">心力衰竭</span>
+        <span class="tag tag-disease">心房颤动</span>
+        <span class="tag tag-disease">心房扑动</span>
+        <span class="tag tag-disease">阵发性室上性心动过速</span>
+        <span class="tag tag-disease">室性期前收缩</span>
+        <span class="tag tag-disease">心室颤动</span>
+        <span class="tag tag-disease">房室传导阻滞</span>
+        <span class="tag tag-disease">窦性心动过缓</span>
+        <span class="tag tag-drug">强心苷</span>
+        <span class="tag tag-drug">氯化钾</span>
+        <span class="tag tag-drug">苯妥英钠</span>
+        <span class="tag tag-drug">β受体阻断药</span>
+        <span class="tag tag-drug">ACEI</span>
+    </div>
+    
+    <div class="page-number">页码：382</div>
+    
+    <div class="keywords-section">
+        <div class="keywords-title">关键词</div>
+        <div style="color: #555; font-size: 14px;">
+            强心苷、心力衰竭、心房颤动、心房扑动、阵发性室上性心动过速、不良反应、心脏毒性、心律失常、氯化钾、苯妥英钠、低血钾、房室传导阻滞、窦性心动过缓
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="~~~~~强心苷药物临床应用与不良反应*****；强心苷、心力衰竭、心房颤动、心房扑动、阵发性室上性心动过速、不良反应、心脏毒性、心律失常、氯化钾、苯妥英钠、低血钾、房室传导阻滞、窦性心动过缓；=382" readonly>
+        <button class="btn btn-copy" onclick="copyContent()">复制</button>
+    </div>
+
+    <script>
+        function showNotification(message, type) {
+            const notif = document.getElementById('notification');
+            notif.textContent = message;
+            notif.className = 'notification ' + type;
+            notif.style.display = 'block';
+            setTimeout(() => {
+                notif.style.display = 'none';
+            }, 2000);
+        }
+        
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showNotification('复制成功！', 'success');
+                }).catch(() => {
+                    document.execCommand('copy');
+                    showNotification('复制成功！', 'success');
+                });
+            } else {
+                document.execCommand('copy');
+                showNotification('复制成功！', 'success');
+            }
+        }
+        
+        function addFavorite() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const currentPage = {
+                title: '~~~~~强心苷药物临床应用与不良反应*****',
+                url: window.location.href,
+                pageNum: '382'
+            };
+            
+            const exists = favorites.some(f => f.url === currentPage.url);
+            if (!exists) {
+                favorites.push(currentPage);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                showNotification('已添加到收藏！', 'success');
+            } else {
+                showNotification('已在收藏列表中！', 'info');
+            }
+        }
+    </script>
+</body>
+</html>
