@@ -1,0 +1,595 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急性中毒-急诊处理与解毒治疗*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5ee 100%);
+            min-height: 100vh;
+            padding: 10px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 10px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 右上角按钮组 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+        }
+        .nav-btns a, .nav-btns button {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(92,184,92,0.3);
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .nav-btns a:hover, .nav-btns button:hover {
+            background: #4cae4c;
+            transform: translateY(-2px);
+        }
+        .nav-btns .prev-btn {
+            background: #f0ad4e;
+            box-shadow: 0 2px 8px rgba(240,173,78,0.3);
+        }
+        .nav-btns .prev-btn:hover {
+            background: #ec971f;
+        }
+        .nav-btns .next-btn {
+            background: #5bc0de;
+            box-shadow: 0 2px 8px rgba(91,192,222,0.3);
+        }
+        .nav-btns .next-btn:hover {
+            background: #46b8da;
+        }
+        .nav-btns .fav-btn {
+            background: #d9534f;
+            box-shadow: 0 2px 8px rgba(217,83,79,0.3);
+        }
+        .nav-btns .fav-btn:hover {
+            background: #c9302c;
+        }
+        .nav-btns .fav-btn.faved {
+            background: #5cb85c;
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            padding: 70px 10px 20px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c3e50;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            max-width: 100%;
+            overflow-x: auto;
+            margin: 0 auto 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        
+        /* 表格头部 - 蓝色 */
+        thead tr {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+        }
+        thead th {
+            padding: 15px 12px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+            border-bottom: 3px solid #2a6db5;
+        }
+        
+        /* 表格内容 */
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+        }
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        tbody tr:hover {
+            background: #f0f7ff;
+        }
+        
+        /* 层级缩进样式 */
+        .level-1 {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 15px;
+        }
+        .level-2 {
+            padding-left: 20px;
+            color: #34495e;
+        }
+        .level-3 {
+            padding-left: 40px;
+            color: #555;
+            font-size: 13px;
+        }
+        .level-4 {
+            padding-left: 60px;
+            color: #666;
+            font-size: 13px;
+        }
+        
+        /* 标记符号颜色 */
+        .bullet {
+            color: #e74c3c;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        .check {
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        .diamond {
+            color: #3498db;
+            margin-right: 5px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 20px 10px;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .tag-disease {
+            background: #ffe0e0;
+            color: #c0392b;
+            border: 1px solid #f5b7b1;
+        }
+        .tag-disease:hover {
+            background: #f5b7b1;
+            transform: scale(1.05);
+        }
+        .tag-drug {
+            background: #e0f7fa;
+            color: #00838f;
+            border: 1px solid #80deea;
+        }
+        .tag-drug:hover {
+            background: #80deea;
+            transform: scale(1.05);
+        }
+        .tag-bacteria {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        .tag-bacteria:hover {
+            background: #a5d6a7;
+            transform: scale(1.05);
+        }
+        
+        /* 关键词和页码区域 */
+        .bottom-section {
+            margin: 20px 10px;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        .keywords {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 2;
+        }
+        .keywords span {
+            display: inline-block;
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 4px 12px;
+            margin: 3px;
+            border-radius: 15px;
+            font-size: 13px;
+        }
+        .page-number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #4a90d9;
+            margin-top: 10px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            margin: 20px 10px;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: border 0.3s;
+        }
+        .copy-input:focus {
+            border-color: #4a90d9;
+        }
+        .copy-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        .copy-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        .copy-btn.copied {
+            background: #5cb85c;
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 2000;
+        }
+        .toast.show {
+            opacity: 1;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .page-title {
+                font-size: 18px;
+                padding-top: 80px;
+            }
+            thead th {
+                font-size: 16px;
+                padding: 12px 8px;
+            }
+            tbody td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            .nav-btns a, .nav-btns button {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            .home-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+
+    <!-- 右上角导航 -->
+    <div class="nav-btns">
+        <a href="284.html" class="prev-btn">← 上一页</a>
+        <a href="286.html" class="next-btn">下一页 →</a>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+    </div>
+
+    <!-- 标题 -->
+    <div class="page-title">~~~~~急性中毒-急诊处理与解毒治疗*****</div>
+
+    <!-- 表格 -->
+    <div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~急性中毒-急诊处理与解毒治疗*****、急性中毒 - 急诊处理：终止接触、复苏支持、促进排出、应用解毒药、4. 急诊处理、立即终止毒物接触、用清水彻底冲洗，清除眼内毒物。、清除伤口处毒物。、紧急复苏和对症支持治疗、促进毒物排出、强化利尿和改变尿液酸碱度。、高压氧治疗是一氧化碳中毒的特效疗法。、应用解毒药</div><div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>急性中毒 - 急诊处理：终止接触、复苏支持、促进排出、应用解毒药</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="level-1">4. 急诊处理</td>
+                </tr>
+                <tr>
+                    <td class="level-2"><span class="bullet">●</span>立即终止毒物接触</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>立即将患者撤离中毒现场，转到空气新鲜的地方，脱去污染衣物。</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>常规毒物中毒，用温水或肥皂水清洗掉皮肤和毛发上的毒物。</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>用清水彻底冲洗，清除眼内毒物。</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>清除伤口处毒物。</td>
+                </tr>
+                <tr>
+                    <td class="level-2"><span class="bullet">●</span>紧急复苏和对症支持治疗</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>以优先保证气道、循环、呼吸等主要生命体征稳定，给予有效急救复苏措施，为后续治疗提供基础保证。</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>清除体内尚未吸收的毒物：经口中毒者，早期清除胃肠道尚未吸收的毒物可明显改善病情，越早、越彻底越好。常用方法为催吐、洗胃、肠道毒物吸附、导泻、灌肠、全肠灌洗。</td>
+                </tr>
+                <tr>
+                    <td class="level-2"><span class="bullet">●</span>促进毒物排出</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>强化利尿和改变尿液酸碱度。</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>吸氧：一氧化碳中毒时，吸氧可促使碳氧血红蛋白解离，加速一氧化碳排出。</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>高压氧治疗是一氧化碳中毒的特效疗法。</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>血液净化：用于血液中毒物浓度明显增高、中毒严重、昏迷时间长、有并发症和经积极支持疗法病情仍日趋恶化者。</td>
+                </tr>
+                <tr>
+                    <td class="level-4"><span class="diamond">◇</span>血液透析：清除血液中分子量较小和非脂溶性的毒物（如苯巴比妥、水杨酸类、甲醇、茶碱、乙二醇和锂等）。短效巴比妥类、格鲁米特（导眠能）和OPI因具有脂溶性，一般不进行血液透析。氯酸盐或重铬酸盐中毒能引起急性肾衰竭，首选血液透析。中毒12小时内进行血液透析效果好。如中毒时间过长，毒物与血浆蛋白结合，则不易透出。</td>
+                </tr>
+                <tr>
+                    <td class="level-4"><span class="diamond">◇</span>血液灌流：血液流过装有活性炭或树脂的灌流柱，毒物被吸附后，再将血液输回患者体内。此法能吸附脂溶性或与蛋白质结合的化学物，清除血液中巴比妥类和百草枯等，是目前最常用的中毒抢救措施。</td>
+                </tr>
+                <tr>
+                    <td class="level-4"><span class="diamond">◇</span>血浆置换：用于清除游离或与蛋白结合的毒物，特别是生物毒（如蛇毒、毒蕈中毒）及砷化氢等溶血毒物中毒。一般需在数小时内置换3～5L血浆。</td>
+                </tr>
+                <tr>
+                    <td class="level-2"><span class="bullet">●</span>应用解毒药</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>金属中毒解毒药：多属螯合剂，常用的有氨羧螯合剂和巯基螯合剂。</td>
+                </tr>
+                <tr>
+                    <td class="level-4"><span class="diamond">◇</span>依地酸钙钠（EDTA Ca-Na）：是最常用的氨羧螯合剂，</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div>
+            <span class="tag tag-disease">急性中毒</span>
+            <span class="tag tag-disease">中毒</span>
+            <span class="tag tag-disease">急诊处理</span>
+            <span class="tag tag-disease">碳氧血红蛋白</span>
+            <span class="tag tag-disease">急性肾衰竭</span>
+            <span class="tag tag-disease">溶血</span>
+            <span class="tag tag-disease">毒蕈中毒</span>
+            <span class="tag tag-drug">一氧化碳</span>
+            <span class="tag tag-drug">苯巴比妥</span>
+            <span class="tag tag-drug">水杨酸类</span>
+            <span class="tag tag-drug">甲醇</span>
+            <span class="tag tag-drug">茶碱</span>
+            <span class="tag tag-drug">乙二醇</span>
+            <span class="tag tag-drug">锂</span>
+            <span class="tag tag-drug">短效巴比妥类</span>
+            <span class="tag tag-drug">格鲁米特</span>
+            <span class="tag tag-drug">导眠能</span>
+            <span class="tag tag-drug">OPI</span>
+            <span class="tag tag-drug">氯酸盐</span>
+            <span class="tag tag-drug">重铬酸盐</span>
+            <span class="tag tag-drug">百草枯</span>
+            <span class="tag tag-drug">蛇毒</span>
+            <span class="tag tag-drug">砷化氢</span>
+            <span class="tag tag-drug">依地酸钙钠</span>
+            <span class="tag tag-drug">EDTA Ca-Na</span>
+            <span class="tag tag-drug">氨羧螯合剂</span>
+            <span class="tag tag-drug">巯基螯合剂</span>
+        </div>
+    </div>
+
+    <!-- 关键词和页码 -->
+    <div class="bottom-section">
+        <div class="keywords">
+            <span>急性中毒</span>
+            <span>中毒</span>
+            <span>急诊处理</span>
+            <span>终止毒物接触</span>
+            <span>紧急复苏</span>
+            <span>对症支持治疗</span>
+            <span>促进毒物排出</span>
+            <span>应用解毒药</span>
+            <span>催吐</span>
+            <span>洗胃</span>
+            <span>导泻</span>
+            <span>灌肠</span>
+            <span>吸氧</span>
+            <span>高压氧</span>
+            <span>血液透析</span>
+            <span>血液灌流</span>
+            <span>血浆置换</span>
+            <span>螯合剂</span>
+            <span>依地酸钙钠</span>
+            <span>EDTA</span>
+            <span>一氧化碳</span>
+            <span>苯巴比妥</span>
+            <span>甲醇</span>
+            <span>OPI</span>
+            <span>百草枯</span>
+            <span>蛇毒</span>
+            <span>砷化氢</span>
+        </div>
+        <div class="page-number">285</div>
+    </div>
+
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="急性中毒-急诊处理与解毒治疗；急性中毒、中毒、急诊处理、终止毒物接触、紧急复苏、对症支持治疗、促进毒物排出、应用解毒药、催吐、洗胃、导泻、灌肠、吸氧、高压氧、血液透析、血液灌流、血浆置换、螯合剂、依地酸钙钠、EDTA、一氧化碳、苯巴比妥、甲醇、OPI、百草枯、蛇毒、砷化氢=285" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+    </div>
+
+    <!-- 提示 -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                    document.getElementById('copyBtn').classList.add('copied');
+                    document.getElementById('copyBtn').textContent = '已复制';
+                    setTimeout(() => {
+                        document.getElementById('copyBtn').classList.remove('copied');
+                        document.getElementById('copyBtn').textContent = '复制';
+                    }, 2000);
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 提示消息
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+        
+        // 收藏功能 (使用localStorage)
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const pageInfo = {
+                title: '急性中毒-急诊处理与解毒治疗',
+                url: '285.html',
+                pageNum: '285'
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const idx = favorites.findIndex(f => f.url === '285.html');
+            
+            if (idx === -1) {
+                favorites.push(pageInfo);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                btn.classList.add('faved');
+                btn.textContent = '★ 已收藏';
+                showToast('已添加到收藏！');
+            } else {
+                favorites.splice(idx, 1);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                btn.classList.remove('faved');
+                btn.textContent = '☆ 收藏';
+                showToast('已取消收藏！');
+            }
+        }
+        
+        // 初始化收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const btn = document.getElementById('favBtn');
+            if (favorites.find(f => f.url === '285.html')) {
+                btn.classList.add('faved');
+                btn.textContent = '★ 已收藏';
+            }
+        };
+    </script>
+
+</body>
+</html>
