@@ -1,0 +1,584 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~糖皮质激素急诊使用剂量疗程撤药及妊娠期用药指南*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #333;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-top: 10px;
+        }
+        
+        .main-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .sub-title {
+            font-size: 14px;
+            color: #5d6d7e;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #2980b9;
+        }
+        
+        .btn-nav {
+            background: #5dade2;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background: #3498db;
+        }
+        
+        .btn-favorite {
+            background: #e74c3c;
+            color: white;
+            font-size: 12px;
+            padding: 6px 14px;
+        }
+        
+        .btn-favorite:hover {
+            background: #c0392b;
+        }
+        
+        .btn-favorite.active {
+            background: #27ae60;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        thead th {
+            background: #2e86c1;
+            color: white;
+            padding: 14px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e8e8e8;
+            line-height: 1.7;
+            color: #444;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 15px;
+        }
+        
+        .highlight-box {
+            background: #eaf2f8;
+            border-left: 4px solid #2e86c1;
+            padding: 10px 12px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .warning-box {
+            background: #fadbd8;
+            border-left: 4px solid #e74c3c;
+            padding: 10px 12px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .tags-section {
+            margin: 25px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            padding: 6px 14px;
+            border-radius: 16px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #fdebd0;
+            color: #9a7d0a;
+            border: 1px solid #f9e79f;
+        }
+        
+        .tag-drug {
+            background: #d5f5e3;
+            color: #1e8449;
+            border: 1px solid #abebc6;
+        }
+        
+        .tag-bacteria {
+            background: #fadbd8;
+            color: #943126;
+            border: 1px solid #f5b7b1;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .copy-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .copy-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 14px;
+            border: 2px solid #d5dbdb;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background: #fafafa;
+        }
+        
+        .btn-copy {
+            background: #27ae60;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+        
+        .btn-copy:hover {
+            background: #229954;
+        }
+        
+        .btn-copy.copied {
+            background: #8e44ad;
+        }
+        
+        .page-number {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 16px;
+            color: #5d6d7e;
+            font-weight: bold;
+        }
+        
+        .keywords-section {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .keywords-title {
+            font-size: 13px;
+            color: #7f8c8d;
+            margin-bottom: 8px;
+        }
+        
+        .keywords-list {
+            font-size: 13px;
+            color: #5d6d7e;
+            line-height: 1.8;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 14px;
+            display: none;
+            z-index: 1000;
+        }
+        
+        @media (max-width: 600px) {
+            .main-title {
+                font-size: 18px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">← 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="364.html" class="btn btn-nav">← 上一页</a>
+            <a href="366.html" class="btn btn-nav">下一页 →</a>
+            <button class="btn btn-favorite" id="favoriteBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <div class="header">
+        <h1 class="main-title">~~~~~糖皮质激素急诊使用剂量疗程撤药及妊娠期用药指南*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~糖皮质激素急诊使用剂量疗程撤药及妊娠期用药指南*****、糖皮质激素急诊使用剂量、疗程、撤药及妊娠期用药、3. 糖皮质激素急诊使用的剂量、疗程以及撤药、急诊糖皮质激素不同剂量的选择（按照泼尼松剂量计）、糖皮质激素使用的不同疗程、4. 全身用糖皮质激素类药物妊娠期用药、冲击治疗剂量、大剂量、足量、中等剂量、短程治疗、长程治疗</div>
+        <p class="sub-title">冲击治疗 | 大剂量 | 足量 | 中等剂量 | 短程治疗 | 长程治疗 | 撤药原则 | 妊娠期用药</p>
+    </div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">糖皮质激素急诊使用剂量、疗程、撤药及妊娠期用药</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        <div class="warning-box">
+                            <strong>重要提示：</strong>若连续使用泼尼松（20～30mg/d）2周以上突然停药，则可能出现肾上腺皮质功能不全的撤药反应，需注意逐渐减量。
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="section-title">3. 糖皮质激素急诊使用的剂量、疗程以及撤药</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <strong>急诊糖皮质激素不同剂量的选择（按照泼尼松剂量计）</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 25%; font-weight: bold; color: #1a5276;">冲击治疗剂量</td>
+                    <td>
+                        一般静脉给药，500～1000mg/d，疗程多小于5天，后减到1～2mg/(kg·d)，适于危重患者的抢救，如狼疮脑病、重症药疹、重症肌无力（有呼吸机支持时）、自身免疫性边缘叶脑炎等。副作用明显，尤其容易继发感染。需配合其他有效治疗措施，有的情况可迅速减药，也有的需要逐渐减量。
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: #1a5276;">大剂量</td>
+                    <td>
+                        1～4mg/(kg·d)，多见于冲击剂量减药过渡方案，一般不超过5～7天；也可见于有冲击治疗指征而顾忌感染等并发症的妥协方案。
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: #1a5276;">足量</td>
+                    <td>
+                        1mg/(kg·d)，糖皮质激素与其受体全部结合。适于多数疾病的早期控制。容易继发感染。一般不超过1个月。
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: #1a5276;">中等剂量</td>
+                    <td>
+                        0.5～1mg/(kg·d)，和糖皮质激素受体的饱和度逐渐增加，适于部分疾病的控制或减量时的中途剂量。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <strong>糖皮质激素使用的不同疗程</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: #1a5276;">短程治疗</td>
+                    <td>
+                        疗程＜1个月，包括感染或过敏性疾病，如结核性脑膜炎、肺孢子菌肺炎、重症药疹等。停药时需逐渐减量至停药。
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: #1a5276;">长程治疗</td>
+                    <td>
+                        疗程＞1个月，适用于自身免疫病，如系统性红斑狼疮、溶血性贫血等。需逐渐减量，维持治疗可采用每日或隔日用药。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <strong>糖皮质激素的撤药</strong>
+                        <div class="highlight-box">
+                            短疗程者可快速减药；长疗程者需缓慢减药，遵循"先快后慢"原则。
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <ul style="margin-left: 20px; line-height: 2;">
+                            <li>糖皮质激素疗程在7天之内者，可直接停药；超过7天者，则需先减药后撤药。</li>
+                            <li>泼尼松30mg/d，连续2周者，可以每3～5天减少泼尼松5mg/d。</li>
+                            <li>泼尼松50mg/d，连续4～8周者，则需每1～2周减少泼尼松5mg/d，至20mg左右后每2～4周减5mg。若在减药过程中病情反复，可酌情增加剂量。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="section-title">4. 全身用糖皮质激素类药物妊娠期用药</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        妊娠女性应用糖皮质激素可能增加胎儿发生腭裂的风险，但是绝对危险度很可能较低。尚缺乏有说服力的证据证明糖皮质激素可以导致胎儿肾上腺皮质功能减退症。不同制剂的胎盘通过特
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">肾上腺皮质功能不全</span>
+            <span class="tag tag-disease">狼疮脑病</span>
+            <span class="tag tag-disease">重症药疹</span>
+            <span class="tag tag-disease">重症肌无力</span>
+            <span class="tag tag-disease">自身免疫性边缘叶脑炎</span>
+            <span class="tag tag-disease">感染</span>
+            <span class="tag tag-disease">过敏性疾病</span>
+            <span class="tag tag-disease">结核性脑膜炎</span>
+            <span class="tag tag-disease">肺孢子菌肺炎</span>
+            <span class="tag tag-disease">系统性红斑狼疮</span>
+            <span class="tag tag-disease">溶血性贫血</span>
+            <span class="tag tag-disease">自身免疫病</span>
+            <span class="tag tag-disease">腭裂</span>
+            <span class="tag tag-drug">泼尼松</span>
+            <span class="tag tag-drug">糖皮质激素</span>
+            <span class="tag tag-bacteria">肺孢子菌</span>
+            <span class="tag tag-bacteria">结核</span>
+        </div>
+    </div>
+    
+    <div class="page-number">— 356 —</div>
+    
+    <div class="keywords-section">
+        <div class="keywords-title">关键词</div>
+        <div class="keywords-list">
+            糖皮质激素 | 冲击治疗 | 大剂量 | 足量 | 中等剂量 | 短程治疗 | 长程治疗 | 撤药 | 逐渐减量 | 泼尼松 | 妊娠期用药 | 腭裂 | 肾上腺皮质功能减退 | 狼疮脑病 | 重症肌无力 | 系统性红斑狼疮 | 溶血性贫血 | 结核性脑膜炎 | 肺孢子菌肺炎
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <div class="copy-wrapper">
+            <input type="text" class="copy-input" id="copyInput" value="糖皮质激素急诊使用剂量疗程撤药及妊娠期用药指南；冲击治疗、大剂量、足量、中等剂量、短程治疗、长程治疗、撤药原则、泼尼松、妊娠期用药、腭裂、狼疮脑病、重症肌无力、系统性红斑狼疮、溶血性贫血、结核性脑膜炎、肺孢子菌肺炎=356" readonly>
+            <button class="btn-copy" id="copyBtn" onclick="copyContent()">复制</button>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '已复制';
+                    btn.classList.add('copied');
+                    showToast('内容已复制到剪贴板');
+                    setTimeout(() => {
+                        btn.textContent = '复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            } else {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制';
+                btn.classList.add('copied');
+                showToast('内容已复制到剪贴板');
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFavorited = btn.classList.contains('active');
+            
+            if (!isFavorited) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                showToast('已添加到收藏');
+                
+                try {
+                    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                    const pageInfo = {
+                        title: '糖皮质激素急诊使用剂量疗程撤药及妊娠期用药指南',
+                        url: '356.html',
+                        pageNum: '356'
+                    };
+                    const exists = favorites.some(f => f.url === '356.html');
+                    if (!exists) {
+                        favorites.push(pageInfo);
+                        localStorage.setItem('favorites', JSON.stringify(favorites));
+                    }
+                } catch(e) {
+                    console.log('localStorage not available');
+                }
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+                showToast('已取消收藏');
+                
+                try {
+                    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                    const filtered = favorites.filter(f => f.url !== '356.html');
+                    localStorage.setItem('favorites', JSON.stringify(filtered));
+                } catch(e) {
+                    console.log('localStorage not available');
+                }
+            }
+        }
+        
+        window.onload = function() {
+            try {
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const isFavorited = favorites.some(f => f.url === '356.html');
+                const btn = document.getElementById('favoriteBtn');
+                if (isFavorited) {
+                    btn.classList.add('active');
+                    btn.textContent = '★ 已收藏';
+                }
+            } catch(e) {
+                console.log('localStorage not available');
+            }
+        };
+    </script>
+</body>
+</html>
