@@ -1,0 +1,561 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>隐球菌脑膜炎 - 定义与临床表现</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimHei", "PingFang SC", sans-serif;
+            background-color: #f5f0ff;
+            color: #333;
+            line-height: 1.8;
+            padding: 15px;
+            font-size: 14px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background-color: #2e7d32;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background-color: #1b5e20;
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background-color: #1976d2;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background-color: #0d47a1;
+            transform: translateY(-2px);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            top: 130px;
+            right: 15px;
+            background-color: #ff9800;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: none;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .fav-btn:hover {
+            background-color: #e65100;
+            transform: translateY(-2px);
+        }
+        
+        /* 标题格式 */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1565c0;
+            margin: 60px 15px 25px 15px;
+            padding: 15px;
+            background-color: #e3f2fd;
+            border-radius: 12px;
+            border-left: 5px solid #1976d2;
+        }
+        
+        .page-title::before {
+            content: "~~~~~";
+            color: #1976d2;
+            margin-right: 10px;
+        }
+        
+        .page-title::after {
+            content: "*****";
+            color: #1976d2;
+            margin-left: 10px;
+        }
+        
+        /* 副标题 */
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #424242;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        /* 表格样式 */
+        .main-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+        
+        .main-table th {
+            background-color: #1976d2;
+            color: white;
+            padding: 18px 15px;
+            text-align: left;
+            font-size: 17px;
+            font-weight: bold;
+        }
+        
+        .main-table td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        .main-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .main-table tr:hover {
+            background-color: #e8f4f8;
+        }
+        
+        .section-header {
+            background-color: #bbdefb !important;
+            font-weight: bold;
+            color: #0d47a1;
+            font-size: 15px;
+        }
+        
+        .check-item {
+            color: #2e7d32;
+            font-weight: 600;
+        }
+        
+        .diamond-item {
+            padding-left: 25px;
+            color: #555;
+        }
+        
+        .diamond-item::before {
+            content: "◇ ";
+            color: #1976d2;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1976d2;
+            margin: 20px 0;
+            padding: 12px;
+            background-color: #e3f2fd;
+            border-radius: 8px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #fff3e0;
+            border-radius: 12px;
+            border: 2px solid #ff9800;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #e65100;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 5px;
+            background-color: #ff9800;
+            color: white;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        /* 底部编辑框区域 */
+        .copy-section {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #e8f5e9;
+            border-radius: 12px;
+            border: 2px solid #4caf50;
+        }
+        
+        .copy-section-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #2e7d32;
+            margin-bottom: 12px;
+        }
+        
+        .copy-input-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #4caf50;
+            border-radius: 8px;
+            font-size: 14px;
+            background-color: white;
+        }
+        
+        .copy-btn {
+            padding: 12px 25px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background-color: #2e7d32;
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fce4ec;
+            border-radius: 8px;
+            color: #c62828;
+            font-size: 14px;
+        }
+        
+        .keywords strong {
+            color: #ad1457;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            .page-title {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            
+            .main-table th {
+                font-size: 15px;
+                padding: 14px 10px;
+            }
+            
+            .main-table td {
+                padding: 12px 10px;
+            }
+            
+            .nav-buttons {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                top: 10px;
+                left: 10px;
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+            
+            .fav-btn {
+                top: 115px;
+                right: 10px;
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="205.html" class="nav-btn">◀ 上一页</a>
+        <a href="207.html" class="nav-btn">下一页 ▶</a>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    
+    <!-- 标题 -->
+    <div class="page-title">隐球菌脑膜炎</div>
+    <div class="subtitle">糖皮质激素治疗、定义与临床表现</div>
+    
+    <!-- 主表格 -->
+    <table class="main-table">
+        <thead>
+            <tr>
+                <th colspan="2">隐球菌脑膜炎诊疗要点</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="section-header">
+                <td colspan="2">糖皮质激素治疗</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">● 糖皮质激素治疗</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">✓ 适应证：</div>
+                    <div>对于存在有力流行病学或临床证据表明有结核性脑膜炎的所有儿童和成人患者。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">✓ 方案：</div>
+                    <div>包括使用地塞米松或泼尼松，具体如下。</div>
+                    <div class="diamond-item">地塞米松：体重＜25kg的儿童：8mg/d，连用2周，然后在4～6周内逐渐减量至停药。体重＞25kg的青少年及成人：0.3～0.4mg/(kg·d)，持续2周，然后在第3周予0.2mg/(kg·d)，第4周予0.1mg/(kg·d)，此后4mg/d，且每周将日剂量减少1mg；总疗程约8周。</div>
+                    <div class="diamond-item">泼尼松：儿童：2～4mg/(kg·d)。青少年和成人：60mg/d。初始剂量治疗2周后，在接下来的6周期间逐渐减量至停药（即每周将日剂量减少10mg）；总疗程约8周。</div>
+                    <div style="text-align: right; color: #666; margin-top: 10px;">（李 妍）</div>
+                </td>
+            </tr>
+            <tr class="section-header">
+                <td colspan="2">■ 隐球菌脑膜炎</td>
+            </tr>
+            <tr class="section-header">
+                <td colspan="2">1. 定义</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>● 隐球菌病是一种侵袭性真菌感染，大多由新型隐球菌所致。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>● 隐球菌感染始于肺部；在HIV感染者中，脑膜脑炎是最常出现的隐球菌病表现。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>● 大多数隐球菌脑膜脑炎患者免疫功能低下。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>● 除HIV感染外，最常见的免疫抑制形式包括糖皮质激素治疗、生物调节剂、使用伊布替尼等酪氨酸激酶抑制剂、实体器官移植、肿瘤（尤其是血液系统恶性肿瘤），以及结节病和肝衰竭等。</div>
+                </td>
+            </tr>
+            <tr class="section-header">
+                <td colspan="2">2. 临床表现</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">● 症状</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">✓</div>
+                    <div>最常见的有发热、不适和头痛，通常在1～2周缓慢出现。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">✓</div>
+                    <div>1/4～1/3患者可出现颈强直、畏光和呕吐。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">✓</div>
+                    <div>少数情况下患者在数日内出现昏迷和暴发性死亡。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">✓</div>
+                    <div>其他提示播散性疾病的症状包括咳嗽、呼吸困难和皮疹。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">✓</div>
+                    <div>视力和听力损失也有报道。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">● 体征</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">✓</div>
+                    <div>初始查体可能发现嗜睡或意识模糊伴发热。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">✓</div>
+                    <div>播散性疾病的其他表现可能也很明显，包括呼吸过速和类似传染性软疣的皮肤病变。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">✓</div>
+                    <div>舒张压增高可能反映颅内压增高。</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 页码 -->
+    <div class="page-number">194</div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <span class="tag">隐球菌脑膜炎</span>
+        <span class="tag">隐球菌病</span>
+        <span class="tag">新型隐球菌</span>
+        <span class="tag">脑膜脑炎</span>
+        <span class="tag">HIV</span>
+        <span class="tag">糖皮质激素</span>
+        <span class="tag">地塞米松</span>
+        <span class="tag">泼尼松</span>
+        <span class="tag">伊布替尼</span>
+        <span class="tag">酪氨酸激酶抑制剂</span>
+        <span class="tag">结核性脑膜炎</span>
+    </div>
+    
+    <!-- 复制功能区域 -->
+    <div class="copy-section">
+        <div class="copy-section-title">📋 快速复制</div>
+        <div class="copy-input-group">
+            <input type="text" class="copy-input" id="copyText" value="隐球菌脑膜炎；糖皮质激素治疗、定义与临床表现；隐球菌脑膜炎,隐球菌病,新型隐球菌,脑膜脑炎,HIV,糖皮质激素,地塞米松,泼尼松,伊布替尼,酪氨酸激酶抑制剂,结核性脑膜炎；=194" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        <strong>关键词：</strong>隐球菌脑膜炎、隐球菌病、新型隐球菌、脑膜脑炎、HIV、糖皮质激素、地塞米松、泼尼松、伊布替尼、酪氨酸激酶抑制剂、免疫抑制、颅内压增高
+    </div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(function() {
+                    alert("已复制到剪贴板！");
+                });
+            } else {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            }
+        }
+        
+        // 添加到收藏
+        function addToFavorites() {
+            const title = "隐球菌脑膜炎";
+            const url = window.location.href;
+            const pageId = "194";
+            
+            try {
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                
+                const exists = favorites.some(f => f.url === url);
+                if (exists) {
+                    alert("该页面已在收藏夹中！");
+                    return;
+                }
+                
+                favorites.push({
+                    title: title,
+                    url: url,
+                    pageId: pageId,
+                    category: "急诊疾病",
+                    date: new Date().toLocaleString()
+                });
+                
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert("已添加到收藏！\n标题：" + title + "\n页码：" + pageId);
+            } catch(e) {
+                alert("收藏功能需要index.html配合实现。\n请确保index.html页面能够读取收藏数据。");
+            }
+        }
+    </script>
+</body>
+</html>
