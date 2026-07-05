@@ -1,0 +1,582 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~蛛网膜下腔出血并发症与急诊处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #5a9bd5;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .favorite-btn {
+            background: #e8b339;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        
+        .favorite-btn.active {
+            background: #d4a017;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .main-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .main-table thead {
+            background: #2e75b6;
+        }
+        
+        .main-table thead th {
+            color: white;
+            padding: 18px 15px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .main-table tbody td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #e8eef4;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #2c3e50;
+        }
+        
+        .main-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .main-table tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        .main-table tbody tr:hover {
+            background: #e8f4fd;
+        }
+        
+        .section-title {
+            color: #1a5276;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .sub-item {
+            padding-left: 20px;
+            color: #34495e;
+        }
+        
+        .sub-sub-item {
+            padding-left: 40px;
+            color: #5d6d7e;
+        }
+        
+        .check {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .copy-section {
+            margin-top: 25px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .copy-section label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        .copy-input-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        #copyInput {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+            background: #fafafa;
+        }
+        
+        #copyBtn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        #copyBtn:hover {
+            background: #219a52;
+        }
+        
+        .tags-section {
+            margin-top: 25px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-section h3 {
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #e8f4fd;
+            color: #2e75b6;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #b8d4f0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            background: #2e75b6;
+            color: white;
+        }
+        
+        .keywords-section {
+            margin-top: 25px;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 13px;
+        }
+        
+        .page-number {
+            margin-top: 10px;
+            color: #95a5a6;
+            font-size: 12px;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            display: none;
+            z-index: 1000;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+                padding: 12px;
+            }
+            
+            .main-table thead th {
+                font-size: 16px;
+                padding: 14px 10px;
+            }
+            
+            .main-table tbody td {
+                padding: 12px 10px;
+                font-size: 13px;
+            }
+            
+            .sub-item {
+                padding-left: 15px;
+            }
+            
+            .sub-sub-item {
+                padding-left: 30px;
+            }
+            
+            .copy-input-group {
+                flex-direction: column;
+            }
+            
+            #copyInput {
+                width: 100%;
+            }
+            
+            .header-nav {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <div class="header-nav">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="183.html" class="nav-btn">上一页</a>
+            <a href="185.html" class="nav-btn">下一页</a>
+            <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~蛛网膜下腔出血并发症与急诊处理*****</h1>
+    
+    <!-- 主表格 -->
+    <table class="main-table">
+        <thead>
+            <tr>
+                <th>蛛网膜下腔出血并发症与急诊处理</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="sub-item">造口术（动脉瘤治疗前）。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-sub-item"><span class="check">✓</span> 只有治疗动脉瘤才能有效预防再出血。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-sub-item"><span class="check">✓</span> 发生再出血时，其他并发症的发生率可能更高，结局可能更差。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">● 血管痉挛和迟发型脑缺血</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-sub-item"><span class="check">✓</span> 40% ~ 60%的SAH患者存在迟发型脑缺血（DCI），是SAH后发生并发症和死亡的重要原因。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-sub-item"><span class="check">✓</span> 通常表现为意识水平的神经功能恶化或新发局灶性神经功能障碍。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">● 脑积水</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-sub-item"><span class="check">✓</span> 是SAH的常见并发症。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-sub-item"><span class="check">✓</span> 脑积水风险增加相关因素包括：①脑室内出血；②后循环动脉瘤；③抗纤溶药物治疗；④就诊时GCS评分较低；⑤有高血压病史或伴低钠血症；⑥年龄较大。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-sub-item"><span class="check">✓</span> 脑脊液梗阻相关脑积水是急性并发症。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-sub-item"><span class="check">✓</span> 脑脊液吸收减少相关脑积水通常在2周或更迟发生，且更可能与分流依赖性有关。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">● 颅内压增高</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">导致SAH患者出现颅内压增高的相关因素包括：①出血量；②急性脑积水、出血和/或缺血后反应性充血；③远端脑小动脉扩张。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">● 癫痫发作</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-sub-item"><span class="check">✓</span> 6% ~ 18%的SAH患者发生癫痫发作。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-sub-item"><span class="check">✓</span> 危险因素包括：①蛛网膜下血凝块较厚；②脑内出血；③迟发型梗死；④大脑中动脉血管瘤。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">● 低钠血症</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-sub-item"><span class="check">✓</span> SAH后低钠血症相对常见，可能由下丘脑损伤介导。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-sub-item"><span class="check">✓</span> 原因：抗利尿激素（ADH）分泌增加导致水潴留，而ADH分泌增加的原因可能是ADH不适当分泌综合征，极少数情况可能是脑性盐耗综合征诱发的容量不足。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">● 心脏异常</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-sub-item"><span class="check">✓</span> SAH后可出现一些心脏改变：①ECG改变；②超声心动图显示结构性改变；③cTn急性升高及BNP升高。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="section-title">6. 急诊处理</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">● 初始管理：包括卧床休息、镇痛、使用充气压力袜，以及停止抗血栓治疗。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">● 动脉瘤性SAH：需收入ICU，持续监测血流动力学和神经功能。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">● 伴颅内压增高和急性脑积水：应行脑室造口术，可对增高的</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <label>快速复制标题与关键词：</label>
+        <div class="copy-input-group">
+            <input type="text" id="copyInput" value="蛛网膜下腔出血并发症与急诊处理；SAH；再出血；动脉瘤；血管痉挛；迟发型脑缺血；DCI；脑积水；颅内压增高；癫痫发作；低钠血症；抗利尿激素；ADH；心脏异常；ECG；cTn；BNP；急诊处理；ICU；脑室造口术；=184" readonly>
+            <button id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <h3>🔖 特色检索标签</h3>
+        <div class="tags-container">
+            <span class="tag">SAH</span>
+            <span class="tag">蛛网膜下腔出血</span>
+            <span class="tag">再出血</span>
+            <span class="tag">动脉瘤</span>
+            <span class="tag">血管痉挛</span>
+            <span class="tag">迟发型脑缺血</span>
+            <span class="tag">DCI</span>
+            <span class="tag">脑积水</span>
+            <span class="tag">脑室内出血</span>
+            <span class="tag">抗纤溶药物</span>
+            <span class="tag">GCS</span>
+            <span class="tag">低钠血症</span>
+            <span class="tag">颅内压增高</span>
+            <span class="tag">急性脑积水</span>
+            <span class="tag">癫痫发作</span>
+            <span class="tag">蛛网膜下血凝块</span>
+            <span class="tag">脑内出血</span>
+            <span class="tag">迟发型梗死</span>
+            <span class="tag">大脑中动脉血管瘤</span>
+            <span class="tag">抗利尿激素</span>
+            <span class="tag">ADH</span>
+            <span class="tag">ADH不适当分泌综合征</span>
+            <span class="tag">脑性盐耗综合征</span>
+            <span class="tag">心脏异常</span>
+            <span class="tag">ECG</span>
+            <span class="tag">超声心动图</span>
+            <span class="tag">cTn</span>
+            <span class="tag">BNP</span>
+            <span class="tag">急诊处理</span>
+            <span class="tag">ICU</span>
+            <span class="tag">脑室造口术</span>
+        </div>
+    </div>
+    
+    <!-- 关键词与页码 -->
+    <div class="keywords-section">
+        <div>关键词：SAH | 蛛网膜下腔出血 | 再出血 | 动脉瘤 | 血管痉挛 | 迟发型脑缺血 | DCI | 脑积水 | 颅内压增高 | 癫痫发作 | 低钠血症 | 抗利尿激素 | ADH | 心脏异常 | ECG | cTn | BNP | 急诊处理 | ICU | 脑室造口术</div>
+        <div class="page-number">页码：184</div>
+    </div>
+    
+    <!-- 提示框 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isActive = btn.classList.contains('active');
+            
+            if (!isActive) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '蛛网膜下腔出血并发症与急诊处理',
+                    url: '184.html',
+                    pageNum: '184'
+                };
+                
+                const exists = favorites.some(f => f.url === '184.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                showToast('已添加到收藏！');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+                
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const filtered = favorites.filter(f => f.url !== '184.html');
+                localStorage.setItem('favorites', JSON.stringify(filtered));
+                
+                showToast('已取消收藏！');
+            }
+        }
+        
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const btn = document.getElementById('favoriteBtn');
+            if (favorites.some(f => f.url === '184.html')) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
