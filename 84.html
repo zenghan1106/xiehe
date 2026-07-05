@@ -1,0 +1,593 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~CAP住院ICU抗生素治疗及医院获得性肺炎定义*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .nav-btn {
+            position: fixed;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .home-btn {
+            top: 15px;
+            left: 15px;
+            background: #28a745;
+            color: white;
+        }
+        
+        .prev-btn {
+            top: 15px;
+            right: 15px;
+            background: #6c757d;
+            color: white;
+        }
+        
+        .next-btn {
+            top: 60px;
+            right: 15px;
+            background: #007bff;
+            color: white;
+        }
+        
+        .fav-btn {
+            top: 105px;
+            right: 15px;
+            background: #ffc107;
+            color: #333;
+        }
+        
+        .fav-btn.active {
+            background: #ff6b6b;
+            color: white;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 70px auto 30px;
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #3498db;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+        
+        thead th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 14px 12px;
+            text-align: left;
+            font-size: 17px;
+            font-weight: 600;
+        }
+        
+        thead th:first-child {
+            border-radius: 10px 0 0 0;
+        }
+        
+        thead th:last-child {
+            border-radius: 0 10px 0 0;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9ff;
+        }
+        
+        tbody tr:hover {
+            background: #e8ecff;
+        }
+        
+        .section-title {
+            background: #e3f2fd !important;
+            font-weight: 600;
+            color: #1565c0;
+        }
+        
+        .note {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #ff9800;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        
+        .tags-container {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f0f4f8;
+            border-radius: 12px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+        
+        .tag-drug {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .tag-bacteria {
+            background: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #90caf9;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .bottom-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .copy-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            width: calc(100% - 120px);
+            max-width: 700px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .copy-input:focus {
+            border-color: #667eea;
+        }
+        
+        .copy-btn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        .copy-btn.copied {
+            background: #28a745;
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 2000;
+        }
+        
+        .toast.show {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 20px 15px;
+                margin-top: 80px;
+            }
+            
+            h1 {
+                font-size: 18px;
+            }
+            
+            table {
+                font-size: 13px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 10px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+            }
+            
+            .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                top: 10px;
+                left: 10px;
+            }
+            
+            .prev-btn {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .next-btn {
+                top: 50px;
+                right: 10px;
+            }
+            
+            .fav-btn {
+                top: 90px;
+                right: 10px;
+            }
+            
+            .copy-input {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="nav-btn home-btn" onclick="location.href='index.html'">🏠 返回首页</button>
+    <button class="nav-btn prev-btn" onclick="location.href='83.html'">⬅ 上一页</button>
+    <button class="nav-btn next-btn" onclick="location.href='85.html'">下一页 ➡</button>
+    <button class="nav-btn fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    
+    <div class="container">
+        <h1>~~~~~CAP住院ICU抗生素治疗及医院获得性肺炎定义*****</h1>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">住院抗生素治疗</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-title">
+                    <td colspan="2">对于无MRSA和假单胞菌属感染危险因素的患者</td>
+                </tr>
+                <tr>
+                    <td colspan="2">选择β-内酰胺类药物加大环内酯或多西环素联合治疗，或单用针对呼吸系统感染的喹诺酮</td>
+                </tr>
+                <tr class="section-title">
+                    <td colspan="2">对于有假单胞菌属感染危险因素的患者</td>
+                </tr>
+                <tr>
+                    <td colspan="2">抗假单胞菌β-内酰胺类药物（如哌拉西林/他唑巴坦、头孢吡肟、头孢他啶、美罗培南或亚胺培南）联合抗假单胞菌喹诺酮（如环丙沙星或左氧氟沙星）</td>
+                </tr>
+                <tr class="section-title">
+                    <td colspan="2">对于有MRSA感染危险因素的患者</td>
+                </tr>
+                <tr>
+                    <td colspan="2">选择上述两种方案之一，并加用具有抗MRSA活性的药物，如万古霉素或利奈唑胺</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">ICU抗生素治疗</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-title">
+                    <td colspan="2">对于大多数无MRSA和假单胞菌属感染危险因素的患者</td>
+                </tr>
+                <tr>
+                    <td colspan="2">使用β-内酰胺类药物（如头孢曲松、头孢噻肟、头孢洛林、氨苄西林/舒巴坦、厄他培南），加大环内酯（如阿奇霉素或克拉霉素）或针对呼吸系统感染的喹诺酮（如左氧氟沙星或莫西沙星）进行治疗</td>
+                </tr>
+                <tr class="section-title">
+                    <td colspan="2">对于有假单胞菌属感染危险因素的患者</td>
+                </tr>
+                <tr>
+                    <td colspan="2">经验性治疗通常采用联合治疗，即抗假单胞菌的β-内酰胺类药物（如哌拉西林/他唑巴坦、头孢吡肟、头孢他啶、美罗培南或亚胺培南）联合抗假单胞菌的喹诺酮（如环丙沙星或左氧氟沙星）</td>
+                </tr>
+                <tr class="section-title">
+                    <td colspan="2">对于有MRSA感染危险因素的患者</td>
+                </tr>
+                <tr>
+                    <td colspan="2">选择上述两种方案之一，并加用具有抗MRSA活性的药物，如万古霉素或利奈唑胺</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">糖皮质激素辅助治疗</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">有脓毒症或呼吸衰竭（吸入氧浓度需要>50%），同时符合以下一个或多个标准：动脉pH<7.3的代谢性酸中毒、乳酸>4mmol/L，或CRP>150mg/L，可酌情给予糖皮质激素辅助治疗，疗程为5天</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">呼吸支持</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">（柴晶晶）</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">医院获得性肺炎</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-title">
+                    <td colspan="2">1. 定义</td>
+                </tr>
+                <tr>
+                    <td colspan="2">医院内肺炎指在医院发生的急性肺实质感染，包括医院获得性肺炎（HAP）和呼吸机相关性肺炎（VAP）</td>
+                </tr>
+                <tr>
+                    <td colspan="2">HAP指在入院≥48小时后发生的肺炎，且在入院时不存在也</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="tags-container">
+            <div class="tags-title">🏷️ 检索标签</div>
+            <div>
+                <span class="tag tag-disease">社区获得性肺炎</span>
+                <span class="tag tag-disease">CAP</span>
+                <span class="tag tag-disease">脓毒症</span>
+                <span class="tag tag-disease">呼吸衰竭</span>
+                <span class="tag tag-disease">医院获得性肺炎</span>
+                <span class="tag tag-disease">HAP</span>
+                <span class="tag tag-disease">VAP</span>
+                <span class="tag tag-disease">医院内肺炎</span>
+                <span class="tag tag-drug">β-内酰胺类</span>
+                <span class="tag tag-drug">大环内酯</span>
+                <span class="tag tag-drug">多西环素</span>
+                <span class="tag tag-drug">喹诺酮</span>
+                <span class="tag tag-drug">哌拉西林/他唑巴坦</span>
+                <span class="tag tag-drug">头孢吡肟</span>
+                <span class="tag tag-drug">头孢他啶</span>
+                <span class="tag tag-drug">美罗培南</span>
+                <span class="tag tag-drug">亚胺培南</span>
+                <span class="tag tag-drug">环丙沙星</span>
+                <span class="tag tag-drug">左氧氟沙星</span>
+                <span class="tag tag-drug">万古霉素</span>
+                <span class="tag tag-drug">利奈唑胺</span>
+                <span class="tag tag-drug">头孢曲松</span>
+                <span class="tag tag-drug">头孢噻肟</span>
+                <span class="tag tag-drug">头孢洛林</span>
+                <span class="tag tag-drug">氨苄西林/舒巴坦</span>
+                <span class="tag tag-drug">厄他培南</span>
+                <span class="tag tag-drug">阿奇霉素</span>
+                <span class="tag tag-drug">克拉霉素</span>
+                <span class="tag tag-drug">莫西沙星</span>
+                <span class="tag tag-drug">糖皮质激素</span>
+                <span class="tag tag-bacteria">MRSA</span>
+                <span class="tag tag-bacteria">假单胞菌属</span>
+                <span class="tag tag-bacteria">肺炎链球菌</span>
+            </div>
+        </div>
+        
+        <div class="bottom-section">
+            <div class="keywords">
+                关键词：CAP；住院抗生素治疗；ICU抗生素治疗；糖皮质激素辅助治疗；呼吸支持；医院获得性肺炎；HAP；VAP；MRSA；假单胞菌属；哌拉西林/他唑巴坦；头孢吡肟；头孢他啶；美罗培南；亚胺培南；环丙沙星；左氧氟沙星；万古霉素；利奈唑胺；头孢曲松；头孢噻肟；头孢洛林；氨苄西林/舒巴坦；厄他培南；阿奇霉素；克拉霉素；莫西沙星
+            </div>
+            <div class="page-number">84</div>
+            <div class="copy-section">
+                <input type="text" class="copy-input" id="copyInput" readonly>
+                <button class="copy-btn" id="copyBtn" onclick="copyContent()">📋 复制</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 页面信息
+        const pageInfo = {
+            title: "CAP住院ICU抗生素治疗及医院获得性肺炎定义",
+            subtitle: "社区获得性肺炎住院与ICU抗生素治疗方案及HAP/VAP定义",
+            keywords: "CAP；住院抗生素治疗；ICU抗生素治疗；糖皮质激素辅助治疗；呼吸支持；医院获得性肺炎；HAP；VAP；MRSA；假单胞菌属；哌拉西林/他唑巴坦；头孢吡肟；头孢他啶；美罗培南；亚胺培南；环丙沙星；左氧氟沙星；万古霉素；利奈唑胺；头孢曲松；头孢噻肟；头孢洛林；氨苄西林/舒巴坦；厄他培南；阿奇霉素；克拉霉素；莫西沙星",
+            pageNum: "84"
+        };
+        
+        // 设置复制框内容
+        const copyContentText = `${pageInfo.title}；${pageInfo.subtitle}；${pageInfo.keywords}=${pageInfo.pageNum}`;
+        document.getElementById('copyInput').value = copyContentText;
+        
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '✓ 已复制';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.textContent = '📋 复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // Toast提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+        
+        // 收藏功能（使用localStorage）
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            const currentPage = {
+                title: pageInfo.title,
+                url: '84.html',
+                pageNum: '84',
+                tags: ['社区获得性肺炎', 'CAP', '脓毒症', '呼吸衰竭', '医院获得性肺炎', 'HAP', 'VAP', '医院内肺炎', 'MRSA', '假单胞菌属', '肺炎链球菌']
+            };
+            
+            const exists = favorites.findIndex(f => f.url === currentPage.url);
+            
+            if (exists >= 0) {
+                favorites.splice(exists, 1);
+                btn.textContent = '⭐ 收藏';
+                btn.classList.remove('active');
+                showToast('已取消收藏');
+            } else {
+                favorites.push(currentPage);
+                btn.textContent = '❤️ 已收藏';
+                btn.classList.add('active');
+                showToast('已添加到收藏！请在index.html查看');
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            sessionStorage.setItem('favoriteUpdate', Date.now().toString());
+        }
+        
+        // 检查是否已收藏
+        function checkFavorite() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const btn = document.getElementById('favBtn');
+            if (favorites.find(f => f.url === '84.html')) {
+                btn.textContent = '❤️ 已收藏';
+                btn.classList.add('active');
+            }
+        }
+        
+        checkFavorite();
+    </script>
+</body>
+</html>
