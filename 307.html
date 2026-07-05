@@ -1,0 +1,474 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>急诊医学-创伤评估与检查流程</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .header .subtitle {
+            font-size: 14px;
+            margin-top: 5px;
+            opacity: 0.9;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            order: 1;
+        }
+        
+        .nav-right {
+            order: 2;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-home {
+            background-color: #4a90d9;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background-color: #357abd;
+        }
+        
+        .btn-nav {
+            background-color: #5cb85c;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background-color: #449d44;
+        }
+        
+        .btn-favorite {
+            background-color: #f0ad4e;
+            color: white;
+        }
+        
+        .btn-favorite:hover {
+            background-color: #ec971f;
+        }
+        
+        .btn-copy {
+            background-color: #5bc0de;
+            color: white;
+            padding: 12px 25px;
+        }
+        
+        .btn-copy:hover {
+            background-color: #46b8da;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #1e5799 0%, #2989d8 50%, #207cca 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 18px 15px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e8e8e8;
+        }
+        
+        tbody tr:hover {
+            background-color: #f8f9ff;
+        }
+        
+        tbody td {
+            padding: 14px 15px;
+            font-size: 15px;
+            vertical-align: top;
+        }
+        
+        tbody td:first-child {
+            font-weight: 600;
+            color: #2c5282;
+            width: 30%;
+            background-color: #f0f4f8;
+        }
+        
+        .check-mark {
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .diamond {
+            color: #6c757d;
+            margin-right: 5px;
+        }
+        
+        .section-title {
+            background-color: #e3f2fd !important;
+            color: #1565c0 !important;
+            font-size: 16px !important;
+        }
+        
+        .tags-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+        
+        .tags-section h3 {
+            color: #2c5282;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 5px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+        }
+        
+        .copy-section {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .copy-input:focus {
+            border-color: #4a90d9;
+        }
+        
+        .keywords-section {
+            text-align: center;
+            padding: 15px;
+            color: #666;
+            font-size: 13px;
+        }
+        
+        .keywords-section span {
+            display: inline-block;
+            margin: 3px 8px;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            color: #2c5282;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 14px 10px;
+            }
+            
+            tbody td {
+                padding: 12px 10px;
+                font-size: 14px;
+            }
+            
+            tbody td:first-child {
+                width: 35%;
+            }
+            
+            .btn {
+                padding: 8px 15px;
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 标题区域 -->
+    <div class="header">
+        <h1>~~~~~急诊医学-创伤评估与检查流程*****</h1>
+        <div class="subtitle">Disability and neurologic evaluation | Exposure and environmental control</div>
+    </div>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="306.html" class="btn btn-nav">上一页</a>
+            <a href="308.html" class="btn btn-nav">下一页</a>
+            <button class="btn btn-favorite" onclick="addToFavorites()">收藏</button>
+        </div>
+    </div>
+    
+    <!-- 主表格 -->
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">急诊创伤患者评估与检查要点</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="section-title" colspan="2">初期评估</td>
+            </tr>
+            <tr>
+                <td><span class="check-mark">✓</span>Disability and neurologic evaluation<br>（伤残评估，进行基本的神经系统评估）</td>
+                <td>采用GCS评分反映意识水平，对患者的瞳孔大小和反射性、大体运动功能及感觉功能进行评估。</td>
+            </tr>
+            <tr>
+                <td><span class="check-mark">✓</span>Exposure and environmental control<br>（暴露和环境控制）</td>
+                <td>确保患者处于完全裸露状态，并确保其整个身体都已进行损伤征象的检查。</td>
+            </tr>
+            <tr>
+                <td class="section-title" colspan="2">初次评估相关检查</td>
+            </tr>
+            <tr>
+                <td><span class="check-mark">✓</span>常规检查</td>
+                <td>血常规、血型、血糖、电解质、血气分析、凝血功能、肝肾功能、心肌损伤标志物、心电图。</td>
+            </tr>
+            <tr>
+                <td><span class="check-mark">✓</span>特殊检查</td>
+                <td>
+                    <span class="diamond">◇</span>超声检查（FAST检查）：FAST是血流动力学不稳定患者初步循环评估中的关键部分，主要用于检测心包和腹腔内出血。<br><br>
+                    <span class="diamond">◇</span>急诊CT检查：对于血流动力学不稳定者，若通过床旁立即可用的诊断性影像学检查不能确定其出血来源，或需要其他信息指导手术治疗，可行该检查。<br><br>
+                    <span class="diamond">◇</span>诊断性腹腔穿刺：可用于血流动力学不稳定的患者在无法实施FAST或FAST结果不明时，检测腹腔出血。
+                </td>
+            </tr>
+            <tr>
+                <td class="section-title" colspan="2">二次评估</td>
+            </tr>
+            <tr>
+                <td>二次评估概述</td>
+                <td>包括详细的病史采集、全面且高效的查体，以及有针对性的诊断性检查。</td>
+            </tr>
+            <tr>
+                <td><span class="check-mark">✓</span>病史：了解损伤机制</td>
+                <td>
+                    <span class="diamond">◇</span>钝挫伤：了解是否使用安全带；了解方向盘是否变形；了解安全气囊是否打开；了解撞击的方向；了解汽车的损坏（特别是损坏侵入乘客座）程度；了解伤员从车里被弹出的距离、跌落的高度、身体着地部位。<br><br>
+                    <span class="diamond">◇</span>穿入伤：了解枪械类型、枪击距离、听到的枪声数、锐器的类型、锐器的长度。
+                </td>
+            </tr>
+            <tr>
+                <td><span class="check-mark">✓</span>查体</td>
+                <td>
+                    <span class="diamond">◇</span>头部和面部：视诊和触诊头面部的整个骨性结构，检查是否存在压痛、出血和变形。<br><br>
+                    <span class="diamond">◇</span>颈部：应假设所有钝挫伤患者都有颈椎损伤。视诊和触诊整个颈部，以确定是否有损伤征象。<br><br>
+                    <span class="diamond">◇</span>胸部：视诊和触诊整个胸壁。<br><br>
+                    <span class="diamond">◇</span>腹部：视诊腹部和侧腰部，检查有无撕裂伤、挫伤（如安全带征）和瘀斑；触诊是否存在压痛和肌强直。安全带征、反跳痛、腹部膨隆或腹肌紧张现象都提示腹腔内损伤。需注意，无腹部压痛并不能排除腹腔内损伤。<br><br>
+                    <span class="diamond">◇</span>直肠和泌尿生殖系统：若怀疑存在尿道损伤或直肠穿入
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 页码 -->
+    <div class="page-number">页码：307</div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="急诊医学-创伤评估与检查流程；急诊创伤患者评估与检查要点；GCS评分；FAST检查；钝挫伤；穿入伤；颈椎损伤；腹腔内损伤；307" readonly>
+        <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <h3>特色检索标签</h3>
+        <span class="tag">钝挫伤</span>
+        <span class="tag">穿入伤</span>
+        <span class="tag">颈椎损伤</span>
+        <span class="tag">腹腔内损伤</span>
+        <span class="tag">FAST检查</span>
+        <span class="tag">GCS评分</span>
+        <span class="tag">诊断性腹腔穿刺</span>
+        <span class="tag">急诊CT检查</span>
+        <span class="tag">安全带征</span>
+        <span class="tag">骨性结构</span>
+        <span class="tag">心肌损伤标志物</span>
+        <span class="tag">凝血功能</span>
+        <span class="tag">肝肾功能</span>
+        <span class="tag">血气分析</span>
+        <span class="tag">电解质</span>
+    </div>
+    
+    <!-- 关键词区域 -->
+    <div class="keywords-section">
+        <strong>关键词：</strong>
+        <span>GCS评分</span>
+        <span>瞳孔反射</span>
+        <span>运动功能</span>
+        <span>感觉功能</span>
+        <span>损伤征象</span>
+        <span>血常规</span>
+        <span>血型</span>
+        <span>血糖</span>
+        <span>心电图</span>
+        <span>超声检查</span>
+        <span>心包出血</span>
+        <span>腹腔出血</span>
+        <span>CT检查</span>
+        <span>手术治疗</span>
+        <span>病史采集</span>
+        <span>查体</span>
+        <span>安全带</span>
+        <span>安全气囊</span>
+        <span>方向盘</span>
+        <span>枪械</span>
+        <span>锐器</span>
+        <span>视诊</span>
+        <span>触诊</span>
+        <span>压痛</span>
+        <span>变形</span>
+        <span>肌强直</span>
+        <span>反跳痛</span>
+        <span>腹部膨隆</span>
+        <span>腹肌紧张</span>
+        <span>尿道损伤</span>
+        <span>直肠穿入</span>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            var copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            }).catch(function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板！");
+            });
+        }
+        
+        function addToFavorites() {
+            var title = document.querySelector('.header h1').textContent.replace(/[~*]/g, '');
+            var url = window.location.href;
+            var favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            var exists = favorites.some(function(item) {
+                return item.url === url;
+            });
+            
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                category: '急诊医学',
+                date: new Date().toLocaleString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert('已成功添加到收藏夹！');
+        }
+    </script>
+</body>
+</html>
