@@ -1,0 +1,464 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~感染性疾病抗生素选择指南*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f5ff;
+            background-image: linear-gradient(135deg, #f0f5ff 0%, #e8f4f8 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #4a90d9;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #4a90d9;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .nav-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            top: 140px;
+            right: 20px;
+            background: #ff6b6b;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+        
+        .fav-btn:hover {
+            background: #ee5a5a;
+            transform: translateY(-2px);
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            font-size: 28px;
+            color: #1a5276;
+            margin: 60px 0 30px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: #2e86de;
+            color: white;
+            padding: 15px 12px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        
+        /* 表格第一行 */
+        tbody tr:first-child td {
+            font-size: 16px;
+            font-weight: bold;
+            background: #e8f4fd;
+        }
+        
+        /* 表格单元格 */
+        td {
+            padding: 12px;
+            border: 1px solid #d6eaf8;
+            text-align: left;
+            vertical-align: top;
+            word-wrap: break-word;
+            max-width: 300px;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        tr:hover {
+            background: #e0f0ff;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            font-size: 18px;
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #2e86de;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: inline-block;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .copy-title {
+            font-size: 16px;
+            color: #1a5276;
+            margin-bottom: 10px;
+        }
+        
+        .copy-box-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        #copyInput {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #d6eaf8;
+            border-radius: 8px;
+            font-size: 14px;
+            width: calc(100% - 100px);
+        }
+        
+        #copyBtn {
+            background: #27ae60;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        #copyBtn:hover {
+            background: #219a52;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #555;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .keywords span {
+            display: inline-block;
+            margin: 3px 8px;
+            color: #2e86de;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .page-title {
+                font-size: 20px;
+                margin-top: 80px;
+            }
+            
+            .home-btn, .nav-btn, .fav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            
+            td {
+                padding: 8px;
+                max-width: 200px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 14px;
+            }
+            
+            .nav-btns {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .home-btn {
+                top: 10px;
+                left: 10px;
+            }
+            
+            .fav-btn {
+                top: 110px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 上一页/下一页 -->
+    <div class="nav-btns">
+        <a href="56.html" class="nav-btn">← 上一页</a>
+        <a href="58.html" class="nav-btn">下一页 →</a>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">~~~~~感染性疾病抗生素选择指南*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~感染性疾病抗生素选择指南*****、疾病名称、常见病原菌、首选抗生素、替代方案、备注、社区获得性肺炎、急性细菌性脑膜炎、复杂性尿路感染、腹腔感染、皮肤软组织感染</div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>疾病名称</th>
+                    <th>常见病原菌</th>
+                    <th>首选抗生素</th>
+                    <th>替代方案</th>
+                    <th>备注</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>社区获得性肺炎</td>
+                    <td>肺炎链球菌<br>流感嗜血杆菌<br>支原体</td>
+                    <td>阿莫西林克拉维酸<br>或呼吸喹诺酮</td>
+                    <td>头孢曲松+大环内酯<br>或莫西沙星</td>
+                    <td>根据CURB评分<br>选择门诊或住院</td>
+                </tr>
+                <tr>
+                    <td>急性细菌性脑膜炎</td>
+                    <td>肺炎链球菌<br>脑膜炎奈瑟菌<br>流感嗜血杆菌</td>
+                    <td>头孢曲松+万古霉素<br>±氨苄西林</td>
+                    <td>美罗培南<br>±万古霉素</td>
+                    <td>地塞米松在<br>首剂抗生素前使用</td>
+                </tr>
+                <tr>
+                    <td>复杂性尿路感染</td>
+                    <td>大肠埃希菌<br>克雷伯菌属<br>肠球菌</td>
+                    <td>头孢哌酮舒巴坦<br>或哌拉西林他唑巴坦</td>
+                    <td>碳青霉烯类<br>或氨基糖苷类</td>
+                    <td>根据尿培养<br>结果调整</td>
+                </tr>
+                <tr>
+                    <td>腹腔感染</td>
+                    <td>肠杆菌科<br>厌氧菌<br>肠球菌</td>
+                    <td>头孢哌酮舒巴坦<br>或哌拉西林他唑巴坦</td>
+                    <td>美罗培南<br>±万古霉素</td>
+                    <td>需覆盖厌氧菌<br>考虑引流</td>
+                </tr>
+                <tr>
+                    <td>皮肤软组织感染</td>
+                    <td>金黄色葡萄球菌<br>化脓性链球菌<br>MRSA</td>
+                    <td>头孢唑林<br>或克林霉素</td>
+                    <td>万古霉素<br>或利奈唑胺(MRSA)</td>
+                    <td>区分蜂窝织炎<br>与脓肿</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div class="tags-container">
+            <span class="tag">社区获得性肺炎</span>
+            <span class="tag">急性细菌性脑膜炎</span>
+            <span class="tag">复杂性尿路感染</span>
+            <span class="tag">腹腔感染</span>
+            <span class="tag">皮肤软组织感染</span>
+            <span class="tag">肺炎链球菌</span>
+            <span class="tag">大肠埃希菌</span>
+            <span class="tag">金黄色葡萄球菌</span>
+            <span class="tag">MRSA</span>
+            <span class="tag">阿莫西林克拉维酸</span>
+            <span class="tag">头孢曲松</span>
+            <span class="tag">万古霉素</span>
+            <span class="tag">美罗培南</span>
+            <span class="tag">哌拉西林他唑巴坦</span>
+            <span class="tag">莫西沙星</span>
+        </div>
+    </div>
+    
+    <!-- 编辑框和复制按钮 -->
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制</div>
+        <div class="copy-box-wrapper">
+            <input type="text" id="copyInput" value="感染性疾病抗生素选择指南；社区获得性肺炎、细菌性脑膜炎、尿路感染、腹腔感染、皮肤感染；肺炎链球菌、大肠埃希菌、金黄色葡萄球菌、MRSA；阿莫西林克拉维酸、头孢曲松、万古霉素、美罗培南、哌拉西林他唑巴坦、莫西沙星；=57" readonly>
+            <button id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">57</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        <span>感染性疾病</span>
+        <span>抗生素</span>
+        <span>肺炎链球菌</span>
+        <span>MRSA</span>
+        <span>头孢曲松</span>
+        <span>万古霉素</span>
+        <span>美罗培南</span>
+        <span>尿路感染</span>
+        <span>脑膜炎</span>
+        <span>肺炎</span>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制!';
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                }, 2000);
+            });
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            const title = document.querySelector('.page-title').textContent;
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const currentPage = {
+                title: title,
+                url: window.location.href,
+                pageNum: '57'
+            };
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === currentPage.url);
+            if (exists) {
+                alert('该页面已在收藏中！');
+                return;
+            }
+            
+            favorites.push(currentPage);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert('已添加到收藏！');
+        }
+    </script>
+</body>
+</html>
