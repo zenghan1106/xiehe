@@ -1,0 +1,615 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~糖尿病酮症酸中毒(DKA)续*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .nav-btn {
+            position: fixed;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .home-btn {
+            top: 15px;
+            left: 15px;
+            background-color: #28a745;
+        }
+        
+        .prev-btn {
+            top: 15px;
+            right: 15px;
+            background-color: #6c757d;
+        }
+        
+        .next-btn {
+            top: 60px;
+            right: 15px;
+            background-color: #007bff;
+        }
+        
+        .fav-btn {
+            position: fixed;
+            top: 105px;
+            right: 15px;
+            padding: 10px 18px;
+            border-radius: 8px;
+            border: none;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            background-color: #ffc107;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .fav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .fav-btn.active {
+            background-color: #ff6b6b;
+            color: white;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 26px;
+            margin: 80px 0 20px;
+            padding: 15px;
+            background-color: #d6eaf8;
+            border-radius: 12px;
+            border-left: 5px solid #2874a6;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        thead {
+            background-color: #2874a6;
+            color: white;
+        }
+        
+        thead th {
+            padding: 18px 15px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f4f8;
+        }
+        
+        td {
+            padding: 14px 15px;
+            font-size: 15px;
+            vertical-align: top;
+        }
+        
+        td:first-child {
+            font-weight: bold;
+            color: #2874a6;
+            width: 120px;
+            background-color: #ebf5fb;
+        }
+        
+        .section-title {
+            background-color: #d4e6f1;
+            color: #1a5276;
+            font-size: 17px;
+            font-weight: bold;
+        }
+        
+        .sub-section {
+            background-color: #eaf2f8;
+            color: #1a5276;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .bullet {
+            color: #2874a6;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+        
+        .sub-item {
+            margin-left: 20px;
+            margin-top: 6px;
+            color: #555;
+        }
+        
+        .check-mark {
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+        
+        .formula {
+            background-color: #fff3cd;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-family: "Courier New", monospace;
+            color: #856404;
+        }
+        
+        .tags-container {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 18px;
+            color: #2874a6;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 6px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background-color: #ffeaa7;
+            color: #d63031;
+        }
+        
+        .tag-drug {
+            background-color: #dfe6e9;
+            color: #2d3436;
+        }
+        
+        .tag-bacteria {
+            background-color: #fab1a0;
+            color: #c0392b;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .copy-section {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #2874a6;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            padding: 12px 25px;
+            background-color: #2874a6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background-color: #1a5276;
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn.copied {
+            background-color: #28a745;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #6c757d;
+            margin: 15px 0;
+            font-weight: 500;
+        }
+        
+        .keywords {
+            text-align: center;
+            padding: 15px;
+            color: #6c757d;
+            font-size: 14px;
+        }
+        
+        .keywords span {
+            display: inline-block;
+            margin: 4px 8px;
+            padding: 4px 12px;
+            background-color: #e9ecef;
+            border-radius: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 20px;
+                margin-top: 140px;
+            }
+            
+            thead th {
+                font-size: 17px;
+                padding: 14px 10px;
+            }
+            
+            td {
+                padding: 12px 10px;
+                font-size: 14px;
+            }
+            
+            td:first-child {
+                width: 100px;
+            }
+            
+            .nav-btn, .fav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                top: 10px;
+                left: 10px;
+            }
+            
+            .prev-btn {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .next-btn {
+                top: 50px;
+                right: 10px;
+            }
+            
+            .fav-btn {
+                top: 90px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航按钮 -->
+    <a href="index.html" class="nav-btn home-btn">🏠 返回首页</a>
+    <a href="234.html" class="nav-btn prev-btn">← 上一页</a>
+    <a href="236.html" class="nav-btn next-btn">下一页 →</a>
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    
+    <!-- 标题 -->
+    <h1>~~~~~糖尿病酮症酸中毒(DKA)续*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~糖尿病酮症酸中毒(DKA)续*****、糖尿病酮症酸中毒（DKA）— 续、前接：DKA定义补充、2. 危险因素、3. 临床表现、症状、查体、4. 必做检查、5. 选做检查、定义续、临床表现特点、胰岛素相关、疾病因素、急性疾病、药物因素、高血糖症状、消化道症状、神经系统、感染相关、容量不足、呼吸特征、快速血糖检测、静脉血糖检测、尿常规、ABG、血常规等、ECG、血清酮体</div>
+    
+    <!-- 主表格 -->
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">糖尿病酮症酸中毒（DKA）— 续</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="2" class="section-title">前接：DKA定义补充</td>
+            </tr>
+            <tr>
+                <td>定义续</td>
+                <td>弱和升糖激素不适当升高引起的糖、脂肪和蛋白质代谢严重紊乱综合征，致水电解质紊乱和酸碱平衡失调</td>
+            </tr>
+            <tr>
+                <td>临床表现特点</td>
+                <td>临床以高血糖、高血酮和代谢性酸中毒为主要表现，通常进展迅速</td>
+            </tr>
+            
+            <tr>
+                <td colspan="2" class="section-title">2. 危险因素</td>
+            </tr>
+            <tr>
+                <td>胰岛素相关</td>
+                <td>胰岛素治疗不充分或中断</td>
+            </tr>
+            <tr>
+                <td>疾病因素</td>
+                <td>新发糖尿病</td>
+            </tr>
+            <tr>
+                <td>急性疾病</td>
+                <td>①感染；②脑血管意外；③心肌梗死；④急性胰腺炎</td>
+            </tr>
+            <tr>
+                <td>药物因素</td>
+                <td>①糖皮质激素；②较大剂量噻嗪类利尿药；③拟交感神经药，如多巴酚丁胺和特布他林；④精神类药物：氯氮平、奥氮平、锂剂；⑤可卡因</td>
+            </tr>
+            
+            <tr>
+                <td colspan="2" class="section-title">3. 临床表现</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="sub-section">症状</td>
+            </tr>
+            <tr>
+                <td>高血糖症状</td>
+                <td><span class="check-mark">✓</span>多饮、多尿、烦渴和体重下降</td>
+            </tr>
+            <tr>
+                <td>消化道症状</td>
+                <td><span class="check-mark">✓</span>恶心、呕吐和腹痛</td>
+            </tr>
+            <tr>
+                <td>神经系统</td>
+                <td><span class="check-mark">✓</span>神经系统症状</td>
+            </tr>
+            <tr>
+                <td>感染相关</td>
+                <td><span class="check-mark">✓</span>感染或其他诱因相关临床表现</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="sub-section">查体</td>
+            </tr>
+            <tr>
+                <td>容量不足</td>
+                <td><span class="check-mark">✓</span>皮肤弹性下降、皮肤黏膜干燥、心动过速、低血压</td>
+            </tr>
+            <tr>
+                <td>呼吸特征</td>
+                <td><span class="check-mark">✓</span>Kussmaul呼吸<br><span class="check-mark">✓</span>呼出气体有水果味</td>
+            </tr>
+            
+            <tr>
+                <td colspan="2" class="section-title">4. 必做检查</td>
+            </tr>
+            <tr>
+                <td>快速血糖检测</td>
+                <td>最快的评估方法，也是实时监测疗效的方法</td>
+            </tr>
+            <tr>
+                <td>静脉血糖检测</td>
+                <td>是标准的葡萄糖测量方法，有助于评估血糖过高而不适用血糖仪、ABG测量的患者</td>
+            </tr>
+            <tr>
+                <td>尿常规</td>
+                <td>注意尿酮、尿糖、尿蛋白水平，也可以提供泌尿系感染的线索</td>
+            </tr>
+            <tr>
+                <td>ABG</td>
+                <td>明确有无酸中毒及程度。DKA为阴离子间隙（AG）增高型代谢性酸中毒。对于无尿患者，血糖升高伴AG增高是诊断DKA的重要依据</td>
+            </tr>
+            <tr>
+                <td>血常规等</td>
+                <td>血常规、电解质、肌酐、尿素氮、肝功能、血糖：DKA患者常有假性低钠血症，可用公式校正：
+                    <div class="formula">校正Na⁺浓度 = 实测Na⁺浓度 + [2×（血糖浓度-5.5）/5.5]，单位均为mmol/L</div>
+                </td>
+            </tr>
+            <tr>
+                <td>ECG</td>
+                <td>明确有无心律失常，除外急性心血管事件诱因</td>
+            </tr>
+            
+            <tr>
+                <td colspan="2" class="section-title">5. 选做检查</td>
+            </tr>
+            <tr>
+                <td>血清酮体</td>
+                <td>可为无尿患者诊断DKA提供依据</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 页码 -->
+    <div class="page-number">页码：235</div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-container">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div>
+            <span class="tag tag-disease">糖尿病酮症酸中毒</span>
+            <span class="tag tag-disease">DKA</span>
+            <span class="tag tag-disease">高血糖</span>
+            <span class="tag tag-disease">高血酮</span>
+            <span class="tag tag-disease">代谢性酸中毒</span>
+            <span class="tag tag-disease">水电解质紊乱</span>
+            <span class="tag tag-disease">酸碱平衡失调</span>
+            <span class="tag tag-disease">新发糖尿病</span>
+            <span class="tag tag-disease">脑血管意外</span>
+            <span class="tag tag-disease">心肌梗死</span>
+            <span class="tag tag-disease">急性胰腺炎</span>
+            <span class="tag tag-disease">Kussmaul呼吸</span>
+            <span class="tag tag-disease">无尿</span>
+            <span class="tag tag-disease">假性低钠血症</span>
+            <span class="tag tag-disease">阴离子间隙</span>
+            <span class="tag tag-disease">AG</span>
+            <span class="tag tag-disease">泌尿系感染</span>
+            <span class="tag tag-disease">心律失常</span>
+            <span class="tag tag-drug">胰岛素</span>
+            <span class="tag tag-drug">糖皮质激素</span>
+            <span class="tag tag-drug">噻嗪类利尿药</span>
+            <span class="tag tag-drug">多巴酚丁胺</span>
+            <span class="tag tag-drug">特布他林</span>
+            <span class="tag tag-drug">氯氮平</span>
+            <span class="tag tag-drug">奥氮平</span>
+            <span class="tag tag-drug">锂剂</span>
+            <span class="tag tag-drug">可卡因</span>
+        </div>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="糖尿病酮症酸中毒(DKA)续；高血糖；高血酮；代谢性酸中毒；Kussmaul呼吸；假性低钠血症；阴离子间隙；AG；胰岛素；糖皮质激素；=235" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        <span>糖尿病酮症酸中毒</span>
+        <span>DKA</span>
+        <span>高血糖</span>
+        <span>高血酮</span>
+        <span>代谢性酸中毒</span>
+        <span>Kussmaul呼吸</span>
+        <span>假性低钠血症</span>
+        <span>阴离子间隙</span>
+        <span>AG</span>
+        <span>胰岛素</span>
+    </div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '✅ 已复制';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.textContent = '📋 复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '✅ 已复制';
+                    btn.classList.add('copied');
+                    
+                    setTimeout(() => {
+                        btn.textContent = '📋 复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFavorited = btn.classList.contains('active');
+            
+            if (!isFavorited) {
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '糖尿病酮症酸中毒(DKA)续',
+                    url: '235.html',
+                    pageNum: '235'
+                };
+                
+                const exists = favorites.some(f => f.url === pageInfo.url);
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                
+                try {
+                    updateIndexFavorites(pageInfo);
+                } catch(e) {
+                    console.log('无法直接更新index.html，收藏已保存到本地');
+                }
+            } else {
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '235.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+            }
+        }
+        
+        function updateIndexFavorites(pageInfo) {
+            localStorage.setItem('newFavorite', JSON.stringify({
+                ...pageInfo,
+                timestamp: Date.now()
+            }));
+        }
+        
+        function checkFavoriteStatus() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.url === '235.html');
+            const btn = document.getElementById('favBtn');
+            
+            if (isFavorited) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        }
+        
+        checkFavoriteStatus();
+    </script>
+</body>
+</html>
