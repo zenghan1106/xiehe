@@ -1,0 +1,554 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~感染性心内膜炎手术指征与泌尿系感染定义及临床表现*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #334155;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .back-btn {
+            background: #22c55e;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(34,197,94,0.3);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 6px rgba(59,130,246,0.3);
+        }
+        
+        .fav-btn {
+            background: #f59e0b;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            margin-top: 5px;
+            box-shadow: 0 2px 6px rgba(245,158,11,0.3);
+        }
+        
+        .fav-btn.active {
+            background: #ef4444;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #166534;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        thead th {
+            background: #2563eb;
+            color: white;
+            padding: 18px 14px;
+            text-align: left;
+            font-size: 19px;
+            font-weight: 700;
+        }
+        
+        tbody td {
+            padding: 12px 14px;
+            border-bottom: 1px solid #e2e8f0;
+            line-height: 1.8;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #f0fdf4;
+        }
+        
+        .section-title {
+            background: #dcfce7;
+            color: #166534;
+            font-weight: 700;
+            font-size: 15px;
+        }
+        
+        .sub-item {
+            padding-left: 25px;
+            color: #475569;
+        }
+        
+        .sub-item-2 {
+            padding-left: 50px;
+            color: #64748b;
+        }
+        
+        .check-mark {
+            color: #16a34a;
+            font-weight: bold;
+        }
+        
+        .diamond {
+            color: #2563eb;
+        }
+        
+        .square {
+            color: #94a3b8;
+        }
+        
+        .author {
+            text-align: right;
+            color: #64748b;
+            font-style: italic;
+            padding-right: 20px;
+        }
+        
+        .tags-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1e293b;
+            margin-bottom: 14px;
+            font-weight: 700;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #bbf7d0;
+            color: #166534;
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .tag:hover {
+            background: #86efac;
+        }
+        
+        .bottom-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .keywords {
+            color: #475569;
+            font-size: 13px;
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+        
+        .page-num {
+            text-align: center;
+            color: #64748b;
+            font-size: 15px;
+            margin: 15px 0;
+            font-weight: 600;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 16px;
+            border: 2px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #475569;
+            background: #f8fafc;
+        }
+        
+        .copy-btn {
+            background: #6366f1;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(99,102,241,0.3);
+        }
+        
+        .copy-btn:hover {
+            background: #4f46e5;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 17px;
+                padding: 12px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 14px 10px;
+            }
+            
+            tbody td {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            .header {
+                flex-direction: column;
+            }
+            
+            .nav-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                width: 100%;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            #copyInput {
+                width: 100%;
+            }
+            
+            .sub-item {
+                padding-left: 15px;
+            }
+            
+            .sub-item-2 {
+                padding-left: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="212.html" class="nav-btn">上一页</a>
+            <a href="214.html" class="nav-btn">下一页</a>
+            <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~感染性心内膜炎手术指征与泌尿系感染定义及临床表现*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>感染性心内膜炎手术指征与泌尿系感染定义、危险因素及临床表现</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="section-title">感染性心内膜炎手术指征</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check-mark">✓</span> 持续性顽固性心力衰竭近期需手术。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check-mark">✓</span> 病情难以控制的瓣周脓肿、瓣周漏、传导阻滞加重、赘生物增大、持续菌血症等。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check-mark">✓</span> 特殊病原菌（金黄色葡萄球菌、真菌、多重耐药菌）。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check-mark">✓</span> 栓塞事件：①适当抗生素治疗下仍反复栓塞；②赘生物直径＞1cm合并栓塞事件；③赘生物直径＞1.5cm；④除非颅内出血或严重脑卒中，否则脑栓塞不是手术禁忌证）。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check-mark">✓</span> 人工瓣膜尤其是对于瓣膜功能不全、瓣周漏、金黄色葡萄球菌感染等。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="author">（刘安雷）</td>
+                </tr>
+                <tr>
+                    <td class="section-title">■ 泌尿系感染</td>
+                </tr>
+                <tr>
+                    <td class="section-title">1. 定义</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check-mark">●</span> 解剖定义
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item">
+                        <span class="check-mark">✓</span> 下尿路感染：指尿道炎和膀胱炎等。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item">
+                        <span class="check-mark">✓</span> 上尿路感染：指肾盂肾炎、肾或肾周脓肿、前列腺炎。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check-mark">●</span> 临床定义
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item">
+                        <span class="check-mark">✓</span> 非复杂性泌尿系感染：指免疫功能正常，无泌尿系器质性病变或神经系统病变的非妊娠期女性的尿道炎、膀胱炎。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item">
+                        <span class="check-mark">✓</span> 复杂性泌尿系感染：指女性上尿路感染，妊娠期女性或男性泌尿系感染，伴器质性病变或免疫抑制状态患者的泌尿系感染。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">2. 危险因素</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check-mark">●</span> 功能异常或解剖异常（如尿道狭窄）。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check-mark">●</span> 泌尿生殖道进行器械操作后，包括长期留置膀胱导管、间歇性膀胱插管以及前列腺活检。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check-mark">●</span> 免疫抑制等。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">3. 临床表现</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check-mark">●</span> 膀胱炎：排尿困难，尿频、尿急、尿痛、血尿及气味变化，耻骨下方疼痛。多无发热。尿道炎与膀胱炎类似，可有尿道分泌物。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check-mark">●</span> 前列腺炎：慢性前列腺炎与膀胱炎类似，尿不尽感；急性前列腺炎有发热，会阴部疼痛，直肠指检前列腺压痛。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check-mark">●</span> 肾盂肾炎：发热，寒战，腰痛，恶心，呕吐，腹泻；肾区有叩击痛，肋脊角压痛。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check-mark">●</span> 肾脓肿：持续发热，抗生素疗效欠佳，类似于肾盂肾炎表现。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check-mark">●</span> 严重感染：可出现菌血症、脓毒症、多器官功能障碍、休克等。
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">检索标签</div>
+        <div class="tags">
+            <span class="tag">感染性心内膜炎</span>
+            <span class="tag">心力衰竭</span>
+            <span class="tag">瓣周脓肿</span>
+            <span class="tag">瓣周漏</span>
+            <span class="tag">传导阻滞</span>
+            <span class="tag">赘生物</span>
+            <span class="tag">菌血症</span>
+            <span class="tag">金黄色葡萄球菌</span>
+            <span class="tag">真菌</span>
+            <span class="tag">多重耐药菌</span>
+            <span class="tag">脑栓塞</span>
+            <span class="tag">脑卒中</span>
+            <span class="tag">人工瓣膜</span>
+            <span class="tag">泌尿系感染</span>
+            <span class="tag">尿道炎</span>
+            <span class="tag">膀胱炎</span>
+            <span class="tag">肾盂肾炎</span>
+            <span class="tag">肾脓肿</span>
+            <span class="tag">前列腺炎</span>
+            <span class="tag">菌血症</span>
+            <span class="tag">脓毒症</span>
+            <span class="tag">多器官功能障碍</span>
+            <span class="tag">休克</span>
+            <span class="tag">尿道狭窄</span>
+            <span class="tag">膀胱导管</span>
+            <span class="tag">前列腺活检</span>
+            <span class="tag">免疫抑制</span>
+        </div>
+    </div>
+    
+    <div class="bottom-section">
+        <div class="keywords">
+            <strong>关键词：</strong>感染性心内膜炎；手术指征；心力衰竭；瓣周脓肿；瓣周漏；传导阻滞；赘生物；菌血症；金黄色葡萄球菌；真菌；多重耐药菌；脑栓塞；人工瓣膜；泌尿系感染；下尿路感染；上尿路感染；尿道炎；膀胱炎；肾盂肾炎；肾脓肿；前列腺炎；非复杂性泌尿系感染；复杂性泌尿系感染；菌血症；脓毒症；多器官功能障碍；休克；尿道狭窄；膀胱导管；前列腺活检；免疫抑制
+        </div>
+        <div class="page-num">213</div>
+        <div class="copy-section">
+            <input type="text" id="copyInput" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <script>
+        const title = "感染性心内膜炎手术指征与泌尿系感染定义及临床表现";
+        const subtitle = "IE手术指征与泌尿系感染定义危险因素及临床表现";
+        const keywords = "感染性心内膜炎；手术指征；心力衰竭；瓣周脓肿；瓣周漏；传导阻滞；赘生物；菌血症；金黄色葡萄球菌；真菌；多重耐药菌；脑栓塞；人工瓣膜；泌尿系感染；下尿路感染；上尿路感染；尿道炎；膀胱炎；肾盂肾炎；肾脓肿；前列腺炎；非复杂性泌尿系感染；复杂性泌尿系感染；菌血症；脓毒症；多器官功能障碍；休克；尿道狭窄；膀胱导管；前列腺活检；免疫抑制";
+        const pageNum = "213";
+        document.getElementById('copyInput').value = title + "；" + subtitle + "；" + keywords + "；" + "=" + pageNum;
+        
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                alert('已复制到剪贴板！');
+            }).catch(function(err) {
+                document.execCommand('copy');
+                alert('已复制到剪贴板！');
+            });
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                
+                const favData = {
+                    title: '~~~~~感染性心内膜炎手术指征与泌尿系感染定义及临床表现*****',
+                    url: '213.html',
+                    category: 'index'
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.find(f => f.url === '213.html');
+                if (!exists) {
+                    favorites.push(favData);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                alert('已添加到收藏！');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '213.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                alert('已取消收藏！');
+            }
+        }
+        
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.find(f => f.url === '213.html');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
