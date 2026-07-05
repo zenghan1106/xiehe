@@ -1,0 +1,693 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>~~~~~肾综合征出血热-汉坦病毒感染诊疗指南*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 100;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            text-decoration: none;
+            display: inline-block;
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        .nav-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #e8a838;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(232,168,56,0.3);
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        .fav-btn:hover {
+            background: #d4952a;
+        }
+        
+        .fav-btn.active {
+            background: #28a745;
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            margin: 70px 0 25px 0;
+            color: #1a5276;
+            font-size: 22px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        /* 表头 */
+        thead tr {
+            background: #2e75b6;
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        /* 表格第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a5276;
+            background: #e8f4f8;
+        }
+        
+        tbody tr:nth-child(2) td {
+            background: #f0f8ff;
+        }
+        
+        /* 表格行 */
+        tbody tr {
+            border-bottom: 1px solid #e8e8e8;
+        }
+        
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+        
+        tbody tr:hover {
+            background: #f8fbff;
+        }
+        
+        td {
+            padding: 12px;
+            line-height: 1.6;
+        }
+        
+        td:first-child {
+            font-weight: 600;
+            color: #2c5f8a;
+            white-space: nowrap;
+            width: 100px;
+            background: #f5f9fc;
+            vertical-align: top;
+        }
+        
+        /* 内容样式 */
+        .content-text {
+            line-height: 1.8;
+        }
+        
+        .check-item {
+            margin: 4px 0;
+            padding: 2px 0;
+        }
+        
+        .phase-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            margin: 2px 4px 2px 0;
+            border-radius: 4px;
+            background: #e8f4f8;
+            color: #1a5276;
+            font-size: 13px;
+        }
+        
+        .symptom-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            margin: 2px 4px 2px 0;
+            border-radius: 4px;
+            background: #fff3e0;
+            color: #e65100;
+            font-size: 13px;
+        }
+        
+        .complication-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            margin: 2px 4px 2px 0;
+            border-radius: 4px;
+            background: #fce4ec;
+            color: #c2185b;
+            font-size: 13px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background: white;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #2e75b6;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .tag-disease {
+            background: #ffe4e1;
+            color: #c0392b;
+            border: 1px solid #f5b7b1;
+        }
+        
+        .tag-symptom {
+            background: #fff3e0;
+            color: #e65100;
+            border: 1px solid #ffcc80;
+        }
+        
+        .tag-check {
+            background: #e8f6f3;
+            color: #1a7a5e;
+            border: 1px solid #a9dfbf;
+        }
+        
+        .tag-virus {
+            background: #f3e5f5;
+            color: #7b1fa2;
+            border: 1px solid #ce93d8;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* 底部区域 */
+        .footer-section {
+            background: white;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .keywords {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .keywords strong {
+            color: #2e75b6;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 15px;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background: #fafafa;
+        }
+        
+        .copy-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #218838;
+        }
+        
+        .copy-btn.copied {
+            background: #17a2b8;
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 200;
+        }
+        
+        .toast.show {
+            opacity: 1;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 13px;
+            }
+            
+            td:first-child {
+                width: 80px;
+                white-space: normal;
+            }
+            
+            .tag {
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+            
+            .nav-btn, .fav-btn, .home-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="197.html" class="nav-btn">← 上一页</a>
+        <a href="199.html" class="nav-btn">下一页 →</a>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">~~~~~肾综合征出血热-汉坦病毒感染诊疗指南*****</h1>
+    
+    <!-- 主表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>项目</th>
+                    <th>内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>疾病名称</td>
+                    <td><strong>肾综合征出血热</strong>（汉坦病毒感染）</td>
+                </tr>
+                <tr>
+                    <td>典型症状</td>
+                    <td>
+                        <span class="symptom-tag">痛</span>
+                        <span class="symptom-tag">眼眶痛</span>
+                        <span class="symptom-tag">三痛</span>
+                        <span class="symptom-tag">发热</span>
+                        <span class="symptom-tag">出血</span>
+                        <span class="symptom-tag">低血压</span>
+                        <span class="symptom-tag">急性肾损伤</span>
+                        <span class="symptom-tag">血小板减少</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>临床分期</td>
+                    <td>
+                        <span class="phase-tag">发热期</span>
+                        <span class="phase-tag">低血压休克期</span>
+                        <span class="phase-tag">少尿期</span>
+                        <span class="phase-tag">多尿期</span>
+                        <span class="phase-tag">恢复期</span>
+                        <div class="content-text" style="margin-top:8px;">
+                            <strong>低血压休克期：</strong>部分患者发热末期或热退时出现血压下降及相应临床表现。<br>
+                            <strong>少尿期：</strong>与低血压休克期重叠的少尿应与肾前性少尿鉴别。主要表现为酸中毒、氮质血症和水电解质紊乱。<br>
+                            <strong>多尿期：</strong>尿量明显增加。水电解质补充不足或继发感染，可发生继发性休克、低血钾等症状。<br>
+                            <strong>恢复期：</strong>尿量、精神等逐渐恢复。部分患者可有持续性蛋白尿和高血压。
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>并发症</td>
+                    <td>
+                        <span class="complication-tag">腔道/脏器出血</span>
+                        <span class="complication-tag">脑炎/脑膜炎</span>
+                        <span class="complication-tag">脑水肿</span>
+                        <span class="complication-tag">肺水肿</span>
+                        <span class="complication-tag">继发感染</span>
+                        <span class="complication-tag">其他脏器损害</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>必做检查</td>
+                    <td>
+                        <div class="content-text">
+                            <div class="check-item"><strong>血常规：</strong>随病程进展，WBC↑，PLT↓。</div>
+                            <div class="check-item"><strong>尿常规：</strong>可出现血尿、蛋白尿和管型尿。突然出现大量尿蛋白对诊断很有帮助。</div>
+                            <div class="check-item"><strong>生化检查：</strong>CRP↑。在低血压休克期或发热后期BUN、Cr↑，多尿后期开始下降，病程中需监测Na⁺、K⁺、Ca²⁺、肝功能等。</div>
+                            <div class="check-item"><strong>ABG：</strong>发热期以呼吸性碱中毒多见，休克期和少尿期以代谢性酸中毒为主。</div>
+                            <div class="check-item"><strong>凝血功能检查：</strong>病程中可能出现出血或DIC。</div>
+                            <div class="check-item"><strong>血清学检测：</strong>诊断急性或既往汉坦病毒感染的主要方法。急性期可检出特异性抗汉坦病毒IgM或IgG效价增高4倍。</div>
+                            <div class="check-item"><strong>分子生物学检查：</strong>RT-PCR可检测到病毒RNA。缺点是病毒RNA通常在数日后从循环中消失。</div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>选做检查</td>
+                    <td>
+                        <div class="content-text">
+                            <div class="check-item"><strong>病毒分离：</strong>发热患者血清接种A549或Vero-E6细胞中可分离汉坦病毒。</div>
+                            <div class="check-item"><strong>ECG：</strong>部分患者可出现心律失常和心肌受损表现。</div>
+                            <div class="check-item"><strong>眼科检查：</strong>部分患者可有眼压增高、视盘水肿。</div>
+                            <div class="check-item"><strong>胸部影像学：</strong>评估患者是否合并肺水肿等表现。</div>
+                            <div class="check-item"><strong>肾活检：</strong>适合临床病程不典型者。</div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>诊断策略</td>
+                    <td>
+                        <div class="content-text">
+                            <div class="check-item"><strong>流行病学：</strong>发病季节，病前2个月内进入疫区，有与鼠类或其他宿主动物接触史。</div>
+                            <div class="check-item"><strong>临床特征：</strong><br>
+                            ✓ 典型表现：发热、出血、低血压、急性肾损伤、血小板减少。<br>
+                            ✓ 5期经过：发热期、低血压休克期、少尿期、多尿期、恢复期。</div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 特色检索标签（点击筛选）</div>
+        <div>
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">肾综合征出血热</span>
+            <span class="tag tag-disease">汉坦病毒感染</span>
+            <span class="tag tag-disease">低血压休克期</span>
+            <span class="tag tag-disease">少尿期</span>
+            <span class="tag tag-disease">多尿期</span>
+            <span class="tag tag-disease">恢复期</span>
+            <span class="tag tag-disease">发热期</span>
+            <span class="tag tag-disease">急性肾损伤</span>
+            <span class="tag tag-disease">DIC</span>
+            
+            <!-- 症状标签 -->
+            <span class="tag tag-symptom">痛</span>
+            <span class="tag tag-symptom">眼眶痛</span>
+            <span class="tag tag-symptom">三痛</span>
+            <span class="tag tag-symptom">发热</span>
+            <span class="tag tag-symptom">出血</span>
+            <span class="tag tag-symptom">低血压</span>
+            <span class="tag tag-symptom">血小板减少</span>
+            <span class="tag tag-symptom">蛋白尿</span>
+            <span class="tag tag-symptom">血尿</span>
+            <span class="tag tag-symptom">氮质血症</span>
+            <span class="tag tag-symptom">酸中毒</span>
+            <span class="tag tag-symptom">低血钾</span>
+            <span class="tag tag-symptom">高血压</span>
+            <span class="tag tag-symptom">心律失常</span>
+            <span class="tag tag-symptom">心肌受损</span>
+            <span class="tag tag-symptom">眼压增高</span>
+            <span class="tag tag-symptom">视盘水肿</span>
+            <span class="tag tag-symptom">肺水肿</span>
+            <span class="tag tag-symptom">脑水肿</span>
+            <span class="tag tag-symptom">脑炎</span>
+            <span class="tag tag-symptom">脑膜炎</span>
+            <span class="tag tag-symptom">继发感染</span>
+            <span class="tag tag-symptom">继发性休克</span>
+            <span class="tag tag-symptom">水电解质紊乱</span>
+            
+            <!-- 检查标签 -->
+            <span class="tag tag-check">血常规</span>
+            <span class="tag tag-check">尿常规</span>
+            <span class="tag tag-check">生化检查</span>
+            <span class="tag tag-check">CRP</span>
+            <span class="tag tag-check">BUN</span>
+            <span class="tag tag-check">Cr</span>
+            <span class="tag tag-check">ABG</span>
+            <span class="tag tag-check">凝血功能检查</span>
+            <span class="tag tag-check">血清学检测</span>
+            <span class="tag tag-check">IgM</span>
+            <span class="tag tag-check">IgG</span>
+            <span class="tag tag-check">分子生物学检查</span>
+            <span class="tag tag-check">RT-PCR</span>
+            <span class="tag tag-check">病毒分离</span>
+            <span class="tag tag-check">ECG</span>
+            <span class="tag tag-check">眼科检查</span>
+            <span class="tag tag-check">胸部影像学</span>
+            <span class="tag tag-check">肾活检</span>
+            <span class="tag tag-check">WBC</span>
+            <span class="tag tag-check">PLT</span>
+            <span class="tag tag-check">Na⁺</span>
+            <span class="tag tag-check">K⁺</span>
+            <span class="tag tag-check">Ca²⁺</span>
+            <span class="tag tag-check">肝功能</span>
+            
+            <!-- 病毒/病原体标签 -->
+            <span class="tag tag-virus">汉坦病毒</span>
+            <span class="tag tag-virus">病毒RNA</span>
+            <span class="tag tag-virus">A549</span>
+            <span class="tag tag-virus">Vero-E6</span>
+            <span class="tag tag-virus">鼠类</span>
+            <span class="tag tag-virus">宿主动物</span>
+        </div>
+    </div>
+    
+    <!-- 底部区域：关键词、页码、复制功能 -->
+    <div class="footer-section">
+        <div class="keywords">
+            <strong>关键词：</strong>肾综合征出血热；汉坦病毒感染；发热期；低血压休克期；少尿期；多尿期；恢复期；三痛；出血；急性肾损伤；血小板减少；DIC；血常规；尿常规；CRP；BUN；Cr；ABG；凝血功能；血清学检测；IgM；IgG；RT-PCR；病毒分离；ECG；肾活检；鼠类；疫区
+        </div>
+        
+        <div class="page-number">
+            页码：198
+        </div>
+        
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyContent()">📋 复制</button>
+        </div>
+    </div>
+    
+    <!-- 提示信息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 页面信息
+        const pageInfo = {
+            title: "肾综合征出血热-汉坦病毒感染诊疗指南",
+            subtitle: "急诊疾病诊疗",
+            keywords: "肾综合征出血热、汉坦病毒感染、发热期、低血压休克期、少尿期、多尿期、恢复期、三痛、急性肾损伤、血小板减少、DIC、RT-PCR、血清学检测",
+            pageNum: "198"
+        };
+        
+        // 初始化复制框内容
+        const copyContentText = `${pageInfo.title}；${pageInfo.subtitle}；${pageInfo.keywords}；=${pageInfo.pageNum}`;
+        document.getElementById('copyInput').value = copyContentText;
+        
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '✓ 已复制';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '📋 复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                });
+            }
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = localStorage.getItem('fav_198') === 'true';
+            
+            if (!isFav) {
+                localStorage.setItem('fav_198', 'true');
+                // 存储收藏信息到index可用格式
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites.push({
+                    page: '198',
+                    title: pageInfo.title,
+                    subtitle: pageInfo.subtitle,
+                    url: '198.html',
+                    disease: '肾综合征出血热',
+                    tags: ['肾综合征出血热', '汉坦病毒', '发热期', '少尿期', '多尿期', '急性肾损伤']
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+                showToast('已添加到收藏！');
+            } else {
+                localStorage.removeItem('fav_198');
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.page !== '198');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                btn.textContent = '⭐ 收藏';
+                btn.classList.remove('active');
+                showToast('已取消收藏');
+            }
+        }
+        
+        // 初始化收藏状态
+        function initFavorite() {
+            const btn = document.getElementById('favBtn');
+            if (localStorage.getItem('fav_198') === 'true') {
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+            }
+        }
+        
+        // 页面加载时初始化
+        window.onload = function() {
+            initFavorite();
+        };
+    </script>
+</body>
+</html>
