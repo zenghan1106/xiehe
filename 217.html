@@ -1,0 +1,712 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~腹泻病因鉴定与急诊处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 30px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 导航按钮区域 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .nav-btn:hover {
+            background: #449d44;
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn.blue {
+            background: #5bc0de;
+            box-shadow: 0 2px 8px rgba(91, 192, 222, 0.3);
+        }
+        
+        .nav-btn.blue:hover {
+            background: #31b0d5;
+        }
+        
+        /* 标题样式 */
+        .main-title {
+            text-align: center;
+            padding: 80px 20px 30px;
+            font-size: 26px;
+            font-weight: bold;
+            color: #2c5282;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        /* 副标题 */
+        .sub-title {
+            text-align: center;
+            font-size: 20px;
+            color: #4a5568;
+            margin-bottom: 25px;
+            padding: 0 20px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            max-width: 95%;
+            margin: 0 auto 30px;
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 15px;
+        }
+        
+        /* 表头样式 */
+        thead th {
+            background: #2b6cb0;
+            color: white;
+            padding: 16px 12px;
+            text-align: center;
+            font-size: 17px;
+            font-weight: bold;
+        }
+        
+        thead th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+        
+        thead th:last-child {
+            border-radius: 0 12px 0 0;
+        }
+        
+        /* 表格第一行（表头下一行）特殊样式 */
+        tbody tr:first-child td {
+            font-size: 16px;
+            font-weight: 600;
+            background: #ebf4ff;
+        }
+        
+        tbody tr:nth-child(odd) {
+            background: #f7fafc;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #ffffff;
+        }
+        
+        tbody tr:hover {
+            background: #e6fffa;
+        }
+        
+        td {
+            padding: 14px 12px;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+            word-wrap: break-word;
+            max-width: 300px;
+        }
+        
+        td:first-child {
+            text-align: left;
+            font-weight: 500;
+            color: #2d3748;
+        }
+        
+        /* 要点列特殊背景 */
+        td:first-child {
+            background: rgba(237, 242, 247, 0.5);
+        }
+        
+        /* 符号样式 */
+        .positive {
+            color: #e53e3e;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .negative {
+            color: #718096;
+        }
+        
+        /* 内容区块 */
+        .content-section {
+            max-width: 95%;
+            margin: 0 auto 25px;
+            background: white;
+            border-radius: 12px;
+            padding: 22px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .section-title {
+            font-size: 19px;
+            font-weight: bold;
+            color: #2b6cb0;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #bee3f8;
+        }
+        
+        .content-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .content-section li {
+            padding: 10px 0;
+            padding-left: 28px;
+            position: relative;
+            border-bottom: 1px solid #edf2f7;
+        }
+        
+        .content-section li:last-child {
+            border-bottom: none;
+        }
+        
+        .content-section li::before {
+            content: "●";
+            position: absolute;
+            left: 0;
+            color: #4299e1;
+            font-size: 12px;
+        }
+        
+        .content-section li ul {
+            margin-top: 10px;
+            padding-left: 15px;
+        }
+        
+        .content-section li li {
+            padding-left: 22px;
+        }
+        
+        .content-section li li::before {
+            content: "✓";
+            color: #48bb78;
+            font-size: 14px;
+        }
+        
+        /* 作者信息 */
+        .author {
+            text-align: right;
+            color: #718096;
+            font-size: 14px;
+            padding: 15px 25px;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #4a5568;
+            padding: 20px;
+            font-weight: 500;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            max-width: 95%;
+            margin: 25px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #4a5568;
+            margin-bottom: 15px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #fed7d7;
+            color: #c53030;
+        }
+        
+        .tag-drug {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .tag-bacteria {
+            background: #bee3f8;
+            color: #2b6cb0;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            max-width: 95%;
+            margin: 25px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .copy-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #4a5568;
+            margin-bottom: 15px;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 12px;
+            align-items: stretch;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 14px 18px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #4a5568;
+            background: #f7fafc;
+            word-break: break-all;
+            line-height: 1.5;
+        }
+        
+        .copy-btn {
+            padding: 14px 28px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .copy-btn.copied {
+            background: #48bb78;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            max-width: 95%;
+            margin: 20px auto;
+            padding: 18px 22px;
+            background: #fffaf0;
+            border-radius: 10px;
+            border-left: 4px solid #ed8936;
+        }
+        
+        .keywords-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #c05621;
+            margin-bottom: 10px;
+        }
+        
+        .keywords-content {
+            font-size: 14px;
+            color: #744210;
+            line-height: 1.8;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 20px;
+                padding-top: 100px;
+            }
+            
+            .sub-title {
+                font-size: 16px;
+            }
+            
+            table {
+                font-size: 13px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            td {
+                padding: 10px 8px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 14px;
+            }
+            
+            .nav-buttons {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .nav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-box {
+                flex-direction: column;
+            }
+            
+            .copy-btn {
+                width: 100%;
+                padding: 12px;
+            }
+        }
+        
+        /* 收藏按钮 */
+        .favorite-btn {
+            position: fixed;
+            top: 140px;
+            right: 15px;
+            background: #ed8936;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(237, 137, 54, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .favorite-btn:hover {
+            background: #dd6b20;
+            transform: translateY(-2px);
+        }
+        
+        .favorite-btn.added {
+            background: #48bb78;
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="216.html" class="nav-btn">← 上一页</a>
+        <a href="218.html" class="nav-btn blue">下一页 →</a>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="favorite-btn" onclick="addToFavorite()" id="favBtn">⭐ 收藏</button>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~腹泻病因鉴定与急诊处理*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~腹泻病因鉴定与急诊处理*****、要点、毒素、细菌、寄生虫、炎症性肠病、粪便白细胞、粪便OB、粪便镜检、粪便培养</div>
+    <p class="sub-title">表32 腹泻病因鉴定 | 抗生素相关性腹泻</p>
+    
+    <!-- 主表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>要点</th>
+                    <th>毒素</th>
+                    <th>细菌</th>
+                    <th>寄生虫</th>
+                    <th>炎症性肠病</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>粪便白细胞</td>
+                    <td class="negative">-</td>
+                    <td class="positive">+</td>
+                    <td class="negative">-</td>
+                    <td class="positive">+</td>
+                </tr>
+                <tr>
+                    <td>粪便OB</td>
+                    <td class="negative">-</td>
+                    <td class="positive">+</td>
+                    <td class="negative">-</td>
+                    <td class="positive">+</td>
+                </tr>
+                <tr>
+                    <td>粪便镜检</td>
+                    <td class="negative">-</td>
+                    <td class="negative">-</td>
+                    <td class="positive">+</td>
+                    <td class="negative">-</td>
+                </tr>
+                <tr>
+                    <td>粪便培养</td>
+                    <td class="negative">-</td>
+                    <td class="positive">+</td>
+                    <td class="negative">-</td>
+                    <td class="negative">-</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 血液检查与艰难梭菌 -->
+    <div class="content-section">
+        <ul>
+            <li>血液检查：结合检查结果评估全身中毒状态及脱水情况，嗜酸性粒细胞增多可能提示寄生虫感染。</li>
+            <li>艰难梭菌感染：抗生素、化疗、免疫抑制、免疫缺陷状态、结肠黏膜炎症坏死等。</li>
+        </ul>
+    </div>
+    
+    <!-- 急诊处理 -->
+    <div class="content-section">
+        <div class="section-title">7. 急诊处理</div>
+        <ul>
+            <li>生命体征不稳定的患者：心电监护，建立静脉通路。</li>
+            <li>呼吸支持：氧疗，保证血氧饱和度＞95%，重症患者需要气管插管、机械通气。</li>
+            <li>循环支持：补液扩容，出现感染性休克需要应用广谱抗生素及血管活性药物支持。</li>
+            <li>维持电解质平衡，避免使用抗胆碱能药物。</li>
+            <li>止泻：蒙脱石散或洛哌丁胺，但需警惕副作用和禁忌证。</li>
+            <li>大部分仅需支持治疗，无须使用抗生素。</li>
+            <li>抗生素应用指征：高热、腹痛、黏液脓血便、脱水、病程超过5天、排便次数＞8次/日、近期使用抗生素。</li>
+            <li>艰难梭菌感染
+                <ul>
+                    <li>尽量停抗生素，加益生菌（双歧杆菌、地衣芽胞杆菌、枯草芽胞杆菌等）。</li>
+                    <li>轻度：可口服或静脉甲硝唑500mg tid，持续10～14天。</li>
+                    <li>中度：口服万古霉素125～500mg qid，持续10～14天。若效果欠佳，可连用甲硝唑。</li>
+                    <li>重度：口服万古霉素＋甲硝唑。</li>
+                </ul>
+            </li>
+        </ul>
+        <p class="author">（刘安雷）</p>
+    </div>
+    
+    <!-- 抗生素相关性腹泻 -->
+    <div class="content-section">
+        <div class="section-title">■ 抗生素相关性腹泻</div>
+        <div class="section-title">1. 定义</div>
+        <ul>
+            <li>抗生素相关性腹泻（AAD）指伴随抗生素的应用发生的无法用其他原因解释的腹泻。</li>
+            <li>原因可能是由于抗生素导致肠道菌群失调。</li>
+            <li>导致AAD常见抗生素：克林霉素、广谱青霉素、第二代或第三代头孢菌素、碳青霉烯类抗生素等。</li>
+        </ul>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">205</div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔖 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">腹泻</span>
+            <span class="tag tag-disease">炎症性肠病</span>
+            <span class="tag tag-disease">艰难梭菌感染</span>
+            <span class="tag tag-disease">抗生素相关性腹泻</span>
+            <span class="tag tag-disease">AAD</span>
+            <span class="tag tag-disease">感染性休克</span>
+            <span class="tag tag-disease">脱水</span>
+            <span class="tag tag-bacteria">细菌</span>
+            <span class="tag tag-bacteria">寄生虫</span>
+            <span class="tag tag-bacteria">艰难梭菌</span>
+            <span class="tag tag-bacteria">双歧杆菌</span>
+            <span class="tag tag-bacteria">地衣芽胞杆菌</span>
+            <span class="tag tag-bacteria">枯草芽胞杆菌</span>
+            <span class="tag tag-drug">抗生素</span>
+            <span class="tag tag-drug">甲硝唑</span>
+            <span class="tag tag-drug">万古霉素</span>
+            <span class="tag tag-drug">蒙脱石散</span>
+            <span class="tag tag-drug">洛哌丁胺</span>
+            <span class="tag tag-drug">克林霉素</span>
+            <span class="tag tag-drug">广谱青霉素</span>
+            <span class="tag tag-drug">头孢菌素</span>
+            <span class="tag tag-drug">碳青霉烯类抗生素</span>
+            <span class="tag tag-drug">益生菌</span>
+            <span class="tag tag-drug">血管活性药物</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制</div>
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyInput" value="腹泻病因鉴定与急诊处理；抗生素相关性腹泻；腹泻、炎症性肠病、艰难梭菌感染、抗生素相关性腹泻、AAD、感染性休克、脱水、细菌、寄生虫、艰难梭菌、双歧杆菌、地衣芽胞杆菌、枯草芽胞杆菌、抗生素、甲硝唑、万古霉素、蒙脱石散、洛哌丁胺、克林霉素、广谱青霉素、头孢菌素、碳青霉烯类抗生素、益生菌、血管活性药物；=205" readonly>
+            <button class="copy-btn" onclick="copyContent()" id="copyBtn">复制</button>
+        </div>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">🔑 关键词</div>
+        <div class="keywords-content">
+            页码：205 | 腹泻 | 急诊处理 | 抗生素相关性腹泻 | 艰难梭菌 | 甲硝唑 | 万古霉素 | 益生菌 | 炎症性肠病 | 寄生虫 | 细菌 | 毒素
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '✓ 已复制';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.textContent = '复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '✓ 已复制';
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                }, 2000);
+            }
+        }
+        
+        // 收藏功能
+        function addToFavorite() {
+            const btn = document.getElementById('favBtn');
+            const title = document.querySelector('.main-title').textContent.replace(/[~*]/g, '').trim();
+            const url = window.location.href;
+            
+            // 尝试添加到localStorage作为收藏记录
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === url);
+            
+            if (!exists) {
+                favorites.push({
+                    title: title,
+                    url: url,
+                    page: '205',
+                    date: new Date().toLocaleString('zh-CN')
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                btn.textContent = '✓ 已收藏';
+                btn.classList.add('added');
+                
+                // 尝试向index.html发送消息（如果同域）
+                try {
+                    if (window.opener) {
+                        window.opener.postMessage({
+                            type: 'addFavorite',
+                            data: { title, url, page: '205' }
+                        }, '*');
+                    }
+                } catch(e) {}
+                
+                alert('已添加到收藏！请在首页查看。');
+            } else {
+                alert('该页面已在收藏中！');
+                btn.textContent = '✓ 已收藏';
+                btn.classList.add('added');
+            }
+        }
+        
+        // 页面加载时检查是否已收藏
+        window.onload = function() {
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const url = window.location.href;
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                const btn = document.getElementById('favBtn');
+                btn.textContent = '✓ 已收藏';
+                btn.classList.add('added');
+            }
+        };
+    </script>
+</body>
+</html>
