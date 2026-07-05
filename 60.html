@@ -1,0 +1,453 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊处理与血尿定义*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #f5f0ff 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .back-btn {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btns {
+            position: absolute;
+            right: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+        }
+        
+        .favorite-btn {
+            background: #f0ad4e;
+        }
+        
+        .favorite-btn:hover {
+            background: #ec971f;
+        }
+        
+        .favorite-btn.active {
+            background: #d9534f;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c5aa0;
+            font-size: 24px;
+            padding: 50px 20px 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .table-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead th {
+            background: #2c5aa0;
+            color: white;
+            padding: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: left;
+        }
+        
+        tbody td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #e0e8f0;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #444;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background: #e8f2ff;
+        }
+        
+        .section-title {
+            background: #e3f0ff !important;
+            font-weight: 600;
+            color: #1a4a8a;
+        }
+        
+        .treatment-type {
+            color: #c0392b;
+            font-weight: 600;
+        }
+        
+        .drug-name {
+            color: #27ae60;
+            font-weight: 600;
+        }
+        
+        .dosage {
+            color: #e67e22;
+        }
+        
+        .keywords-section {
+            max-width: 900px;
+            margin: 25px auto;
+            padding: 20px;
+            background: rgba(255,255,255,0.85);
+            border-radius: 10px;
+        }
+        
+        .keywords-title {
+            color: #2c5aa0;
+            font-size: 16px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #e8f4f8;
+            color: #2c5aa0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #b8d4e8;
+        }
+        
+        .copy-section {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255,255,255,0.85);
+            border-radius: 10px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #b8d4e8;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background: #5bc0de;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #46b8da;
+        }
+        
+        .copy-btn.copied {
+            background: #5cb85c;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+                padding: 55px 10px 15px;
+            }
+            
+            .back-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px;
+            }
+            
+            tbody td {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-btns">
+            <a href="59.html" class="nav-btn">上一页</a>
+            <a href="61.html" class="nav-btn">下一页</a>
+            <button class="nav-btn favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~急诊处理与血尿定义*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~急诊处理与血尿定义*****、类别、详细内容、5. 急诊处理、对因治疗、血尿、1. 定义、镇痛、泌尿系结石、肾盂肾炎、腹主动脉夹层、腰椎骨折、带状疱疹、肾梗死、肉眼血尿、颜色变化、肉眼血尿判断、镜下血尿</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>类别</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-title">
+                    <td colspan="2">5. 急诊处理</td>
+                </tr>
+                <tr>
+                    <td class="treatment-type">镇痛</td>
+                    <td>急性腰痛的治疗是短期缓解症状，无证据显示镇痛治疗会延误诊断。轻度疼痛可选用<span class="drug-name">NSAID</span>，如<span class="drug-name">布洛芬</span>、<span class="drug-name">洛索洛芬钠</span>；中度疼痛可考虑中枢性镇痛药物，如<span class="drug-name">曲马多</span>；重度疼痛可选用强阿片类药物，如<span class="drug-name">哌替啶</span>、<span class="drug-name">吗啡</span>等。</td>
+                </tr>
+                <tr class="section-title">
+                    <td colspan="2">对因治疗</td>
+                </tr>
+                <tr>
+                    <td class="treatment-type">泌尿系结石</td>
+                    <td>一般联合使用解痉及镇痛药物，如<span class="drug-name">山莨菪碱</span> <span class="dosage">10mg im</span> + <span class="drug-name">哌替啶</span> <span class="dosage">50mg im</span>，多饮水。直径≤5mm的结石多能自行排出。合并梗阻、出现急性肾损伤时需要请泌尿外科急会诊评估体外碎石、D-J管及肾造瘘指征。</td>
+                </tr>
+                <tr>
+                    <td class="treatment-type">肾盂肾炎</td>
+                    <td>病情危重或复杂性肾盂肾炎首选<span class="drug-name">碳青霉烯类药物</span>（<span class="drug-name">亚胺培南</span> <span class="dosage">500mg q6h</span>），同时请泌尿外科解除梗阻。单纯肾盂肾炎首选<span class="drug-name">喹诺酮类</span>（<span class="drug-name">左氧氟沙星</span> <span class="dosage">0.5g qd</span>）。</td>
+                </tr>
+                <tr>
+                    <td class="treatment-type">腹主动脉夹层</td>
+                    <td>控制心率在60次/分左右，首选<span class="drug-name">β受体阻断药艾司洛尔</span>；积极控制血压在120/70mmHg以下，可选<span class="drug-name">硝普钠</span>；疼痛剧烈患者可予<span class="drug-name">吗啡</span>皮下注射；尽快联系血管外科手术治疗。</td>
+                </tr>
+                <tr>
+                    <td class="treatment-type">腰椎骨折</td>
+                    <td>根据疼痛程度选用<span class="drug-name">洛索洛芬钠片</span> <span class="dosage">60mg po</span>、<span class="drug-name">曲马多</span> <span class="dosage">50mg po/im</span>，骨科门诊治疗骨质疏松及评估有无椎体手术指征。</td>
+                </tr>
+                <tr>
+                    <td class="treatment-type">带状疱疹</td>
+                    <td>可予<span class="drug-name">伐昔洛韦</span>抗病毒治疗，可选用<span class="drug-name">布洛芬缓释胶囊</span>缓解疼痛，皮肤科门诊就诊。</td>
+                </tr>
+                <tr>
+                    <td class="treatment-type">肾梗死</td>
+                    <td>肾动脉夹层治疗同腹主动脉夹层。肾动脉血栓形成若无禁忌可考虑抗凝治疗，静脉使用<span class="drug-name">肝素</span> [初始剂量 <span class="dosage">60～80U/kg</span>，维持剂量 <span class="dosage">12～18U/(kg·h)</span>]，后根据基础INR水平加用口服<span class="drug-name">华法林</span>，目标INR为2～3。合并高血压患者首选<span class="drug-name">ACEI/ARB类</span>降压药物。血管外科评估手术及溶栓取栓指征。</td>
+                </tr>
+                <tr class="section-title">
+                    <td colspan="2">血尿</td>
+                </tr>
+                <tr class="section-title">
+                    <td colspan="2">1. 定义</td>
+                </tr>
+                <tr>
+                    <td>肉眼血尿</td>
+                    <td>可以为肉眼可见（称为肉眼血尿），或仅在显微镜下检查时发现（称为镜下血尿）。本章主要讨论急诊常见的肉眼血尿。</td>
+                </tr>
+                <tr>
+                    <td>颜色变化</td>
+                    <td>尿液颜色改变并不一定反映失血程度，因为1L尿液中含有1ml血液即可产生肉眼可见的颜色变化。</td>
+                </tr>
+                <tr>
+                    <td>肉眼血尿判断</td>
+                    <td>尿液颜色呈红色或褐色时，怀疑为肉眼血尿。</td>
+                </tr>
+                <tr>
+                    <td>镜下血尿</td>
+                    <td>通常被定义为离心尿沉渣镜检红细胞≥3/HPF。单纯镜下血尿通常建议门诊就诊。</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="keywords-section">
+        <div class="keywords-title">特色检索标签</div>
+        <div class="tag-container">
+            <span class="tag">NSAID</span>
+            <span class="tag">布洛芬</span>
+            <span class="tag">洛索洛芬钠</span>
+            <span class="tag">曲马多</span>
+            <span class="tag">哌替啶</span>
+            <span class="tag">吗啡</span>
+            <span class="tag">山莨菪碱</span>
+            <span class="tag">碳青霉烯类</span>
+            <span class="tag">亚胺培南</span>
+            <span class="tag">喹诺酮类</span>
+            <span class="tag">左氧氟沙星</span>
+            <span class="tag">艾司洛尔</span>
+            <span class="tag">硝普钠</span>
+            <span class="tag">伐昔洛韦</span>
+            <span class="tag">肝素</span>
+            <span class="tag">华法林</span>
+            <span class="tag">ACEI</span>
+            <span class="tag">ARB</span>
+            <span class="tag">泌尿系结石</span>
+            <span class="tag">肾盂肾炎</span>
+            <span class="tag">腹主动脉夹层</span>
+            <span class="tag">腰椎骨折</span>
+            <span class="tag">带状疱疹</span>
+            <span class="tag">肾梗死</span>
+            <span class="tag">血尿</span>
+            <span class="tag">肉眼血尿</span>
+            <span class="tag">镜下血尿</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="急诊处理与血尿定义；镇痛、对因治疗、泌尿系结石、肾盂肾炎、腹主动脉夹层、腰椎骨折、带状疱疹、肾梗死、血尿定义、肉眼血尿、镜下血尿、NSAID、布洛芬、洛索洛芬钠、曲马多、哌替啶、吗啡、山莨菪碱、亚胺培南、左氧氟沙星、艾司洛尔、硝普钠、伐昔洛韦、肝素、华法林、ACEI、ARB；=60" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyContent()">复制</button>
+    </div>
+    
+    <div class="page-number">页码：60</div>
+    
+    <script>
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            document.execCommand('copy');
+            
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '已复制';
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFav = btn.classList.toggle('active');
+            
+            if (isFav) {
+                btn.textContent = '❤️ 已收藏';
+                
+                try {
+                    const favData = {
+                        title: '急诊处理与血尿定义',
+                        url: '60.html',
+                        date: new Date().toISOString()
+                    };
+                    
+                    let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                    const exists = favorites.some(f => f.url === '60.html');
+                    
+                    if (!exists) {
+                        favorites.push(favData);
+                        localStorage.setItem('favorites', JSON.stringify(favorites));
+                        window.dispatchEvent(new CustomEvent('favoriteAdded', { detail: favData }));
+                    }
+                } catch(e) {
+                    console.log('收藏存储失败', e);
+                }
+                
+            } else {
+                btn.textContent = '⭐ 收藏';
+                
+                try {
+                    let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                    favorites = favorites.filter(f => f.url !== '60.html');
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                } catch(e) {
+                    console.log('取消收藏失败', e);
+                }
+            }
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            try {
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const isFav = favorites.some(f => f.url === '60.html');
+                if (isFav) {
+                    const btn = document.getElementById('favoriteBtn');
+                    btn.classList.add('active');
+                    btn.textContent = '❤️ 已收藏';
+                }
+            } catch(e) {}
+        });
+    </script>
+</body>
+</html>
