@@ -1,0 +1,589 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~胸腔积液诊断指南*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            z-index: 100;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 导航按钮容器 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+        }
+        
+        .nav-btn.next {
+            background: #f0ad4e;
+            box-shadow: 0 2px 8px rgba(240, 173, 78, 0.3);
+        }
+        
+        .nav-btn.next:hover {
+            background: #ec971f;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #d9534f;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(217, 83, 79, 0.3);
+        }
+        
+        .fav-btn:hover {
+            background: #c9302c;
+        }
+        
+        .fav-btn.active {
+            background: #5cb85c;
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 900px;
+            margin: 60px auto 30px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        /* 标题 */
+        .main-title {
+            background: linear-gradient(90deg, #1e5799 0%, #2989d8 50%, #207cca 100%);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        
+        /* 表格样式 */
+        .content-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+        
+        .content-table thead {
+            background: #2e6da4;
+            color: white;
+        }
+        
+        .content-table th {
+            padding: 16px 14px;
+            text-align: left;
+            font-size: 17px;
+            font-weight: bold;
+            border: 1px solid #1a4a7a;
+        }
+        
+        .content-table td {
+            padding: 14px;
+            border: 1px solid #d0d7de;
+            vertical-align: top;
+            line-height: 1.7;
+        }
+        
+        .content-table tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        .content-table tbody tr:hover {
+            background: #e8f4fd;
+        }
+        
+        .section-title {
+            background: #e3f2fd !important;
+            color: #1565c0;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .highlight-red {
+            color: #c62828;
+            font-weight: 600;
+        }
+        
+        .highlight-green {
+            color: #2e7d32;
+            font-weight: 600;
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            padding: 20px;
+            background: #fafbfc;
+            border-top: 1px solid #e1e4e8;
+        }
+        
+        /* 复制功能区 */
+        .copy-area {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            align-items: stretch;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 14px 16px;
+            border: 2px solid #4a90d9;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #555;
+            background: white;
+            min-height: 50px;
+        }
+        
+        .copy-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 15px;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+        }
+        
+        .copy-btn:hover {
+            background: #357abd;
+        }
+        
+        .copy-btn.copied {
+            background: #5cb85c;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            color: #666;
+            font-size: 15px;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #eef2f7;
+            border-radius: 8px;
+        }
+        
+        /* 关键词标签 */
+        .tags-section {
+            margin-bottom: 15px;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+        
+        .tag-disease:hover {
+            background: #c62828;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .tag-bacteria:hover {
+            background: #2e7d32;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #fff3e0;
+            color: #ef6c00;
+            border: 1px solid #ffcc80;
+        }
+        
+        .tag-drug:hover {
+            background: #ef6c00;
+            color: white;
+        }
+        
+        /* 页脚关键词 */
+        .footer-keywords {
+            text-align: center;
+            padding: 15px;
+            color: #888;
+            font-size: 13px;
+            border-top: 1px solid #e1e4e8;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 18px;
+                padding: 18px 15px;
+            }
+            
+            .content-table th,
+            .content-table td {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            .content-table th {
+                font-size: 15px;
+            }
+            
+            .copy-area {
+                flex-direction: column;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                position: relative;
+                top: auto;
+                right: auto;
+                flex-direction: row;
+                justify-content: center;
+                margin-bottom: 15px;
+                flex-wrap: wrap;
+            }
+            
+            .home-btn {
+                position: relative;
+                top: auto;
+                left: auto;
+                margin-bottom: 10px;
+                text-align: center;
+            }
+            
+            .container {
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="90.html" class="nav-btn">← 上一页</a>
+        <a href="92.html" class="nav-btn next">下一页 →</a>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+    </div>
+    
+    <div class="container">
+        <!-- 标题 -->
+        <div class="main-title">~~~~~胸腔积液诊断指南*****</div>
+        
+        <!-- 主表格 -->
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">项目</th>
+                    <th style="width: 75%;">内容详情</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-title">
+                    <td colspan="2">一、常规检查项目</td>
+                </tr>
+                <tr>
+                    <td><strong>NT-proBNP/BNP检测</strong></td>
+                    <td>除外心力衰竭因素引起的胸腔积液</td>
+                </tr>
+                <tr>
+                    <td><strong>胸片/CT</strong></td>
+                    <td>评估积液量及位置</td>
+                </tr>
+                <tr>
+                    <td><strong>胸腔积液标本检查</strong></td>
+                    <td>肉眼观察胸腔积液性状有助于得到初始诊断线索（见下表），以及积液常规、总蛋白（TP）、乳酸脱氢酶（LDH）、葡萄糖（Glu）检查</td>
+                </tr>
+                
+                <tr class="section-title">
+                    <td colspan="2">二、表10 胸腔积液性状诊断提示</td>
+                </tr>
+                <tr>
+                    <td><span class="highlight-red">淡黄色清亮</span></td>
+                    <td>漏出液</td>
+                </tr>
+                <tr>
+                    <td><span class="highlight-red">红色</span></td>
+                    <td>肿瘤、创伤、肺梗死、石棉肺</td>
+                </tr>
+                <tr>
+                    <td><span class="highlight-red">白色</span></td>
+                    <td>乳糜胸、胆固醇渗出（假性乳糜胸）</td>
+                </tr>
+                <tr>
+                    <td><span class="highlight-red">棕色</span></td>
+                    <td>阿米巴脓肿、长期血性胸腔积液</td>
+                </tr>
+                <tr>
+                    <td><span class="highlight-red">黑色</span></td>
+                    <td>黑曲霉菌病、恶性黑色素瘤、胰腺炎、滥用可卡因、支气管肺癌、慢性血胸</td>
+                </tr>
+                <tr>
+                    <td><span class="highlight-red">黄色</span></td>
+                    <td>细菌感染所致脓性胸腔积液</td>
+                </tr>
+                <tr>
+                    <td><span class="highlight-red">黄绿色</span></td>
+                    <td>结核性或风湿性胸腔积液</td>
+                </tr>
+                
+                <tr class="section-title">
+                    <td colspan="2">三、选做检查（5）</td>
+                </tr>
+                <tr>
+                    <td><strong>结核感染</strong></td>
+                    <td>胸腔积液腺苷脱氨酶（ADA）、抗酸染色、结核分枝杆菌培养、T.SPOT-TB</td>
+                </tr>
+                <tr>
+                    <td><strong>脓胸</strong></td>
+                    <td>胸腔积液革兰染色、细菌培养</td>
+                </tr>
+                <tr>
+                    <td><strong>恶性肿瘤</strong></td>
+                    <td>胸腔积液找瘤细胞、癌胚抗原（CEA）检测</td>
+                </tr>
+                <tr>
+                    <td><strong>乳糜胸、假性乳糜胸</strong></td>
+                    <td>胸腔积液胆固醇（CHO）、甘油三酯（TG）</td>
+                </tr>
+                <tr>
+                    <td><strong>胰腺炎、食管破裂</strong></td>
+                    <td>胸腔积液淀粉酶</td>
+                </tr>
+                
+                <tr class="section-title">
+                    <td colspan="2">四、鉴别诊断（6）— Light标准</td>
+                </tr>
+                <tr>
+                    <td><strong>渗出液诊断标准</strong><br><span style="color:#666;font-size:13px;">敏感性98%，特异性83%</span></td>
+                    <td>以下3条中满足任1条者为渗出液：<br>
+                    ① 胸腔积液LDH/血清LDH ＞ 0.6<br>
+                    ② 胸腔积液TP/血清TP ＞ 0.5<br>
+                    ③ 胸腔积液LDH ＞ 2/3血清LDH正常值上限</td>
+                </tr>
+                <tr>
+                    <td><strong>补充诊断标准</strong><br><span style="color:#666;font-size:13px;">Light标准特异性不够时联合使用</span></td>
+                    <td>• 血清-胸腔积液白蛋白梯度 ≤ 12g/L 或总蛋白梯度 ≤ 31g/L → 考虑渗出液可能性大<br>
+                    • 胸腔积液胆固醇（CHO）＞ 1.16mmol/L → 考虑渗出液可能性大</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 底部区域 -->
+        <div class="bottom-section">
+            <!-- 复制功能 -->
+            <div class="copy-area">
+                <input type="text" class="copy-input" id="copyInput" readonly>
+                <button class="copy-btn" id="copyBtn" onclick="copyContent()">复制</button>
+            </div>
+            
+            <!-- 页码 -->
+            <div class="page-number">页码：91</div>
+            
+            <!-- 特色检索标签 -->
+            <div class="tags-section">
+                <div class="tags-title">🔍 特色检索标签（点击筛选）：</div>
+                <div class="tags-container">
+                    <!-- 疾病标签 -->
+                    <span class="tag tag-disease">心力衰竭</span>
+                    <span class="tag tag-disease">肿瘤</span>
+                    <span class="tag tag-disease">肺梗死</span>
+                    <span class="tag tag-disease">石棉肺</span>
+                    <span class="tag tag-disease">乳糜胸</span>
+                    <span class="tag tag-disease">假性乳糜胸</span>
+                    <span class="tag tag-disease">阿米巴脓肿</span>
+                    <span class="tag tag-disease">黑曲霉菌病</span>
+                    <span class="tag tag-disease">恶性黑色素瘤</span>
+                    <span class="tag tag-disease">胰腺炎</span>
+                    <span class="tag tag-disease">支气管肺癌</span>
+                    <span class="tag tag-disease">慢性血胸</span>
+                    <span class="tag tag-disease">脓胸</span>
+                    <span class="tag tag-disease">结核性胸腔积液</span>
+                    <span class="tag tag-disease">风湿性胸腔积液</span>
+                    <span class="tag tag-disease">食管破裂</span>
+                    <!-- 细菌标签 -->
+                    <span class="tag tag-bacteria">结核分枝杆菌</span>
+                    <!-- 药物/抗生素相关标签 -->
+                    <span class="tag tag-drug">可卡因</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 页脚关键词 -->
+        <div class="footer-keywords">
+            关键词：胸腔积液、Light标准、渗出液、漏出液、ADA、LDH、NT-proBNP、CEA、乳糜胸、结核、脓胸
+        </div>
+    </div>
+    
+    <script>
+        // 初始化复制输入框内容
+        const title = "~~~~~胸腔积液诊断指南*****";
+        const subtitle = "胸腔积液性状诊断提示与Light标准鉴别";
+        const keywords = "胸腔积液；Light标准；渗出液；漏出液；ADA；LDH；NT-proBNP；CEA；乳糜胸；结核；脓胸";
+        const pageNum = "91";
+        document.getElementById('copyInput').value = title + "；" + subtitle + "；" + keywords + "；" + "=" + pageNum;
+        
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        let isFavorited = false;
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            isFavorited = !isFavorited;
+            
+            if (isFavorited) {
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+                // 添加到index.html的收藏类目（通过localStorage模拟）
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                if (!favorites.includes('91.html')) {
+                    favorites.push({
+                        title: '胸腔积液诊断指南',
+                        url: '91.html',
+                        page: '91'
+                    });
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                alert('已添加到收藏！请在首页查看收藏类目。');
+            } else {
+                btn.textContent = '☆ 收藏';
+                btn.classList.remove('active');
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '91.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            if (favorites.some(f => f.url === '91.html')) {
+                isFavorited = true;
+                document.getElementById('favBtn').textContent = '★ 已收藏';
+                document.getElementById('favBtn').classList.add('active');
+            }
+        };
+    </script>
+</body>
+</html>
