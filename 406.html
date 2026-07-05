@@ -1,0 +1,590 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~医学英文缩略语续表（TEN-WBC）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .back-home {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 100;
+        }
+        
+        .back-home a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #4a90d9;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .back-home a:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 右上角导航按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn, .fav-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+        }
+        
+        .nav-btn:hover {
+            background: #449d44;
+            transform: translateY(-2px);
+        }
+        
+        .fav-btn {
+            background: #f0ad4e;
+            color: white;
+        }
+        
+        .fav-btn:hover {
+            background: #ec971f;
+            transform: translateY(-2px);
+        }
+        
+        .fav-btn.active {
+            background: #d9534f;
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            margin: 70px 0 30px;
+            font-size: 22px;
+            color: #2c3e50;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            max-width: 900px;
+            margin: 0 auto 30px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        /* 表头 */
+        thead tr {
+            background: linear-gradient(135deg, #1e5799 0%, #2989d8 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 18px 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            letter-spacing: 1px;
+        }
+        
+        /* 表格内容 */
+        tbody tr {
+            transition: background 0.2s ease;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        tbody td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        tbody td:first-child {
+            font-weight: 600;
+            color: #1e5799;
+            white-space: nowrap;
+        }
+        
+        tbody td:nth-child(2) {
+            color: #555;
+            word-break: break-word;
+        }
+        
+        tbody td:nth-child(3) {
+            color: #333;
+            word-break: break-word;
+        }
+        
+        /* 页码显示 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            color: #666;
+            margin: 20px 0;
+            font-weight: 500;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            max-width: 900px;
+            margin: 0 auto 30px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            padding: 0 10px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background: white;
+        }
+        
+        .copy-btn {
+            padding: 12px 25px;
+            background: #5bc0de;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: #46b8da;
+        }
+        
+        .copy-btn.copied {
+            background: #5cb85c;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            max-width: 900px;
+            margin: 0 auto 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #e3f2fd;
+            color: #1976d2;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #bbdefb;
+        }
+        
+        .tag:hover {
+            background: #1976d2;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* 关键词 */
+        .keywords {
+            max-width: 900px;
+            margin: 0 auto 20px;
+            text-align: center;
+            color: #888;
+            font-size: 13px;
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 15px 30px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 200;
+            display: none;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 18px;
+                margin: 80px 0 20px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 14px 10px;
+            }
+            
+            tbody td {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            .nav-buttons {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .nav-btn, .fav-btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            
+            .back-home a {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <div class="back-home">
+        <a href="index.html">← 返回首页</a>
+    </div>
+    
+    <!-- 右上角导航 -->
+    <div class="nav-buttons">
+        <a href="405.html" class="nav-btn">上一页</a>
+        <a href="407.html" class="nav-btn">下一页</a>
+        <button class="fav-btn" onclick="toggleFavorite()" id="favBtn">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">~~~~~医学英文缩略语续表（TEN-WBC）*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>英文缩略语</th>
+                    <th>英文全称</th>
+                    <th>中文全称</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>TEN</td>
+                    <td>toxic epidermal necrolysis</td>
+                    <td>中毒性表皮坏死松解症</td>
+                </tr>
+                <tr>
+                    <td>TIA</td>
+                    <td>transient ischemic attack</td>
+                    <td>短暂性脑缺血发作</td>
+                </tr>
+                <tr>
+                    <td>TMA</td>
+                    <td>thrombotic microangiopathy</td>
+                    <td>血栓性微血管病</td>
+                </tr>
+                <tr>
+                    <td>TPN</td>
+                    <td>total parenteral nutrition</td>
+                    <td>全肠外营养</td>
+                </tr>
+                <tr>
+                    <td>TPO</td>
+                    <td>thermoplastic polyolefin</td>
+                    <td>血小板生成素</td>
+                </tr>
+                <tr>
+                    <td>TT</td>
+                    <td>thrombin time</td>
+                    <td>凝血酶时间</td>
+                </tr>
+                <tr>
+                    <td>TTM</td>
+                    <td>targetted temperature management</td>
+                    <td>目标温度管理</td>
+                </tr>
+                <tr>
+                    <td>TTP</td>
+                    <td>thrombotic-thrombocytopenic purpura</td>
+                    <td>血栓性血小板减少性紫癜</td>
+                </tr>
+                <tr>
+                    <td>TVD</td>
+                    <td>total vessel density</td>
+                    <td>总血管密度</td>
+                </tr>
+                <tr>
+                    <td>TVUS</td>
+                    <td>transvaginal of ultrasound</td>
+                    <td>经阴道超声检查</td>
+                </tr>
+                <tr>
+                    <td>UA</td>
+                    <td>unstable angina</td>
+                    <td>不稳定性心绞痛</td>
+                </tr>
+                <tr>
+                    <td>UCG</td>
+                    <td>ultrasonic cardiography</td>
+                    <td>超声心动图</td>
+                </tr>
+                <tr>
+                    <td>VAP</td>
+                    <td>ventilator-associated pneumonia</td>
+                    <td>呼吸机相关性肺炎</td>
+                </tr>
+                <tr>
+                    <td>VC</td>
+                    <td>volume control</td>
+                    <td>容量控制</td>
+                </tr>
+                <tr>
+                    <td>VEGF</td>
+                    <td>vascular endothelial growth factor</td>
+                    <td>血管内皮生长因子</td>
+                </tr>
+                <tr>
+                    <td>VM</td>
+                    <td>viral myocarditis</td>
+                    <td>病毒性心肌炎</td>
+                </tr>
+                <tr>
+                    <td>VTE</td>
+                    <td>venous thromboembolism</td>
+                    <td>静脉血栓栓塞症</td>
+                </tr>
+                <tr>
+                    <td>vWF</td>
+                    <td>von Willebrand factor</td>
+                    <td>血管性血友病因子</td>
+                </tr>
+                <tr>
+                    <td>WBC</td>
+                    <td>white blood cell</td>
+                    <td>白细胞</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">399</div>
+    
+    <!-- 编辑框和复制按钮 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" readonly>
+        <button class="copy-btn" onclick="copyContent()">复制</button>
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag">中毒性表皮坏死松解症</span>
+            <span class="tag">短暂性脑缺血发作</span>
+            <span class="tag">血栓性微血管病</span>
+            <span class="tag">血栓性血小板减少性紫癜</span>
+            <span class="tag">不稳定性心绞痛</span>
+            <span class="tag">呼吸机相关性肺炎</span>
+            <span class="tag">病毒性心肌炎</span>
+            <span class="tag">静脉血栓栓塞症</span>
+            <!-- 药物/治疗标签 -->
+            <span class="tag">全肠外营养</span>
+            <span class="tag">血小板生成素</span>
+            <span class="tag">目标温度管理</span>
+            <!-- 细菌相关 -->
+            <span class="tag">呼吸机相关性肺炎</span>
+            <span class="tag">白细胞</span>
+        </div>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        关键词：TEN；TIA；TMA；TPN；TPO；TT；TTM；TTP；TVD；TVUS；UA；UCG；VAP；VC；VEGF；VM；VTE；vWF；WBC
+    </div>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 设置编辑框内容
+        const title = "医学英文缩略语续表（TEN-WBC）";
+        const subtitle = "中毒性表皮坏死松解症至白细胞";
+        const keywords = "TEN；TIA；TMA；TPN；TPO；TT；TTM；TTP；TVD；TVUS；UA；UCG；VAP；VC；VEGF；VM；VTE；vWF；WBC";
+        const pageNum = "406";
+        
+        document.getElementById('copyInput').value = `${title}；${subtitle}；${keywords}=${pageNum}`;
+        
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            navigator.clipboard.writeText(input.value).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '已复制';
+                btn.classList.add('copied');
+                showToast('内容已复制到剪贴板');
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        // 收藏功能（使用localStorage模拟，同时更新index收藏）
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = localStorage.getItem('fav_406') === 'true';
+            
+            if (!isFav) {
+                localStorage.setItem('fav_406', 'true');
+                localStorage.setItem('fav_406_title', title);
+                localStorage.setItem('fav_406_url', window.location.href);
+                // 添加到index收藏列表
+                addToIndexFavorites();
+                btn.textContent = '❤️ 已收藏';
+                btn.classList.add('active');
+                showToast('已添加到收藏');
+            } else {
+                localStorage.removeItem('fav_406');
+                localStorage.removeItem('fav_406_title');
+                localStorage.removeItem('fav_406_url');
+                // 从index收藏列表移除
+                removeFromIndexFavorites();
+                btn.textContent = '⭐ 收藏';
+                btn.classList.remove('active');
+                showToast('已取消收藏');
+            }
+        }
+        
+        // 添加到index收藏（通过localStorage共享数据）
+        function addToIndexFavorites() {
+            let favorites = JSON.parse(localStorage.getItem('index_favorites') || '[]');
+            const item = { id: '406', title: title, url: '406.html' };
+            const exists = favorites.find(f => f.id === '406');
+            if (!exists) {
+                favorites.push(item);
+                localStorage.setItem('index_favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 从index收藏移除
+        function removeFromIndexFavorites() {
+            let favorites = JSON.parse(localStorage.getItem('index_favorites') || '[]');
+            favorites = favorites.filter(f => f.id !== '406');
+            localStorage.setItem('index_favorites', JSON.stringify(favorites));
+        }
+        
+        // 检查收藏状态
+        if (localStorage.getItem('fav_406') === 'true') {
+            const btn = document.getElementById('favBtn');
+            btn.textContent = '❤️ 已收藏';
+            btn.classList.add('active');
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 标签点击搜索功能
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const text = this.textContent;
+                showToast(`搜索: ${text}`);
+            });
+        });
+    </script>
+</body>
+</html>
