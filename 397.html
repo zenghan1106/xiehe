@@ -1,0 +1,406 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~附录*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimHei", sans-serif;
+            background-color: #f5f5f0;
+            background-image: linear-gradient(135deg, #fafaf5 0%, #f0f0e8 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .nav-btn {
+            position: fixed;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .nav-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .home-btn {
+            top: 20px;
+            left: 20px;
+            background-color: #4a90d9;
+            color: white;
+        }
+        
+        .prev-btn {
+            top: 20px;
+            right: 20px;
+            background-color: #5cb85c;
+            color: white;
+        }
+        
+        .next-btn {
+            top: 60px;
+            right: 20px;
+            background-color: #f0ad4e;
+            color: white;
+        }
+        
+        .favorite-btn {
+            top: 100px;
+            right: 20px;
+            background-color: #d9534f;
+            color: white;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 80px auto 40px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 40px;
+        }
+        
+        .title-section {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #e8f4f8;
+            border-radius: 10px;
+        }
+        
+        .main-title {
+            font-size: 42px;
+            color: #2c5f7c;
+            letter-spacing: 30px;
+            text-indent: 30px;
+            font-weight: bold;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-top: 10px;
+        }
+        
+        .decorative-border {
+            border: 3px double #b8c5d0;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .decorative-border::before {
+            content: "❦";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 0 15px;
+            color: #7a9ab0;
+            font-size: 24px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 15px;
+        }
+        
+        thead {
+            background-color: #4a90d9;
+            color: white;
+        }
+        
+        th {
+            padding: 18px 15px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        td {
+            padding: 15px;
+            border: 1px solid #d0d8e0;
+            text-align: center;
+            color: #333;
+            line-height: 1.8;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f4f8;
+        }
+        
+        .content-cell {
+            word-break: break-all;
+            white-space: normal;
+        }
+        
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #f0f7ff;
+            border-radius: 10px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #4a90d9;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 18px;
+            margin: 5px;
+            background-color: #e1ecf4;
+            color: #39739d;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid #b3d3ea;
+        }
+        
+        .copy-section {
+            margin: 30px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #4a90d9;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+            background-color: #fafafa;
+        }
+        
+        .copy-btn {
+            padding: 12px 25px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background-color: #4cae4c;
+        }
+        
+        .copy-btn.copied {
+            background-color: #5bc0de;
+        }
+        
+        .keywords-section {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            color: #888;
+            font-size: 13px;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 14px;
+            color: #999;
+            margin-top: 10px;
+        }
+        
+        .watermark {
+            text-align: center;
+            color: #bbb;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin-top: 120px;
+            }
+            
+            .main-title {
+                font-size: 28px;
+                letter-spacing: 15px;
+                text-indent: 15px;
+            }
+            
+            th {
+                font-size: 16px;
+            }
+            
+            .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <button class="nav-btn home-btn" onclick="window.location.href='index.html'">返回首页</button>
+    
+    <!-- 上一页按钮 -->
+    <button class="nav-btn prev-btn" onclick="window.location.href='396.html'">上一页</button>
+    
+    <!-- 下一页按钮 -->
+    <button class="nav-btn next-btn" onclick="window.location.href='398.html'">下一页</button>
+    
+    <!-- 收藏按钮 -->
+    <button class="nav-btn favorite-btn" onclick="addToFavorites()">收藏</button>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <div class="title-section">
+            <h1 class="main-title">附录</h1>
+            <p class="subtitle">Scanner Pro 扫描文档附录页</p>
+        </div>
+        
+        <!-- 装饰边框内容区 -->
+        <div class="decorative-border">
+            <!-- 主表格 -->
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="2">附录内容</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="2" class="content-cell">
+                            附录
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="content-cell">
+                            使用 Scanner Pro 创建
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- 特色检索标签 -->
+        <div class="tags-section">
+            <div class="tags-title">特色检索标签</div>
+            <span class="tag">附录</span>
+            <span class="tag">Scanner Pro</span>
+        </div>
+        
+        <!-- 复制功能区 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+        
+        <!-- 关键词 -->
+        <div class="keywords-section">
+            关键词：附录、Scanner Pro、扫描文档
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">397</div>
+        
+        <!-- 水印 -->
+        <div class="watermark">使用 Scanner Pro 创建</div>
+    </div>
+    
+    <script>
+        // 设置复制框内容
+        const pageNum = window.location.pathname.split('/').pop().replace('.html', '');
+        const title = '附录';
+        const subtitle = 'Scanner Pro 扫描文档附录页';
+        const keywords = '附录；Scanner Pro；扫描文档';
+        document.getElementById('copyText').value = title + '；' + subtitle + '；' + keywords + '=' + pageNum;
+        
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.textContent;
+            btn.textContent = '已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 添加到收藏
+        function addToFavorites() {
+            // 获取当前页面信息
+            const pageInfo = {
+                title: title,
+                url: window.location.href,
+                pageNum: pageNum
+            };
+            
+            // 从localStorage获取现有收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === pageInfo.url);
+            if (exists) {
+                alert('该页面已在收藏中！');
+                return;
+            }
+            
+            // 添加到收藏
+            favorites.push(pageInfo);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 更新index.html的收藏列表（通过localStorage同步）
+            localStorage.setItem('indexNeedsUpdate', 'true');
+            
+            alert('已添加到收藏！请在首页查看。');
+        }
+    </script>
+</body>
+</html>
