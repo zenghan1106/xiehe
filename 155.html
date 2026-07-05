@@ -1,0 +1,376 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~血小板减少症诊断与检查*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .nav-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn {
+            background-color: #4a90d9;
+            color: white;
+        }
+        
+        .home-btn:hover {
+            background-color: #357abd;
+        }
+        
+        .page-nav {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .page-btn {
+            background-color: #52c41a;
+            color: white;
+        }
+        
+        .page-btn:hover {
+            background-color: #389e0d;
+        }
+        
+        .fav-btn {
+            background-color: #faad14;
+            color: white;
+            margin-top: 8px;
+        }
+        
+        .fav-btn:hover {
+            background-color: #d48806;
+        }
+        
+        .fav-btn.active {
+            background-color: #ff4d4f;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 12px;
+            background-color: #d6eaf8;
+            border-radius: 8px;
+            border-left: 5px solid #2e86c1;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        thead {
+            background-color: #2e86c1;
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        tbody td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+        }
+        
+        tbody tr:hover {
+            background-color: #f0f7ff;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #fafbfc;
+        }
+        
+        .section-title {
+            color: #1a5276;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        
+        .sub-item {
+            color: #2874a6;
+            font-weight: 500;
+        }
+        
+        .check-mark {
+            color: #27ae60;
+            margin-right: 4px;
+        }
+        
+        .bullet {
+            color: #e74c3c;
+            margin-right: 4px;
+        }
+        
+        .copy-section {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+        
+        .copy-section input {
+            width: calc(100% - 100px);
+            padding: 10px;
+            border: 1px solid #d9d9d9;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+        
+        .copy-section button {
+            width: 80px;
+            padding: 10px;
+            margin-left: 10px;
+            background-color: #52c41a;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        
+        .copy-section button:hover {
+            background-color: #389e0d;
+        }
+        
+        .tags-section {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+        
+        .tags-section h3 {
+            color: #1a5276;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 5px 12px;
+            margin: 4px;
+            background-color: #e3f2fd;
+            color: #1565c0;
+            border-radius: 16px;
+            font-size: 13px;
+            border: 1px solid #90caf9;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+            padding: 10px;
+        }
+        
+        .page-num {
+            text-align: center;
+            color: #999;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-bar">
+        <a href="index.html" class="nav-btn home-btn">← 返回首页</a>
+        <div class="page-nav">
+            <a href="154.html" class="nav-btn page-btn">↑ 上一页</a>
+            <a href="156.html" class="nav-btn page-btn">↓ 下一页</a>
+        </div>
+    </div>
+    <button class="nav-btn fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+
+    <h1>~~~~~血小板减少症诊断与检查*****</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>分类</th>
+                <th>详细内容</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="section-title">病因</td>
+                <td>
+                    <span class="check-mark">✓</span>血栓形成引起血小板消耗过多：血栓性微血管病（TMA）、肝素诱导的血小板减少症（HIT）、弥散性血管内凝血（DIC）<br>
+                    <span class="bullet">●</span>血小板分布异常<br>
+                    &nbsp;&nbsp;脾大：脾肿瘤、脾充血、黑热病、脾浸润、原发性脾大
+                </td>
+            </tr>
+            <tr>
+                <td class="section-title">3. 临床表现</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="sub-item">● 病史</td>
+                <td>
+                    <span class="check-mark">✓</span>请患者提供既往的血常规结果判断是否为新出现的血小板减少<br>
+                    <span class="check-mark">✓</span>若无法提供，则询问既往出血病史，包括各种自发出血及手术外伤出血情况<br>
+                    <span class="check-mark">✓</span>是否有新近出现的出血<br>
+                    <span class="check-mark">✓</span>是否有药物暴露（各种新近使用的处方药非处方药、肝素、中草药）<br>
+                    <span class="check-mark">✓</span>是否有新近感染<br>
+                    <span class="check-mark">✓</span>是否有流行病学史（近期去过疟疾、登革热、钩端螺旋体病、脑膜炎球菌血症、鼠咬热、立克次体感染、汉坦病毒病，以及病毒性出血热（如埃博拉出血热、拉沙热）流行地区<br>
+                    <span class="check-mark">✓</span>是否存在HIV感染的危险因素<br>
+                    <span class="check-mark">✓</span>是否有其他可能合并血小板减少的疾病<br>
+                    <span class="check-mark">✓</span>是否进行可能使血小板减少的治疗（血管内人工装置及相关治疗、放疗）
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item">● 症状</td>
+                <td>
+                    <span class="check-mark">✓</span>可有皮肤、牙龈、结膜出血表现<br>
+                    <span class="check-mark">✓</span>可有呕血、血尿等重要脏器出血表现
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item">● 查体</td>
+                <td>
+                    <span class="check-mark">✓</span>可有皮肤、牙龈、结膜出血表现<br>
+                    <span class="check-mark">✓</span>若有血栓体征，需警惕HIT、DIC、TMA、PNH及抗磷脂综合征（APS）
+                </td>
+            </tr>
+            <tr>
+                <td class="section-title">4. 必做检查</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="sub-item">● 外周血涂片</td>
+                <td>
+                    <span class="check-mark">✓</span>有无血小板聚集而出现血小板计数较低<br>
+                    <span class="check-mark">✓</span>有无血细胞形态异常<br>
+                    <span class="check-mark">✓</span>破碎红细胞提示微血管病变（如DIC、TTP、HUS、药物诱发TMA）<br>
+                    <span class="check-mark">✓</span>球形红细胞提示免疫介导的溶血性贫血或遗传性球形红细胞增多症<br>
+                    <span class="check-mark">✓</span>未成熟白细胞或异型增生的白细胞提示白血病或骨髓增生
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="copy-section">
+        <input type="text" id="copyText" value="血小板减少症诊断与检查；临床表现、必做检查、病史、症状、查体、外周血涂片；=143" readonly>
+        <button onclick="copyToClipboard()">复制</button>
+    </div>
+
+    <div class="tags-section">
+        <h3>🔖 特色检索标签</h3>
+        <span class="tag">血栓性微血管病</span>
+        <span class="tag">TMA</span>
+        <span class="tag">肝素诱导的血小板减少症</span>
+        <span class="tag">HIT</span>
+        <span class="tag">弥散性血管内凝血</span>
+        <span class="tag">DIC</span>
+        <span class="tag">脾大</span>
+        <span class="tag">黑热病</span>
+        <span class="tag">疟疾</span>
+        <span class="tag">登革热</span>
+        <span class="tag">钩端螺旋体病</span>
+        <span class="tag">脑膜炎球菌血症</span>
+        <span class="tag">鼠咬热</span>
+        <span class="tag">立克次体感染</span>
+        <span class="tag">汉坦病毒病</span>
+        <span class="tag">埃博拉出血热</span>
+        <span class="tag">拉沙热</span>
+        <span class="tag">HIV</span>
+        <span class="tag">抗磷脂综合征</span>
+        <span class="tag">APS</span>
+        <span class="tag">PNH</span>
+        <span class="tag">TTP</span>
+        <span class="tag">HUS</span>
+        <span class="tag">免疫介导的溶血性贫血</span>
+        <span class="tag">遗传性球形红细胞增多症</span>
+        <span class="tag">白血病</span>
+        <span class="tag">骨髓增生</span>
+    </div>
+
+    <div class="page-num">页码：143</div>
+    <div class="keywords">
+        关键词：血小板减少症 | TMA | HIT | DIC | 血栓 | 出血 | 微血管病变 | 溶血性贫血 | 白血病
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(() => {
+                alert("已复制到剪贴板：" + copyText.value);
+            });
+        }
+
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = localStorage.getItem('fav_143') === 'true';
+            
+            if (isFav) {
+                localStorage.removeItem('fav_143');
+                btn.textContent = '☆ 收藏';
+                btn.classList.remove('active');
+                alert('已取消收藏');
+            } else {
+                localStorage.setItem('fav_143', 'true');
+                localStorage.setItem('fav_143_title', '~~~~~血小板减少症诊断与检查*****');
+                localStorage.setItem('fav_143_url', '143.html');
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+                alert('已添加到收藏！');
+            }
+        }
+
+        window.onload = function() {
+            const isFav = localStorage.getItem('fav_143') === 'true';
+            const btn = document.getElementById('favBtn');
+            if (isFav) {
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
