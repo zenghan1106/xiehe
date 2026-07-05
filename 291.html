@@ -1,0 +1,654 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~CO中毒急诊处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #2c3e50;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .nav-left {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .btn-home {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn-page {
+            background: #2ecc71;
+            color: white;
+            min-width: 80px;
+            justify-content: center;
+        }
+        
+        .btn-page:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
+        }
+        
+        .btn-favorite {
+            background: #e74c3c;
+            color: white;
+            margin-top: 5px;
+        }
+        
+        .btn-favorite:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+        }
+        
+        .btn-favorite.active {
+            background: #f39c12;
+        }
+        
+        /* 标题区域 */
+        .title-section {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+        }
+        
+        .main-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1a5276;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            letter-spacing: 2px;
+        }
+        
+        .sub-title {
+            font-size: 16px;
+            color: #5d6d7e;
+            margin-top: 10px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            max-width: 900px;
+            margin: 0 auto 30px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        /* 表头 - 蓝色 */
+        thead tr {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 18px 15px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+            letter-spacing: 1px;
+        }
+        
+        /* 表格第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a5276;
+            background: #ebf5fb;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #d6eaf8;
+            transition: background 0.3s ease;
+        }
+        
+        td {
+            padding: 15px;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #34495e;
+            border-bottom: 1px solid #e8e8e8;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        .section-title {
+            color: #2980b9;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .item-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .item-list li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .item-list li::before {
+            content: "•";
+            color: #3498db;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .sub-item {
+            padding-left: 30px !important;
+            color: #5d6d7e;
+        }
+        
+        .sub-item::before {
+            content: "✓" !important;
+            color: #2ecc71 !important;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #7f8c8d;
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            max-width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            max-width: 900px;
+            margin: 0 auto 30px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #2c3e50;
+            background: white;
+            width: calc(100% - 100px);
+        }
+        
+        .btn-copy {
+            background: #9b59b6;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        
+        .btn-copy:hover {
+            background: #8e44ad;
+        }
+        
+        .btn-copy.copied {
+            background: #2ecc71;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            max-width: 900px;
+            margin: 0 auto 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        
+        .keywords-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2980b9;
+            margin-bottom: 15px;
+        }
+        
+        .keywords-content {
+            font-size: 14px;
+            color: #5d6d7e;
+            line-height: 2;
+        }
+        
+        .keyword-tag {
+            display: inline-block;
+            padding: 5px 15px;
+            margin: 5px;
+            background: #e8f4f8;
+            color: #2980b9;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+        
+        /* 检索标签 */
+        .tags-section {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 15px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 20px;
+            margin: 5px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #fdebd0;
+            color: #d35400;
+            border: 2px solid #f39c12;
+        }
+        
+        .tag-disease:hover {
+            background: #f39c12;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #d5f5e3;
+            color: #27ae60;
+            border: 2px solid #2ecc71;
+        }
+        
+        .tag-drug:hover {
+            background: #2ecc71;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #d6eaf8;
+            color: #2980b9;
+            border: 2px solid #3498db;
+        }
+        
+        .tag-bacteria:hover {
+            background: #3498db;
+            color: white;
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #2ecc71;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 22px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 15px 10px;
+            }
+            
+            td {
+                padding: 12px 10px;
+                font-size: 14px;
+            }
+            
+            .btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+                padding: 0 10px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <!-- 顶部导航 -->
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="290.html" class="btn btn-page">← 上一页</a>
+            <a href="292.html" class="btn btn-page">下一页 →</a>
+            <button class="btn btn-favorite" id="favoriteBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="title-section">
+        <h1 class="main-title">~~~~~CO中毒急诊处理*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~CO中毒急诊处理*****、CO中毒 - 急诊医学指南</div>
+        <p class="sub-title">一氧化碳中毒的诊断与治疗策略</p>
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>CO中毒 - 急诊医学指南</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="section-title">COHb浓度分级</div>
+                        <ul class="item-list">
+                            <li>轻度中毒：血液COHb浓度 10% ~ 30%</li>
+                            <li>中度中毒：血液COHb浓度 30% ~ 50%</li>
+                            <li>重度中毒：血液COHb浓度 > 50%</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">5. 选做检查</div>
+                        <ul class="item-list">
+                            <li>胸片：表现不特异，可能发现误吸</li>
+                            <li>ECG：可能存在各种心律失常</li>
+                            <li>头颅CT/MRI：可发现不同程度的颅内水肿，并除外急性脑血管事件</li>
+                            <li>肝肾功能检查：评估患者基础状态，但对诊断非必须</li>
+                            <li>BNP、cTnI检测：对诊断帮助不大</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">6. 诊断策略</div>
+                        <ul class="item-list">
+                            <li>根据CO接触史、突然昏迷、皮肤黏膜樱桃红色等做出诊断</li>
+                            <li>CO中毒需有以下3条诊断依据：
+                                <ul class="item-list">
+                                    <li class="sub-item">①与CO中毒相一致的症状</li>
+                                    <li class="sub-item">②近期有CO接触史</li>
+                                    <li class="sub-item">③血液COHb浓度升高</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">7. 急诊处理</div>
+                        <ul class="item-list">
+                            <li>心电监护，建立静脉通路，维持气道开放</li>
+                            <li>迅速将患者转移到空气新鲜的地方，卧床休息，保暖，保持呼吸道通畅</li>
+                            <li><strong>吸氧</strong>
+                                <ul class="item-list">
+                                    <li class="sub-item">吸入氧气可加速COHb解离，增加CO排出</li>
+                                    <li class="sub-item">最终目标：从患者体中消除CO，以避免急性和长期并发症</li>
+                                    <li class="sub-item">治疗应持续至COHb降至正常值（< 3%），且患者无症状</li>
+                                    <li class="sub-item">吸入新鲜空气时，CO由COHb释放出半量约需4小时；吸入纯氧时可缩短至30 ~ 40分钟；吸入3个大气压的纯氧可缩短至20分钟</li>
+                                </ul>
+                            </li>
+                            <li><strong>高压氧治疗</strong>
+                                <ul class="item-list">
+                                    <li class="sub-item">能增加血液中溶解氧，提高动脉血氧分压，使毛细血管内的氧易向细胞内弥散</li>
+                                    <li class="sub-item">可迅速纠正组织缺氧</li>
+                                    <li class="sub-item">预防长期伤害，如皮质功能障碍、帕金森综合征、帕金森病、痴呆、心脏并发症，以及降低长期病死率</li>
+                                </ul>
+                            </li>
+                            <li><strong>防治脑水肿</strong>：严重中毒后，脑水肿可在24 ~ 48小时发展到高峰
+                                <ul class="item-list">
+                                    <li class="sub-item">20%甘露醇：最常用，静脉快速滴注。待2 ~ 3天后颅内压增高现象好转可减量</li>
+                                    <li class="sub-item">呋塞米：可脱水</li>
+                                    <li class="sub-item">腺苷三磷酸、糖皮质激素（如地塞米松）：有助于缓解脑水肿</li>
+                                    <li class="sub-item">频繁抽搐者：首选药物为地西泮，抽搐停止后可再静脉滴</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">291</div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="CO中毒急诊处理；一氧化碳中毒的诊断与治疗策略；CO中毒、COHb、高压氧、甘露醇、呋塞米、地塞米松、地西泮；=291" readonly>
+        <button class="btn-copy" onclick="copyContent()">复制</button>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">🔍 关键词</div>
+        <div class="keywords-content">
+            <span class="keyword-tag">CO中毒</span>
+            <span class="keyword-tag">COHb</span>
+            <span class="keyword-tag">高压氧</span>
+            <span class="keyword-tag">甘露醇</span>
+            <span class="keyword-tag">呋塞米</span>
+            <span class="keyword-tag">地塞米松</span>
+            <span class="keyword-tag">地西泮</span>
+        </div>
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签（点击筛选）</div>
+        <div>
+            <span class="tag tag-disease">CO中毒</span>
+            <span class="tag tag-disease">一氧化碳中毒</span>
+            <span class="tag tag-disease">脑水肿</span>
+            <span class="tag tag-disease">颅内水肿</span>
+            <span class="tag tag-disease">组织缺氧</span>
+            <span class="tag tag-disease">心律失常</span>
+            <span class="tag tag-disease">误吸</span>
+            <span class="tag tag-disease">昏迷</span>
+            <span class="tag tag-disease">抽搐</span>
+            <span class="tag tag-disease">帕金森综合征</span>
+            <span class="tag tag-disease">帕金森病</span>
+            <span class="tag tag-disease">痴呆</span>
+            <span class="tag tag-disease">皮质功能障碍</span>
+            <span class="tag tag-drug">甘露醇</span>
+            <span class="tag tag-drug">呋塞米</span>
+            <span class="tag tag-drug">地塞米松</span>
+            <span class="tag tag-drug">地西泮</span>
+            <span class="tag tag-drug">腺苷三磷酸</span>
+            <span class="tag tag-drug">纯氧</span>
+            <span class="tag tag-drug">高压氧</span>
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                    const btn = document.querySelector('.btn-copy');
+                    btn.classList.add('copied');
+                    btn.textContent = '已复制';
+                    setTimeout(() => {
+                        btn.classList.remove('copied');
+                        btn.textContent = '复制';
+                    }, 2000);
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFavorited = btn.classList.contains('active');
+            
+            if (!isFavorited) {
+                btn.classList.add('active');
+                btn.innerHTML = '❤️ 已收藏';
+                
+                // 保存到localStorage，模拟添加到index收藏
+                const favoriteData = {
+                    title: 'CO中毒急诊处理',
+                    url: '291.html',
+                    category: '急诊疾病',
+                    timestamp: new Date().toISOString()
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.find(f => f.url === '291.html');
+                if (!exists) {
+                    favorites.push(favoriteData);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                showToast('已添加到收藏！');
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = '⭐ 收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '291.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                showToast('已取消收藏！');
+            }
+        }
+        
+        // 检查是否已收藏
+        function checkFavoriteStatus() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.find(f => f.url === '291.html');
+            if (isFavorited) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('active');
+                btn.innerHTML = '❤️ 已收藏';
+            }
+        }
+        
+        // 显示提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = checkFavoriteStatus;
+    </script>
+</body>
+</html>
