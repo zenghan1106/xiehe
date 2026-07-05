@@ -1,0 +1,328 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~免疫疾病急诊-狼疮急症*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f0f4f8;
+            background-image: linear-gradient(135deg, #e3f2fd 0%, #f0f4f8 100%);
+            color: #333;
+            padding: 15px;
+            line-height: 1.6;
+        }
+        .nav-btn {
+            position: fixed;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            z-index: 100;
+        }
+        .home-btn {
+            top: 10px;
+            left: 10px;
+            background-color: #4CAF50;
+            color: white;
+        }
+        .prev-btn {
+            top: 10px;
+            right: 10px;
+            background-color: #FF9800;
+            color: white;
+        }
+        .next-btn {
+            top: 50px;
+            right: 10px;
+            background-color: #2196F3;
+            color: white;
+        }
+        .fav-btn {
+            top: 90px;
+            right: 10px;
+            background-color: #E91E63;
+            color: white;
+        }
+        h1 {
+            text-align: center;
+            color: #1565C0;
+            font-size: 22px;
+            margin: 60px 0 20px 0;
+            padding: 10px;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin: 0 auto;
+            max-width: 100%;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        thead {
+            background-color: #1976D2;
+            color: white;
+        }
+        thead th {
+            padding: 14px 10px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: left;
+        }
+        tbody td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 14px;
+            color: #444;
+            vertical-align: top;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        tbody tr:hover {
+            background-color: #e3f2fd;
+        }
+        .section-title {
+            font-weight: bold;
+            color: #1565C0;
+            font-size: 15px;
+        }
+        .check-mark {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        .bullet-mark {
+            color: #2196F3;
+            font-weight: bold;
+        }
+        .tags-container {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .tags-title {
+            font-size: 16px;
+            color: #1565C0;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 5px;
+            background-color: #e3f2fd;
+            color: #1565C0;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #90caf9;
+        }
+        .copy-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        #copyInput {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #90caf9;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #555;
+        }
+        .copy-btn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        .page-num {
+            text-align: center;
+            font-size: 18px;
+            color: #666;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+        .keywords {
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+            margin-top: 10px;
+            padding: 10px;
+        }
+        @media (max-width: 600px) {
+            h1 { font-size: 18px; margin-top: 80px; }
+            thead th { font-size: 14px; padding: 10px 8px; }
+            tbody td { font-size: 13px; padding: 10px 8px; }
+            .nav-btn { padding: 6px 12px; font-size: 12px; }
+            .copy-section { flex-direction: column; }
+            #copyInput { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="nav-btn home-btn">返回首页</a>
+    <a href="226.html" class="nav-btn prev-btn">上一页</a>
+    <a href="228.html" class="nav-btn next-btn">下一页</a>
+    <button class="nav-btn fav-btn" onclick="addToFavorites()">收藏</button>
+
+    <h1>~~~~~免疫疾病急诊-狼疮急症*****</h1>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类</th>
+                    <th>内容详情</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="section-title">依赖</td>
+                    <td>
+                        <span class="check-mark">✓</span> 推荐氢化可的松200mg/d
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">积极寻找和处理病灶</td>
+                    <td>
+                        <span class="check-mark">✓</span> 应使用包括影像学在内的各种方法争取在6小时内确认感染源或病灶<br>
+                        <span class="check-mark">✓</span> 尽可能早地用对患者安全的方法引流感染灶，包括移除感染的移植物或血管内导管，清除坏死组织等<br>
+                        <span class="check-mark">✓</span> 目前对急性胰腺炎不主张进行早期手术
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">使用抗生素</td>
+                    <td>
+                        <span class="check-mark">✓</span> 对脓毒症休克和严重脓毒症，在确认后1小时内予抗生素治疗<br>
+                        <span class="check-mark">✓</span> 抗生素治疗前应先留取可能感染部位和血液的标本做细菌学培养<br>
+                        <span class="check-mark">✓</span> 开始可根据感染部位和本病房的优势菌种经验性地选择抗生素，抗菌谱可以广一些，力度可以大一些，即所谓"重锤猛击"，且每天评估疗效<br>
+                        <span class="check-mark">✓</span> 经验性治疗一般3～5天，然后根据所获的细菌学结果进行调整
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">凝血功能紊乱处理</td>
+                    <td>
+                        <span class="check-mark">✓</span> 若PLT＜5×10⁹/L，无论是否有出血均应输注血小板<br>
+                        <span class="check-mark">✓</span> 若存在高出血风险，则维持PLT（5～30）×10⁹/L<br>
+                        <span class="check-mark">✓</span> 若进行有创操作，必须提高PLT至≥50×10⁹/L
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">低灌注所致酸中毒</td>
+                    <td>
+                        不主张为改善血流动力学或心血管对升压药物的敏感性而使用碳酸氢钠纠正，除非pH＜7.15<br>
+                        （戴佳原）
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title" colspan="2" style="text-align:center; font-size:16px; color:#1565C0;">免疫疾病急诊 — 狼疮急症</td>
+                </tr>
+                <tr>
+                    <td class="section-title">1. 定义</td>
+                    <td>
+                        <span class="bullet-mark">●</span> 系统性红斑狼疮（SLE）是一种病因不明的慢性自身免疫病，几乎可累及全身所有器官<br>
+                        <span class="bullet-mark">●</span> 疾病严重程度因不同脏器受累而轻重不一，从轻微关节炎或皮疹到肾衰竭、严重血细胞减低甚至中枢神经系统病变均可出现<br>
+                        <span class="bullet-mark">●</span> 狼疮活动影响重要脏器功能者可视为狼疮急症
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">2. 临床表现</td>
+                    <td>
+                        <span class="bullet-mark">●</span> 全身症状：SLE可出现乏力、发热、体重减轻等
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tags-container">
+        <div class="tags-title">检索标签</div>
+        <span class="tag">脓毒症</span>
+        <span class="tag">严重脓毒症</span>
+        <span class="tag">急性胰腺炎</span>
+        <span class="tag">系统性红斑狼疮</span>
+        <span class="tag">SLE</span>
+        <span class="tag">狼疮急症</span>
+        <span class="tag">关节炎</span>
+        <span class="tag">皮疹</span>
+        <span class="tag">肾衰竭</span>
+        <span class="tag">氢化可的松</span>
+        <span class="tag">抗生素</span>
+        <span class="tag">血小板</span>
+        <span class="tag">碳酸氢钠</span>
+    </div>
+
+    <div class="page-num">227</div>
+
+    <div class="copy-section">
+        <input type="text" id="copyInput" value="免疫疾病急诊-狼疮急症；脓毒症、严重脓毒症、急性胰腺炎、系统性红斑狼疮、SLE、狼疮急症、关节炎、皮疹、肾衰竭、氢化可的松、抗生素、血小板、碳酸氢钠；=227" readonly>
+        <button class="copy-btn" onclick="copyText()">复制</button>
+    </div>
+
+    <div class="keywords">
+        关键词：脓毒症 | 严重脓毒症 | 急性胰腺炎 | 系统性红斑狼疮 | SLE | 狼疮急症 | 关节炎 | 皮疹 | 肾衰竭 | 氢化可的松 | 抗生素 | 血小板 | 碳酸氢钠
+    </div>
+
+    <script>
+        function copyText() {
+            var input = document.getElementById("copyInput");
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                alert("已复制到剪贴板！");
+            }, function(err) {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            });
+        }
+
+        function addToFavorites() {
+            var title = document.title.replace(/~~~~~|*****$/g, '');
+            var favData = JSON.parse(localStorage.getItem('favorites') || '[]');
+            var currentPage = {
+                title: title,
+                url: window.location.href,
+                pageNum: '227'
+            };
+            var exists = favData.some(function(item) {
+                return item.url === currentPage.url;
+            });
+            if (!exists) {
+                favData.push(currentPage);
+                localStorage.setItem('favorites', JSON.stringify(favData));
+                alert('已添加到收藏！');
+            } else {
+                alert('该页面已在收藏中！');
+            }
+        }
+    </script>
+
+</body>
+</html>
