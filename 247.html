@@ -1,0 +1,493 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~肾上腺危象急诊处理与嗜铬细胞瘤危象-急诊疾病*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 顶部导航 */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .left-btns {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .right-btns {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: #2196F3;
+            color: white;
+        }
+        
+        .btn-page {
+            background: #4CAF50;
+            color: white;
+            min-width: 70px;
+            text-align: center;
+        }
+        
+        .btn-fav {
+            background: #FF9800;
+            color: white;
+            font-size: 13px;
+            padding: 6px 14px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            color: #1565C0;
+            margin: 15px 0 20px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        /* 表格容器 */
+        .table-wrap {
+            overflow-x: auto;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+        
+        /* 表头蓝色 */
+        thead th {
+            background: linear-gradient(135deg, #1976D2 0%, #2196F3 100%);
+            color: white;
+            padding: 14px 12px;
+            font-size: 17px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        td, th {
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        .section-title {
+            color: #1565C0;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .sub-section {
+            color: #d32f2f;
+            font-weight: bold;
+            font-size: 15px;
+            margin-top: 8px;
+        }
+        
+        .bullet {
+            color: #2196F3;
+            font-weight: bold;
+            margin-right: 4px;
+        }
+        
+        .check {
+            color: #4CAF50;
+            font-weight: bold;
+            margin-right: 4px;
+        }
+        
+        .author {
+            text-align: right;
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 4px;
+            border-radius: 20px;
+            font-size: 13px;
+            background: #e3f2fd;
+            color: #1565C0;
+            border: 1px solid #90caf9;
+        }
+        
+        .tag-disease {
+            background: #ffebee;
+            color: #c62828;
+            border-color: #ef9a9a;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 14px;
+            border: 2px solid #90caf9;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+        
+        .btn-copy {
+            background: #9C27B0;
+            color: white;
+            padding: 10px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        /* 页码 */
+        .page-num {
+            text-align: center;
+            font-size: 18px;
+            color: #666;
+            margin: 15px 0;
+            font-weight: 500;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .keywords-title {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 8px;
+        }
+        
+        .keyword-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            margin: 3px;
+            background: #fff3e0;
+            color: #e65100;
+            border-radius: 15px;
+            font-size: 13px;
+        }
+        
+        /* 底部信息 */
+        .footer {
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            padding: 15px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px 8px;
+            }
+            
+            .main-title {
+                font-size: 18px;
+            }
+            
+            table {
+                font-size: 13px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 10px 8px;
+            }
+            
+            td, th {
+                padding: 8px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部导航 -->
+    <div class="top-nav">
+        <div class="left-btns">
+            <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+        </div>
+        <div class="right-btns">
+            <a href="246.html" class="btn btn-page">⬆ 上一页</a>
+            <a href="248.html" class="btn btn-page">⬇ 下一页</a>
+            <button class="btn btn-fav" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~肾上腺危象急诊处理与嗜铬细胞瘤危象-急诊疾病*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~肾上腺危象急诊处理与嗜铬细胞瘤危象-急诊疾病*****、肾上腺危象急诊处理与嗜铬细胞瘤危象 - 急诊疾病诊疗要点、嗜铬细胞瘤危象</div>
+
+    <!-- 表格 -->
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">肾上腺危象急诊处理与嗜铬细胞瘤危象 - 急诊疾病诊疗要点</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        <span class="section-title">6. 急诊处理</span><br>
+                        <span class="bullet">●</span>心电监护，建立静脉通路，持续生命体征监护。<br>
+                        <span class="bullet">●</span>采集血电解质、血糖，留取血样检测血清皮质醇及ACTH，疑诊时尽快专科会诊。<br>
+                        <span class="bullet">●</span>循环支持<br>
+                        <span class="check">✓</span>最初12～24小时内静脉输入1～3L 0.9%盐水或糖盐水（5%GS加入到0.9%NS中，纠正可能存在的低血糖）。<br>
+                        <span class="check">✓</span>持续血流动力学监测。<br>
+                        <span class="check">✓</span>密切监测血电解质，以避免医源性液体过负荷。<br>
+                        <span class="bullet">●</span>激素替代治疗<br>
+                        <span class="check">✓</span>氢化可的松100mg iv负荷量，序贯q6～8h 50mg iv，或第一个24小时序贯200mg/24h持续静脉滴注。<br>
+                        <span class="check">✓</span>若氢化可的松不可得，替代药物可用泼尼松龙、泼尼松或地塞米松（4mg iv，不干扰血清皮质醇测定）。<br>
+                        <span class="check">✓</span>除非存在严重的共存疾病，否则肠外糖皮质激素治疗应在1～3天内逐渐减量。如胃肠功能正常，可逐渐过渡为口服制剂。<br>
+                        <span class="bullet">●</span>支持治疗：包括低钠血症、高钾血症及少见的高钙血症。<br>
+                        <span class="bullet">●</span>诊断性检查：注意寻找肾上腺危象的诱因（如细菌感染、病毒性胃肠炎），并予相应治疗。<br>
+                        <div class="author">（唐晗琪）</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="section-title" style="color: #d32f2f;">■ 嗜铬细胞瘤危象</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="section-title">1. 定义</span><br>
+                        <span class="bullet">●</span>嗜铬细胞瘤危象（PCC）指儿茶酚胺突然大量释放后出现的血流动力学不稳定，最终导致器官功能损害或丧失。<br>
+                        <span class="bullet">●</span>嗜铬细胞瘤危象包括高血压危象、高血压与低血压交替、发作性低血压与休克、急性左心功能不全、上消化道大出血、糖尿病酮症酸中毒及低血糖危象等。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="section-title">2. 危险因素</span><br>
+                        挤压、精神刺激、剧烈运动、体位改变、外伤、感染、手术及某些药物。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="section-title">3. 临床表现</span><br>
+                        <span class="sub-section">症状</span><br>
+                        <span class="check">✓</span>经典三联征：阵发性头痛、发汗、心动过速。大多数患者无经典症状。<br>
+                        <span class="check">✓</span>50%患者有阵发性高血压。<br>
+                        <span class="check">✓</span>可能表现：高血压或低血压、过热（体温＞40℃）、神志改
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 页码 -->
+    <div class="page-num">247</div>
+
+    <!-- 关键词 -->
+    <div class="keywords">
+        <div class="keywords-title">关键词</div>
+        <span class="keyword-tag">肾上腺危象</span>
+        <span class="keyword-tag">嗜铬细胞瘤危象</span>
+        <span class="keyword-tag">急诊处理</span>
+        <span class="keyword-tag">氢化可的松</span>
+        <span class="keyword-tag">泼尼松龙</span>
+        <span class="keyword-tag">泼尼松</span>
+        <span class="keyword-tag">地塞米松</span>
+        <span class="keyword-tag">ACTH</span>
+        <span class="keyword-tag">皮质醇</span>
+        <span class="keyword-tag">低钠血症</span>
+        <span class="keyword-tag">高钾血症</span>
+        <span class="keyword-tag">高血压危象</span>
+        <span class="keyword-tag">低血压</span>
+        <span class="keyword-tag">休克</span>
+        <span class="keyword-tag">糖尿病酮症酸中毒</span>
+        <span class="keyword-tag">低血糖危象</span>
+    </div>
+
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="肾上腺危象急诊处理与嗜铬细胞瘤危象-急诊疾病；氢化可的松、泼尼松龙、泼尼松、地塞米松、ACTH、皮质醇、低钠血症、高钾血症、高血压危象、低血压、休克、糖尿病酮症酸中毒、低血糖危象；=247" readonly>
+        <button class="btn-copy" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">检索标签（疾病 · 药物 · 细菌）</div>
+        <span class="tag tag-disease">肾上腺危象</span>
+        <span class="tag tag-disease">嗜铬细胞瘤危象</span>
+        <span class="tag tag-disease">高血压危象</span>
+        <span class="tag tag-disease">低血压</span>
+        <span class="tag tag-disease">休克</span>
+        <span class="tag tag-disease">急性左心功能不全</span>
+        <span class="tag tag-disease">上消化道大出血</span>
+        <span class="tag tag-disease">糖尿病酮症酸中毒</span>
+        <span class="tag tag-disease">低血糖危象</span>
+        <span class="tag tag-disease">低钠血症</span>
+        <span class="tag tag-disease">高钾血症</span>
+        <span class="tag tag-disease">高钙血症</span>
+        <span class="tag tag-disease">细菌感染</span>
+        <span class="tag tag-disease">病毒性胃肠炎</span>
+        <span class="tag tag-disease">阵发性头痛</span>
+        <span class="tag tag-disease">心动过速</span>
+        <span class="tag tag-disease">阵发性高血压</span>
+        <span class="tag">氢化可的松</span>
+        <span class="tag">泼尼松龙</span>
+        <span class="tag">泼尼松</span>
+        <span class="tag">地塞米松</span>
+        <span class="tag">糖皮质激素</span>
+        <span class="tag">5%GS</span>
+        <span class="tag">0.9%NS</span>
+        <span class="tag">0.9%盐水</span>
+        <span class="tag">糖盐水</span>
+        <span class="tag">儿茶酚胺</span>
+    </div>
+
+    <div class="footer">
+        急诊疾病 · 第247页
+    </div>
+
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                alert('已复制到剪贴板：' + input.value);
+            }).catch(() => {
+                document.execCommand('copy');
+                alert('已复制到剪贴板');
+            });
+        }
+
+        // 收藏功能
+        function addToFavorites() {
+            const title = '~~~~~肾上腺危象急诊处理与嗜铬细胞瘤危象-急诊疾病*****';
+            const url = window.location.href;
+            const pageNum = '247';
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                pageNum: pageNum,
+                category: '急诊疾病',
+                timestamp: new Date().toISOString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert('已收藏！页面信息：\n标题：' + title + '\n页码：' + pageNum);
+        }
+    </script>
+
+</body>
+</html>
