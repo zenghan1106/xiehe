@@ -1,0 +1,592 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~尿路感染急诊处理与急性感染性腹泻*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .nav-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #e8b339;
+            margin-top: 5px;
+        }
+        
+        .fav-btn:hover {
+            background: #d4a030;
+        }
+        
+        /* 标题样式 */
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 60px 0 25px 0;
+            padding: 0 80px;
+            line-height: 1.5;
+        }
+        
+        /* 副标题 */
+        .subtitle {
+            text-align: center;
+            color: #2874a6;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        
+        /* 大章节标题 */
+        .chapter-title {
+            background: #1a5276;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 15px 20px;
+            margin: 25px 0 15px 0;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        /* 小节标题 */
+        .section-title {
+            background: #d6eaf8;
+            color: #1a5276;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 12px 15px;
+            margin: 20px 0 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #2e86c1;
+        }
+        
+        /* 表格样式 - 所有内容整合在一个大表格 */
+        .main-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        /* 表头 */
+        .main-table thead tr {
+            background: #2e86c1;
+            color: white;
+        }
+        
+        .main-table thead th {
+            padding: 18px 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        /* 表格第一行字体大一点 */
+        .main-table tbody tr:first-child td {
+            font-size: 16px;
+            font-weight: bold;
+            background: #eaf2f8;
+        }
+        
+        /* 普通单元格 */
+        .main-table td, .main-table th {
+            padding: 14px 15px;
+            border: 1px solid #aed6f1;
+            text-align: left;
+            font-size: 14px;
+            line-height: 1.8;
+            vertical-align: top;
+        }
+        
+        /* 分类行 */
+        .category-row {
+            background: #d6eaf8 !important;
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        .category-row td {
+            font-size: 15px !important;
+        }
+        
+        /* 子项缩进 */
+        .sub-item {
+            padding-left: 25px !important;
+            position: relative;
+        }
+        
+        .sub-item::before {
+            content: "•";
+            position: absolute;
+            left: 10px;
+            color: #2e86c1;
+            font-weight: bold;
+        }
+        
+        /* 勾选标记 */
+        .check-item {
+            padding-left: 30px !important;
+            position: relative;
+        }
+        
+        .check-item::before {
+            content: "✓";
+            position: absolute;
+            left: 10px;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        /* 编号项 */
+        .num-item {
+            padding-left: 30px !important;
+        }
+        
+        /* 页码显示 */
+        .page-num {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 16px;
+            margin: 25px 0;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 30px 0 20px 0;
+        }
+        
+        .tags-title {
+            color: #1a5276;
+            font-size: 15px;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #d6eaf8;
+            color: #1a5276;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #aed6f1;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 25px 0;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        .copy-input-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        #copyInput {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #aed6f1;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            width: calc(100% - 100px);
+        }
+        
+        #copyBtn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        #copyBtn:hover {
+            background: #219a52;
+        }
+        
+        #copyBtn.copied {
+            background: #7f8c8d;
+        }
+        
+        /* 关键词底部 */
+        .keywords-bottom {
+            text-align: center;
+            color: #95a5a6;
+            font-size: 13px;
+            margin-top: 20px;
+            padding: 15px;
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #27ae60;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            display: none;
+            z-index: 200;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 18px;
+                padding: 0 60px;
+                margin-top: 80px;
+            }
+            
+            .nav-buttons {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .nav-btn, .home-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .main-table thead th {
+                font-size: 16px;
+                padding: 15px 10px;
+            }
+            
+            .main-table td, .main-table th {
+                padding: 12px 10px;
+                font-size: 13px;
+            }
+            
+            .chapter-title {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <button class="home-btn" onclick="location.href='index.html'">返回首页</button>
+    
+    <!-- 右上角导航 -->
+    <div class="nav-buttons">
+        <button class="nav-btn" onclick="location.href='214.html'">上一页</button>
+        <button class="nav-btn" onclick="location.href='216.html'">下一页</button>
+        <button class="nav-btn fav-btn" onclick="addToFavorite()">收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~尿路感染急诊处理与急性感染性腹泻*****</h1>
+    <p class="subtitle">急诊处理 · 急性感染性腹泻定义 · 危险因素 · 临床表现</p>
+    
+    <!-- 大章节：尿路感染急诊处理 -->
+    <div class="chapter-title">■ 尿路感染急诊处理</div>
+    
+    <!-- 整合所有内容在一个表格 -->
+    <table class="main-table">
+        <thead>
+            <tr>
+                <th style="width:25%">分类</th>
+                <th style="width:75%">详细内容</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="category-row">
+                <td colspan="2">7. 急诊处理</td>
+            </tr>
+            <tr>
+                <td class="sub-item">一般措施</td>
+                <td>①多饮水，＞2000ml/d，每2～3小时排尿1次；<br>②性生活相关者于性交后及时排尿；<br>③避免使用尿路器械。</td>
+            </tr>
+            <tr>
+                <td class="sub-item">无症状性菌尿</td>
+                <td>不常规使用抗生素，除妊娠、泌尿系手术前等情况。</td>
+            </tr>
+            <tr>
+                <td class="sub-item">急性膀胱炎</td>
+                <td>复方磺胺甲噁唑或环丙沙星或左氧氟沙星，连用3天。</td>
+            </tr>
+            <tr>
+                <td class="sub-item">急性肾盂肾炎</td>
+                <td>喹诺酮类（左氧氟沙星）或β-内酰胺类抗生素（阿莫西林/克拉维酸钾或头孢曲松），连用14天。</td>
+            </tr>
+            <tr>
+                <td class="sub-item">前列腺炎</td>
+                <td>急性期复方磺胺甲噁唑或喹诺酮类，连用2～4周。</td>
+            </tr>
+            <tr>
+                <td class="sub-item">效果不佳者</td>
+                <td>需考虑结核、结构异常、异物、耐药菌等，需进一步评估。</td>
+            </tr>
+            <tr class="category-row">
+                <td colspan="2">继发感染性休克病情危重或存在尿路梗阻者</td>
+            </tr>
+            <tr>
+                <td class="check-item">监护生命体征</td>
+                <td>完善心电图、血压、血氧饱和度等。</td>
+            </tr>
+            <tr>
+                <td class="check-item">抗休克治疗</td>
+                <td>积极补液，应用血管活性药物等。</td>
+            </tr>
+            <tr>
+                <td class="check-item">抗感染治疗</td>
+                <td>使用抗假单胞菌的碳青霉烯类药物（亚胺培南、美罗培南等）以覆盖超广谱β-内酰胺酶（ESBL）微生物和铜绿假单胞菌，并使用万古霉素覆盖MRSA。亦可用达托霉素和利奈唑胺替代万古霉素。</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:right;color:#666;font-style:italic;">（刘安雷）</td>
+            </tr>
+            
+            <!-- 急性感染性腹泻 -->
+            <tr class="category-row">
+                <td colspan="2">■ 急性感染性腹泻</td>
+            </tr>
+            <tr class="category-row">
+                <td colspan="2">1. 定义</td>
+            </tr>
+            <tr>
+                <td class="sub-item">腹泻定义</td>
+                <td>腹泻为排除其他肠道症状外，排未成形大便≥3次/日，或排出未成形粪便总量超过250g/d。</td>
+            </tr>
+            <tr>
+                <td class="sub-item">持续时间分类</td>
+                <td>急性＜14天、持续性14～29天、慢性≥30天。</td>
+            </tr>
+            <tr class="category-row">
+                <td colspan="2">2. 危险因素</td>
+            </tr>
+            <tr>
+                <td class="sub-item" colspan="2">先前国际旅行史。</td>
+            </tr>
+            <tr>
+                <td class="sub-item" colspan="2">抗菌药物治疗、化疗或PPI治疗。</td>
+            </tr>
+            <tr>
+                <td class="sub-item" colspan="2">不安全性行为。</td>
+            </tr>
+            <tr>
+                <td class="sub-item" colspan="2">日托中心工作。</td>
+            </tr>
+            <tr>
+                <td class="sub-item" colspan="2">存在已知免疫功能紊乱。</td>
+            </tr>
+            <tr class="category-row">
+                <td colspan="2">3. 临床表现</td>
+            </tr>
+            <tr>
+                <td class="sub-item">症状</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="check-item">一般表现</td>
+                <td>常伴发热、腹泻、腹痛及白细胞增多等表现。</td>
+            </tr>
+            <tr>
+                <td class="check-item">不同部位症状特点</td>
+                <td>①小肠感染性腹泻的特点：阵发性脐</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 页码 -->
+    <div class="page-num">203</div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag">尿路感染</span>
+            <span class="tag">急性膀胱炎</span>
+            <span class="tag">急性肾盂肾炎</span>
+            <span class="tag">前列腺炎</span>
+            <span class="tag">感染性休克</span>
+            <span class="tag">急性感染性腹泻</span>
+            <span class="tag">复方磺胺甲噁唑</span>
+            <span class="tag">环丙沙星</span>
+            <span class="tag">左氧氟沙星</span>
+            <span class="tag">喹诺酮类</span>
+            <span class="tag">阿莫西林</span>
+            <span class="tag">克拉维酸钾</span>
+            <span class="tag">头孢曲松</span>
+            <span class="tag">β-内酰胺类</span>
+            <span class="tag">碳青霉烯类</span>
+            <span class="tag">亚胺培南</span>
+            <span class="tag">美罗培南</span>
+            <span class="tag">万古霉素</span>
+            <span class="tag">达托霉素</span>
+            <span class="tag">利奈唑胺</span>
+            <span class="tag">MRSA</span>
+            <span class="tag">ESBL</span>
+            <span class="tag">铜绿假单胞菌</span>
+            <span class="tag">耐药菌</span>
+            <span class="tag">结核</span>
+            <span class="tag">PPI</span>
+            <span class="tag">白细胞</span>
+        </div>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <div class="copy-input-group">
+            <input type="text" id="copyInput" readonly>
+            <button id="copyBtn" onclick="copyContent()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 关键词底部 -->
+    <div class="keywords-bottom">
+        关键词：尿路感染急诊处理与急性感染性腹泻；急诊处理；急性膀胱炎；急性肾盂肾炎；前列腺炎；感染性休克；急性感染性腹泻；定义；危险因素；临床表现；复方磺胺甲噁唑；环丙沙星；左氧氟沙星；喹诺酮类；阿莫西林；克拉维酸钾；头孢曲松；碳青霉烯类；亚胺培南；美罗培南；万古霉素；达托霉素；利奈唑胺；MRSA；ESBL；铜绿假单胞菌；耐药菌 | 页码：203
+    </div>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 设置复制框内容
+        const pageNum = '203';
+        const title = '尿路感染急诊处理与急性感染性腹泻';
+        const subtitle = '急诊处理；急性膀胱炎；急性肾盂肾炎；前列腺炎；感染性休克；急性感染性腹泻；定义；危险因素；临床表现';
+        const keywords = '复方磺胺甲噁唑；环丙沙星；左氧氟沙星；喹诺酮类；阿莫西林；克拉维酸钾；头孢曲松；碳青霉烯类；亚胺培南；美罗培南；万古霉素；达托霉素；利奈唑胺；MRSA；ESBL；铜绿假单胞菌；耐药菌；结核；PPI；白细胞';
+        document.getElementById('copyInput').value = title + '；' + subtitle + '；' + keywords + '；=' + pageNum;
+        
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => showCopySuccess());
+            } else {
+                document.execCommand('copy');
+                showCopySuccess();
+            }
+        }
+        
+        function showCopySuccess() {
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '已复制';
+            btn.classList.add('copied');
+            
+            showToast('内容已复制到剪贴板');
+            
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2500);
+        }
+        
+        // 收藏功能
+        function addToFavorite() {
+            const currentTitle = document.title.replace(/~~~~~|\\\\*\\\\*\\\\*\\\\*\\\\*/g, '');
+            const currentUrl = window.location.pathname.split('/').pop() || '203.html';
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            const exists = favorites.find(f => f.url === currentUrl);
+            if (exists) {
+                showToast('该页面已在收藏中');
+                return;
+            }
+            
+            favorites.push({
+                title: currentTitle,
+                url: currentUrl,
+                category: '感染性疾病',
+                date: new Date().toLocaleDateString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            localStorage.setItem('favoriteUpdate', Date.now().toString());
+            
+            showToast('已添加到收藏，请在首页查看');
+        }
+    </script>
+</body>
+</html>
