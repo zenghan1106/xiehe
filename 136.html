@@ -1,0 +1,453 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急性胆管炎抗菌治疗与上消化道出血*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 15px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background-color: #1e5aa8;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.3s;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background-color: #154785;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        
+        .nav-btn {
+            background-color: #4a90d9;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 13px;
+            transition: background-color 0.3s;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background-color: #357abd;
+        }
+        
+        .favorite-btn {
+            background-color: #f0ad4e;
+            color: #333;
+            padding: 8px 18px;
+            border-radius: 6px;
+            border: none;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .favorite-btn:hover {
+            background-color: #ec971f;
+        }
+        
+        .favorite-btn.active {
+            background-color: #d9534f;
+            color: white;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a3a6e;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #e8f0fe;
+            border-radius: 10px;
+            border-left: 5px solid #1e5aa8;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        thead tr {
+            background-color: #1e5aa8;
+            color: white;
+        }
+        
+        thead th {
+            padding: 18px 12px;
+            text-align: left;
+            font-size: 17px;
+            font-weight: bold;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f0fe;
+        }
+        
+        td {
+            padding: 12px;
+            vertical-align: top;
+            font-size: 14px;
+        }
+        
+        td:first-child {
+            font-weight: bold;
+            color: #1e5aa8;
+            width: 130px;
+            white-space: nowrap;
+        }
+        
+        .check-item {
+            color: #28a745;
+            margin-right: 6px;
+            font-weight: bold;
+        }
+        
+        .bullet-item {
+            color: #333;
+            margin-right: 6px;
+        }
+        
+        .sub-item {
+            margin-left: 20px;
+            display: block;
+        }
+        
+        .sub-sub-item {
+            margin-left: 40px;
+            display: block;
+        }
+        
+        .section-title {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            margin-top: 20px;
+            padding: 18px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1e5aa8;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 4px;
+            font-size: 13px;
+            border: 1px solid;
+        }
+        
+        .tag.disease {
+            background-color: #fde8e8;
+            color: #c0392b;
+            border-color: #f5c6c6;
+        }
+        
+        .tag.drug {
+            background-color: #e8f8f5;
+            color: #27ae60;
+            border-color: #c5e8d5;
+        }
+        
+        .tag.bacteria {
+            background-color: #fef5e7;
+            color: #e8b339;
+            border-color: #f5deb3;
+        }
+        
+        .bottom-section {
+            margin-top: 20px;
+            padding: 18px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 15px;
+            border: 2px solid #c5d9f8;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 22px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background-color: #218838;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #ddd;
+        }
+        
+        .keywords span {
+            color: #1e5aa8;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+                padding: 12px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 14px 10px;
+            }
+            
+            td {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            td:first-child {
+                width: 100px;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-buttons {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="135.html" class="nav-btn">上一页</a>
+            <a href="137.html" class="nav-btn">下一页</a>
+            <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~急性胆管炎抗菌治疗与上消化道出血*****</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">急性胆管炎抗菌治疗与上消化道出血临床要点</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>抗菌药物治疗</td>
+                <td>环类药物。若首选药物无效，可改用碳青霉烯类药物，如美罗培南或亚胺培南/西司他丁。若怀疑铜绿假单胞菌感染，推荐使用头孢哌酮/舒巴坦、哌拉西林/他唑巴坦。抗菌治疗应持续5～7天，之后根据症状、体征以及白细胞、CRP及PCT确定停药时间。</td>
+            </tr>
+            <tr>
+                <td><span class="section-title">胆道引流</span></td>
+                <td><span class="check-item">✓</span>初始抗生素治疗对60%～80%的急性胆管炎患者有效，对于轻中度胆管炎患者，应在24～48小时内进行胆道引流。<br>
+                <span class="check-item">✓</span>对于保守治疗24小时无效的胆管炎患者，应进行紧急胆道减压。<br>
+                <span class="check-item">✓</span>手术方式选择：首选内镜下括约肌切开取石/支架置入术。若引流不成功，可进行超声内镜下胆道引流或PTCD。</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: right; color: #888; font-style: italic;">（刘 霜）</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="background-color: #e8f0fe; font-size: 16px; font-weight: bold; color: #1a3a6e;">■ 上消化道出血</td>
+            </tr>
+            <tr>
+                <td><span class="section-title">1. 定义</span></td>
+                <td><span class="bullet-item">●</span>上消化道出血指Treitz韧带以上的消化道包括食管、胃、十二指肠或胰胆等病变引起的出血。<br>
+                <span class="bullet-item">●</span>患者常表现为呕血（血液或咖啡渣样物质）和/或黑便（黑色柏油便）。<br>
+                <span class="bullet-item">●</span>急性大量出血时可有头晕、心悸、意识模糊、四肢湿冷等表现。<br>
+                <span class="bullet-item">●</span>大量失血后的24小时内常出现低热。</td>
+            </tr>
+            <tr>
+                <td><span class="section-title">2. 常见病因及临床表现</span></td>
+                <td><span class="bullet-item">●</span><strong>消化性溃疡：</strong>胃、十二指肠溃疡出血是上消化道出血最常见的病因。10%～15%患者可无溃疡病史而以上消化道出血为首发症状。出血性消化溃疡主要有4个主要危险因素：幽门螺杆菌感染、NSAID、生理应激、胃酸过多。<br>
+                <span class="bullet-item">●</span><strong>门脉高压并发症</strong>（食管胃底静脉曲张破裂和门脉高压性胃病）：患者常同时存在严重肝病的表现。<br>
+                <span class="bullet-item">●</span><strong>重度或糜烂性食管炎：</strong>患者通常有胃食管反流病史，NSAID/四环素等药物使用和感染也是其高危因素。食管炎所致出血患者呕血更常见，少见黑便。<br>
+                <span class="bullet-item">●</span><strong>急性糜烂出血性胃炎/十二指肠炎：</strong>炎症相关的黏膜损伤常在内镜检查时发现。患者有腹部不适、烧心、恶心、呕吐等，常见原因有药物、应激、高浓度酒精等。<br>
+                <span class="bullet-item">●</span><strong>血管病变：</strong>包括血管发育异常、Dieulafoy病变和胃窦血管扩张症（GAVE）。<br>
+                <span class="bullet-item">●</span><strong>食管贲门黏膜撕裂综合征：</strong>远端食管和近端胃黏膜纵向撕裂</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="tags-container">
+        <div class="tags-title">特色检索标签</div>
+        <span class="tag disease">急性胆管炎</span>
+        <span class="tag disease">上消化道出血</span>
+        <span class="tag disease">消化性溃疡</span>
+        <span class="tag disease">食管胃底静脉曲张破裂</span>
+        <span class="tag disease">门脉高压性胃病</span>
+        <span class="tag disease">糜烂性食管炎</span>
+        <span class="tag disease">急性糜烂出血性胃炎</span>
+        <span class="tag disease">十二指肠炎</span>
+        <span class="tag disease">Dieulafoy病变</span>
+        <span class="tag disease">胃窦血管扩张症</span>
+        <span class="tag disease">GAVE</span>
+        <span class="tag disease">食管贲门黏膜撕裂综合征</span>
+        <span class="tag bacteria">铜绿假单胞菌</span>
+        <span class="tag bacteria">幽门螺杆菌</span>
+        <span class="tag drug">碳青霉烯类药物</span>
+        <span class="tag drug">美罗培南</span>
+        <span class="tag drug">亚胺培南</span>
+        <span class="tag drug">西司他丁</span>
+        <span class="tag drug">头孢哌酮</span>
+        <span class="tag drug">舒巴坦</span>
+        <span class="tag drug">哌拉西林</span>
+        <span class="tag drug">他唑巴坦</span>
+        <span class="tag drug">NSAID</span>
+        <span class="tag drug">四环素</span>
+    </div>
+    
+    <div class="bottom-section">
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="急性胆管炎抗菌治疗与上消化道出血；碳青霉烯类；美罗培南；亚胺培南；西司他丁；头孢哌酮；舒巴坦；哌拉西林；他唑巴坦；铜绿假单胞菌；胆道引流；PTCD；上消化道出血；Treitz韧带；呕血；黑便；消化性溃疡；幽门螺杆菌；NSAID；门脉高压；食管胃底静脉曲张；糜烂性食管炎；Dieulafoy病变；GAVE；食管贲门黏膜撕裂综合征；=136" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+        <div class="page-number">页码：136</div>
+        <div class="keywords">
+            关键词：<span>急性胆管炎、碳青霉烯类、美罗培南、亚胺培南、头孢哌酮、舒巴坦、哌拉西林、他唑巴坦、铜绿假单胞菌、胆道引流、PTCD、上消化道出血、消化性溃疡、幽门螺杆菌、NSAID、门脉高压、食管胃底静脉曲张、Dieulafoy病变、GAVE、食管贲门黏膜撕裂综合征</span>
+        </div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '已复制';
+                btn.style.backgroundColor = '#218838';
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.style.backgroundColor = '#28a745';
+                }, 2000);
+            });
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            if (btn.classList.contains('active')) {
+                btn.classList.remove('active');
+                btn.innerHTML = '☆ 收藏';
+                localStorage.removeItem('fav_136');
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f !== '136');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            } else {
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                if (!favorites.includes('136')) {
+                    favorites.push('136');
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                localStorage.setItem('fav_136', '急性胆管炎抗菌治疗与上消化道出血');
+            }
+        }
+        
+        window.onload = function() {
+            if (localStorage.getItem('fav_136')) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
