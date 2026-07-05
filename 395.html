@@ -1,0 +1,567 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊常用药物泵入用法（表47）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8eef5 100%);
+            min-height: 100vh;
+            padding: 20px 15px 30px;
+            color: #333;
+            line-height: 1.6;
+        }
+        /* 导航按钮区域 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .nav-left {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        .btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        .btn-home {
+            background: #2563eb;
+            color: white;
+        }
+        .btn-home:hover {
+            background: #1d4ed8;
+        }
+        .btn-page {
+            background: #fff;
+            color: #2563eb;
+            border: 2px solid #2563eb;
+        }
+        .btn-page:hover {
+            background: #2563eb;
+            color: white;
+        }
+        .btn-fav {
+            background: #f59e0b;
+            color: white;
+            font-size: 13px;
+            padding: 6px 14px;
+        }
+        .btn-fav:hover {
+            background: #d97706;
+        }
+        .btn-fav.active {
+            background: #10b981;
+        }
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1e3a5f;
+            margin: 15px 0 20px;
+            padding: 14px 20px;
+            background: rgba(255,255,255,0.85);
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(37,99,235,0.1);
+            border-left: 4px solid #2563eb;
+        }
+        /* 表格容器 */
+        .table-wrap {
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: white;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            min-width: 600px;
+        }
+        thead {
+            background: #2563eb;
+            color: white;
+        }
+        thead th {
+            padding: 16px 14px;
+            text-align: left;
+            font-size: 17px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        thead th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+        thead th:last-child {
+            border-radius: 0 12px 0 0;
+        }
+        tbody td {
+            padding: 12px 14px;
+            border-bottom: 1px solid #eef2f7;
+            vertical-align: top;
+            word-break: break-word;
+            line-height: 1.7;
+        }
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        tbody tr:hover {
+            background: #eff6ff;
+        }
+        tbody tr:last-child td:first-child {
+            border-radius: 0 0 0 12px;
+        }
+        tbody tr:last-child td:last-child {
+            border-radius: 0 0 12px 0;
+        }
+        /* 药物名称高亮 */
+        .drug-name {
+            font-weight: 600;
+            color: #1e40af;
+        }
+        /* 剂量数值高亮 */
+        .dose-num {
+            color: #dc2626;
+            font-weight: 500;
+        }
+        /* 备注标签 */
+        .note-tag {
+            display: inline-block;
+            background: #fef3c7;
+            color: #92400e;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+        /* 复制区域 */
+        .copy-section {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 14px;
+            border: 2px solid #dbeafe;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #475569;
+            background: #f8fafc;
+        }
+        .btn-copy {
+            background: #059669;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        .btn-copy:hover {
+            background: #047857;
+        }
+        .btn-copy.copied {
+            background: #2563eb;
+        }
+        /* 标签区域 */
+        .tags-section {
+            margin-bottom: 20px;
+        }
+        .tags-title {
+            font-size: 16px;
+            color: #475569;
+            margin-bottom: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .tags-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: default;
+        }
+        .tag-disease {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .tag-drug {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        .tag-bacteria {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        /* 底部关键词 */
+        .footer-section {
+            text-align: center;
+            padding: 24px 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        .keywords {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 12px;
+            line-height: 1.8;
+        }
+        .page-num {
+            font-size: 32px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+        .page-num-label {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+        /* 提示 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(30,58,95,0.9);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 14px;
+            display: none;
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 12px 10px 20px;
+            }
+            .page-title {
+                font-size: 17px;
+                padding: 12px 14px;
+            }
+            thead th {
+                font-size: 15px;
+                padding: 14px 10px;
+            }
+            tbody td {
+                padding: 10px 10px;
+                font-size: 13px;
+            }
+            .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            .copy-section {
+                padding: 12px;
+            }
+            .page-num {
+                font-size: 26px;
+            }
+        }
+        @media (max-width: 480px) {
+            .table-wrap {
+                border-radius: 8px;
+            }
+            table {
+                font-size: 12px;
+            }
+            thead th {
+                font-size: 13px;
+                padding: 12px 8px;
+            }
+            tbody td {
+                padding: 8px;
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部导航 -->
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">← 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="394.html" class="btn btn-page">← 上一页</a>
+            <a href="396.html" class="btn btn-page">下一页 →</a>
+            <button class="btn btn-fav" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+
+    <!-- 标题 -->
+    <h1 class="page-title">~~~~~急诊常用药物泵入用法（表47）*****</h1>
+
+    <!-- 表格 -->
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>药物名称</th>
+                    <th>药品规格</th>
+                    <th>起始剂量和剂量粗略换算</th>
+                    <th>备注</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="drug-name">重酒石酸去甲肾上腺素注射液</span></td>
+                    <td>2mg/1ml</td>
+                    <td>18mg + 5%Glu 4ml → 1ml/h <span class="dose-num">[0.1μg/(kg·min)]</span></td>
+                    <td><span class="note-tag">体重60kg</span></td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">肾上腺素注射液</span></td>
+                    <td>1mg/1ml</td>
+                    <td>18mg + 5%Glu 32ml → 1ml/h <span class="dose-num">[0.1μg/(kg·min)]</span></td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">盐酸多巴胺注射液</span></td>
+                    <td>20mg/2ml</td>
+                    <td>180mg + NS 32ml → 1ml/h <span class="dose-num">[1μg/(kg·min)]</span></td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">盐酸多巴酚丁胺注射液</span></td>
+                    <td>20mg/2ml</td>
+                    <td>180mg + NS 32ml → 2.5ml/h <span class="dose-num">[2.5μg/(kg·min)]</span></td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">左西孟旦注射液</span></td>
+                    <td>12.5mg/5ml</td>
+                    <td>3mg + 5%Glu 44ml → 1ml/h <span class="dose-num">(1μg/min)</span></td>
+                    <td>先15ml/h泵10分钟（负荷量），2.5ml，约10μg/kg</td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">注射用重组人脑利钠肽</span></td>
+                    <td>0.5mg/支+粉</td>
+                    <td>0.5mg + 5%Glu 50ml → 2.7ml/h <span class="dose-num">[0.0075μg/(kg·min)]</span></td>
+                    <td>先慢推9ml（负荷量），约10μg/kg</td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">盐酸乌拉地尔注射液</span></td>
+                    <td>25mg/5ml</td>
+                    <td>250mg纯泵 → 1ml/h <span class="dose-num">(5mg/h)</span></td>
+                    <td>先慢推2～10ml（10～50mg）</td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">盐酸尼卡地平注射液</span></td>
+                    <td>10mg/10ml</td>
+                    <td>50mg纯泵 → 1ml/h <span class="dose-num">(1mg/h)</span></td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">硝酸甘油注射液</span></td>
+                    <td>5mg/1ml</td>
+                    <td>50mg + NS 40ml → 0.6ml/h <span class="dose-num">(10μg/min)</span></td>
+                    <td>以0.6ml为单位调整剂量</td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">注射用硝普钠</span></td>
+                    <td>50mg/支+粉</td>
+                    <td>50mg + 5%Glu 50ml → 0.6ml/h <span class="dose-num">(10μg/min)</span></td>
+                    <td>以0.6ml为单位调整剂量</td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">甲磺酸酚妥拉明注射液</span></td>
+                    <td>10mg/2ml</td>
+                    <td>50mg + NS 40ml → 1ml/h <span class="dose-num">(1mg/h)</span></td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">尼莫地平注射液</span></td>
+                    <td>10mg/50ml</td>
+                    <td>10mg纯泵 → 5ml/h <span class="dose-num">(1mg/h)</span></td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">盐酸右美托咪定注射液</span></td>
+                    <td>5mg/5ml</td>
+                    <td>50mg纯泵 → 1ml/h <span class="dose-num">(4μg/h)</span></td>
+                    <td>先90ml/h泵10分钟（负荷量），约1μg/kg</td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">盐酸左美托咪定注射液</span></td>
+                    <td>20μg/2ml</td>
+                    <td>20μg + NS 48ml → 1ml/h <span class="dose-num">(4μg/h)</span></td>
+                    <td>先90ml/h泵10分钟（负荷量），约1μg/kg</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="急诊常用药物泵入用法；表47、重酒石酸去甲肾上腺素、肾上腺素、盐酸多巴胺、盐酸多巴酚丁胺、左西孟旦、注射用重组人脑利钠肽、盐酸乌拉地尔、盐酸尼卡地平、硝酸甘油、注射用硝普钠、甲磺酸酚妥拉明、尼莫地平、盐酸右美托咪定、盐酸左美托咪定、泵入用法、剂量换算=395" readonly>
+        <button class="btn-copy" id="copyBtn" onclick="copyContent()">复制</button>
+    </div>
+
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签（仅图片内文字）</div>
+        <div class="tags-wrap">
+            <!-- 药物（图片中全是药物） -->
+            <span class="tag tag-drug">重酒石酸去甲肾上腺素</span>
+            <span class="tag tag-drug">肾上腺素</span>
+            <span class="tag tag-drug">盐酸多巴胺</span>
+            <span class="tag tag-drug">盐酸多巴酚丁胺</span>
+            <span class="tag tag-drug">左西孟旦</span>
+            <span class="tag tag-drug">注射用重组人脑利钠肽</span>
+            <span class="tag tag-drug">盐酸乌拉地尔</span>
+            <span class="tag tag-drug">盐酸尼卡地平</span>
+            <span class="tag tag-drug">硝酸甘油</span>
+            <span class="tag tag-drug">注射用硝普钠</span>
+            <span class="tag tag-drug">甲磺酸酚妥拉明</span>
+            <span class="tag tag-drug">尼莫地平</span>
+            <span class="tag tag-drug">盐酸右美托咪定</span>
+            <span class="tag tag-drug">盐酸左美托咪定</span>
+            <span class="tag tag-drug">5%Glu</span>
+            <span class="tag tag-drug">NS</span>
+        </div>
+    </div>
+
+    <!-- 底部关键词与页码 -->
+    <div class="footer-section">
+        <div class="keywords">
+            关键词：急诊常用药物 | 泵入用法 | 表47 | 重酒石酸去甲肾上腺素 | 肾上腺素 | 盐酸多巴胺 | 盐酸多巴酚丁胺 | 左西孟旦 | 注射用重组人脑利钠肽 | 盐酸乌拉地尔 | 盐酸尼卡地平 | 硝酸甘油 | 注射用硝普钠 | 甲磺酸酚妥拉明 | 尼莫地平 | 盐酸右美托咪定 | 盐酸左美托咪定 | 剂量换算 | 微量泵
+        </div>
+        <div class="page-num">395</div>
+        <div class="page-num-label">当前页码</div>
+    </div>
+
+    <!-- 提示框 -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopySuccess();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopySuccess();
+            }
+        }
+        
+        function showCopySuccess() {
+            const btn = document.getElementById('copyBtn');
+            const toast = document.getElementById('toast');
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            toast.textContent = '内容已复制到剪贴板';
+            toast.style.display = 'block';
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+                toast.style.display = 'none';
+            }, 2000);
+        }
+
+        // 收藏功能（使用localStorage模拟）
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const pageData = {
+                title: '急诊常用药物泵入用法（表47）',
+                url: '395.html',
+                pageNum: '395',
+                tags: ['重酒石酸去甲肾上腺素','肾上腺素','盐酸多巴胺','盐酸多巴酚丁胺','左西孟旦','注射用重组人脑利钠肽','盐酸乌拉地尔','盐酸尼卡地平','硝酸甘油','注射用硝普钠','甲磺酸酚妥拉明','尼莫地平','盐酸右美托咪定','盐酸左美托咪定']
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.findIndex(f => f.url === '395.html');
+            
+            if (exists >= 0) {
+                favorites.splice(exists, 1);
+                btn.innerHTML = '☆ 收藏';
+                btn.classList.remove('active');
+                showToast('已取消收藏');
+            } else {
+                favorites.push(pageData);
+                btn.innerHTML = '★ 已收藏';
+                btn.classList.add('active');
+                showToast('已添加到收藏（本地浏览器）');
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            try {
+                window.parent.postMessage({type: 'favorite', data: pageData}, '*');
+            } catch(e) {}
+        }
+
+        // 检查收藏状态
+        (function checkFavorite() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const btn = document.getElementById('favBtn');
+            if (favorites.find(f => f.url === '395.html')) {
+                btn.innerHTML = '★ 已收藏';
+                btn.classList.add('active');
+            }
+        })();
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => toast.style.display = 'none', 2000);
+        }
+    </script>
+
+</body>
+</html>
