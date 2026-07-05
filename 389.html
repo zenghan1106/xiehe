@@ -1,0 +1,660 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~抗心律失常药物-索他洛尔伊布利特与钙通道阻滞药*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5ee 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(145deg, #4a90d9, #357abd);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 3px 10px rgba(74, 144, 217, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 144, 217, 0.4);
+        }
+        
+        /* 右上角导航按钮容器 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(145deg, #5cb85c, #449d44);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(92, 184, 92, 0.4);
+        }
+        
+        .nav-btn.prev {
+            background: linear-gradient(145deg, #f0ad4e, #ec971f);
+            box-shadow: 0 2px 8px rgba(240, 173, 78, 0.3);
+        }
+        
+        .nav-btn.prev:hover {
+            box-shadow: 0 4px 12px rgba(240, 173, 78, 0.4);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: linear-gradient(145deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+            transition: all 0.3s ease;
+            margin-top: 5px;
+        }
+        
+        .fav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+        }
+        
+        .fav-btn.favorited {
+            background: linear-gradient(145deg, #95a5a6, #7f8c8d);
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 900px;
+            margin: 60px auto 30px;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.1), transparent);
+            border-radius: 10px;
+            line-height: 1.4;
+        }
+        
+        /* 表格样式 */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+        
+        .data-table thead {
+            background: linear-gradient(145deg, #3498db, #2980b9);
+            color: white;
+        }
+        
+        .data-table th {
+            padding: 16px 14px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+            border: 1px solid #2471a3;
+        }
+        
+        .data-table td {
+            padding: 14px;
+            border: 1px solid #d5dbdb;
+            vertical-align: top;
+            color: #2c3e50;
+        }
+        
+        .data-table tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .data-table tbody tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+        
+        .data-table tbody tr:hover {
+            background-color: #e8f6f3;
+            transition: background-color 0.3s ease;
+        }
+        
+        /* 第一行字体大一点 */
+        .data-table tbody tr:first-child td {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        /* 分类标题行 */
+        .category-row {
+            background: linear-gradient(90deg, #e8f6f3, #d1f2eb) !important;
+        }
+        
+        .category-row td {
+            font-weight: bold;
+            color: #0e6251 !important;
+            font-size: 17px !important;
+        }
+        
+        /* 药物名称高亮 */
+        .drug-name {
+            color: #c0392b;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        /* 适应症标签 */
+        .indication {
+            color: #27ae60;
+            font-weight: 500;
+        }
+        
+        /* 不良反应标签 */
+        .adverse {
+            color: #e74c3c;
+            font-weight: 500;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #7f8c8d;
+            margin: 20px 0;
+            padding: 10px;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            background: linear-gradient(145deg, #fef9e7, #fcf3cf);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #f9e79f;
+        }
+        
+        .keywords-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #9a7d0a;
+            margin-bottom: 10px;
+        }
+        
+        .keywords-content {
+            font-size: 14px;
+            color: #7d6608;
+            line-height: 1.8;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background: linear-gradient(145deg, #eaf2f8, #d4e6f1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #aed6f1;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: linear-gradient(145deg, #5dade2, #3498db);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 4px;
+            font-size: 13px;
+            box-shadow: 0 2px 5px rgba(52, 152, 219, 0.2);
+        }
+        
+        .tag.disease {
+            background: linear-gradient(145deg, #58d68d, #27ae60);
+        }
+        
+        .tag.drug {
+            background: linear-gradient(145deg, #ec7063, #e74c3c);
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            background: linear-gradient(145deg, #f5eef8, #e8daef);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #d7bde2;
+        }
+        
+        .copy-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #6c3483;
+            margin-bottom: 12px;
+        }
+        
+        .copy-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #bb8fce;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #4a235a;
+            background: white;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        
+        .copy-input:focus {
+            border-color: #8e44ad;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(145deg, #9b59b6, #8e44ad);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(155, 89, 182, 0.3);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(155, 89, 182, 0.4);
+        }
+        
+        .copy-btn.copied {
+            background: linear-gradient(145deg, #58d68d, #27ae60);
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 2000;
+        }
+        
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                margin: 50px auto 20px;
+                padding: 15px;
+                border-radius: 15px;
+            }
+            
+            .page-title {
+                font-size: 20px;
+                padding: 10px;
+            }
+            
+            .data-table {
+                font-size: 13px;
+            }
+            
+            .data-table th {
+                font-size: 15px;
+                padding: 12px 10px;
+            }
+            
+            .data-table td {
+                padding: 10px;
+            }
+            
+            .home-btn, .nav-btn, .fav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-wrapper {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 17px;
+            }
+            
+            .data-table {
+                font-size: 12px;
+            }
+            
+            .data-table th {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 右上角导航按钮 -->
+    <div class="nav-buttons">
+        <a href="388.html" class="nav-btn prev">← 上一页</a>
+        <a href="390.html" class="nav-btn">下一页 →</a>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 标题 -->
+        <h1 class="page-title">~~~~~抗心律失常药物-索他洛尔伊布利特与钙通道阻滞药*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~抗心律失常药物-索他洛尔伊布利特与钙通道阻滞药*****、药物分类/名称、详细内容、III类抗心律失常药（延长动作电位时程药）续、IV类抗心律失常药（钙通道阻滞药）、索他洛尔、伊布利特、维拉帕米（异搏定）、地尔硫䓬</div>
+        
+        <!-- 数据表格 -->
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th style="width: 22%;">药物分类/名称</th>
+                    <th style="width: 78%;">详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2" style="background: #fef9e7; color: #7d6608; font-size: 14px;">
+                        <strong>前文补充：</strong>胺碘酮抑制外周T₄向T₃转化，患者可发生甲状腺功能亢进或减退，也可出现间质性肺炎或<span class="adverse">肺纤维化</span>。
+                    </td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="2">III类抗心律失常药（延长动作电位时程药）续</td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">索他洛尔</span></td>
+                    <td>
+                        <strong>药理作用：</strong>非选择性β受体阻断药，并能抑制延迟钾电流，拮抗β受体，降低自律性，减慢房室结传导，延长心房、心室及浦肯野纤维的动作电位时程和有效不应期。<br><br>
+                        <strong>药代动力学：</strong>口服吸收快，无首关代谢，生物利用度达90%～100%。与血浆蛋白结合少，心、肾浓度高，全部以原形经肾排出。<br><br>
+                        <strong>临床应用：</strong>临床治疗各种严重<span class="indication">室性心律失常</span>，维持<span class="indication">心房颤动</span>患者的窦性心率。为广谱抗心律失常药，对于<span class="indication">室上性</span>和<span class="indication">室性心动过速</span>均有效。<br><br>
+                        <strong>不良反应：</strong>不良反应较少。常见不良反应包括<span class="adverse">窦性心动过缓</span>、<span class="adverse">房室传导阻滞</span>、<span class="adverse">QT间期延长</span>、<span class="adverse">低血压</span>。偶见尖端扭转型室性心动过速。因此<span class="indication">哮喘</span>或<span class="indication">慢性阻塞性肺疾病</span>、<span class="indication">窦性心动过缓</span>、病态窦房结综合征、高度房室传导阻滞、<span class="indication">心力衰竭</span>者禁用。<span class="indication">肾功能不全</span>、<span class="indication">糖尿病</span>或有自发性低血糖史、进展性<span class="indication">甲状腺功能亢进症</span>者慎用。
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">伊布利特</span></td>
+                    <td>
+                        <strong>药理作用：</strong>可延长动作电位，增加心房和心室肌、房室结、希氏束系统和旁路的不应期。<br><br>
+                        <strong>药代动力学：</strong>本药静脉注射后，血浆浓度呈多指数式快速增加。血流动力学呈高度的变异性。本药可被快速地从血浆中清除和广泛的组织分布。代谢半衰期平均6小时（2～12小时）。其药代动力学特征不受心律失常的类型（<span class="indication">心房颤动</span>、<span class="indication">心房扑动</span>）、患者年龄、性别以及是否同时使用地高辛、钙通道阻滞药或β受体阻断药等的影响。<br><br>
+                        <strong>临床应用：</strong>临床用于逆转近期发作的<span class="indication">心房颤动</span>或<span class="indication">心房扑动</span>至窦性心律，尤其是没有结构性心脏病的<span class="indication">心房颤动</span>或<span class="indication">心房扑动</span>效果较好。对血压和心率影响小。<br><br>
+                        <strong>不良反应：</strong>主要不良反应为心律失常，包括间断或连续性多形性<span class="adverse">室性心动过速</span>，偶有<span class="adverse">尖端扭转型室性心动过速</span>。因此，治疗后至少监测6小时。伊布利特作用时间短，可能还需其他抗心律失常药来维持窦性心律。
+                    </td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="2">IV类抗心律失常药（钙通道阻滞药）</td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">维拉帕米</span><br>（异搏定）</td>
+                    <td>
+                        <strong>药理作用：</strong>对激活和失活状态的L型钙通道均有阻滞作用，也抑制钾通道，可降低窦房结自律性，降低缺血时心房、心室和浦肯野纤维的异常自律性，减少或消除后除极所致的触发活动，减慢房室结传导，可终止房室结折返，减慢<span class="indication">心房扑动</span>、<span class="indication">心房颤动</span>时加快的心室率，延长窦房结、房室结的有效不应期。<br><br>
+                        <strong>药代动力学：</strong>由于经肝代谢，<span class="indication">肝功能异常</span>患者慎用。<br><br>
+                        <strong>临床应用：</strong>治疗<span class="indication">室上性</span>和房室结折返性心律失常效果佳。口服安全。<br><br>
+                        <strong>不良反应：</strong>可出现<span class="adverse">便秘</span>、<span class="adverse">腹胀</span>、<span class="adverse">腹泻</span>、<span class="adverse">头痛</span>等不适，静脉给药可引起<span class="adverse">血压下降</span>。房室传导阻滞、心功能不全、<span class="indication">心源性休克</span>患者禁用此药。
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">地尔硫䓬</span></td>
+                    <td>
+                        <strong>药理作用：</strong>同类药物还有地尔硫䓬，在作用于心脏的同时还作用于血管，产生<span class="indication">血管扩张</span>作用。
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 页码 -->
+        <div class="page-number">380</div>
+        
+        <!-- 关键词区域 -->
+        <div class="keywords-section">
+            <div class="keywords-title">🔍 关键词</div>
+            <div class="keywords-content">
+                抗心律失常药、索他洛尔、伊布利特、维拉帕米、异搏定、地尔硫䓬、钙通道阻滞药、β受体阻断药、延长动作电位时程药、心房颤动、心房扑动、室性心动过速、室上性心动过速、窦性心动过缓、房室传导阻滞、QT间期延长、低血压、尖端扭转型室性心动过速、心力衰竭、哮喘、慢性阻塞性肺疾病、肾功能不全、糖尿病、甲状腺功能亢进症、心源性休克、肝功能异常、血管扩张
+            </div>
+        </div>
+        
+        <!-- 检索标签 -->
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 检索标签</div>
+            <div>
+                <span class="tag disease">心律失常</span>
+                <span class="tag disease">室性心律失常</span>
+                <span class="tag disease">心房颤动</span>
+                <span class="tag disease">心房扑动</span>
+                <span class="tag disease">室上性心动过速</span>
+                <span class="tag disease">室性心动过速</span>
+                <span class="tag disease">窦性心动过缓</span>
+                <span class="tag disease">房室传导阻滞</span>
+                <span class="tag disease">心力衰竭</span>
+                <span class="tag disease">哮喘</span>
+                <span class="tag disease">慢性阻塞性肺疾病</span>
+                <span class="tag disease">肾功能不全</span>
+                <span class="tag disease">糖尿病</span>
+                <span class="tag disease">甲状腺功能亢进症</span>
+                <span class="tag disease">心源性休克</span>
+                <span class="tag disease">肝功能异常</span>
+                <span class="tag disease">低血压</span>
+                <span class="tag disease">肺纤维化</span>
+                <span class="tag drug">索他洛尔</span>
+                <span class="tag drug">伊布利特</span>
+                <span class="tag drug">维拉帕米</span>
+                <span class="tag drug">异搏定</span>
+                <span class="tag drug">地尔硫䓬</span>
+                <span class="tag drug">地高辛</span>
+            </div>
+        </div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <div class="copy-title">📋 快速复制</div>
+            <div class="copy-wrapper">
+                <input type="text" class="copy-input" id="copyInput" value="抗心律失常药物-索他洛尔伊布利特与钙通道阻滞药；抗心律失常药、索他洛尔、伊布利特、维拉帕米、异搏定、地尔硫䓬、钙通道阻滞药、β受体阻断药、延长动作电位时程药、心房颤动、心房扑动、室性心动过速、室上性心动过速、窦性心动过缓、房室传导阻滞、QT间期延长、低血压、尖端扭转型室性心动过速、心力衰竭、哮喘、慢性阻塞性肺疾病、肾功能不全、糖尿病、甲状腺功能亢进症、心源性休克、肝功能异常、血管扩张=380" readonly>
+                <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopySuccess();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopySuccess();
+            }
+        }
+        
+        function showCopySuccess() {
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            showToast('内容已复制到剪贴板！');
+            
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 显示提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFavorited = btn.classList.contains('favorited');
+            const title = '~~~~~抗心律失常药物-索他洛尔伊布利特与钙通道阻滞药*****';
+            const pageId = '380';
+            
+            // 获取现有收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            if (!isFavorited) {
+                // 添加收藏
+                const exists = favorites.find(f => f.id === pageId);
+                if (!exists) {
+                    favorites.push({
+                        id: pageId,
+                        title: title,
+                        url: '380.html',
+                        category: '抗心律失常药物',
+                        date: new Date().toISOString()
+                    });
+                }
+                btn.textContent = '❤ 已收藏';
+                btn.classList.add('favorited');
+                showToast('已添加到index收藏类目！');
+            } else {
+                // 取消收藏
+                favorites = favorites.filter(f => f.id !== pageId);
+                btn.textContent = '⭐ 收藏';
+                btn.classList.remove('favorited');
+                showToast('已取消收藏');
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试更新index.html的收藏（如果同源）
+            try {
+                updateIndexFavorites(favorites);
+            } catch(e) {
+                console.log('无法直接更新index.html');
+            }
+        }
+        
+        // 更新index.html的收藏列表（通过localStorage共享）
+        function updateIndexFavorites(favorites) {
+            localStorage.setItem('favoriteUpdate', JSON.stringify({
+                timestamp: Date.now(),
+                favorites: favorites
+            }));
+        }
+        
+        // 检查收藏状态
+        function checkFavoriteStatus() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const pageId = '380';
+            const btn = document.getElementById('favBtn');
+            
+            if (favorites.find(f => f.id === pageId)) {
+                btn.textContent = '❤ 已收藏';
+                btn.classList.add('favorited');
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        document.addEventListener('DOMContentLoaded', checkFavoriteStatus);
+    </script>
+</body>
+</html>
