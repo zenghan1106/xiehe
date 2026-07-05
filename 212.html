@@ -1,0 +1,604 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~感染性心内膜炎改良Duke标准与急诊处理及经验性抗感染方案*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #334155;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .back-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(59,130,246,0.3);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 6px rgba(16,185,129,0.3);
+        }
+        
+        .fav-btn {
+            background: #f59e0b;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            margin-top: 5px;
+            box-shadow: 0 2px 6px rgba(245,158,11,0.3);
+        }
+        
+        .fav-btn.active {
+            background: #ef4444;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1e40af;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        thead th {
+            background: #2563eb;
+            color: white;
+            padding: 18px 14px;
+            text-align: left;
+            font-size: 19px;
+            font-weight: 700;
+        }
+        
+        tbody td {
+            padding: 12px 14px;
+            border-bottom: 1px solid #e2e8f0;
+            line-height: 1.8;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #eff6ff;
+        }
+        
+        .section-title {
+            background: #dbeafe;
+            color: #1e40af;
+            font-weight: 700;
+            font-size: 15px;
+        }
+        
+        .sub-item {
+            padding-left: 25px;
+            color: #475569;
+        }
+        
+        .sub-item-2 {
+            padding-left: 50px;
+            color: #64748b;
+        }
+        
+        .check-mark {
+            color: #16a34a;
+            font-weight: bold;
+        }
+        
+        .diamond {
+            color: #2563eb;
+        }
+        
+        .square {
+            color: #94a3b8;
+        }
+        
+        .table-inner {
+            width: 100%;
+            margin: 10px 0;
+            border: 2px solid #bfdbfe;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .table-inner thead th {
+            background: #60a5fa;
+            font-size: 15px;
+            padding: 12px;
+            text-align: center;
+        }
+        
+        .table-inner tbody td {
+            padding: 10px 12px;
+            text-align: center;
+            border-bottom: 1px solid #dbeafe;
+        }
+        
+        .table-inner tbody tr:nth-child(even) {
+            background: #eff6ff;
+        }
+        
+        .tags-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1e293b;
+            margin-bottom: 14px;
+            font-weight: 700;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #bfdbfe;
+            color: #1e40af;
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .tag:hover {
+            background: #93c5fd;
+        }
+        
+        .bottom-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .keywords {
+            color: #475569;
+            font-size: 13px;
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+        
+        .page-num {
+            text-align: center;
+            color: #64748b;
+            font-size: 15px;
+            margin: 15px 0;
+            font-weight: 600;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 16px;
+            border: 2px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #475569;
+            background: #f8fafc;
+        }
+        
+        .copy-btn {
+            background: #6366f1;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(99,102,241,0.3);
+        }
+        
+        .copy-btn:hover {
+            background: #4f46e5;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 17px;
+                padding: 12px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 14px 10px;
+            }
+            
+            tbody td {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            .header {
+                flex-direction: column;
+            }
+            
+            .nav-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                width: 100%;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            #copyInput {
+                width: 100%;
+            }
+            
+            .sub-item {
+                padding-left: 15px;
+            }
+            
+            .sub-item-2 {
+                padding-left: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="211.html" class="nav-btn">上一页</a>
+            <a href="213.html" class="nav-btn">下一页</a>
+            <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~感染性心内膜炎改良Duke标准与急诊处理及经验性抗感染方案*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>感染性心内膜炎（IE）改良Duke标准、急诊处理及经验性抗感染方案</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span class="check-mark">✓</span> 超声心动图：发现符合IE表现但不符合主要标准。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">
+                        <span class="check-mark">●</span> 改良Duke标准
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item">
+                        <span class="check-mark">✓</span> 确诊IE
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item-2">
+                        <span class="diamond">◇</span> 病理学标准
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item-2">
+                        <span class="square">□</span> 病理损害：组织学检查发现证实活动性心内膜炎的赘生物或心内脓肿。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item-2">
+                        <span class="square">□</span> 微生物：赘生物或心内脓肿标本培养或组织学检查证实存在微生物。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item-2">
+                        <span class="diamond">◇</span> 临床标准
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item-2">
+                        <span class="square">□</span> 2个主要临床标准。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item-2">
+                        <span class="square">□</span> 1个主要临床标准和3个次要临床标准。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item-2">
+                        <span class="square">□</span> 5个次要临床标准。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item">
+                        <span class="check-mark">✓</span> 疑诊IE：存在1个主要临床标准和1个次要临床标准，或存在3个次要临床标准时，可疑诊IE。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check-mark">●</span> 排除IE：若存在以下任何情况，则可能排除IE。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item">
+                        <span class="check-mark">✓</span> 已确定为其他诊断。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item">
+                        <span class="check-mark">✓</span> ≤4天抗生素治疗后临床表现消退。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item">
+                        <span class="check-mark">✓</span> ≤4天抗生素治疗后手术或尸检未发现IE的病理学证据。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item">
+                        <span class="check-mark">✓</span> 不满足疑诊或确诊IE的临床标准。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">7. 急诊处理</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check-mark">●</span> 心电监护，建立静脉通路，专科会诊。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check-mark">●</span> 呼吸支持：氧疗，保证血氧饱和度＞95%，重症患者需要气管插管、机械通气。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check-mark">●</span> 循环支持：若出现低血压的感染性休克或心源性休克，需进行液体复苏及血管活性药物（去甲肾上腺素、多巴胺或多巴酚丁胺）。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check-mark">●</span> 抗感染治疗：经验性抗感染方案见表30，根据血培养调整抗生素方案，I疗程通常为4～6周。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div style="text-align: center; font-weight: 700; margin: 10px 0; color: #1e40af;">表30 IE经验性抗感染方案</div>
+                        <table class="table-inner">
+                            <thead>
+                                <tr>
+                                    <th colspan="2">类型</th>
+                                    <th>方案</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td rowspan="2">天然瓣膜</td>
+                                    <td>AIE</td>
+                                    <td>万古霉素＋头孢曲松</td>
+                                </tr>
+                                <tr>
+                                    <td>SIE</td>
+                                    <td>头孢曲松＋庆大霉素</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">人工瓣膜</td>
+                                    <td>早期（术后＜2个月）</td>
+                                    <td>万古霉素＋庆大霉素＋头孢吡肟</td>
+                                </tr>
+                                <tr>
+                                    <td>后期（术后＞2个月）</td>
+                                    <td>万古霉素＋庆大霉素＋头孢吡肟</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check-mark">●</span> 警惕并发症：如充血性心力衰竭、传导阻滞、栓塞事件等。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check-mark">●</span> 手术指征
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item">
+                        <span class="check-mark">✓</span> 顽固性心源性休克需急诊手术。
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">检索标签</div>
+        <div class="tags">
+            <span class="tag">感染性心内膜炎</span>
+            <span class="tag">IE</span>
+            <span class="tag">改良Duke标准</span>
+            <span class="tag">赘生物</span>
+            <span class="tag">心内脓肿</span>
+            <span class="tag">AIE</span>
+            <span class="tag">SIE</span>
+            <span class="tag">天然瓣膜</span>
+            <span class="tag">人工瓣膜</span>
+            <span class="tag">万古霉素</span>
+            <span class="tag">头孢曲松</span>
+            <span class="tag">庆大霉素</span>
+            <span class="tag">头孢吡肟</span>
+            <span class="tag">去甲肾上腺素</span>
+            <span class="tag">多巴胺</span>
+            <span class="tag">多巴酚丁胺</span>
+            <span class="tag">充血性心力衰竭</span>
+            <span class="tag">传导阻滞</span>
+            <span class="tag">栓塞</span>
+            <span class="tag">心源性休克</span>
+            <span class="tag">感染性休克</span>
+        </div>
+    </div>
+    
+    <div class="bottom-section">
+        <div class="keywords">
+            <strong>关键词：</strong>感染性心内膜炎；IE；改良Duke标准；确诊IE；疑诊IE；排除IE；急诊处理；经验性抗感染方案；表30；天然瓣膜；人工瓣膜；AIE；SIE；万古霉素；头孢曲松；庆大霉素；头孢吡肟；去甲肾上腺素；多巴胺；多巴酚丁胺；心源性休克；感染性休克；充血性心力衰竭；传导阻滞；栓塞
+        </div>
+        <div class="page-num">212</div>
+        <div class="copy-section">
+            <input type="text" id="copyInput" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <script>
+        const title = "感染性心内膜炎改良Duke标准与急诊处理及经验性抗感染方案";
+        const subtitle = "IE改良Duke诊断标准与急诊处理及表30经验性抗感染方案";
+        const keywords = "感染性心内膜炎；IE；改良Duke标准；确诊IE；疑诊IE；排除IE；急诊处理；经验性抗感染方案；表30；天然瓣膜；人工瓣膜；AIE；SIE；万古霉素；头孢曲松；庆大霉素；头孢吡肟；去甲肾上腺素；多巴胺；多巴酚丁胺；心源性休克；感染性休克；充血性心力衰竭；传导阻滞；栓塞";
+        const pageNum = "212";
+        document.getElementById('copyInput').value = title + "；" + subtitle + "；" + keywords + "；" + "=" + pageNum;
+        
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                alert('已复制到剪贴板！');
+            }).catch(function(err) {
+                document.execCommand('copy');
+                alert('已复制到剪贴板！');
+            });
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                
+                const favData = {
+                    title: '~~~~~感染性心内膜炎改良Duke标准与急诊处理及经验性抗感染方案*****',
+                    url: '212.html',
+                    category: 'index'
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.find(f => f.url === '212.html');
+                if (!exists) {
+                    favorites.push(favData);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                alert('已添加到收藏！');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '212.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                alert('已取消收藏！');
+            }
+        }
+        
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.find(f => f.url === '212.html');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
