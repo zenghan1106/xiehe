@@ -1,0 +1,428 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊经验性抗菌药物治疗LESSS原则*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #fff5f0;
+            background-image: linear-gradient(160deg, #fdeae3 0%, #fff5f0 50%, #fef0e8 100%);
+            color: #2c3e50;
+            line-height: 1.8;
+            padding: 12px;
+            min-height: 100vh;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .home-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 6px rgba(52,152,219,0.3);
+        }
+        .home-btn:hover {
+            background-color: #2980b9;
+        }
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        .nav-btn {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 5px rgba(39,174,96,0.3);
+        }
+        .nav-btn:hover {
+            background-color: #219a52;
+        }
+        .fav-btn {
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(243,156,18,0.3);
+        }
+        .fav-btn:hover {
+            background-color: #e67e22;
+        }
+        .fav-btn.active {
+            background-color: #e74c3c;
+        }
+        h1 {
+            text-align: center;
+            color: #7b241c;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 12px;
+            background-color: #fadbd8;
+            border-radius: 12px;
+            border-left: 5px solid #c0392b;
+            border-right: 5px solid #c0392b;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            font-size: 14px;
+        }
+        thead {
+            background-color: #2e86de;
+            color: white;
+        }
+        thead th {
+            padding: 16px 12px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        tbody td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #fef5f2;
+        }
+        tbody tr:hover {
+            background-color: #fadbd8;
+        }
+        .section-title {
+            font-weight: bold;
+            color: #7b241c;
+            font-size: 15px;
+            background-color: #fadbd8;
+            padding: 8px;
+            border-radius: 6px;
+            margin: 6px 0;
+        }
+        .highlight-box {
+            background-color: #eafaf1;
+            border-left: 4px solid #27ae60;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 0 6px 6px 0;
+        }
+        .warning-box {
+            background-color: #fadbd8;
+            border-left: 4px solid #e74c3c;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 0 6px 6px 0;
+        }
+        .number-highlight {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        .term-highlight {
+            color: #8e44ad;
+            font-weight: bold;
+        }
+        .lesss-principle {
+            background-color: #eaf2f8;
+            border: 2px solid #2e86de;
+            border-radius: 10px;
+            padding: 12px;
+            margin: 10px 0;
+        }
+        .tags-container {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+        }
+        .tags-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        .tag {
+            display: inline-block;
+            background-color: #e74c3c;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            box-shadow: 0 2px 4px rgba(231,76,60,0.2);
+        }
+        .bottom-section {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+        }
+        .keywords {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 12px;
+            word-break: break-all;
+            line-height: 1.8;
+        }
+        .page-number {
+            text-align: center;
+            font-size: 20px;
+            color: #2e86de;
+            font-weight: bold;
+            margin: 12px 0;
+            padding: 8px;
+            background-color: #eaf2f8;
+            border-radius: 8px;
+        }
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            font-size: 13px;
+            background-color: #f8fbff;
+        }
+        .copy-btn {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 0 2px 6px rgba(39,174,96,0.3);
+        }
+        .copy-btn:hover {
+            background-color: #219a52;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 8px;
+            }
+            h1 {
+                font-size: 17px;
+                padding: 10px;
+            }
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            tbody td {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            .home-btn, .nav-btn, .fav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            .copy-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="358.html" class="nav-btn">上一页</a>
+            <a href="360.html" class="nav-btn">下一页</a>
+            <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+        </div>
+    </div>
+
+    <h1>~~~~~急诊经验性抗菌药物治疗LESSS原则*****</h1>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        检出率超过<span class="number-highlight">20%</span>，则需要经验性覆盖<span class="term-highlight">MRSA</span>；而急诊科或重症医学科中<span class="term-highlight">铜绿假单胞菌</span>和<span class="term-highlight">鲍曼不动杆菌</span>的流行病学数据和耐药情况的流行病学资料也可为经验性选择抗菌药物提供有价值的信息。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">● 需考虑患者病史和抗菌药物使用史（medical hiStory，S）：</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        患者病史及抗菌药物的使用史也应是临床医师抗菌药物选择的重点考量因素。一般来说符合以下条件的患者，需要警惕多药耐药菌的感染：①本次就诊前90天使用过静脉抗菌药物；②本次就诊合并感染性休克；③本次就诊感染导致急性呼吸窘迫综合征；④住院超过5天的感染；⑤本次就诊感染发生前已经开始肾脏替代治疗。存在多药耐药菌感染风险时，如铜绿假单胞菌或鲍曼不动杆菌导致的肺部感染，需结合当地耐药情况的流行病学数据，考虑选择两种不同作用机制的抗菌药物联合进行治疗。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">● 需考虑感染部位及常见病原菌（infection Site，S）：</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        经验性治疗前，需再次结合患者的病史、临床表现及感染部位对病原学进行推断。感染部位的判断将直接影响经验性抗菌药物应用的选择和剂量。经验性抗菌药物治疗时，需要充分考虑感染的部位和相应的病原菌。避免不加选择地应用广谱抗菌药物。同时应注意感染源的清除与引流。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">● 需根据患者病情严重程度（Severity，S）选择抗菌药物：</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        急诊抗感染治疗时，同时需要充分考虑患者病情，一般因感染导致的脏器功能不全，需要使用机械通气及血管活性药物等支持时提示患者病情危重。对于这类患者，目前循证医学证据表明需要尽早开始抗菌药物治疗，而不能因为等待细菌学及药敏试验结果而延误治疗。此类患者常需使用广谱抗菌药物，甚至联合使用抗菌药物，覆盖最为可能的病原体。此外，由于此类患者常合并低蛋白血症、接受大量液体复苏等情况，使用抗菌药物时，需要充分考虑抗菌药物的药动学和药代学参数的改变，以感染部位抗菌药物浓度达标为目的，优化抗菌药物的使用。此外，对于老年患者、肝肾功能减退、超常规剂量使用抗菌药物、使用不良反应较大的抗菌药物时，有条件的单位应当进行药物浓度的监测，并合理地进行治疗剂量的调整。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="lesss-principle">
+                            <strong>急诊抗感染治疗应当基于以上"LESSS"原则</strong>，详细采集患者病史，充分考虑宿主、病原菌、抗菌药物间的关系，尽早正确地使用抗菌药物。此外，病原学标本的留取是合理与正确使用抗菌药物的重要基础，是目标抗菌药物治疗的必要条件。
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tags-container">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <span class="tag">MRSA</span>
+        <span class="tag">铜绿假单胞菌</span>
+        <span class="tag">鲍曼不动杆菌</span>
+        <span class="tag">多药耐药菌</span>
+        <span class="tag">感染性休克</span>
+        <span class="tag">急性呼吸窘迫综合征</span>
+        <span class="tag">肾脏替代治疗</span>
+        <span class="tag">肺部感染</span>
+        <span class="tag">抗菌药物</span>
+        <span class="tag">广谱抗菌药物</span>
+        <span class="tag">脏器功能不全</span>
+        <span class="tag">机械通气</span>
+        <span class="tag">低蛋白血症</span>
+        <span class="tag">肝肾功能减退</span>
+        <span class="tag">药物浓度监测</span>
+    </div>
+
+    <div class="bottom-section">
+        <div class="keywords">
+            <strong>关键词：</strong>急诊经验性抗菌药物治疗LESSS原则；MRSA；铜绿假单胞菌；鲍曼不动杆菌；多药耐药菌；medical hiStory；感染性休克；急性呼吸窘迫综合征；肾脏替代治疗；肺部感染；抗菌药物；联合治疗；infection Site；感染部位；病原菌；Severity；病情严重程度；脏器功能不全；机械通气；血管活性药物；低蛋白血症；液体复苏；药动学；药代学；药物浓度监测；肝肾功能减退；病原学标本；目标抗菌药物治疗
+        </div>
+        <div class="page-number">359</div>
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="急诊经验性抗菌药物治疗LESSS原则；急诊经验性抗菌药物治疗LESSS原则、MRSA、铜绿假单胞菌、鲍曼不动杆菌、多药耐药菌、medical hiStory、感染性休克、急性呼吸窘迫综合征、肾脏替代治疗、肺部感染、抗菌药物、联合治疗、infection Site、感染部位、病原菌、Severity、病情严重程度、脏器功能不全、机械通气、血管活性药物、低蛋白血症、液体复苏、药动学、药代学、药物浓度监测、肝肾功能减退、病原学标本、目标抗菌药物治疗；=359" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            var input = document.getElementById("copyInput");
+            input.select();
+            input.setSelectionRange(0, 99999);
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(function() {
+                    alert("已复制到剪贴板！");
+                });
+            } else {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            }
+        }
+
+        function toggleFavorite() {
+            var btn = document.getElementById("favBtn");
+            var title = document.title.replace(/~~~~~|\*\*\*\*\*/g, "");
+            var url = window.location.href;
+            var favData = {
+                title: title,
+                url: url,
+                page: "359"
+            };
+            
+            var favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+            var index = favorites.findIndex(function(f) { return f.url === url; });
+            
+            if (index === -1) {
+                favorites.push(favData);
+                btn.textContent = "❤️ 已收藏";
+                btn.classList.add("active");
+                alert("已添加到收藏！");
+            } else {
+                favorites.splice(index, 1);
+                btn.textContent = "⭐ 收藏";
+                btn.classList.remove("active");
+                alert("已取消收藏！");
+            }
+            
+            localStorage.setItem("favorites", JSON.stringify(favorites));
+            
+            updateIndexFavorites(favorites);
+        }
+
+        function updateIndexFavorites(favorites) {
+            localStorage.setItem("page359_favorite", JSON.stringify({
+                title: "急诊经验性抗菌药物治疗LESSS原则",
+                url: "359.html",
+                added: new Date().toLocaleString()
+            }));
+        }
+
+        window.onload = function() {
+            var favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+            var url = window.location.href;
+            var index = favorites.findIndex(function(f) { return f.url === url; });
+            var btn = document.getElementById("favBtn");
+            if (index !== -1) {
+                btn.textContent = "❤️ 已收藏";
+                btn.classList.add("active");
+            }
+        };
+    </script>
+</body>
+</html>
