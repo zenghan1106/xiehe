@@ -1,0 +1,578 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~醉酒患者急症并发症识别与处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        .nav-btn {
+            position: fixed;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+        
+        .home-btn {
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .prev-btn {
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(45deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+        }
+        
+        .next-btn {
+            top: 60px;
+            right: 15px;
+            background: linear-gradient(45deg, #fc4a1a 0%, #f7b733 100%);
+            color: white;
+        }
+        
+        .fav-btn {
+            top: 105px;
+            right: 15px;
+            background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        
+        .fav-btn.active {
+            background: linear-gradient(45deg, #ff6b6b 0%, #ee5a24 100%);
+        }
+        
+        .title-section {
+            text-align: center;
+            margin: 70px 0 25px 0;
+            padding: 20px;
+        }
+        
+        .main-title {
+            font-size: 26px;
+            font-weight: bold;
+            color: #1a5276;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            letter-spacing: 2px;
+        }
+        
+        .title-decoration {
+            color: #e74c3c;
+            font-size: 28px;
+        }
+        
+        .table-container {
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            overflow-x: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        thead tr {
+            background: linear-gradient(45deg, #1e5799 0%, #2989d8 50%, #207cca 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 20px 15px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e8e8e8;
+            transition: background 0.3s ease;
+        }
+        
+        tbody tr:hover {
+            background: #f8f9ff;
+        }
+        
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+        
+        tbody td {
+            padding: 15px;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #2c3e50;
+            vertical-align: top;
+        }
+        
+        .symptom-name {
+            color: #c0392b;
+            font-weight: bold;
+            font-size: 16px;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .symptom-content {
+            color: #34495e;
+            text-align: justify;
+        }
+        
+        .author-row {
+            background: #eaf2f8 !important;
+        }
+        
+        .author {
+            text-align: right;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .page-num {
+            text-align: center;
+            color: #95a5a6;
+            font-size: 14px;
+            padding: 10px;
+        }
+        
+        .tags-section {
+            max-width: 800px;
+            margin: 0 auto 25px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #ffeaa7;
+            color: #d63031;
+        }
+        
+        .tag-drug {
+            background: #74b9ff;
+            color: #0984e3;
+        }
+        
+        .tag-bacteria {
+            background: #55efc4;
+            color: #00b894;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+        }
+        
+        .keywords-section {
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .keywords-title {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 8px;
+        }
+        
+        .keywords {
+            font-size: 13px;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        
+        .copy-section {
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .copy-title {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 12px;
+        }
+        
+        .copy-box-wrapper {
+            display: flex;
+            gap: 12px;
+            align-items: stretch;
+        }
+        
+        #copyInput {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #2c3e50;
+            background: #fafafa;
+            outline: none;
+            transition: border-color 0.3s;
+            width: calc(100% - 100px);
+        }
+        
+        #copyInput:focus {
+            border-color: #3498db;
+        }
+        
+        .copy-btn {
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .copy-btn.copied {
+            background: linear-gradient(45deg, #00b894 0%, #00cec9 100%);
+        }
+        
+        .page-link {
+            text-align: center;
+            color: #95a5a6;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 600px) {
+            .main-title {
+                font-size: 20px;
+            }
+            
+            thead th {
+                font-size: 17px;
+                padding: 15px 10px;
+            }
+            
+            tbody td {
+                font-size: 14px;
+                padding: 12px;
+            }
+            
+            .nav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                top: 10px;
+                left: 10px;
+            }
+            
+            .prev-btn, .next-btn, .fav-btn {
+                right: 10px;
+            }
+            
+            .prev-btn { top: 10px; }
+            .next-btn { top: 50px; }
+            .fav-btn { top: 90px; }
+            
+            .title-section {
+                margin-top: 55px;
+            }
+            
+            #copyInput {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航按钮 -->
+    <button class="nav-btn home-btn" onclick="location.href='index.html'">🏠 返回首页</button>
+    <button class="nav-btn prev-btn" onclick="location.href='66.html'">⬆ 上一页</button>
+    <button class="nav-btn next-btn" onclick="location.href='68.html'">⬇ 下一页</button>
+    <button class="nav-btn fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    
+    <!-- 标题 -->
+    <div class="title-section">
+        <h1 class="main-title">
+            <span class="title-decoration">~~~~~</span>
+            醉酒患者急症并发症识别与处理
+            <span class="title-decoration">*****</span>
+        </h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~ 醉酒患者急症并发症识别与处理 *****、急症症状 — 醉酒患者并发症详解</div>
+    </div>
+    
+    <!-- 主表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>急症症状 — 醉酒患者并发症详解</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span class="symptom-name">● 尿作用 / 尿潴留</span>
+                        <span class="symptom-content">
+                            治疗酒精中毒需要输液，同时也增加了尿量来源。轻度意识障碍一般不会导致排尿障碍，但对于昏迷程度较重的患者，可能发生尿潴留甚至膀胱破裂。接诊时查体需要注意膀胱区有无膨隆和压痛，治疗过程中关注排尿情况，及时发现尿潴留并予导尿处理。醉酒患者不应进行利尿处理。
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="symptom-name">● 食管裂孔疝</span>
+                        <span class="symptom-content">
+                            是呕吐的一大并发症，有部分意识的患者会表述腹痛等症状，不难发现。昏迷较重的患者难以表述，早期难以诊断，需要待患者意识转好后的自主不适主诉才有助于诊断。对于醉酒患者，需要密切观察症状体征变化，若出现难以解释的呼吸困难、腹痛、胸痛应考虑，可行胸腹部CT帮助诊断。
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="symptom-name">● 低钾血症</span>
+                        <span class="symptom-content">
+                            醉酒患者常会导致低血钾，呕吐、排尿进一步加重，低血钾可以导致心律失常甚至心室颤动猝死。对于无高钾血症高危因素的醉酒患者需要常规补充氯化钾，并监测电解质尤其是血钾情况。
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="symptom-name">● 高血糖 / 低血糖</span>
+                        <span class="symptom-content">
+                            饮酒和饮酒的进食常会出现高血糖，对于糖尿病患者会引起高血糖并发症如糖尿病酮症、高渗状态，还可能出现低血糖，与醉酒的意识障碍混杂无法区分。所有醉酒患者均应常规监测血糖。
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="symptom-name">● 车祸、斗殴、无意碰撞等导致的隐秘致命伤</span>
+                        <span class="symptom-content">
+                            醉酒患者可能发生无意中的跌撞伤，酒后可能打架、斗殴，开车、骑车等发生车祸，很多时候在病史中难以问出，甚至患者清醒后都问不出病史。这些损伤可能导致隐秘外伤，如颅脑外伤、肝脾肾破裂、刀扎伤等，出现醉酒难以解释的情况，如意识问题、休克、腹部膨隆等，需要警惕这些隐秘病因，不可局限于醉酒的一个病因。
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="symptom-name">● 其他中毒</span>
+                        <span class="symptom-content">
+                            一些特殊原因的饮酒，如失恋、失业、离婚等，有可能饮酒同时进行了其他的自杀行为，如服药自杀，需关注饮酒的原因，可疑时需进行毒物检测。一些散装酒、勾兑酒还可能发生假酒中毒，需要询问喝酒的种类和其他人的表现。
+                        </span>
+                    </td>
+                </tr>
+                <tr class="author-row">
+                    <td class="author">（徐胜勇）</td>
+                </tr>
+                <tr>
+                    <td class="page-num">— 第 54 页 —</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">酒精中毒</span>
+            <span class="tag tag-disease">尿潴留</span>
+            <span class="tag tag-disease">食管裂孔疝</span>
+            <span class="tag tag-disease">低钾血症</span>
+            <span class="tag tag-disease">心律失常</span>
+            <span class="tag tag-disease">心室颤动</span>
+            <span class="tag tag-disease">高血糖</span>
+            <span class="tag tag-disease">低血糖</span>
+            <span class="tag tag-disease">糖尿病酮症</span>
+            <span class="tag tag-disease">颅脑外伤</span>
+            <span class="tag tag-disease">肝脾肾破裂</span>
+            <span class="tag tag-disease">休克</span>
+            <span class="tag tag-disease">假酒中毒</span>
+            <span class="tag tag-drug">氯化钾</span>
+            <span class="tag tag-drug">胰岛素</span>
+            <span class="tag tag-drug">葡萄糖</span>
+            <span class="tag tag-drug">解毒剂</span>
+            <span class="tag tag-bacteria">肠道菌群紊乱</span>
+        </div>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">🔍 关键词</div>
+        <div class="keywords">
+            醉酒、酒精中毒、急症、并发症、尿潴留、膀胱破裂、食管裂孔疝、低钾血症、心律失常、心室颤动、高血糖、低血糖、糖尿病酮症、隐秘外伤、颅脑外伤、肝脾肾破裂、休克、假酒中毒、毒物检测、徐胜勇
+        </div>
+    </div>
+    
+    <!-- 页码链接 -->
+    <div class="page-link">页码：67</div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制（标题 + 副标题 + 关键词 + 页码）</div>
+        <div class="copy-box-wrapper">
+            <input type="text" id="copyInput" value="醉酒患者急症并发症识别与处理；急症症状—醉酒患者并发症详解；酒精中毒、尿潴留、食管裂孔疝、低钾血症、心律失常、高血糖、低血糖、糖尿病酮症、隐秘外伤、颅脑外伤、肝脾肾破裂、休克、假酒中毒、氯化钾、毒物检测=67" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                
+                // 保存到 localStorage
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '醉酒患者急症并发症识别与处理',
+                    url: '67.html',
+                    category: '急症症状',
+                    date: new Date().toISOString()
+                };
+                
+                // 避免重复添加
+                const exists = favorites.some(f => f.url === '67.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                // 同时更新 index.html 的收藏（通过 postMessage 或共享存储）
+                updateIndexFavorite(pageInfo);
+                
+                alert('已添加到收藏！');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const filtered = favorites.filter(f => f.url !== '67.html');
+                localStorage.setItem('favorites', JSON.stringify(filtered));
+            }
+        }
+        
+        function updateIndexFavorite(pageInfo) {
+            // 尝试向 index.html 发送消息（如果同窗口打开）
+            try {
+                const indexWindow = window.opener;
+                if (indexWindow && !indexWindow.closed) {
+                    indexWindow.postMessage({
+                        type: 'ADD_FAVORITE',
+                        data: pageInfo
+                    }, '*');
+                }
+            } catch(e) {
+                console.log('无法向首页发送消息');
+            }
+        }
+        
+        // 检查是否已收藏
+        function checkFavoriteStatus() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '67.html');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = checkFavoriteStatus;
+    </script>
+</body>
+</html>
