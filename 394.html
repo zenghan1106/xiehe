@@ -1,0 +1,477 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~止血药物与急诊出血处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 20px 15px 30px;
+            color: #333;
+            line-height: 1.6;
+        }
+        /* 导航按钮区域 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .nav-left {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        .btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        .btn-home {
+            background: #4a90d9;
+            color: white;
+        }
+        .btn-home:hover {
+            background: #357abd;
+        }
+        .btn-page {
+            background: #fff;
+            color: #4a90d9;
+            border: 2px solid #4a90d9;
+        }
+        .btn-page:hover {
+            background: #4a90d9;
+            color: white;
+        }
+        .btn-fav {
+            background: #ff6b6b;
+            color: white;
+            font-size: 13px;
+            padding: 6px 14px;
+        }
+        .btn-fav:hover {
+            background: #ee5a5a;
+        }
+        .btn-fav.active {
+            background: #ffd93d;
+            color: #333;
+        }
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 15px 0 20px;
+            padding: 12px 20px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        /* 表格容器 */
+        .table-wrap {
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            background: white;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+        thead {
+            background: #4a90d9;
+            color: white;
+        }
+        thead th {
+            padding: 14px 16px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        tbody td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #eef2f7;
+            vertical-align: top;
+            word-break: break-all;
+            line-height: 1.7;
+        }
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        tbody tr:hover {
+            background: #f0f4f8;
+        }
+        /* 内容类型标识 */
+        .tag-num {
+            display: inline-block;
+            background: #4a90d9;
+            color: white;
+            width: 26px;
+            height: 26px;
+            line-height: 26px;
+            text-align: center;
+            border-radius: 50%;
+            font-size: 13px;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+        .tag-dot {
+            color: #4a90d9;
+            font-size: 18px;
+            margin-right: 6px;
+        }
+        .content-row {
+            display: flex;
+            align-items: flex-start;
+        }
+        /* 复制区域 */
+        .copy-section {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 14px;
+            border: 2px solid #dde3ea;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #555;
+            background: #fafbfc;
+        }
+        .btn-copy {
+            background: #52c41a;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .btn-copy:hover {
+            background: #45a116;
+        }
+        .btn-copy.copied {
+            background: #1890ff;
+        }
+        /* 标签区域 */
+        .tags-section {
+            margin-bottom: 20px;
+        }
+        .tags-title {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .tags-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: default;
+        }
+        .tag-disease {
+            background: #ffe0e0;
+            color: #c41d1d;
+        }
+        .tag-drug {
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+        .tag-bacteria {
+            background: #dcfce7;
+            color: #166534;
+        }
+        /* 底部关键词 */
+        .footer-section {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        .keywords {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        .page-num {
+            font-size: 28px;
+            font-weight: bold;
+            color: #4a90d9;
+        }
+        .page-num-label {
+            font-size: 12px;
+            color: #999;
+            margin-top: 4px;
+        }
+        /* 提示 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            display: none;
+            z-index: 1000;
+        }
+        /* 响应式 */
+        @media (max-width: 600px) {
+            body {
+                padding: 12px 10px 20px;
+            }
+            .page-title {
+                font-size: 18px;
+                padding: 10px 14px;
+            }
+            thead th {
+                font-size: 16px;
+                padding: 12px 14px;
+            }
+            tbody td {
+                padding: 10px 14px;
+                font-size: 14px;
+            }
+            .btn {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+            .copy-section {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部导航 -->
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">← 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="393.html" class="btn btn-page">← 上一页</a>
+            <a href="395.html" class="btn btn-page">下一页 →</a>
+            <button class="btn btn-fav" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+
+    <!-- 标题 -->
+    <h1 class="page-title">~~~~~止血药物与急诊出血处理*****</h1>
+
+    <!-- 表格 -->
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>内容分类</th>
+                    <th>详细说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="tag-num">续</span></td>
+                    <td>倍，可分布于全身组织和血浆，半衰期为120分钟。静脉滴注一般成人1次0.25～0.5g，必要时可每天1～2g，分1～2次给药。</td>
+                </tr>
+                <tr>
+                    <td><span class="tag-num">续</span></td>
+                    <td>大样本研究证实氨甲环酸可显著降低因创伤出血导致的死亡率，但并不减少对创伤患者的输血需求。而在因疾病导致的出血尤其是上消化道出血中，还缺少足够证据说明氨甲环酸是否可以减少出血并降低死亡率。</td>
+                </tr>
+                <tr>
+                    <td><span class="tag-num">4</span></td>
+                    <td><strong>鱼精蛋白</strong> — 对于肝素相关的出血可以用硫酸鱼精蛋白使APTT恢复正常。由于肝素在体内代谢迅速，与鱼精蛋白给药的间隔时间越长，拮抗所需用量越少。推荐剂量是1mg鱼精蛋白/100U肝素，需要根据最后一次肝素注射量和时间进行调整。如用肝素后30～60分钟，需0.50～0.75mg中和100U肝素，2小时后只需0.250～0.375mg。</td>
+                </tr>
+                <tr>
+                    <td><span class="tag-num">5</span></td>
+                    <td><strong>局部或外用止血药</strong></td>
+                </tr>
+                <tr>
+                    <td><span class="tag-dot">•</span></td>
+                    <td><strong>凝血酶（Thrombin）制品</strong>：由血液提纯，经除菌过滤、冷冻、干燥而获得的无菌制品。具有凝血酶的生理作用，局部使用后使病灶局部表面血液中的纤维蛋白原转变为纤维蛋白而形成稳定的凝血块。可用于外科手术、外伤、烧伤等创面出血，以及各种原因引起的口腔、耳、鼻、喉等部位的出血等。但仅限于局部使用，不能用于注射。</td>
+                </tr>
+                <tr>
+                    <td><span class="tag-dot">•</span></td>
+                    <td><strong>TC-325（Hemospray）</strong>：是一种无机物粉末，为消化道止血喷剂。已在欧洲部分国家、加拿大及中国香港获批使用。由于明确其安全有效性的RCT研究仍在开展当中，现有证据仅限于病例报道和病例系列研究。</td>
+                </tr>
+                <tr>
+                    <td><span class="tag-dot">•</span></td>
+                    <td><strong>中药</strong>：对于出血性疾病也有一定疗效。其中<strong>云南白药</strong>具有止血愈伤、活血散瘀、消炎消肿、排脓去毒等作用。国内有许多文献认为可以加速止血，缩短病程，提高治愈率。</td>
+                </tr>
+                <tr>
+                    <td><span class="tag-num">注</span></td>
+                    <td>（非创伤性出血的急诊处理共识专家组）</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="止血药物与急诊出血处理；氨甲环酸、鱼精蛋白、凝血酶、TC-325、云南白药、上消化道出血、肝素、出血、创伤=394" readonly>
+        <button class="btn-copy" id="copyBtn" onclick="copyContent()">复制</button>
+    </div>
+
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签（仅图片内文字）</div>
+        <div class="tags-wrap">
+            <!-- 疾病 -->
+            <span class="tag tag-disease">出血</span>
+            <span class="tag tag-disease">创伤出血</span>
+            <span class="tag tag-disease">上消化道出血</span>
+            <span class="tag tag-disease">出血性疾病</span>
+            <!-- 药物/抗生素 -->
+            <span class="tag tag-drug">氨甲环酸</span>
+            <span class="tag tag-drug">鱼精蛋白</span>
+            <span class="tag tag-drug">硫酸鱼精蛋白</span>
+            <span class="tag tag-drug">肝素</span>
+            <span class="tag tag-drug">凝血酶</span>
+            <span class="tag tag-drug">Thrombin</span>
+            <span class="tag tag-drug">TC-325</span>
+            <span class="tag tag-drug">Hemospray</span>
+            <span class="tag tag-drug">云南白药</span>
+        </div>
+    </div>
+
+    <!-- 底部关键词与页码 -->
+    <div class="footer-section">
+        <div class="keywords">
+            关键词：止血药物 | 氨甲环酸 | 鱼精蛋白 | 凝血酶 | TC-325 | 云南白药 | 上消化道出血 | 肝素 | 急诊处理
+        </div>
+        <div class="page-num">394</div>
+        <div class="page-num-label">当前页码</div>
+    </div>
+
+    <!-- 提示框 -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopySuccess();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopySuccess();
+            }
+        }
+        
+        function showCopySuccess() {
+            const btn = document.getElementById('copyBtn');
+            const toast = document.getElementById('toast');
+            btn.textContent = '已复制';
+            btn.classList.add('copied');
+            toast.textContent = '内容已复制到剪贴板';
+            toast.style.display = 'block';
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+                toast.style.display = 'none';
+            }, 2000);
+        }
+
+        // 收藏功能（使用localStorage模拟，同浏览器有效）
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const pageData = {
+                title: '止血药物与急诊出血处理',
+                url: '394.html',
+                pageNum: '394',
+                tags: ['出血', '氨甲环酸', '鱼精蛋白', '云南白药', '凝血酶']
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.findIndex(f => f.url === '394.html');
+            
+            if (exists >= 0) {
+                favorites.splice(exists, 1);
+                btn.innerHTML = '☆ 收藏';
+                btn.classList.remove('active');
+                showToast('已取消收藏');
+            } else {
+                favorites.push(pageData);
+                btn.innerHTML = '★ 已收藏';
+                btn.classList.add('active');
+                showToast('已添加到收藏（本地浏览器）');
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试向index页面发送消息（需配合index页面接收）
+            try {
+                window.parent.postMessage({type: 'favorite', data: pageData}, '*');
+            } catch(e) {}
+        }
+
+        // 检查收藏状态
+        (function checkFavorite() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const btn = document.getElementById('favBtn');
+            if (favorites.find(f => f.url === '394.html')) {
+                btn.innerHTML = '★ 已收藏';
+                btn.classList.add('active');
+            }
+        })();
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => toast.style.display = 'none', 2000);
+        }
+    </script>
+
+</body>
+</html>
