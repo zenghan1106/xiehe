@@ -1,0 +1,686 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊循环监测与支持——血流动力学监测*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 50%, #fef3c7 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+            z-index: 100;
+        }
+        
+        .home-btn:hover {
+            background: #2563eb;
+        }
+        
+        /* 导航按钮容器 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #059669;
+        }
+        
+        .nav-btn.next {
+            background: #f59e0b;
+            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+        }
+        
+        .nav-btn.next:hover {
+            background: #d97706;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #ef4444;
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+        }
+        
+        .fav-btn:hover {
+            background: #dc2626;
+        }
+        
+        .fav-btn.active {
+            background: #10b981;
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1e40af;
+            margin: 70px 0 10px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        /* 副标题 */
+        .subtitle {
+            text-align: center;
+            font-size: 15px;
+            color: #4b5563;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 8px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            padding: 15px 10px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+        }
+        
+        /* 第一行特殊样式 */
+        .section-header td {
+            background: #dbeafe;
+            color: #1e3a8a;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 12px;
+        }
+        
+        /* 子标题行 */
+        .sub-header td {
+            background: #eff6ff;
+            color: #1e40af;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 10px;
+        }
+        
+        /* 单元格 */
+        td, th {
+            border: 1px solid #d1d5db;
+            padding: 10px;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        /* 分类列 */
+        td:first-child {
+            font-weight: 600;
+            color: #1f2937;
+            background: #f9fafb;
+            min-width: 120px;
+            white-space: nowrap;
+        }
+        
+        /* 内容列 */
+        .content-cell {
+            color: #374151;
+            text-align: justify;
+        }
+        
+        /* zebra条纹 */
+        tbody tr:nth-child(even):not(.section-header):not(.sub-header) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover:not(.section-header):not(.sub-header) {
+            background: #e0f2fe;
+        }
+        
+        /* 重点标记 */
+        .highlight {
+            color: #dc2626;
+            font-weight: 600;
+        }
+        
+        .formula {
+            color: #059669;
+            font-weight: 600;
+            background: #d1fae5;
+            padding: 2px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+        
+        .type-tag {
+            color: #7c3aed;
+            font-weight: 600;
+        }
+        
+        /* 列表样式 */
+        .content-cell ul {
+            margin: 0;
+            padding-left: 0;
+            list-style: none;
+        }
+        
+        .content-cell li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .content-cell li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+        }
+        
+        /* 子列表 */
+        .sub-list {
+            margin-left: 16px;
+            margin-top: 4px;
+        }
+        
+        .sub-list li {
+            margin-bottom: 4px;
+        }
+        
+        /* 检查标记 */
+        .check-mark {
+            color: #059669;
+            font-weight: 600;
+        }
+        
+        /* 菱形标记 */
+        .diamond-mark {
+            color: #3b82f6;
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.85);
+            border-radius: 12px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #93c5fd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #374151;
+            background: #fff;
+        }
+        
+        .copy-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #2563eb;
+        }
+        
+        .copy-btn.copied {
+            background: #10b981;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            color: #1f2937;
+            font-weight: bold;
+            margin: 15px 0;
+            padding: 10px;
+            background: #e5e7eb;
+            border-radius: 8px;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            padding: 15px;
+            background: #fef3c7;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        .keywords-title {
+            font-weight: bold;
+            color: #92400e;
+            margin-bottom: 10px;
+        }
+        
+        .keyword-tag {
+            display: inline-block;
+            background: #fbbf24;
+            color: #78350f;
+            padding: 6px 14px;
+            margin: 4px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        /* 特色标签 */
+        .feature-tags {
+            margin-top: 25px;
+            padding: 20px;
+            background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
+            border-radius: 12px;
+        }
+        
+        .feature-tags-title {
+            font-weight: bold;
+            color: #5b21b6;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 16px;
+        }
+        
+        .tag-category {
+            margin-bottom: 15px;
+        }
+        
+        .tag-category-name {
+            font-weight: 600;
+            color: #6d28d9;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .tag-item {
+            display: inline-block;
+            background: white;
+            color: #5b21b6;
+            padding: 8px 16px;
+            margin: 4px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 2px solid #a78bfa;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .tag-item:hover {
+            background: #5b21b6;
+            color: white;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 16px;
+                margin-top: 80px;
+            }
+            
+            .nav-buttons {
+                position: relative;
+                top: auto;
+                right: auto;
+                flex-direction: row;
+                justify-content: center;
+                margin-bottom: 15px;
+                flex-wrap: wrap;
+            }
+            
+            .home-btn {
+                position: relative;
+                top: auto;
+                left: auto;
+                display: block;
+                width: fit-content;
+                margin: 0 auto 10px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            td, th {
+                padding: 8px;
+            }
+            
+            td:first-child {
+                white-space: normal;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="327.html" class="nav-btn">↑ 上一页</a>
+        <a href="329.html" class="nav-btn next">↓ 下一页</a>
+        <button class="nav-btn fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~急诊循环监测与支持——血流动力学监测*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~急诊循环监测与支持——血流动力学监测*****、分类/项目、详细内容、急诊循环监测与支持、1. 血流动力学监测、无创及微创监测、概念、休克类型①、休克类型②、休克类型③、休克类型④、方法、一般状况监测、超声血流动力学监测</div>
+    <div class="subtitle">休克分类、血流动力学核心公式与循环监测方法</div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类/项目</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-header">
+                    <td colspan="2">急诊循环监测与支持</td>
+                </tr>
+                <tr class="sub-header">
+                    <td colspan="2">1. 血流动力学监测</td>
+                </tr>
+                <tr>
+                    <td>概念</td>
+                    <td class="content-cell">
+                        血流动力学研究血液在心血管系统中流动的一系列物理学问题，即流量、阻力、压力之间的关系。核心就是回答一个问题：<span class="highlight">"患者为什么休克了？"</span>为了回答这个问题，需要引出血流动力学的核心公式：<span class="formula">BP＝CO×SVR</span>。此公式类似于欧姆定律：<span class="formula">U＝V×R</span>。其中，CO为心输出量，SVR为外周血管阻力。CO与两个因素有关：血管内容量和心脏泵功能。基于如此理解，可以将所有类型的休克按照血流动力学分为4种类型。
+                    </td>
+                </tr>
+                <tr>
+                    <td>休克类型①</td>
+                    <td class="content-cell">
+                        <span class="type-tag">外周血管阻力不足导致的分布性休克：</span>包括感染性休克、过敏性休克、神经源性休克等，对应的治疗为使用缩血管药物（升压药）、纠正原发病等。
+                    </td>
+                </tr>
+                <tr>
+                    <td>休克类型②</td>
+                    <td class="content-cell">
+                        <span class="type-tag">血管内容量不足导致的低血容量性休克：</span>包括失血性休克、失液性休克等，对应的治疗主要是补足血容量。
+                    </td>
+                </tr>
+                <tr>
+                    <td>休克类型③</td>
+                    <td class="content-cell">
+                        <span class="type-tag">心脏泵功能不足导致的心源性休克：</span>包括心肌梗死导致的休克、心肌炎导致的休克等，对应的治疗为强心、改善心肌供血等。
+                    </td>
+                </tr>
+                <tr>
+                    <td>休克类型④</td>
+                    <td class="content-cell">
+                        <span class="type-tag">循环系统血流阻塞导致的梗阻性休克：</span>包括心脏压塞、张力性气胸、肺栓塞等原因导致的休克，对应的治疗为纠正原发病。
+                    </td>
+                </tr>
+                <tr>
+                    <td>方法</td>
+                    <td class="content-cell">
+                        需注意，真实患者的血流动力学状态可能是各种类型都有一部分，或先后出现。如感染性休克患者早期的原发病可能有低血容量性问题，出现外周血管"麻痹"后就有了血管阻力不足的问题，进一步造成脓毒症心肌病，出现心脏泵功能问题等。因此，为分清患者血流动力学各因素变化，则需用到各种循环监测的方法。目前急诊临床上常用的循环监测方法如下。
+                    </td>
+                </tr>
+                <tr class="sub-header">
+                    <td colspan="2"><span class="check-mark">✓</span> 无创及微创监测</td>
+                </tr>
+                <tr>
+                    <td><span class="diamond-mark">◇</span> 一般状况监测</td>
+                    <td class="content-cell">
+                        在监护病房可以心电监护患者的心率、血压等。即使在急诊门诊或普通病房，也可以通过简单地观察患者的临床表现得到关于患者循环状况是否良好的关键信息，常提到的判断患者微循环的3个"窗口"包括：
+                        <ul>
+                            <li>①皮肤：是否出现花斑，通常花斑最早出现在患者的膝关节处；毛细血管再充盈时间（CRT）是另一个重要且方便的评价指标；</li>
+                            <li>②尿量：对于无肾衰竭的患者，尿量是肾灌注是否充分的一个敏感指标；</li>
+                            <li>③精神状态：早期休克可导致患者淡漠、言语减少，严重的休克会导致患者意识丧失。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="diamond-mark">◇</span> 超声血流动力学监测</td>
+                    <td class="content-cell">
+                        ①经体表二维超声，是目前新兴的血流动力学监测方法，包括诸多的切面测量（如下
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <!-- 复制功能 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyContent()">复制</button>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">页码：317</div>
+        
+        <!-- 关键词 -->
+        <div class="keywords">
+            <div class="keywords-title">关键词</div>
+            <span class="keyword-tag">血流动力学</span>
+            <span class="keyword-tag">休克</span>
+            <span class="keyword-tag">BP</span>
+            <span class="keyword-tag">CO</span>
+            <span class="keyword-tag">SVR</span>
+            <span class="keyword-tag">分布性休克</span>
+            <span class="keyword-tag">低血容量性休克</span>
+            <span class="keyword-tag">心源性休克</span>
+            <span class="keyword-tag">梗阻性休克</span>
+            <span class="keyword-tag">循环监测</span>
+            <span class="keyword-tag">CRT</span>
+            <span class="keyword-tag">超声</span>
+        </div>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="feature-tags">
+        <div class="feature-tags-title">🔍 特色检索标签</div>
+        
+        <div class="tag-category">
+            <div class="tag-category-name">疾病相关：</div>
+            <span class="tag-item">休克</span>
+            <span class="tag-item">感染性休克</span>
+            <span class="tag-item">过敏性休克</span>
+            <span class="tag-item">神经源性休克</span>
+            <span class="tag-item">失血性休克</span>
+            <span class="tag-item">失液性休克</span>
+            <span class="tag-item">心肌梗死</span>
+            <span class="tag-item">心肌炎</span>
+            <span class="tag-item">心脏压塞</span>
+            <span class="tag-item">张力性气胸</span>
+            <span class="tag-item">肺栓塞</span>
+            <span class="tag-item">脓毒症心肌病</span>
+            <span class="tag-item">肾衰竭</span>
+        </div>
+        
+        <div class="tag-category">
+            <div class="tag-category-name">细菌相关：</div>
+            <span class="tag-item">无</span>
+        </div>
+        
+        <div class="tag-category">
+            <div class="tag-category-name">药物/治疗相关：</div>
+            <span class="tag-item">缩血管药物</span>
+            <span class="tag-item">升压药</span>
+            <span class="tag-item">强心</span>
+            <span class="tag-item">心电监护</span>
+            <span class="tag-item">超声</span>
+            <span class="tag-item">血流动力学监测</span>
+        </div>
+    </div>
+    
+    <script>
+        // 页面信息
+        const pageInfo = {
+            title: "急诊循环监测与支持——血流动力学监测",
+            subtitle: "休克分类、血流动力学核心公式与循环监测方法",
+            keywords: "血流动力学；休克；BP；CO；SVR；分布性休克；低血容量性休克；心源性休克；梗阻性休克；循环监测；CRT；超声",
+            pageNum: "317"
+        };
+        
+        // 设置复制输入框内容
+        document.getElementById('copyInput').value = 
+            pageInfo.title + "；" + 
+            pageInfo.subtitle + "；" + 
+            pageInfo.keywords + "；" + 
+            "=" + pageInfo.pageNum;
+        
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isActive = btn.classList.contains('active');
+            
+            if (!isActive) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                
+                // 保存到localStorage
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const currentPage = {
+                    title: '~~~~~' + pageInfo.title + '*****',
+                    url: window.location.pathname.split('/').pop() || '317.html',
+                    category: '急救技术'
+                };
+                
+                const exists = favorites.some(f => f.url === currentPage.url);
+                if (!exists) {
+                    favorites.push(currentPage);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                alert('已添加到收藏！请在 index.html 的收藏类目下查看。');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '317.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const currentUrl = window.location.pathname.split('/').pop() || '317.html';
+            const isFav = favorites.some(f => f.url === currentUrl);
+            
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
