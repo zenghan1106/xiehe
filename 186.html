@@ -1,0 +1,543 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~ADEM急性播散性脑脊髓炎*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 80px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background-color: #1a5276;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        /* 导航按钮区域 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background-color: #1a5276;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .nav-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .fav-btn {
+            background-color: #e67e22;
+        }
+        
+        .fav-btn:hover {
+            background-color: #f39c12;
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            padding: 80px 20px 30px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #1a5276;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            max-width: 95%;
+            margin: 0 auto 30px;
+            overflow-x: auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        /* 表头 */
+        thead tr {
+            background-color: #1a5276;
+            color: white;
+        }
+        
+        thead th {
+            padding: 18px 15px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+            border-bottom: 3px solid #2980b9;
+        }
+        
+        /* 表格内容 */
+        tbody tr {
+            border-bottom: 1px solid #e8edf2;
+            transition: background-color 0.2s;
+        }
+        
+        tbody tr:hover {
+            background-color: #f8fafc;
+        }
+        
+        tbody td {
+            padding: 14px 15px;
+            vertical-align: top;
+        }
+        
+        /* 行标题（第一列） */
+        .row-title {
+            font-weight: bold;
+            color: #1a5276;
+            background-color: #ebf3fa;
+            white-space: nowrap;
+            min-width: 100px;
+        }
+        
+        /* 子项目符号 */
+        .bullet {
+            margin: 6px 0;
+            padding-left: 18px;
+            position: relative;
+        }
+        
+        .bullet::before {
+            content: "●";
+            position: absolute;
+            left: 0;
+            color: #2980b9;
+        }
+        
+        .sub-bullet {
+            margin: 4px 0 4px 20px;
+            padding-left: 18px;
+            position: relative;
+            color: #555;
+        }
+        
+        .sub-bullet::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #666;
+            padding: 20px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            max-width: 95%;
+            margin: 0 auto 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background-color: #ffeaa7;
+            color: #6c5ce7;
+        }
+        
+        .tag-bacteria {
+            background-color: #dfe6e9;
+            color: #2d3436;
+        }
+        
+        .tag-virus {
+            background-color: #ffcccc;
+            color: #c0392b;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* 底部编辑框区域 */
+        .copy-section {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 15px 20px;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 999;
+        }
+        
+        .copy-input {
+            flex: 1;
+            height: 44px;
+            padding: 0 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .copy-input:focus {
+            border-color: #2980b9;
+        }
+        
+        .copy-btn {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background-color: #2ecc71;
+        }
+        
+        .copy-btn.copied {
+            background-color: #1a5276;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            padding: 15px 20px 80px;
+            font-size: 13px;
+            color: #888;
+        }
+        
+        .keywords span {
+            display: inline-block;
+            margin: 3px 6px;
+            padding: 4px 10px;
+            background: #eef2f7;
+            border-radius: 4px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 20px;
+                padding-top: 100px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 14px 12px;
+            }
+            
+            tbody td {
+                padding: 12px;
+                font-size: 13px;
+            }
+            
+            .nav-buttons {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .nav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                padding: 10px 15px;
+            }
+            
+            .copy-input {
+                font-size: 12px;
+            }
+            
+            .copy-btn {
+                padding: 10px 18px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="185.html" class="nav-btn">上一页</a>
+        <a href="187.html" class="nav-btn">下一页</a>
+        <button class="nav-btn fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~ADEM急性播散性脑脊髓炎*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~ADEM急性播散性脑脊髓炎*****、ADEM急性播散性脑脊髓炎 - 临床资料、相关病原体、3. 临床特征、4. 必做检查、5. 选做检查、6. 诊断</div>
+    
+    <!-- 主表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">ADEM急性播散性脑脊髓炎 - 临床资料</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="row-title">相关病原体</td>
+                    <td>状疱疹病毒、麻疹病毒、天花病毒、EB病毒、单纯疱疹病毒、人类疱疹病毒6型、流感病毒、HIV和肺炎支原体</td>
+                </tr>
+                <tr>
+                    <td class="row-title">3. 临床特征</td>
+                    <td>
+                        <div class="bullet">典型表现为急性起病的多灶性神经系统症状</div>
+                        <div class="bullet">可伴ADEM出现的非特异性表现包括头痛、发热、恶心和呕吐</div>
+                        <div class="bullet">20%～56%成人患者有神志改变（即脑病），可出现易激惹、意识模糊和精神病性症状，甚至嗜睡和昏迷等</div>
+                        <div class="bullet">大多数患者有运动障碍，可累及单个肢体或导致下肢轻瘫或四肢轻瘫</div>
+                        <div class="bullet">常有感觉障碍</div>
+                        <div class="bullet">脑干受累也很常见，包括眼运动障碍和构音障碍</div>
+                        <div class="bullet">其他可能有脑膜刺激征、共济失调、失语、视神经炎（有时为双侧）、眼球震颤、锥体外系症状、尿潴留、癫痫发作和颅内压增高</div>
+                        <div class="bullet">有感染后神经系统综合征的成人患者可能存在周围神经系统受累</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="row-title">4. 必做检查</td>
+                    <td>
+                        <div class="bullet">神经影像学：MRI是首选，但为排除神经系统疾病的其他原因，可能需行紧急CT扫描</div>
+                        <div class="bullet">腰穿
+                            <div class="sub-bullet">脑脊液检查应包括细胞计数、蛋白、葡萄糖、培养和寡克隆带检测（包括有无寡克隆带、IgG合成率和IgG指数）</div>
+                            <div class="sub-bullet">若临床病史提示病毒感染，还应行病毒检测</div>
+                            <div class="sub-bullet">ADEM的脑脊液表现多变，50%～80%患者出现脑脊液检查结果异常，6%～65%患者存在寡克隆带</div>
+                        </div>
+                        <div class="bullet">全血细胞计数（含血小板）</div>
+                        <div class="bullet">血清电解质、尿素氮和肌酐检测</div>
+                        <div class="bullet">肝功能检查</div>
+                        <div class="bullet">cTn检测</div>
+                        <div class="bullet">PT、INR和APTT测定</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="row-title">5. 选做检查</td>
+                    <td>
+                        <div class="bullet">脑电图（EEG）：结果通常无特异性</div>
+                        <div class="bullet">诱发电位检查：根据病变部位，视觉诱发电位和体感诱发电位可能出现异常，但检查结果一般不能帮助该病诊断</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="row-title">6. 诊断</td>
+                    <td>
+                        <div class="bullet">对于存在急性多灶性神经系统症状和体征，但无先前无法解释的神经系统症状病史的患者，可考虑诊断ADEM</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">— 174 —</div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">ADEM</span>
+            <span class="tag tag-disease">急性播散性脑脊髓炎</span>
+            <span class="tag tag-disease">脑病</span>
+            <span class="tag tag-disease">视神经炎</span>
+            <span class="tag tag-virus">状疱疹病毒</span>
+            <span class="tag tag-virus">麻疹病毒</span>
+            <span class="tag tag-virus">天花病毒</span>
+            <span class="tag tag-virus">EB病毒</span>
+            <span class="tag tag-virus">单纯疱疹病毒</span>
+            <span class="tag tag-virus">人类疱疹病毒6型</span>
+            <span class="tag tag-virus">流感病毒</span>
+            <span class="tag tag-virus">HIV</span>
+            <span class="tag tag-bacteria">肺炎支原体</span>
+            <span class="tag tag-disease">脑膜刺激征</span>
+            <span class="tag tag-disease">共济失调</span>
+            <span class="tag tag-disease">失语</span>
+            <span class="tag tag-disease">癫痫发作</span>
+            <span class="tag tag-disease">颅内压增高</span>
+        </div>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        <span>ADEM</span>
+        <span>急性播散性脑脊髓炎</span>
+        <span>临床特征</span>
+        <span>必做检查</span>
+        <span>选做检查</span>
+        <span>诊断</span>
+        <span>脑脊液</span>
+        <span>MRI</span>
+        <span>寡克隆带</span>
+        <span>病毒感染</span>
+    </div>
+    
+    <!-- 底部复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="ADEM急性播散性脑脊髓炎；急性起病的多灶性神经系统症状、头痛、发热、恶心、呕吐、神志改变、运动障碍、感觉障碍、脑干受累、脑膜刺激征、共济失调、失语、视神经炎、癫痫发作、颅内压增高、MRI、腰穿、脑脊液、寡克隆带、脑电图、诱发电位；=174" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 添加到收藏
+        function addToFavorites() {
+            const title = 'ADEM急性播散性脑脊髓炎';
+            const url = window.location.href;
+            
+            // 尝试使用本地存储模拟收藏功能
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                category: '急诊疾病',
+                date: new Date().toLocaleDateString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试更新index.html的收藏（通过postMessage或其他方式）
+            alert('已添加到收藏！\n标题：' + title + '\n请在首页查看收藏类目。');
+            
+            // 向父窗口或index页面发送收藏信息
+            try {
+                window.parent.postMessage({
+                    type: 'addFavorite',
+                    data: { title: title, url: url }
+                }, '*');
+            } catch(e) {}
+        }
+        
+        // 页面加载时设置正确的页码信息
+        document.addEventListener('DOMContentLoaded', function() {
+            const pageNum = '174';
+            const fileName = window.location.pathname.split('/').pop().replace('.html', '');
+            console.log('当前页码：' + pageNum);
+        });
+    </script>
+</body>
+</html>
