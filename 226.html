@@ -1,0 +1,502 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~脓毒症诊断与急诊处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            z-index: 100;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 右上角按钮组 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #e8a838;
+            margin-top: 5px;
+        }
+        
+        .fav-btn:hover {
+            background: #d4952e;
+        }
+        
+        .fav-btn.active {
+            background: #c9302c;
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 900px;
+            margin: 60px auto 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            padding: 25px 20px;
+            background: linear-gradient(90deg, #4a90d9 0%, #63a4eb 100%);
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        /* 表格样式 */
+        .content-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+        
+        .content-table th {
+            background: #4a90d9;
+            color: white;
+            padding: 14px 12px;
+            text-align: left;
+            font-weight: bold;
+            font-size: 17px;
+        }
+        
+        .content-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e8ecf1;
+            line-height: 1.8;
+            color: #444;
+        }
+        
+        .content-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        .content-table tr:hover {
+            background: #eef4fb;
+        }
+        
+        /* 第一行内容字体大一点 */
+        .first-row {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        /* 小标题样式 */
+        .section-title {
+            color: #4a90d9;
+            font-weight: bold;
+            font-size: 16px;
+            margin: 8px 0;
+        }
+        
+        /* 列表项 */
+        .list-item {
+            margin: 6px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .list-item::before {
+            content: "•";
+            position: absolute;
+            left: 5px;
+            color: #4a90d9;
+            font-weight: bold;
+        }
+        
+        .check-item {
+            margin: 6px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+        }
+        
+        .check-item::before {
+            content: "✓";
+            position: absolute;
+            left: 5px;
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            padding: 20px;
+            font-size: 18px;
+            color: #666;
+            font-weight: bold;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            padding: 20px;
+            background: #f8fafc;
+            border-top: 2px solid #e8ecf1;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #e3f0ff;
+            color: #4a90d9;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            border: 1px solid #c5d9ed;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            padding: 15px 20px;
+            background: #fff;
+            border-top: 1px solid #e8ecf1;
+        }
+        
+        .keywords-title {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 8px;
+        }
+        
+        .keywords {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            padding: 20px;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #555;
+            background: white;
+        }
+        
+        .copy-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #218838;
+        }
+        
+        .copy-btn.copied {
+            background: #6c757d;
+        }
+        
+        /* 移动端适配 */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .page-title {
+                font-size: 18px;
+                padding: 18px 15px;
+            }
+            
+            .content-table {
+                font-size: 13px;
+            }
+            
+            .content-table th {
+                font-size: 15px;
+                padding: 10px 8px;
+            }
+            
+            .content-table td {
+                padding: 8px;
+                line-height: 1.6;
+            }
+            
+            .first-row {
+                font-size: 14px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .container {
+                margin-top: 55px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 右上角导航 -->
+    <div class="nav-buttons">
+        <a href="225.html" class="nav-btn">上一页</a>
+        <a href="227.html" class="nav-btn">下一页</a>
+        <button class="nav-btn fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <div class="container">
+        <!-- 标题 -->
+        <div class="page-title">~~~~~脓毒症诊断与急诊处理*****</div>
+        
+        <!-- 表格内容 -->
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>分类</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="first-row">
+                    <td colspan="2">
+                        <strong>脓毒症（Sepsis）</strong> — 持续升高的ScvO₂或SvO₂和恶化的代谢性酸中毒和高乳酸血症提示机体氧代谢陷入衰竭，是预后不良的征兆。
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="section-title">病情进展</span></td>
+                    <td>
+                        <div class="list-item">病情进展迅速：除非原发病、全身免疫炎症反应紊乱和相关损害得到有效控制，脓毒症通常呈进行性发展的态势而难以遏制。</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="section-title">3. 诊断</span></td>
+                    <td>
+                        <div class="list-item">疑似脓毒症诊断标准：①可疑感染；②qSOFA ≥ 2分（收缩压≤100mmHg、呼吸频率≥22次/分、意识改变，3项中满足≥2项）。</div>
+                        <div class="list-item">脓毒症休克诊断标准：在脓毒症和充分液体复苏的基础上，使用血管加压药才能使MAP维持在65mmHg以上，且血乳酸水平＞2mmol/L，可诊断。</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="section-title">4. 急诊处理</span></td>
+                    <td>
+                        <div class="section-title">早期液体复苏</div>
+                        <div class="check-item">一旦发现脓毒症伴有低血压或低灌注表现，应在6小时内完成液体复苏以纠正低血容量。</div>
+                        <div class="check-item">初步目标：①CVP 8～12mmHg，机械通气下可提高至13～15mmHg；②MAP ≥ 65mmHg；③尿量≥0.5ml/(kg·h)；④ScvO₂ ≥ 70%，或SvO₂ ≥ 65%。</div>
+                        <div class="check-item">主要目的：纠正因氧输送不足造成的缺氧或潜在缺氧。因ScvO₂和SvO₂能够反映氧输送与外周细胞实际氧耗的匹配情况，其正常化是早期液体复苏治疗的核心。</div>
+                        
+                        <div class="section-title">输血治疗</div>
+                        <div class="check-item">在ScvO₂和SvO₂不达标且存在严重贫血的患者，输血有助于增加氧输送。</div>
+                        <div class="check-item">指南主张仅将Hb限制在70～90g/L。</div>
+                        <div class="check-item">特殊情况下，如合并心肌缺血、严重缺氧等可适当提高血红蛋白水平。</div>
+                        
+                        <div class="section-title">脓毒症休克升压药物的使用</div>
+                        <div class="check-item">若患者存在低血压，且经过充分液体复苏后仍不能被纠正，则考虑为脓毒症休克，且是使用血管加压药物的指征。</div>
+                        <div class="check-item">维持血压的目标值是MAP ≥ 65mmHg。</div>
+                        <div class="check-item">通常以去甲肾上腺素和多巴胺作为一线升压药物，必要时可联合血管加压素（0.03U/min）。</div>
+                        <div class="check-item">对低心排和高心脏充盈压主张使用多巴酚丁胺。</div>
+                        <div class="check-item">对去甲肾上腺素和多巴胺反应差的患者，可尝试使用肾上腺素。</div>
+                        
+                        <div class="section-title">脓毒症休克糖皮质激素的使用</div>
+                        <div class="check-item">适应证：脓毒症休克患者，经过充分液体复苏和血管活性药物治疗后，血流动力学仍不稳定，对血管活性药物有</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 页码 -->
+        <div class="page-number">226</div>
+        
+        <!-- 检索标签 -->
+        <div class="tags-section">
+            <div class="tags-title">检索标签（点击图片中的标签可快速检索）：</div>
+            <span class="tag">脓毒症</span>
+            <span class="tag">脓毒症休克</span>
+            <span class="tag">qSOFA</span>
+            <span class="tag">CVP</span>
+            <span class="tag">MAP</span>
+            <span class="tag">ScvO₂</span>
+            <span class="tag">SvO₂</span>
+            <span class="tag">去甲肾上腺素</span>
+            <span class="tag">多巴胺</span>
+            <span class="tag">血管加压素</span>
+            <span class="tag">多巴酚丁胺</span>
+            <span class="tag">肾上腺素</span>
+            <span class="tag">糖皮质激素</span>
+            <span class="tag">代谢性酸中毒</span>
+            <span class="tag">高乳酸血症</span>
+            <span class="tag">液体复苏</span>
+            <span class="tag">输血治疗</span>
+        </div>
+        
+        <!-- 关键词 -->
+        
+            <div class="keywords">脓毒症、脓毒症休克、早期液体复苏、升压药物、糖皮质激素、qSOFA、ScvO₂、SvO₂、MAP、CVP、去甲肾上腺素、多巴胺、血管加压素、多巴酚丁胺、肾上腺素</div>
+        </div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="脓毒症诊断与急诊处理；脓毒症、脓毒症休克、早期液体复苏、升压药物、糖皮质激素、qSOFA、ScvO₂、SvO₂、MAP、CVP、去甲肾上腺素、多巴胺、血管加压素、多巴酚丁胺、肾上腺素；=226" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    const btn = document.querySelector('.copy-btn');
+                    btn.textContent = '已复制';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.textContent = '复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '已复制';
+                setTimeout(() => btn.textContent = '复制', 2000);
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '❤ 已收藏';
+                
+                // 保存到localStorage（模拟添加到index收藏）
+                const favData = {
+                    title: '脓毒症诊断与急诊处理',
+                    url: '226.html',
+                    tags: ['脓毒症', '脓毒症休克', '急诊处理']
+                };
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites.push(favData);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                alert('已添加到收藏！可在index.html查看收藏列表。');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '226.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '226.html');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '❤ 已收藏';
+            }
+        };
+    </script>
+<div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：脓毒症诊断与急诊处理、分类、详细内容、病情进展、3. 诊断、4. 急诊处理</div></body>
+</html>
