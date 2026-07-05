@@ -1,0 +1,523 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~心肌炎诊断策略与急诊处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            background-image: linear-gradient(135deg, #e8f4f8 0%, #f5f0e8 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-top: 10px;
+        }
+        
+        .main-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            line-height: 1.4;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left, .nav-right {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #2980b9;
+        }
+        
+        .btn-nav {
+            background: #5dade2;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background: #2e86c1;
+        }
+        
+        .btn-favorite {
+            background: #f39c12;
+            color: white;
+            margin-top: 10px;
+        }
+        
+        .btn-favorite:hover {
+            background: #e67e22;
+        }
+        
+        .btn-favorite.active {
+            background: #e74c3c;
+        }
+        
+        .btn-copy {
+            background: #27ae60;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 0 8px 8px 0;
+            white-space: nowrap;
+        }
+        
+        .btn-copy:hover {
+            background: #219a52;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        thead {
+            background: #1a5276;
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e8e8e8;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        td {
+            padding: 12px;
+            line-height: 1.7;
+            color: #2c3e50;
+        }
+        
+        td:first-child {
+            font-weight: bold;
+            color: #1a5276;
+            white-space: nowrap;
+            width: 120px;
+            vertical-align: top;
+        }
+        
+        .check-item {
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 4px;
+        }
+        
+        .section-title {
+            background: #d4e6f1;
+            color: #1a5276;
+            font-weight: bold;
+        }
+        
+        .sub-item {
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .highlight-box {
+            background: #fef9e7;
+            border-left: 4px solid #f39c12;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .tags-section {
+            margin: 25px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            color: #1a5276;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #fadbd8;
+            color: #c0392b;
+        }
+        
+        .tag-disease:hover {
+            background: #f5b7b1;
+        }
+        
+        .tag-drug {
+            background: #d5f5e3;
+            color: #27ae60;
+        }
+        
+        .tag-drug:hover {
+            background: #abebc6;
+        }
+        
+        .tag-bacteria {
+            background: #d6eaf8;
+            color: #2980b9;
+        }
+        
+        .tag-bacteria:hover {
+            background: #aed6f1;
+        }
+        
+        .copy-section {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+        }
+        
+        .copy-input {
+            flex: 1;
+            max-width: calc(100% - 100px);
+            padding: 12px;
+            border: 2px solid #3498db;
+            border-radius: 8px 0 0 8px;
+            font-size: 13px;
+            outline: none;
+        }
+        
+        .page-number {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 18px;
+            color: #1a5276;
+            font-weight: bold;
+        }
+        
+        .keywords-section {
+            text-align: center;
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        
+        .keywords-title {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 8px;
+        }
+        
+        .keywords-content {
+            color: #2c3e50;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 14px;
+            display: none;
+            z-index: 1000;
+        }
+        
+        @media (max-width: 600px) {
+            .main-title {
+                font-size: 18px;
+            }
+            
+            table {
+                font-size: 13px;
+            }
+            
+            td {
+                padding: 10px 8px;
+            }
+            
+            td:first-child {
+                width: 100px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">← 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="105.html" class="btn btn-nav">↑ 上一页</a>
+            <a href="107.html" class="btn btn-nav">↓ 下一页</a>
+            <button class="btn btn-favorite" id="favoriteBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <div class="header">
+        <h1 class="main-title">~~~~~心肌炎诊断策略与急诊处理*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~心肌炎诊断策略与急诊处理*****、心肌炎诊断与急诊处理指南、6. 诊断策略、7. 急诊处理、临床表现、诊断标准、辅助特征（支持临床怀疑心肌炎）、检查说明</div>
+    </div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">心肌炎诊断与急诊处理指南</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2" class="section-title">6. 诊断策略</td>
+                </tr>
+                <tr>
+                    <td colspan="2">满足以下至少1项临床表现和1项诊断标准，或至少2项诊断标准，并除外引起以下临床表现的其他疾病，如缺血性心脏病、应激性心肌病、其他心肌病、瓣膜性心脏病等。</td>
+                </tr>
+                <tr>
+                    <td>临床表现</td>
+                    <td>
+                        <span class="check-item">✓</span>急性胸痛<br>
+                        <span class="check-item">✓</span>新发或加重的呼吸困难或乏力<br>
+                        <span class="check-item">✓</span>心悸，原因不明的心律失常，晕厥，或心脏性猝死未遂<br>
+                        <span class="check-item">✓</span>原因不明的心源性休克
+                    </td>
+                </tr>
+                <tr>
+                    <td>诊断标准</td>
+                    <td>
+                        <span class="check-item">✓</span>心电图改变：房室、束支或室内传导阻滞，ST-T改变，窦性停搏，室性心动过速或心室颤动，心搏停止，心房颤动，R波波幅显著降低，异常Q波，低电压，频发期前收缩，室上性心动过速<br>
+                        <span class="check-item">✓</span>cTn升高<br>
+                        <span class="check-item">✓</span>心脏影像学检查（超声心动图或MRI）显示有功能性和结构性异常，MRI提示心肌炎的钆剂延迟增强和/或符合水肿的表现
+                    </td>
+                </tr>
+                <tr>
+                    <td>辅助特征<br>（支持临床怀疑心肌炎）</td>
+                    <td>
+                        <span class="check-item">✓</span>最近30天发热（体温≥38.0℃），伴或不伴相关症状，如寒战、头痛、肌痛、不适、食欲下降、恶心、呕吐或腹泻<br>
+                        <span class="check-item">✓</span>既往临床怀疑过或确诊过心肌炎<br>
+                        <span class="check-item">✓</span>有毒物质暴露<br>
+                        <span class="check-item">✓</span>合并自身免疫病
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">7. 急诊处理</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        • 心电监护，专科会诊<br>
+                        • 休息，避免NSAID<br>
+                        • 治疗以非特异性的支持治疗为主<br>
+                        • 心肌炎伴心力衰竭的患者应接受标准的急性和慢性心力衰竭治疗<br>
+                        • 有症状的心律失常患者应给予抗心律失常治疗<br>
+                        • 对于特定的自身免疫性疾病，如结节病、嗜酸性粒细胞性心肌炎、狼疮性心肌炎，给予原发病的免疫抑制治疗<br>
+                        • 不推荐对心肌炎患者使用常规抗病毒治疗。糖皮质激素和免疫球蛋白对急性心肌炎的疗效尚不确切，不建议常规使用
+                    </td>
+                </tr>
+                <tr>
+                    <td>检查说明</td>
+                    <td>
+                        <div class="highlight-box">
+                            <strong>心内膜心肌活检：</strong>心内膜活检+组织学检查是诊断心肌炎的金标准，但许多疑似心肌炎患者并不适合行该检查。
+                        </div>
+                        <div class="highlight-box">
+                            <strong>冠状动脉造影：</strong>限制日常生活，或无创性检查显示有缺血性心脏病高风险特征的患者，需行冠状动脉造影检查。
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div>
+            <span class="tag tag-disease">心肌炎</span>
+            <span class="tag tag-disease">缺血性心脏病</span>
+            <span class="tag tag-disease">应激性心肌病</span>
+            <span class="tag tag-disease">瓣膜性心脏病</span>
+            <span class="tag tag-disease">心力衰竭</span>
+            <span class="tag tag-disease">心律失常</span>
+            <span class="tag tag-disease">结节病</span>
+            <span class="tag tag-disease">嗜酸性粒细胞性心肌炎</span>
+            <span class="tag tag-disease">狼疮性心肌炎</span>
+            <span class="tag tag-disease">自身免疫病</span>
+            <span class="tag tag-drug">NSAID</span>
+            <span class="tag tag-drug">糖皮质激素</span>
+            <span class="tag tag-drug">免疫球蛋白</span>
+            <span class="tag tag-drug">cTn</span>
+            <span class="tag tag-drug">钆剂</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="心肌炎诊断策略与急诊处理；心肌炎、诊断策略、急诊处理、心电图、cTn、MRI、心力衰竭、NSAID、糖皮质激素、免疫球蛋白；=106" readonly>
+        <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="page-number">第 106 页</div>
+    
+    <div class="keywords-section">
+        <div class="keywords-title">🔍 关键词</div>
+        <div class="keywords-content">
+            心肌炎 | 诊断策略 | 急诊处理 | 心电图 | cTn | MRI | 心力衰竭 | NSAID | 糖皮质激素 | 免疫球蛋白 | 心律失常 | 心内膜心肌活检 | 冠状动脉造影 | 自身免疫病
+        </div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 显示提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFavorited = btn.classList.contains('active');
+            
+            if (!isFavorited) {
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+                showToast('已添加到收藏！');
+                
+                // 尝试添加到index.html的收藏类目
+                try {
+                    const favoriteData = {
+                        title: '心肌炎诊断策略与急诊处理',
+                        url: '106.html',
+                        category: '急诊疾病'
+                    };
+                    localStorage.setItem('favorite_106', JSON.stringify(favoriteData));
+                } catch(e) {
+                    console.log('本地存储不可用');
+                }
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = '☆ 收藏';
+                showToast('已取消收藏！');
+                localStorage.removeItem('favorite_106');
+            }
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            try {
+                if (localStorage.getItem('favorite_106')) {
+                    const btn = document.getElementById('favoriteBtn');
+                    btn.classList.add('active');
+                    btn.innerHTML = '★ 已收藏';
+                }
+            } catch(e) {}
+        };
+        
+        // 标签点击搜索功能
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const keyword = this.textContent;
+                showToast('搜索: ' + keyword);
+            });
+        });
+    </script>
+</body>
+</html>
