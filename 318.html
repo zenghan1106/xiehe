@@ -1,0 +1,668 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~气管插管药物应用与管理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 30px;
+        }
+        
+        /* 顶部导航栏 */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 15px;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .left-btn {
+            margin-top: 5px;
+        }
+        
+        .left-btn a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #2196F3;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .left-btn a:hover {
+            background-color: #1976D2;
+            transform: translateY(-2px);
+        }
+        
+        .right-btns {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+        
+        .right-btns a {
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+        
+        .prev-btn {
+            background-color: #FF9800;
+            color: white;
+        }
+        
+        .prev-btn:hover {
+            background-color: #F57C00;
+        }
+        
+        .next-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .next-btn:hover {
+            background-color: #388E3C;
+        }
+        
+        .fav-btn {
+            background-color: #E91E63;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+        
+        .fav-btn:hover {
+            background-color: #C2185B;
+        }
+        
+        .fav-btn.added {
+            background-color: #9C27B0;
+        }
+        
+        /* 主标题 */
+        .main-title {
+            text-align: center;
+            padding: 25px 15px;
+            background-color: #e3f2fd;
+            margin-bottom: 20px;
+        }
+        
+        .main-title h1 {
+            font-size: 22px;
+            color: #1565C0;
+            font-weight: bold;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            width: 95%;
+            max-width: 900px;
+            margin: 0 auto 25px;
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        /* 表头 */
+        thead {
+            background-color: #2196F3;
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        /* 表格内容 */
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+        
+        tbody tr:hover {
+            background-color: #e3f2fd;
+        }
+        
+        tbody td {
+            padding: 12px;
+            font-size: 14px;
+            color: #444;
+            vertical-align: top;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 15px;
+            font-weight: 500;
+            color: #1565C0;
+        }
+        
+        /* 分类标题行 */
+        .category-row {
+            background-color: #bbdefb !important;
+        }
+        
+        .category-row td {
+            font-weight: bold;
+            color: #0D47A1 !important;
+            font-size: 15px !important;
+        }
+        
+        /* 子项标记 */
+        .sub-item {
+            color: #666;
+            padding-left: 15px;
+            position: relative;
+        }
+        
+        .sub-item::before {
+            content: "◆";
+            position: absolute;
+            left: 0;
+            color: #2196F3;
+        }
+        
+        .check-item {
+            color: #2e7d32;
+            padding-left: 15px;
+            position: relative;
+        }
+        
+        .check-item::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        .diamond-item {
+            color: #666;
+            padding-left: 15px;
+            position: relative;
+        }
+        
+        .diamond-item::before {
+            content: "◇";
+            position: absolute;
+            left: 0;
+            color: #FF9800;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #666;
+            margin: 20px 0;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            width: 95%;
+            max-width: 900px;
+            margin: 0 auto 25px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1565C0;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .tag-disease {
+            background-color: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+        
+        .tag-disease:hover {
+            background-color: #ef9a9a;
+            color: white;
+        }
+        
+        .tag-drug {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .tag-drug:hover {
+            background-color: #a5d6a7;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background-color: #fff3e0;
+            color: #ef6c00;
+            border: 1px solid #ffcc80;
+        }
+        
+        .tag-bacteria:hover {
+            background-color: #ffcc80;
+            color: white;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            width: 95%;
+            max-width: 900px;
+            margin: 0 auto 25px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .keywords-title {
+            font-size: 16px;
+            color: #1565C0;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .keywords-content {
+            font-size: 14px;
+            color: #555;
+            line-height: 2;
+        }
+        
+        .keyword {
+            display: inline-block;
+            margin-right: 15px;
+            color: #2196F3;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            width: 95%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .copy-title {
+            font-size: 16px;
+            color: #1565C0;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .copy-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #bbdefb;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        #copyInput:focus {
+            border-color: #2196F3;
+        }
+        
+        #copyBtn {
+            padding: 12px 30px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        #copyBtn:hover {
+            background-color: #1976D2;
+        }
+        
+        #copyBtn.copied {
+            background-color: #4CAF50;
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 15px 30px;
+            background-color: rgba(0,0,0,0.8);
+            color: white;
+            border-radius: 10px;
+            font-size: 14px;
+            z-index: 1000;
+            display: none;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .main-title h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 14px;
+            }
+            
+            .right-btns a, .fav-btn {
+                padding: 6px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            #copyBtn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="top-nav">
+        <div class="left-btn">
+            <a href="index.html">🏠 返回首页</a>
+        </div>
+        <div class="right-btns">
+            <a href="317.html" class="prev-btn">⬅ 上一页</a>
+            <a href="319.html" class="next-btn">下一页 ➡</a>
+            <button class="fav-btn" id="favBtn" onclick="addToFavorites()">❤ 收藏</button>
+        </div>
+    </div>
+    
+    <!-- 主标题 -->
+    <div class="main-title">
+        <h1>~~~~~气管插管药物应用与管理*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~气管插管药物应用与管理*****、分类、详细内容、气管切开、药物应用、插管后管理、适应证与禁忌证、禁忌证、气管切开说明、药物应用概述、镇痛、镇静、肌松、气管插管位置确定、常用体格检查</div>
+    </div>
+    
+    <!-- 表格内容 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 25%;">分类</th>
+                    <th style="width: 75%;">详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>适应证与禁忌证</strong></td>
+                    <td>道吸入性损伤；热损伤或腐蚀性损伤；血管神经性水肿；上呼吸道出血；会厌炎和假膜性喉炎（导致急性喉梗阻）或其他经口插管失败的紧急情况。该技术对外科技巧要求不高，更适合急诊使用。</td>
+                </tr>
+                <tr>
+                    <td class="sub-item">禁忌证</td>
+                    <td>解剖标志无法识别；凝血功能障碍（相对的）；喉气管断裂且远端气管收缩至纵隔；未满8岁的儿童；喉部病变（狭窄、癌症、感染等所有与之相关的）；对技术不熟练（相对的）</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="2">◇ 气管切开</td>
+                </tr>
+                <tr>
+                    <td class="diamond-item">气管切开说明</td>
+                    <td>可以替代气管插管。适于无法进行气管插管的患者建立长久稳定的确定性气道。急诊情况下，有条件时首选经皮快速气管切开。</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="2">● 药物应用</td>
+                </tr>
+                <tr>
+                    <td>药物应用概述</td>
+                    <td>由于喉镜插入及气管插管有强烈的刺激，神志清楚的患者难以忍受，通常不能主动配合，影响操作。同时强烈的刺激引起交感神经兴奋，产生强烈的应激反应，出现血压升高、心率增快，可能会加重原发病。因此，建议根据患者的情况适当使用镇痛、镇静、肌松药物。由于药物不同的药理作用，且常规剂量使用难以用一种药物代替其他一种或两种的作用，建议合理选用药物降低插管难度。首选起效快、代谢快的药物。</td>
+                </tr>
+                <tr>
+                    <td class="check-item">镇痛</td>
+                    <td>插管操作会产生明显的疼痛及不适感，但常规镇痛药物多有呼吸抑制作用。选用起效和代谢快速的药物比较符合临床要求，如<strong>瑞芬太尼</strong>、<strong>阿芬太尼</strong>、<strong>芬太尼</strong>和<strong>吗啡</strong>。</td>
+                </tr>
+                <tr>
+                    <td class="check-item">镇静</td>
+                    <td>插管环境下会产生强烈的紧张、焦虑情绪，肌松后产生的无力、濒死感可导致不良回忆，同时意识清醒患者对操作会有躲避。建议使用镇静药物消除这些不良因素。可选用起效快的<strong>丙泊酚</strong>、<strong>依托咪酯</strong>、<strong>咪达唑仑</strong>。</td>
+                </tr>
+                <tr>
+                    <td class="check-item">肌松</td>
+                    <td>肌肉痉挛或受刺激后的反射性肌紧张会使声门暴露困难，可使用肌松药。临床多选用起效迅速的<strong>氯化琥珀胆碱</strong>和<strong>罗库溴铵</strong>。在使用肌松药前必须先使用镇静药物。对于肌松药的使用应非常谨慎，通常患者给予肌松药后失去自主呼吸能力，一旦出现困难插管或通气则是致命的，因此需要正确评估患者情况后合理使用。</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="2">● 插管后管理</td>
+                </tr>
+                <tr>
+                    <td class="check-item">气管插管位置确定</td>
+                    <td>气管导管放置后需重点确认其在气管内合适的位置。确认方法包括查体、呼气末CO₂监测、床旁超声、胸片等。上述方法各有利弊，结合患者情况选择，有条件需首选呼气末CO₂监测。</td>
+                </tr>
+                <tr>
+                    <td class="diamond-item">常用体格检查</td>
+                    <td>包括胃泡区和双侧胸部（腋中线第4肋间）听诊、观察胸廓起伏、呼气时气管导管壁上出现</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">
+        页码：318
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">会厌炎</span>
+            <span class="tag tag-disease">假膜性喉炎</span>
+            <span class="tag tag-disease">急性喉梗阻</span>
+            <span class="tag tag-disease">上呼吸道出血</span>
+            <span class="tag tag-disease">血管神经性水肿</span>
+            <span class="tag tag-disease">吸入性损伤</span>
+            <span class="tag tag-disease">热损伤</span>
+            <span class="tag tag-disease">腐蚀性损伤</span>
+            <span class="tag tag-drug">瑞芬太尼</span>
+            <span class="tag tag-drug">阿芬太尼</span>
+            <span class="tag tag-drug">芬太尼</span>
+            <span class="tag tag-drug">吗啡</span>
+            <span class="tag tag-drug">丙泊酚</span>
+            <span class="tag tag-drug">依托咪酯</span>
+            <span class="tag tag-drug">咪达唑仑</span>
+            <span class="tag tag-drug">氯化琥珀胆碱</span>
+            <span class="tag tag-drug">罗库溴铵</span>
+        </div>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">🔑 关键词</div>
+        <div class="keywords-content">
+            <span class="keyword">气管插管</span>
+            <span class="keyword">药物应用</span>
+            <span class="keyword">镇痛</span>
+            <span class="keyword">镇静</span>
+            <span class="keyword">肌松</span>
+            <span class="keyword">插管后管理</span>
+            <span class="keyword">气管切开</span>
+            <span class="keyword">呼气末CO₂监测</span>
+        </div>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <div class="copy-title">📋 复制信息</div>
+        <div class="copy-row">
+            <input type="text" id="copyInput" value="气管插管药物应用与管理；镇痛、镇静、肌松药物、插管后管理、气管切开、会厌炎、假膜性喉炎、瑞芬太尼、芬太尼、丙泊酚、氯化琥珀胆碱=318" readonly>
+            <button id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                    document.getElementById('copyBtn').classList.add('copied');
+                    document.getElementById('copyBtn').textContent = '已复制';
+                    setTimeout(() => {
+                        document.getElementById('copyBtn').classList.remove('copied');
+                        document.getElementById('copyBtn').textContent = '复制';
+                    }, 2000);
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 添加到收藏
+        function addToFavorites() {
+            const btn = document.getElementById('favBtn');
+            const title = document.querySelector('.main-title h1').textContent;
+            const pageNum = '318';
+            const url = window.location.href;
+            
+            // 获取现有收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.pageNum === pageNum);
+            
+            if (exists) {
+                showToast('该页面已在收藏中！');
+                return;
+            }
+            
+            // 添加收藏
+            favorites.push({
+                title: title,
+                pageNum: pageNum,
+                url: url,
+                time: new Date().toLocaleString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 同时保存到index可读取的格式
+            let indexFavorites = JSON.parse(localStorage.getItem('index_favorites') || '[]');
+            indexFavorites.push({
+                title: title,
+                pageNum: pageNum,
+                url: '318.html',
+                category: '气管插管'
+            });
+            localStorage.setItem('index_favorites', JSON.stringify(indexFavorites));
+            
+            btn.classList.add('added');
+            btn.textContent = '❤ 已收藏';
+            showToast('已添加到收藏！');
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.pageNum === '318');
+            if (exists) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('added');
+                btn.textContent = '❤ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
