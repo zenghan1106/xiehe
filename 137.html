@@ -1,0 +1,443 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~上消化道出血病因检查与急诊处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 15px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background-color: #1e5aa8;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.3s;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background-color: #154785;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        
+        .nav-btn {
+            background-color: #4a90d9;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 13px;
+            transition: background-color 0.3s;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background-color: #357abd;
+        }
+        
+        .favorite-btn {
+            background-color: #f0ad4e;
+            color: #333;
+            padding: 8px 18px;
+            border-radius: 6px;
+            border: none;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .favorite-btn:hover {
+            background-color: #ec971f;
+        }
+        
+        .favorite-btn.active {
+            background-color: #d9534f;
+            color: white;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a3a6e;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #e8f0fe;
+            border-radius: 10px;
+            border-left: 5px solid #1e5aa8;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        thead tr {
+            background-color: #1e5aa8;
+            color: white;
+        }
+        
+        thead th {
+            padding: 18px 12px;
+            text-align: left;
+            font-size: 17px;
+            font-weight: bold;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f0fe;
+        }
+        
+        td {
+            padding: 12px;
+            vertical-align: top;
+            font-size: 14px;
+        }
+        
+        td:first-child {
+            font-weight: bold;
+            color: #1e5aa8;
+            width: 130px;
+            white-space: nowrap;
+        }
+        
+        .check-item {
+            color: #28a745;
+            margin-right: 6px;
+            font-weight: bold;
+        }
+        
+        .bullet-item {
+            color: #333;
+            margin-right: 6px;
+        }
+        
+        .sub-item {
+            margin-left: 20px;
+            display: block;
+        }
+        
+        .sub-sub-item {
+            margin-left: 40px;
+            display: block;
+        }
+        
+        .section-title {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            margin-top: 20px;
+            padding: 18px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1e5aa8;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 4px;
+            font-size: 13px;
+            border: 1px solid;
+        }
+        
+        .tag.disease {
+            background-color: #fde8e8;
+            color: #c0392b;
+            border-color: #f5c6c6;
+        }
+        
+        .tag.drug {
+            background-color: #e8f8f5;
+            color: #27ae60;
+            border-color: #c5e8d5;
+        }
+        
+        .tag.bacteria {
+            background-color: #fef5e7;
+            color: #e8b339;
+            border-color: #f5deb3;
+        }
+        
+        .bottom-section {
+            margin-top: 20px;
+            padding: 18px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 15px;
+            border: 2px solid #c5d9f8;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 22px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background-color: #218838;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #ddd;
+        }
+        
+        .keywords span {
+            color: #1e5aa8;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+                padding: 12px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 14px 10px;
+            }
+            
+            td {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            td:first-child {
+                width: 100px;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-buttons {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="136.html" class="nav-btn">上一页</a>
+            <a href="138.html" class="nav-btn">下一页</a>
+            <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~上消化道出血病因检查与急诊处理*****</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">上消化道出血病因、检查与急诊处理要点</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>食管贲门黏膜撕裂综合征</td>
+                <td>（壁内剥离），通常与剧烈干呕等腹压突然增大相关，失血量常较小且自限。</td>
+            </tr>
+            <tr>
+                <td>胃癌</td>
+                <td>中老年男性居多。早期胃癌可无症状；进展期胃癌常有上腹痛，伴食欲减退、体重减轻、早饱感，上腹部可扪及肿块伴压痛，有时可扪及Virchow淋巴结并出现相关转移症状。早期胃癌典型的呕吐物为咖啡渣样。</td>
+            </tr>
+            <tr>
+                <td>胆道出血</td>
+                <td>外伤、炎症、肿瘤或动脉瘤所致肝内或肝外动脉、静脉与胆管或胆囊相通，引起上消化道出血者均属于胆道出血。常有右上腹阵发性绞痛、出血、黄疸。出血有间歇性发作倾向。感染性胆道出血常伴高热、寒战。部分可触及肿大的肝和胆囊。</td>
+            </tr>
+            <tr>
+                <td><span class="section-title">3. 必做检查</span></td>
+                <td><span class="bullet-item">●</span><strong>血常规：</strong>出血早期Hb可无明显变化，3～4小时后出现贫血，初期2～8小时监测1次；MCV：急性失血为正细胞正色素贫血。<br>
+                <span class="bullet-item">●</span><strong>粪便OB：</strong>对粪便颜色不能确定是否为出血者，可查粪便OB证实。<br>
+                <span class="bullet-item">●</span><strong>生化检查：</strong>BUN/Cr＞36:1或尿素/肌酐＞100:1提示出血源自上消化道。比值越高，上消化道出血的可能性越大。<br>
+                <span class="bullet-item">●</span><strong>肝功能、血型、感染4项等输血前检查。</strong><br>
+                <span class="bullet-item">●</span><strong>凝血功能检查。</strong><br>
+                <span class="bullet-item">●</span><strong>腹部B超：</strong>以明确是否有肝硬化、门静脉高压等情况。<br>
+                <span class="bullet-item">●</span><strong>上消化道内镜：</strong>是上消化道出血的首选诊断检查，可定位和识别出血灶并止血。若无禁忌，推荐对大多数急性上消化道出血患者行早期内镜操作（24小时内），疑似静脉曲张破裂出血患者应在就诊12小时内进行内镜操作。</td>
+            </tr>
+            <tr>
+                <td><span class="section-title">4. 选做检查</span></td>
+                <td><span class="bullet-item">●</span><strong>血管造影：</strong>可检出活动性出血。<br>
+                <span class="bullet-item">●</span><strong>结肠镜：</strong>上消化道内镜检查阴性的黑便患者通常需行结肠镜检查，以排除右半结肠出血灶。<br>
+                <span class="bullet-item">●</span><strong>放射性核素扫描。</strong><br>
+                <span class="bullet-item">●</span><strong>心肌酶测定和24小时动态心电图：</strong>适用于有心肌梗死风险的患者。<br>
+                <span class="bullet-item">●</span><strong>腹盆CT：</strong>以除外穿孔，增强CT可用于活动性出血定位。</td>
+            </tr>
+            <tr>
+                <td><span class="section-title">5. 急诊处理</span></td>
+                <td><span class="bullet-item">●</span><strong>一般支持</strong><br>
+                <span class="sub-item"><span class="check-item">✓</span>卧床、吸氧、禁食水、补液。</span>
+                <span class="sub-item"><span class="check-item">✓</span>密切监测患者生命体征、出血量及尿量。</span>
+                <span class="sub-item"><span class="check-item">✓</span>保持呼吸道通畅。</span>
+                <span class="sub-item"><span class="check-item">✓</span>对活动性出血或大出血者放置胃管，接袋引流。</span></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="tags-container">
+        <div class="tags-title">特色检索标签</div>
+        <span class="tag disease">上消化道出血</span>
+        <span class="tag disease">食管贲门黏膜撕裂综合征</span>
+        <span class="tag disease">胃癌</span>
+        <span class="tag disease">胆道出血</span>
+        <span class="tag disease">肝硬化</span>
+        <span class="tag disease">门静脉高压</span>
+        <span class="tag disease">静脉曲张破裂出血</span>
+        <span class="tag disease">心肌梗死</span>
+    </div>
+    
+    <div class="bottom-section">
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="上消化道出血病因检查与急诊处理；食管贲门黏膜撕裂综合征；胃癌；胆道出血；Virchow淋巴结；血常规；粪便OB；BUN/Cr；上消化道内镜；血管造影；结肠镜；放射性核素扫描；心肌酶；腹盆CT；急诊处理；=137" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+        <div class="page-number">页码：137</div>
+        <div class="keywords">
+            关键词：<span>上消化道出血、食管贲门黏膜撕裂综合征、胃癌、胆道出血、Virchow淋巴结、血常规、粪便OB、BUN/Cr、上消化道内镜、血管造影、结肠镜、放射性核素扫描、心肌酶、腹盆CT、肝硬化、门静脉高压、静脉曲张破裂出血</span>
+        </div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '已复制';
+                btn.style.backgroundColor = '#218838';
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.style.backgroundColor = '#28a745';
+                }, 2000);
+            });
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            if (btn.classList.contains('active')) {
+                btn.classList.remove('active');
+                btn.innerHTML = '☆ 收藏';
+                localStorage.removeItem('fav_137');
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f !== '137');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            } else {
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                if (!favorites.includes('137')) {
+                    favorites.push('137');
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                localStorage.setItem('fav_137', '上消化道出血病因检查与急诊处理');
+            }
+        }
+        
+        window.onload = function() {
+            if (localStorage.getItem('fav_137')) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
