@@ -1,0 +1,544 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~休克药物治疗与急性阑尾炎急诊处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-home {
+            background: #4a90d9;
+            color: white;
+        }
+
+        .btn-home:hover {
+            background: #357abd;
+        }
+
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+
+        .btn-page {
+            background: #5cb85c;
+            color: white;
+            min-width: 80px;
+        }
+
+        .btn-page:hover {
+            background: #4cae4c;
+        }
+
+        .btn-fav {
+            background: #f0ad4e;
+            color: white;
+            min-width: 80px;
+        }
+
+        .btn-fav:hover {
+            background: #ec971f;
+        }
+
+        .btn-fav.active {
+            background: #d9534f;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 22px;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            line-height: 1.6;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        thead th {
+            background: #2e5c8a;
+            color: white;
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+
+        .section-title {
+            font-weight: 700;
+            color: #1a5276;
+            font-size: 15px;
+        }
+
+        .check-item {
+            color: #27ae60;
+            font-weight: 600;
+        }
+
+        .sub-item {
+            padding-left: 20px;
+            color: #555;
+        }
+
+        .highlight-box {
+            background: #e8f6f3;
+            border-left: 4px solid #1abc9c;
+            padding: 10px 12px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .author {
+            text-align: right;
+            color: #888;
+            font-size: 13px;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .tags-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.85);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .tags-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tag-disease {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+
+        .tag-disease:hover {
+            background: #c62828;
+            color: white;
+        }
+
+        .tag-drug {
+            background: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #90caf9;
+        }
+
+        .tag-drug:hover {
+            background: #1565c0;
+            color: white;
+        }
+
+        .tag-bacteria {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+
+        .tag-bacteria:hover {
+            background: #2e7d32;
+            color: white;
+        }
+
+        .keywords-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(255,255,255,0.85);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            text-align: center;
+        }
+
+        .keywords-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+
+        .keywords-content {
+            font-size: 14px;
+            color: #555;
+            line-height: 2;
+        }
+
+        .keyword {
+            display: inline-block;
+            padding: 4px 12px;
+            margin: 4px;
+            background: #fff3e0;
+            color: #e65100;
+            border-radius: 16px;
+            font-size: 13px;
+        }
+
+        .page-number {
+            margin-top: 15px;
+            font-size: 20px;
+            font-weight: 700;
+            color: #2e5c8a;
+        }
+
+        .copy-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background: #fafafa;
+        }
+
+        .btn-copy {
+            background: #6c5ce7;
+            color: white;
+            padding: 12px 28px;
+            white-space: nowrap;
+        }
+
+        .btn-copy:hover {
+            background: #5b4cdb;
+        }
+
+        .btn-copy.copied {
+            background: #00b894;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .btn {
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-top">
+        <a href="index.html" class="btn btn-home">← 返回首页</a>
+        <div class="nav-right">
+            <a href="122.html" class="btn btn-page">上一页</a>
+            <a href="124.html" class="btn btn-page">下一页</a>
+            <button class="btn btn-fav" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+
+    <h1>~~~~~休克药物治疗与急性阑尾炎急诊处理*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~休克药物治疗与急性阑尾炎急诊处理*****、休克药物治疗与消化系统疾病急诊、五、消化系统疾病急诊 ■ 急性阑尾炎</div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>休克药物治疗与消化系统疾病急诊</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="section-title">一、正性肌力药物和血管活性药物</div>
+                        <div class="check-item">✓ 若容量补充仍不能将心输出量维持在足够水平，则提示心脏功能障碍，有指征应用正性肌力药物，如多巴酚丁胺等</div>
+                        <div class="sub-item">血管收缩药物由于可以升高血压，可能在临床上被过度应用</div>
+                        <div class="sub-item">在容量负荷不足的情况下应用血管收缩药物可导致外周血管进一步收缩，组织灌注更加减少</div>
+                        <div class="sub-item">同时由于心脏后负荷的增加而使心输出量下降</div>
+                        <div class="sub-item">仅有可能的有利因素是静脉系统的收缩可增加回心血流量，增加心脏前负荷</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">二、复苏目标</div>
+                        <div class="check-item">✓ 休克早期复苏的目标是在最短的时间内改善组织灌注，纠正组织细胞缺氧，恢复器官的正常功能</div>
+                        <div class="sub-item">提高氧输送是实现这些目标的基本方法</div>
+                        <div class="sub-item">血流动力学监测指标为复苏的过程提供反馈性指导，保证具体方法在时间上和程度上的准确实施</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">三、病因治疗</div>
+                        <div class="check-item">• 休克的病因治疗指对导致休克发生发展原因的去除</div>
+                        <div class="sub-item">通常需要一定的时间过程（如控制感染）或在另一方面对机体造成新的损伤（如手术打击），使得患者没有机会等待病因治疗的完成或无法耐受病因治疗的实施</div>
+                        <div class="sub-item">所以，在治疗休克时，病因治疗一定要与支持性治疗有机的结合在才有可能提高休克的治愈率</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">四、延续性支持治疗</div>
+                        <div class="check-item">• 紧接在早期复苏达到目标后，在医疗措施的干预下，机体组织灌注一般得以改善，循环稳定后即进入延续性支持治疗</div>
+                        <div class="sub-item">主要组成部分包括：继续维持组织灌注、纠正机体内环境紊乱、纠正早期休克复苏治疗所致再损伤</div>
+                        <div class="sub-item">维持组织灌注可在保证组织灌注的前提下，可逐渐降低支持力度，减少血管活性药物剂量，进入降阶梯治疗的阶段</div>
+                        <div class="sub-item">纠正机体内环境紊乱是延续性支持治疗的重要内容</div>
+                        <div class="sub-item">同时，对早期复苏的必要措施所导致的一些后果，需要在后期的治疗中进行一定的调整，纠正早期休克复苏治疗所致再损伤是延续治疗的重要部分，是休克后期治疗方向的转折</div>
+                        <div class="sub-item">应根据患者的具体情况，在血流动力学监测指标的反馈指导下，对循环功能状态进行积极调整</div>
+                        <div class="author">（戴佳原）</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">五、消化系统疾病急诊</div>
+                        <div class="check-item">■ 急性阑尾炎</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">六、急性阑尾炎 - 临床表现</div>
+                        <div class="check-item">• 病史：腹痛、食欲减退、恶心、呕吐</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">休克</span>
+            <span class="tag tag-disease">心脏功能障碍</span>
+            <span class="tag tag-disease">组织灌注不良</span>
+            <span class="tag tag-disease">组织细胞缺氧</span>
+            <span class="tag tag-disease">机体内环境紊乱</span>
+            <span class="tag tag-disease">急性阑尾炎</span>
+            <span class="tag tag-disease">腹痛</span>
+            <span class="tag tag-disease">食欲减退</span>
+            <span class="tag tag-disease">恶心</span>
+            <span class="tag tag-disease">呕吐</span>
+            <span class="tag tag-drug">正性肌力药物</span>
+            <span class="tag tag-drug">血管活性药物</span>
+            <span class="tag tag-drug">多巴酚丁胺</span>
+            <span class="tag tag-drug">血管收缩药物</span>
+            <span class="tag tag-bacteria">感染</span>
+        </div>
+    </div>
+
+    <div class="keywords-section">
+        <div class="keywords-title">🔍 关键词</div>
+        <div class="keywords-content">
+            <span class="keyword">休克</span>
+            <span class="keyword">正性肌力药物</span>
+            <span class="keyword">血管活性药物</span>
+            <span class="keyword">多巴酚丁胺</span>
+            <span class="keyword">复苏目标</span>
+            <span class="keyword">病因治疗</span>
+            <span class="keyword">延续性支持治疗</span>
+            <span class="keyword">降阶梯治疗</span>
+            <span class="keyword">急性阑尾炎</span>
+            <span class="keyword">消化系统急诊</span>
+        </div>
+        <div class="page-number">123</div>
+    </div>
+
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" readonly>
+        <button class="btn btn-copy" id="copyBtn" onclick="copyToClipboard()">复制</button>
+    </div>
+
+    <script>
+        // 设置复制输入框内容
+        const title = "~~~~~休克药物治疗与急性阑尾炎急诊处理*****";
+        const subtitle = "休克药物治疗与消化系统疾病急诊";
+        const keywords = "休克；正性肌力药物；血管活性药物；多巴酚丁胺；复苏目标；病因治疗；延续性支持治疗；降阶梯治疗；急性阑尾炎；消化系统急诊";
+        const pageNum = "123";
+        document.getElementById('copyInput').value = title + "；" + subtitle + "；" + keywords + "；=" + pageNum;
+
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+
+        // 收藏功能
+        let isFavorited = false;
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            isFavorited = !isFavorited;
+            
+            if (isFavorited) {
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+                
+                // 保存到localStorage，用于index.html读取
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const currentPage = {
+                    title: '休克药物治疗与急性阑尾炎急诊处理',
+                    url: window.location.pathname.split('/').pop() || '123.html',
+                    category: '急诊疾病'
+                };
+                
+                // 避免重复添加
+                const exists = favorites.some(f => f.url === currentPage.url);
+                if (!exists) {
+                    favorites.push(currentPage);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                // 触发index.html更新（如果打开的话）
+                localStorage.setItem('favoritesUpdated', Date.now().toString());
+            } else {
+                btn.textContent = '☆ 收藏';
+                btn.classList.remove('active');
+                
+                // 从收藏中移除
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const currentUrl = window.location.pathname.split('/').pop() || '123.html';
+                favorites = favorites.filter(f => f.url !== currentUrl);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                localStorage.setItem('favoritesUpdated', Date.now().toString());
+            }
+        }
+
+        // 页面加载时检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const currentUrl = window.location.pathname.split('/').pop() || '123.html';
+            const exists = favorites.some(f => f.url === currentUrl);
+            if (exists) {
+                isFavorited = true;
+                document.getElementById('favBtn').textContent = '★ 已收藏';
+                document.getElementById('favBtn').classList.add('active');
+            }
+        };
+    </script>
+
+</body>
+</html>
