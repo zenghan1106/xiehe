@@ -1,0 +1,418 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~高危头痛与低危头痛鉴别诊断*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .header {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        
+        .nav-buttons {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .nav-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .prev-btn {
+            background-color: #4a90d9;
+        }
+        
+        .next-btn {
+            background-color: #4a90d9;
+        }
+        
+        .fav-btn {
+            background-color: #e6a23c;
+        }
+        
+        .home-btn {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 100;
+            padding: 8px 16px;
+            background-color: #67c23a;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            padding: 50px 10px 20px;
+            font-weight: bold;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 0 -5px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        thead th {
+            background-color: #2e75b6;
+            color: white;
+            padding: 14px 12px;
+            text-align: left;
+            font-size: 17px;
+            font-weight: bold;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+            font-size: 14px;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background-color: #e3f0ff;
+        }
+        
+        .category {
+            color: #c0392b;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        
+        .sub-item {
+            color: #2980b9;
+            font-weight: 600;
+        }
+        
+        .check-mark {
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 4px;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #888;
+            font-size: 13px;
+            margin: 15px 0;
+        }
+        
+        .tags-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 5px 12px;
+            margin: 4px;
+            background-color: #e8f4f8;
+            color: #1a5276;
+            border-radius: 15px;
+            font-size: 13px;
+            border: 1px solid #b8d4e3;
+        }
+        
+        .copy-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 12px;
+            border: 1px solid #dcdcdc;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            padding: 10px 20px;
+            background-color: #409eff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .copy-btn:active {
+            background-color: #3a8ee6;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            margin-top: 15px;
+            padding-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 18px;
+                padding-top: 60px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .nav-btn, .home-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="52.html" class="nav-btn prev-btn">上一页</a>
+        <a href="54.html" class="nav-btn next-btn">下一页</a>
+        <button class="nav-btn fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~高危头痛与低危头痛鉴别诊断*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类</th>
+                    <th>具体类型</th>
+                    <th>临床表现与特点</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="14" class="category">高危头痛</td>
+                    <td><span class="check-mark">✓</span><span class="sub-item">蛛网膜下腔出血（SAH）</span></td>
+                    <td>突发剧烈头痛、呕吐、脑膜刺激征。患者常描述为"生平最糟糕的头痛"。发病6小时内CT检查敏感率性接近100%（需有经验的放射医师）。若CT阴性但高度怀疑SAH，可行腰穿检查确认。</td>
+                </tr>
+                <tr>
+                    <td><span class="check-mark">✓</span><span class="sub-item">颈动脉或椎动脉夹层、可逆性脑血管收缩或颅内出血</span></td>
+                    <td>头痛常于用力后发生，伴颈痛或霍纳（Horner）综合征，常需增强CT确认。</td>
+                </tr>
+                <tr>
+                    <td><span class="check-mark">✓</span><span class="sub-item">中枢系统炎症</span></td>
+                    <td>包括脑膜炎、脑炎、血管炎、脑脓肿等。头痛部位弥散，伴发热、精神行为异常等。查体可见脑膜刺激征、病理征等。</td>
+                </tr>
+                <tr>
+                    <td><span class="check-mark">✓</span><span class="sub-item">免疫功能低下患者新发头痛</span></td>
+                    <td>需警惕其并发感染、淋巴瘤和白血病。</td>
+                </tr>
+                <tr>
+                    <td><span class="check-mark">✓</span><span class="sub-item">50岁以上患者新发头痛或头痛逐渐恶化</span></td>
+                    <td>需警惕肿瘤、出血等，多有神经定位体征、精神状态等改变。</td>
+                </tr>
+                <tr>
+                    <td><span class="check-mark">✓</span><span class="sub-item">颞动脉炎</span></td>
+                    <td>常见于中老年人，多为颞部头痛，头皮颞浅动脉搏动减弱或消失，疼痛部位皮肤红肿，有触痛，可伴视力障碍、间歇性下颌运动障碍、发热、乏力。</td>
+                </tr>
+                <tr>
+                    <td><span class="check-mark">✓</span><span class="sub-item">颅内静脉窦血栓形成</span></td>
+                    <td>较少见，与口服避孕药、妊娠和产褥期、恶性肿瘤、感染、外伤等高凝诱因相关，在中青年女性更常见。可有意识障碍，癫痫发作，局灶性神经功能障碍等。</td>
+                </tr>
+                <tr>
+                    <td><span class="check-mark">✓</span><span class="sub-item">眼科疾病</span></td>
+                    <td>包括青光眼、感染、炎症、眶内肿瘤等。多为单侧额部或眶部疼痛，可有视力下降、眼肌麻痹，眼压升高等。</td>
+                </tr>
+                <tr>
+                    <td><span class="check-mark">✓</span><span class="sub-item">妊娠期新发头痛</span></td>
+                    <td>应警惕子痫前期，发生于妊娠20周以后，伴血压升高、视物模糊、水肿、抽搐等症状。</td>
+                </tr>
+                <tr>
+                    <td><span class="check-mark">✓</span><span class="sub-item">高血压急症</span></td>
+                    <td>严重头痛，可有抽搐、意识障碍，血压明显增高。</td>
+                </tr>
+                <tr>
+                    <td><span class="check-mark">✓</span><span class="sub-item">CO中毒</span></td>
+                    <td>发病前处在有CO来源（如锅炉等）的封闭空间，离开所处环境头痛缓解。</td>
+                </tr>
+                <tr>
+                    <td><span class="check-mark">✓</span><span class="sub-item">鼻源性头痛</span></td>
+                    <td>如副鼻窦炎。通常为双侧额部、颌面部钝性疼痛，晨重暮轻，弯腰或咳嗽加重，伴鼻塞、脓涕。查体可发现前额、内眦、上颌等副鼻窦区压痛。</td>
+                </tr>
+                <tr>
+                    <td><span class="check-mark">✓</span><span class="sub-item">毒性面容</span></td>
+                    <td>指头痛患者出现嗜睡、面色苍白、发热或发汗等，提示可能存在累及中枢神经系统的全身性疾病或感染。</td>
+                </tr>
+                <tr>
+                    <td class="category">低危头痛</td>
+                    <td colspan="2">常无须行进一步检查，需具备以下所有条件：①既往有同样头痛发作；②病史和检查提示醒觉和认知正常；③颈抵抗阴性（提示无脑膜刺激征）；④体温、血压等生命体征正常；⑤神经系统查体正常或无定位体征；⑥经观察或治疗后头痛缓解。</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">40</div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <span class="tag">蛛网膜下腔出血</span>
+        <span class="tag">SAH</span>
+        <span class="tag">颈动脉夹层</span>
+        <span class="tag">椎动脉夹层</span>
+        <span class="tag">可逆性脑血管收缩</span>
+        <span class="tag">颅内出血</span>
+        <span class="tag">脑膜炎</span>
+        <span class="tag">脑炎</span>
+        <span class="tag">血管炎</span>
+        <span class="tag">脑脓肿</span>
+        <span class="tag">淋巴瘤</span>
+        <span class="tag">白血病</span>
+        <span class="tag">肿瘤</span>
+        <span class="tag">颞动脉炎</span>
+        <span class="tag">颅内静脉窦血栓形成</span>
+        <span class="tag">青光眼</span>
+        <span class="tag">眶内肿瘤</span>
+        <span class="tag">子痫前期</span>
+        <span class="tag">高血压急症</span>
+        <span class="tag">CO中毒</span>
+        <span class="tag">副鼻窦炎</span>
+        <span class="tag">鼻源性头痛</span>
+        <span class="tag">毒性面容</span>
+        <span class="tag">霍纳综合征</span>
+        <span class="tag">Horner</span>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="高危头痛与低危头痛鉴别诊断；高危头痛；低危头痛；蛛网膜下腔出血；SAH；颈动脉夹层；脑膜炎；脑炎；血管炎；脑脓肿；颞动脉炎；颅内静脉窦血栓；青光眼；子痫前期；高血压急症；CO中毒；副鼻窦炎；=40" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">关键词：40 | 页码：40</div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            }, function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板！");
+            });
+        }
+        
+        // 添加到收藏
+        function addToFavorites() {
+            // 获取当前页面信息
+            const title = document.title;
+            const url = window.location.href;
+            const pageNum = "40";
+            
+            // 尝试使用localStorage存储收藏信息
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(fav => fav.url === url);
+            if (exists) {
+                alert("该页面已在收藏夹中！");
+                return;
+            }
+            
+            // 添加收藏
+            favorites.push({
+                title: title,
+                url: url,
+                pageNum: pageNum,
+                category: '头痛',
+                addTime: new Date().toLocaleString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert("已添加到index.html的收藏类目下！\n标题：" + title);
+        }
+    </script>
+</body>
+</html>
