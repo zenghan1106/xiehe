@@ -1,0 +1,499 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~SLEDAI-2000积分表续表及SLE急诊处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f9ff 50%, #fff5f5 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #333;
+        }
+        
+        .header {
+            position: relative;
+            margin-bottom: 20px;
+            padding-top: 10px;
+        }
+        
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            z-index: 100;
+        }
+        
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+        }
+        
+        .fav-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(255,107,107,0.3);
+        }
+        
+        .title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 60px 0 20px 0;
+            padding: 0 10px;
+            line-height: 1.4;
+        }
+        
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #2874a6;
+            margin-bottom: 15px;
+        }
+        
+        .section-title {
+            font-size: 17px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 25px 0 15px 0;
+            padding: 10px 15px;
+            background: #d4e6f1;
+            border-radius: 8px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        thead {
+            background: #2e86c1;
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 10px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4fd;
+        }
+        
+        td {
+            padding: 10px;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        .performance {
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        .description {
+            color: #444;
+            word-break: break-all;
+        }
+        
+        .score {
+            text-align: center;
+            font-weight: bold;
+            color: #c0392b;
+            white-space: nowrap;
+        }
+        
+        .note {
+            background: #fef9e7;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 13px;
+            color: #7d6608;
+            line-height: 1.8;
+            border-left: 4px solid #f4d03f;
+        }
+        
+        .content-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .content-section h3 {
+            color: #1a5276;
+            font-size: 15px;
+            margin: 15px 0 10px 0;
+        }
+        
+        .content-section ul {
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+        
+        .content-section li {
+            margin-bottom: 8px;
+            color: #444;
+        }
+        
+        .check-mark {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .tags-section {
+            margin: 25px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            cursor: pointer;
+        }
+        
+        .tag:hover {
+            background: #c0392b;
+        }
+        
+        .page-num {
+            text-align: center;
+            font-size: 18px;
+            color: #2e86c1;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .keywords {
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 15px;
+            padding: 10px;
+        }
+        
+        .copy-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            padding: 0 10px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            max-width: calc(100% - 110px);
+            padding: 12px 15px;
+            border: 2px solid #4a90d9;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #219a52;
+        }
+        
+        .author {
+            text-align: right;
+            color: #888;
+            font-size: 13px;
+            margin: 10px 0;
+        }
+        
+        @media (max-width: 600px) {
+            .title {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            thead th {
+                font-size: 14px;
+                padding: 10px 6px;
+            }
+            td {
+                padding: 8px 6px;
+                font-size: 13px;
+            }
+            .nav-btn, .fav-btn, .home-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            .copy-input {
+                font-size: 12px;
+                padding: 10px;
+            }
+            .section-title {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <div class="nav-btns">
+        <a href="230.html" class="nav-btn">上一页</a>
+        <a href="232.html" class="nav-btn">下一页</a>
+        <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    </div>
+
+    <h1 class="title">~~~~~SLEDAI-2000积分表续表及SLE急诊处理*****</h1>
+    <p class="subtitle">续表 SLEDAI-2000积分表 / 6. 急诊处理 / 硬皮病肾危象</p>
+
+    <div class="section-title">续表 SLEDAI-2000积分表</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:30%">表现</th>
+                    <th style="width:55%">描述</th>
+                    <th style="width:15%">计分</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="performance">抗ds-DNA抗体增加</td>
+                    <td class="description"></td>
+                    <td class="score">2分</td>
+                </tr>
+                <tr>
+                    <td class="performance">发热＞38℃需除外感染</td>
+                    <td class="description"></td>
+                    <td class="score">1分</td>
+                </tr>
+                <tr>
+                    <td class="performance">PLT＜100×10⁹/L</td>
+                    <td class="description"></td>
+                    <td class="score">1分</td>
+                </tr>
+                <tr>
+                    <td class="performance">WBC＜3.0×10⁹/L</td>
+                    <td class="description"></td>
+                    <td class="score">1分</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="note">
+        <strong>注：</strong>对SLE病情的判断，0～4分，基本无活动；5～9分，轻度活动；10～14分，中度活动；≥15分，重度活动。上述计分为前10天之内的症状和检查。
+    </div>
+
+    <div class="section-title">6. 急诊处理</div>
+    
+    <div class="content-section">
+        <h3>● 一般原则</h3>
+        <ul>
+            <li><span class="check-mark">✓</span> 需在评估疾病活动性及脏器损伤情况后调整治疗方案。</li>
+            <li><span class="check-mark">✓</span> 中重度SLE患者先予一段时间的强化免疫抑制治疗（诱导缓解治疗），再进行长期的低强度维持治疗。</li>
+            <li><span class="check-mark">✓</span> 中重度SLE患者可予泼尼松0.5～1mg/(kg·d)，与免疫抑制药联合应用。</li>
+        </ul>
+        
+        <h3>● 糖皮质激素冲击治疗</h3>
+        <ul>
+            <li><span class="check-mark">✓</span> 指征：急进性狼疮肾炎、大量心包积液、弥漫性肺泡出血、狼疮脑病、严重血细胞异常、血管炎。</li>
+            <li><span class="check-mark">✓</span> 方案：甲泼尼龙1.0g/d×(3～5)天，之后改用大剂量糖皮质激素（40～60mg/d）维持治疗。</li>
+            <li><span class="check-mark">✓</span> 难治性疾病可考虑联合血浆置换。</li>
+        </ul>
+        
+        <h3>● 神经精神狼疮</h3>
+        <ul>
+            <li><span class="check-mark">✓</span> 癫痫发作：可予咪达唑仑静脉注射镇静治疗。</li>
+            <li><span class="check-mark">✓</span> 弥漫性狼疮脑病：可采用甲氨蝶呤5～10mg加地塞米松5～10mg鞘内注射。</li>
+        </ul>
+        
+        <h3>● 狼疮合并血小板明显减低</h3>
+        <ul>
+            <li>可静脉输注丙种球蛋白0.4mg/(kg·d)×(3～5)天。</li>
+        </ul>
+        
+        <h3>● 治疗过程中SLE患者出现发热</h3>
+        <ul>
+            <li><span class="check-mark">✓</span> 首先应除外各种感染，尤其是结核感染。</li>
+            <li><span class="check-mark">✓</span> 若感染为主要矛盾，应尽快减量糖皮质激素，暂停免疫抑制药，并加强抗感染治疗。</li>
+        </ul>
+        
+        <p class="author">（杨 婧）</p>
+    </div>
+
+    <div class="section-title">■ 硬皮病肾危象</div>
+    
+    <div class="content-section">
+        <h3>1. 定义</h3>
+        <ul>
+            <li>硬皮病是一种以局限性或弥漫性皮肤增厚或纤维化为特征，</li>
+        </ul>
+    </div>
+
+    <div class="tags-section">
+        <div class="tags-title">检索标签（点击图片中的关键词可检索）：</div>
+        <span class="tag">SLE</span>
+        <span class="tag">抗ds-DNA抗体</span>
+        <span class="tag">发热</span>
+        <span class="tag">PLT</span>
+        <span class="tag">WBC</span>
+        <span class="tag">狼疮肾炎</span>
+        <span class="tag">心包积液</span>
+        <span class="tag">弥漫性肺泡出血</span>
+        <span class="tag">狼疮脑病</span>
+        <span class="tag">血管炎</span>
+        <span class="tag">甲泼尼龙</span>
+        <span class="tag">糖皮质激素</span>
+        <span class="tag">泼尼松</span>
+        <span class="tag">免疫抑制药</span>
+        <span class="tag">血浆置换</span>
+        <span class="tag">咪达唑仑</span>
+        <span class="tag">甲氨蝶呤</span>
+        <span class="tag">地塞米松</span>
+        <span class="tag">丙种球蛋白</span>
+        <span class="tag">结核感染</span>
+        <span class="tag">硬皮病</span>
+        <span class="tag">硬皮病肾危象</span>
+        <span class="tag">皮肤增厚</span>
+        <span class="tag">纤维化</span>
+    </div>
+
+    <div class="page-num">231</div>
+
+    <div class="keywords">
+        关键词：SLEDAI-2000积分表；续表；SLE急诊处理；硬皮病肾危象；系统性红斑狼疮；狼疮肾炎；心包积液；弥漫性肺泡出血；狼疮脑病；血管炎；甲泼尼龙；糖皮质激素；泼尼松；免疫抑制药；血浆置换；咪达唑仑；甲氨蝶呤；地塞米松；丙种球蛋白；结核感染；硬皮病；皮肤增厚；纤维化；抗ds-DNA抗体；PLT；WBC
+    </div>
+
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="SLEDAI-2000积分表续表及SLE急诊处理；续表 SLEDAI-2000积分表 / 6. 急诊处理 / 硬皮病肾危象；SLEDAI-2000积分表；续表；SLE急诊处理；硬皮病肾危象；系统性红斑狼疮；狼疮肾炎；心包积液；弥漫性肺泡出血；狼疮脑病；血管炎；甲泼尼龙；糖皮质激素；泼尼松；免疫抑制药；血浆置换；咪达唑仑；甲氨蝶呤；地塞米松；丙种球蛋白；结核感染；硬皮病；皮肤增厚；纤维化；抗ds-DNA抗体；PLT；WBC；=231" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            }, function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板！");
+            });
+        }
+        
+        function addToFavorites() {
+            const title = document.title.replace(/~~~~~|*****/g, '');
+            const favData = {
+                title: title,
+                url: window.location.href,
+                pageNum: '231'
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === favData.url);
+            
+            if (!exists) {
+                favorites.push(favData);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已收藏！可在index.html的收藏类目下查看。');
+            } else {
+                alert('该页面已在收藏中！');
+            }
+            
+            try {
+                localStorage.setItem('lastFavUpdate', Date.now());
+            } catch(e) {}
+        }
+    </script>
+
+</body>
+</html>
