@@ -1,0 +1,559 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急性心力衰竭治疗与急性心肌炎*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        /* 左上角返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            z-index: 1000;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 右上角按钮组 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(92,184,92,0.3);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+        }
+        
+        .nav-btn.next {
+            background: #f0ad4e;
+        }
+        
+        .nav-btn.next:hover {
+            background: #ec971f;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #d9534f;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(217,83,79,0.3);
+        }
+        
+        .fav-btn:hover {
+            background: #c9302c;
+        }
+        
+        .fav-btn.active {
+            background: #5cb85c;
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            font-size: 26px;
+            color: #2c3e50;
+            margin: 60px 0 25px 0;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            max-width: 900px;
+            margin: 0 auto 30px auto;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        
+        /* 表头 - 蓝色 */
+        thead th {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        /* 表格第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 15px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        td, th {
+            padding: 12px;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4fd;
+        }
+        
+        /* 分类标题行 */
+        .section-row {
+            background: #e3f2fd !important;
+        }
+        
+        .section-row td {
+            color: #1565c0;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        
+        /* 子项目 */
+        .sub-item {
+            color: #555;
+            padding-left: 8px;
+        }
+        
+        /* 底部区域 */
+        .bottom-area {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* 标签区域 */
+        .tags-area {
+            margin-bottom: 20px;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #e3f2fd;
+            color: #1565c0;
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 13px;
+            margin: 4px;
+            border: 1px solid #bbdefb;
+        }
+        
+        .tag.disease {
+            background: #ffebee;
+            color: #c62828;
+            border-color: #ef9a9a;
+        }
+        
+        .tag.drug {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-color: #a5d6a7;
+        }
+        
+        .tag.bacteria {
+            background: #fff3e0;
+            color: #ef6c00;
+            border-color: #ffcc80;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+            margin: 15px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+        }
+        
+        /* 页码 */
+        .page-num {
+            text-align: center;
+            font-size: 18px;
+            color: #4a90d9;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        
+        /* 复制区域 */
+        .copy-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #4a90d9;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            display: none;
+            z-index: 2000;
+        }
+        
+        /* 手机适配 */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 20px;
+                margin-top: 80px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            td, th {
+                padding: 8px;
+            }
+            
+            .home-btn, .nav-btn, .fav-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-area {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 右上角导航按钮 -->
+    <div class="nav-buttons">
+        <a href="103.html" class="nav-btn">← 上一页</a>
+        <a href="105.html" class="nav-btn next">下一页 →</a>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~急性心力衰竭治疗与急性心肌炎*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:25%">分类</th>
+                    <th style="width:75%">详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-row">
+                    <td colspan="2">💊 急性心力衰竭治疗（续）</td>
+                </tr>
+                <tr>
+                    <td><strong>血压管理与降压药物</strong></td>
+                    <td>注意血压水平。血压明显升高者使用降压药物（可选用硝酸甘油、硝普钠、尼卡地平、ACEI等）；出现心源性休克患者则需使用强心及升压药物（如去甲肾上腺素、肾上腺素、多巴胺、多巴酚丁胺、米力农等）</td>
+                </tr>
+                <tr>
+                    <td><strong>洋地黄制剂</strong></td>
+                    <td>西地兰适用于快速心房颤动合并心力衰竭患者</td>
+                </tr>
+                <tr>
+                    <td><strong>难治性心力衰竭</strong></td>
+                    <td>难以纠正的心力衰竭，可考虑使用左西孟旦、重组人脑利钠肽</td>
+                </tr>
+                <tr>
+                    <td><strong>抗心律失常</strong></td>
+                    <td>针对快速性心律失常合并心力衰竭患者，可考虑使用抗心律失常药物纠正，尽量恢复窦性心律。短期无法转复者可考虑使用控制心室率药物</td>
+                </tr>
+                <tr>
+                    <td><strong>纠正内环境紊乱</strong></td>
+                    <td>如代谢性酸中毒、高钾血症、低钾血症等</td>
+                </tr>
+                <tr>
+                    <td><strong>输血支持</strong></td>
+                    <td>必要时输血支持纠正贫血</td>
+                </tr>
+                <tr>
+                    <td><strong>机械性心脏支持</strong></td>
+                    <td>起搏器、主动脉内球囊反搏（IABP）、体外膜氧合（ECMO）或短期左心室辅助装置等</td>
+                </tr>
+                
+                <tr class="section-row">
+                    <td colspan="2">❤️ 急性心肌炎</td>
+                </tr>
+                <tr>
+                    <td><strong>定义</strong></td>
+                    <td>心肌炎是一种心肌炎性疾病，通过心内膜心肌活检并按照已制定的组织学、免疫学和免疫组织化学标准进行诊断</td>
+                </tr>
+                <tr>
+                    <td><strong>病程特点</strong></td>
+                    <td>心肌炎可以呈急性、亚急性或慢性，心肌受累可为局灶性也可是弥漫性</td>
+                </tr>
+                <tr>
+                    <td><strong>临床表现特点</strong></td>
+                    <td>有症状患者通常表现为急性心力衰竭，但也可能出现类似于急性心肌梗死或快速性心律失常（包括猝死）或高度心脏传导阻滞的综合征表现</td>
+                </tr>
+                <tr>
+                    <td><strong>急慢性分类</strong></td>
+                    <td>心力衰竭症状出现时间不超过3个月者为急性心肌炎，病程＞3个月者为慢性心肌炎</td>
+                </tr>
+                
+                <tr class="section-row">
+                    <td colspan="2">🔬 急性心肌炎病因</td>
+                </tr>
+                <tr>
+                    <td><strong>病因概述</strong></td>
+                    <td>心肌炎可由多种感染性和非感染性疾病引起</td>
+                </tr>
+                <tr>
+                    <td><strong>病毒性心肌炎</strong></td>
+                    <td>病毒性心肌炎是感染性心肌炎最常见的类型。过去以柯萨奇病毒为代表的肠道病毒最常见，现在人类疱疹病毒6型和细小病毒B19是疑似心肌炎患者中最常检测到的病毒基因组。锥虫病是美洲流行地区心肌炎的常见原因</td>
+                </tr>
+                <tr>
+                    <td><strong>非感染性病因</strong></td>
+                    <td>非感染性病因包括药物/毒物（可卡因、锂剂、阿霉素），结缔组织病（系统性红斑狼疮、硬皮病、肉芽肿性疾病）等</td>
+                </tr>
+                
+                <tr class="section-row">
+                    <td colspan="2">🩺 急性心肌炎临床表现</td>
+                </tr>
+                <tr>
+                    <td><strong>急性心肌炎特征</strong></td>
+                    <td>ACS样急性胸痛，但血管造影检查显示无冠状动脉疾病</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-area">
+        <!-- 检索标签 -->
+        <div class="tags-area">
+            <div class="tags-title">🔖 检索标签：</div>
+            <span class="tag disease">急性心力衰竭</span>
+            <span class="tag disease">心源性休克</span>
+            <span class="tag disease">急性心肌炎</span>
+            <span class="tag disease">慢性心肌炎</span>
+            <span class="tag disease">病毒性心肌炎</span>
+            <span class="tag disease">心肌炎</span>
+            <span class="tag disease">心力衰竭</span>
+            <span class="tag disease">快速性心律失常</span>
+            <span class="tag disease">心脏传导阻滞</span>
+            <span class="tag disease">系统性红斑狼疮</span>
+            <span class="tag disease">硬皮病</span>
+            <span class="tag disease">肉芽肿性疾病</span>
+            <span class="tag disease">锥虫病</span>
+            <span class="tag drug">硝酸甘油</span>
+            <span class="tag drug">硝普钠</span>
+            <span class="tag drug">尼卡地平</span>
+            <span class="tag drug">ACEI</span>
+            <span class="tag drug">去甲肾上腺素</span>
+            <span class="tag drug">肾上腺素</span>
+            <span class="tag drug">多巴胺</span>
+            <span class="tag drug">多巴酚丁胺</span>
+            <span class="tag drug">米力农</span>
+            <span class="tag drug">西地兰</span>
+            <span class="tag drug">左西孟旦</span>
+            <span class="tag drug">重组人脑利钠肽</span>
+            <span class="tag drug">可卡因</span>
+            <span class="tag drug">锂剂</span>
+            <span class="tag drug">阿霉素</span>
+            <span class="tag bacteria">柯萨奇病毒</span>
+            <span class="tag bacteria">人类疱疹病毒6型</span>
+            <span class="tag bacteria">细小病毒B19</span>
+        </div>
+        
+        <!-- 关键词 -->
+        <div class="keywords">
+            <strong>关键词：</strong>急性心力衰竭、急性心肌炎、病毒性心肌炎、心源性休克、硝酸甘油、硝普钠、尼卡地平、ACEI、去甲肾上腺素、肾上腺素、多巴胺、多巴酚丁胺、米力农、西地兰、左西孟旦、重组人脑利钠肽、IABP、ECMO、柯萨奇病毒、人类疱疹病毒6型、细小病毒B19、可卡因、锂剂、阿霉素、系统性红斑狼疮
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-num">104</div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyInput" value="急性心力衰竭治疗与急性心肌炎；急性心力衰竭治疗、急性心肌炎定义、病因、临床表现；急性心力衰竭、急性心肌炎、病毒性心肌炎、心源性休克、硝酸甘油、硝普钠、尼卡地平、ACEI、去甲肾上腺素、肾上腺素、多巴胺、多巴酚丁胺、米力农、西地兰、左西孟旦、重组人脑利钠肽、IABP、ECMO、柯萨奇病毒、人类疱疹病毒6型、细小病毒B19、可卡因、锂剂、阿霉素、系统性红斑狼疮；=104" readonly>
+            <button class="copy-btn" onclick="copyContent()">📋 复制</button>
+        </div>
+    </div>
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                showToast('✅ 已复制到剪贴板');
+            }).catch(() => {
+                document.execCommand('copy');
+                showToast('✅ 已复制到剪贴板');
+            });
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                
+                // 保存到localStorage，index.html可读取
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '~~~~~急性心力衰竭治疗与急性心肌炎*****',
+                    url: '104.html',
+                    pageNum: '104',
+                    tags: ['急性心力衰竭', '急性心肌炎', '病毒性心肌炎', '心源性休克', '硝酸甘油', '硝普钠', '多巴胺', '西地兰', '柯萨奇病毒']
+                };
+                
+                // 避免重复
+                const exists = favorites.some(f => f.url === '104.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                showToast('⭐ 已添加到收藏');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '104.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                showToast('💔 已取消收藏');
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const btn = document.getElementById('favBtn');
+            if (favorites.some(f => f.url === '104.html')) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
