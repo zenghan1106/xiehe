@@ -1,0 +1,382 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~侵袭性真菌感染（IFI）检查与诊断策略*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        .btn-home {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(33,150,243,0.3);
+            z-index: 100;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-home:hover {
+            background: #1976D2;
+        }
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        .nav-btns a, .nav-btns button {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(33,150,243,0.3);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        .nav-btns a:hover, .nav-btns button:hover {
+            background: #1976D2;
+        }
+        .btn-fav {
+            background: #FF9800 !important;
+        }
+        .btn-fav:hover {
+            background: #F57C00 !important;
+        }
+        .container {
+            max-width: 800px;
+            margin: 60px auto 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #1565C0;
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        thead th {
+            background: #2196F3;
+            color: white;
+            padding: 16px 12px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+        }
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 15px;
+            line-height: 1.7;
+            vertical-align: top;
+        }
+        tbody tr:hover {
+            background: #f0f7ff;
+        }
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        tbody tr:nth-child(even):hover {
+            background: #f0f7ff;
+        }
+        .section-title {
+            font-weight: bold;
+            color: #1565C0;
+            font-size: 16px;
+            white-space: nowrap;
+        }
+        .check-mark {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        .page-num {
+            text-align: center;
+            color: #666;
+            font-size: 16px;
+            margin: 20px 0;
+        }
+        .tags-section {
+            margin-top: 25px;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .tag {
+            display: inline-block;
+            background: #E3F2FD;
+            color: #1565C0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            border: 1px solid #BBDEFB;
+        }
+        .tag-disease {
+            background: #FFEBEE;
+            color: #C62828;
+            border-color: #EF9A9A;
+        }
+        .tag-drug {
+            background: #E8F5E9;
+            color: #2E7D32;
+            border-color: #A5D6A7;
+        }
+        .tag-bacteria {
+            background: #FFF3E0;
+            color: #E65100;
+            border-color: #FFCC80;
+        }
+        .keywords-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            text-align: center;
+        }
+        .keywords {
+            color: #555;
+            font-size: 14px;
+            line-height: 2;
+        }
+        .copy-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #BBDEFB;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+            background: white;
+        }
+        .btn-copy {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .btn-copy:hover {
+            background: #388E3C;
+        }
+        .btn-copy.copied {
+            background: #2196F3;
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 18px;
+                margin-top: 10px;
+            }
+            thead th {
+                font-size: 16px;
+                padding: 12px 8px;
+            }
+            tbody td {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            .btn-home, .nav-btns a, .nav-btns button {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            .copy-section {
+                flex-direction: column;
+            }
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="btn-home">← 返回首页</a>
+    
+    <div class="nav-btns">
+        <a href="222.html">← 上一页</a>
+        <a href="224.html">下一页 →</a>
+        <button class="btn-fav" onclick="addToFavorites()">⭐ 收藏</button>
+    </div>
+
+    <div class="container">
+        <h1>~~~~~侵袭性真菌感染（IFI）检查与诊断策略*****</h1>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>项目</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="section-title">血源性表现</td>
+                    <td>
+                        若出现眼底异常、心脏超声提示瓣膜赘生物、皮下结节等表现而血培养阴性，临床能除外其他部位的感染，亦要高度怀疑存在血源性真菌感染
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">必做检查</td>
+                    <td>
+                        <strong>血培养：</strong>血液真菌培养呈霉菌、念珠菌或其他酵母菌阳性，同时临床症状及体征符合相关致病菌的感染，称为真菌血症，可确诊IFI<br><br>
+                        <strong>血常规：</strong>明确是否存在粒细胞减少或缺乏<br><br>
+                        <strong>HIV筛查：</strong>明确是否患有艾滋病<br><br>
+                        <strong>血液1,3-β-D葡聚糖检测（G试验）、半乳甘露聚糖检测（GM试验）测定：</strong>若阳性，可作为IFI微生物学诊断依据<br><br>
+                        <strong>体液或组织微生物学检测：</strong>可疑IFI感染部位的微生物血检查，如痰或支气管肺泡灌洗液、鼻窦抽取液、脑脊液、尿液等
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">选做检查</td>
+                    <td>
+                        <strong>深部组织病理学检查：</strong>在针吸或活检取得的深部组织中，采用组织化学或细胞化学方法检获菌丝或球形体（非酵母菌的丝状真菌），或酵母菌细胞和/或假菌丝，或肺孢子菌包囊、滋养体或囊内小体。或在通常无菌，且在无菌术下取得的标本，其培养结果呈阳性<br><br>
+                        <strong>CT</strong><br>
+                        <span class="check-mark">✓</span> <strong>鼻窦CT：</strong>可提示鼻窦部位侵袭性感染（窦壁侵蚀，或感染突入邻近部位，颅骨基底部位的广泛破坏）<br>
+                        <span class="check-mark">✓</span> <strong>胸部CT：</strong>早期胸膜下密度增高的结节实变影；光晕征；新月形空气征；实变区域内出现空腔等<br><br>
+                        <strong>头颅MRI：</strong>用于辅助诊断中枢神经系统IFI及协助评估受累病灶<br><br>
+                        <strong>腰穿+脑脊液检查：</strong>用于诊断中枢神经系统IFI<br><br>
+                        <strong>超声心动图：</strong>曲霉菌性心内膜炎高风险因素包括植入人工心脏瓣膜、留置中心静脉导管及静脉注射毒品
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">诊断策略</td>
+                    <td>
+                        <strong>确诊：</strong>真菌血症或深部组织病理学见真菌/标本培养阳性，可确诊IFI<br><br>
+                        <strong>临床诊断：</strong>免疫抑制人群（如长期粒细胞减少、长期使用糖皮质激素、移植物抗宿主病等），符合1项主要临床特征（或2项次要临床特征），并有微生物学证据（①体液镜检或细胞学检查或培养呈阳性，或②血G试验阳性，或③支气管肺泡灌洗液、脑脊液或2份以上的血液样品GM试验阳性，或④脑脊液隐球菌抗原阳性，或⑤PCP-DNA阳性/六胺银染色阳性）
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="page-num">223</div>
+
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 检索标签（点击可检索）</div>
+            <span class="tag tag-disease">侵袭性真菌感染</span>
+            <span class="tag tag-disease">IFI</span>
+            <span class="tag tag-disease">真菌血症</span>
+            <span class="tag tag-disease">艾滋病</span>
+            <span class="tag tag-disease">粒细胞减少</span>
+            <span class="tag tag-disease">移植物抗宿主病</span>
+            <span class="tag tag-disease">曲霉菌性心内膜炎</span>
+            <span class="tag tag-disease">中枢神经系统IFI</span>
+            <span class="tag tag-drug">糖皮质激素</span>
+            <span class="tag tag-drug">六胺银</span>
+            <span class="tag tag-bacteria">真菌</span>
+            <span class="tag tag-bacteria">霉菌</span>
+            <span class="tag tag-bacteria">念珠菌</span>
+            <span class="tag tag-bacteria">酵母菌</span>
+            <span class="tag tag-bacteria">丝状真菌</span>
+            <span class="tag tag-bacteria">肺孢子菌</span>
+            <span class="tag tag-bacteria">曲霉菌</span>
+            <span class="tag tag-bacteria">隐球菌</span>
+            <span class="tag tag-bacteria">HIV</span>
+            <span class="tag tag-bacteria">PCP</span>
+        </div>
+
+        <div class="keywords-section">
+            <div class="keywords">
+                <strong>关键词：</strong>IFI | 真菌血症 | 血培养 | G试验 | GM试验 | HIV | 艾滋病 | 粒细胞减少 | 糖皮质激素 | 移植物抗宿主病 | 鼻窦CT | 胸部CT | 头颅MRI | 脑脊液 | 超声心动图 | 曲霉菌性心内膜炎 | 人工心脏瓣膜 | 中心静脉导管 | 光晕征 | 新月形空气征 | PCP | 六胺银染色
+            </div>
+        </div>
+
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="侵袭性真菌感染（IFI）检查与诊断策略；IFI；真菌血症；血培养；G试验；GM试验；HIV筛查；粒细胞减少；糖皮质激素；移植物抗宿主病；鼻窦CT；胸部CT；头颅MRI；脑脊液；超声心动图；曲霉菌性心内膜炎；人工心脏瓣膜；PCP；六胺银染色；=223" readonly>
+            <button class="btn-copy" onclick="copyText()">复制</button>
+        </div>
+    </div>
+
+    <script>
+        function copyText() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                const btn = document.querySelector('.btn-copy');
+                btn.textContent = '已复制!';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        function addToFavorites() {
+            const title = document.title;
+            const url = window.location.href;
+            
+            if (window.sidebar && window.sidebar.addPanel) {
+                window.sidebar.addPanel(title, url, '');
+            } else if (window.external && ('AddFavorite' in window.external)) {
+                window.external.AddFavorite(url, title);
+            } else {
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.some(f => f.url === url);
+                if (!exists) {
+                    favorites.push({
+                        title: '~~~~~侵袭性真菌感染（IFI）检查与诊断策略*****',
+                        url: '223.html',
+                        category: '急诊医学'
+                    });
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                    alert('已添加到收藏！请在index.html查看收藏列表。');
+                } else {
+                    alert('该页面已在收藏列表中！');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
