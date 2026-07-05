@@ -1,0 +1,657 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~高钙血症-定义病因与临床表现*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: #f0f4f8;
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px 15px 80px;
+            color: #2c3e50;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(52,152,219,0.3);
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        /* 导航按钮组 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(231,76,60,0.3);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .nav-btn.next {
+            background: #27ae60;
+            box-shadow: 0 2px 8px rgba(39,174,96,0.3);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #f39c12;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(243,156,18,0.3);
+            margin-top: 10px;
+        }
+        
+        .fav-btn.active {
+            background: #e67e22;
+        }
+        
+        /* 标题样式 */
+        .page-title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 60px 0 25px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* 表格样式 */
+        .main-table {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto 30px;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(31,38,135,0.15);
+        }
+        
+        .main-table th {
+            background: #2980b9;
+            color: white;
+            padding: 18px 15px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        .main-table td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #ecf0f1;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #34495e;
+        }
+        
+        .main-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .main-table tr:hover {
+            background: #e8f4f8;
+        }
+        
+        .section-header {
+            background: #3498db !important;
+            color: white !important;
+            font-weight: bold;
+            font-size: 17px !important;
+        }
+        
+        .section-header td {
+            color: white !important;
+            padding: 12px 15px !important;
+        }
+        
+        .sub-item {
+            padding-left: 30px !important;
+            color: #555 !important;
+        }
+        
+        .check-mark {
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        /* 标签样式 */
+        .tags-section {
+            max-width: 900px;
+            margin: 0 auto 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 6px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .tag-disease:hover {
+            background: #2e7d32;
+            color: white;
+        }
+        
+        .tag-symptom {
+            background: #fff3e0;
+            color: #ef6c00;
+            border: 1px solid #ffcc80;
+        }
+        
+        .tag-symptom:hover {
+            background: #ef6c00;
+            color: white;
+        }
+        
+        .tag-treatment {
+            background: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #90caf9;
+        }
+        
+        .tag-treatment:hover {
+            background: #1565c0;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #fce4ec;
+            color: #c2185b;
+            border: 1px solid #f48fb1;
+        }
+        
+        .tag-drug:hover {
+            background: #c2185b;
+            color: white;
+        }
+        
+        /* 页码和关键词 */
+        .footer-info {
+            max-width: 900px;
+            margin: 0 auto 20px;
+            text-align: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 10px;
+        }
+        
+        .page-number {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2980b9;
+            margin-bottom: 10px;
+        }
+        
+        .keywords {
+            font-size: 13px;
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 15px;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            z-index: 999;
+        }
+        
+        .copy-input {
+            width: calc(100% - 120px);
+            max-width: 700px;
+            padding: 12px 15px;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #2c3e50;
+            outline: none;
+        }
+        
+        .copy-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 15px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #2980b9;
+        }
+        
+        .copy-btn.copied {
+            background: #27ae60;
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            display: none;
+            z-index: 2000;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .page-title {
+                font-size: 20px;
+                margin-top: 80px;
+            }
+            
+            .main-table th {
+                font-size: 17px;
+                padding: 14px 12px;
+            }
+            
+            .main-table td {
+                font-size: 14px;
+                padding: 12px;
+            }
+            
+            .copy-input {
+                font-size: 12px;
+                padding: 10px;
+            }
+            
+            .copy-btn {
+                padding: 10px 18px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="261.html" class="nav-btn">← 上一页</a>
+        <a href="263.html" class="nav-btn next">下一页 →</a>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">~~~~~高钙血症-定义病因与临床表现*****</h1>
+    
+    <!-- 主表格 -->
+    <table class="main-table">
+        <thead>
+            <tr>
+                <th colspan="2">高钙血症 - 急诊医学</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 接上文（低钠血症注意事项结尾） -->
+            <tr>
+                <td colspan="2">
+                    的基础病因，如停用致病药物、应用糖皮质激素治疗肾上腺皮质功能减退症等。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    ● 血钠纠正速度不宜过快，24小时内血钠浓度升高不应超过8～12mmol/L，否则血钠上升过快可能导致渗透性脱髓鞘。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    ● 去氨加压素不适用于自我诱导性水中毒的精神病患者。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:right; color:#7f8c8d; font-style:italic;">
+                    （王春婷）
+                </td>
+            </tr>
+            
+            <!-- 高钙血症标题 -->
+            <tr class="section-header">
+                <td colspan="2">■ 高钙血症</td>
+            </tr>
+            
+            <!-- 1. 定义 -->
+            <tr class="section-header">
+                <td colspan="2">1. 定义</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    ● 血清校正钙（mmol/L）＝血清测定Ca²⁺（mmol/L）＋0.02×[40－Alb（g/L）]。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    ● 血清校正钙＞2.5mmol/L。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    ● 离子钙（血气中Ca²⁺，有生物活性、游离的钙）＞1.5mmol/L。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    ● 原发性甲状旁腺功能亢进症（简称甲旁亢）和恶性肿瘤是高钙血症最常见病因，占所有病例90%以上。
+                </td>
+            </tr>
+            
+            <!-- 2. 病因 -->
+            <tr class="section-header">
+                <td colspan="2">2. 病因</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    ● PTH介导的高钙血症：原发性甲旁亢、继发性甲旁亢、遗传性（家族性低尿钙高钙血症、多发性内分泌瘤综合征等）。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    ● 非PTH介导的高钙血症：恶性肿瘤、慢性肉芽肿性疾病、维生素D中毒等。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    ● 药物：噻嗪类利尿药、锂剂、维生素A、茶碱中毒等。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    ● 其他：甲亢、嗜铬细胞瘤、肾上腺皮质功能减退症、佩吉特（Paget）骨病、制动、胃肠外营养、乳－碱综合征、横纹肌溶解和急性肾衰竭等。
+                </td>
+            </tr>
+            
+            <!-- 3. 临床表现 -->
+            <tr class="section-header">
+                <td colspan="2">3. 临床表现</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="font-weight:bold; color:#2980b9;">● 症状</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="sub-item">
+                    <span class="check-mark">✓</span>神经精神：焦虑、抑郁及认知功能障碍最常见。随着钙浓度增加，症状可逐渐加重，包括嗜睡、意识模糊、木僵及昏迷。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="sub-item">
+                    <span class="check-mark">✓</span>胃肠道：食欲缺乏、恶心、便秘，少见的有胰腺炎、消化性溃疡。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="sub-item">
+                    <span class="check-mark">✓</span>肾：常见表现是多尿、烦渴，可导致脱水。慢性高钙血症合并高钙尿症可导致肾结石、肾功能不全、肾钙沉着症。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="sub-item">
+                    <span class="check-mark">✓</span>心血管：重度高钙血症患者可能出现心律失常。急性高钙血症常表现为QT间期缩短；慢性高钙血症可能导致心脏瓣膜、冠状动脉和心肌纤维钙质沉积，以及高血压及心肌病。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="sub-item">
+                    <span class="check-mark">✓</span>肌肉骨骼：肌无力、骨痛等。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="font-weight:bold; color:#2980b9;">● 查体</td>
+            </tr>
+            
+            <!-- 页码 -->
+            <tr>
+                <td colspan="2" style="text-align:center; font-weight:bold; color:#7f8c8d; background:#f8f9fa;">250</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div>
+            <span class="tag tag-disease">高钙血症</span>
+            <span class="tag tag-disease">原发性甲状旁腺功能亢进症</span>
+            <span class="tag tag-disease">甲旁亢</span>
+            <span class="tag tag-disease">恶性肿瘤</span>
+            <span class="tag tag-disease">继发性甲旁亢</span>
+            <span class="tag tag-disease">家族性低尿钙高钙血症</span>
+            <span class="tag tag-disease">多发性内分泌瘤综合征</span>
+            <span class="tag tag-disease">慢性肉芽肿性疾病</span>
+            <span class="tag tag-disease">维生素D中毒</span>
+            <span class="tag tag-disease">甲亢</span>
+            <span class="tag tag-disease">嗜铬细胞瘤</span>
+            <span class="tag tag-disease">肾上腺皮质功能减退症</span>
+            <span class="tag tag-disease">佩吉特骨病</span>
+            <span class="tag tag-disease">Paget骨病</span>
+            <span class="tag tag-disease">乳－碱综合征</span>
+            <span class="tag tag-disease">横纹肌溶解</span>
+            <span class="tag tag-disease">急性肾衰竭</span>
+            <span class="tag tag-disease">慢性高钙血症</span>
+            <span class="tag tag-disease">急性高钙血症</span>
+            <span class="tag tag-disease">重度高钙血症</span>
+            <span class="tag tag-disease">高钙尿症</span>
+            <span class="tag tag-disease">肾结石</span>
+            <span class="tag tag-disease">肾功能不全</span>
+            <span class="tag tag-disease">肾钙沉着症</span>
+            <span class="tag tag-disease">心肌病</span>
+            <span class="tag tag-disease">高血压</span>
+            <span class="tag tag-disease">渗透性脱髓鞘</span>
+            <span class="tag tag-disease">自我诱导性水中毒</span>
+            <span class="tag tag-symptom">焦虑</span>
+            <span class="tag tag-symptom">抑郁</span>
+            <span class="tag tag-symptom">认知功能障碍</span>
+            <span class="tag tag-symptom">嗜睡</span>
+            <span class="tag tag-symptom">意识模糊</span>
+            <span class="tag tag-symptom">木僵</span>
+            <span class="tag tag-symptom">昏迷</span>
+            <span class="tag tag-symptom">食欲缺乏</span>
+            <span class="tag tag-symptom">恶心</span>
+            <span class="tag tag-symptom">便秘</span>
+            <span class="tag tag-symptom">胰腺炎</span>
+            <span class="tag tag-symptom">消化性溃疡</span>
+            <span class="tag tag-symptom">多尿</span>
+            <span class="tag tag-symptom">烦渴</span>
+            <span class="tag tag-symptom">脱水</span>
+            <span class="tag tag-symptom">心律失常</span>
+            <span class="tag tag-symptom">QT间期缩短</span>
+            <span class="tag tag-symptom">肌无力</span>
+            <span class="tag tag-symptom">骨痛</span>
+            <span class="tag tag-drug">噻嗪类利尿药</span>
+            <span class="tag tag-drug">锂剂</span>
+            <span class="tag tag-drug">维生素A</span>
+            <span class="tag tag-drug">茶碱</span>
+            <span class="tag tag-drug">糖皮质激素</span>
+            <span class="tag tag-drug">去氨加压素</span>
+            <span class="tag tag-treatment">血清校正钙</span>
+            <span class="tag tag-treatment">离子钙</span>
+            <span class="tag tag-treatment">胃肠外营养</span>
+            <span class="tag tag-treatment">制动</span>
+        </div>
+    </div>
+    
+    <!-- 页码和关键词 -->
+    <div class="footer-info">
+        <div class="page-number">页码：262</div>
+        <div class="keywords">
+            关键词：高钙血症；定义；病因；临床表现；原发性甲状旁腺功能亢进症；甲旁亢；恶性肿瘤；PTH介导；非PTH介导；噻嗪类利尿药；锂剂；维生素A；茶碱中毒；甲亢；嗜铬细胞瘤；肾上腺皮质功能减退症；佩吉特骨病；乳－碱综合征；横纹肌溶解；急性肾衰竭；焦虑；抑郁；认知功能障碍；心律失常；QT间期缩短；肾结石；肾功能不全；肾钙沉着症；心肌病；高血压；去氨加压素；渗透性脱髓鞘
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="高钙血症-定义病因与临床表现；高钙血症；定义；病因；临床表现；原发性甲状旁腺功能亢进症；甲旁亢；恶性肿瘤；PTH介导；非PTH介导；噻嗪类利尿药；锂剂；维生素A；茶碱中毒；甲亢；嗜铬细胞瘤；肾上腺皮质功能减退症；佩吉特骨病；乳－碱综合征；横纹肌溶解；急性肾衰竭；焦虑；抑郁；认知功能障碍；心律失常；QT间期缩短；肾结石；肾功能不全；肾钙沉着症；心肌病；高血压；去氨加压素；渗透性脱髓鞘；=262" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                    document.getElementById('copyBtn').classList.add('copied');
+                    document.getElementById('copyBtn').textContent = '已复制';
+                    setTimeout(() => {
+                        document.getElementById('copyBtn').classList.remove('copied');
+                        document.getElementById('copyBtn').textContent = '复制';
+                    }, 2000);
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '⭐ 已收藏';
+                showToast('已添加到收藏！');
+                
+                // 保存到localStorage
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                if (!favorites.includes('262')) {
+                    favorites.push('262');
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                // 更新index.html收藏
+                updateIndexFavorites();
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                showToast('已取消收藏！');
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f !== '262');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                updateIndexFavorites();
+            }
+        }
+        
+        // 更新index.html收藏
+        function updateIndexFavorites() {
+            const pageInfo = {
+                page: '262',
+                title: '高钙血症-定义病因与临床表现'
+            };
+            localStorage.setItem('page_262_info', JSON.stringify(pageInfo));
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            if (favorites.includes('262')) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '⭐ 已收藏';
+            }
+        }
+    </script>
+</body>
+</html>
