@@ -1,0 +1,578 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~肾上腺素与多巴胺药理作用及临床应用*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #fefce8 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+            color: #1e293b;
+        }
+        
+        /* 导航按钮 */
+        .nav-btn {
+            position: fixed;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+        }
+        
+        .home-btn {
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .prev-btn {
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        
+        .next-btn {
+            top: 60px;
+            right: 15px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+        
+        .fav-btn {
+            top: 105px;
+            right: 15px;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 900px;
+            margin: 85px auto 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            padding: 28px 20px;
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #06b6d4 100%);
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            line-height: 1.6;
+        }
+        
+        /* 表格样式 */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        .data-table thead {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            color: white;
+        }
+        
+        .data-table thead th {
+            padding: 18px 14px;
+            font-size: 17px;
+            font-weight: bold;
+            text-align: center;
+            border: 1px solid #3b82f6;
+        }
+        
+        .data-table tbody td {
+            padding: 14px 12px;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+            color: #334155;
+            line-height: 1.8;
+            vertical-align: top;
+        }
+        
+        .data-table tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        .data-table tbody tr:hover {
+            background-color: #dbeafe;
+            transition: background-color 0.3s;
+        }
+        
+        /* 药物名称高亮 */
+        .drug-name {
+            color: #1e40af;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        
+        /* 分类标题 */
+        .category-title {
+            color: #7c3aed;
+            font-weight: bold;
+        }
+        
+        /* 受体类型 */
+        .receptor {
+            color: #059669;
+            font-weight: bold;
+        }
+        
+        /* 不良反应 */
+        .adverse {
+            color: #dc2626;
+        }
+        
+        /* 临床应用 */
+        .clinical {
+            color: #059669;
+        }
+        
+        /* 机制说明 */
+        .mechanism {
+            color: #7c3aed;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            padding: 24px 20px;
+            background: #f0f9ff;
+            border-top: 2px solid #e0e7ff;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 14px;
+            font-weight: 500;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 7px 18px;
+            margin: 6px;
+            border-radius: 24px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1.5px solid;
+        }
+        
+        .disease-tag {
+            background: #fef3c7;
+            color: #92400e;
+            border-color: #fcd34d;
+        }
+        
+        .drug-tag {
+            background: #dbeafe;
+            color: #1e40af;
+            border-color: #93c5fd;
+        }
+        
+        .receptor-tag {
+            background: #d1fae5;
+            color: #065f46;
+            border-color: #6ee7b7;
+        }
+        
+        .symptom-tag {
+            background: #fce7f3;
+            color: #be185d;
+            border-color: #f9a8d4;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            padding: 24px 20px;
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .keywords {
+            font-size: 12px;
+            color: #64748b;
+            text-align: center;
+            margin-bottom: 16px;
+            line-height: 2;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 15px;
+            color: #3b82f6;
+            font-weight: bold;
+            margin-bottom: 22px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            max-width: calc(100% - 100px);
+            margin: 0 auto;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 14px 16px;
+            border: 2px solid #3b82f6;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #475569;
+            background: white;
+            outline: none;
+        }
+        
+        .copy-btn {
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%) translateY(120px);
+            background: #1e293b;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 2000;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 640px) {
+            .page-title {
+                font-size: 16px;
+                padding: 20px 15px;
+            }
+            
+            .data-table {
+                font-size: 12px;
+            }
+            
+            .data-table thead th {
+                font-size: 14px;
+                padding: 14px 8px;
+            }
+            
+            .data-table tbody td {
+                padding: 10px 8px;
+                line-height: 1.7;
+            }
+            
+            .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                top: 10px;
+                left: 10px;
+            }
+            
+            .prev-btn, .next-btn, .fav-btn {
+                right: 10px;
+            }
+            
+            .prev-btn { top: 10px; }
+            .next-btn { top: 50px; }
+            .fav-btn { top: 90px; }
+            
+            .copy-section {
+                flex-direction: column;
+                max-width: 100%;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+            
+            .container {
+                margin-top: 135px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航按钮 -->
+    <button class="nav-btn home-btn" onclick="location.href='index.html'">🏠 返回首页</button>
+    <button class="nav-btn prev-btn" onclick="location.href='376.html'">← 上一页</button>
+    <button class="nav-btn next-btn" onclick="location.href='378.html'">下一页 →</button>
+    <button class="nav-btn fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 标题 -->
+        <div class="page-title">~~~~~肾上腺素与多巴胺药理作用及临床应用*****</div>
+        
+        <!-- 数据表格 -->
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th style="width: 20%;">分类/项目</th>
+                    <th style="width: 80%;">详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="drug-name">肾上腺素<br>（平滑肌作用续）</td>
+                    <td>
+                        体，发挥强大的舒张支气管作用，并能抑制肥大细胞释放组胺等过敏物质。激动支气管黏膜血管的<span class="receptor">α</span>受体，使其收缩，降低毛细血管通透性，利于消除支气管黏膜水肿。在膀胱上肾上腺素<span class="receptor">β</span>受体激动可使膀胱逼尿肌舒张，<span class="receptor">α</span>受体激动使尿道括约肌收缩，因此引起排尿困难和尿潴留。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="drug-name">肾上腺素<br>代谢</td>
+                    <td>
+                        肾上腺素可提高机体代谢，治疗剂量下可使耗氧量增加20%～30%。在人体，由于<span class="receptor">α</span>受体和<span class="receptor">β₂</span>受体激动可能致肝糖原分解，而肾上腺素兼具<span class="receptor">α、β</span>作用，故升高血糖作用较去甲肾上腺素显著。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="drug-name">肾上腺素<br>中枢</td>
+                    <td>
+                        肾上腺素不易透过血脑屏障，治疗量时一般无明显中枢兴奋现象。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="drug-name">肾上腺素<br>体内过程</td>
+                    <td>
+                        皮下注射因能收缩血管，因此吸收缓慢，作用维持时间长，约1小时。肌内注射的吸收速度快，作用维持10～30分钟。肾上腺素在体内的摄取与代谢途径与去甲肾上腺素相似，静脉注射或滴注肾上腺素96小时后主要以代谢产物和少量原形经肾排泄。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="drug-name">肾上腺素<br>临床应用</td>
+                    <td>
+                        <span class="clinical">用于因支气管痉挛所致严重呼吸困难。用于过敏反应的急救治疗。用于延长浸润麻醉用药的作用时间。用于抢救多种原因（如麻醉和手术中的意外、药物中毒、心脏传导阻滞）引起的心搏骤停（对电击引起的心搏骤停，可用本药配合除颤仪或利多卡因等进行抢救）。用于与脓毒症休克相关的低血压。用于对初期除颤无效的心室颤动（VF）、无脉性室性心动过速（VT）。用于对阿托品、安置起搏器无效的症状性心动过缓。用于对容量复苏无效的低血压或休克。用于治疗荨麻疹、枯草热、血清反应。用于制止鼻黏膜和牙龈出血。</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="drug-name">肾上腺素<br>不良反应</td>
+                    <td>
+                        <span class="adverse">主要为心悸、烦躁、头痛和血压升高等。剂量过大时，α受体过度兴奋使血压快速升高。当β受体兴奋过强时，可使心肌耗氧量增加，引起心肌缺血和心律失常。禁用于高血压、器质性心脏病、甲状腺功能亢进症等。</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="drug-name">多巴胺</td>
+                    <td>
+                        <span class="category-title">◇ 多巴胺</span>：是去甲肾上腺素生物合成的前体，药用多巴胺是人工合成品。<br><br>
+                        
+                        <span class="mechanism">□ 药理作用</span>：多巴胺主要激动<span class="receptor">α、β</span>和外周多巴胺受体，并促进神经末梢释放去甲肾上腺素。根据给药剂量的不同，多巴胺具有不同的作用。剂量为1～2μg/（kg·min）时，该药主要作用于肾、肠系膜、冠状动...
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 标签区域 -->
+        <div class="tags-section">
+            <div class="tags-title">🔖 检索标签（点击可筛选，仅含图片内文字）：</div>
+            <div>
+                <span class="disease-tag">支气管痉挛</span>
+                <span class="disease-tag">严重呼吸困难</span>
+                <span class="disease-tag">过敏反应</span>
+                <span class="disease-tag">心搏骤停</span>
+                <span class="disease-tag">脓毒症休克</span>
+                <span class="disease-tag">低血压</span>
+                <span class="disease-tag">心室颤动</span>
+                <span class="disease-tag">无脉性室性心动过速</span>
+                <span class="disease-tag">症状性心动过缓</span>
+                <span class="disease-tag">休克</span>
+                <span class="disease-tag">荨麻疹</span>
+                <span class="disease-tag">枯草热</span>
+                <span class="disease-tag">血清反应</span>
+                <span class="disease-tag">高血压</span>
+                <span class="disease-tag">器质性心脏病</span>
+                <span class="disease-tag">甲状腺功能亢进症</span>
+                <span class="disease-tag">心肌缺血</span>
+                <span class="disease-tag">心律失常</span>
+                <span class="disease-tag">排尿困难</span>
+                <span class="disease-tag">尿潴留</span>
+                <span class="drug-tag">肾上腺素</span>
+                <span class="drug-tag">多巴胺</span>
+                <span class="drug-tag">去甲肾上腺素</span>
+                <span class="drug-tag">利多卡因</span>
+                <span class="drug-tag">阿托品</span>
+                <span class="receptor-tag">α受体</span>
+                <span class="receptor-tag">β受体</span>
+                <span class="receptor-tag">β₂受体</span>
+                <span class="symptom-tag">肥大细胞</span>
+                <span class="symptom-tag">组胺</span>
+                <span class="symptom-tag">毛细血管通透性</span>
+                <span class="symptom-tag">膀胱逼尿肌</span>
+                <span class="symptom-tag">尿道括约肌</span>
+                <span class="symptom-tag">肝糖原分解</span>
+                <span class="symptom-tag">血脑屏障</span>
+                <span class="symptom-tag">心脏传导阻滞</span>
+                <span class="symptom-tag">除颤仪</span>
+                <span class="symptom-tag">起搏器</span>
+                <span class="symptom-tag">容量复苏</span>
+                <span class="symptom-tag">鼻黏膜</span>
+                <span class="symptom-tag">牙龈出血</span>
+                <span class="symptom-tag">心悸</span>
+                <span class="symptom-tag">烦躁</span>
+                <span class="symptom-tag">头痛</span>
+                <span class="symptom-tag">血压升高</span>
+                <span class="symptom-tag">人工合成品</span>
+                <span class="symptom-tag">神经末梢</span>
+            </div>
+        </div>
+        
+        <!-- 底部区域 -->
+        <div class="bottom-section">
+            <div class="keywords">
+                <strong>关键词：</strong>肾上腺素、多巴胺、去甲肾上腺素、α受体、β受体、β₂受体、支气管痉挛、呼吸困难、过敏反应、心搏骤停、脓毒症休克、心室颤动、无脉性室性心动过速、心动过缓、利多卡因、阿托品、除颤仪、起搏器、容量复苏、心肌缺血、心律失常、高血压、器质性心脏病、甲状腺功能亢进症、排尿困难、尿潴留、肝糖原分解、血脑屏障、人工合成品
+            </div>
+            <div class="page-number">页码：377</div>
+            
+            <!-- 复制区域 -->
+            <div class="copy-section">
+                <input type="text" class="copy-input" id="copyInput" readonly>
+                <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 提示框 -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // 页面信息
+        const pageInfo = {
+            title: "肾上腺素与多巴胺药理作用及临床应用",
+            subtitle: "α+β受体激动药、多巴胺受体激动药、急救用药",
+            keywords: "肾上腺素、多巴胺、去甲肾上腺素、α受体、β受体、β₂受体、支气管痉挛、呼吸困难、过敏反应、心搏骤停、脓毒症休克、心室颤动、无脉性室性心动过速、心动过缓、利多卡因、阿托品、除颤仪、起搏器、容量复苏、心肌缺血、心律失常、高血压、器质性心脏病、甲状腺功能亢进症、排尿困难、尿潴留、肝糖原分解、血脑屏障、人工合成品",
+            pageNum: "377"
+        };
+        
+        // 设置复制输入框内容
+        const copyContent = `${pageInfo.title}；${pageInfo.subtitle}；${pageInfo.keywords}=${pageInfo.pageNum}`;
+        document.getElementById('copyInput').value = copyContent;
+        
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('✅ 已复制到剪贴板！');
+                }).catch(() => {
+                    document.execCommand('copy');
+                    showToast('✅ 已复制到剪贴板！');
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('✅ 已复制到剪贴板！');
+            }
+        }
+        
+        // 显示提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            const favItem = {
+                title: document.title,
+                url: window.location.href,
+                pageNum: pageInfo.pageNum,
+                addTime: new Date().toLocaleString('zh-CN')
+            };
+            
+            const exists = favorites.some(f => f.pageNum === pageInfo.pageNum);
+            if (exists) {
+                showToast('⚠️ 该页面已在收藏中！');
+                return;
+            }
+            
+            favorites.push(favItem);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            localStorage.setItem('newFavorite', JSON.stringify(favItem));
+            
+            showToast('⭐ 已添加到收藏！');
+        }
+        
+        // 标签点击
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                showToast(`🔍 标签: ${this.textContent}`);
+            });
+        });
+    </script>
+</body>
+</html>
