@@ -1,0 +1,517 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~医院获得性肺炎和呼吸机相关性肺炎的诊疗要点*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5ee 100%);
+            min-height: 100vh;
+            padding: 20px 15px 40px;
+            color: #333;
+        }
+        
+        /* 顶部导航按钮 */
+        .nav-btn {
+            position: fixed;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            font-weight: 600;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+        
+        .home-btn {
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .prev-btn {
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        
+        .next-btn {
+            top: 60px;
+            right: 15px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+        
+        .fav-btn {
+            top: 105px;
+            right: 15px;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+        }
+        
+        .fav-btn.active {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+        }
+        
+        /* 标题区域 */
+        .title-section {
+            text-align: center;
+            margin: 70px 0 30px;
+            padding: 20px;
+        }
+        
+        .main-title {
+            font-size: 26px;
+            font-weight: 800;
+            color: #1a5276;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            line-height: 1.4;
+            letter-spacing: 1px;
+        }
+        
+        .sub-title {
+            font-size: 16px;
+            color: #2874a6;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+        
+        /* 表格样式 */
+        .table-container {
+            max-width: 100%;
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        thead tr {
+            background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 18px 15px;
+            font-size: 18px;
+            font-weight: 700;
+            text-align: left;
+            letter-spacing: 0.5px;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e3f2fd;
+            transition: background 0.2s;
+        }
+        
+        tbody tr:hover {
+            background: #f5fbff;
+        }
+        
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+        
+        tbody td {
+            padding: 14px 15px;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #2c3e50;
+            vertical-align: top;
+        }
+        
+        td.section-num {
+            font-weight: 700;
+            color: #1565c0;
+            font-size: 16px;
+            white-space: nowrap;
+            width: 40px;
+        }
+        
+        td.section-title {
+            font-weight: 700;
+            color: #1a5276;
+            font-size: 16px;
+            white-space: nowrap;
+            width: 100px;
+        }
+        
+        td.content {
+            word-break: break-all;
+            overflow-wrap: break-word;
+        }
+        
+        .bullet {
+            color: #e74c3c;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .page-num {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1565c0;
+            margin-bottom: 15px;
+        }
+        
+        /* 关键词标签 */
+        .tags-section {
+            margin: 25px 0;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 18px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .disease-tag {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            color: #c0392b;
+        }
+        
+        .bacteria-tag {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #16a085;
+        }
+        
+        .drug-tag {
+            background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
+            color: #8e44ad;
+        }
+        
+        .tag:hover {
+            transform: scale(1.08);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            width: calc(100% - 120px);
+            max-width: 600px;
+            padding: 14px 18px;
+            border: 2px solid #90caf9;
+            border-radius: 12px;
+            font-size: 14px;
+            color: #333;
+            background: white;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .copy-input:focus {
+            border-color: #1565c0;
+        }
+        
+        .copy-btn {
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .copy-btn.copied {
+            background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+        }
+        
+        /* 关键词 */
+        .keywords {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #666;
+            line-height: 2;
+        }
+        
+        .keywords span {
+            color: #1565c0;
+            font-weight: 600;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 20px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 14px 10px;
+            }
+            
+            tbody td {
+                font-size: 14px;
+                padding: 12px 10px;
+            }
+            
+            .nav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                width: calc(100% - 100px);
+                font-size: 12px;
+                padding: 12px;
+            }
+            
+            .copy-btn {
+                padding: 12px 20px;
+                font-size: 13px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航按钮 -->
+    <button class="nav-btn home-btn" onclick="location.href='index.html'">🏠 返回首页</button>
+    <button class="nav-btn prev-btn" onclick="location.href='84.html'">← 上一页</button>
+    <button class="nav-btn next-btn" onclick="location.href='86.html'">下一页 →</button>
+    <button class="nav-btn fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    
+    <!-- 标题 -->
+    <div class="title-section">
+        <h1 class="main-title">~~~~~医院获得性肺炎和呼吸机相关性肺炎的诊疗要点*****</h1>
+        <p class="sub-title">HAP/VAP 微生物学、临床表现、检查与诊断策略</p>
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="3">📋 医院获得性肺炎(HAP)与呼吸机相关性肺炎(VAP)诊疗内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="section-num">1</td>
+                    <td class="section-title">定义说明</td>
+                    <td class="content">不处于潜伏期。<br><span class="bullet">•</span> VAP指在气管插管≥48小时后发生的肺炎。</td>
+                </tr>
+                <tr>
+                    <td class="section-num">2</td>
+                    <td class="section-title">微生物学</td>
+                    <td class="content"><span class="bullet">•</span> HAP和VAP的病原体多种多样，且可能为多重感染。<br><span class="bullet">•</span> 常见病原体包括：革兰阴性需氧杆菌，如大肠埃希菌、肺炎克雷伯菌、肠杆菌、铜绿假单胞菌和不动杆菌；革兰阳性球菌，如金黄色葡萄球菌，包括耐甲氧西林金黄色葡萄球菌(MRSA)，以及链球菌。</td>
+                </tr>
+                <tr>
+                    <td class="section-num">3</td>
+                    <td class="section-title">临床表现</td>
+                    <td class="content">同社区获得性肺炎。</td>
+                </tr>
+                <tr>
+                    <td class="section-num">4</td>
+                    <td class="section-title">必做检查</td>
+                    <td class="content"><span class="bullet">•</span> 血常规。<br><span class="bullet">•</span> 胸片。<br><span class="bullet">•</span> 生化检查：包括空腹血糖、血清钠、肝肾功能等。</td>
+                </tr>
+                <tr>
+                    <td class="section-num">5</td>
+                    <td class="section-title">选做检查</td>
+                    <td class="content"><span class="bullet">•</span> ABG。<br><span class="bullet">•</span> 痰：革兰染色和细菌培养。<br><span class="bullet">•</span> 病毒PCR和培养：根据临床情况决定，对呼吸道合胞体病毒做直接抗原测定。<br><span class="bullet">•</span> 军团菌尿抗原检测、分枝杆菌涂片和培养、真菌培养和涂片、肺孢子菌染色等。<br><span class="bullet">•</span> 评价和排除肺外感染源。<br><span class="bullet">•</span> 血培养。<br><span class="bullet">•</span> 尿液分析和培养。<br><span class="bullet">•</span> 支气管镜保护性毛刷和支气管肺泡灌洗：适用于急性进展性肺炎、气管插管进行机械通气的重症肺炎、应用免疫抑制药及对经验性抗菌药物治疗效果不佳者。<br><span class="bullet">•</span> 胸部CT。<br><span class="bullet">•</span> 诊断性胸腔穿刺：适用于胸腔积液存在者，可行超声检查，并考虑诊断性穿刺。</td>
+                </tr>
+                <tr>
+                    <td class="section-num">6</td>
+                    <td class="section-title">诊断策略</td>
+                    <td class="content"><span class="bullet">•</span> 临床诊断标准：①影像学：新出现或进展性肺部浸润影；②浸润是由感染所致的临床证据：新出现的发热，脓痰，白细胞＞10×10⁹/L或＜4×10⁹/L。①加②中两种临床表现是目前的临床诊断标准。VAP患者可能仅表现为呼吸困难、分泌物增多、低氧血症或呼吸力学改变。<br><span class="bullet">•</span> 临床肺部感染评分(CPIS)(表9)：CPIS评分超过6分诊断</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="bottom-section">
+        <div class="page-num">第 85 页</div>
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <p class="tags-title">🔍 特色检索标签（点击筛选）</p>
+        <span class="tag disease-tag" onclick="filterByTag('肺炎')">肺炎</span>
+        <span class="tag disease-tag" onclick="filterByTag('HAP')">HAP</span>
+        <span class="tag disease-tag" onclick="filterByTag('VAP')">VAP</span>
+        <span class="tag disease-tag" onclick="filterByTag('社区获得性肺炎')">社区获得性肺炎</span>
+        <span class="tag disease-tag" onclick="filterByTag('急性进展性肺炎')">急性进展性肺炎</span>
+        <span class="tag disease-tag" onclick="filterByTag('重症肺炎')">重症肺炎</span>
+        <span class="tag bacteria-tag" onclick="filterByTag('大肠埃希菌')">大肠埃希菌</span>
+        <span class="tag bacteria-tag" onclick="filterByTag('肺炎克雷伯菌')">肺炎克雷伯菌</span>
+        <span class="tag bacteria-tag" onclick="filterByTag('肠杆菌')">肠杆菌</span>
+        <span class="tag bacteria-tag" onclick="filterByTag('铜绿假单胞菌')">铜绿假单胞菌</span>
+        <span class="tag bacteria-tag" onclick="filterByTag('不动杆菌')">不动杆菌</span>
+        <span class="tag bacteria-tag" onclick="filterByTag('金黄色葡萄球菌')">金黄色葡萄球菌</span>
+        <span class="tag bacteria-tag" onclick="filterByTag('MRSA')">MRSA</span>
+        <span class="tag bacteria-tag" onclick="filterByTag('链球菌')">链球菌</span>
+        <span class="tag bacteria-tag" onclick="filterByTag('军团菌')">军团菌</span>
+        <span class="tag bacteria-tag" onclick="filterByTag('分枝杆菌')">分枝杆菌</span>
+        <span class="tag bacteria-tag" onclick="filterByTag('真菌')">真菌</span>
+        <span class="tag bacteria-tag" onclick="filterByTag('肺孢子菌')">肺孢子菌</span>
+        <span class="tag bacteria-tag" onclick="filterByTag('呼吸道合胞体病毒')">呼吸道合胞体病毒</span>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="医院获得性肺炎和呼吸机相关性肺炎的诊疗要点；HAP/VAP 微生物学、临床表现、检查与诊断策略；肺炎,HAP,VAP,大肠埃希菌,肺炎克雷伯菌,铜绿假单胞菌,金黄色葡萄球菌,MRSA,军团菌,肺孢子菌,CPIS=85" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        <span>关键词：</span>肺炎, HAP, VAP, 医院获得性肺炎, 呼吸机相关性肺炎, 大肠埃希菌, 肺炎克雷伯菌, 肠杆菌, 铜绿假单胞菌, 不动杆菌, 金黄色葡萄球菌, MRSA, 耐甲氧西林金黄色葡萄球菌, 链球菌, 军团菌, 分枝杆菌, 真菌, 肺孢子菌, 呼吸道合胞体病毒, CPIS, 临床肺部感染评分
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✅ 已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = localStorage.getItem('fav_85') === 'true';
+            
+            if (!isFav) {
+                localStorage.setItem('fav_85', 'true');
+                btn.innerHTML = '❤️ 已收藏';
+                btn.classList.add('active');
+                
+                // 添加到index收藏
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    id: '85',
+                    title: '医院获得性肺炎和呼吸机相关性肺炎的诊疗要点',
+                    url: '85.html',
+                    tags: ['肺炎', 'HAP', 'VAP', 'MRSA', 'CPIS']
+                };
+                const exists = favorites.some(f => f.id === '85');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                alert('已收藏！可在首页查看收藏内容。');
+            } else {
+                localStorage.setItem('fav_85', 'false');
+                btn.innerHTML = '⭐ 收藏';
+                btn.classList.remove('active');
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.id !== '85');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 初始化收藏状态
+        function initFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = localStorage.getItem('fav_85') === 'true';
+            if (isFav) {
+                btn.innerHTML = '❤️ 已收藏';
+                btn.classList.add('active');
+            }
+        }
+        
+        // 标签筛选功能
+        function filterByTag(tag) {
+            alert('正在筛选: ' + tag + '\n(实际应用中可跳转至对应筛选页面)');
+        }
+        
+        // 页面加载时初始化
+        window.onload = function() {
+            initFavorite();
+        };
+    </script>
+</body>
+</html>
