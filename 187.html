@@ -1,0 +1,412 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~ADEM急诊处理与流行性乙型脑炎*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f0f4f8;
+            background-image: linear-gradient(135deg, #e8f4f8 0%, #f5f7fa 100%);
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .nav-left {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-home {
+            background-color: #4a90d9;
+            color: white;
+        }
+        .btn-home:hover {
+            background-color: #357abd;
+        }
+        .btn-nav {
+            background-color: #5cb85c;
+            color: white;
+        }
+        .btn-nav:hover {
+            background-color: #4cae4c;
+        }
+        .btn-fav {
+            background-color: #f0ad4e;
+            color: white;
+            margin-top: 5px;
+        }
+        .btn-fav:hover {
+            background-color: #ec971f;
+        }
+        .btn-copy {
+            background-color: #5bc0de;
+            color: white;
+            padding: 10px 20px;
+        }
+        .btn-copy:hover {
+            background-color: #46b8da;
+        }
+        h1 {
+            text-align: center;
+            color: #2c5282;
+            font-size: 24px;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            word-break: break-all;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+        thead {
+            background-color: #2b6cb0;
+            color: white;
+        }
+        thead th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        tbody td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+            word-break: break-word;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        tbody tr:hover {
+            background-color: #edf2f7;
+        }
+        .section-title {
+            font-weight: bold;
+            color: #2c5282;
+            font-size: 17px;
+        }
+        .sub-item {
+            padding-left: 20px;
+            color: #4a5568;
+        }
+        .check-item {
+            padding-left: 30px;
+            color: #4a5568;
+        }
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+        .tags-title {
+            font-size: 16px;
+            color: #2c5282;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .tag {
+            background-color: #ebf8ff;
+            color: #2b6cb0;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid #bee3f8;
+        }
+        .copy-section {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            color: #4a5568;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        .keywords-section {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+        .keywords-title {
+            font-size: 16px;
+            color: #2c5282;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .keywords-list {
+            color: #4a5568;
+            font-size: 14px;
+            line-height: 2;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 18px;
+            }
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            tbody td {
+                padding: 10px 8px;
+                font-size: 14px;
+            }
+            .btn {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+            .nav-top {
+                flex-direction: column;
+            }
+            .nav-right {
+                align-items: flex-start;
+                width: 100%;
+            }
+            .copy-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="186.html" class="btn btn-nav">← 上一页</a>
+            <a href="188.html" class="btn btn-nav">下一页 →</a>
+            <button class="btn btn-fav" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+
+    <!-- 标题 -->
+    <h1>~~~~~ADEM急诊处理与流行性乙型脑炎*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~ADEM急诊处理与流行性乙型脑炎*****、分类、详细内容、7. 急诊处理、流行性乙型脑炎、前驱感染和脑脊液异常、一般治疗、糖皮质激素治疗、IVIG或血浆置换、环磷酰胺、抗病毒治疗、抗生素治疗、1. 定义、传染源、2. 临床表现、典型病程分期</div>
+
+    <!-- 表格内容 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="section-title">前驱感染和脑脊液异常</td>
+                    <td>脑脊液淋巴细胞轻度增多和蛋白轻度升高可提示ADEM，但并非诊断ADEM的必要条件。</td>
+                </tr>
+                <tr>
+                    <td class="section-title" colspan="2">7. 急诊处理</td>
+                </tr>
+                <tr>
+                    <td class="section-title">一般治疗</td>
+                    <td>监护、吸氧，营养支持，意识障碍者需注意气道保护能力及呼吸节律，必要时予气管插管保护气道、机械通气治疗。</td>
+                </tr>
+                <tr>
+                    <td class="section-title">糖皮质激素治疗</td>
+                    <td>推荐对ADEM成人患者使用大剂量糖皮质激素进行初始治疗。</td>
+                </tr>
+                <tr>
+                    <td class="section-title">IVIG或血浆置换</td>
+                    <td>适用于静脉用糖皮质激素疗效不充分或存在糖皮质激素使用禁忌的患者。</td>
+                </tr>
+                <tr>
+                    <td class="section-title">环磷酰胺</td>
+                    <td>已被用于糖皮质激素疗效不佳的患者，常需重复给药。</td>
+                </tr>
+                <tr>
+                    <td class="section-title">抗病毒治疗</td>
+                    <td>一些ADEM成人患者表现为发热、脑膜刺激征和急性脑病，且有血液和脑脊液炎症的证据。对于这类患者，若存在脑炎但无明确解释，则应开始使用阿昔洛韦进行经验性治疗，并持续治疗至排除感染性病因。</td>
+                </tr>
+                <tr>
+                    <td class="section-title">抗生素治疗</td>
+                    <td>无须对疑诊细菌性脑膜炎进行经验性抗生素治疗，除非脑脊液检查提示有细菌性炎症表现。（崔庆宏）</td>
+                </tr>
+                <tr>
+                    <td class="section-title" colspan="2">■ 流行性乙型脑炎</td>
+                </tr>
+                <tr>
+                    <td class="section-title">1. 定义</td>
+                    <td>流行性乙型脑炎简称乙脑，是由乙脑病毒经蚊虫叮咬传播感染所致的急性中枢神经系统感染，属于人畜共患自然疫源性疾病。</td>
+                </tr>
+                <tr>
+                    <td class="section-title">传染源</td>
+                    <td>猪为主要传染源，马、牛、羊、狗、猫、鸡、鸭、鹅等也可感染。三带喙库蚊传播乙脑病毒的能力最强，伊蚊和按蚊也能传播，受感染的候鸟、蝙蝠也是乙脑病毒越冬宿主。人群对乙脑普遍易感，绝大多数易感者呈无症状隐性感染。</td>
+                </tr>
+                <tr>
+                    <td class="section-title">2. 临床表现</td>
+                    <td>潜伏期通常5～15天，多数隐匿感染或轻症，少数出现中枢神经系统症状。</td>
+                </tr>
+                <tr>
+                    <td class="section-title">典型病程分期</td>
+                    <td>典型患者病程可分为4个阶段。<br>✓ 初期：病初3天，病毒血症期，表现为发热、精神萎靡、食欲缺乏、轻度嗜睡及头痛。体温持续在39℃左右。<br>✓ 极期：病程3～10天，体温上升至40℃以上，持续不退直至极期结束。全身症状加重，渐转昏迷，并出现惊厥。出现不同程度脑水肿和颅内压升高。少数可继发吉兰-巴雷综</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 页码 -->
+    <div class="page-number">187</div>
+
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔖 检索标签</div>
+        <div class="tags-container">
+            <span class="tag">ADEM</span>
+            <span class="tag">急性播散性脑脊髓炎</span>
+            <span class="tag">流行性乙型脑炎</span>
+            <span class="tag">乙脑</span>
+            <span class="tag">脑膜炎</span>
+            <span class="tag">脑炎</span>
+            <span class="tag">糖皮质激素</span>
+            <span class="tag">环磷酰胺</span>
+            <span class="tag">阿昔洛韦</span>
+            <span class="tag">抗生素</span>
+            <span class="tag">IVIG</span>
+            <span class="tag">血浆置换</span>
+            <span class="tag">吉兰-巴雷综合征</span>
+            <span class="tag">脑水肿</span>
+            <span class="tag">颅内压升高</span>
+            <span class="tag">三带喙库蚊</span>
+            <span class="tag">病毒血症</span>
+        </div>
+    </div>
+
+    <!-- 复制功能区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="ADEM急诊处理与流行性乙型脑炎；ADEM、急性播散性脑脊髓炎、流行性乙型脑炎、乙脑、糖皮质激素、环磷酰胺、阿昔洛韦、抗生素、IVIG、血浆置换、脑膜炎、脑炎、脑水肿、颅内压升高、吉兰-巴雷综合征、三带喙库蚊、病毒血症=187" readonly>
+        <button class="btn btn-copy" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">🔑 关键词</div>
+        <div class="keywords-list">
+            ADEM、急性播散性脑脊髓炎、流行性乙型脑炎、乙脑、糖皮质激素、环磷酰胺、阿昔洛韦、抗生素、IVIG、血浆置换、脑膜炎、脑炎、脑水肿、颅内压升高、吉兰-巴雷综合征、三带喙库蚊、病毒血症、经验性治疗、中枢神经系统感染、人畜共患、自然疫源性疾病、蚊虫叮咬、昏迷、惊厥
+        </div>
+    </div>
+
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            }, function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板！");
+            });
+        }
+
+        // 添加到收藏
+        function addToFavorites() {
+            // 获取当前页面信息
+            const title = "ADEM急诊处理与流行性乙型脑炎";
+            const url = window.location.href;
+            const pageNum = "187";
+            
+            // 从localStorage获取已有的收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(fav => fav.url === url);
+            if (exists) {
+                alert("该页面已在收藏夹中！");
+                return;
+            }
+            
+            // 添加新收藏
+            favorites.push({
+                title: title,
+                url: url,
+                pageNum: pageNum,
+                category: "神经系统疾病",
+                addTime: new Date().toLocaleString()
+            });
+            
+            // 保存到localStorage
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 同时尝试更新index.html的收藏列表（通过同源策略）
+            alert("已添加到收藏！\n标题：" + title + "\n页码：" + pageNum);
+        }
+    </script>
+</body>
+</html>
