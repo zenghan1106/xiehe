@@ -1,0 +1,583 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~坏死性筋膜炎（续）- 临床表现与检查*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            background-image: linear-gradient(160deg, #f0f4f8 0%, #e6eef7 100%);
+            color: #333;
+            line-height: 1.7;
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #3a7bd5;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(58,123,213,0.25);
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background: #2a5fa8;
+            transform: translateY(-2px);
+        }
+        
+        /* 导航按钮容器 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #3a7bd5;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(58,123,213,0.25);
+            transition: all 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background: #2a5fa8;
+            transform: translateY(-2px);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #f0a030;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(240,160,48,0.25);
+            transition: all 0.3s;
+        }
+        
+        .fav-btn:hover {
+            background: #d89020;
+            transform: translateY(-2px);
+        }
+        
+        .fav-btn.active {
+            background: #e74c3c;
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 800px;
+            margin: 75px auto 30px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 6px 30px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        /* 标题样式 */
+        .page-title {
+            background: #1a5276;
+            color: white;
+            padding: 22px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead th {
+            background: #1a5276;
+            color: white;
+            padding: 16px;
+            text-align: left;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        tbody td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 15px;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #eef4fb;
+        }
+        
+        .section-title {
+            color: #1a5276;
+            font-weight: bold;
+            font-size: 17px;
+            white-space: nowrap;
+        }
+        
+        .sub-item {
+            padding-left: 22px;
+            position: relative;
+            margin-bottom: 6px;
+        }
+        
+        .sub-item::before {
+            content: "●";
+            position: absolute;
+            left: 0;
+            color: #3a7bd5;
+            font-size: 10px;
+            top: 5px;
+        }
+        
+        .check-item {
+            padding-left: 22px;
+            position: relative;
+            margin-bottom: 6px;
+        }
+        
+        .check-item::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .highlight-red {
+            color: #c0392b;
+            font-weight: 500;
+        }
+        
+        .highlight-blue {
+            color: #1a5276;
+            font-weight: 500;
+        }
+        
+        .disease-name {
+            color: #8e44ad;
+            font-weight: 500;
+        }
+        
+        .lab-item {
+            color: #d35400;
+            font-weight: 500;
+        }
+        
+        /* 页码显示 */
+        .page-number {
+            text-align: center;
+            padding: 18px;
+            color: #555;
+            font-size: 15px;
+            background: #f8fafc;
+            font-weight: 500;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            padding: 22px;
+            background: #f8fafc;
+            border-top: 2px solid #e8e8e8;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 220px;
+            padding: 14px 16px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: inherit;
+            background: white;
+            transition: border-color 0.3s;
+        }
+        
+        .copy-input:focus {
+            outline: none;
+            border-color: #3a7bd5;
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .copy-btn:hover {
+            background: #219a52;
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn.copied {
+            background: #3498db;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            padding: 22px;
+            background: white;
+            border-top: 1px solid #e8e8e8;
+        }
+        
+        .tags-title {
+            font-size: 17px;
+            color: #1a5276;
+            font-weight: bold;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 10px 18px;
+            border-radius: 24px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .tag-disease {
+            background: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #bbdefb;
+        }
+        
+        .tag-disease:hover {
+            background: #1565c0;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .tag-drug {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+        }
+        
+        .tag-drug:hover {
+            background: #2e7d32;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .tag-bacteria {
+            background: #fff3e0;
+            color: #e65100;
+            border: 1px solid #ffe0b2;
+        }
+        
+        .tag-bacteria:hover {
+            background: #e65100;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .tag-symptom {
+            background: #fce4ec;
+            color: #c2185b;
+            border: 1px solid #f8bbd9;
+        }
+        
+        .tag-symptom:hover {
+            background: #c2185b;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            padding: 18px 22px;
+            background: #f8fafc;
+            text-align: center;
+            color: #555;
+            font-size: 13px;
+            border-top: 1px solid #e8e8e8;
+        }
+        
+        .keywords-section span {
+            color: #1a5276;
+            font-weight: 600;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .page-title {
+                font-size: 19px;
+                padding: 18px;
+            }
+            
+            thead th {
+                font-size: 17px;
+                padding: 14px;
+            }
+            
+            tbody td {
+                padding: 12px 14px;
+                font-size: 14px;
+            }
+            
+            .section-title {
+                font-size: 15px;
+            }
+            
+            .nav-buttons {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .nav-btn, .fav-btn, .home-btn {
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="219.html" class="nav-btn">↑ 上一页</a>
+        <a href="221.html" class="nav-btn">↓ 下一页</a>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+    </div>
+    
+    <div class="container">
+        <!-- 标题 -->
+        <div class="page-title">~~~~~坏死性筋膜炎（续）- 危险因素、临床表现与检查*****</div>
+        
+        <!-- 主表格 -->
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 25%;">内容分类</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="section-title">危险因素（续）</td>
+                    <td>
+                        <div class="sub-item">挫伤</div>
+                        <div class="sub-item">皮肤破损：水痘病变，昆虫叮咬，注射吸毒</div>
+                        <div class="sub-item">近期手术：结肠、泌尿道和妇科手术，新生儿包皮环切术</div>
+                        <div class="sub-item">黏膜破损：痔、直肠裂和会阴切开术</div>
+                        <div class="sub-item">免疫抑制：糖尿病、肝硬化、粒细胞减少症和<span class="highlight-red">HIV感染</span></div>
+                        <div class="sub-item">恶性肿瘤</div>
+                        <div class="sub-item">肥胖</div>
+                        <div class="sub-item">酗酒</div>
+                        <div class="sub-item">女性：妊娠、分娩和妇科手术</div>
+                        <div class="sub-item">糖尿病</div>
+                        <div class="sub-item">使用<span class="highlight-blue">NSAID</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">3. 临床表现</td>
+                    <td>
+                        <div class="sub-item" style="font-weight:600; color:#1a5276;">典型表现</div>
+                        <div class="check-item">常急性发病（数小时内）</div>
+                        <div class="check-item">病情可快速进展为广泛性破坏，导致全身中毒、肢体丧失和/或死亡</div>
+                        <div class="check-item">可累及表皮、真皮、皮下组织、筋膜和肌肉</div>
+                        <div class="sub-item" style="font-weight:600; color:#1a5276;">坏死性感染的临床表现</div>
+                        <div class="check-item">皮肤弥漫性红斑；水肿表现；剧烈疼痛；捻发音；皮肤大疱、坏死或瘀斑</div>
+                        <div class="check-item">皮下组织可变硬，明显水肿可导致骨筋膜室综合征，进而并发肌坏死</div>
+                        <div class="check-item">手术伤口感染时发生的<span class="highlight-blue">NSTI</span>以大量分泌物、发暗易碎的皮下组织及苍白、失活的筋膜为特征</div>
+                        <div class="sub-item" style="font-weight:600; color:#1a5276;">受累部位</div>
+                        <div class="check-item">四肢：最常累及</div>
+                        <div class="check-item">会阴：会阴坏死性筋膜炎又称<span class="disease-name">Fournier坏疽</span>，可由胃肠道或尿道黏膜完整性被破坏引起，可能迅速蔓延至前腹壁和臀肌，男性多于女性</div>
+                        <div class="check-item">头颈部：头颈部坏死性筋膜炎可由手术或器械检查导致口咽黏膜完整性破坏所致，也可发生于牙源性感染时</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">4. 必做检查</td>
+                    <td>
+                        <div class="sub-item"><span class="lab-item">血常规</span>：白细胞增多伴核左移</div>
+                        <div class="sub-item"><span class="lab-item">生化检查</span>：低钠血症，血清肌酐、乳酸、肌酸激酶（<span class="highlight-blue">CK</span>）和<span class="highlight-blue">AST</span>水平升高。血清CK或AST水平升高提示累及肌肉或筋膜的深部感染，而非蜂窝织炎</div>
+                        <div class="sub-item"><span class="lab-item">炎症标志物检测</span>：<span class="highlight-blue">CRP</span>和/或<span class="highlight-blue">ESR</span>水平增高</div>
+                        <div class="sub-item"><span class="lab-item">ABG</span>：提示酸中毒</div>
+                        <div class="sub-item"><span class="lab-item">凝血功能检测</span>：异常</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 页码 -->
+        <div class="page-number">页码：220</div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <div class="copy-box">
+                <input type="text" class="copy-input" id="copyInput" value="坏死性筋膜炎（续）- 危险因素、临床表现与检查；坏死性筋膜炎、坏死性软组织感染、NSTI、Fournier坏疽、HIV感染、NSAID、CK、AST、CRP、ESR、ABG、血常规、生化检查、炎症标志物；=220" readonly>
+                <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+            </div>
+        </div>
+        
+        <!-- 标签区域 -->
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 特色检索标签</div>
+            <div class="tags-container">
+                <span class="tag tag-disease">坏死性筋膜炎</span>
+                <span class="tag tag-disease">坏死性软组织感染</span>
+                <span class="tag tag-disease">NSTI</span>
+                <span class="tag tag-disease">Fournier坏疽</span>
+                <span class="tag tag-disease">水痘</span>
+                <span class="tag tag-bacteria">HIV感染</span>
+                <span class="tag tag-drug">NSAID</span>
+                <span class="tag tag-symptom">白细胞增多</span>
+                <span class="tag tag-symptom">低钠血症</span>
+                <span class="tag tag-symptom">酸中毒</span>
+            </div>
+        </div>
+        
+        <!-- 关键词 -->
+        <div class="keywords-section">
+            关键词：<span>坏死性筋膜炎、NSTI、Fournier坏疽、HIV感染、NSAID、CK、AST、CRP、ESR、ABG、血常规、生化检查、炎症标志物</span>
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const item = {
+                    title: '坏死性筋膜炎（续）- 危险因素、临床表现与检查',
+                    url: '220.html',
+                    page: '220',
+                    tags: ['坏死性筋膜炎', '坏死性软组织感染', 'NSTI', 'Fournier坏疽', 'HIV感染', 'NSAID', 'CK', 'AST', 'CRP', 'ESR', 'ABG']
+                };
+                
+                const exists = favorites.some(f => f.url === '220.html');
+                if (!exists) {
+                    favorites.push(item);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                alert('已添加到收藏！');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '220.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '220.html');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
