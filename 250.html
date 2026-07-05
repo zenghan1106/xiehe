@@ -1,0 +1,573 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~尿崩症-病因分类临床表现与检查*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8f0f8 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            z-index: 100;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 导航按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(92,184,92,0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            top: 110px;
+            right: 15px;
+            background: #f0ad4e;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(240,173,78,0.3);
+            z-index: 100;
+        }
+        
+        .fav-btn:hover {
+            background: #ec971f;
+        }
+        
+        .fav-btn.active {
+            background: #d9534f;
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            color: #2c5282;
+            margin: 60px 0 20px 0;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        /* 副标题 */
+        .sub-title {
+            text-align: center;
+            font-size: 15px;
+            color: #4a5568;
+            margin-bottom: 25px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: #3182ce;
+            color: white;
+            padding: 16px 12px;
+            font-size: 17px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        /* 表格内容 */
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+            line-height: 1.7;
+            color: #2d3748;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        tbody tr:hover {
+            background: #edf2f7;
+        }
+        
+        /* 项目符号样式 */
+        .bullet {
+            color: #3182ce;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .check-mark {
+            color: #38a169;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        /* 章节标题 */
+        .section-title {
+            color: #2b6cb0;
+            font-weight: bold;
+            font-size: 15px;
+            margin: 8px 0;
+        }
+        
+        /* 疾病标题 */
+        .disease-title {
+            color: #1a365d;
+            font-weight: bold;
+            font-size: 17px;
+            margin: 12px 0;
+            padding: 8px 0;
+            border-bottom: 2px solid #3182ce;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #4a5568;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            background: white;
+            border-radius: 12px;
+            padding: 18px;
+            margin: 20px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .keywords-title {
+            font-size: 15px;
+            color: #2c5282;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .keywords-content {
+            font-size: 13px;
+            color: #4a5568;
+            line-height: 1.8;
+            word-break: break-all;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background: white;
+            border-radius: 12px;
+            padding: 18px;
+            margin: 20px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            color: #2c5282;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #ebf8ff;
+            color: #2b6cb0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            border: 1px solid #bee3f8;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            background: white;
+            border-radius: 12px;
+            padding: 18px;
+            margin: 20px 0 30px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .copy-title {
+            font-size: 15px;
+            color: #2c5282;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        .copy-box-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #4a5568;
+            background: #f7fafc;
+            outline: none;
+        }
+        
+        .copy-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #5a67d8;
+        }
+        
+        .copy-btn.copied {
+            background: #38a169;
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 14px;
+            display: none;
+            z-index: 200;
+        }
+        
+        /* 手机适配 */
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 18px;
+                margin-top: 70px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 10px;
+            }
+            
+            tbody td {
+                font-size: 13px;
+                padding: 10px;
+            }
+            
+            .home-btn, .nav-btn, .fav-btn {
+                font-size: 12px;
+                padding: 7px 12px;
+            }
+            
+            .copy-box-wrapper {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="249.html" class="nav-btn">↑ 上一页</a>
+        <a href="251.html" class="nav-btn">↓ 下一页</a>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~尿崩症-病因分类临床表现与检查*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~尿崩症-病因分类临床表现与检查*****、尿崩症 - 详细内容</div>
+    <p class="sub-title">急诊疾病 | 内分泌疾病 | 水盐代谢紊乱 | 垂体疾病</p>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>尿崩症 - 详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span class="bullet">●</span>原因：抗利尿激素（ADH）分泌减少（中枢性尿崩症），或肾对ADH作用产生抵抗（肾性尿崩症）导致集合系统水重吸收减少。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="bullet">●</span>尿量范围可能从轻度部分性尿崩症患者的2L/d至病情严重患者的10～15L/d以上。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">2. 分类</div>
+                        <span class="bullet">●</span>中枢性尿崩症（CDI）：其特征是ADH（又称血管加压素）释放减少，导致不同程度的多尿。对于绝大多数病例而言，CDI的最常见病因是特发性CDI、原发性或继发性肿瘤或浸润性疾病（如朗格汉斯细胞组织细胞增生症）、神经外科手术及创伤。<br><br>
+                        <span class="bullet">●</span>肾性尿崩症（NDI）：指对ADH作用的抵抗导致尿液浓缩能力下降。儿童常见病因为遗传性NDI，成人则为长期摄入锂剂及高钙血症。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">3. 临床表现</div>
+                        <span class="bullet">●</span>中至重度NDI或CDI患者通常表现为多尿（成人＞3L/d，儿童＞2L/m²）、低比重尿（尿比重＜1.005）、夜尿及烦渴。<br><br>
+                        <span class="bullet">●</span>若渴觉受损或不能表达渴觉，可发生中至重度高钠血症，出现高热、精神症状、谵妄甚至死亡。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">4. 必做检查</div>
+                        <span class="bullet">●</span>记录24小时尿量。<br>
+                        <span class="bullet">●</span>尿比重、尿渗透压、血浆渗透压测定。<br>
+                        <span class="bullet">●</span>血常规、肝肾功能、电解质（重点关注血Na⁺）。<br>
+                        <span class="bullet">●</span>ESR、IgG4。<br>
+                        <span class="bullet">●</span>AFP＋CEA。<br>
+                        <span class="bullet">●</span>血总皮质醇、ACTH、甲功2、GH、IGF-1、β-HCG、性激素。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">5. 选做检查</div>
+                        <span class="bullet">●</span>颅骨正侧位X线片＋垂体CT或MRI：评估有无中枢性病变等CDI病因。<br>
+                        <span class="bullet">●</span>胸腹盆增强CT。<br>
+                        <span class="bullet">●</span>视力、视野、眼底检查。<br>
+                        <span class="bullet">●</span>伴腺垂体受累，需做相应检查。<br>
+                        <span class="bullet">●</span>禁水加压素试验（通常在内分泌科病房完成）。<br>
+                        <span class="check-mark">✓</span>一般禁水8～18小时，使血清钠达到145mmol/L。<br>
+                        <span class="check-mark">✓</span>大多数尿渗透压＞100mmol/kg者可进行整夜限水，次日早晨评价。<br>
+                        <span class="check-mark">✓</span>严重多尿且尿渗透压＜100mmol/kg者，限水2～3小时即可。<br>
+                        <span class="check-mark">✓</span>限水试验次日检测尿渗透压、血浆渗透压和血清钠浓度。
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">页码：250</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">关键词</div>
+        <div class="keywords-content">
+            尿崩症；中枢性尿崩症；肾性尿崩症；CDI；NDI；ADH；血管加压素；抗利尿激素；多尿；低比重尿；高钠血症；禁水加压素试验；尿渗透压；血浆渗透压；垂体；朗格汉斯细胞组织细胞增生症；锂剂；高钙血症；ESR；IgG4；AFP；CEA；ACTH；甲功；GH；IGF-1；β-HCG
+        </div>
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">检索标签</div>
+        <div>
+            <span class="tag">尿崩症</span>
+            <span class="tag">中枢性尿崩症</span>
+            <span class="tag">肾性尿崩症</span>
+            <span class="tag">ADH</span>
+            <span class="tag">血管加压素</span>
+            <span class="tag">多尿</span>
+            <span class="tag">高钠血症</span>
+            <span class="tag">低比重尿</span>
+            <span class="tag">禁水加压素试验</span>
+            <span class="tag">尿渗透压</span>
+            <span class="tag">血浆渗透压</span>
+            <span class="tag">垂体</span>
+            <span class="tag">肿瘤</span>
+            <span class="tag">朗格汉斯细胞组织细胞增生症</span>
+            <span class="tag">锂剂</span>
+            <span class="tag">高钙血症</span>
+            <span class="tag">ESR</span>
+            <span class="tag">IgG4</span>
+            <span class="tag">AFP</span>
+            <span class="tag">CEA</span>
+            <span class="tag">ACTH</span>
+            <span class="tag">甲功</span>
+            <span class="tag">GH</span>
+            <span class="tag">IGF-1</span>
+            <span class="tag">β-HCG</span>
+            <span class="tag">CT</span>
+            <span class="tag">MRI</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <div class="copy-title">复制信息</div>
+        <div class="copy-box-wrapper">
+            <input type="text" class="copy-input" id="copyInput" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 设置复制框内容
+        const title = "尿崩症-病因分类临床表现与检查";
+        const subtitle = "急诊疾病 | 内分泌疾病 | 水盐代谢紊乱 | 垂体疾病";
+        const keywords = "尿崩症；中枢性尿崩症；肾性尿崩症；CDI；NDI；ADH；血管加压素；抗利尿激素；多尿；低比重尿；高钠血症；禁水加压素试验；尿渗透压；血浆渗透压；垂体；朗格汉斯细胞组织细胞增生症；锂剂；高钙血症；ESR；IgG4；AFP；CEA；ACTH；甲功；GH；IGF-1；β-HCG";
+        const pageNum = "250";
+        document.getElementById('copyInput').value = title + "；" + subtitle + "；" + keywords + "；=" + pageNum;
+        
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                    document.getElementById('copyBtn').classList.add('copied');
+                    document.getElementById('copyBtn').textContent = '已复制';
+                    setTimeout(() => {
+                        document.getElementById('copyBtn').classList.remove('copied');
+                        document.getElementById('copyBtn').textContent = '复制';
+                    }, 2000);
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                showToast('已添加到收藏！');
+                
+                // 保存到localStorage模拟添加到index收藏类目
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '~~~~~尿崩症-病因分类临床表现与检查*****',
+                    url: '250.html',
+                    page: '250'
+                };
+                // 检查是否已存在
+                const exists = favorites.some(f => f.url === '250.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+                showToast('已取消收藏！');
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '250.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '250.html');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
