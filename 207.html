@@ -1,0 +1,581 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>隐球菌脑膜炎辅助检查与伤寒 - 急诊处理</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimHei", "PingFang SC", sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            line-height: 1.8;
+            padding: 15px;
+            font-size: 14px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background-color: #2e7d32;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background-color: #1b5e20;
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background-color: #1976d2;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background-color: #0d47a1;
+            transform: translateY(-2px);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            top: 130px;
+            right: 15px;
+            background-color: #ff9800;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: none;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .fav-btn:hover {
+            background-color: #e65100;
+            transform: translateY(-2px);
+        }
+        
+        /* 标题格式 */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1565c0;
+            margin: 60px 15px 25px 15px;
+            padding: 15px;
+            background-color: #e3f2fd;
+            border-radius: 12px;
+            border-left: 5px solid #1976d2;
+        }
+        
+        .page-title::before {
+            content: "~~~~~";
+            color: #1976d2;
+            margin-right: 10px;
+        }
+        
+        .page-title::after {
+            content: "*****";
+            color: #1976d2;
+            margin-left: 10px;
+        }
+        
+        /* 副标题 */
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #424242;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        /* 表格样式 */
+        .main-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+        
+        .main-table th {
+            background-color: #1976d2;
+            color: white;
+            padding: 18px 15px;
+            text-align: left;
+            font-size: 17px;
+            font-weight: bold;
+        }
+        
+        .main-table td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        .main-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .main-table tr:hover {
+            background-color: #e8f4f8;
+        }
+        
+        .section-header {
+            background-color: #bbdefb !important;
+            font-weight: bold;
+            color: #0d47a1;
+            font-size: 15px;
+        }
+        
+        .check-item {
+            color: #2e7d32;
+            font-weight: 600;
+        }
+        
+        .diamond-item {
+            padding-left: 25px;
+            color: #555;
+        }
+        
+        .diamond-item::before {
+            content: "◇ ";
+            color: #1976d2;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1976d2;
+            margin: 20px 0;
+            padding: 12px;
+            background-color: #e3f2fd;
+            border-radius: 8px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #fff3e0;
+            border-radius: 12px;
+            border: 2px solid #ff9800;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #e65100;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 5px;
+            background-color: #ff9800;
+            color: white;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        /* 底部编辑框区域 */
+        .copy-section {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #e8f5e9;
+            border-radius: 12px;
+            border: 2px solid #4caf50;
+        }
+        
+        .copy-section-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #2e7d32;
+            margin-bottom: 12px;
+        }
+        
+        .copy-input-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #4caf50;
+            border-radius: 8px;
+            font-size: 14px;
+            background-color: white;
+        }
+        
+        .copy-btn {
+            padding: 12px 25px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background-color: #2e7d32;
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fce4ec;
+            border-radius: 8px;
+            color: #c62828;
+            font-size: 14px;
+        }
+        
+        .keywords strong {
+            color: #ad1457;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            .page-title {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            
+            .main-table th {
+                font-size: 15px;
+                padding: 14px 10px;
+            }
+            
+            .main-table td {
+                padding: 12px 10px;
+            }
+            
+            .nav-buttons {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                top: 10px;
+                left: 10px;
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+            
+            .fav-btn {
+                top: 115px;
+                right: 10px;
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="206.html" class="nav-btn">◀ 上一页</a>
+        <a href="208.html" class="nav-btn">下一页 ▶</a>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    
+    <!-- 标题 -->
+    <div class="page-title">隐球菌脑膜炎辅助检查与伤寒</div>
+    <div class="subtitle">急诊处理与定义临床表现</div>
+    
+    <!-- 主表格 -->
+    <table class="main-table">
+        <thead>
+            <tr>
+                <th colspan="2">隐球菌脑膜炎与伤寒诊疗要点</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="section-header">
+                <td colspan="2">3. 辅助检查</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">● 血常规＋生化检查：</div>
+                    <div>严重免疫抑制患者可能存在白细胞减少、贫血、低白蛋白血症以及丙种球蛋白抗体片段增多。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">● 脑脊液检查</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">✓ 隐球菌多糖抗原检测：</div>
+                    <div>可在培养结果阳性前很早就强烈提示存在感染。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">✓ 病原学检测：</div>
+                    <div>可确诊隐球菌脑膜脑炎。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">● 影像学检查</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">✓</div>
+                    <div>CT或MRI可以帮助除外其他脑部疾病。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">✓</div>
+                    <div>若疑有颅内压增高和/或其他占位性病变，则必须在腰穿前进行脑部放射影像学检查。</div>
+                </td>
+            </tr>
+            <tr class="section-header">
+                <td colspan="2">4. 急诊处理</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">● 抗真菌治疗</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">✓ 诱导治疗：</div>
+                    <div>采用两性霉素B联合氟胞嘧啶治疗。首选两性霉素B脂质制剂。可静脉给予两性霉素B脂质体3～4mg/(kg·d)，或两性霉素B脂质复合物5mg/(kg·d)，至少持续2周。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">✓ 巩固治疗：</div>
+                    <div>推荐使用氟康唑，巩固治疗8周，感染科随诊。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">✓ 维持治疗：</div>
+                    <div>诊断后通常予1年的唑类维持治疗。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">● 控制颅内压</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">✓</div>
+                    <div>是决定隐球菌脑膜脑炎预后的关键因素之一。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">✓</div>
+                    <div>首次腰穿时应测量ICP。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">✓</div>
+                    <div>若脑脊液压力≥25cmH₂O，且诱导治疗期间存在ICP增高的症状，应行CSF引流以将压力降低50%，或降至正常水平（≤20cmH₂O）。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">● 减少免疫抑制治疗。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: right; color: #666;">
+                    （李 妍）
+                </td>
+            </tr>
+            <tr class="section-header">
+                <td colspan="2">■ 伤寒</td>
+            </tr>
+            <tr class="section-header">
+                <td colspan="2">1. 定义</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>● 伤寒是一种由摄入被污染的食物或水而获得的侵袭性细菌感染，是伴发热和腹痛的严重全身性疾病。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>● 引起伤寒的微生物通常为肠道沙门菌伤寒血清型，其他沙门菌血清型（特别是肠道沙门菌甲型、乙型或丙型副伤寒血清型）可引起相似的综合征。</div>
+                </td>
+            </tr>
+            <tr class="section-header">
+                <td colspan="2">2. 临床表现</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>● 通常表现：在摄入致病微生物后5～21天出现腹痛、发热和畏寒。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>● 典型表现：包括相对心动过缓、脉搏－体温分离和玫瑰疹（躯</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 页码 -->
+    <div class="page-number">195</div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <span class="tag">隐球菌脑膜炎</span>
+        <span class="tag">隐球菌脑膜脑炎</span>
+        <span class="tag">新型隐球菌</span>
+        <span class="tag">伤寒</span>
+        <span class="tag">肠道沙门菌</span>
+        <span class="tag">副伤寒</span>
+        <span class="tag">两性霉素B</span>
+        <span class="tag">氟胞嘧啶</span>
+        <span class="tag">氟康唑</span>
+        <span class="tag">HIV</span>
+    </div>
+    
+    <!-- 复制功能区域 -->
+    <div class="copy-section">
+        <div class="copy-section-title">📋 快速复制</div>
+        <div class="copy-input-group">
+            <input type="text" class="copy-input" id="copyText" value="隐球菌脑膜炎辅助检查与伤寒；急诊处理与定义临床表现；隐球菌脑膜炎,隐球菌脑膜脑炎,新型隐球菌,伤寒,肠道沙门菌,副伤寒,两性霉素B,氟胞嘧啶,氟康唑,HIV；=195" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        <strong>关键词：</strong>隐球菌脑膜炎、隐球菌脑膜脑炎、新型隐球菌、伤寒、肠道沙门菌、副伤寒、两性霉素B、氟胞嘧啶、氟康唑、颅内压、ICP、CSF引流、免疫抑制
+    </div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(function() {
+                    alert("已复制到剪贴板！");
+                });
+            } else {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            }
+        }
+        
+        // 添加到收藏
+        function addToFavorites() {
+            const title = "隐球菌脑膜炎辅助检查与伤寒";
+            const url = window.location.href;
+            const pageId = "195";
+            
+            try {
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                
+                const exists = favorites.some(f => f.url === url);
+                if (exists) {
+                    alert("该页面已在收藏夹中！");
+                    return;
+                }
+                
+                favorites.push({
+                    title: title,
+                    url: url,
+                    pageId: pageId,
+                    category: "急诊疾病",
+                    date: new Date().toLocaleString()
+                });
+                
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert("已添加到收藏！\n标题：" + title + "\n页码：" + pageId);
+            } catch(e) {
+                alert("收藏功能需要index.html配合实现。\n请确保index.html页面能够读取收藏数据。");
+            }
+        }
+    </script>
+</body>
+</html>
