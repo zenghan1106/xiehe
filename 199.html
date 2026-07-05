@@ -1,0 +1,698 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>~~~~~肾综合征出血热诊疗续-鼠疫诊疗指南*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 100;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            text-decoration: none;
+            display: inline-block;
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        .nav-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #e8a838;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(232,168,56,0.3);
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        .fav-btn:hover {
+            background: #d4952a;
+        }
+        
+        .fav-btn.active {
+            background: #28a745;
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            margin: 70px 0 25px 0;
+            color: #1a5276;
+            font-size: 22px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        /* 表头 */
+        thead tr {
+            background: #2e75b6;
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        /* 表格第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a5276;
+            background: #e8f4f8;
+        }
+        
+        tbody tr:nth-child(2) td {
+            background: #f0f8ff;
+        }
+        
+        /* 表格行 */
+        tbody tr {
+            border-bottom: 1px solid #e8e8e8;
+        }
+        
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+        
+        tbody tr:hover {
+            background: #f8fbff;
+        }
+        
+        td {
+            padding: 12px;
+            line-height: 1.6;
+        }
+        
+        td:first-child {
+            font-weight: 600;
+            color: #2c5f8a;
+            white-space: nowrap;
+            width: 100px;
+            background: #f5f9fc;
+            vertical-align: top;
+        }
+        
+        /* 内容样式 */
+        .content-text {
+            line-height: 1.8;
+        }
+        
+        .check-item {
+            margin: 4px 0;
+            padding: 2px 0;
+        }
+        
+        .disease-section {
+            margin: 8px 0;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 3px solid #2e75b6;
+        }
+        
+        .disease-title {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+        
+        .symptom-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            margin: 2px 4px 2px 0;
+            border-radius: 4px;
+            background: #fff3e0;
+            color: #e65100;
+            font-size: 13px;
+        }
+        
+        .bacteria-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            margin: 2px 4px 2px 0;
+            border-radius: 4px;
+            background: #e8f6f3;
+            color: #1a7a5e;
+            font-size: 13px;
+        }
+        
+        .drug-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            margin: 2px 4px 2px 0;
+            border-radius: 4px;
+            background: #fce4ec;
+            color: #c2185b;
+            font-size: 13px;
+        }
+        
+        .treatment-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            margin: 2px 4px 2px 0;
+            border-radius: 4px;
+            background: #e8f4f8;
+            color: #1565c0;
+            font-size: 13px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background: white;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #2e75b6;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .tag-disease {
+            background: #ffe4e1;
+            color: #c0392b;
+            border: 1px solid #f5b7b1;
+        }
+        
+        .tag-bacteria {
+            background: #e8f6f3;
+            color: #1a7a5e;
+            border: 1px solid #a9dfbf;
+        }
+        
+        .tag-symptom {
+            background: #fff3e0;
+            color: #e65100;
+            border: 1px solid #ffcc80;
+        }
+        
+        .tag-drug {
+            background: #fce4ec;
+            color: #c2185b;
+            border: 1px solid #f8bbd9;
+        }
+        
+        .tag-check {
+            background: #f3e5f5;
+            color: #7b1fa2;
+            border: 1px solid #ce93d8;
+        }
+        
+        .tag-treatment {
+            background: #e8f4f8;
+            color: #1565c0;
+            border: 1px solid #90caf9;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* 底部区域 */
+        .footer-section {
+            background: white;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .keywords {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .keywords strong {
+            color: #2e75b6;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 15px;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background: #fafafa;
+        }
+        
+        .copy-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #218838;
+        }
+        
+        .copy-btn.copied {
+            background: #17a2b8;
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 200;
+        }
+        
+        .toast.show {
+            opacity: 1;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 13px;
+            }
+            
+            td:first-child {
+                width: 80px;
+                white-space: normal;
+            }
+            
+            .tag {
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+            
+            .nav-btn, .fav-btn, .home-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="198.html" class="nav-btn">← 上一页</a>
+        <a href="200.html" class="nav-btn">下一页 →</a>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">~~~~~肾综合征出血热诊疗续-鼠疫诊疗指南*****</h1>
+    
+    <!-- 主表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>项目</th>
+                    <th>内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>疾病名称</td>
+                    <td><strong>肾综合征出血热（续）</strong> / <strong>鼠疫</strong></td>
+                </tr>
+                <tr>
+                    <td>实验室检查</td>
+                    <td>
+                        <div class="content-text">
+                            <div class="check-item">✓ 血清、血细胞、尿液中检出<strong>出血热病毒抗原</strong>或血清中检出特异性<strong>IgM抗体</strong>可确诊。</div>
+                            <div class="check-item">✓ 特异性<strong>IgG</strong>需双份血清效价4倍以上升高才具诊断意义。</div>
+                            <div class="check-item">✓ <strong>RT-PCR</strong>检测<strong>汉坦病毒RNA</strong>有助于早期和非典型患者的诊断。</div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>需鉴别的诊断</td>
+                    <td>
+                        <div class="content-text">
+                            急性肾损伤相关的其他感染（如<strong>钩端螺旋体病</strong>），药物相关急性间质性肾炎，其他非感染性病因如<strong>肉芽肿性多血管炎</strong>、<strong>肺出血肾炎综合征</strong>等。
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>急诊处理</td>
+                    <td>
+                        <div class="content-text">
+                            <div class="check-item">• 早发现、早休息、早治疗，以<strong>对症支持治疗</strong>为主。目前尚无针对汉坦病毒感染的特异性抗病毒治疗。<strong>利巴韦林</strong>或可降低病死率，有待进一步证实。</div>
+                            <div class="check-item">• 针对病程中各期特点给予相应治疗。注意防治<strong>休克</strong>、<strong>肾损害</strong>和<strong>出血</strong>，维持水电解质平衡，预防并发症。</div>
+                            <div class="check-item">• 镇痛应避免使用<strong>NSAID</strong>（可促进急性肾损伤发生）。</div>
+                            <div class="check-item">• 有适当指征者应接受<strong>肾脏替代治疗</strong>。</div>
+                            <div class="check-item">• 必要时转<strong>ICU</strong>或专科医院进一步诊治。</div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>鼠疫定义</td>
+                    <td>
+                        <div class="content-text">
+                            <div class="check-item">• 由<strong>鼠疫耶尔森菌</strong>引起的<strong>烈性传染病</strong>。</div>
+                            <div class="check-item">• 是以<strong>发病急</strong>、<strong>传播快</strong>、<strong>传染性强</strong>、<strong>病死率高</strong>为特点的<strong>甲类传染病</strong>。</div>
+                            <div class="check-item">• 通过媒介<strong>跳蚤</strong>传播，是流行在<strong>啮齿类</strong>动物间的<strong>自然疫源性</strong>疾病。在一定条件下通过染疫的<strong>鼠</strong>、<strong>蚤</strong>或其他途径传播给人。</div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>鼠疫临床表现</td>
+                    <td>
+                        <div class="content-text">
+                            <div class="check-item">• <strong>潜伏期：</strong>较短，一般为<strong>数天</strong>。</div>
+                            <div class="check-item">• <strong>一般症状：</strong>危重的<strong>全身中毒症状</strong>。<br>
+                            ✓ <strong>稽留热</strong>，伴<strong>寒战</strong>。<br>
+                            ✓ <strong>头痛</strong>、<strong>呼吸急促</strong>，很快陷入<strong>极度虚弱</strong>状态。<br>
+                            ✓ 重症患者早期出现<strong>神经症状</strong>，<strong>意识不清</strong>，<strong>步行蹒跚</strong>，<strong>恐怖不安</strong>，<strong>结膜充血</strong>，出现所谓的<strong>鼠疫颜貌</strong>。</div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>鼠疫临床分型</td>
+                    <td>
+                        <div class="content-text">
+                            <div class="check-item">• <strong>腺鼠疫</strong><br>
+                            ◇ 最多见，以受侵袭部位所属<strong>淋巴结肿大</strong>为主要症状。</div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 特色检索标签（点击筛选）</div>
+        <div>
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">肾综合征出血热</span>
+            <span class="tag tag-disease">鼠疫</span>
+            <span class="tag tag-disease">甲类传染病</span>
+            <span class="tag tag-disease">烈性传染病</span>
+            <span class="tag tag-disease">急性肾损伤</span>
+            <span class="tag tag-disease">钩端螺旋体病</span>
+            <span class="tag tag-disease">肉芽肿性多血管炎</span>
+            <span class="tag tag-disease">肺出血肾炎综合征</span>
+            <span class="tag tag-disease">腺鼠疫</span>
+            
+            <!-- 细菌标签 -->
+            <span class="tag tag-bacteria">鼠疫耶尔森菌</span>
+            <span class="tag tag-bacteria">汉坦病毒</span>
+            <span class="tag tag-bacteria">出血热病毒</span>
+            
+            <!-- 症状标签 -->
+            <span class="tag tag-symptom">稽留热</span>
+            <span class="tag tag-symptom">寒战</span>
+            <span class="tag tag-symptom">头痛</span>
+            <span class="tag tag-symptom">呼吸急促</span>
+            <span class="tag tag-symptom">极度虚弱</span>
+            <span class="tag tag-symptom">神经症状</span>
+            <span class="tag tag-symptom">意识不清</span>
+            <span class="tag tag-symptom">步行蹒跚</span>
+            <span class="tag tag-symptom">恐怖不安</span>
+            <span class="tag tag-symptom">结膜充血</span>
+            <span class="tag tag-symptom">鼠疫颜貌</span>
+            <span class="tag tag-symptom">淋巴结肿大</span>
+            <span class="tag tag-symptom">全身中毒症状</span>
+            <span class="tag tag-symptom">休克</span>
+            <span class="tag tag-symptom">肾损害</span>
+            <span class="tag tag-symptom">出血</span>
+            
+            <!-- 药物/治疗标签 -->
+            <span class="tag tag-drug">利巴韦林</span>
+            <span class="tag tag-drug">NSAID</span>
+            
+            <!-- 检查标签 -->
+            <span class="tag tag-check">IgM</span>
+            <span class="tag tag-check">IgG</span>
+            <span class="tag tag-check">RT-PCR</span>
+            <span class="tag tag-check">汉坦病毒RNA</span>
+            <span class="tag tag-check">出血热病毒抗原</span>
+            
+            <!-- 治疗标签 -->
+            <span class="tag tag-treatment">对症支持治疗</span>
+            <span class="tag tag-treatment">肾脏替代治疗</span>
+            <span class="tag tag-treatment">ICU</span>
+            <span class="tag tag-treatment">跳蚤</span>
+            <span class="tag tag-treatment">啮齿类</span>
+            <span class="tag tag-treatment">鼠</span>
+            <span class="tag tag-treatment">蚤</span>
+            <span class="tag tag-treatment">自然疫源性</span>
+        </div>
+    </div>
+    
+    <!-- 底部区域：关键词、页码、复制功能 -->
+    <div class="footer-section">
+        <div class="keywords">
+            <strong>关键词：</strong>肾综合征出血热；鼠疫；汉坦病毒；鼠疫耶尔森菌；甲类传染病；烈性传染病；IgM；IgG；RT-PCR；出血热病毒抗原；汉坦病毒RNA；钩端螺旋体病；肉芽肿性多血管炎；肺出血肾炎综合征；NSAID；利巴韦林；肾脏替代治疗；ICU；腺鼠疫；稽留热；寒战；鼠疫颜貌；淋巴结肿大；跳蚤；啮齿类；自然疫源性
+        </div>
+        
+        <div class="page-number">
+            页码：199
+        </div>
+        
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyContent()">📋 复制</button>
+        </div>
+    </div>
+    
+    <!-- 提示信息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 页面信息
+        const pageInfo = {
+            title: "肾综合征出血热诊疗续-鼠疫诊疗指南",
+            subtitle: "急诊疾病诊疗",
+            keywords: "肾综合征出血热、鼠疫、汉坦病毒、鼠疫耶尔森菌、甲类传染病、IgM、IgG、RT-PCR、利巴韦林、NSAID、腺鼠疫、鼠疫颜貌、淋巴结肿大、自然疫源性",
+            pageNum: "199"
+        };
+        
+        // 初始化复制框内容
+        const copyContentText = `${pageInfo.title}；${pageInfo.subtitle}；${pageInfo.keywords}；=${pageInfo.pageNum}`;
+        document.getElementById('copyInput').value = copyContentText;
+        
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '✓ 已复制';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '📋 复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                });
+            }
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = localStorage.getItem('fav_199') === 'true';
+            
+            if (!isFav) {
+                localStorage.setItem('fav_199', 'true');
+                // 存储收藏信息到index可用格式
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites.push({
+                    page: '199',
+                    title: pageInfo.title,
+                    subtitle: pageInfo.subtitle,
+                    url: '199.html',
+                    disease: '肾综合征出血热、鼠疫',
+                    tags: ['肾综合征出血热', '鼠疫', '汉坦病毒', '鼠疫耶尔森菌', '甲类传染病', '腺鼠疫']
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+                showToast('已添加到收藏！');
+            } else {
+                localStorage.removeItem('fav_199');
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.page !== '199');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                btn.textContent = '⭐ 收藏';
+                btn.classList.remove('active');
+                showToast('已取消收藏');
+            }
+        }
+        
+        // 初始化收藏状态
+        function initFavorite() {
+            const btn = document.getElementById('favBtn');
+            if (localStorage.getItem('fav_199') === 'true') {
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+            }
+        }
+        
+        // 页面加载时初始化
+        window.onload = function() {
+            initFavorite();
+        };
+    </script>
+</body>
+</html>
