@@ -1,0 +1,610 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊医学-有机磷中毒检查诊断与急诊处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5ee 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(135deg, #4a90d9, #357abd);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(74, 144, 217, 0.3);
+            z-index: 1000;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background: linear-gradient(135deg, #357abd, #2a5f8f);
+            transform: translateY(-2px);
+        }
+        
+        /* 右上角导航按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #5cb85c, #449d44);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(92, 184, 92, 0.3);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .nav-btn:hover {
+            background: linear-gradient(135deg, #449d44, #357a35);
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn.prev {
+            background: linear-gradient(135deg, #f0ad4e, #ec971f);
+        }
+        
+        .nav-btn.prev:hover {
+            background: linear-gradient(135deg, #ec971f, #d58512);
+        }
+        
+        /* 收藏按钮 */
+        .favorite-btn {
+            background: linear-gradient(135deg, #d9534f, #c9302c);
+            margin-top: 5px;
+        }
+        
+        .favorite-btn:hover {
+            background: linear-gradient(135deg, #c9302c, #ac2925);
+        }
+        
+        /* 标题样式 */
+        .main-title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 60px 0 25px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #4a90d9;
+            border-right: 5px solid #4a90d9;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            max-width: 100%;
+            overflow-x: auto;
+            margin: 0 auto 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        /* 表头样式 - 蓝色 */
+        thead th {
+            background: linear-gradient(135deg, #2c5aa0, #1e3d6f);
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 18px 15px;
+            text-align: left;
+            border-bottom: 3px solid #ffd700;
+        }
+        
+        /* 表格内容样式 */
+        tbody td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #e0e8f0;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #2c3e50;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: rgba(240, 248, 255, 0.6);
+        }
+        
+        tbody tr:hover {
+            background: rgba(232, 244, 248, 0.9);
+        }
+        
+        /* 分类标题行 */
+        .category-row {
+            background: linear-gradient(90deg, #e8f4f8, #d4edda) !important;
+        }
+        
+        .category-row td {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 16px;
+            border-left: 4px solid #4a90d9;
+        }
+        
+        /* 子项样式 */
+        .sub-item {
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .sub-item::before {
+            content: "◆";
+            position: absolute;
+            left: 8px;
+            color: #4a90d9;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 30px auto;
+            max-width: 800px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .tag-disease {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a5a);
+            color: white;
+        }
+        
+        .tag-drug {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: linear-gradient(135deg, #a8e6cf, #7fcdcd);
+            color: #2c5f2d;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            margin: 30px auto;
+            max-width: 800px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .copy-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .copy-box-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #4a90d9;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #333;
+            background: #f8fbff;
+            min-height: 45px;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 15px;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+        }
+        
+        .copy-btn:hover {
+            background: linear-gradient(135deg, #5a67d8, #6b46c1);
+        }
+        
+        .copy-btn.copied {
+            background: linear-gradient(135deg, #5cb85c, #449d44);
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            margin: 25px auto;
+            max-width: 800px;
+            text-align: center;
+            padding: 15px;
+        }
+        
+        .keywords {
+            font-size: 14px;
+            color: #666;
+            line-height: 2;
+        }
+        
+        .keywords strong {
+            color: #1a5276;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 20px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 20px;
+                margin-top: 80px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 14px 10px;
+            }
+            
+            tbody td {
+                font-size: 14px;
+                padding: 12px 10px;
+            }
+            
+            .nav-buttons {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .nav-btn, .home-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-box-wrapper {
+                flex-direction: column;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+        
+        /* 成功提示 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #5cb85c;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 2000;
+        }
+        
+        .toast.show {
+            display: block;
+            animation: fadeInOut 2s ease;
+        }
+        
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            20% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            80% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 右上角导航按钮 -->
+    <div class="nav-buttons">
+        <a href="287.html" class="nav-btn prev">← 上一页</a>
+        <a href="289.html" class="nav-btn">下一页 →</a>
+        <button class="nav-btn favorite-btn" onclick="addToFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~急诊医学-有机磷中毒检查诊断与急诊处理*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">急诊医学 - 有机磷中毒检查诊断与急诊处理</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">✓ 表现为感觉、运动型多发神经病变，主要累及肢体末端，发生下肢瘫痪、四肢肌萎缩等。</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="2">3. 必做检查</td>
+                </tr>
+                <tr>
+                    <td width="30%">● 血ChE活力测定</td>
+                    <td>血ChE活力是诊断OPI中毒的特异性实验指标，对判断中毒程度、疗效和预后极为重要。</td>
+                </tr>
+                <tr>
+                    <td>● 毒物检测</td>
+                    <td>患者血、尿、粪便或胃内容物中可检测到OPI或其特异性代谢产物成分。OPI的动态血药浓度检测有助于病情评估及治疗。</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="2">4. 诊断策略</td>
+                </tr>
+                <tr>
+                    <td colspan="2">● OPI暴露史。</td>
+                </tr>
+                <tr>
+                    <td colspan="2">● OPI中毒症状及体征。</td>
+                </tr>
+                <tr>
+                    <td colspan="2">● 全血ChE活力降低。</td>
+                </tr>
+                <tr>
+                    <td colspan="2">● 血、胃内容物OPI及其代谢物检测。</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="2">5. 急性中毒诊断分级</td>
+                </tr>
+                <tr>
+                    <td>● 轻度中毒</td>
+                    <td>仅有M样症状，ChE活力70%～50%。</td>
+                </tr>
+                <tr>
+                    <td>● 中度中毒</td>
+                    <td>M样症状加重，出现N样症状，ChE活力50%～30%。</td>
+                </tr>
+                <tr>
+                    <td>● 重度中毒</td>
+                    <td>具有M、N样症状，伴肺水肿、抽搐、昏迷，呼吸肌麻痹和脑水肿，ChE活力30%以下。</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="2">6. 急诊处理</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="2">● 迅速清除毒物</td>
+                </tr>
+                <tr>
+                    <td colspan="2">✓ 立即将患者撤离中毒现场。</td>
+                </tr>
+                <tr>
+                    <td colspan="2">✓ 彻底清除未被机体吸收入血的毒物，如迅速脱去污染衣服，用肥皂水清洗污染皮肤、毛发和指甲。</td>
+                </tr>
+                <tr>
+                    <td colspan="2">✓ 眼部污染时，用清水、生理盐水、2%碳酸氢钠溶液或3%硼酸溶液冲洗。</td>
+                </tr>
+                <tr>
+                    <td colspan="2">✓ 口服中毒者，用清水洗胃，并及时导泻。</td>
+                </tr>
+                <tr>
+                    <td colspan="2">● 紧急复苏：立刻清除呼吸道分泌物，保持呼吸道通畅，吸氧，必要时机械通气。</td>
+                </tr>
+                <tr>
+                    <td colspan="2">● 应用解毒药：在清除毒物过程中，同时应用ChE复能药和胆碱受体阻断药治疗。</td>
+                </tr>
+                <tr>
+                    <td colspan="2">✓ 用药原则：根据病情，要早期、足量、联合和重复应用解毒药。</td>
+                </tr>
+                <tr>
+                    <td>◇ 轻度中毒</td>
+                    <td>单用ChE复能药。</td>
+                </tr>
+                <tr>
+                    <td>◇ 中至重度中毒</td>
+                    <td>可联合应用ChE复能药与胆碱受体阻断药，两药合用时，应减少胆碱受体阻断药（阿托品）用量，以免发生中毒。</td>
+                </tr>
+                <tr>
+                    <td colspan="2">✓ ChE复能药肟类化合物能使被抑制的ChE恢复活性。所用药</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">有机磷中毒</span>
+            <span class="tag tag-disease">急性中毒</span>
+            <span class="tag tag-disease">轻度中毒</span>
+            <span class="tag tag-disease">中度中毒</span>
+            <span class="tag tag-disease">重度中毒</span>
+            <span class="tag tag-disease">肺水肿</span>
+            <span class="tag tag-disease">呼吸肌麻痹</span>
+            <span class="tag tag-disease">脑水肿</span>
+            <span class="tag tag-disease">昏迷</span>
+            <span class="tag tag-disease">抽搐</span>
+            <span class="tag tag-disease">多发神经病变</span>
+            <span class="tag tag-disease">下肢瘫痪</span>
+            <span class="tag tag-disease">四肢肌萎缩</span>
+            <span class="tag tag-disease">过敏性皮炎</span>
+            <span class="tag tag-drug">ChE复能药</span>
+            <span class="tag tag-drug">胆碱受体阻断药</span>
+            <span class="tag tag-drug">阿托品</span>
+            <span class="tag tag-drug">碳酸氢钠</span>
+            <span class="tag tag-drug">硼酸</span>
+            <span class="tag tag-drug">肟类化合物</span>
+            <span class="tag tag-bacteria">胆碱酯酶</span>
+            <span class="tag tag-bacteria">ChE</span>
+            <span class="tag tag-bacteria">OPI</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制</div>
+        <div class="copy-box-wrapper">
+            <input type="text" class="copy-input" id="copyInput" value="急诊医学-有机磷中毒检查诊断与急诊处理；有机磷中毒；必做检查；诊断策略；急性中毒诊断分级；急诊处理；血ChE活力测定；毒物检测；ChE复能药；阿托品；=288" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">— 288 —</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords">
+            <strong>关键词：</strong>有机磷中毒 | 血ChE活力测定 | 毒物检测 | 诊断策略 | 急性中毒诊断分级 | 轻度中毒 | 中度中毒 | 重度中毒 | 急诊处理 | 清除毒物 | 紧急复苏 | ChE复能药 | 胆碱受体阻断药 | 阿托品 | 肟类化合物 | 机械通气 | 洗胃 | 导泻
+        </div>
+    </div>
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast">已复制到剪贴板！</div>
+    <div class="toast" id="favToast">已添加到收藏！</div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('copy');
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('copy');
+            }
+            
+            const btn = document.querySelector('.copy-btn');
+            btn.textContent = '已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        function showToast(type) {
+            const toastId = type === 'copy' ? 'toast' : 'favToast';
+            const toast = document.getElementById(toastId);
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+        
+        function addToFavorite() {
+            const favData = {
+                title: '急诊医学-有机磷中毒检查诊断与急诊处理',
+                url: window.location.href,
+                page: '288'
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.page === favData.page);
+            
+            if (!exists) {
+                favorites.push(favData);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+            
+            showToast('fav');
+        }
+        
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1.05)';
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>
