@@ -1,0 +1,464 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~尿培养阳性结果处理流程*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #e6f3ff 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            z-index: 100;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 导航按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(92,184,92,0.3);
+            text-align: center;
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+        }
+        
+        .fav-btn {
+            background: #f0ad4e;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(240,173,78,0.3);
+        }
+        
+        .fav-btn:hover {
+            background: #ec971f;
+        }
+        
+        /* 标题 */
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 26px;
+            margin: 60px 0 25px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            word-break: break-all;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            font-size: 14px;
+        }
+        
+        /* 表头 */
+        thead tr {
+            background: linear-gradient(135deg, #2980b9, #3498db);
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+            border: 1px solid #1a5276;
+        }
+        
+        /* 第一行 */
+        tbody tr:first-child {
+            background: #d6eaf8;
+        }
+        
+        tbody tr:first-child td {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        /* 普通单元格 */
+        td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 1.6;
+        }
+        
+        /* 斑马纹 */
+        tbody tr:nth-child(even):not(:first-child) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            color: #1a5276;
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: white;
+            font-weight: 500;
+        }
+        
+        .tag-disease {
+            background: #e74c3c;
+        }
+        
+        .tag-bacteria {
+            background: #9b59b6;
+        }
+        
+        .tag-antibiotic {
+            background: #27ae60;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+        }
+        
+        .copy-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #2980b9;
+        }
+        
+        /* 页码 */
+        .page-num {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            color: #888;
+            font-size: 13px;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 20px;
+                margin-top: 80px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            
+            td {
+                padding: 8px;
+                font-size: 13px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-btns">
+        <a href="99.html" class="nav-btn">上一页</a>
+        <a href="101.html" class="nav-btn">下一页</a>
+        <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~尿培养阳性结果处理流程*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>尿培养阳性结果处理流程</th>
+                    <th>临床表现</th>
+                    <th>处理</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>无症状菌尿</td>
+                    <td>无感染症状</td>
+                    <td>无需治疗，除非妊娠或泌尿道操作前</td>
+                </tr>
+                <tr>
+                    <td>急性单纯性膀胱炎</td>
+                    <td>尿频、尿急、尿痛、耻骨上疼痛</td>
+                    <td>呋喃妥因、磷霉素、头孢氨苄等</td>
+                </tr>
+                <tr>
+                    <td>急性肾盂肾炎</td>
+                    <td>发热、寒战、腰痛、恶心呕吐</td>
+                    <td>氟喹诺酮类、头孢曲松、哌拉西林/他唑巴坦</td>
+                </tr>
+                <tr>
+                    <td>复杂性尿路感染</td>
+                    <td>存在泌尿系结构或功能异常</td>
+                    <td>根据药敏结果选择，疗程10-14天</td>
+                </tr>
+                <tr>
+                    <td>复发性尿路感染</td>
+                    <td>6个月内≥2次或1年内≥3次</td>
+                    <td>低剂量长程抑菌治疗或预防性用药</td>
+                </tr>
+                <tr>
+                    <td>导尿管相关尿路感染</td>
+                    <td>留置导尿管患者出现感染症状</td>
+                    <td>更换导尿管，根据药敏选择抗生素</td>
+                </tr>
+                <tr>
+                    <td>男性尿路感染</td>
+                    <td>前列腺炎或附睾炎症状</td>
+                    <td>氟喹诺酮类或复方磺胺甲噁唑，疗程4-6周</td>
+                </tr>
+                <tr>
+                    <td>妊娠期尿路感染</td>
+                    <td>妊娠期出现尿路感染症状</td>
+                    <td>头孢类、磷霉素、呋喃妥因（避免氟喹诺酮和磺胺类）</td>
+                </tr>
+                <tr>
+                    <td>儿童尿路感染</td>
+                    <td>发热、烦躁、喂养困难、尿痛</td>
+                    <td>根据年龄和药敏选择，排除膀胱输尿管反流</td>
+                </tr>
+                <tr>
+                    <td>尿脓毒血症</td>
+                    <td>严重感染伴器官功能障碍</td>
+                    <td>广谱抗生素+泌尿外科引流，ICU支持治疗</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags">
+            <span class="tag tag-disease">无症状菌尿</span>
+            <span class="tag tag-disease">急性单纯性膀胱炎</span>
+            <span class="tag tag-disease">急性肾盂肾炎</span>
+            <span class="tag tag-disease">复杂性尿路感染</span>
+            <span class="tag tag-disease">复发性尿路感染</span>
+            <span class="tag tag-disease">导尿管相关尿路感染</span>
+            <span class="tag tag-disease">男性尿路感染</span>
+            <span class="tag tag-disease">妊娠期尿路感染</span>
+            <span class="tag tag-disease">儿童尿路感染</span>
+            <span class="tag tag-disease">尿脓毒血症</span>
+            <span class="tag tag-bacteria">大肠埃希菌</span>
+            <span class="tag tag-bacteria">肺炎克雷伯菌</span>
+            <span class="tag tag-bacteria">变形杆菌</span>
+            <span class="tag tag-bacteria">肠球菌</span>
+            <span class="tag tag-bacteria">铜绿假单胞菌</span>
+            <span class="tag tag-antibiotic">呋喃妥因</span>
+            <span class="tag tag-antibiotic">磷霉素</span>
+            <span class="tag tag-antibiotic">头孢氨苄</span>
+            <span class="tag tag-antibiotic">氟喹诺酮</span>
+            <span class="tag tag-antibiotic">头孢曲松</span>
+            <span class="tag tag-antibiotic">哌拉西林/他唑巴坦</span>
+            <span class="tag tag-antibiotic">复方磺胺甲噁唑</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="尿培养阳性结果处理流程；无症状菌尿；急性单纯性膀胱炎；急性肾盂肾炎；复杂性尿路感染；复发性尿路感染；导尿管相关尿路感染；男性尿路感染；妊娠期尿路感染；儿童尿路感染；尿脓毒血症；大肠埃希菌；肺炎克雷伯菌；变形杆菌；肠球菌；铜绿假单胞菌；呋喃妥因；磷霉素；头孢氨苄；氟喹诺酮；头孢曲松；哌拉西林/他唑巴坦；复方磺胺甲噁唑；=100" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-num">页码：100</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        关键词：尿培养阳性结果处理流程；无症状菌尿；急性单纯性膀胱炎；急性肾盂肾炎；复杂性尿路感染；复发性尿路感染；导尿管相关尿路感染；男性尿路感染；妊娠期尿路感染；儿童尿路感染；尿脓毒血症；大肠埃希菌；肺炎克雷伯菌；变形杆菌；肠球菌；铜绿假单胞菌；呋喃妥因；磷霉素；头孢氨苄；氟喹诺酮；头孢曲松；哌拉西林/他唑巴坦；复方磺胺甲噁唑
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                alert('已复制到剪贴板！');
+            }).catch(() => {
+                document.execCommand('copy');
+                alert('已复制到剪贴板！');
+            });
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            // 获取当前页面信息
+            const title = document.title;
+            const url = window.location.href;
+            
+            // 尝试添加到index的收藏类目
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const item = {
+                title: title,
+                url: url,
+                pageNum: '100'
+            };
+            
+            // 检查是否已存在
+            const exists = favorites.some(f => f.url === url);
+            if (!exists) {
+                favorites.push(item);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已添加到收藏！');
+            } else {
+                alert('该页面已在收藏中！');
+            }
+            
+            // 同时尝试写入index.html的收藏区域（如果同源）
+            try {
+                const indexFavorites = JSON.parse(localStorage.getItem('index_favorites') || '[]');
+                if (!indexFavorites.some(f => f.url === url)) {
+                    indexFavorites.push(item);
+                    localStorage.setItem('index_favorites', JSON.stringify(indexFavorites));
+                }
+            } catch(e) {
+                console.log('localStorage操作完成');
+            }
+        }
+    </script>
+</body>
+</html>
