@@ -1,0 +1,634 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急性肠梗阻病因临床表现与检查*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 80px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1000;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 收藏按钮 */
+        .favorite-btn {
+            background: #e8a838;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(232, 168, 56, 0.3);
+        }
+        
+        .favorite-btn:hover {
+            background: #d49a2f;
+        }
+        
+        .favorite-btn.active {
+            background: #c9302c;
+        }
+        
+        /* 标题 */
+        h1 {
+            text-align: center;
+            padding: 80px 20px 25px;
+            font-size: 22px;
+            color: #2c5282;
+            font-weight: bold;
+        }
+        
+        /* 副标题 */
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+            padding: 0 20px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            width: 95%;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        /* 表头 */
+        thead tr {
+            background: #2b6cb0;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 14px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+            border: 1px solid #2c5282;
+        }
+        
+        /* 表格主体 */
+        tbody td {
+            padding: 12px 14px;
+            border: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #edf2f7;
+        }
+        
+        /* 层级缩进 */
+        .level-1 {
+            font-weight: bold;
+            color: #2c5282;
+            font-size: 15px;
+        }
+        
+        .level-2 {
+            padding-left: 20px;
+            color: #4a5568;
+        }
+        
+        .level-3 {
+            padding-left: 40px;
+            color: #4a5568;
+            font-size: 13px;
+        }
+        
+        /* 符号样式 */
+        .bullet {
+            color: #2b6cb0;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+        
+        .diamond {
+            color: #718096;
+            margin-right: 6px;
+        }
+        
+        .check {
+            color: #38a169;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+        
+        /* 页码显示 */
+        .page-number {
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+            margin: 20px 0;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            width: 95%;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #4a5568;
+            background: white;
+        }
+        
+        .copy-btn {
+            background: #48bb78;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #38a169;
+        }
+        
+        .copy-btn.copied {
+            background: #38a169;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            width: 95%;
+            max-width: 800px;
+            margin: 0 auto 25px;
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            color: #2c5282;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #fed7d7;
+            color: #c53030;
+        }
+        
+        .tag-disease:hover {
+            background: #fc8181;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .tag-drug:hover {
+            background: #68d391;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #bee3f8;
+            color: #2c5282;
+        }
+        
+        .tag-bacteria:hover {
+            background: #63b3ed;
+            color: white;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            width: 95%;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .keywords-title {
+            font-size: 15px;
+            color: #2c5282;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .keywords-content {
+            color: #4a5568;
+            font-size: 13px;
+            line-height: 2;
+        }
+        
+        .keyword {
+            display: inline-block;
+            margin-right: 15px;
+            color: #4a5568;
+        }
+        
+        /* 页码链接 */
+        .page-link {
+            text-align: center;
+            color: #999;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 18px;
+                padding-top: 100px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 12px 10px;
+            }
+            
+            tbody td {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            .level-3 {
+                padding-left: 30px;
+            }
+            
+            .nav-buttons {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .nav-btn, .favorite-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="142.html" class="nav-btn">上一页</a>
+        <a href="144.html" class="nav-btn">下一页</a>
+        <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~急性肠梗阻病因临床表现与检查*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~急性肠梗阻病因临床表现与检查*****、急性肠梗阻病因、临床表现与检查、肠外病变：肿瘤压迫、粘连束带压迫、嵌顿疝等。、常见情况：肠系膜血管血栓或栓塞。、少见情况：如主动脉夹层。、3.临床表现、症状、排气排便停止：见于多数患者。、体征、直肠指检可以发现直肠肿物或粪块嵌塞。、肠腔严重扩张肠鸣音减弱。、麻痹性肠梗阻肠鸣音减弱或消失。、4.必做检查、生化检查：发现电解质紊乱、肝肾功能异常。</div>
+    <p class="subtitle">急诊疾病 · 第131页</p>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>急性肠梗阻病因、临床表现与检查</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="level-2"><span class="check">✓</span>肠外病变：肿瘤压迫、粘连束带压迫、嵌顿疝等。</td>
+                </tr>
+                <tr>
+                    <td class="level-1"><span class="bullet">●</span>动力性肠梗阻：神经抑制或毒素刺激所致肠道运动功能紊乱，引起肠内容物通过障碍。分为麻痹性和痉挛性两类。</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>麻痹性：多见，可发生在弥漫性腹膜炎、腹部创伤、腹部手术后、严重电解质紊乱等。</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>痉挛性：少见，由于肠壁肌肉过度收缩所致，可见于铅中毒、急性肠炎等。</td>
+                </tr>
+                <tr>
+                    <td class="level-1"><span class="bullet">●</span>血运性肠梗阻：肠系膜血管内血液循环障碍，导致肠蠕动功能丧失，使肠内容物停止运行。</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>常见情况：肠系膜血管血栓或栓塞。</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>少见情况：如主动脉夹层。</td>
+                </tr>
+                <tr>
+                    <td class="level-1"><span class="bullet">3.</span>临床表现</td>
+                </tr>
+                <tr>
+                    <td class="level-1"><span class="bullet">●</span>症状</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>腹痛：机械性肠梗阻多为阵发绞痛，腹痛间隔时间缩短或剧烈持续腹痛提示绞窄性肠梗阻。麻痹性肠梗阻多为持续性胀痛。</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>呕吐：高位梗阻呕吐出现早且频繁，呕吐物为食物、胃液、胆汁等；呕吐粪水提示低位肠梗阻。</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>排气排便停止：见于多数患者。</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>发热：通常提示感染或其他并发症（缺血或坏死等），但无发热不能排除感染，尤其对于年龄较大或免疫功能受损患者。</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>便血：通常提示肿瘤、肠缺血、肠套叠、炎性黏膜损伤等。</td>
+                </tr>
+                <tr>
+                    <td class="level-1"><span class="bullet">●</span>体征</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>腹部膨隆、腹部包块、肠型、腹部压痛、腹膜刺激征、腹股沟有无肿物。</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>直肠指检可以发现直肠肿物或粪块嵌塞。</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>急性机械性肠梗阻的听诊特征是伴有疼痛的高调"叮当"音。</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>肠腔严重扩张肠鸣音减弱。</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>麻痹性肠梗阻肠鸣音减弱或消失。</td>
+                </tr>
+                <tr>
+                    <td class="level-3"><span class="check">✓</span>有无神志改变及脱水体征，如心动过速、直立性低血压和尿量减少。</td>
+                </tr>
+                <tr>
+                    <td class="level-1"><span class="bullet">4.</span>必做检查</td>
+                </tr>
+                <tr>
+                    <td class="level-2"><span class="bullet">●</span>血常规、CRP检测：协助评估感染情况。贫血可能提示克罗恩病、肿瘤等。</td>
+                </tr>
+                <tr>
+                    <td class="level-2"><span class="bullet">●</span>生化检查：发现电解质紊乱、肝肾功能异常。</td>
+                </tr>
+                <tr>
+                    <td class="level-2"><span class="bullet">●</span>腹平片：可以发现肠袢扩张伴气液平面，膈下游离气体提示消化道穿孔。一般不能明确梗阻部位，但价格低廉、易得。</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <p class="page-number">— 131 —</p>
+    <p class="page-link">131</p>
+    
+    <!-- 复制功能 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="急性肠梗阻病因临床表现与检查；急诊疾病；急性肠梗阻、动力性肠梗阻、麻痹性肠梗阻、痉挛性肠梗阻、血运性肠梗阻、绞窄性肠梗阻、机械性肠梗阻、弥漫性腹膜炎、铅中毒、急性肠炎、肠系膜血管血栓、主动脉夹层、克罗恩病、消化道穿孔、腹痛、呕吐、便血、腹膜刺激征、肠鸣音、CRP、腹平片；=131" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyContent()">复制</button>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <p class="tags-title">🔖 特色检索标签</p>
+        <div class="tags-container">
+            <span class="tag tag-disease">急性肠梗阻</span>
+            <span class="tag tag-disease">动力性肠梗阻</span>
+            <span class="tag tag-disease">麻痹性肠梗阻</span>
+            <span class="tag tag-disease">痉挛性肠梗阻</span>
+            <span class="tag tag-disease">血运性肠梗阻</span>
+            <span class="tag tag-disease">绞窄性肠梗阻</span>
+            <span class="tag tag-disease">机械性肠梗阻</span>
+            <span class="tag tag-disease">弥漫性腹膜炎</span>
+            <span class="tag tag-disease">铅中毒</span>
+            <span class="tag tag-disease">急性肠炎</span>
+            <span class="tag tag-disease">肠系膜血管血栓</span>
+            <span class="tag tag-disease">主动脉夹层</span>
+            <span class="tag tag-disease">克罗恩病</span>
+            <span class="tag tag-disease">消化道穿孔</span>
+            <span class="tag tag-drug">CRP</span>
+        </div>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <p class="keywords-title">🔑 关键词</p>
+        <div class="keywords-content">
+            <span class="keyword">急性肠梗阻</span>
+            <span class="keyword">动力性肠梗阻</span>
+            <span class="keyword">麻痹性肠梗阻</span>
+            <span class="keyword">痉挛性肠梗阻</span>
+            <span class="keyword">血运性肠梗阻</span>
+            <span class="keyword">绞窄性肠梗阻</span>
+            <span class="keyword">机械性肠梗阻</span>
+            <span class="keyword">弥漫性腹膜炎</span>
+            <span class="keyword">铅中毒</span>
+            <span class="keyword">急性肠炎</span>
+            <span class="keyword">肠系膜血管血栓</span>
+            <span class="keyword">主动脉夹层</span>
+            <span class="keyword">克罗恩病</span>
+            <span class="keyword">消化道穿孔</span>
+            <span class="keyword">腹痛</span>
+            <span class="keyword">呕吐</span>
+            <span class="keyword">便血</span>
+            <span class="keyword">腹膜刺激征</span>
+            <span class="keyword">肠鸣音</span>
+            <span class="keyword">CRP</span>
+            <span class="keyword">腹平片</span>
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                const originalText = btn.textContent;
+                btn.textContent = '已复制!';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '已复制!';
+                    setTimeout(() => {
+                        btn.textContent = '复制';
+                    }, 2000);
+                });
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isActive = btn.classList.contains('active');
+            
+            if (!isActive) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '急性肠梗阻病因临床表现与检查',
+                    url: '131.html',
+                    pageNum: '131',
+                    category: '急诊疾病'
+                };
+                
+                const exists = favorites.some(f => f.url === '131.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                try {
+                    updateIndexFavorite(pageInfo);
+                } catch(e) {
+                    console.log('无法直接更新index.html');
+                }
+                
+                alert('已添加到收藏！');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const filtered = favorites.filter(f => f.url !== '131.html');
+                localStorage.setItem('favorites', JSON.stringify(filtered));
+            }
+        }
+        
+        function updateIndexFavorite(pageInfo) {
+            localStorage.setItem('favoriteUpdate', JSON.stringify({
+                action: 'add',
+                data: pageInfo,
+                timestamp: Date.now()
+            }));
+        }
+        
+        function checkFavoriteStatus() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.url === '131.html');
+            
+            if (isFavorited) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        }
+        
+        window.onload = function() {
+            checkFavoriteStatus();
+        };
+    </script>
+</body>
+</html>
