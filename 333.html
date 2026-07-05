@@ -1,0 +1,551 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~容量反应判断与急诊血流动力学评估*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: #f0f4f8;
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #5a9bd5;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background: #4a8bc4;
+            transform: translateY(-2px);
+        }
+        
+        .fav-btn {
+            background: #e8a838;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .fav-btn:hover {
+            background: #d49a2e;
+            transform: translateY(-2px);
+        }
+        
+        .fav-btn.active {
+            background: #c9302c;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0 25px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            border-left: 5px solid #4a90d9;
+            word-break: break-all;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        thead th {
+            background: #2e75b6;
+            color: white;
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        tbody td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e8ecf1;
+            vertical-align: top;
+            line-height: 1.8;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4fd;
+        }
+        
+        .section-title {
+            color: #1a5276;
+            font-weight: 700;
+            font-size: 15px;
+        }
+        
+        .sub-item {
+            color: #2c5aa0;
+            font-weight: 600;
+        }
+        
+        .check-mark {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .warning {
+            color: #c0392b;
+            font-weight: 600;
+        }
+        
+        .highlight-box {
+            background: #fff3cd;
+            border-left: 4px solid #f0ad4e;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 6px;
+        }
+        
+        .copy-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            margin-bottom: 20px;
+        }
+        
+        .copy-row {
+            display: flex;
+            gap: 12px;
+            align-items: stretch;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 14px 16px;
+            border: 2px solid #dde3ea;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #555;
+            background: #fafbfc;
+        }
+        
+        #copyBtn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 15px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+        
+        #copyBtn:hover {
+            background: #219a52;
+            transform: translateY(-2px);
+        }
+        
+        #copyBtn.copied {
+            background: #7f8c8d;
+        }
+        
+        .tags-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            margin-bottom: 20px;
+        }
+        
+        .tags-title {
+            color: #1a5276;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8ecf1;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #e3f2fd;
+            color: #1565c0;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            border: 1px solid #bbdefb;
+            transition: all 0.3s;
+            cursor: default;
+        }
+        
+        .tag:hover {
+            background: #1565c0;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .tag.disease {
+            background: #fce4ec;
+            color: #c2185b;
+            border-color: #f8bbd9;
+        }
+        
+        .tag.disease:hover {
+            background: #c2185b;
+            color: white;
+        }
+        
+        .tag.drug {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-color: #c8e6c9;
+        }
+        
+        .tag.drug:hover {
+            background: #2e7d32;
+            color: white;
+        }
+        
+        .tag.bacteria {
+            background: #fff3e0;
+            color: #ef6c00;
+            border-color: #ffe0b2;
+        }
+        
+        .tag.bacteria:hover {
+            background: #ef6c00;
+            color: white;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #95a5a6;
+            font-size: 12px;
+            padding: 15px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 12px 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+                padding: 12px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .nav-buttons {
+                width: 100%;
+                flex-direction: row;
+                justify-content: flex-end;
+                flex-wrap: wrap;
+            }
+            
+            .copy-row {
+                flex-direction: column;
+            }
+            
+            #copyInput {
+                width: 100%;
+            }
+            
+            #copyBtn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="nav-buttons">
+            <a href="332.html" class="nav-btn">← 上一页</a>
+            <a href="334.html" class="nav-btn">下一页 →</a>
+            <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~容量反应判断与急诊血流动力学评估*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2" class="section-title">患者原发病病情好转后的容量变化</td>
+                </tr>
+                <tr>
+                    <td>病情好转机制</td>
+                    <td>之前存在第三间隙中的液体回到循环中，导致容量增多</td>
+                </tr>
+                <tr>
+                    <td>肾功能良好</td>
+                    <td>将出现自发的负平衡</td>
+                </tr>
+                <tr>
+                    <td>肾功能不良</td>
+                    <td><span class="warning">可能导致肺水肿，需要及时识别，适时给予利尿治疗，配合实现负平衡</span></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">3. 关于容量反应的判断</td>
+                </tr>
+                <tr>
+                    <td class="sub-item">● 静态指标</td>
+                    <td>如MAP/HR/CVP/PCWP/GEDV/SV/IVC，是直接或间接反映容量状态，<span class="warning">而对预测容量反应不可靠</span>。但出现明显极值时有利于临床判断，如低CVP提示补液相对安全。</td>
+                </tr>
+                <tr>
+                    <td class="sub-item">● 功能性指标</td>
+                    <td>如PPV/SVV/ΔIVC/EEO，其使用有诸多先决条件：<br>
+                    - PPV/SVV使用时要求患者<span class="warning">机械通气且为完全机控状态</span>，还要求一定的潮气量和呼吸频率，且患者肺顺应性良好、无心律失常<br>
+                    - ΔIVC在患者机械通气时也有类似的要求，在患者有自主呼吸时也要求平静呼吸（<span class="warning">实际上很多急诊重症患者呼吸都不能平静</span>）<br>
+                    - EEO也要求患者为机械通气<br>
+                    <span class="warning">功能性指标虽好，但估计这些指标在急诊的适用患者人群不到20%</span></td>
+                </tr>
+                <tr>
+                    <td class="sub-item">● PICCO和漂浮导管</td>
+                    <td>操作相对复杂，在EICU患者中可以应用，但得到的各项指标需要整合理解，避免陷阱。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">✓ 较适合急诊的容量判断方法</td>
+                </tr>
+                <tr>
+                    <td class="sub-item check-mark">✓ 急诊超声</td>
+                    <td>可以直观地用于休克的诊断和评估，并有成熟的流程，对于大部分血流动力学改变显著的人群有帮助。<br><br>
+                    <span class="warning">但应该直面的是：</span>在急诊也有很多患者超声评价的结果处于"灰区"，即无法得出确定性判断。超声测量也存在诸多误区，评估结果的准确性和操作者经验密切相关，甚至有的患者无法获得有效图像。<br><br>
+                    <span class="highlight-box">超声的总体优势在于无须其他任何设备帮助，实施方便快捷，估计超声在急诊的适用患者人群在60%以上。</span></td>
+                </tr>
+                <tr>
+                    <td class="sub-item check-mark">✓ ScvO₂、P(v-a)CO₂</td>
+                    <td>提供氧供和血流的基本指标，只要患者置入上腔的中心静脉即可获得，<span class="check-mark">准确率高，解读容易，较适合急诊使用</span>。</td>
+                </tr>
+                <tr>
+                    <td class="sub-item check-mark">✓ 补液试验或被动抬腿试验（PLR）</td>
+                    <td>是急诊重症患者的常用容量判断方法，原则上操作时只有观察每搏量（SV）变化是<span class="check-mark">唯一可以准确判断容量反应的方法</span>，而实际上在急诊环境SV的获得并不容易。观察MAP甚至HR的变化是无奈的替代选择，对容量反应的预测并不准确。<br><br>
+                    PLR能可逆性转移约300ml血液，对于容量窗口窄的高危患者更为安全，但操作时应注意：<br>
+                    ① PLR前患者<span class="warning">45°半卧位，而不是平卧位</span>；PLR时抬高下肢45°与放平上身同时进行<br>
+                    ② 最好实时监测SV，而不是心率或血压<br>
+                    ③ 最大效应发生在1分钟左右</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="copy-section">
+        <div class="copy-row">
+            <input type="text" id="copyInput" value="容量反应判断与急诊血流动力学评估；容量反应；静态指标；功能性指标；急诊超声；ScvO₂；P(v-a)CO₂；补液试验；被动抬腿试验；PLR；休克；血流动力学；=333" readonly>
+            <button id="copyBtn" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+    
+    <div class="page-number">333</div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag disease">休克</span>
+            <span class="tag disease">肺水肿</span>
+            <span class="tag drug">利尿</span>
+            <span class="tag drug">补液</span>
+        </div>
+    </div>
+    
+    <div class="keywords">
+        关键词：容量反应 | 静态指标 | 功能性指标 | PPV | SVV | ΔIVC | EEO | PICCO | 漂浮导管 | 急诊超声 | ScvO₂ | P(v-a)CO₂ | 补液试验 | 被动抬腿试验 | PLR | 休克 | 血流动力学 | 每搏量 | 中心静脉压
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '✓ 已复制';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.textContent = '📋 复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '✓ 已复制';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '📋 复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                
+                // 保存收藏到localStorage
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '容量反应判断与急诊血流动力学评估',
+                    url: '333.html',
+                    pageNum: '333',
+                    category: '急诊重症'
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.url === '333.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                    
+                    // 尝试更新index.html的收藏区域（如果同源）
+                    try {
+                        updateIndexFavorites(pageInfo);
+                    } catch(e) {
+                        console.log('无法直接更新index.html');
+                    }
+                }
+                
+                alert('已添加到收藏！请在首页查看收藏内容。');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const filtered = favorites.filter(f => f.url !== '333.html');
+                localStorage.setItem('favorites', JSON.stringify(filtered));
+            }
+        }
+        
+        function updateIndexFavorites(pageInfo) {
+            // 通过localStorage通知index.html更新
+            localStorage.setItem('newFavorite', JSON.stringify(pageInfo));
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '333.html');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
