@@ -1,0 +1,582 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>急诊医学-创伤二次评估与电击伤</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 18px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 12px;
+            color: white;
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .header .subtitle {
+            font-size: 14px;
+            margin-top: 6px;
+            opacity: 0.95;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            order: 1;
+        }
+        
+        .nav-right {
+            order: 2;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .btn-home {
+            background-color: #4a90d9;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background-color: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        .btn-nav {
+            background-color: #5cb85c;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background-color: #449d44;
+            transform: translateY(-2px);
+        }
+        
+        .btn-favorite {
+            background-color: #f0ad4e;
+            color: white;
+        }
+        
+        .btn-favorite:hover {
+            background-color: #ec971f;
+            transform: translateY(-2px);
+        }
+        
+        .btn-copy {
+            background-color: #5bc0de;
+            color: white;
+            padding: 12px 25px;
+        }
+        
+        .btn-copy:hover {
+            background-color: #46b8da;
+            transform: translateY(-2px);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #1e5799 0%, #2989d8 50%, #207cca 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 20px 15px;
+            text-align: left;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e8e8e8;
+        }
+        
+        tbody tr:hover {
+            background-color: #f8f9ff;
+        }
+        
+        tbody td {
+            padding: 14px 15px;
+            font-size: 15px;
+            vertical-align: top;
+        }
+        
+        tbody td:first-child {
+            font-weight: 600;
+            color: #2c5282;
+            width: 30%;
+            background-color: #f0f4f8;
+        }
+        
+        .check-mark {
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .diamond {
+            color: #6c757d;
+            margin-right: 5px;
+        }
+        
+        .section-title {
+            background-color: #e3f2fd !important;
+            color: #1565c0 !important;
+            font-size: 16px !important;
+        }
+        
+        .tags-section {
+            margin: 20px 0;
+            padding: 18px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .tags-section h3 {
+            color: #2c5282;
+            margin-bottom: 14px;
+            font-size: 17px;
+            border-bottom: 2px solid #e3f2fd;
+            padding-bottom: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 7px 16px;
+            margin: 5px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .tag:hover {
+            transform: scale(1.08);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        
+        .copy-section {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .copy-input:focus {
+            border-color: #4a90d9;
+        }
+        
+        .keywords-section {
+            text-align: center;
+            padding: 18px;
+            color: #555;
+            font-size: 13px;
+            background-color: white;
+            border-radius: 12px;
+            margin-top: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        
+        .keywords-section strong {
+            color: #2c5282;
+            font-size: 14px;
+        }
+        
+        .keywords-section span {
+            display: inline-block;
+            margin: 4px 8px;
+            padding: 2px 8px;
+            background-color: #f0f4f8;
+            border-radius: 4px;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 20px;
+            color: #2c5282;
+            font-weight: bold;
+            margin: 18px 0;
+            padding: 10px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 17px;
+                padding: 16px 12px;
+            }
+            
+            tbody td {
+                padding: 12px 12px;
+                font-size: 14px;
+            }
+            
+            tbody td:first-child {
+                width: 35%;
+            }
+            
+            .btn {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 标题区域 -->
+    <div class="header">
+        <h1>~~~~~急诊医学-创伤二次评估与电击伤*****</h1>
+        <div class="subtitle">二次评估相关检查 | 急诊处理 | 电击伤定义与临床表现</div>
+    </div>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="307.html" class="btn btn-nav">上一页</a>
+            <a href="309.html" class="btn btn-nav">下一页</a>
+            <button class="btn btn-favorite" onclick="addToFavorites()">收藏</button>
+        </div>
+    </div>
+    
+    <!-- 主表格 -->
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">急诊创伤二次评估与电击伤诊疗要点</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="diamond">◇</span>直肠和泌尿生殖系统（续）</td>
+                <td>伤，需直肠指检。</td>
+            </tr>
+            <tr>
+                <td><span class="diamond">◇</span>肌肉骨骼</td>
+                <td>视诊和触诊四肢的所有部分，寻找有无压痛、变形和关节活动度降低。</td>
+            </tr>
+            <tr>
+                <td><span class="diamond">◇</span>神经系统</td>
+                <td>详细评估四肢的感觉运动功能，并重新评估患者的GCS评分。</td>
+            </tr>
+            <tr>
+                <td><span class="diamond">◇</span>皮肤</td>
+                <td>皮肤检查可显示撕裂伤、擦伤、瘀斑、血肿形成。</td>
+            </tr>
+            <tr>
+                <td class="section-title" colspan="2">二次评估相关检查</td>
+            </tr>
+            <tr>
+                <td><span class="diamond">◇</span>头胸腹盆CT</td>
+                <td>根据临床评估和损伤机制有选择性地进行特定部位CT检查。</td>
+            </tr>
+            <tr>
+                <td><span class="diamond">◇</span>X线平片</td>
+                <td>评估脊柱、骨盆和四肢有无骨折、脱位和异物。</td>
+            </tr>
+            <tr>
+                <td><span class="diamond">◇</span>血管造影</td>
+                <td>评估出血性疾病的位置，同时可进行介入栓塞止血治疗。</td>
+            </tr>
+            <tr>
+                <td class="section-title" colspan="2">5. 急诊处理</td>
+            </tr>
+            <tr>
+                <td>急诊处理原则</td>
+                <td>
+                    • 稳定生命体征，根据不同部位的损伤，采取相对应处理。<br>
+                    • 支持治疗＋急诊手术治疗，需多学科密切配合完成。<br>
+                    <div style="text-align: right; color: #666; margin-top: 8px;">（王江山）</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="section-title" colspan="2">■ 电击伤</td>
+            </tr>
+            <tr>
+                <td class="section-title" colspan="2">1. 定义</td>
+            </tr>
+            <tr>
+                <td>电击伤定义</td>
+                <td>• 电击伤包括电烧伤和雷电击伤，电流的直接作用、电能转换为热能以及机械性钝挫伤均可导致组织破坏和器官功能障碍。</td>
+            </tr>
+            <tr>
+                <td>热量公式</td>
+                <td>• 热量＝电流（I）×电压（V）×接触时间（t），因此组织损伤与流经身体的电流量有关。</td>
+            </tr>
+            <tr>
+                <td class="section-title" colspan="2">2. 临床表现</td>
+            </tr>
+            <tr>
+                <td>临床表现概述</td>
+                <td>• 因电击强度和触电时间而异，轻者出现浅表皮肤烧伤，严重者出现MODS甚至死亡。</td>
+            </tr>
+            <tr>
+                <td>心脏</td>
+                <td>• 可发生心律失常，心室颤动是最常见的致命性心律失常；心肌损伤罕见。</td>
+            </tr>
+            <tr>
+                <td>肾脏</td>
+                <td>• 横纹肌溶解可由大面积组织坏死引起，产生肌红蛋白诱导性急性肾损伤。</td>
+            </tr>
+            <tr>
+                <td>神经系统</td>
+                <td>• 包括昏迷、记忆障碍、自主神经功能紊乱、混合型外周运动和感觉障碍等。</td>
+            </tr>
+            <tr>
+                <td>皮肤</td>
+                <td>• 皮肤烧伤程度可从浅表烧伤到Ⅲ度烧伤不等，不能以表面损伤衡量内部损伤程度。电击伤会造成一种独特的烧伤特征，即"对吻烧伤"。该伤痕出现于屈肌的皱褶处，即屈肌表面在紧邻关节处相互接触的地方。</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 页码 -->
+    <div class="page-number">页码：308</div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="急诊医学-创伤二次评估与电击伤；急诊创伤二次评估与电击伤诊疗要点；GCS评分；CT检查；X线平片；血管造影；电击伤；电烧伤；雷电击伤；MODS；心室颤动；横纹肌溶解；急性肾损伤；对吻烧伤；Ⅲ度烧伤；308" readonly>
+        <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <h3>特色检索标签</h3>
+        <span class="tag">电击伤</span>
+        <span class="tag">电烧伤</span>
+        <span class="tag">雷电击伤</span>
+        <span class="tag">MODS</span>
+        <span class="tag">心室颤动</span>
+        <span class="tag">横纹肌溶解</span>
+        <span class="tag">急性肾损伤</span>
+        <span class="tag">对吻烧伤</span>
+        <span class="tag">Ⅲ度烧伤</span>
+        <span class="tag">心律失常</span>
+        <span class="tag">心肌损伤</span>
+        <span class="tag">自主神经功能紊乱</span>
+        <span class="tag">感觉障碍</span>
+        <span class="tag">运动障碍</span>
+        <span class="tag">昏迷</span>
+        <span class="tag">记忆障碍</span>
+        <span class="tag">骨折</span>
+        <span class="tag">脱位</span>
+        <span class="tag">血管造影</span>
+        <span class="tag">介入栓塞</span>
+        <span class="tag">止血治疗</span>
+        <span class="tag">X线平片</span>
+        <span class="tag">CT检查</span>
+        <span class="tag">头胸腹盆CT</span>
+        <span class="tag">脊柱</span>
+        <span class="tag">骨盆</span>
+        <span class="tag">异物</span>
+        <span class="tag">出血性疾病</span>
+        <span class="tag">急诊手术</span>
+        <span class="tag">多学科配合</span>
+        <span class="tag">支持治疗</span>
+        <span class="tag">生命体征</span>
+        <span class="tag">直肠指检</span>
+        <span class="tag">肌肉骨骼</span>
+        <span class="tag">关节活动度</span>
+        <span class="tag">压痛</span>
+        <span class="tag">变形</span>
+        <span class="tag">感觉运动功能</span>
+        <span class="tag">GCS评分</span>
+        <span class="tag">撕裂伤</span>
+        <span class="tag">擦伤</span>
+        <span class="tag">瘀斑</span>
+        <span class="tag">血肿</span>
+    </div>
+    
+    <!-- 关键词区域 -->
+    <div class="keywords-section">
+        <strong>关键词：</strong>
+        <span>GCS评分</span>
+        <span>直肠指检</span>
+        <span>肌肉骨骼</span>
+        <span>关节活动度</span>
+        <span>压痛</span>
+        <span>变形</span>
+        <span>感觉运动功能</span>
+        <span>神经系统</span>
+        <span>皮肤</span>
+        <span>撕裂伤</span>
+        <span>擦伤</span>
+        <span>瘀斑</span>
+        <span>血肿</span>
+        <span>CT检查</span>
+        <span>头胸腹盆CT</span>
+        <span>X线平片</span>
+        <span>脊柱</span>
+        <span>骨盆</span>
+        <span>骨折</span>
+        <span>脱位</span>
+        <span>异物</span>
+        <span>血管造影</span>
+        <span>出血性疾病</span>
+        <span>介入栓塞</span>
+        <span>止血治疗</span>
+        <span>急诊处理</span>
+        <span>生命体征</span>
+        <span>急诊手术</span>
+        <span>支持治疗</span>
+        <span>多学科配合</span>
+        <span>电击伤</span>
+        <span>电烧伤</span>
+        <span>雷电击伤</span>
+        <span>电流</span>
+        <span>电压</span>
+        <span>接触时间</span>
+        <span>组织损伤</span>
+        <span>器官功能障碍</span>
+        <span>MODS</span>
+        <span>心律失常</span>
+        <span>心室颤动</span>
+        <span>心肌损伤</span>
+        <span>横纹肌溶解</span>
+        <span>急性肾损伤</span>
+        <span>肌红蛋白</span>
+        <span>昏迷</span>
+        <span>记忆障碍</span>
+        <span>自主神经功能紊乱</span>
+        <span>感觉障碍</span>
+        <span>运动障碍</span>
+        <span>浅表烧伤</span>
+        <span>Ⅲ度烧伤</span>
+        <span>对吻烧伤</span>
+        <span>屈肌</span>
+        <span>皱褶</span>
+        <span>关节</span>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            var copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            }).catch(function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板！");
+            });
+        }
+        
+        function addToFavorites() {
+            var title = document.querySelector('.header h1').textContent.replace(/[~*]/g, '');
+            var url = window.location.href;
+            var favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            var exists = favorites.some(function(item) {
+                return item.url === url;
+            });
+            
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                category: '急诊医学',
+                date: new Date().toLocaleString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert('已成功添加到收藏夹！');
+        }
+    </script>
+</body>
+</html>
