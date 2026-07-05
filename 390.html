@@ -1,0 +1,643 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~其他常见抗心律失常药物-洋地黄类阿托品与腺苷*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5ee 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(145deg, #4a90d9, #357abd);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 3px 10px rgba(74, 144, 217, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 144, 217, 0.4);
+        }
+        
+        /* 右上角导航按钮容器 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(145deg, #5cb85c, #449d44);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(92, 184, 92, 0.4);
+        }
+        
+        .nav-btn.prev {
+            background: linear-gradient(145deg, #f0ad4e, #ec971f);
+            box-shadow: 0 2px 8px rgba(240, 173, 78, 0.3);
+        }
+        
+        .nav-btn.prev:hover {
+            box-shadow: 0 4px 12px rgba(240, 173, 78, 0.4);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: linear-gradient(145deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+            transition: all 0.3s ease;
+            margin-top: 5px;
+        }
+        
+        .fav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+        }
+        
+        .fav-btn.favorited {
+            background: linear-gradient(145deg, #95a5a6, #7f8c8d);
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 900px;
+            margin: 60px auto 30px;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.1), transparent);
+            border-radius: 10px;
+            line-height: 1.4;
+        }
+        
+        /* 表格样式 */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+        
+        .data-table thead {
+            background: linear-gradient(145deg, #3498db, #2980b9);
+            color: white;
+        }
+        
+        .data-table th {
+            padding: 16px 14px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+            border: 1px solid #2471a3;
+        }
+        
+        .data-table td {
+            padding: 14px;
+            border: 1px solid #d5dbdb;
+            vertical-align: top;
+            color: #2c3e50;
+        }
+        
+        .data-table tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .data-table tbody tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+        
+        .data-table tbody tr:hover {
+            background-color: #e8f6f3;
+            transition: background-color 0.3s ease;
+        }
+        
+        /* 第一行字体大一点 */
+        .data-table tbody tr:first-child td {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        /* 分类标题行 */
+        .category-row {
+            background: linear-gradient(90deg, #e8f6f3, #d1f2eb) !important;
+        }
+        
+        .category-row td {
+            font-weight: bold;
+            color: #0e6251 !important;
+            font-size: 17px !important;
+        }
+        
+        /* 药物名称高亮 */
+        .drug-name {
+            color: #c0392b;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        /* 适应症标签 */
+        .indication {
+            color: #27ae60;
+            font-weight: 500;
+        }
+        
+        /* 不良反应标签 */
+        .adverse {
+            color: #e74c3c;
+            font-weight: 500;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #7f8c8d;
+            margin: 20px 0;
+            padding: 10px;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            background: linear-gradient(145deg, #fef9e7, #fcf3cf);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #f9e79f;
+        }
+        
+        .keywords-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #9a7d0a;
+            margin-bottom: 10px;
+        }
+        
+        .keywords-content {
+            font-size: 14px;
+            color: #7d6608;
+            line-height: 1.8;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background: linear-gradient(145deg, #eaf2f8, #d4e6f1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #aed6f1;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: linear-gradient(145deg, #5dade2, #3498db);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 4px;
+            font-size: 13px;
+            box-shadow: 0 2px 5px rgba(52, 152, 219, 0.2);
+        }
+        
+        .tag.disease {
+            background: linear-gradient(145deg, #58d68d, #27ae60);
+        }
+        
+        .tag.drug {
+            background: linear-gradient(145deg, #ec7063, #e74c3c);
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            background: linear-gradient(145deg, #f5eef8, #e8daef);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #d7bde2;
+        }
+        
+        .copy-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #6c3483;
+            margin-bottom: 12px;
+        }
+        
+        .copy-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #bb8fce;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #4a235a;
+            background: white;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        
+        .copy-input:focus {
+            border-color: #8e44ad;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(145deg, #9b59b6, #8e44ad);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(155, 89, 182, 0.3);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(155, 89, 182, 0.4);
+        }
+        
+        .copy-btn.copied {
+            background: linear-gradient(145deg, #58d68d, #27ae60);
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 2000;
+        }
+        
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                margin: 50px auto 20px;
+                padding: 15px;
+                border-radius: 15px;
+            }
+            
+            .page-title {
+                font-size: 20px;
+                padding: 10px;
+            }
+            
+            .data-table {
+                font-size: 13px;
+            }
+            
+            .data-table th {
+                font-size: 15px;
+                padding: 12px 10px;
+            }
+            
+            .data-table td {
+                padding: 10px;
+            }
+            
+            .home-btn, .nav-btn, .fav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-wrapper {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 17px;
+            }
+            
+            .data-table {
+                font-size: 12px;
+            }
+            
+            .data-table th {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 右上角导航按钮 -->
+    <div class="nav-buttons">
+        <a href="389.html" class="nav-btn prev">← 上一页</a>
+        <a href="391.html" class="nav-btn">下一页 →</a>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 标题 -->
+        <h1 class="page-title">~~~~~其他常见抗心律失常药物-洋地黄类阿托品与腺苷*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~其他常见抗心律失常药物-洋地黄类阿托品与腺苷*****、药物分类/名称、详细内容、5. 其他常见抗心律失常药物、地高辛（洋地黄类）、阿托品、腺苷</div>
+        
+        <!-- 数据表格 -->
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th style="width: 22%;">药物分类/名称</th>
+                    <th style="width: 78%;">详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="2">5. 其他常见抗心律失常药物</td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">地高辛</span><br>（洋地黄类）</td>
+                    <td>
+                        <strong>正性肌力作用：</strong>本药可选择性与心肌细胞膜Na⁺-K⁺-ATP酶结合并高效抑制该酶活性，细胞内Na⁺浓度升高，Na⁺-Ca²⁺泵交换增加，细胞内Ca²⁺浓度升高，从而地高辛发挥其正性肌力作用，有效治疗<span class="indication">左心室功能障碍</span>。但是对于<span class="indication">心肌缺血</span>或其他原因导致的舒张期功能障碍患者，抑制Na⁺-K⁺-ATP酶产生的正性肌力作用对患者有害。<br><br>
+                        <strong>负性频率作用：</strong>由于其正性肌力作用，使心输出量增加，血流动力学状态改善，消除交感神经张力的反射性增高，并增强迷走神经张力，从而减慢心率。此外，在房室结内，小剂量地高辛通过M₂受体兴奋迷走神经，从而显著减慢传导速度。大剂量地高辛可抑制Na⁺-K⁺-ATP酶直接作用于房室结传导系统并有效对抗交感神经效应。<br><br>
+                        <strong>心脏电生理作用：</strong>通过对心肌电活动的直接作用和对迷走神经的间接作用，降低窦房结自律性；提高浦肯野纤维自律性；减慢房室结传导速度，延长其有效不应期，导致房室结隐匿性传导增加，可减慢<span class="indication">心房颤动</span>或<span class="indication">心房扑动</span>的心室率；由于此药可缩短心房有效不应期，当用于<span class="indication">房性心动过速</span>和<span class="indication">心房扑动</span>时，可能导致心房率的加速和<span class="indication">心房扑动转为心房颤动</span>。<br><br>
+                        <strong>药代动力学：</strong>本药排泄较快而蓄积性较小。代谢半衰期平均为36小时。口服药物受肠内菌群生化作用影响，治疗浓度为0.5～2μg/L，血药浓度测定在服药6～8小时后进行，在肾功能正常的情况下，药物代谢半衰期为36小时，治疗剂量和中毒剂量窗窄，可受<span class="indication">低钾血症</span>、<span class="indication">高钙血症</span>、<span class="indication">低镁血症</span>、<span class="indication">组织缺氧</span>、<span class="indication">心脏手术</span>、<span class="indication">心肌缺血</span>及其他药物的影响而减少。<br><br>
+                        <strong>临床应用：</strong>用于<span class="indication">高血压</span>、<span class="indication">瓣膜性心脏病</span>、<span class="indication">先天性心脏病</span>等急、慢性心功能不全，尤其适用于伴有快速心室率的<span class="indication">心房颤动</span>效果较好。由于治疗窗窄，用药过量可见<span class="adverse">恶心</span>、<span class="adverse">呕吐</span>、<span class="adverse">食欲缺乏</span>、<span class="adverse">疲乏</span>、<span class="adverse">不适</span>、<span class="adverse">高钾血症</span>、<span class="adverse">心律失常</span>、<span class="adverse">头晕</span>、<span class="adverse">黄视</span>、<span class="adverse">绿视</span>、<span class="adverse">肠系膜动脉缺血</span>、<span class="adverse">嗜睡</span>、<span class="adverse">行为紊乱</span>（包括精神病发作）。主要为药物导致的各类型心律失常，常见的为<span class="indication">房性心动过速伴房室传导阻滞</span>及<span class="indication">室性二联律</span>等。
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">阿托品</span></td>
+                    <td>
+                        <strong>药理作用：</strong>抑制迷走神经张力、提高交感神经兴奋性，以提高窦房结自律性，改善房室传导，使窦性心率增快。<br><br>
+                        <strong>临床应用：</strong>主要用于<span class="indication">心动过缓</span>患者。<br><br>
+                        <strong>禁忌症：</strong>伴有<span class="indication">青光眼</span>患者禁用。<span class="indication">前列腺肥大</span>患者、<span class="indication">妊娠</span>及<span class="indication">哺乳妇女</span>慎用。
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">腺苷</span></td>
+                    <td>
+                        <strong>药理作用：</strong>腺苷为内源性嘌呤核苷酸，作用于G蛋白偶联的腺苷受体，激活心房、窦房结、房室结的乙酰胆碱敏感性的钾离子通道，导致钾外流增加。另外，通过拮抗儿茶酚胺活化的腺
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 页码 -->
+        <div class="page-number">381</div>
+        
+        <!-- 关键词区域 -->
+        <div class="keywords-section">
+            <div class="keywords-title">🔍 关键词</div>
+            <div class="keywords-content">
+                抗心律失常药物、洋地黄类、地高辛、阿托品、腺苷、正性肌力作用、负性频率作用、心脏电生理、Na⁺-K⁺-ATP酶、心房颤动、心房扑动、房性心动过速、左心室功能障碍、心肌缺血、低钾血症、高钙血症、低镁血症、组织缺氧、心脏手术、高血压、瓣膜性心脏病、先天性心脏病、心功能不全、心动过缓、青光眼、前列腺肥大、妊娠、哺乳
+            </div>
+        </div>
+        
+        <!-- 检索标签 -->
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 检索标签</div>
+            <div>
+                <span class="tag disease">心律失常</span>
+                <span class="tag disease">心房颤动</span>
+                <span class="tag disease">心房扑动</span>
+                <span class="tag disease">房性心动过速</span>
+                <span class="tag disease">左心室功能障碍</span>
+                <span class="tag disease">心肌缺血</span>
+                <span class="tag disease">低钾血症</span>
+                <span class="tag disease">高钙血症</span>
+                <span class="tag disease">低镁血症</span>
+                <span class="tag disease">组织缺氧</span>
+                <span class="tag disease">心脏手术</span>
+                <span class="tag disease">高血压</span>
+                <span class="tag disease">瓣膜性心脏病</span>
+                <span class="tag disease">先天性心脏病</span>
+                <span class="tag disease">心功能不全</span>
+                <span class="tag disease">心动过缓</span>
+                <span class="tag disease">青光眼</span>
+                <span class="tag disease">前列腺肥大</span>
+                <span class="tag disease">妊娠</span>
+                <span class="tag disease">高钾血症</span>
+                <span class="tag disease">室性二联律</span>
+                <span class="tag drug">地高辛</span>
+                <span class="tag drug">阿托品</span>
+                <span class="tag drug">腺苷</span>
+            </div>
+        </div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <div class="copy-title">📋 快速复制</div>
+            <div class="copy-wrapper">
+                <input type="text" class="copy-input" id="copyInput" value="其他常见抗心律失常药物-洋地黄类阿托品与腺苷；抗心律失常药物、洋地黄类、地高辛、阿托品、腺苷、正性肌力作用、负性频率作用、心脏电生理、心房颤动、心房扑动、房性心动过速、左心室功能障碍、心肌缺血、低钾血症、高钙血症、低镁血症、组织缺氧、心脏手术、高血压、瓣膜性心脏病、先天性心脏病、心功能不全、心动过缓、青光眼、前列腺肥大、妊娠、高钾血症、室性二联律=381" readonly>
+                <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopySuccess();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopySuccess();
+            }
+        }
+        
+        function showCopySuccess() {
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            showToast('内容已复制到剪贴板！');
+            
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 显示提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFavorited = btn.classList.contains('favorited');
+            const title = '~~~~~其他常见抗心律失常药物-洋地黄类阿托品与腺苷*****';
+            const pageId = '381';
+            
+            // 获取现有收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            if (!isFavorited) {
+                // 添加收藏
+                const exists = favorites.find(f => f.id === pageId);
+                if (!exists) {
+                    favorites.push({
+                        id: pageId,
+                        title: title,
+                        url: '381.html',
+                        category: '抗心律失常药物',
+                        date: new Date().toISOString()
+                    });
+                }
+                btn.textContent = '❤ 已收藏';
+                btn.classList.add('favorited');
+                showToast('已添加到index收藏类目！');
+            } else {
+                // 取消收藏
+                favorites = favorites.filter(f => f.id !== pageId);
+                btn.textContent = '⭐ 收藏';
+                btn.classList.remove('favorited');
+                showToast('已取消收藏');
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试更新index.html的收藏（如果同源）
+            try {
+                updateIndexFavorites(favorites);
+            } catch(e) {
+                console.log('无法直接更新index.html');
+            }
+        }
+        
+        // 更新index.html的收藏列表（通过localStorage共享）
+        function updateIndexFavorites(favorites) {
+            localStorage.setItem('favoriteUpdate', JSON.stringify({
+                timestamp: Date.now(),
+                favorites: favorites
+            }));
+        }
+        
+        // 检查收藏状态
+        function checkFavoriteStatus() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const pageId = '381';
+            const btn = document.getElementById('favBtn');
+            
+            if (favorites.find(f => f.id === pageId)) {
+                btn.textContent = '❤ 已收藏';
+                btn.classList.add('favorited');
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        document.addEventListener('DOMContentLoaded', checkFavoriteStatus);
+    </script>
+</body>
+</html>
