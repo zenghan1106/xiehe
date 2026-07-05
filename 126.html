@@ -1,0 +1,399 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~特殊人群阑尾炎与急性胰腺炎诊疗*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5ee 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-nav {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        .btn-favorite {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        .btn-copy {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #333;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 28px;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 15px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+        }
+        
+        thead tr {
+            background: linear-gradient(135deg, #1e5799 0%, #2989d8 50%, #207cca 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 20px 15px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: rgba(240,248,255,0.6);
+        }
+        
+        tbody tr:hover {
+            background: rgba(255,235,205,0.5);
+        }
+        
+        tbody td {
+            padding: 15px;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #2c3e50;
+            vertical-align: top;
+        }
+        
+        .section-title {
+            color: #1a5276;
+            font-weight: bold;
+            font-size: 17px;
+        }
+        
+        .sub-item {
+            color: #2874a6;
+        }
+        
+        .check-mark {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .diamond {
+            color: #e74c3c;
+        }
+        
+        .square {
+            color: #8e44ad;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            width: calc(100% - 120px);
+            max-width: 600px;
+            padding: 15px;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            font-size: 14px;
+            background: white;
+        }
+        
+        .tags-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 18px;
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            display: inline-block;
+        }
+        
+        .tag-disease {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+        }
+        
+        .tag-antibiotic {
+            background: linear-gradient(135deg, #4834d4 0%, #686de0 100%);
+        }
+        
+        .tag-bacteria {
+            background: linear-gradient(135deg, #00d2d3 0%, #01a3a4 100%);
+        }
+        
+        .page-info {
+            text-align: center;
+            padding: 20px;
+            font-size: 16px;
+            color: #555;
+        }
+        
+        .page-number {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 20px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 15px 10px;
+            }
+            
+            tbody td {
+                font-size: 13px;
+                padding: 10px;
+            }
+            
+            .btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                width: calc(100% - 100px);
+            }
+            
+            .nav-top {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-right {
+                flex-direction: row;
+                justify-content: flex-end;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="125.html" class="btn btn-nav">上一页</a>
+            <a href="127.html" class="btn btn-nav">下一页</a>
+            <button class="btn btn-favorite" onclick="addFavorite()">收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~特殊人群阑尾炎与急性胰腺炎诊疗*****</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>特殊人群阑尾炎与急性胰腺炎诊疗内容</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span class="sub-item">• 老人阑尾炎</span><br>
+                    <span class="check-mark">✓</span> 临床表现通常不典型，主要表现为炎症反应减弱，导致病史及查体无异常发现，延迟就诊导致穿孔发生率高。<br>
+                    <span class="check-mark">✓</span> 对保守治疗好转后患者需2个月后复诊，进行结肠镜评估是否有肿瘤。<br><br>
+                    <span class="sub-item">• 免疫功能受损患者阑尾炎</span><br>
+                    炎症表现较弱，病史、查体及实验室检查常无阳性发现，CT检查十分必要，若确诊不应推迟手术。<br>
+                    （孙 翰）
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">■ 急性胰腺炎</span><br><br>
+                    <span class="section-title">1. 定义</span><br>
+                    <span class="sub-item">•</span> 急性胰腺炎（AP）是多种病因导致胰酶在胰腺内被激活后引起胰腺组织自身消化、水肿、出血甚至坏死的炎症反应。<br>
+                    <span class="sub-item">•</span> 临床以急性上腹痛、恶心、呕吐、发热和血胰酶增高等为特点。<br>
+                    <span class="sub-item">•</span> 根据临床表现和累及脏器分为轻症急性胰腺炎（MAP）、中度重症急性胰腺炎（MSAP）与重症急性胰腺炎（SAP）。<br>
+                    <span class="sub-item">•</span> MAP指患者可有极轻微的脏器功能紊乱，无严重腹膜炎体征和严重的代谢功能紊乱，病情常呈自限性，预后良好。<br>
+                    <span class="sub-item">•</span> SAP指患者有脏器功能障碍或衰竭、代谢功能紊乱或出现胰腺坏死、脓肿、假性囊肿等局部并发症，患者可出现腹膜炎体征、皮下瘀斑等。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">2. 病因</span><br>
+                    <span class="sub-item">•</span> 常见病因（70%以上）：胆石症、酒精、高脂血症。<br>
+                    <span class="sub-item">•</span> 其他病因（10%）：自身免疫性、先天性、医源性、感染性、代谢性、坏死性、梗阻性、中毒性、创伤性、血管源性等。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">3. 临床表现</span><br>
+                    <span class="sub-item">• 症状</span><br>
+                    <span class="check-mark">✓</span> 腹痛：多与饱餐和酗酒相关，突然发作的上腹部持续性刀割样疼痛，50%患者可向左背部放射，蜷缩体位可使疼痛缓解。<br>
+                    <span class="check-mark">✓</span> 发热：多为中度发热，持续3～5天。若发热不退甚至持续升高，需警惕胰腺脓肿。<br>
+                    <span class="check-mark">✓</span> 恶心、呕吐：见于多数患者，呕吐物为胃内容物，呕吐后症状不缓解。<br>
+                    <span class="check-mark">✓</span> 黄疸：不一定存在。<br>
+                    <span class="sub-item">• 体征</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="特殊人群阑尾炎与急性胰腺炎诊疗；老人阑尾炎、免疫功能受损患者阑尾炎、急性胰腺炎、定义、病因、临床表现；=126" readonly>
+        <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">老人阑尾炎</span>
+            <span class="tag tag-disease">免疫功能受损患者阑尾炎</span>
+            <span class="tag tag-disease">急性胰腺炎</span>
+            <span class="tag tag-disease">轻症急性胰腺炎</span>
+            <span class="tag tag-disease">中度重症急性胰腺炎</span>
+            <span class="tag tag-disease">重症急性胰腺炎</span>
+            <span class="tag tag-disease">胆石症</span>
+            <span class="tag tag-disease">高脂血症</span>
+            <span class="tag tag-disease">胰腺脓肿</span>
+            <span class="tag tag-disease">假性囊肿</span>
+            <span class="tag tag-disease">腹膜炎</span>
+            <span class="tag tag-antibiotic">甲硝唑</span>
+        </div>
+    </div>
+    
+    <div class="page-info">
+        <p>页码：<span class="page-number">126</span></p>
+        <p style="margin-top:10px; color:#888;">关键词：老人阑尾炎、免疫功能受损、急性胰腺炎、AP、MAP、MSAP、SAP、胆石症、酒精、高脂血症、腹痛、发热、恶心呕吐、黄疸</p>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            var copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板：" + copyText.value);
+            });
+        }
+        
+        function addFavorite() {
+            var title = document.title;
+            var url = window.location.href;
+            var indexData = localStorage.getItem('favorites') ? JSON.parse(localStorage.getItem('favorites')) : [];
+            var exists = indexData.some(function(item) {
+                return item.url === url;
+            });
+            if (!exists) {
+                indexData.push({
+                    title: title,
+                    url: url,
+                    category: '急诊疾病'
+                });
+                localStorage.setItem('favorites', JSON.stringify(indexData));
+                alert('已添加到收藏！');
+            } else {
+                alert('该页面已在收藏中！');
+            }
+        }
+    </script>
+</body>
+</html>
