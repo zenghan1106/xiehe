@@ -1,0 +1,436 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急性冠脉综合征（ACS）心电图诊断与检查要点*****</title>
+    <script>
+        function copyToClipboard() {
+            var copyText = document.getElementById("copyBox");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            document.execCommand("copy");
+            alert("已复制到剪贴板！");
+        }
+        
+        function addToFavorites() {
+            var title = document.title;
+            var url = window.location.href;
+            var indexPage = "index.html";
+            
+            // Store favorite in localStorage for index page to read
+            var favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            var pageName = window.location.pathname.split('/').pop().replace('.html', '');
+            if (!favorites.some(f => f.url === url)) {
+                favorites.push({
+                    title: title,
+                    url: url,
+                    pageName: pageName,
+                    category: '急诊疾病'
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已添加到收藏！请在 index.html 页面查看收藏列表。');
+            } else {
+                alert('该页面已在收藏列表中！');
+            }
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            background-image: linear-gradient(135deg, #f0f4f8 0%, #e8f0f8 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background-color: #2980b9;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .home-btn:hover {
+            background-color: #1a5276;
+            transform: translateY(-2px);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background-color: #3498db;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .nav-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-1px);
+        }
+        
+        .favorite-btn {
+            background-color: #e74c3c;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 6px;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .favorite-btn:hover {
+            background-color: #c0392b;
+            transform: translateY(-1px);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 24px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #d6eaf8;
+            border-radius: 10px;
+            border-left: 5px solid #2980b9;
+            word-wrap: break-word;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            font-size: 14px;
+        }
+        
+        thead {
+            background-color: #2980b9;
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+            border: 1px solid #1a5276;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f4f8;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            color: #2980b9;
+            font-size: 16px;
+        }
+        
+        .check-mark {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            font-weight: bold;
+            color: #2980b9;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: #e8f4f8;
+            color: #2980b9;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 4px;
+            font-size: 13px;
+            border: 1px solid #2980b9;
+        }
+        
+        .copy-section {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        #copyBox {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px;
+            border: 2px solid #2980b9;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #333;
+        }
+        
+        .copy-btn {
+            background-color: #27ae60;
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background-color: #1e8449;
+        }
+        
+        .page-number {
+            text-align: center;
+            margin-top: 15px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+                padding: 10px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 12px;
+            }
+            
+            td {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            .header-nav {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-buttons {
+                align-items: stretch;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            #copyBox {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-nav">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="95.html" class="nav-btn">上一页</a>
+            <a href="97.html" class="nav-btn">下一页</a>
+            <button class="favorite-btn" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~急性冠脉综合征（ACS）心电图诊断与检查要点*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~急性冠脉综合征（ACS）心电图诊断与检查要点*****、急诊疾病 - ACS诊断与检查、症状特点、查体、4. 必做检查、放射部位、部位（Site）、持续时间（Time course）、伴随症状、生命体征和意识状态、急性心肌梗死时心源性休克、心力衰竭证据、神经系统检查、ECG、STEMI、NSTEMI或UA相符的表现、前壁缺血、前间壁缺血、心尖部或侧壁缺血、下壁缺血、右心室缺血、后壁缺血</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">急诊疾病 - ACS诊断与检查</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2" class="section-title">症状特点</td>
+                </tr>
+                <tr>
+                    <td width="20%">放射部位</td>
+                    <td>手腕、手指、颈部和咽喉、下颌和牙齿、背部肩胛区</td>
+                </tr>
+                <tr>
+                    <td>部位（Site）</td>
+                    <td>可能存在难以定位的弥散性不适</td>
+                </tr>
+                <tr>
+                    <td>持续时间（Time course）</td>
+                    <td>心绞痛通常短暂（2～5分钟），通过休息或服用硝酸甘油可缓解。相比之下，ACS患者胸痛普遍超过30分钟。典型心绞痛持续超过20分钟可提示ACS。</td>
+                </tr>
+                <tr>
+                    <td><span class="check-mark">✓</span> 伴随症状</td>
+                    <td>呼吸急促、嗳气、恶心、消化不良、呕吐、出汗、头晕、湿冷、乏力等</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">查体</td>
+                </tr>
+                <tr>
+                    <td><span class="check-mark">✓</span> 生命体征和意识状态</td>
+                    <td>反应性、气道、呼吸和循环，患者呼吸骤停或心搏呼吸骤停时，应采取恰当的复苏流程</td>
+                </tr>
+                <tr>
+                    <td><span class="check-mark">✓</span> 急性心肌梗死时心源性休克</td>
+                    <td>注意全身灌注不足证据：低血压，心动过速，认知损害，皮肤冰凉、湿冷、苍白、晦暗</td>
+                </tr>
+                <tr>
+                    <td><span class="check-mark">✓</span> 心力衰竭证据</td>
+                    <td>颈静脉怒张，新发或加重的肺湿啰音，低血压，心动过速，新发第三心音奔马律，新发或加重的二尖瓣关闭不全杂音</td>
+                </tr>
+                <tr>
+                    <td>神经系统检查</td>
+                    <td>有重点的神经系统检查，包括查体及头颅影像学检查，评估有无溶栓禁忌</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">4. 必做检查</td>
+                </tr>
+                <tr>
+                    <td>ECG</td>
+                    <td>初始ECG应在就诊10分钟以内完成，如初始检查不能诊断，且仍有症状并高度怀疑ACS，应每15～30分钟复查ECG。若有Ⅱ、Ⅲ和aVF导联ST段抬高所证实的下壁缺血证据，应行V₄R、V₅R和V₆R右胸导联ECG检查。</td>
+                </tr>
+                <tr>
+                    <td><span class="check-mark">✓</span> STEMI</td>
+                    <td>两个连续导联的J点新出现ST段抬高的诊断阈值如下：在除V₂～V₃的所有导联ST段抬高≥0.1mV（1mm），在V₂～V₃导联：≥40岁男性为≥0.2mV（2mm），＜40岁男性为≥0.25mV（2.5mm），女性为≥0.15mV（1.5mm）。</td>
+                </tr>
+                <tr>
+                    <td><span class="check-mark">✓</span> NSTEMI或UA相符的表现</td>
+                    <td>在两个连续导联新出现的水平型或下斜型ST段压低≥0.05mV（0.5mm），和/或R波为主或R/S＞1的两个相邻导联T波倒置≥0.1mV（1mm）。</td>
+                </tr>
+                <tr>
+                    <td><span class="check-mark">✓</span> 前壁缺血</td>
+                    <td>2个或2个以上胸导联（V₁～V₆）</td>
+                </tr>
+                <tr>
+                    <td><span class="check-mark">✓</span> 前间壁缺血</td>
+                    <td>V₁～V₃导联</td>
+                </tr>
+                <tr>
+                    <td><span class="check-mark">✓</span> 心尖部或侧壁缺血</td>
+                    <td>Ⅰ和aVL导联</td>
+                </tr>
+                <tr>
+                    <td><span class="check-mark">✓</span> 下壁缺血</td>
+                    <td>Ⅱ、Ⅲ和aVF导联</td>
+                </tr>
+                <tr>
+                    <td><span class="check-mark">✓</span> 右心室缺血</td>
+                    <td>右胸导联</td>
+                </tr>
+                <tr>
+                    <td><span class="check-mark">✓</span> 后壁缺血</td>
+                    <td>后壁胸导联</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-container">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <span class="tag">ACS</span>
+        <span class="tag">急性冠脉综合征</span>
+        <span class="tag">心绞痛</span>
+        <span class="tag">心肌梗死</span>
+        <span class="tag">STEMI</span>
+        <span class="tag">NSTEMI</span>
+        <span class="tag">UA</span>
+        <span class="tag">不稳定型心绞痛</span>
+        <span class="tag">心电图</span>
+        <span class="tag">ECG</span>
+        <span class="tag">ST段抬高</span>
+        <span class="tag">ST段压低</span>
+        <span class="tag">T波倒置</span>
+        <span class="tag">心源性休克</span>
+        <span class="tag">心力衰竭</span>
+        <span class="tag">硝酸甘油</span>
+        <span class="tag">溶栓</span>
+        <span class="tag">前壁缺血</span>
+        <span class="tag">前间壁缺血</span>
+        <span class="tag">下壁缺血</span>
+        <span class="tag">右心室缺血</span>
+        <span class="tag">后壁缺血</span>
+        <span class="tag">侧壁缺血</span>
+        <span class="tag">心尖部缺血</span>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" id="copyBox" value="急性冠脉综合征（ACS）心电图诊断与检查要点；ACS、急性冠脉综合征、心绞痛、心肌梗死、STEMI、NSTEMI、UA、不稳定型心绞痛、心电图、ECG、ST段抬高、ST段压低、T波倒置、心源性休克、心力衰竭、硝酸甘油、溶栓、前壁缺血、前间壁缺血、下壁缺血、右心室缺血、后壁缺血、侧壁缺血、心尖部缺血；=96" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="page-number">页码：96</div>
+</body>
+</html>
