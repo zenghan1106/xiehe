@@ -1,0 +1,566 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~蛛网膜下腔出血（续）- 病因、临床表现、诊断与并发症*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #5a9bd5;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .favorite-btn {
+            background: #e8b339;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        
+        .favorite-btn.active {
+            background: #d4a017;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .main-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .main-table thead {
+            background: #2e75b6;
+        }
+        
+        .main-table thead th {
+            color: white;
+            padding: 18px 15px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .main-table tbody td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #e8eef4;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #2c3e50;
+        }
+        
+        .main-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .main-table tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        .main-table tbody tr:hover {
+            background: #e8f4fd;
+        }
+        
+        .section-title {
+            color: #1a5276;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .sub-item {
+            padding-left: 20px;
+            color: #34495e;
+        }
+        
+        .sub-sub-item {
+            padding-left: 40px;
+            color: #5d6d7e;
+        }
+        
+        .check {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .note {
+            padding-left: 20px;
+            color: #5d6d7e;
+            font-style: italic;
+        }
+        
+        .copy-section {
+            margin-top: 25px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .copy-section label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        .copy-input-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        #copyInput {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+            background: #fafafa;
+        }
+        
+        #copyBtn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        #copyBtn:hover {
+            background: #219a52;
+        }
+        
+        .tags-section {
+            margin-top: 25px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-section h3 {
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #e8f4fd;
+            color: #2e75b6;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #b8d4f0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            background: #2e75b6;
+            color: white;
+        }
+        
+        .keywords-section {
+            margin-top: 25px;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 13px;
+        }
+        
+        .page-number {
+            margin-top: 10px;
+            color: #95a5a6;
+            font-size: 12px;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            display: none;
+            z-index: 1000;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+                padding: 12px;
+            }
+            
+            .main-table thead th {
+                font-size: 16px;
+                padding: 14px 10px;
+            }
+            
+            .main-table tbody td {
+                padding: 12px 10px;
+                font-size: 13px;
+            }
+            
+            .sub-item {
+                padding-left: 15px;
+            }
+            
+            .sub-sub-item {
+                padding-left: 30px;
+            }
+            
+            .note {
+                padding-left: 15px;
+            }
+            
+            .copy-input-group {
+                flex-direction: column;
+            }
+            
+            #copyInput {
+                width: 100%;
+            }
+            
+            .header-nav {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <div class="header-nav">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="182.html" class="nav-btn">上一页</a>
+            <a href="184.html" class="nav-btn">下一页</a>
+            <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~蛛网膜下腔出血（续）- 病因、临床表现、诊断与并发症*****</h1>
+    
+    <!-- 主表格 -->
+    <table class="main-table">
+        <thead>
+            <tr>
+                <th>蛛网膜下腔出血（续）- 病因、临床表现、诊断与并发症</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="sub-item">● 脊液。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">● SAH占脑卒中的10%，病死率接近50%，幸存者有严重的神经系统并发症。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="section-title">2. 病因</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">● 大多数SAH由囊状动脉瘤破裂导致。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">● 其他原因包括：创伤、动静脉畸形/瘘、血管炎、颅内动脉夹层、淀粉样血管病、出血素质和使用违禁药物（特别是可卡因和苯丙胺类）。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="section-title">3. 临床表现</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">● 突发剧烈头痛，通常描述其为"一生中最严重的头痛"。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">● 30%的患者头痛为单侧性，主要发生在动脉瘤侧。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">● 头痛发作可能伴短暂意识丧失、恶心或呕吐以及脑膜刺激征。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">● SAH伴玻璃体（视网膜前）积血称为Terson综合征，提示预后较差。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">● 虽然在体力活动或情绪应激时发生症状提示SAH，但约半数动脉瘤性SAH发生于非用力活动、休息或睡眠时。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="section-title">4. 诊断</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">● 首选头颅CT平扫，若不能确定可行腰穿。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">● 一旦诊断SAH，必须行血管造影检查确定出血病因。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-sub-item"><span class="check">✓</span> 数字减影血管造影术（DSA）：对颅内动脉瘤的分辨率最高，可清楚显示其解剖学特点，是查找SAH病因的金标准。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-sub-item"><span class="check">✓</span> CT血管造影（CTA）和磁共振血管造影（MRA）：属于无创性检查，有助于筛查和术前规划。对于SAH患者，若CTA未发现动脉瘤，则应进行DSA。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-sub-item"><span class="check">✓</span> 血管造影检查：结果阴性患者复查血管造影。14% ~ 22%的病例中，血管造影不能明确SAH原因。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="note">需注意，若初始血管造影结果阴性，应在3周后复查血管影像学，推荐复查DSA。初始血管造影检查阴性的SAH患者中，多达24%在复查血管造影时能检测到动脉瘤。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="section-title">5. 并发症</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-item">● 再出血</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-sub-item"><span class="check">✓</span> 发生率为8% ~ 23%。SAH后24小时内再出血风险最高，特别是初始出血后6小时内。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sub-sub-item"><span class="check">✓</span> 再出血可能的独立预测因素包括：①入院时的Hunt-Hess分级；②最大动脉瘤直径；③初始血压较高；④SAH前有先兆性头痛；⑤发作到入院的间隔时间较长；⑥早期行脑室</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <label>快速复制标题与关键词：</label>
+        <div class="copy-input-group">
+            <input type="text" id="copyInput" value="蛛网膜下腔出血（续）- 病因、临床表现、诊断与并发症；SAH；蛛网膜下腔出血；囊状动脉瘤；动静脉畸形；Terson综合征；数字减影血管造影术；DSA；CT血管造影；CTA；磁共振血管造影；MRA；再出血；Hunt-Hess分级；=183" readonly>
+            <button id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <h3>🔖 特色检索标签</h3>
+        <div class="tags-container">
+            <span class="tag">SAH</span>
+            <span class="tag">蛛网膜下腔出血</span>
+            <span class="tag">囊状动脉瘤</span>
+            <span class="tag">动静脉畸形</span>
+            <span class="tag">血管炎</span>
+            <span class="tag">颅内动脉夹层</span>
+            <span class="tag">淀粉样血管病</span>
+            <span class="tag">可卡因</span>
+            <span class="tag">苯丙胺类</span>
+            <span class="tag">Terson综合征</span>
+            <span class="tag">头颅CT平扫</span>
+            <span class="tag">腰穿</span>
+            <span class="tag">数字减影血管造影术</span>
+            <span class="tag">DSA</span>
+            <span class="tag">CT血管造影</span>
+            <span class="tag">CTA</span>
+            <span class="tag">磁共振血管造影</span>
+            <span class="tag">MRA</span>
+            <span class="tag">再出血</span>
+            <span class="tag">Hunt-Hess分级</span>
+        </div>
+    </div>
+    
+    <!-- 关键词与页码 -->
+    <div class="keywords-section">
+        <div>关键词：SAH | 蛛网膜下腔出血 | 囊状动脉瘤 | 动静脉畸形 | Terson综合征 | 数字减影血管造影术 | DSA | CT血管造影 | CTA | 磁共振血管造影 | MRA | 再出血 | Hunt-Hess分级</div>
+        <div class="page-number">页码：183</div>
+    </div>
+    
+    <!-- 提示框 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isActive = btn.classList.contains('active');
+            
+            if (!isActive) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '蛛网膜下腔出血（续）- 病因、临床表现、诊断与并发症',
+                    url: '183.html',
+                    pageNum: '183'
+                };
+                
+                const exists = favorites.some(f => f.url === '183.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                showToast('已添加到收藏！');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+                
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const filtered = favorites.filter(f => f.url !== '183.html');
+                localStorage.setItem('favorites', JSON.stringify(filtered));
+                
+                showToast('已取消收藏！');
+            }
+        }
+        
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const btn = document.getElementById('favoriteBtn');
+            if (favorites.some(f => f.url === '183.html')) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
