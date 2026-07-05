@@ -1,0 +1,608 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>~~~~~临床微生物学检验-肺炎克雷伯菌药敏报告*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 100;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            text-decoration: none;
+            display: inline-block;
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        .nav-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #e8a838;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(232,168,56,0.3);
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        .fav-btn:hover {
+            background: #d4952a;
+        }
+        
+        .fav-btn.active {
+            background: #28a745;
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            margin: 70px 0 25px 0;
+            color: #1a5276;
+            font-size: 22px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        /* 表头 */
+        thead tr {
+            background: #2e75b6;
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        /* 表格第一行（样本信息）字体大一点 */
+        tbody tr:first-child td {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a5276;
+            background: #e8f4f8;
+        }
+        
+        tbody tr:nth-child(2) td {
+            background: #f0f8ff;
+        }
+        
+        /* 表格行 */
+        tbody tr {
+            border-bottom: 1px solid #e8e8e8;
+        }
+        
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+        
+        tbody tr:hover {
+            background: #f8fbff;
+        }
+        
+        td {
+            padding: 12px;
+            line-height: 1.6;
+        }
+        
+        td:first-child {
+            font-weight: 600;
+            color: #2c5f8a;
+            white-space: nowrap;
+            width: 120px;
+            background: #f5f9fc;
+        }
+        
+        /* 敏感耐药标记 */
+        .sensitive {
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .resistant {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        
+        /* 药敏结果特殊样式 */
+        .drug-result {
+            display: inline-block;
+            margin: 3px 6px 3px 0;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: #f0f0f0;
+            white-space: nowrap;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background: white;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #2e75b6;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .tag-disease {
+            background: #ffe4e1;
+            color: #c0392b;
+            border: 1px solid #f5b7b1;
+        }
+        
+        .tag-bacteria {
+            background: #e8f6f3;
+            color: #1a7a5e;
+            border: 1px solid #a9dfbf;
+        }
+        
+        .tag-antibiotic {
+            background: #eaf2f8;
+            color: #2e75b6;
+            border: 1px solid #aed6f1;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* 底部区域 */
+        .footer-section {
+            background: white;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .keywords {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .keywords strong {
+            color: #2e75b6;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 15px;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background: #fafafa;
+        }
+        
+        .copy-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #218838;
+        }
+        
+        .copy-btn.copied {
+            background: #17a2b8;
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 200;
+        }
+        
+        .toast.show {
+            opacity: 1;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 13px;
+            }
+            
+            td:first-child {
+                width: 100px;
+            }
+            
+            .tag {
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+            
+            .nav-btn, .fav-btn, .home-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="196.html" class="nav-btn">← 上一页</a>
+        <a href="198.html" class="nav-btn">下一页 →</a>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">~~~~~临床微生物学检验-肺炎克雷伯菌药敏报告*****</h1>
+    
+    <!-- 主表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>项目</th>
+                    <th>内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>检验项目</td>
+                    <td>细菌培养及鉴定 + 药敏试验</td>
+                </tr>
+                <tr>
+                    <td>样本类型</td>
+                    <td>痰</td>
+                </tr>
+                <tr>
+                    <td>检验方法</td>
+                    <td>培养法</td>
+                </tr>
+                <tr>
+                    <td>细菌名称</td>
+                    <td><strong>肺炎克雷伯菌</strong>（<em>Klebsiella pneumoniae</em>）</td>
+                </tr>
+                <tr>
+                    <td>菌量</td>
+                    <td><strong>+++</strong>（大量生长）</td>
+                </tr>
+                <tr>
+                    <td>药敏结果<br>（敏感S）</td>
+                    <td>
+                        <span class="drug-result"><span class="sensitive">头孢他啶 S</span></span>
+                        <span class="drug-result"><span class="sensitive">头孢吡肟 S</span></span>
+                        <span class="drug-result"><span class="sensitive">氨曲南 S</span></span>
+                        <span class="drug-result"><span class="sensitive">亚胺培南 S</span></span>
+                        <span class="drug-result"><span class="sensitive">美罗培南 S</span></span>
+                        <span class="drug-result"><span class="sensitive">阿米卡星 S</span></span>
+                        <span class="drug-result"><span class="sensitive">庆大霉素 S</span></span>
+                        <span class="drug-result"><span class="sensitive">妥布霉素 S</span></span>
+                        <span class="drug-result"><span class="sensitive">环丙沙星 S</span></span>
+                        <span class="drug-result"><span class="sensitive">左氧氟沙星 S</span></span>
+                        <span class="drug-result"><span class="sensitive">头孢曲松 S</span></span>
+                        <span class="drug-result"><span class="sensitive">头孢噻肟 S</span></span>
+                        <span class="drug-result"><span class="sensitive">头孢哌酮/舒巴坦 S</span></span>
+                        <span class="drug-result"><span class="sensitive">哌拉西林/他唑巴坦 S</span></span>
+                        <span class="drug-result"><span class="sensitive">替加环素 S</span></span>
+                        <span class="drug-result"><span class="sensitive">多黏菌素B S</span></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>药敏结果<br>（耐药R）</td>
+                    <td>
+                        <span class="drug-result"><span class="resistant">氨苄西林/舒巴坦 R</span></span>
+                        <span class="drug-result"><span class="resistant">头孢唑林 R</span></span>
+                        <span class="drug-result"><span class="resistant">哌拉西林 R</span></span>
+                        <span class="drug-result"><span class="resistant">氨苄西林 R</span></span>
+                        <span class="drug-result"><span class="resistant">复方新诺明 R</span></span>
+                        <span class="drug-result"><span class="resistant">头孢呋辛 R</span></span>
+                        <span class="drug-result"><span class="resistant">头孢西丁 R</span></span>
+                        <span class="drug-result"><span class="resistant">四环素 R</span></span>
+                        <span class="drug-result"><span class="resistant">氯霉素 R</span></span>
+                        <span class="drug-result"><span class="resistant">呋喃妥因 R</span></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 特色检索标签（点击筛选）</div>
+        <div>
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">肺炎</span>
+            <span class="tag tag-disease">呼吸道感染</span>
+            
+            <!-- 细菌标签 -->
+            <span class="tag tag-bacteria">肺炎克雷伯菌</span>
+            <span class="tag tag-bacteria">Klebsiella pneumoniae</span>
+            
+            <!-- 抗生素药物标签（敏感） -->
+            <span class="tag tag-antibiotic">头孢他啶</span>
+            <span class="tag tag-antibiotic">头孢吡肟</span>
+            <span class="tag tag-antibiotic">氨曲南</span>
+            <span class="tag tag-antibiotic">亚胺培南</span>
+            <span class="tag tag-antibiotic">美罗培南</span>
+            <span class="tag tag-antibiotic">阿米卡星</span>
+            <span class="tag tag-antibiotic">庆大霉素</span>
+            <span class="tag tag-antibiotic">妥布霉素</span>
+            <span class="tag tag-antibiotic">环丙沙星</span>
+            <span class="tag tag-antibiotic">左氧氟沙星</span>
+            <span class="tag tag-antibiotic">头孢曲松</span>
+            <span class="tag tag-antibiotic">头孢噻肟</span>
+            <span class="tag tag-antibiotic">头孢哌酮/舒巴坦</span>
+            <span class="tag tag-antibiotic">哌拉西林/他唑巴坦</span>
+            <span class="tag tag-antibiotic">替加环素</span>
+            <span class="tag tag-antibiotic">多黏菌素B</span>
+            
+            <!-- 抗生素药物标签（耐药） -->
+            <span class="tag tag-antibiotic">氨苄西林/舒巴坦</span>
+            <span class="tag tag-antibiotic">头孢唑林</span>
+            <span class="tag tag-antibiotic">哌拉西林</span>
+            <span class="tag tag-antibiotic">氨苄西林</span>
+            <span class="tag tag-antibiotic">复方新诺明</span>
+            <span class="tag tag-antibiotic">头孢呋辛</span>
+            <span class="tag tag-antibiotic">头孢西丁</span>
+            <span class="tag tag-antibiotic">四环素</span>
+            <span class="tag tag-antibiotic">氯霉素</span>
+            <span class="tag tag-antibiotic">呋喃妥因</span>
+        </div>
+    </div>
+    
+    <!-- 底部区域：关键词、页码、复制功能 -->
+    <div class="footer-section">
+        <div class="keywords">
+            <strong>关键词：</strong>临床微生物学检验；细菌培养及鉴定；药敏试验；痰培养；肺炎克雷伯菌；Klebsiella pneumoniae；多重耐药；碳青霉烯类敏感；ESBL；第三代头孢菌素敏感；氨基糖苷类敏感；喹诺酮类敏感；β-内酰胺酶抑制剂复合制剂敏感；替加环素；多黏菌素
+        </div>
+        
+        <div class="page-number">
+            页码：197
+        </div>
+        
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyContent()">📋 复制</button>
+        </div>
+    </div>
+    
+    <!-- 提示信息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 页面信息
+        const pageInfo = {
+            title: "临床微生物学检验",
+            subtitle: "细菌培养及鉴定+药敏试验",
+            keywords: "肺炎克雷伯菌、痰培养、药敏试验、头孢他啶、亚胺培南、美罗培南、替加环素、多黏菌素",
+            pageNum: "197"
+        };
+        
+        // 初始化复制框内容
+        const copyContentText = `${pageInfo.title}；${pageInfo.subtitle}；${pageInfo.keywords}；=${pageInfo.pageNum}`;
+        document.getElementById('copyInput').value = copyContentText;
+        
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '✓ 已复制';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '📋 复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                });
+            }
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = localStorage.getItem('fav_197') === 'true';
+            
+            if (!isFav) {
+                localStorage.setItem('fav_197', 'true');
+                // 存储收藏信息到index可用格式
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites.push({
+                    page: '197',
+                    title: pageInfo.title,
+                    subtitle: pageInfo.subtitle,
+                    url: '197.html',
+                    bacteria: '肺炎克雷伯菌',
+                    tags: ['肺炎克雷伯菌', '痰培养', '替加环素', '多黏菌素B']
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+                showToast('已添加到收藏！');
+            } else {
+                localStorage.removeItem('fav_197');
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.page !== '197');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                btn.textContent = '⭐ 收藏';
+                btn.classList.remove('active');
+                showToast('已取消收藏');
+            }
+        }
+        
+        // 初始化收藏状态
+        function initFavorite() {
+            const btn = document.getElementById('favBtn');
+            if (localStorage.getItem('fav_197') === 'true') {
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+            }
+        }
+        
+        // 页面加载时初始化
+        window.onload = function() {
+            initFavorite();
+        };
+    </script>
+</body>
+</html>
