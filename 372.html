@@ -1,0 +1,503 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~糖皮质激素在肾上腺危象及甲状腺危象中的应用与急诊血管活性药物的使用*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+            color: #333;
+        }
+        .nav-btn {
+            position: fixed;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            z-index: 100;
+        }
+        .home-btn {
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: #fff;
+        }
+        .home-btn:hover {
+            background: #357abd;
+        }
+        .prev-btn {
+            top: 15px;
+            right: 15px;
+            background: #5cb85c;
+            color: #fff;
+        }
+        .prev-btn:hover {
+            background: #449d44;
+        }
+        .next-btn {
+            top: 55px;
+            right: 15px;
+            background: #f0ad4e;
+            color: #fff;
+        }
+        .next-btn:hover {
+            background: #ec971f;
+        }
+        .fav-btn {
+            top: 95px;
+            right: 15px;
+            background: #d9534f;
+            color: #fff;
+        }
+        .fav-btn:hover {
+            background: #c9302c;
+        }
+        .container {
+            max-width: 900px;
+            margin: 80px auto 30px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .page-title {
+            text-align: center;
+            padding: 25px 20px;
+            background: linear-gradient(90deg, #1e5799 0%, #2989d8 50%, #207cca 100%);
+            color: #fff;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .page-title::before {
+            content: "~~~~~";
+            color: #ffd700;
+            margin-right: 8px;
+        }
+        .page-title::after {
+            content: "*****";
+            color: #ffd700;
+            margin-left: 8px;
+        }
+        .subtitle {
+            text-align: center;
+            padding: 10px;
+            background: #e3f2fd;
+            color: #1565c0;
+            font-size: 14px;
+        }
+        .section-header {
+            padding: 15px 20px;
+            background: linear-gradient(90deg, #1565c0 0%, #1976d2 100%);
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .conclusion-box {
+            margin: 15px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            border-radius: 8px;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #2e7d32;
+        }
+        .conclusion-box .section-title {
+            color: #1b5e20;
+            font-weight: bold;
+        }
+        .author {
+            text-align: right;
+            color: #666;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+        .new-section {
+            margin-top: 20px;
+            border-top: 3px solid #ff9800;
+        }
+        .new-section-header {
+            padding: 15px 20px;
+            background: linear-gradient(90deg, #e65100 0%, #f57c00 100%);
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        thead {
+            background: linear-gradient(90deg, #1565c0 0%, #1976d2 100%);
+            color: #fff;
+        }
+        thead th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+            border: 1px solid #0d47a1;
+        }
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        tbody td {
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            vertical-align: top;
+            line-height: 1.8;
+        }
+        .disease-name {
+            color: #c62828;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        .section-title {
+            color: #1565c0;
+            font-weight: bold;
+        }
+        .drug-name {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+        .dosage {
+            color: #6a1b9a;
+            background: #f3e5f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .warning {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        .definition-list {
+            list-style: none;
+            padding: 0;
+        }
+        .definition-list li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 15px;
+        }
+        .definition-list li::before {
+            content: "●";
+            position: absolute;
+            left: 0;
+            color: #1565c0;
+        }
+        .sub-list {
+            list-style: none;
+            padding-left: 20px;
+            margin-top: 5px;
+        }
+        .sub-list li::before {
+            content: "①" counter(item);
+            counter-increment: item;
+            color: #e65100;
+        }
+        .tags-section {
+            padding: 20px;
+            background: #fff3e0;
+            border-top: 3px solid #ff9800;
+        }
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #e65100;
+            margin-bottom: 12px;
+        }
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 4px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .tag-disease {
+            background: #ffcdd2;
+            color: #c62828;
+            border: 1px solid #ef5350;
+        }
+        .tag-drug {
+            background: #c8e6c9;
+            color: #2e7d32;
+            border: 1px solid #66bb6a;
+        }
+        .tag-bacteria {
+            background: #b3e5fc;
+            color: #0277bd;
+            border: 1px solid #29b6f6;
+        }
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .bottom-section {
+            padding: 20px;
+            background: #eceff1;
+            text-align: center;
+        }
+        .keywords {
+            font-size: 13px;
+            color: #546e7a;
+            margin-bottom: 10px;
+        }
+        .page-number {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1565c0;
+        }
+        .copy-section {
+            padding: 20px;
+            background: #fff;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .copy-input {
+            width: calc(100% - 120px);
+            max-width: 700px;
+            padding: 12px 16px;
+            border: 2px solid #90caf9;
+            border-radius: 10px;
+            font-size: 14px;
+            outline: none;
+            background: #f5f5f5;
+        }
+        .copy-btn {
+            padding: 12px 28px;
+            background: linear-gradient(90deg, #42a5f5 0%, #1e88e5 100%);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .copy-btn:hover {
+            background: linear-gradient(90deg, #1e88e5 0%, #1565c0 100%);
+        }
+        .copy-btn.copied {
+            background: #4caf50;
+        }
+        @media (max-width: 600px) {
+            .container {
+                margin: 70px 5px 20px;
+                border-radius: 12px;
+            }
+            .page-title {
+                font-size: 16px;
+                padding: 18px 12px;
+            }
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            tbody td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            .copy-input {
+                width: calc(100% - 100px);
+                font-size: 12px;
+            }
+            .copy-btn {
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="nav-btn home-btn">🏠 返回首页</a>
+    <a href="371.html" class="nav-btn prev-btn">⬅ 上一页</a>
+    <a href="373.html" class="nav-btn next-btn">➡ 下一页</a>
+    <button class="nav-btn fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+
+    <div class="container">
+        <div class="page-title">糖皮质激素在肾上腺危象及甲状腺危象中的应用与急诊血管活性药物的使用</div>
+        <div class="subtitle">糖皮质激素急诊应用专家组</div>
+
+        <div class="section-header">一、肾上腺危象与甲状腺危象的激素治疗</div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:22%">疾病/病症</th>
+                    <th style="width:78%">建议、用法及剂量</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="disease-name">肾上腺危象</span><br><span class="disease-name">（续）</span></td>
+                    <td>
+                        功能减退症的患者，首选<span class="drug-name">地塞米松</span>，因为<span class="drug-name">地塞米松</span>不会干扰血清皮质醇测定。<br><br>
+                        <span class="section-title">用法及剂量：</span><span class="drug-name">氢化可的松</span><span class="dosage">100mg/d</span>，或<span class="drug-name">地塞米松</span><span class="dosage">4mg/d</span>，静脉给药。并在1～3天内逐渐减量并改为口服维持剂量。口服维持替代治疗应选择短效<span class="drug-name">糖皮质激素</span>，如<span class="drug-name">氢化可的松</span>，<span class="dosage">20mg/d</span>，分2～3次给药。
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="disease-name">甲状腺相关危象</span></td>
+                    <td>
+                        <span class="section-title">建议：</span>对于有严重甲状腺毒症临床表现的甲状腺危象临床特征的患者，推荐给予<span class="drug-name">糖皮质激素</span>。但对并未危及生命的重度甲状腺功能亢进症，不常规使用<span class="drug-name">糖皮质激素</span>。<br><br>
+                        对于有严重甲状腺功能减退导致的黏液性水肿昏迷患者，在排除并存的肾上腺皮质功能减退症前，必须采用应激剂量的<span class="drug-name">糖皮质激素</span>治疗。需注意，在垂体危象时，<span class="drug-name">糖皮质激素</span>必须在甲状腺激素前给予，以免加重患者病情。<br><br>
+                        <span class="section-title">用法及剂量：</span>甲状腺危象的激素用法为：<span class="drug-name">氢化可的松</span><span class="dosage">100mg q8h</span>，静脉给药，甲状腺危象好转后迅速停药。黏液性水肿昏迷的激素用法同样为：<span class="drug-name">氢化可的松</span><span class="dosage">100mg q8h</span>，静脉给药。
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="conclusion-box">
+            <span class="section-title">6. 结语</span><br>
+            <span class="drug-name">糖皮质激素</span>具有强大的抗炎作用，在许多急诊危重症患者的治疗中起到巨大甚至是决定性作用。但<span class="drug-name">糖皮质激素</span>又是一把"双刃剑"，它在迅速控制炎症反应的同时也会产生很多副作用，特别是在大剂量或冲击剂量使用时，可能造成致命感染。因此必须权衡利弊，规范使用。
+            <div class="author">（糖皮质激素急诊应用专家组）</div>
+        </div>
+
+        <div class="new-section">
+            <div class="new-section-header">■ 急诊血管活性药物的使用</div>
+        </div>
+
+        <div class="section-header">1. 定义</div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:22%">分类</th>
+                    <th style="width:78%">定义与说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="disease-name">血管活性药</span><br><span class="disease-name">广义定义</span></td>
+                    <td>
+                        广义上包括一切能使血压升高或下降的药物，但通常意义上是指能够使血压升高的作用于心脏或血管的药物，包括<span class="drug-name">正性肌力药</span>和<span class="drug-name">血管加压药</span>。<br><br>
+                        <span class="section-title">① 正性肌力药：</span>是一类作用于心脏，能够增加心肌收缩力的药物。心肌收缩力增加可导致心输出量增加和血压升高。<br><br>
+                        <span class="section-title">② 血管加压药：</span>是一类对动脉和静脉在内的周围血管具有显著收缩作用的药物，目的是提高平均动脉压。
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="disease-name">临床应用</span></td>
+                    <td>
+                        这两类药多用于循环衰竭的患者中，许多药物均有正性肌力作用和血管加压作用，如<span class="drug-name">儿茶酚胺类药物</span>既有正性肌力作用，也有周围血管的作用，包括静脉收缩、小动脉舒张和收缩作
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 检索标签（点击图片中的文字快速检索）</div>
+            <span class="tag tag-disease">肾上腺危象</span>
+            <span class="tag tag-disease">甲状腺功能减退症</span>
+            <span class="tag tag-disease">甲状腺危象</span>
+            <span class="tag tag-disease">甲状腺毒症</span>
+            <span class="tag tag-disease">黏液性水肿昏迷</span>
+            <span class="tag tag-disease">垂体危象</span>
+            <span class="tag tag-disease">循环衰竭</span>
+            <span class="tag tag-drug">地塞米松</span>
+            <span class="tag tag-drug">氢化可的松</span>
+            <span class="tag tag-drug">糖皮质激素</span>
+            <span class="tag tag-drug">甲状腺激素</span>
+            <span class="tag tag-drug">正性肌力药</span>
+            <span class="tag tag-drug">血管加压药</span>
+            <span class="tag tag-drug">儿茶酚胺类药物</span>
+        </div>
+
+        <div class="bottom-section">
+            <div class="keywords">关键词：糖皮质激素、肾上腺危象、甲状腺危象、甲状腺毒症、黏液性水肿昏迷、垂体危象、氢化可的松、地塞米松、急诊血管活性药物、正性肌力药、血管加压药、儿茶酚胺类药物</div>
+            <div class="page-number">页码：363</div>
+        </div>
+
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="糖皮质激素在肾上腺危象及甲状腺危象中的应用与急诊血管活性药物的使用；糖皮质激素急诊应用专家组；糖皮质激素、肾上腺危象、甲状腺危象、甲状腺毒症、黏液性水肿昏迷、垂体危象、氢化可的松、地塞米松、急诊血管活性药物、正性肌力药、血管加压药、儿茶酚胺类药物=363" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '✅ 已复制';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '📋 复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        function addToFavorites() {
+            const title = document.querySelector('.page-title').textContent.replace(/~~~~~|\*\*\*\*\*/g, '').trim();
+            const url = window.location.href;
+            const favoriteData = {
+                title: title,
+                url: url,
+                page: '363',
+                tags: ['糖皮质激素', '肾上腺危象', '甲状腺危象', '甲状腺毒症', '黏液性水肿昏迷', '垂体危象', '氢化可的松', '地塞米松', '急诊血管活性药物', '正性肌力药', '血管加压药', '儿茶酚胺类药物']
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === url);
+            if (!exists) {
+                favorites.push(favoriteData);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                localStorage.setItem('newFavorite', JSON.stringify(favoriteData));
+                
+                const btn = document.querySelector('.fav-btn');
+                btn.textContent = '⭐ 已收藏';
+                btn.style.background = '#4caf50';
+                setTimeout(() => {
+                    alert('已添加到收藏！请在 index.html 页面查看收藏列表。');
+                }, 100);
+            } else {
+                alert('该页面已在收藏列表中！');
+            }
+        }
+
+        window.addEventListener('load', () => {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const currentUrl = window.location.href;
+            if (favorites.some(f => f.url === currentUrl)) {
+                const btn = document.querySelector('.fav-btn');
+                btn.textContent = '⭐ 已收藏';
+                btn.style.background = '#4caf50';
+            }
+        });
+    </script>
+</body>
+</html>
