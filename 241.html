@@ -1,0 +1,651 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~低血糖症·甲状腺危象*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8f0e8 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #2c3e50;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+        }
+        
+        .home-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        
+        .nav-btn {
+            background: #2ecc71;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(46, 204, 113, 0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+        }
+        
+        .favorite-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(231, 76, 60, 0.3);
+        }
+        
+        .favorite-btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        .favorite-btn.active {
+            background: #f39c12;
+        }
+        
+        .page-title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 15px 0 25px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            letter-spacing: 2px;
+        }
+        
+        .main-table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(31, 97, 141, 0.15);
+        }
+        
+        .main-table th {
+            background: #2874a6;
+            color: white;
+            padding: 18px 15px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .main-table td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #e8f4f8;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #34495e;
+        }
+        
+        .main-table tr:nth-child(even) {
+            background: #f8fbfd;
+        }
+        
+        .main-table tr:hover {
+            background: #e8f6f3;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 16px;
+        }
+        
+        .sub-item {
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .sub-item::before {
+            content: "•";
+            position: absolute;
+            left: 5px;
+            color: #3498db;
+        }
+        
+        .check-item::before {
+            content: "✓";
+            position: absolute;
+            left: 5px;
+            color: #2ecc71;
+        }
+        
+        .tags-section {
+            max-width: 800px;
+            margin: 0 auto 25px auto;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .tag {
+            background: #d5e8f3;
+            color: #1a5276;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #aed6f1;
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            background: #2874a6;
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .tag.disease {
+            background: #fadbd8;
+            color: #922b21;
+            border-color: #f5b7b1;
+        }
+        
+        .tag.disease:hover {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .tag.drug {
+            background: #d5f5e3;
+            color: #1e8449;
+            border-color: #abebc6;
+        }
+        
+        .tag.drug:hover {
+            background: #2ecc71;
+            color: white;
+        }
+        
+        .tag.bacteria {
+            background: #fef9e7;
+            color: #9a7d0a;
+            border-color: #f9e79f;
+        }
+        
+        .tag.bacteria:hover {
+            background: #f1c40f;
+            color: white;
+        }
+        
+        .copy-section {
+            max-width: 800px;
+            margin: 0 auto 25px auto;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .copy-title {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #d5e8f3;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #2c3e50;
+            background: #f8fbfd;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-btn {
+            background: #9b59b6;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #8e44ad;
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn.copied {
+            background: #2ecc71;
+        }
+        
+        .keywords-section {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .keywords-title {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+        
+        .keywords-content {
+            font-size: 15px;
+            color: #2874a6;
+            font-weight: 500;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            color: #1a5276;
+            font-weight: bold;
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 8px;
+            max-width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 14px;
+            display: none;
+            z-index: 1000;
+        }
+        
+        @media (max-width: 600px) {
+            .page-title {
+                font-size: 20px;
+            }
+            
+            .main-table th {
+                font-size: 16px;
+                padding: 14px 10px;
+            }
+            
+            .main-table td {
+                font-size: 13px;
+                padding: 10px;
+            }
+            
+            .header-nav {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-buttons {
+                flex-direction: row;
+                justify-content: flex-end;
+                flex-wrap: wrap;
+            }
+            
+            .copy-box {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="header-nav">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="240.html" class="nav-btn">上一页</a>
+            <a href="242.html" class="nav-btn">下一页</a>
+            <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">~~~~~低血糖症·甲状腺危象*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~低血糖症·甲状腺危象*****、低血糖症诊断策略与急诊处理 / 甲状腺危象、6. 诊断策略、7. 急诊处理、轻症、重症、注意维持水电解质平衡。、甲状腺危象、1. 定义、2. 危险因素</div>
+    
+    <!-- 主表格 -->
+    <table class="main-table">
+        <thead>
+            <tr>
+                <th>低血糖症诊断策略与急诊处理 / 甲状腺危象</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span class="section-title">6. 诊断策略</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item">
+                    <strong>发现低血糖：</strong>对于以自主神经和神经精神症状起病的患者均需测量血糖，尤其是不明原因突发昏迷、精神运动异常、心悸、出汗的患者。
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item">
+                    <strong>对于有症状伴低血糖的患者：</strong>除外饮食、药物因素后需要检查血浆同步血糖、C肽、胰岛素原，以明确低血糖原因。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">7. 急诊处理</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item">
+                    <strong>无症状：</strong>接受药物治疗的糖尿病患者，血糖≤3.9mmol/L，即使无症状也应采取预防措施，包括15～60分钟内重复测量，避免承担驾驶等重要任务，可以摄入碳水化合物和调整治疗方案。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>轻症</strong>
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item check-item">
+                    摄入15～20g速效碳水化合物，如1勺白糖、半杯果汁、1勺蜂蜜、6～8块硬糖等，通常使血糖升高至安全范围而不会引起高血糖。
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item check-item">
+                    15分钟后复测血糖，若仍＜3.9mmol/L，可能需重复治疗。
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item check-item">
+                    之后可使用长效碳水化合物（进餐或零食）以预防症状发生。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>重症</strong>
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item check-item">
+                    立即予静脉注射20g 50%葡萄糖，15分钟后复测血糖。
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item check-item">
+                    对于胰岛素瘤、长效胰岛素过量、晚期肝衰竭等患者，需注意持续性低血糖可能，使用高糖静脉注射后，需要5%～10%葡萄糖静脉滴注维持并监测血糖。
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item check-item">
+                    注意维持水电解质平衡。
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right; color: #7f8c8d; font-style: italic;">
+                    （宗 良）
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">■ 甲状腺危象</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">1. 定义</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item">
+                    甲状腺危象又称甲亢危象，指甲状腺功能亢进症（简称甲亢）在病情未被控制的情况下，由于一些应激的激发因素，使甲亢病情突然加重，出现严重危及患者健康和生命的状态。
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item">
+                    甲状腺危象是内分泌科急症，病死率高，需在抢救室或ICU接受全面生命支持。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">2. 危险因素</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item">
+                    甲亢（Graves病、毒性多结节性甲状腺肿、孤立性毒性甲状腺腺瘤）长期未得到治疗。
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item">
+                    急性事件诱发，如甲状腺或非甲状腺手术、创伤、感染、急性碘负荷或分娩。
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag disease">低血糖症</span>
+            <span class="tag disease">甲状腺危象</span>
+            <span class="tag disease">甲亢危象</span>
+            <span class="tag disease">甲状腺功能亢进症</span>
+            <span class="tag disease">甲亢</span>
+            <span class="tag disease">Graves病</span>
+            <span class="tag disease">毒性多结节性甲状腺肿</span>
+            <span class="tag disease">孤立性毒性甲状腺腺瘤</span>
+            <span class="tag disease">胰岛素瘤</span>
+            <span class="tag disease">糖尿病</span>
+            <span class="tag drug">葡萄糖</span>
+            <span class="tag drug">白糖</span>
+            <span class="tag drug">果汁</span>
+            <span class="tag drug">蜂蜜</span>
+            <span class="tag drug">硬糖</span>
+            <span class="tag drug">C肽</span>
+            <span class="tag drug">胰岛素原</span>
+            <span class="tag drug">碳水化合物</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制信息</div>
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyInput" value="低血糖症·甲状腺危象；诊断策略；急诊处理；无症状；轻症；重症；甲状腺危象；定义；危险因素；Graves病；毒性多结节性甲状腺肿；孤立性毒性甲状腺腺瘤；感染；创伤；急性碘负荷；分娩；=241" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 关键词区域 -->
+    <div class="keywords-section">
+        <div class="keywords-title">🔍 关键词</div>
+        <div class="keywords-content">
+            低血糖症、甲状腺危象、甲亢危象、甲状腺功能亢进症、甲亢、诊断策略、急诊处理、无症状、轻症、重症、葡萄糖、白糖、果汁、蜂蜜、硬糖、碳水化合物、C肽、胰岛素原、胰岛素瘤、糖尿病、Graves病、毒性多结节性甲状腺肿、孤立性毒性甲状腺腺瘤、感染、创伤、急性碘负荷、分娩、水电解质平衡、内分泌科急症、ICU
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">241</div>
+    
+    <!-- 提示框 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '✓ 已复制';
+                btn.classList.add('copied');
+                showToast('复制成功！');
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                showToast('复制失败，请手动复制');
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFavorited = btn.classList.contains('active');
+            
+            if (!isFavorited) {
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+                showToast('已添加到收藏！');
+                
+                try {
+                    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                    const pageInfo = {
+                        title: '低血糖症·甲状腺危象',
+                        url: '241.html',
+                        pageNum: '241',
+                        category: '急诊疾病'
+                    };
+                    
+                    const exists = favorites.some(f => f.url === '241.html');
+                    if (!exists) {
+                        favorites.push(pageInfo);
+                        localStorage.setItem('favorites', JSON.stringify(favorites));
+                    }
+                } catch (e) {
+                    console.log('localStorage不可用');
+                }
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = '☆ 收藏';
+                showToast('已取消收藏');
+                
+                try {
+                    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                    const filtered = favorites.filter(f => f.url !== '241.html');
+                    localStorage.setItem('favorites', JSON.stringify(filtered));
+                } catch (e) {
+                    console.log('localStorage不可用');
+                }
+            }
+        }
+        
+        // 显示提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            try {
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const isFavorited = favorites.some(f => f.url === '241.html');
+                if (isFavorited) {
+                    const btn = document.getElementById('favoriteBtn');
+                    btn.classList.add('active');
+                    btn.innerHTML = '★ 已收藏';
+                }
+            } catch (e) {
+                console.log('localStorage不可用');
+            }
+        };
+    </script>
+</body>
+</html>
