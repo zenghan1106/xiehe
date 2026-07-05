@@ -1,0 +1,530 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>~~~~~铜绿假单胞菌感染与抗生素治疗指南*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            padding: 10px;
+            min-height: 100vh;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background-color: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background-color: #357abd;
+        }
+        
+        /* 导航按钮容器 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background-color: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .nav-btn:hover {
+            background-color: #357abd;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .fav-btn:hover {
+            background-color: #c0392b;
+        }
+        
+        .fav-btn.active {
+            background-color: #f39c12;
+        }
+        
+        /* 标题样式 */
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 22px;
+            margin: 70px 0 20px 0;
+            padding: 0 10px;
+            word-wrap: break-word;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 0 -5px;
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        /* 表头样式 - 蓝色 */
+        thead {
+            background-color: #2196F3;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 18px;
+            border-bottom: 2px solid #1976D2;
+            white-space: nowrap;
+        }
+        
+        /* 表格第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        tbody td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #444;
+            word-wrap: break-word;
+            max-width: 300px;
+        }
+        
+        tbody tr:hover {
+            background-color: #f0f7ff;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #fafbfc;
+        }
+        
+        tbody tr:nth-child(even):hover {
+            background-color: #f0f7ff;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 25px 0;
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background-color: #e3f2fd;
+            color: #1976D2;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid #bbdefb;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            background-color: #1976D2;
+            color: white;
+        }
+        
+        /* 页码区域 */
+        .page-info {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        
+        .page-number {
+            font-size: 18px;
+            color: #2196F3;
+            font-weight: 600;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff3e0;
+            border-radius: 8px;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .keywords-title {
+            font-size: 15px;
+            color: #e65100;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .keywords-content {
+            font-size: 14px;
+            color: #bf360c;
+            line-height: 1.8;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #555;
+            background-color: #fafafa;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background-color: #45a049;
+        }
+        
+        .copy-btn.copied {
+            background-color: #2196F3;
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 2000;
+        }
+        
+        .toast.show {
+            opacity: 1;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 14px;
+            }
+            
+            .home-btn, .nav-btn, .fav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 右上角导航按钮 -->
+    <div class="nav-buttons">
+        <a href="86.html" class="nav-btn">⬅ 上一页</a>
+        <a href="88.html" class="nav-btn">下一页 ➡</a>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~铜绿假单胞菌感染与抗生素治疗指南*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~铜绿假单胞菌感染与抗生素治疗指南*****、项目、详细内容、疾病名称、致病菌、首选抗生素、替代药物、联合用药、耐药机制、治疗原则、注意事项</div>
+    
+    <!-- 表格区域 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>项目</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 第一行字体较大 -->
+                <tr>
+                    <td>疾病名称</td>
+                    <td>铜绿假单胞菌感染</td>
+                </tr>
+                <tr>
+                    <td>致病菌</td>
+                    <td>铜绿假单胞菌<br>(Pseudomonas aeruginosa)</td>
+                </tr>
+                <tr>
+                    <td>首选抗生素</td>
+                    <td>头孢他啶、头孢吡肟、<br>哌拉西林他唑巴坦、<br>头孢哌酮舒巴坦</td>
+                </tr>
+                <tr>
+                    <td>替代药物</td>
+                    <td>氨曲南、亚胺培南、<br>美罗培南、多黏菌素</td>
+                </tr>
+                <tr>
+                    <td>联合用药</td>
+                    <td>氨基糖苷类+β-内酰胺类<br>氟喹诺酮类+β-内酰胺类</td>
+                </tr>
+                <tr>
+                    <td>耐药机制</td>
+                    <td>产ESBL、产AmpC酶、<br>外排泵高表达、<br>生物被膜形成</td>
+                </tr>
+                <tr>
+                    <td>治疗原则</td>
+                    <td>早期足量、联合用药、<br>根据药敏调整、<br>疗程足够</td>
+                </tr>
+                <tr>
+                    <td>注意事项</td>
+                    <td>避免单用氟喹诺酮<br>监测肾功能<br>注意药物相互作用</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag">铜绿假单胞菌感染</span>
+            <span class="tag">铜绿假单胞菌</span>
+            <span class="tag">头孢他啶</span>
+            <span class="tag">头孢吡肟</span>
+            <span class="tag">哌拉西林他唑巴坦</span>
+            <span class="tag">头孢哌酮舒巴坦</span>
+            <span class="tag">亚胺培南</span>
+            <span class="tag">美罗培南</span>
+            <span class="tag">多黏菌素</span>
+            <span class="tag">氨曲南</span>
+        </div>
+    </div>
+    
+    <!-- 页码信息 -->
+    <div class="page-info">
+        <span class="page-number">当前页码：87</span>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">🔑 关键词</div>
+        <div class="keywords-content">
+            铜绿假单胞菌；抗生素治疗；耐药机制；联合用药；头孢他啶；哌拉西林他唑巴坦；碳青霉烯类；多黏菌素；医院感染；革兰阴性菌
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 页面信息配置
+        const pageInfo = {
+            title: "铜绿假单胞菌感染与抗生素治疗指南",
+            subtitle: "临床用药参考",
+            keywords: "铜绿假单胞菌；抗生素治疗；耐药机制；联合用药；头孢他啶；哌拉西林他唑巴坦",
+            pageNum: "87"
+        };
+        
+        // 初始化复制框内容
+        const copyContent = `${pageInfo.title}；${pageInfo.subtitle}；${pageInfo.keywords}=${pageInfo.pageNum}`;
+        document.getElementById('copyInput').value = copyContent;
+        
+        // 复制到剪贴板功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                showToast('✅ 已复制到剪贴板！');
+                document.getElementById('copyBtn').classList.add('copied');
+                document.getElementById('copyBtn').textContent = '已复制';
+                setTimeout(() => {
+                    document.getElementById('copyBtn').classList.remove('copied');
+                    document.getElementById('copyBtn').textContent = '复制';
+                }, 2000);
+            } catch (err) {
+                showToast('❌ 复制失败，请手动复制');
+            }
+        }
+        
+        // 显示提示消息
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFavorited = btn.classList.contains('active');
+            
+            if (!isFavorited) {
+                // 添加到收藏
+                btn.classList.add('active');
+                btn.innerHTML = '❤️ 已收藏';
+                showToast('⭐ 已添加到收藏！');
+                
+                // 保存到localStorage
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const currentPage = {
+                    title: pageInfo.title,
+                    url: window.location.href,
+                    pageNum: pageInfo.pageNum
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.pageNum === pageInfo.pageNum);
+                if (!exists) {
+                    favorites.push(currentPage);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            } else {
+                // 取消收藏
+                btn.classList.remove('active');
+                btn.innerHTML = '⭐ 收藏';
+                showToast('💔 已取消收藏');
+                
+                // 从localStorage移除
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.pageNum !== pageInfo.pageNum);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.pageNum === pageInfo.pageNum);
+            if (isFavorited) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.innerHTML = '❤️ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
