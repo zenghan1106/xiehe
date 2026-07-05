@@ -1,0 +1,616 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊营养支持计算与通路选择*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f0f7f0 0%, #e8f5e9 50%, #f1f8e9 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .nav-btn {
+            position: fixed;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(145deg, #4a90d9, #357abd);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(74, 144, 217, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 144, 217, 0.4);
+        }
+        
+        .home-btn {
+            top: 15px;
+            left: 15px;
+        }
+        
+        .prev-btn {
+            top: 15px;
+            right: 15px;
+        }
+        
+        .next-btn {
+            top: 60px;
+            right: 15px;
+        }
+        
+        .fav-btn {
+            top: 105px;
+            right: 15px;
+            background: linear-gradient(145deg, #f5a623, #e09400);
+            box-shadow: 0 3px 10px rgba(245, 166, 35, 0.3);
+        }
+        
+        .fav-btn:hover {
+            box-shadow: 0 5px 15px rgba(245, 166, 35, 0.4);
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 80px auto 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(31, 110, 180, 0.15);
+            overflow: hidden;
+        }
+        
+        .page-header {
+            background: linear-gradient(145deg, #1e6db5, #2980d9);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .table-wrapper {
+            padding: 20px;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        thead tr {
+            background: linear-gradient(145deg, #1e6db5, #2980d9);
+            color: white;
+        }
+        
+        thead th {
+            padding: 18px 15px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+            border-bottom: 3px solid #f0f8ff;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e8f0f8;
+            transition: background 0.2s;
+        }
+        
+        tbody tr:hover {
+            background: #f5faff;
+        }
+        
+        tbody td {
+            padding: 14px 15px;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #2c3e50;
+            vertical-align: top;
+        }
+        
+        .section-title {
+            background: #e8f4fc;
+            font-weight: bold;
+            color: #1e6db5;
+        }
+        
+        .sub-item {
+            padding-left: 20px;
+            position: relative;
+            margin: 8px 0;
+        }
+        
+        .sub-item::before {
+            content: "•";
+            position: absolute;
+            left: 5px;
+            color: #2980d9;
+        }
+        
+        .check-item {
+            padding-left: 35px;
+            position: relative;
+            margin: 6px 0;
+        }
+        
+        .check-item::before {
+            content: "✓";
+            position: absolute;
+            left: 15px;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .formula-box {
+            background: #f0f8ff;
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-family: "Courier New", monospace;
+            color: #1e6db5;
+            margin: 10px 0;
+            border-left: 4px solid #2980d9;
+        }
+        
+        .highlight-box {
+            background: #fff8e7;
+            border-left: 4px solid #f5a623;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .bottom-section {
+            padding: 20px;
+            background: #f8fbff;
+            border-top: 2px solid #e0ecf8;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 14px 18px;
+            border: 2px solid #b8d4f0;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #2c3e50;
+            background: white;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        #copyInput:focus {
+            border-color: #2980d9;
+        }
+        
+        .copy-btn {
+            padding: 14px 28px;
+            background: linear-gradient(145deg, #27ae60, #219a52);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(39, 174, 96, 0.3);
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .tags-section {
+            margin: 20px 0;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1e6db5;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 18px;
+            margin: 6px;
+            background: linear-gradient(145deg, #e8f4fc, #d0e8f7);
+            color: #1e6db5;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid #b8d4f0;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            background: linear-gradient(145deg, #1e6db5, #2980d9);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .keywords-section {
+            text-align: center;
+            padding: 20px;
+            background: #e8f4fc;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        
+        .keywords-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1e6db5;
+            margin-bottom: 10px;
+        }
+        
+        .keywords-list {
+            font-size: 14px;
+            color: #4a6580;
+            line-height: 2;
+        }
+        
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            font-size: 16px;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #27ae60;
+            color: white;
+            padding: 14px 35px;
+            border-radius: 30px;
+            font-size: 15px;
+            opacity: 0;
+            transition: all 0.4s;
+            z-index: 2000;
+            box-shadow: 0 5px 20px rgba(39, 174, 96, 0.3);
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                margin-top: 70px;
+            }
+            
+            .page-header h1 {
+                font-size: 20px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 14px 12px;
+            }
+            
+            tbody td {
+                font-size: 14px;
+                padding: 12px;
+            }
+            
+            .nav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                top: 10px;
+                left: 10px;
+            }
+            
+            .prev-btn {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .next-btn {
+                top: 50px;
+                right: 10px;
+            }
+            
+            .fav-btn {
+                top: 90px;
+                right: 10px;
+            }
+            
+            #copyInput {
+                width: 100%;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航按钮 -->
+    <a href="index.html" class="nav-btn home-btn">🏠 返回首页</a>
+    <a href="340.html" class="nav-btn prev-btn">← 上一页</a>
+    <a href="342.html" class="nav-btn next-btn">下一页 →</a>
+    <button class="nav-btn fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    
+    <div class="container">
+        <!-- 标题 -->
+        <div class="page-header">
+            <h1>~~~~~急诊营养支持计算与通路选择*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~急诊营养支持计算与通路选择*****、急诊营养支持计算及公式、通路和制剂选择、3. 计算及公式、4. 急诊肠内营养的通路和制剂选择、5. 急诊肠外营养支持的通路和配方选择、消化吸收功能障碍患者宜选择短肽型或氨基酸型配方。、限制液体入量患者可选择高能量密度配方。、高脂血症或血脂增高患者宜选用优化脂肪配方。</div>
+        </div>
+        
+        <!-- 表格内容 -->
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>急诊营养支持计算及公式、通路和制剂选择</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="section-title">3. 计算及公式</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sub-item">剂量体重：开具肠内肠外营养处方时，需要确定用于计算热量和蛋白质摄入的合适体重。</div>
+                            <div class="check-item">若患者体重低下（BMI＜18.5），建议将当前体重作为初始剂量体重。</div>
+                            <div class="check-item">若患者体重正常（BMI 18.5～24.9）或超重（BMI 25～29.9），建议将当前体重作为剂量体重，但应当去除外周性水肿重量。</div>
+                            <div class="check-item">若患者体重肥胖（BMI＞30），可采用简易办法算，剂量体重＝1.1理想体重（IBW）；另一种方法是在IBW的基础上再加上实际体重（ABW）和IBW差值的2/5，即：剂量体重＝IBW＋0.4（ABW－IBW）。理想体重的近似计算：男，身高－100（cm）；女，身高－105（cm）。</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sub-item">热量计算：大多数患者，第1周内8～10kcal/kg，从第2周开始25～30kcal/kg。</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sub-item">蛋白质计算：建议蛋白质所需量为1.2～2.0g/kg，烧伤患者或脓毒症患者可达1.5～2.0g/kg。</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sub-item">静脉给予的脂质（包括非营养性脂质）：建议不超过1.5g/（kg·d）。</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sub-item">根据剂量体重算出总热量、蛋白质及脂质需求，然后结合患者液体需求量来决策营养支持方案。</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="section-title">4. 急诊肠内营养的通路和制剂选择</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sub-item">急诊肠内营养通路最常使用鼻胃管，对于重症胰腺炎或高误吸风险患者推荐使用空肠营养管。</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sub-item">放置鼻胃管或空肠营养管后应当通过X线片明确管路位置，每次使用前应当回抽确定是否通畅及胃残量多寡。</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sub-item">标准制剂适用于绝大多大多数患者，标准制剂的组成特点：等渗溶液，能量密度1kcal/ml，整蛋白含量40g/1000ml，非蛋白热/氮比约为130：1，长链脂肪酸（偶有中链脂肪酸和ω-3脂肪酸），单糖和多聚糖混合，不含乳糖，含维生素、矿物质和微量元素。</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sub-item">消化吸收功能障碍患者宜选择短肽型或氨基酸型配方。</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sub-item">限制液体入量患者可选择高能量密度配方。</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sub-item">糖尿病或血糖升高患者有条件时可选用糖尿病适用配方。</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sub-item">高脂血症或血脂增高患者宜选用优化脂肪配方。</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sub-item">持续腹泻患者，首先可考虑使用含纤维素处方，如果含纤维素处方无效，可试用短肽配方。</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="section-title">5. 急诊肠外营养支持的通路和配方选择</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sub-item">患者开始肠外营养时，如若考虑短期即可过渡到肠内营养或</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- 复制功能区 -->
+        <div class="bottom-section">
+            <div class="copy-section">
+                <input type="text" id="copyInput" value="急诊营养支持计算与通路选择；剂量体重、热量计算、蛋白质计算、肠内营养、肠外营养、鼻胃管、空肠营养管、重症胰腺炎、误吸、糖尿病、高脂血症、腹泻、短肽配方、氨基酸配方；=341" readonly>
+                <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+            </div>
+            
+            <!-- 检索标签 -->
+            <div class="tags-section">
+                <div class="tags-title">🏷️ 检索标签</div>
+                <span class="tag">BMI</span>
+                <span class="tag">IBW</span>
+                <span class="tag">ABW</span>
+                <span class="tag">烧伤</span>
+                <span class="tag">脓毒症</span>
+                <span class="tag">重症胰腺炎</span>
+                <span class="tag">误吸</span>
+                <span class="tag">鼻胃管</span>
+                <span class="tag">空肠营养管</span>
+                <span class="tag">X线片</span>
+                <span class="tag">糖尿病</span>
+                <span class="tag">高脂血症</span>
+                <span class="tag">腹泻</span>
+                <span class="tag">短肽配方</span>
+                <span class="tag">氨基酸配方</span>
+                <span class="tag">纤维素</span>
+                <span class="tag">乳糖不耐受</span>
+                <span class="tag">ω-3脂肪酸</span>
+            </div>
+            
+            <!-- 关键词 -->
+            <div class="keywords-section">
+                <div class="keywords-title">🔍 关键词</div>
+                <div class="keywords-list">
+                    急诊营养支持 | 剂量体重 | BMI | IBW | ABW | 热量计算 | 蛋白质计算 | 肠内营养 | 肠外营养 | 鼻胃管 | 空肠营养管 | 重症胰腺炎 | 误吸风险 | 标准制剂 | 短肽型配方 | 氨基酸型配方 | 糖尿病配方 | 高脂血症 | 腹泻 | 纤维素
+                </div>
+            </div>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">— 第 341 页 —</div>
+    </div>
+    
+    <!-- 提示框 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('✓ 已复制到剪贴板');
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('✓ 已复制到剪贴板');
+            }
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            const title = '急诊营养支持计算与通路选择';
+            const url = window.location.href;
+            
+            if (window.sidebar && window.sidebar.addPanel) {
+                window.sidebar.addPanel(title, url, '');
+                showToast('✓ 已添加到收藏夹');
+            } else if (window.external && ('AddFavorite' in window.external)) {
+                window.external.AddFavorite(url, title);
+                showToast('✓ 已添加到收藏夹');
+            } else {
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '~~~~~急诊营养支持计算与通路选择*****',
+                    url: '341.html',
+                    category: '急诊营养',
+                    tags: ['BMI', 'IBW', 'ABW', '烧伤', '脓毒症', '重症胰腺炎', '误吸', '鼻胃管', '空肠营养管', '糖尿病', '高脂血症', '腹泻', '短肽配方', '氨基酸配方', '纤维素']
+                };
+                
+                const exists = favorites.some(f => f.url === pageInfo.url);
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                    showToast('✓ 已添加到收藏（本地存储）');
+                } else {
+                    showToast('⚠ 该页面已在收藏中');
+                }
+            }
+        }
+        
+        // 显示提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+        
+        // 页面加载时设置输入框宽度
+        window.addEventListener('load', function() {
+            const container = document.querySelector('.container');
+            const input = document.getElementById('copyInput');
+            if (container && input) {
+                const containerWidth = container.offsetWidth;
+                input.style.width = (containerWidth - 140) + 'px';
+            }
+        });
+        
+        // 窗口大小改变时调整输入框宽度
+        window.addEventListener('resize', function() {
+            const container = document.querySelector('.container');
+            const input = document.getElementById('copyInput');
+            if (container && input) {
+                const containerWidth = container.offsetWidth;
+                const newWidth = Math.max(200, containerWidth - 140);
+                input.style.width = newWidth + 'px';
+            }
+        });
+    </script>
+</body>
+</html>
