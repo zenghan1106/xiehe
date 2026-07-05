@@ -1,0 +1,388 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~异位妊娠（续）- 检查与诊断*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5ee 100%);
+            min-height: 100vh;
+            padding: 10px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .fav-btn {
+            background: #f0ad4e;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        
+        .fav-btn.active {
+            background: #d9534f;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #2874a6;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        thead tr {
+            background: #2e86c1 !important;
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 12px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:nth-child(odd) {
+            background: #ffffff;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #dee2e6;
+            font-size: 14px;
+            line-height: 1.7;
+            color: #333;
+            vertical-align: top;
+        }
+        
+        .section-title {
+            background: #d4edda !important;
+            font-weight: bold;
+            color: #155724;
+        }
+        
+        .section-title td {
+            font-size: 15px;
+            padding: 10px 12px;
+        }
+        
+        .bullet {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .check {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .copy-section {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            width: calc(100% - 120px);
+            max-width: 600px;
+            padding: 12px 15px;
+            border: 2px solid #2e86c1;
+            border-radius: 8px;
+            font-size: 13px;
+            background: white;
+        }
+        
+        .copy-btn {
+            background: #2e86c1;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .tags-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #e3f2fd;
+            color: #1565c0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            border: 1px solid #bbdefb;
+        }
+        
+        .tag.disease {
+            background: #ffebee;
+            color: #c62828;
+            border-color: #ef9a9a;
+        }
+        
+        .tag.drug {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-color: #a5d6a7;
+        }
+        
+        .tag.bacteria {
+            background: #fff3e0;
+            color: #ef6c00;
+            border-color: #ffcc80;
+        }
+        
+        .page-num {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .keywords {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 12px;
+            color: #888;
+            padding: 10px;
+        }
+        
+        @media (max-width: 600px) {
+            h1 { font-size: 18px; }
+            thead th { font-size: 15px; padding: 12px 8px; }
+            td { font-size: 13px; padding: 10px 8px; }
+            #copyInput { width: calc(100% - 100px); font-size: 12px; }
+            .copy-btn { padding: 10px 18px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-btns">
+            <a href="277.html" class="nav-btn">上一页</a>
+            <a href="279.html" class="nav-btn">下一页</a>
+            <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~异位妊娠（续）- 检查与诊断*****</h1>
+    <p class="subtitle">妇产科急诊</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">异位妊娠 - 临床表现、检查与诊断策略</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="section-title">
+                <td colspan="2">3. 临床表现（续）</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <b>症状（续）</b><br>
+                    <span class="check">✓</span> 腹痛部位通常在盆腔，可为弥漫或局限。<br>
+                    <span class="check">✓</span> 疼痛缺乏特异性，破裂时可能出现剧烈疼痛。<br>
+                    <span class="check">✓</span> 血液淤积在直肠子宫陷凹可引起强烈的便意。<br><br>
+                    <b>查体</b><br>
+                    <span class="check">✓</span> 腹部压痛阳性。<br>
+                    <span class="check">✓</span> 压痛部位较常见在下腹部和盆腔，少数病例可有中上腹压痛。<br>
+                    <span class="check">✓</span> 若破裂出血可见腹部膨隆，也可有反跳痛阳性。<br>
+                    <span class="check">✓</span> 应完成双合诊和内镜检查，明确子宫大小和通过阴道镜确定出血来源。
+                </td>
+            </tr>
+            <tr class="section-title">
+                <td colspan="2">4. 必做检查</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <span class="bullet">●</span> <b>HCG测定</b>：首先测定HCG以明确妊娠诊断，之后动态监测，以评估是否为异位妊娠。多数以2000U/L为临界值。<br><br>
+                    <span class="bullet">●</span> <b>FAST超声</b>：由急诊医师主导床旁完成，通过腹盆腔游离积液，明确患者是否存在异位妊娠破裂出血。<br><br>
+                    <span class="bullet">●</span> <b>子宫＋双附件B超</b>：明确是否为宫内妊娠，并寻找其他常见异位妊娠部位的包块。还可了解是否存在子宫＋双附件结构异常，评估风险因素。经阴道超声检查（TVUS）是评估的标准方法。血流动力学不稳定者不宜外出，直至完成该检查。<br><br>
+                    <span class="bullet">●</span> <b>血常规</b>：明确是否有出血导致的贫血。<br><br>
+                    <span class="bullet">●</span> <b>生化检查</b>：明确肝肾功能状态，以确定后续手术和药物治疗是否存在禁忌证，并确定是否存在出血造成的休克，协助评估病情危重程度。<br><br>
+                    <span class="bullet">●</span> <b>凝血功能检查</b>：为手术和药物治疗确定是否存在禁忌证，对存在血流动力学不稳定的危急状态，应予纠正。
+                </td>
+            </tr>
+            <tr class="section-title">
+                <td colspan="2">5. 选做检查</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <span class="bullet">●</span> <b>ABG</b>：应对存在异位妊娠破裂可能和血流动力学不稳定的危重患者进行该检查评估，了解组织灌注状态。<br><br>
+                    <span class="bullet">●</span> <b>血型筛查</b>：若患者存在潜在手术治疗可能，或需急诊输血，应对患者进行早期的血型评估，以便进行后续的配血治疗。<br><br>
+                    <span class="bullet">●</span> <b>其他影像学检查</b>：对于极少见的异位妊娠部位可能需要除腹盆超声检查外的其他影像学检查。
+                </td>
+            </tr>
+            <tr class="section-title">
+                <td colspan="2">6. 诊断策略</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <span class="bullet">●</span> 明确已妊娠并确定提示异位妊娠的症状：通过病史采集明确月经史和评估危险因素，并获取此次就诊时存在的症状，完善HCG检查。<br><br>
+                    <span class="bullet">●</span> 评估血流动力学稳定性：通过生命体征、突发症状加重、查
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="page-num">页码：266</div>
+    
+    <div class="copy-section">
+        <input type="text" id="copyInput" value="异位妊娠（续）- 检查与诊断；妇产科急诊；临床表现；查体；必做检查；HCG测定；FAST超声；B超；血常规；生化检查；凝血功能检查；选做检查；ABG；血型筛查；诊断策略；=266" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签：</div>
+        <span class="tag disease">异位妊娠</span>
+    </div>
+    
+    <div class="keywords">
+        关键词：异位妊娠 | 妇产科急诊 | 腹痛 | HCG | 超声 | FAST | TVUS | 血常规 | 生化检查 | 凝血功能 | ABG | 血型筛查 | 诊断策略
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '已复制';
+                setTimeout(() => btn.textContent = '复制', 1500);
+            });
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            if (isFav) {
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+                localStorage.removeItem('fav_266');
+            } else {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                localStorage.setItem('fav_266', JSON.stringify({
+                    title: '异位妊娠（续）- 检查与诊断',
+                    url: '266.html',
+                    category: '妇产科急诊'
+                }));
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites_index') || '[]');
+                const exists = favorites.find(f => f.url === '266.html');
+                if (!exists) {
+                    favorites.push({
+                        title: '异位妊娠（续）- 检查与诊断',
+                        url: '266.html',
+                        category: '妇产科急诊',
+                        addTime: new Date().toISOString()
+                    });
+                    localStorage.setItem('favorites_index', JSON.stringify(favorites));
+                }
+            }
+        }
+        
+        window.onload = function() {
+            if (localStorage.getItem('fav_266')) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+            }
+        }
+    </script>
+</body>
+</html>
