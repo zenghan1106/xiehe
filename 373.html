@@ -1,0 +1,394 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊常用药物：血管活性药分类与受体作用*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 15px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background-color: #2c5aa0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        
+        .nav-btn {
+            background-color: #4a90d9;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .fav-btn {
+            background-color: #e67e22;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a3a6e;
+            font-size: 22px;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #e8f0fe;
+            border-radius: 8px;
+            border-left: 5px solid #2c5aa0;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #555;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        thead {
+            background-color: #2c5aa0;
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 10px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            border: 1px solid #1a3a6e;
+        }
+        
+        tbody td {
+            padding: 12px 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+            font-size: 14px;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f0fe;
+        }
+        
+        .section-title {
+            background-color: #d4e4f7;
+            color: #1a3a6e;
+            font-weight: bold;
+            text-align: left;
+            padding: 10px;
+        }
+        
+        .content-text {
+            text-align: left;
+            padding: 12px;
+            line-height: 1.8;
+        }
+        
+        .copy-section {
+            margin: 25px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #2c5aa0;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        
+        .copy-btn {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .tags-section {
+            margin: 25px 0;
+            padding: 15px;
+            background-color: #fff3e0;
+            border-radius: 8px;
+        }
+        
+        .tags-title {
+            color: #e67e22;
+            font-size: 15px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: #2c5aa0;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+        }
+        
+        .keywords {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #e8f5e9;
+            border-radius: 8px;
+        }
+        
+        .keywords-title {
+            color: #27ae60;
+            font-size: 15px;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        .page-num {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 6px;
+            }
+            
+            tbody td {
+                font-size: 12px;
+                padding: 8px 6px;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-buttons {
+                flex-direction: row;
+                justify-content: flex-end;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">返回首页</a>
+        <div class="nav-buttons">
+            <a href="372.html" class="nav-btn">上一页</a>
+            <a href="374.html" class="nav-btn">下一页</a>
+            <button class="fav-btn" onclick="addToFavorites()">收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~急诊常用药物：血管活性药分类与受体作用*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~急诊常用药物：血管活性药分类与受体作用*****、种类、α₁、α₂、β₁、β₂、多巴胺（外周）、血管活性药分类、儿茶酚胺类药物、α受体激动药、分布、作用、基本药理学、常见受体种类、去甲肾上腺素</div>
+    <p class="subtitle">表45 常见受体种类、分布及作用</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>种类</th>
+                <th>α₁</th>
+                <th>α₂</th>
+                <th>β₁</th>
+                <th>β₂</th>
+                <th>多巴胺（外周）</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="section-title">分布</td>
+                <td>小动脉及<br>静脉</td>
+                <td>突触前膜</td>
+                <td>心脏</td>
+                <td>所有血管</td>
+                <td>肾、胃肠道、<br>冠脉血管扩张</td>
+            </tr>
+            <tr>
+                <td class="section-title">作用</td>
+                <td>增加心肌<br>收缩力<br>血管收缩</td>
+                <td>增加心肌<br>收缩力<br>血管收缩</td>
+                <td>增加心肌<br>收缩力<br>增加心率<br>增加传导<br>速度</td>
+                <td>增加心肌<br>收缩力<br>血管扩张</td>
+                <td>肾、胃肠道、<br>冠脉血管扩张</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <table>
+        <tbody>
+            <tr>
+                <td class="section-title" colspan="2">血管活性药分类</td>
+            </tr>
+            <tr>
+                <td class="content-text" colspan="2">
+                    常见的血管活性药可分为儿茶酚胺类药物、非儿茶酚胺类药物及血管调节药物。其中儿茶酚胺类是急诊最常用的血管活性药物，包括天然产生的儿茶酚胺，如多巴胺、去甲肾上腺素和肾上腺素，以及人工合成的药物，如多巴酚丁胺、异丙肾上腺素等。
+                </td>
+            </tr>
+            <tr>
+                <td class="section-title" colspan="2">儿茶酚胺类药物</td>
+            </tr>
+            <tr>
+                <td class="section-title">基本药理学</td>
+                <td class="content-text">
+                    儿茶酚胺类药物的基本化学结构是β-苯乙胺，当苯环碳原子的氢及末端氨基被不同的基团取代时，可影响对药物对受体的亲和力及药物的体内过程。多巴胺在体内被羟化为去甲肾上腺素，而去甲肾上腺素是体内主要的外周交感化学递质。交感神经末梢释放去甲肾上腺素受到α₂受体介导的再摄取调控，并且在应激时从肾上腺释放的肾上腺素会增强这一过程。去甲肾上腺素被转化成为肾上腺素后在肝和肺内被代谢。所有儿茶酚胺均有很短的生物半衰期（1～2分钟），在开始恒量输注后5～10分钟达到稳态血药浓度，因此可快速达到临床目标值。不同患者在不同时间内对这些药物的全身效应变化很大，且反应程度无法预测，取决于循环衰竭的病因和全身并存疾病。
+                </td>
+            </tr>
+            <tr>
+                <td class="section-title">常见受体种类</td>
+                <td class="content-text">
+                    与外周血管活性调节有关的受体主要为α₁、α₂、β₁、β₂肾上腺素受体和多巴胺受体（表45）。肾上腺素、去甲肾上腺素和多巴胺在低剂量时几乎都是β受体激动药，随着剂量增加α受体效应逐渐明显（表46）。人工合成的儿茶酚胺绝大多数是β受体激动药。
+                </td>
+            </tr>
+            <tr>
+                <td class="section-title" colspan="2">α受体激动药</td>
+            </tr>
+            <tr>
+                <td class="section-title">去甲肾上腺素</td>
+                <td class="content-text">
+                    是肾上腺素能神经末梢释放的主要递质，肾上腺髓质也有少量分泌。药用的去甲肾上腺素是人工合成品，化学性质不稳定。<br><br>
+                    <strong>药理作用：</strong>激动α受体作用强大，对心脏β₁受体作用
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="急诊常用药物：血管活性药分类与受体作用；血管活性药；儿茶酚胺；去甲肾上腺素；多巴胺；肾上腺素；受体；α受体；β受体；急诊；药物=373" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <span class="tag">血管活性药</span>
+        <span class="tag">儿茶酚胺</span>
+        <span class="tag">去甲肾上腺素</span>
+        <span class="tag">多巴胺</span>
+        <span class="tag">肾上腺素</span>
+        <span class="tag">α受体</span>
+        <span class="tag">β受体</span>
+        <span class="tag">急诊</span>
+        <span class="tag">药物</span>
+    </div>
+    
+    <div class="keywords">
+        <div class="keywords-title">关键词</div>
+        <p>血管活性药；儿茶酚胺；去甲肾上腺素；多巴胺；肾上腺素；α受体；β受体；受体激动药；急诊药物</p>
+    </div>
+    
+    <div class="page-num">页码：373</div>
+    
+    <script>
+        function copyToClipboard() {
+            var copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            });
+        }
+        
+        function addToFavorites() {
+            var title = document.title;
+            var url = window.location.href;
+            
+            if (localStorage.getItem('favorites')) {
+                var favorites = JSON.parse(localStorage.getItem('favorites'));
+            } else {
+                var favorites = [];
+            }
+            
+            var exists = favorites.some(function(item) {
+                return item.url === url;
+            });
+            
+            if (!exists) {
+                favorites.push({
+                    title: title,
+                    url: url,
+                    category: '急诊常用药物'
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已添加到收藏！');
+            } else {
+                alert('该页面已在收藏中！');
+            }
+        }
+    </script>
+</body>
+</html>
