@@ -1,0 +1,382 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急性肝衰竭与急诊出血处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f0f8ff;
+            background-image: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .header {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .home-btn {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            position: absolute;
+            right: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .fav-btn {
+            background: #f0ad4e;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 28px;
+            padding: 50px 120px 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 0 auto;
+            max-width: 100%;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        thead th {
+            background: #2e86de;
+            color: white;
+            padding: 16px 12px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e8f0;
+            color: #2c3e50;
+            font-size: 14px;
+            line-height: 1.8;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        .section-title {
+            color: #1a5276;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .sub-item {
+            color: #2874a6;
+        }
+        
+        .sub-sub-item {
+            color: #5d6d7e;
+            padding-left: 20px;
+        }
+        
+        .tags-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            color: #1a5276;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #d4edda;
+            color: #155724;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 4px;
+            font-size: 13px;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .copy-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #2e86de;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #2c3e50;
+        }
+        
+        .copy-btn {
+            background: #2e86de;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .page-info {
+            text-align: center;
+            margin-top: 20px;
+            color: #5d6d7e;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 20px;
+                padding: 60px 10px 15px;
+            }
+            
+            .home-btn {
+                position: relative;
+                margin-bottom: 10px;
+            }
+            
+            .nav-buttons {
+                position: relative;
+                flex-direction: row;
+                justify-content: flex-end;
+                margin-bottom: 10px;
+            }
+            
+            tbody td {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">返回首页</a>
+        <div class="nav-buttons">
+            <a href="137.html" class="nav-btn">上一页</a>
+            <a href="139.html" class="nav-btn">下一页</a>
+            <button class="fav-btn" onclick="addToFavorites()">收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~急性肝衰竭与急诊出血处理*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~急性肝衰竭与急诊出血处理*****、分类、详细内容、血流动力学不稳定者、药物治疗、治疗性操作、急性肝衰竭 - 定义、急性肝衰竭 - 病因</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="section-title">血流动力学不稳定者</td>
+                    <td>
+                        <span class="sub-item">✓ 建立静脉通路，立即开始液体复苏。</span><br>
+                        <span class="sub-item">✓ 输血：对于大多数患者尽量维持Hb ≥ 80g/L。</span><br>
+                        <span class="sub-sub-item">◇ 对于不稳定性冠状动脉疾病患者或有持续活动性出血的患者，应维持Hb ≥ 90g/L。</span><br>
+                        <span class="sub-sub-item">◇ 对于低血容量的活动性出血患者即使Hb看起来是正常的，也可能需要输血，必须密切监测Hb变化。</span><br>
+                        <span class="sub-sub-item">◇ 对于疑似静脉曲张出血患者，建议的输血目标是维持Hb在70～100g/L。</span><br>
+                        <span class="sub-sub-item">◇ 对于PLT &lt; 50×10⁹/L患者可能需输血小板。</span><br>
+                        <span class="sub-sub-item">◇ 非肝硬化患者INR &gt; 2时需输注凝血酶原复合物浓缩剂。</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">药物治疗</td>
+                    <td>
+                        <span class="sub-item">✓ 应用PPI抑酸。</span><br>
+                        <span class="sub-item">✓ 对于静脉曲张出血者，予奥曲肽/生长抑素等药物减少内脏血流。</span><br>
+                        <span class="sub-item">✓ 对肝硬化患者预防性使用抗生素。</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">治疗性操作</td>
+                    <td>
+                        <span class="sub-item">✓ 首选内镜治疗。</span><br>
+                        <span class="sub-item">✓ 出血24～48小时内若药物＋内镜治疗失败，需考虑介入血管栓塞或外科手术止血。</span><br>
+                        <span style="color:#888; text-align:right; display:block;">（孙瑞雪）</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">急性肝衰竭 - 定义</td>
+                    <td>
+                        <span class="sub-item">• 急性肝衰竭（ALF）指多种因素引起重度急性肝损伤，伴肝性脑病和肝合成功能受损（PT或INR延长）。</span><br>
+                        <span class="sub-item">• 患者一般无基础肝病或肝硬化，且病程多 &lt; 26周。</span><br>
+                        <span class="sub-item">• 患者既往有肝硬化或慢性肝病，此次病程 &lt; 26周，应诊断为慢加急性肝衰竭。</span><br>
+                        <span class="sub-item">• 根据病程，急性肝衰竭分为超急性（病程 &lt; 7天）、急性（病程7～212天）和亚急性（21天 &lt; 病程 &lt; 26周）。</span><br>
+                        <span class="sub-item">• 引起肝衰竭的基础病因是预后的决定因素。</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">急性肝衰竭 - 病因</td>
+                    <td>
+                        <span class="sub-item">• 病毒性肝炎：亚洲多见，是成人ALF的最常见病因。</span><br>
+                        <span class="sub-sub-item">✓ 肝炎病毒：甲型、乙型、丙型、丁型、戊型肝炎病毒（HAV、HBV、HCV、HDV、HEV）。</span><br>
+                        <span class="sub-sub-item">✓ 其他病毒：巨细胞病毒（CMV）、EB病毒（EBV）、肠道病毒、水痘-带状疱疹病毒、黄热病毒等。</span><br>
+                        <span class="sub-item">• 药物性肝炎：英、美等国家多见，如对乙酰氨基酚、抗结核</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <span class="tag">急性肝衰竭</span>
+        <span class="tag">ALF</span>
+        <span class="tag">肝性脑病</span>
+        <span class="tag">肝硬化</span>
+        <span class="tag">慢加急性肝衰竭</span>
+        <span class="tag">超急性</span>
+        <span class="tag">亚急性</span>
+        <span class="tag">病毒性肝炎</span>
+        <span class="tag">HAV</span>
+        <span class="tag">HBV</span>
+        <span class="tag">HCV</span>
+        <span class="tag">HDV</span>
+        <span class="tag">HEV</span>
+        <span class="tag">CMV</span>
+        <span class="tag">EBV</span>
+        <span class="tag">药物性肝炎</span>
+        <span class="tag">对乙酰氨基酚</span>
+        <span class="tag">抗结核</span>
+        <span class="tag">血流动力学不稳定</span>
+        <span class="tag">液体复苏</span>
+        <span class="tag">输血</span>
+        <span class="tag">静脉曲张出血</span>
+        <span class="tag">血小板</span>
+        <span class="tag">INR</span>
+        <span class="tag">凝血酶原复合物浓缩剂</span>
+        <span class="tag">PPI</span>
+        <span class="tag">奥曲肽</span>
+        <span class="tag">生长抑素</span>
+        <span class="tag">抗生素</span>
+        <span class="tag">内镜治疗</span>
+        <span class="tag">血管栓塞</span>
+        <span class="tag">外科手术止血</span>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="急性肝衰竭与急诊出血处理；急性肝衰竭、ALF、肝性脑病、肝硬化、病毒性肝炎、HBV、药物性肝炎、对乙酰氨基酚、抗结核、血流动力学不稳定、液体复苏、输血、静脉曲张出血、PPI、奥曲肽、生长抑素、抗生素、内镜治疗、血管栓塞、外科手术止血；=138" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="page-info">
+        页码：138
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            var input = document.getElementById("copyInput");
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                alert("已复制到剪贴板！");
+            });
+        }
+        
+        function addToFavorites() {
+            var title = document.title;
+            var url = window.location.href;
+            var indexData = localStorage.getItem('favorites') ? JSON.parse(localStorage.getItem('favorites')) : [];
+            var exists = indexData.some(function(item) {
+                return item.url === url;
+            });
+            if (!exists) {
+                indexData.push({
+                    title: title,
+                    url: url,
+                    category: '急诊疾病'
+                });
+                localStorage.setItem('favorites', JSON.stringify(indexData));
+                alert('已添加到收藏！');
+            } else {
+                alert('该页面已在收藏中！');
+            }
+        }
+    </script>
+</body>
+</html>
