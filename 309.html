@@ -1,0 +1,587 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>急诊医学-电击伤体格检查与诊疗</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 18px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 12px;
+            color: white;
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .header .subtitle {
+            font-size: 14px;
+            margin-top: 6px;
+            opacity: 0.95;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            order: 1;
+        }
+        
+        .nav-right {
+            order: 2;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .btn-home {
+            background-color: #4a90d9;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background-color: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        .btn-nav {
+            background-color: #5cb85c;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background-color: #449d44;
+            transform: translateY(-2px);
+        }
+        
+        .btn-favorite {
+            background-color: #f0ad4e;
+            color: white;
+        }
+        
+        .btn-favorite:hover {
+            background-color: #ec971f;
+            transform: translateY(-2px);
+        }
+        
+        .btn-copy {
+            background-color: #5bc0de;
+            color: white;
+            padding: 12px 25px;
+        }
+        
+        .btn-copy:hover {
+            background-color: #46b8da;
+            transform: translateY(-2px);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #1e5799 0%, #2989d8 50%, #207cca 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 20px 15px;
+            text-align: left;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e8e8e8;
+        }
+        
+        tbody tr:hover {
+            background-color: #f8f9ff;
+        }
+        
+        tbody td {
+            padding: 14px 15px;
+            font-size: 15px;
+            vertical-align: top;
+        }
+        
+        tbody td:first-child {
+            font-weight: 600;
+            color: #2c5282;
+            width: 30%;
+            background-color: #f0f4f8;
+        }
+        
+        .bullet {
+            color: #e74c3c;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .section-title {
+            background-color: #e3f2fd !important;
+            color: #1565c0 !important;
+            font-size: 16px !important;
+        }
+        
+        .tags-section {
+            margin: 20px 0;
+            padding: 18px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .tags-section h3 {
+            color: #2c5282;
+            margin-bottom: 14px;
+            font-size: 17px;
+            border-bottom: 2px solid #e3f2fd;
+            padding-bottom: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 7px 16px;
+            margin: 5px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .tag:hover {
+            transform: scale(1.08);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        
+        .copy-section {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .copy-input:focus {
+            border-color: #4a90d9;
+        }
+        
+        .keywords-section {
+            text-align: center;
+            padding: 18px;
+            color: #555;
+            font-size: 13px;
+            background-color: white;
+            border-radius: 12px;
+            margin-top: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        
+        .keywords-section strong {
+            color: #2c5282;
+            font-size: 14px;
+        }
+        
+        .keywords-section span {
+            display: inline-block;
+            margin: 4px 8px;
+            padding: 2px 8px;
+            background-color: #f0f4f8;
+            border-radius: 4px;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 20px;
+            color: #2c5282;
+            font-weight: bold;
+            margin: 18px 0;
+            padding: 10px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 17px;
+                padding: 16px 12px;
+            }
+            
+            tbody td {
+                padding: 12px 12px;
+                font-size: 14px;
+            }
+            
+            tbody td:first-child {
+                width: 35%;
+            }
+            
+            .btn {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 标题区域 -->
+    <div class="header">
+        <h1>~~~~~急诊医学-电击伤体格检查与诊疗*****</h1>
+        <div class="subtitle">体格检查 | 必做检查 | 诊断 | 急诊处理</div>
+    </div>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="308.html" class="btn btn-nav">上一页</a>
+            <a href="310.html" class="btn btn-nav">下一页</a>
+            <button class="btn btn-favorite" onclick="addToFavorites()">收藏</button>
+        </div>
+    </div>
+    
+    <!-- 主表格 -->
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">电击伤体格检查、诊断与急诊处理要点</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="bullet">•</span>肌肉骨骼系统</td>
+                <td>严重热损伤可导致骨膜烧伤、骨基质破坏以及骨坏死；患者可能会出现严重的软组织和肌肉损伤，导致横纹肌溶解或急性骨筋膜室综合征。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet">•</span>血管、凝血系统及其他损伤</td>
+                <td>电击所致小血管凝固性坏死可导致各种血管损伤表现。</td>
+            </tr>
+            <tr>
+                <td class="section-title" colspan="2">3. 体格检查</td>
+            </tr>
+            <tr>
+                <td><span class="bullet">•</span>气道、呼吸和循环检查</td>
+                <td>气道、呼吸和循环检查。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet">•</span>心血管功能检查</td>
+                <td>评估心律，检查脉搏。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet">•</span>皮肤检查</td>
+                <td>针对烧伤进行视诊；查找水疱、烧焦的皮肤和其他病损；注意皮肤褶皱、关节周围区域以及口腔（尤其是幼儿）。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet">•</span>神经系统功能检查</td>
+                <td>评估精神状态、瞳孔功能、肌力和运动功能，以及感觉功能。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet">•</span>眼科检查</td>
+                <td>评估视力；视诊眼部，包括眼底镜检查。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet">•</span>耳鼻喉检查</td>
+                <td>鼓膜视诊；评估听力。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet">•</span>肌肉骨骼系统检查</td>
+                <td>通过视诊和触诊评估有无骨折、急性骨筋膜室综合征等损伤征象。</td>
+            </tr>
+            <tr>
+                <td class="section-title" colspan="2">4. 必做检查</td>
+            </tr>
+            <tr>
+                <td><span class="bullet">•</span>血清电解质+肾功能</td>
+                <td>血清电解质（包括钾和钙）＋肾功能检查。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet">•</span>血清肌酸激酶、肌红蛋白、肌钙蛋白</td>
+                <td>血清肌酸激酶、肌红蛋白（检测肌肉损伤）、血清肌钙蛋白测定。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet">•</span>血常规</td>
+                <td>血常规。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet">•</span>凝血功能检查</td>
+                <td>凝血功能检查。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet">•</span>ECG</td>
+                <td>ECG。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet">•</span>放射影像学检查</td>
+                <td>对疑似损伤的区域进行放射影像学检查。</td>
+            </tr>
+            <tr>
+                <td class="section-title" colspan="2">5. 诊断</td>
+            </tr>
+            <tr>
+                <td><span class="bullet">•</span>诊断要点一</td>
+                <td>通过详细的病史采集、发病诱因、临床表现及详细查体，一般不难诊断。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet">•</span>诊断要点二</td>
+                <td>有些昏迷患者，无现场目击人员，不能够提供详细的病史资料，需要详细的查体，查看有无典型的电击伤特征，即入口伤和出口伤。</td>
+            </tr>
+            <tr>
+                <td class="section-title" colspan="2">6. 急诊处理</td>
+            </tr>
+            <tr>
+                <td><span class="bullet">•</span>心搏骤停处理</td>
+                <td>许多严重电击伤后心搏骤停（SCA）的患者都需要较长时间心肺复苏，结局常优于其他原因导致SCA的患者。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet">•</span>创伤评估与复苏</td>
+                <td>创伤评估和适当的复苏，迅速评估气道和心肺状态。存在昏迷或包括神志改变在内的神经功能障碍者，应立即进行头部和脊柱成像检查。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet">•</span>高压电击处理</td>
+                <td>高压电击（＞1000V）伤幸存者应接受心脏和血流动力学</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 页码 -->
+    <div class="page-number">页码：309</div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="急诊医学-电击伤体格检查与诊疗；电击伤体格检查、诊断与急诊处理要点；SCA；心肺复苏；高压电击；骨筋膜室综合征；横纹肌溶解；入口伤；出口伤；309" readonly>
+        <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <h3>特色检索标签</h3>
+        <span class="tag">电击伤</span>
+        <span class="tag">心搏骤停</span>
+        <span class="tag">SCA</span>
+        <span class="tag">心肺复苏</span>
+        <span class="tag">高压电击</span>
+        <span class="tag">骨筋膜室综合征</span>
+        <span class="tag">横纹肌溶解</span>
+        <span class="tag">急性肾损伤</span>
+        <span class="tag">入口伤</span>
+        <span class="tag">出口伤</span>
+        <span class="tag">骨膜烧伤</span>
+        <span class="tag">骨坏死</span>
+        <span class="tag">血管损伤</span>
+        <span class="tag">凝固性坏死</span>
+        <span class="tag">心律失常</span>
+        <span class="tag">水疱</span>
+        <span class="tag">眼底镜</span>
+        <span class="tag">鼓膜</span>
+        <span class="tag">骨折</span>
+        <span class="tag">肌钙蛋白</span>
+        <span class="tag">肌红蛋白</span>
+        <span class="tag">肌酸激酶</span>
+        <span class="tag">凝血功能</span>
+        <span class="tag">ECG</span>
+        <span class="tag">放射影像学</span>
+        <span class="tag">昏迷</span>
+        <span class="tag">神经功能障碍</span>
+        <span class="tag">脊柱成像</span>
+        <span class="tag">血流动力学</span>
+    </div>
+    
+    <!-- 关键词区域 -->
+    <div class="keywords-section">
+        <strong>关键词：</strong>
+        <span>肌肉骨骼系统</span>
+        <span>骨膜烧伤</span>
+        <span>骨基质</span>
+        <span>骨坏死</span>
+        <span>软组织</span>
+        <span>肌肉损伤</span>
+        <span>横纹肌溶解</span>
+        <span>急性骨筋膜室综合征</span>
+        <span>血管</span>
+        <span>凝血系统</span>
+        <span>凝固性坏死</span>
+        <span>体格检查</span>
+        <span>气道</span>
+        <span>呼吸</span>
+        <span>循环</span>
+        <span>心血管功能</span>
+        <span>心律</span>
+        <span>脉搏</span>
+        <span>皮肤检查</span>
+        <span>水疱</span>
+        <span>烧焦</span>
+        <span>皮肤褶皱</span>
+        <span>口腔</span>
+        <span>幼儿</span>
+        <span>神经系统</span>
+        <span>精神状态</span>
+        <span>瞳孔功能</span>
+        <span>肌力</span>
+        <span>运动功能</span>
+        <span>感觉功能</span>
+        <span>眼科检查</span>
+        <span>视力</span>
+        <span>眼底镜</span>
+        <span>耳鼻喉</span>
+        <span>鼓膜</span>
+        <span>听力</span>
+        <span>骨折</span>
+        <span>血清电解质</span>
+        <span>钾</span>
+        <span>钙</span>
+        <span>肾功能</span>
+        <span>肌酸激酶</span>
+        <span>肌红蛋白</span>
+        <span>肌钙蛋白</span>
+        <span>血常规</span>
+        <span>凝血功能</span>
+        <span>ECG</span>
+        <span>放射影像学</span>
+        <span>诊断</span>
+        <span>病史</span>
+        <span>发病诱因</span>
+        <span>昏迷</span>
+        <span>入口伤</span>
+        <span>出口伤</span>
+        <span>急诊处理</span>
+        <span>心搏骤停</span>
+        <span>SCA</span>
+        <span>心肺复苏</span>
+        <span>创伤评估</span>
+        <span>复苏</span>
+        <span>神经功能障碍</span>
+        <span>神志改变</span>
+        <span>头部成像</span>
+        <span>脊柱成像</span>
+        <span>高压电击</span>
+        <span>1000V</span>
+        <span>血流动力学</span>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            var copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            }).catch(function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板！");
+            });
+        }
+        
+        function addToFavorites() {
+            var title = document.querySelector('.header h1').textContent.replace(/[~*]/g, '');
+            var url = window.location.href;
+            var favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            var exists = favorites.some(function(item) {
+                return item.url === url;
+            });
+            
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                category: '急诊医学',
+                date: new Date().toLocaleString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert('已成功添加到收藏夹！');
+        }
+    </script>
+</body>
+</html>
