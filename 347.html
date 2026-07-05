@@ -1,0 +1,600 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~仰头拉颌法与人工呼吸急救技术*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            z-index: 1000;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 导航按钮组 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(92,184,92,0.3);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+        }
+        
+        .nav-btn.next {
+            background: #f0ad4e;
+        }
+        
+        .nav-btn.next:hover {
+            background: #ec971f;
+        }
+        
+        /* 收藏按钮 */
+        .favorite-btn {
+            background: #d9534f;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(217,83,79,0.3);
+        }
+        
+        .favorite-btn:hover {
+            background: #c9302c;
+        }
+        
+        .favorite-btn.active {
+            background: #5cb85c;
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 800px;
+            margin: 70px auto 30px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        /* 标题区域 */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 22px;
+            line-height: 1.5;
+            font-weight: 600;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        
+        .header .subtitle {
+            font-size: 14px;
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+        
+        /* 表格样式 */
+        .content-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .content-table thead {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        .content-table thead th {
+            padding: 18px 15px;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: left;
+        }
+        
+        .content-table tbody td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #444;
+            vertical-align: top;
+        }
+        
+        .content-table tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .content-table tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        /* 重点标记 */
+        .highlight {
+            color: #d9534f;
+            font-weight: 600;
+        }
+        
+        .key-point {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #856404;
+        }
+        
+        /* 步骤标记 */
+        .step-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: #4a90d9;
+            color: white;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        /* 图注 */
+        .figure-note {
+            background: #e8f4f8;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-size: 14px;
+            color: #2c5282;
+        }
+        
+        /* 比例高亮 */
+        .ratio {
+            font-size: 20px;
+            font-weight: bold;
+            color: #d9534f;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 25px 15px;
+            padding: 20px;
+            background: #f0f7ff;
+            border-radius: 12px;
+            border-left: 4px solid #4a90d9;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c5282;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: white;
+            color: #4a90d9;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid #4a90d9;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        /* 底部编辑框区域 */
+        .copy-section {
+            margin: 25px 15px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+        
+        .copy-section-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .copy-box-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #555;
+            background: white;
+            min-height: 50px;
+            resize: vertical;
+        }
+        
+        .copy-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #5a6268;
+        }
+        
+        .copy-btn.copied {
+            background: #28a745;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            padding: 20px;
+            font-size: 18px;
+            color: #888;
+            font-weight: 300;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            margin: 20px 15px;
+            padding: 18px;
+            background: #fff8e1;
+            border-radius: 12px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .keywords-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .keywords-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .keyword-item {
+            background: white;
+            color: #856404;
+            padding: 6px 14px;
+            border-radius: 16px;
+            font-size: 13px;
+            border: 1px solid #ffc107;
+        }
+        
+        /* 页脚 */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #999;
+            font-size: 12px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 18px;
+            }
+            
+            .content-table thead th {
+                font-size: 16px;
+                padding: 14px 12px;
+            }
+            
+            .content-table tbody td {
+                font-size: 14px;
+                padding: 12px;
+            }
+            
+            .copy-box-wrapper {
+                flex-direction: column;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .nav-btn, .favorite-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="346.html" class="nav-btn">← 上一页</a>
+        <a href="348.html" class="nav-btn next">下一页 →</a>
+        <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">☆ 收藏</button>
+    </div>
+    
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 标题头 -->
+        <div class="header">
+            <h1>~~~~~仰头拉颌法与人工呼吸急救技术*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~仰头拉颌法与人工呼吸急救技术*****、急救技术操作规范、页码信息 本书页码：</div>
+            <p class="subtitle">急救技术 · 心肺复苏 · 气道管理</p>
+        </div>
+        
+        <!-- 内容表格 -->
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>急救技术操作规范</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span class="highlight">仰头拉颌法（图35）</span><br>
+                        抢救者在患者头侧，双肘位于患者背部同一水平上，用双手抓住患者两侧下颌角，向上牵拉，使下颌向前。同时，使头部后仰，两手拇指可将下唇下推，使口腔打开。<br><br>
+                        <div class="figure-note">⚠️ 注意：此手法应用广泛，但不适合于有可疑颈椎骨折的患者。若颈前部颏下软组织受压，以免压迫气管。</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="highlight">清除气道异物</span><br>
+                        行开放气道手法时，如发现患者口腔内异物，应予立即取出；如无可见异物，则不必特殊行此步骤。<br><br>
+                        采取上述方法同时积极准备器械以便行更有效的处理，常用器械有<span class="key-point">喉镜</span>、<span class="key-point">压舌板</span>、<span class="key-point">开口器</span>、<span class="key-point">手术钳</span>，通过器械直接取出或吸出异物，直至做口咽插管、气管插管、环甲膜穿刺或切开。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="highlight">B（呼吸支持）</span><br>
+                        双人CPR中在不影响心脏按压的前提下应保障呼吸道通畅及实施人工呼吸支持。无论何种人工呼吸（口对口、口对面罩、球囊-面罩、球囊对高级气道），均应<span class="key-point">通气1秒以上</span>，避免过快；胸廓有明显起伏即证明通气有效，尽量避免过度通气。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="highlight">口对口人工呼吸（图36）</span><br>
+                        <span class="step-num">1</span>在保持呼吸道通畅和患者口部张开的位置进行；<br>
+                        <span class="step-num">2</span>抢救者用按于前额之手的拇指和示指，捏闭患者鼻孔；<br>
+                        <span class="step-num">3</span>抢救者吸一口气，张开口紧贴患者口部，以封闭患者嘴周围（婴幼儿可连同鼻一块包住，不漏气）；<br>
+                        <span class="step-num">4</span>匀速向患者口内呼气，注意观察胸廓是否起伏；<br>
+                        <span class="step-num">5</span>一次呼气完毕，应立即与患者口部脱离，吸入新鲜空气，以便做下一次人工呼吸，同时放松捏患者鼻部的手，以便患者从鼻孔出气，此时患者胸部自然回复，有气流从口鼻呼出。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="highlight">按压与人工呼吸比例</span><br>
+                        针对成人，《2020年美国心脏协会心肺复苏及心血管急救指南》提出：<br>
+                        • 不论单人还是双人CPR，胸外按压与人工呼吸的比例均为 <span class="ratio">30:2</span><br>
+                        • 青春期以下儿童双人CPR时按压与呼吸比例为 <span class="ratio">15:2</span><br>
+                        • 单人仍为 <span class="ratio">30:2</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="highlight">页码信息</span><br>
+                        本书页码：第336页
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 特色检索标签 -->
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 特色检索标签</div>
+            <div class="tags-container">
+                <span class="tag">心肺复苏</span>
+                <span class="tag">人工呼吸</span>
+                <span class="tag">气道异物</span>
+                <span class="tag">喉镜</span>
+                <span class="tag">压舌板</span>
+                <span class="tag">开口器</span>
+                <span class="tag">手术钳</span>
+                <span class="tag">气管插管</span>
+                <span class="tag">环甲膜穿刺</span>
+                <span class="tag">球囊-面罩</span>
+                <span class="tag">口咽插管</span>
+            </div>
+        </div>
+        
+        <!-- 复制编辑框 -->
+        <div class="copy-section">
+            <div class="copy-section-title">📋 快速复制（标题、副标题、关键词及页码）</div>
+            <div class="copy-box-wrapper">
+                <textarea class="copy-input" id="copyInput" readonly>仰头拉颌法与人工呼吸急救技术；急救技术；心肺复苏；气道管理；仰头拉颌法；清除气道异物；呼吸支持；口对口人工呼吸；按压与呼吸比例；喉镜；压舌板；开口器；手术钳；气管插管；环甲膜穿刺；球囊-面罩；=347</textarea>
+                <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+            </div>
+        </div>
+        
+        <!-- 页码显示 -->
+        <div class="page-number">— 347 —</div>
+        
+        <!-- 关键词 -->
+        <div class="keywords-section">
+            <div class="keywords-title">🔑 关键词</div>
+            <div class="keywords-list">
+                <span class="keyword-item">仰头拉颌法</span>
+                <span class="keyword-item">人工呼吸</span>
+                <span class="keyword-item">CPR</span>
+                <span class="keyword-item">心肺复苏</span>
+                <span class="keyword-item">气道管理</span>
+                <span class="keyword-item">急救技术</span>
+                <span class="keyword-item">呼吸支持</span>
+                <span class="keyword-item">胸外按压</span>
+            </div>
+        </div>
+        
+        <!-- 页脚 -->
+        <div class="footer">
+            使用 Scanner Pro 创建 · 医学教材第336页
+        </div>
+    </div>
+    
+    <script>
+        // 复制到剪贴板功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isActive = btn.classList.contains('active');
+            
+            if (!isActive) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                
+                // 保存到localStorage（模拟添加到index收藏类目）
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '仰头拉颌法与人工呼吸急救技术',
+                    url: '347.html',
+                    page: '347',
+                    category: '急救技术'
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.url === '347.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                // 尝试更新index.html的收藏列表（通过localStorage通信）
+                localStorage.setItem('indexNeedsUpdate', Date.now().toString());
+                
+                alert('已添加到收藏！请在首页查看收藏列表。');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+                
+                // 从收藏中移除
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const updated = favorites.filter(f => f.url !== '347.html');
+                localStorage.setItem('favorites', JSON.stringify(updated));
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.url === '347.html');
+            if (isFavorited) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
