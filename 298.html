@@ -1,0 +1,579 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~镇静催眠药中毒临床表现与诊治要点*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 导航按钮容器 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #4a90d9;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .nav-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn.favorite-btn {
+            background: #e74c3c;
+            box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+        }
+        
+        .nav-btn.favorite-btn:hover {
+            background: #c0392b;
+        }
+        
+        .nav-btn.favorite-btn.active {
+            background: #27ae60;
+        }
+        
+        /* 标题样式 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 60px 0 25px 0;
+            padding: 0 10px;
+            line-height: 1.5;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        /* 表头 */
+        thead tr {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        /* 表格内容 */
+        tbody tr {
+            border-bottom: 1px solid #eef2f7;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        
+        tbody tr:hover {
+            background: #f0f7ff;
+        }
+        
+        td {
+            padding: 12px;
+            line-height: 1.8;
+            vertical-align: top;
+        }
+        
+        /* 层级缩进样式 */
+        .level-1 {
+            font-weight: bold;
+            color: #2c3e50;
+            background: #e8f4fd;
+        }
+        
+        .level-2 {
+            padding-left: 20px;
+            color: #34495e;
+        }
+        
+        .level-3 {
+            padding-left: 40px;
+            color: #555;
+        }
+        
+        .bullet {
+            color: #4a90d9;
+            margin-right: 6px;
+        }
+        
+        .diamond {
+            color: #e67e22;
+            margin-right: 6px;
+        }
+        
+        .check {
+            color: #27ae60;
+            margin-right: 6px;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 16px;
+            color: #7f8c8d;
+            font-weight: bold;
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            max-width: 900px;
+            margin: 25px auto;
+            padding: 0 10px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: stretch;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #dde5ed;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background: white;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .copy-input:focus {
+            border-color: #4a90d9;
+        }
+        
+        .copy-btn {
+            padding: 12px 25px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #219a52;
+        }
+        
+        .copy-btn.copied {
+            background: #7f8c8d;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .keywords span {
+            display: inline-block;
+            background: #e8f4fd;
+            color: #4a90d9;
+            padding: 4px 12px;
+            border-radius: 15px;
+            margin: 3px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            transition: all 0.3s;
+            cursor: default;
+        }
+        
+        .tag-disease {
+            background: #fde8e8;
+            color: #c0392b;
+        }
+        
+        .tag-drug {
+            background: #e8f5e9;
+            color: #27ae60;
+        }
+        
+        .tag-bacteria {
+            background: #fff3e0;
+            color: #e67e22;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .main-title {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .level-2 {
+                padding-left: 15px;
+            }
+            
+            .level-3 {
+                padding-left: 30px;
+            }
+            
+            .nav-buttons {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .nav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="297.html" class="nav-btn">← 上一页</a>
+        <a href="299.html" class="nav-btn">下一页 →</a>
+        <button class="nav-btn favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~镇静催眠药中毒临床表现与诊治要点*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~镇静催眠药中毒临床表现与诊治要点*****、分类、详细内容、急性中毒、巴比妥类中毒、轻度中毒：嗜睡、注意力不集中、记忆力减退、共济失调、眼球震颤、苯二氮䓬类中毒、非巴比妥非苯二氮䓬类中毒：症状虽与巴比妥类中毒相似，但有其自身特点、甲喹酮中毒：可有明显呼吸抑制，出现锥体束征（如肌阵挛、抽搐甚至癫痫发作等）、甲丙氨酯中毒：与巴比妥类药物中毒相似，常有血压下降、吩噻嗪类中毒：锥体外系反应最常见、智力障碍：记忆力、计算力和理解力均有明显下降，工作学习能力减退、人格变化：患者丧失进取心，对家庭和社会失去责任感、戒断综合征：主要表现为自主神经兴奋性增高和轻重度神经精神异常</div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2" class="level-1"><span class="bullet">●</span>急性中毒</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="level-2"><span class="check">✓</span>巴比妥类中毒</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="level-3">轻度中毒：嗜睡、注意力不集中、记忆力减退、共济失调、眼球震颤</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="level-3">重度中毒：进行性中枢抑制，由嗜睡到深昏迷；呼吸抑制由呼吸浅慢到呼吸停止；可出现低血压、休克、体温下降、肌张力低下、腱反射消失；长期昏迷者可并发肺炎、肺水肿、脑水肿、肾衰竭</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="level-2"><span class="check">✓</span>苯二氮䓬类中毒</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="level-3">主要表现：嗜睡、头晕、眩晕、乏力、言语不清、共济失调。如出现严重症状，应考虑同服其他镇静催眠药或酒精等因素</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="level-2"><span class="check">✓</span>非巴比妥非苯二氮䓬类中毒：症状虽与巴比妥类中毒相似，但有其自身特点</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="level-3"><span class="diamond">◇</span>水合氯醛中毒：呼出气体有梨样气味，初期瞳孔缩小，后期散大，可有心律失常、肺水肿、肝肾功能损伤和昏迷等</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="level-3"><span class="diamond">◇</span>格鲁米特中毒：意识障碍有周期性波动。循环系统抑制作用突出，出现低血压、休克等表现，有抗胆碱能神经症状，如瞳孔散大等</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="level-3"><span class="diamond">◇</span>甲喹酮中毒：可有明显呼吸抑制，出现锥体束征（如肌阵挛、抽搐甚至癫痫发作等）</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="level-3"><span class="diamond">◇</span>甲丙氨酯中毒：与巴比妥类药物中毒相似，常有血压下降</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="level-2"><span class="check">✓</span>吩噻嗪类中毒：锥体外系反应最常见</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="level-3"><span class="diamond">◇</span>临床表现有以下3类：①帕金森综合征样表现；②静坐不能；③急性肌张力障碍反应，如斜颈、吞咽困难和牙关紧闭等</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="level-3"><span class="diamond">◇</span>对氯丙嗪类药物过敏者，即使是治疗剂量，也有引起剥脱性皮炎、粒细胞缺乏症及胆汁淤积性肝炎而死亡者</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="level-3"><span class="diamond">◇</span>这类药物有明显抗胆碱能作用，患者常有心动过速、高温及肠蠕动减少；对α受体的阻断作用导致血管扩张及血压降低</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="level-1"><span class="bullet">●</span>慢性中毒：长期滥用大量催眠药的患者可发生慢性中毒，除有轻度中毒症状外，常伴精神症状，主要有以下3点</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="level-2"><span class="check">✓</span>意识障碍和轻躁狂状态：出现一时性躁动不安或意识模糊。言语兴奋、欣快、易疲乏，伴震颤、咬字不清和步态不稳等</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="level-2"><span class="check">✓</span>智力障碍：记忆力、计算力和理解力均有明显下降，工作学习能力减退</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="level-2"><span class="check">✓</span>人格变化：患者丧失进取心，对家庭和社会失去责任感</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="level-1"><span class="bullet">●</span>戒断综合征：主要表现为自主神经兴奋性增高和轻重度神经精神异常</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="level-2"><span class="check">✓</span>轻症：最后一次服药后1日内或数日内出现焦虑、易激动、失眠、头痛、食欲减退、无力和震颤。2～3天后达到高峰，可有恶心、呕吐和肌肉痉挛</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="level-2"><span class="check">✓</span>重症：突然停药后1～2天出现癫痫样发作（部分患者也可在停药后7～8天出现），有时出现幻视、定向力丧失、高热和谵妄，数日至3周内恢复，患者用药量多为治疗量的5倍以上，时间超过1个月。用药量大、时间长而骤然停药者</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">— 298 —</div>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="镇静催眠药中毒临床表现与诊治要点；急性中毒、慢性中毒、戒断综合征；巴比妥类、苯二氮䓬类、水合氯醛、格鲁米特、甲喹酮、甲丙氨酯、吩噻嗪类、氯丙嗪；=298" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyContent()">复制</button>
+        </div>
+        
+        <!-- 关键词 -->
+        <div class="keywords">
+            <span>镇静催眠药中毒</span>
+            <span>急性中毒</span>
+            <span>慢性中毒</span>
+            <span>戒断综合征</span>
+            <span>巴比妥类</span>
+            <span>苯二氮䓬类</span>
+            <span>水合氯醛</span>
+            <span>格鲁米特</span>
+            <span>甲喹酮</span>
+            <span>甲丙氨酯</span>
+            <span>吩噻嗪类</span>
+            <span>氯丙嗪</span>
+            <span>锥体外系反应</span>
+            <span>癫痫样发作</span>
+        </div>
+        
+        <!-- 检索标签 -->
+        <div class="tags-section">
+            <div class="tags-title">🔍 特色检索标签</div>
+            <div class="tags-container">
+                <span class="tag tag-disease">中毒</span>
+                <span class="tag tag-disease">慢性中毒</span>
+                <span class="tag tag-disease">戒断综合征</span>
+                <span class="tag tag-disease">低血压</span>
+                <span class="tag tag-disease">休克</span>
+                <span class="tag tag-disease">昏迷</span>
+                <span class="tag tag-disease">肺水肿</span>
+                <span class="tag tag-disease">肝肾功能损伤</span>
+                <span class="tag tag-disease">心律失常</span>
+                <span class="tag tag-disease">呼吸抑制</span>
+                <span class="tag tag-disease">癫痫发作</span>
+                <span class="tag tag-disease">锥体束征</span>
+                <span class="tag tag-disease">帕金森综合征</span>
+                <span class="tag tag-disease">肌张力障碍</span>
+                <span class="tag tag-disease">剥脱性皮炎</span>
+                <span class="tag tag-disease">粒细胞缺乏症</span>
+                <span class="tag tag-disease">胆汁淤积性肝炎</span>
+                <span class="tag tag-disease">谵妄</span>
+                <span class="tag tag-disease">高热</span>
+                <span class="tag tag-drug">巴比妥类</span>
+                <span class="tag tag-drug">苯二氮䓬类</span>
+                <span class="tag tag-drug">水合氯醛</span>
+                <span class="tag tag-drug">格鲁米特</span>
+                <span class="tag tag-drug">甲喹酮</span>
+                <span class="tag tag-drug">甲丙氨酯</span>
+                <span class="tag tag-drug">吩噻嗪类</span>
+                <span class="tag tag-drug">氯丙嗪</span>
+                <span class="tag tag-drug">镇静催眠药</span>
+                <span class="tag tag-drug">催眠药</span>
+                <span class="tag tag-drug">α受体</span>
+                <span class="tag tag-bacteria">肺炎</span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.textContent;
+            btn.textContent = '已复制！';
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFavorited = localStorage.getItem('fav_298') === 'true';
+            
+            if (isFavorited) {
+                localStorage.setItem('fav_298', 'false');
+                btn.textContent = '⭐ 收藏';
+                btn.classList.remove('active');
+                alert('已取消收藏');
+            } else {
+                localStorage.setItem('fav_298', 'true');
+                localStorage.setItem('fav_298_title', '镇静催眠药中毒临床表现与诊治要点');
+                localStorage.setItem('fav_298_url', '298.html');
+                btn.textContent = '❤️ 已收藏';
+                btn.classList.add('active');
+                alert('已添加到收藏！');
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const isFavorited = localStorage.getItem('fav_298') === 'true';
+            const btn = document.getElementById('favoriteBtn');
+            if (isFavorited) {
+                btn.textContent = '❤️ 已收藏';
+                btn.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
