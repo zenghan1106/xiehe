@@ -1,0 +1,515 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~肺栓塞PE诊断策略_Wells评分_sPESI评分*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #2c3e50;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 30px;
+        }
+        
+        /* 顶部按钮区域 */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 15px;
+            position: relative;
+        }
+        
+        .left-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 100;
+        }
+        
+        .right-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+            align-items: flex-end;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn-home {
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-nav {
+            background: linear-gradient(45deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        .btn-fav {
+            background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            margin-top: 5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+        
+        .btn-copy {
+            background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 12px 25px;
+            font-size: 15px;
+        }
+        
+        /* 主内容区 */
+        .main-content {
+            padding: 80px 15px 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            color: #1a5276;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            font-weight: 700;
+            line-height: 1.4;
+        }
+        
+        /* 表格样式 */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+        
+        .data-table thead {
+            background: linear-gradient(45deg, #1e88e5 0%, #0d47a1 100%);
+            color: white;
+        }
+        
+        .data-table th {
+            padding: 16px 12px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 17px;
+        }
+        
+        .data-table td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e8f4f8;
+            vertical-align: top;
+        }
+        
+        .data-table tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        .data-table tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        .data-table .section-header {
+            background: #e8f5e9 !important;
+            font-weight: 700;
+            color: #2e7d32;
+            font-size: 16px;
+        }
+        
+        .data-table .note-row {
+            background: #fff3e0 !important;
+            color: #e65100;
+            font-size: 14px;
+        }
+        
+        .data-table .score {
+            text-align: center;
+            font-weight: 600;
+            color: #1565c0;
+            white-space: nowrap;
+        }
+        
+        /* 说明文字 */
+        .intro-text {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .intro-text ul {
+            padding-left: 20px;
+        }
+        
+        .intro-text li {
+            margin-bottom: 8px;
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #90caf9;
+            border-radius: 10px;
+            font-size: 14px;
+            background: white;
+            color: #333;
+        }
+        
+        /* 关键词标签 */
+        .tags-section {
+            margin: 25px 0;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1a5276;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            color: white;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .tag-disease {
+            background: linear-gradient(45deg, #ff6b6b 0%, #ee5a6f 100%);
+        }
+        
+        .tag-drug {
+            background: linear-gradient(45deg, #11998e 0%, #38ef7d 100%);
+        }
+        
+        .tag-bacteria {
+            background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            color: #1a5276;
+            font-weight: 700;
+            margin: 20px 0;
+            padding: 12px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+        }
+        
+        /* 关键词底部 */
+        .keywords-bottom {
+            text-align: center;
+            padding: 15px;
+            color: #666;
+            font-size: 13px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .main-content {
+                padding-top: 100px;
+            }
+            
+            .page-title {
+                font-size: 18px;
+            }
+            
+            .data-table {
+                font-size: 13px;
+            }
+            
+            .data-table th, .data-table td {
+                padding: 10px 8px;
+            }
+            
+            .btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <div class="left-btn">
+        <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+    </div>
+    
+    <!-- 右侧导航按钮 -->
+    <div class="right-btns">
+        <a href="78.html" class="btn btn-nav">⬆ 上一页</a>
+        <a href="80.html" class="btn btn-nav">⬇ 下一页</a>
+        <button class="btn btn-fav" onclick="addToFavorites()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 主内容 -->
+    <div class="main-content">
+        <h1 class="page-title">~~~~~肺栓塞PE诊断策略_Wells评分_sPESI评分*****</h1>
+        
+        <!-- 说明文字 -->
+        <div class="intro-text">
+            <ul>
+                <li>BNP、cTnI检测：对诊断帮助不大，但升高提示PE预后不佳。</li>
+                <li>V/Q显像：理论上可以诊断PE，但因其检查的复杂性，难以在急诊开展。</li>
+            </ul>
+        </div>
+        
+        <!-- 诊断策略说明 -->
+        <div class="intro-text">
+            <strong>6. 诊断策略</strong><br>
+            PE临床可能性评估：简化版Wells评分（表6）。
+        </div>
+        
+        <!-- 主表格：所有内容合并到一个表格 -->
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th style="width: 70%;">危险因素 / 内容</th>
+                    <th style="width: 30%;">得分 / 说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 表6 标题行 -->
+                <tr class="section-header">
+                    <td colspan="2" style="text-align: center;">表6 简化版Wells评分</td>
+                </tr>
+                <tr>
+                    <td>有DVT症状体征</td>
+                    <td class="score">1分</td>
+                </tr>
+                <tr>
+                    <td>除PE外，其他诊断可能性小</td>
+                    <td class="score">1分</td>
+                </tr>
+                <tr>
+                    <td>制动或手术史（过去4周内）</td>
+                    <td class="score">1分</td>
+                </tr>
+                <tr>
+                    <td>肿瘤活动期</td>
+                    <td class="score">1分</td>
+                </tr>
+                <tr>
+                    <td>既往DVT/PE病史</td>
+                    <td class="score">1分</td>
+                </tr>
+                <tr>
+                    <td>咯血</td>
+                    <td class="score">1分</td>
+                </tr>
+                <tr>
+                    <td>HR ≥ 100次/分</td>
+                    <td class="score">1分</td>
+                </tr>
+                <tr class="note-row">
+                    <td colspan="2">注：评分 ≥ 2分，可能是PE，建议做CTPA。反之，PE可能性小，若D-Dimer阴性可除外PE。</td>
+                </tr>
+                
+                <!-- 分隔说明 -->
+                <tr class="section-header">
+                    <td colspan="2" style="text-align: center;">CTPA阳性可诊断PE</td>
+                </tr>
+                <tr>
+                    <td colspan="2">需鉴别的其他诊断：急性冠脉综合征、肺炎、主动脉夹层等。</td>
+                </tr>
+                <tr>
+                    <td colspan="2">诊断PE后，若患者有休克或低血压，考虑为高危，需要尽快溶栓；非高危者参考简化版PE严重指数评分（sPESI）评估患者的严重程度划分中危和低危险（PESI评分过于复杂，不适合急诊使用），sPESI ≥ 1为中危，sPESI = 0为低危（表7）。中危者中，影像学发现右心室功能障碍 + cTnI或cTnT升高者为中高危，需要严密监测可能需要溶栓；否则为中低危，直接开始抗凝治疗。</td>
+                </tr>
+                
+                <!-- 表7 标题行 -->
+                <tr class="section-header">
+                    <td colspan="2" style="text-align: center;">表7 sPESI赋值表</td>
+                </tr>
+                <tr>
+                    <td>年龄 > 80岁</td>
+                    <td class="score">1分</td>
+                </tr>
+                <tr>
+                    <td>肿瘤</td>
+                    <td class="score">1分</td>
+                </tr>
+                <tr>
+                    <td>慢性心力衰竭或慢性肺部疾病</td>
+                    <td class="score">1分</td>
+                </tr>
+                <tr>
+                    <td>HR ≥ 110次/分</td>
+                    <td class="score">1分</td>
+                </tr>
+                <tr>
+                    <td>SBP < 100mmHg</td>
+                    <td class="score">1分</td>
+                </tr>
+                <tr>
+                    <td>SaO₂ < 90%</td>
+                    <td class="score">1分</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <!-- 复制功能 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="肺栓塞PE诊断策略_Wells评分_sPESI评分；PE；DVT；Wells评分；sPESI；CTPA；D-Dimer；溶栓；抗凝；急性冠脉综合征；肺炎；主动脉夹层；cTnI；cTnT；BNP；=79" readonly>
+            <button class="btn btn-copy" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">79</div>
+        
+        <!-- 检索标签 -->
+        <div class="tags-section">
+            <div class="tags-title">🔖 检索标签</div>
+            <div class="tags-container">
+                <span class="tag tag-disease">PE</span>
+                <span class="tag tag-disease">DVT</span>
+                <span class="tag tag-disease">肺栓塞</span>
+                <span class="tag tag-disease">急性冠脉综合征</span>
+                <span class="tag tag-disease">肺炎</span>
+                <span class="tag tag-disease">主动脉夹层</span>
+                <span class="tag tag-disease">慢性心力衰竭</span>
+                <span class="tag tag-disease">慢性肺部疾病</span>
+                <span class="tag tag-disease">肿瘤</span>
+                <span class="tag tag-disease">咯血</span>
+                <span class="tag tag-disease">休克</span>
+                <span class="tag tag-disease">低血压</span>
+            </div>
+        </div>
+        
+        <!-- 底部关键词 -->
+        <div class="keywords-bottom">
+            <strong>关键词：</strong>PE | DVT | Wells评分 | sPESI | CTPA | D-Dimer | 溶栓 | 抗凝 | cTnI | cTnT | BNP
+        </div>
+    </div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板：" + copyText.value);
+            }, function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板");
+            });
+        }
+        
+        // 添加到收藏
+        function addToFavorites() {
+            const pageInfo = {
+                title: "肺栓塞PE诊断策略_Wells评分_sPESI评分",
+                url: window.location.href,
+                pageNum: "79",
+                tags: ["PE","DVT","Wells评分","sPESI"]
+            };
+            
+            // 获取已有收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.pageNum === pageInfo.pageNum);
+            if (exists) {
+                alert("该页面已在收藏夹中！");
+                return;
+            }
+            
+            favorites.push(pageInfo);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 同时更新index.html的收藏列表（通过localStorage通信）
+            localStorage.setItem('newFavorite', JSON.stringify(pageInfo));
+            
+            alert("⭐ 已添加到收藏！\n页面：肺栓塞PE诊断策略\n页码：79");
+        }
+    </script>
+</body>
+</html>
