@@ -1,0 +1,680 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>感染性皮肤病 (Infectious Skin Diseases) - 医学笔记第272页</title>
+    <style>
+        :root {
+            --primary-blue: #1e88e5;
+            --light-blue: #e3f2fd;
+            --hover-blue: #1565c0;
+            --bg-color: #f5f7fa;
+            --card-bg: #ffffff;
+            --text-primary: #2c3e50;
+            --text-secondary: #546e7a;
+            --accent-green: #43a047;
+            --accent-orange: #fb8c00;
+            --accent-red: #e53935;
+            --shadow: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-hover: 0 4px 16px rgba(0,0,0,0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+
+        /* 导航栏 */
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--card-bg);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .nav-left, .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-home {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .btn-home:hover {
+            background: var(--hover-blue);
+            transform: translateY(-1px);
+        }
+
+        .btn-nav {
+            background: var(--light-blue);
+            color: var(--primary-blue);
+        }
+
+        .btn-nav:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .btn-favorite {
+            background: #fff3e0;
+            color: var(--accent-orange);
+            border: 1px solid #ffe0b2;
+        }
+
+        .btn-favorite:hover {
+            background: var(--accent-orange);
+            color: white;
+        }
+
+        .btn-favorite.active {
+            background: var(--accent-orange);
+            color: white;
+        }
+
+        /* 主内容区 */
+        .main-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 88px 16px 24px;
+        }
+
+        /* 标题样式 */
+        .page-title {
+            text-align: center;
+            margin-bottom: 24px;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary-blue), #42a5f5);
+            border-radius: 16px;
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .page-title h1 {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .title-deco {
+            color: #ffeb3b;
+            font-size: 20px;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        /* 表格样式 */
+        .disease-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+
+        .disease-table thead th {
+            background: var(--primary-blue);
+            color: white;
+            padding: 16px;
+            font-size: 17px;
+            font-weight: 600;
+            text-align: left;
+        }
+
+        .disease-table tbody tr {
+            transition: background 0.2s;
+        }
+
+        .disease-table tbody tr:hover {
+            background: var(--light-blue);
+        }
+
+        .disease-table tbody td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #e8eaf6;
+            vertical-align: top;
+        }
+
+        .disease-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .section-header {
+            background: #f8f9fa !important;
+        }
+
+        .section-header td {
+            font-weight: 600;
+            color: var(--primary-blue);
+            font-size: 15px;
+        }
+
+        .item-label {
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .item-content {
+            color: var(--text-primary);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .check-mark {
+            color: var(--accent-green);
+            margin-right: 6px;
+            font-weight: bold;
+        }
+
+        .disease-name {
+            color: var(--primary-blue);
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .disease-name::before {
+            content: '';
+            width: 4px;
+            height: 18px;
+            background: var(--primary-blue);
+            border-radius: 2px;
+        }
+
+        /* 标签区域 */
+        .tags-section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .tags-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tags-title::before {
+            content: '🏷️';
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .tag-disease {
+            background: #e8f5e9;
+            color: var(--accent-green);
+        }
+
+        .tag-disease:hover {
+            background: var(--accent-green);
+            color: white;
+        }
+
+        .tag-bacteria {
+            background: #fce4ec;
+            color: #c2185b;
+        }
+
+        .tag-bacteria:hover {
+            background: #c2185b;
+            color: white;
+        }
+
+        .tag-drug {
+            background: #e3f2fd;
+            color: var(--primary-blue);
+        }
+
+        .tag-drug:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        /* 复制区域 */
+        .copy-section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .copy-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .copy-wrapper {
+            display: flex;
+            gap: 12px;
+            align-items: stretch;
+        }
+
+        .copy-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            background: #fafafa;
+            min-height: 48px;
+            resize: vertical;
+        }
+
+        .copy-input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        .btn-copy {
+            background: var(--primary-blue);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+
+        .btn-copy:hover {
+            background: var(--hover-blue);
+        }
+
+        .btn-copy.copied {
+            background: var(--accent-green);
+        }
+
+        /* 页脚 */
+        .page-footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        .page-number {
+            display: inline-block;
+            padding: 8px 20px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            font-weight: 500;
+            color: var(--primary-blue);
+        }
+
+        /* 关键词 */
+        .keywords-section {
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        .keywords {
+            color: var(--text-secondary);
+            font-size: 12px;
+        }
+
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #333;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 24px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .main-content {
+                padding-top: 100px;
+            }
+
+            .nav-bar {
+                padding: 10px 12px;
+            }
+
+            .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+
+            .page-title h1 {
+                font-size: 18px;
+            }
+
+            .disease-table thead th {
+                font-size: 15px;
+                padding: 12px;
+            }
+
+            .disease-table tbody td {
+                padding: 10px 12px;
+                font-size: 13px;
+            }
+
+            .copy-wrapper {
+                flex-direction: column;
+            }
+
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="nav-bar">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="271.html" class="btn btn-nav">← 上一页</a>
+            <a href="273.html" class="btn btn-nav">下一页 →</a>
+            <button class="btn btn-favorite" id="favoriteBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+        </div>
+    </nav>
+
+    <!-- 主内容 -->
+    <div class="main-content">
+        <!-- 标题 -->
+        <div class="page-title">
+            <h1><span class="title-deco">~~~~~</span> 感染性皮肤病 <span class="title-deco">*****</span></h1>
+        </div>
+        <p class="page-subtitle">Infectious Skin Diseases | 第272页医学笔记</p>
+
+        <!-- 表格 -->
+        <table class="disease-table">
+            <thead>
+                <tr>
+                    <th colspan="2">感染性皮肤病详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-header">
+                    <td colspan="2">📋 1. 定义</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="item-content">任何由<strong>细菌</strong>、<strong>真菌</strong>、<strong>病毒</strong>引起的皮肤感染类疾病，都是皮肤感染。</div>
+                    </td>
+                </tr>
+                <tr class="section-header">
+                    <td colspan="2">🏥 2. 常见疾病及临床表现</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="disease-name">脓肿、疖和痈</div>
+                        <div class="item-content">
+                            <span class="check-mark">✓</span>常见于青少年和年轻人，<strong>金黄色葡萄球菌</strong>是最常见的致病微生物。<br>
+                            <span class="check-mark">✓</span>脓肿一般表现为炎症性局限性皮肤红肿，其中出现脓液。<br>
+                            <span class="check-mark">✓</span>疖是急性炎症性、毛囊性及其周围的化脓性损害，面部、颈部、头皮、股部、臀部、会阴等处易发，伴疼痛，破溃后疼痛减轻。<br>
+                            <span class="check-mark">✓</span>痈由疖聚集而成，可出现窦道。
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="disease-name">丹毒</div>
+                        <div class="item-content">
+                            <span class="check-mark">✓</span><strong>A组链球菌</strong>所致皮肤软组织感染。<br>
+                            <span class="check-mark">✓</span>皮肤表现为大面积水肿性红斑，界限清晰、触痛，其上可出现水疱，可发生于面部、下肢，患处皮温增高、疼痛，伴局部淋巴结肿大。<br>
+                            <span class="check-mark">✓</span>多伴发热、寒战等全身症状。<br>
+                            <span class="check-mark">✓</span>可因治疗不当或其他原因转为慢性。
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="disease-name">水痘及带状疱疹</div>
+                        <div class="item-content">
+                            <span class="check-mark">✓</span>由<strong>水痘-带状疱疹病毒</strong>引起。<br>
+                            <span class="check-mark">✓</span>水痘通过空气播散飞沫传播，通常有发热、乏力等前驱症状，之后出现全身瘙痒性丘疹，之后皮损迅速发展成直径1～3mm的水疱，周围有红晕，7～10天后逐渐结痂愈合。<br>
+                            <span class="check-mark">✓</span>带状疱疹表现为前驱的局部皮肤感觉过敏、疼痛，之后沿同一神经节段区出现局限性疼痛性红斑，其上出现密集的水疱、大疱。
+                        </div>
+                    </td>
+                </tr>
+                <tr class="section-header">
+                    <td colspan="2">🔬 3. 必做检查</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="item-content">
+                            <strong>血常规：</strong>细菌感染可出现白细胞及中性粒细胞计数升高。<br><br>
+                            <strong>生化检查：</strong>细菌、病毒感染时，许多抗细菌、抗病毒药物会有肝肾损害，需关注肝肾功能。
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- 标签区域 -->
+        <div class="tags-section">
+            <div class="tags-title">特色检索标签</div>
+            <div class="tags-container">
+                <!-- 疾病标签 -->
+                <button class="tag tag-disease">脓肿</button>
+                <button class="tag tag-disease">疖</button>
+                <button class="tag tag-disease">痈</button>
+                <button class="tag tag-disease">丹毒</button>
+                <button class="tag tag-disease">水痘</button>
+                <button class="tag tag-disease">带状疱疹</button>
+                <!-- 细菌标签 -->
+                <button class="tag tag-bacteria">金黄色葡萄球菌</button>
+                <button class="tag tag-bacteria">A组链球菌</button>
+                <button class="tag tag-bacteria">水痘-带状疱疹病毒</button>
+                <!-- 药物/治疗标签 -->
+                <button class="tag tag-drug">抗生素</button>
+                <button class="tag tag-drug">软膏外涂</button>
+                <button class="tag tag-drug">抗细菌药物</button>
+                <button class="tag tag-drug">抗病毒药物</button>
+            </div>
+        </div>
+
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <div class="copy-title">📋 快速复制页面信息</div>
+            <div class="copy-wrapper">
+                <textarea class="copy-input" id="copyText" rows="2" readonly>感染性皮肤病；细菌、真菌、病毒引起的皮肤感染；脓肿、疖、痈、丹毒、水痘、带状疱疹；金黄色葡萄球菌、A组链球菌、水痘-带状疱疹病毒；抗生素、软膏外涂、抗细菌药物、抗病毒药物；=272</textarea>
+                <button class="btn-copy" id="copyBtn" onclick="copyToClipboard()">📋 复制</button>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <div class="page-footer">
+            <div class="page-number">第 272 页</div>
+            <div class="keywords-section">
+                <p class="keywords">关键词：感染性皮肤病 | 皮肤感染 | 细菌 | 真菌 | 病毒 | 脓肿 | 疖 | 痈 | 丹毒 | 水痘 | 带状疱疹 | 金黄色葡萄球菌 | A组链球菌 | 水痘-带状疱疹病毒 | 抗生素 | 血常规 | 生化检查</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const text = document.getElementById('copyText');
+            text.select();
+            text.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text.value).then(() => {
+                    showCopySuccess();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopySuccess();
+            }
+        }
+
+        function showCopySuccess() {
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✓ 已复制';
+            btn.classList.add('copied');
+            
+            showToast('内容已复制到剪贴板！');
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFavorited = btn.classList.contains('active');
+            
+            if (!isFavorited) {
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+                showToast('已添加到收藏！');
+                
+                // 存储收藏状态到localStorage
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                if (!favorites.includes('272')) {
+                    favorites.push('272');
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = '⭐ 收藏';
+                showToast('已取消收藏');
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f !== '272');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+
+        // 检查收藏状态
+        function checkFavoriteStatus() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            if (favorites.includes('272')) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+            }
+        }
+
+        // Toast提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        // 标签点击搜索功能
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const keyword = this.textContent;
+                showToast(`正在搜索: ${keyword}`);
+                // 实际应用中可以跳转到搜索页面
+                // window.location.href = `search.html?q=${encodeURIComponent(keyword)}`;
+            });
+        });
+
+        // 页面加载时检查收藏状态
+        document.addEventListener('DOMContentLoaded', checkFavoriteStatus);
+    </script>
+</body>
+</html>
