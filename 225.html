@@ -1,0 +1,596 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊医学-脓毒症SOFA评分与临床表现*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #f5f0ff 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-home {
+            background: linear-gradient(135deg, #4a90d9, #357abd);
+            color: white;
+        }
+        
+        .btn-page {
+            background: linear-gradient(135deg, #5cb85c, #449d44);
+            color: white;
+            min-width: 80px;
+        }
+        
+        .btn-fav {
+            background: linear-gradient(135deg, #f0ad4e, #ec971f);
+            color: white;
+            margin-top: 5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 28px;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 15px;
+        }
+        
+        .main-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .main-table thead tr {
+            background: linear-gradient(135deg, #1e5799, #2989d8, #207cca);
+            color: white;
+        }
+        
+        .main-table thead th {
+            padding: 20px 15px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        .main-table tbody td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #444;
+        }
+        
+        .main-table tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        .main-table tbody tr:hover {
+            background: #e3f2fd;
+            transition: background 0.3s;
+        }
+        
+        .section-title {
+            color: #1a5276;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .sub-item {
+            color: #2c3e50;
+            padding-left: 20px;
+        }
+        
+        .table-name {
+            text-align: center;
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 17px;
+        }
+        
+        .sofa-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        
+        .sofa-table th {
+            background: #3498db;
+            color: white;
+            padding: 10px 8px;
+            text-align: center;
+            border: 1px solid #2980b9;
+        }
+        
+        .sofa-table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        
+        .sofa-table tr:nth-child(even) {
+            background: #f0f7ff;
+        }
+        
+        .sofa-system {
+            font-weight: bold;
+            color: #1a5276;
+            background: #e8f4f8;
+        }
+        
+        .author {
+            text-align: right;
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+        }
+        
+        .tags-section {
+            background: rgba(255,255,255,0.8);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            color: #1a5276;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #ffe0e0;
+            color: #c0392b;
+            border: 1px solid #f5b7b1;
+        }
+        
+        .tag-drug {
+            background: #e0f7e0;
+            color: #27ae60;
+            border: 1px solid #a9dfbf;
+        }
+        
+        .tag-bacteria {
+            background: #e0e0ff;
+            color: #8e44ad;
+            border: 1px solid #d2b4de;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+        
+        .copy-section {
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .copy-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        
+        .copy-input:focus {
+            outline: none;
+            border-color: #4a90d9;
+        }
+        
+        .btn-copy {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            color: white;
+            padding: 12px 25px;
+        }
+        
+        .keywords-section {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .page-number {
+            font-size: 18px;
+            color: #1a5276;
+            font-weight: bold;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            display: none;
+            z-index: 1000;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 22px;
+            }
+            
+            .main-table thead th {
+                font-size: 16px;
+                padding: 15px 10px;
+            }
+            
+            .main-table tbody td {
+                font-size: 14px;
+                padding: 12px 10px;
+            }
+            
+            .nav-top {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-right {
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .btn-fav {
+                margin-top: 0;
+            }
+            
+            .sofa-table {
+                font-size: 11px;
+            }
+            
+            .sofa-table th, .sofa-table td {
+                padding: 5px 3px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="224.html" class="btn btn-page">← 上一页</a>
+            <a href="226.html" class="btn btn-page">下一页 →</a>
+            <button class="btn btn-fav" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~急诊医学 - 脓毒症SOFA评分与临床表现*****</h1>
+    
+    <table class="main-table">
+        <thead>
+            <tr>
+                <th>📋 急诊医学 - 脓毒症定义、SOFA评分与临床表现</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span class="sub-item">织、体液或体腔，但也可是毒素侵入。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sub-item">● 细菌学证据能够确认感染，但无细菌学证据也不能完全排除感染，可通过临床其他检查或指标协助诊断。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sub-item">● Sepsis3.0不再使用SIRS标准，而是依据患者状态采用序贯器官衰竭评分（SOFA）及快速SOFA评分（qSOFA）进行诊断（表33）。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sub-item">● 定义为机体对于感染的失控反应所致威胁生命的器官功能障碍："感染＋SOFA评分≥2分"可以诊断脓毒症。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="table-name">表33 SOFA评分</div>
+                    <table class="sofa-table">
+                        <tr>
+                            <th>系统</th>
+                            <th>变量</th>
+                            <th colspan="5">评分</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th>0</th>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                        </tr>
+                        <tr>
+                            <td class="sofa-system">呼吸</td>
+                            <td>PO₂/FiO₂<br>(mmHg)</td>
+                            <td>≥400</td>
+                            <td><400</td>
+                            <td><300</td>
+                            <td><200</td>
+                            <td><100</td>
+                        </tr>
+                        <tr>
+                            <td class="sofa-system">血液</td>
+                            <td>血小板<br>(×10⁹/L)</td>
+                            <td>≥150</td>
+                            <td><150</td>
+                            <td><100</td>
+                            <td><50</td>
+                            <td><20</td>
+                        </tr>
+                        <tr>
+                            <td class="sofa-system">肝脏</td>
+                            <td>胆红素<br>(μmol/L)</td>
+                            <td><20</td>
+                            <td>20～32</td>
+                            <td>33～101</td>
+                            <td>102～204</td>
+                            <td>>204</td>
+                        </tr>
+                        <tr>
+                            <td class="sofa-system" rowspan="3">循环</td>
+                            <td>MAP (mmHg)</td>
+                            <td>≥70</td>
+                            <td><70</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>多巴胺<br>[μg/(kg·min)]</td>
+                            <td></td>
+                            <td></td>
+                            <td>≤5</td>
+                            <td>>5</td>
+                            <td>>15</td>
+                        </tr>
+                        <tr>
+                            <td>多巴酚丁胺<br>[μg/(kg·min)]</td>
+                            <td></td>
+                            <td></td>
+                            <td colspan="3">任何剂量</td>
+                        </tr>
+                        <tr>
+                            <td class="sofa-system"></td>
+                            <td>肾上腺素<br>[μg/(kg·min)]</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>≤0.1</td>
+                            <td>>0.1</td>
+                        </tr>
+                        <tr>
+                            <td class="sofa-system">中枢</td>
+                            <td>GCS评分</td>
+                            <td>15</td>
+                            <td>13～14</td>
+                            <td>10～12</td>
+                            <td>6～9</td>
+                            <td><6</td>
+                        </tr>
+                        <tr>
+                            <td class="sofa-system" rowspan="2">肾脏</td>
+                            <td>血肌酐<br>(μmol/L)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>尿量 (ml/d)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><500</td>
+                            <td><200</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">2. 临床表现</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sub-item">● 高动力型循环：</span>脓毒症通常呈现"高排低阻"的高动力型循环状态。高动力型循环可以持续于脓毒症的整个病程，但也可因心力衰竭或严重低容量血症而陷入低动力型循环。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sub-item">● 高ScvO₂（中心静脉血氧饱和度）或SvO₂（混合静脉血氧饱和度）：</span>ScvO₂或SvO₂意义相同，都能反映全身细胞对氧的利用情况。在脓毒症，由于存在一系列干扰细胞氧摄取和利用的因素，故导致ScvO₂或SvO₂升高，伴代谢性酸中毒和高乳酸
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">脓毒症</span>
+            <span class="tag tag-disease">感染</span>
+            <span class="tag tag-disease">器官功能障碍</span>
+            <span class="tag tag-disease">高动力型循环</span>
+            <span class="tag tag-disease">心力衰竭</span>
+            <span class="tag tag-disease">低容量血症</span>
+            <span class="tag tag-disease">代谢性酸中毒</span>
+            <span class="tag tag-disease">高乳酸</span>
+            <span class="tag tag-disease">SIRS</span>
+            <span class="tag tag-disease">Sepsis3.0</span>
+            <span class="tag tag-disease">qSOFA</span>
+            <span class="tag tag-drug">多巴胺</span>
+            <span class="tag tag-drug">多巴酚丁胺</span>
+            <span class="tag tag-drug">肾上腺素</span>
+            <span class="tag tag-bacteria">细菌</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <div class="copy-row">
+            <input type="text" class="copy-input" id="copyText" value="急诊医学-脓毒症SOFA评分与临床表现；脓毒症、感染、SOFA评分、qSOFA、SIRS、Sepsis3.0、器官功能障碍、高动力型循环、中心静脉血氧饱和度、混合静脉血氧饱和度、代谢性酸中毒、高乳酸、多巴胺、多巴酚丁胺、肾上腺素=225" readonly>
+            <button class="btn btn-copy" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+    
+    <div class="keywords-section">
+        <div class="page-number">页码：225</div>
+        <div>关键词：脓毒症 | 感染 | SOFA评分 | qSOFA | SIRS | Sepsis3.0 | 器官功能障碍 | 高动力型循环 | 中心静脉血氧饱和度 | 混合静脉血氧饱和度 | 代谢性酸中毒 | 高乳酸 | 多巴胺 | 多巴酚丁胺 | 肾上腺素</div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('✅ 已复制到剪贴板！');
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('✅ 已复制到剪贴板！');
+            }
+        }
+        
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        function addToFavorites() {
+            const title = document.querySelector('h1').textContent;
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            const exists = favorites.some(f => f.url === window.location.href);
+            if (!exists) {
+                favorites.push({
+                    title: title,
+                    url: window.location.href,
+                    page: '225'
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                showToast('⭐ 已添加到收藏！');
+            } else {
+                showToast('❤️ 已在收藏中！');
+            }
+            
+            localStorage.setItem('newFavorite', JSON.stringify({
+                title: title,
+                url: '225.html',
+                page: '225'
+            }));
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const pageName = window.location.pathname.split('/').pop().replace('.html', '') || '225';
+            const copyContent = `急诊医学-脓毒症SOFA评分与临床表现；脓毒症、感染、SOFA评分、qSOFA、SIRS、Sepsis3.0、器官功能障碍、高动力型循环、中心静脉血氧饱和度、混合静脉血氧饱和度、代谢性酸中毒、高乳酸、多巴胺、多巴酚丁胺、肾上腺素=${pageName}`;
+            document.getElementById('copyText').value = copyContent;
+        });
+    </script>
+</body>
+</html>
