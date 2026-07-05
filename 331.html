@@ -1,0 +1,580 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~微循环监测指标与血流动力学支持详解*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            z-index: 100;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 导航按钮容器 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .nav-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #e8b339;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(232, 179, 57, 0.3);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .fav-btn:hover {
+            background: #d4a030;
+        }
+        
+        .fav-btn.active {
+            background: #c9302c;
+        }
+        
+        /* 主标题 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 70px 0 20px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        /* 表头 */
+        thead tr {
+            background: linear-gradient(135deg, #2e86de 0%, #1a5276 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 17px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        
+        /* 表格内容 */
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e8eef4;
+            vertical-align: top;
+            line-height: 1.7;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4fd;
+        }
+        
+        /* 分类标题行 */
+        .category-row {
+            background: #d4e6f1 !important;
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        .category-row td {
+            font-size: 15px;
+            padding: 14px 12px;
+        }
+        
+        /* 页码标注 */
+        .page-num {
+            text-align: center;
+            color: #888;
+            font-size: 13px;
+            margin: 15px 0;
+        }
+        
+        /* 底部编辑框区域 */
+        .copy-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 15px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #d4e6f1;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background: #fafbfc;
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #219a52;
+        }
+        
+        .copy-btn.copied {
+            background: #7f8c8d;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            text-align: center;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .page-code {
+            font-size: 15px;
+            color: #1a5276;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .keywords {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .keyword-tag {
+            background: #e8f4fd;
+            color: #2e86de;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #d4e6f1;
+        }
+        
+        /* 特色检索标签 */
+        .special-tags {
+            background: white;
+            padding: 20px 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        
+        .special-tags-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .tag {
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #fde8e8;
+            color: #c0392b;
+            border: 1px solid #f5b7b1;
+        }
+        
+        .tag-disease:hover {
+            background: #f5b7b1;
+        }
+        
+        .tag-antibiotic {
+            background: #e8f8f5;
+            color: #27ae60;
+            border: 1px solid #a9dfbf;
+        }
+        
+        .tag-antibiotic:hover {
+            background: #a9dfbf;
+        }
+        
+        .tag-bacteria {
+            background: #fef9e7;
+            color: #d4ac0d;
+            border: 1px solid #f9e79f;
+        }
+        
+        .tag-bacteria:hover {
+            background: #f9e79f;
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 200;
+        }
+        
+        .toast.show {
+            opacity: 1;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .main-title {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .nav-buttons {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .nav-btn, .fav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="330.html" class="nav-btn">◀ 上一页</a>
+        <a href="332.html" class="nav-btn">下一页 ▶</a>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 主标题 -->
+    <h1 class="main-title">~~~~~微循环监测指标与血流动力学支持详解*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~微循环监测指标与血流动力学支持详解*****、监测类别、具体方法 / 参数、原理 / 特点 / 临床意义、微循环监测（续）、ScvO₂、P(v-a)CO₂、灌注指数（PI）、旁流暗场成像（SDF）、血流动力学支持、血流动力学治疗、容量复苏</div>
+    
+    <!-- 表格内容 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>监测类别</th>
+                    <th>具体方法 / 参数</th>
+                    <th>原理 / 特点 / 临床意义</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="3">微循环监测（续）</td>
+                </tr>
+                <tr>
+                    <td>ScvO₂</td>
+                    <td>中心静脉血氧饱和度</td>
+                    <td>可以简单地通过抽取中心静脉血查血气得到。ScvO₂≈SaO₂-[VO₂/(CO×Hb×1.34)]。根据公式可见，ScvO₂变化取决于机体的氧供和氧耗的变化，氧供需平衡中任一因素改变均可影响ScvO₂。在患者的氧耗无明显变化，且动脉血氧饱和度正常、血红蛋白正常时，SvO₂和CO有一定相关性。当SvO₂低于70%时，需考虑患者存在氧供障碍，如果患者无明显氧耗增加的因素、动脉血氧饱和度正常、血红蛋白正常，则提示CO不足</td>
+                </tr>
+                <tr>
+                    <td>P(v-a)CO₂</td>
+                    <td>静动脉二氧化碳分压差</td>
+                    <td>也可描述为ΔPCO₂，可以通过同时抽取外周动脉和中心静脉血查血气，二者PCO₂相减后得到。VCO₂（CO₂排除量）=CO×K×ΔPCO₂，根据公式可见，ΔPCO₂和CO负相关，尤其是CO偏低时ΔPCO₂迅速增高。可以解释为：当组织灌注不足时，血流不足以将组织产生的CO₂带走，组织中CO₂清除能力下降，产生CO₂淤滞现象，导致P(v-a)CO₂升高。因此，P(v-a)CO₂可以较好地反映组织灌注及代谢状态。正常情况下＜6mmHg</td>
+                </tr>
+                <tr>
+                    <td>灌注指数（PI）</td>
+                    <td>Perfusion Index</td>
+                    <td>是基于指脉氧饱和度模块测得的附属参数，多数监护仪都可显示此参数，反映脉动血流的情况，体现了血流灌注能力，是反映微循环的指标之一。脉动的血流越大，脉动分量越多，PI值越大。PI＜1.4提示可能存在微循环灌注不良</td>
+                </tr>
+                <tr>
+                    <td>旁流暗场成像（SDF）</td>
+                    <td>Side-stream Dark-field Imaging</td>
+                    <td>直接可视化实时观察舌下微循环状况，以此反映全身的微循环。有多个相关参数可对微循环状态进行评估，包括总血管密度（TVD）、灌注血管密度（PVD）、灌注血管比例（PPV）、微血管流动指数（MFI）等。目前临床尚未普及，多用于科研</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="3">血流动力学支持</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">血流动力学治疗</td>
+                    <td>治疗目标</td>
+                    <td>通过血流动力学监测了解患者的血流动力学状态，整个血流动力学治疗也着重于如何调整血管内容量，如何调整升压药物，如何增强心脏收缩力，以及如何纠正原发病。这些治疗主要包括容量管理、强心药物和缩血管药物的使用、IABP、ECMO的支持</td>
+                </tr>
+                <tr>
+                    <td>容量复苏</td>
+                    <td>容量复苏时首选晶体液，但大量补充生理盐水时注意高氯性酸中毒和急性肾损伤的发生；胶体液（包括白蛋白）的扩容作用更加快速持久，但多项临床试验都未证实其能改善预后，且有不少副作用，需谨慎使用。对心源性休克和脓毒症休克中的心肌抑制患者，需要更加精细地管理好容量。目前强心治疗的一线药物是多巴酚丁胺；近期比较有希望的药物是左</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-num">— 第 320 页 —</div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="微循环监测指标与血流动力学支持详解；ScvO₂；P(v-a)CO₂；灌注指数；旁流暗场成像；SDF；容量复苏；晶体液；胶体液；多巴酚丁胺；IABP；ECMO；心源性休克；脓毒症休克；高氯性酸中毒；急性肾损伤；=320" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyContent()">📋 复制</button>
+    </div>
+    
+    <!-- 关键词区域 -->
+    <div class="keywords-section">
+        <div class="page-code">页码：320</div>
+        <div class="keywords">
+            <span class="keyword-tag">ScvO₂</span>
+            <span class="keyword-tag">P(v-a)CO₂</span>
+            <span class="keyword-tag">灌注指数</span>
+            <span class="keyword-tag">SDF</span>
+            <span class="keyword-tag">TVD</span>
+            <span class="keyword-tag">PVD</span>
+            <span class="keyword-tag">PPV</span>
+            <span class="keyword-tag">MFI</span>
+            <span class="keyword-tag">容量复苏</span>
+            <span class="keyword-tag">晶体液</span>
+            <span class="keyword-tag">胶体液</span>
+            <span class="keyword-tag">多巴酚丁胺</span>
+            <span class="keyword-tag">IABP</span>
+            <span class="keyword-tag">ECMO</span>
+            <span class="keyword-tag">心源性休克</span>
+            <span class="keyword-tag">脓毒症休克</span>
+        </div>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="special-tags">
+        <div class="special-tags-title">🔍 特色检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">心源性休克</span>
+            <span class="tag tag-disease">脓毒症休克</span>
+            <span class="tag tag-disease">高氯性酸中毒</span>
+            <span class="tag tag-disease">急性肾损伤</span>
+            <span class="tag tag-disease">心肌抑制</span>
+            <span class="tag tag-disease">微循环灌注不良</span>
+            <span class="tag tag-disease">组织缺氧</span>
+            <span class="tag tag-disease">氧供障碍</span>
+            <!-- 抗生素/药物标签 -->
+            <span class="tag tag-antibiotic">多巴酚丁胺</span>
+            <span class="tag tag-antibiotic">白蛋白</span>
+            <span class="tag tag-antibiotic">生理盐水</span>
+            <span class="tag tag-antibiotic">升压药物</span>
+            <span class="tag tag-antibiotic">强心药物</span>
+            <span class="tag tag-antibiotic">缩血管药物</span>
+            <!-- 细菌标签（本页无具体细菌） -->
+        </div>
+    </div>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '✓ 已复制';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.textContent = '📋 复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = localStorage.getItem('fav_320') === 'true';
+            
+            if (!isFav) {
+                localStorage.setItem('fav_320', 'true');
+                localStorage.setItem('fav_320_title', '微循环监测指标与血流动力学支持详解');
+                localStorage.setItem('fav_320_url', '320.html');
+                btn.textContent = '❤️ 已收藏';
+                btn.classList.add('active');
+                showToast('已添加到收藏！');
+                updateIndexFavorite();
+            } else {
+                localStorage.removeItem('fav_320');
+                localStorage.removeItem('fav_320_title');
+                localStorage.removeItem('fav_320_url');
+                btn.textContent = '⭐ 收藏';
+                btn.classList.remove('active');
+                showToast('已取消收藏！');
+            }
+        }
+        
+        // 更新index.html的收藏
+        function updateIndexFavorite() {
+            const favList = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favList.find(f => f.url === '320.html');
+            if (!exists) {
+                favList.push({
+                    url: '320.html',
+                    title: '微循环监测指标与血流动力学支持详解',
+                    page: '320'
+                });
+                localStorage.setItem('favorites', JSON.stringify(favList));
+            }
+        }
+        
+        // 检查收藏状态
+        function checkFavorite() {
+            const isFav = localStorage.getItem('fav_320') === 'true';
+            const btn = document.getElementById('favBtn');
+            if (isFav) {
+                btn.textContent = '❤️ 已收藏';
+                btn.classList.add('active');
+            }
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+        
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            checkFavorite();
+        });
+    </script>
+</body>
+</html>
