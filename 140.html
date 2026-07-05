@@ -1,0 +1,438 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急性肝衰竭诊断与治疗*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .header {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        
+        .back-btn {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: #1e88e5;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn {
+            position: absolute;
+            right: 0;
+            background-color: #1e88e5;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover, .back-btn:hover {
+            background-color: #1565c0;
+        }
+        
+        .prev-btn {
+            top: 0;
+        }
+        
+        .next-btn {
+            top: 45px;
+        }
+        
+        .fav-btn {
+            position: absolute;
+            right: 0;
+            top: 90px;
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .fav-btn:hover {
+            background-color: #f57c00;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a237e;
+            font-size: 22px;
+            padding: 50px 10px 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .content-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .content-table th {
+            background-color: #1565c0;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .content-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 14px;
+            vertical-align: top;
+        }
+        
+        .content-table tr:nth-child(even) {
+            background-color: #f5f5f5;
+        }
+        
+        .content-table tr:hover {
+            background-color: #e3f2fd;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            color: #0d47a1;
+            font-size: 16px;
+        }
+        
+        .check-mark {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            padding: 20px;
+            background-color: #e8f5e9;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .tag {
+            background-color: #4caf50;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            background-color: #388e3c;
+        }
+        
+        .keywords-section {
+            text-align: center;
+            padding: 15px;
+            background-color: #fff3e0;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .keywords-section h3 {
+            color: #e65100;
+            margin-bottom: 10px;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .copy-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        #copyInput {
+            width: calc(100% - 100px);
+            max-width: 600px;
+            padding: 12px;
+            border: 2px solid #1e88e5;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        #copyBtn {
+            background-color: #1e88e5;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        #copyBtn:hover {
+            background-color: #1565c0;
+        }
+        
+        #copyBtn.copied {
+            background-color: #4caf50;
+        }
+        
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 18px;
+                padding-top: 80px;
+            }
+            
+            .content-table th {
+                font-size: 16px;
+            }
+            
+            .content-table td {
+                font-size: 13px;
+                padding: 8px 10px;
+            }
+            
+            .back-btn, .nav-btn, .fav-btn {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+            
+            .tag {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <a href="139.html" class="nav-btn prev-btn">上一页</a>
+        <a href="141.html" class="nav-btn next-btn">下一页</a>
+        <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    </div>
+    
+    <h1>~~~~~急性肝衰竭诊断与治疗*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~急性肝衰竭诊断与治疗*****、急性肝衰竭（ALF）诊疗要点、实验室检查、影像学检查、5. 诊断策略、6. 急诊处理、一般支持治疗、脂肪酶和淀粉酶检测、血氨测定、毒物分析＋肝炎病毒测定、腹部B超、腹部CT或MRI、胸片或胸部CT、第一步：临床诊断、第二步：病因学诊断、原则、卧床安静休息、加强病情监护、营养支持、纠正低蛋白血症、消毒隔离</div>
+    
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th colspan="2">急性肝衰竭（ALF）诊疗要点</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="2" class="section-title">实验室检查</td>
+            </tr>
+            <tr>
+                <td width="30%"><span class="check-mark">✓</span> 脂肪酶和淀粉酶检测</td>
+                <td>可轻度升高</td>
+            </tr>
+            <tr>
+                <td><span class="check-mark">✓</span> 血氨测定</td>
+                <td>水平升高</td>
+            </tr>
+            <tr>
+                <td><span class="check-mark">✓</span> 毒物分析＋肝炎病毒测定</td>
+                <td>确定病因</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="section-title">影像学检查</td>
+            </tr>
+            <tr>
+                <td><span class="check-mark">✓</span> 腹部B超</td>
+                <td>首选，易进行、价格便宜且无创，可寻找病因</td>
+            </tr>
+            <tr>
+                <td><span class="check-mark">✓</span> 腹部CT或MRI</td>
+                <td>次选，诊断布－加综合征及肝恶性肿瘤比腹部超声敏感，但注意静脉造影剂有肾衰竭风险</td>
+            </tr>
+            <tr>
+                <td><span class="check-mark">✓</span> 胸片或胸部CT</td>
+                <td>约30%的ALF患者有肺水肿和肺部感染，有助于了解肺部情况</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="section-title">5. 诊断策略</td>
+            </tr>
+            <tr>
+                <td><strong>第一步：临床诊断</strong></td>
+                <td>＜26周内患者出现神志改变、恶心、呕吐、黄疸或右上腹疼痛等症状＋肝功能异常（转氨酶伴胆红素、碱性磷酸酶显著升高）＋肝性脑病＋PT延长（INR≥1.5）</td>
+            </tr>
+            <tr>
+                <td><strong>第二步：病因学诊断</strong></td>
+                <td>如病毒、药物、酒精、免疫、血吸虫等</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <strong>肝衰竭诊断格式：</strong><br>
+                    肝衰竭（分类、分型、分期）疾病＋病因诊断<br>
+                    例如：慢加急性肝衰竭A型早期乙型病毒性肝炎<br>
+                    亚急性肝衰竭中期药物性肝炎<br>
+                    慢性肝衰竭血吸虫性肝硬化<br>
+                    急性肝衰竭病因待查
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="section-title">6. 急诊处理</td>
+            </tr>
+            <tr>
+                <td><strong>原则</strong></td>
+                <td>早期诊断、早期根据病因进行治疗，积极防治各种并发症</td>
+            </tr>
+            <tr>
+                <td colspan="2"><strong>一般支持治疗</strong></td>
+            </tr>
+            <tr>
+                <td><span class="check-mark">✓</span> 卧床安静休息</td>
+                <td>减少体力消耗</td>
+            </tr>
+            <tr>
+                <td><span class="check-mark">✓</span> 加强病情监护</td>
+                <td>评估神经状态，持续监测基本生命体征，详细记录24小时出入量，每天监测1次转氨酶和胆红素，酌情复查血常规、凝血功能、动脉血气，警惕低血糖</td>
+            </tr>
+            <tr>
+                <td><span class="check-mark">✓</span> 营养支持</td>
+                <td>纠正水电解质紊乱，补充维生素。首选肠内营养，病情急性期低热卡供能，20～25kcal/(kg·d)，稳定期可增加35～40kcal/(kg·d)。肠内无法达标者，可静脉额外补充。肝性脑病患者需限制经肠道蛋白摄入，并保持排便通畅</td>
+            </tr>
+            <tr>
+                <td><span class="check-mark">✓</span> 纠正低蛋白血症</td>
+                <td>积极纠正低蛋白血症，补充白蛋白或新鲜血浆，并酌情补充凝血因子</td>
+            </tr>
+            <tr>
+                <td><span class="check-mark">✓</span> 消毒隔离</td>
+                <td>注意消毒隔离，加强口腔护理、肺部及肠道管理，预防医院内感染</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="tags-container">
+        <span class="tag">肝衰竭</span>
+        <span class="tag">急性肝衰竭</span>
+        <span class="tag">慢加急性肝衰竭</span>
+        <span class="tag">亚急性肝衰竭</span>
+        <span class="tag">慢性肝衰竭</span>
+        <span class="tag">肝性脑病</span>
+        <span class="tag">乙型病毒性肝炎</span>
+        <span class="tag">药物性肝炎</span>
+        <span class="tag">血吸虫性肝硬化</span>
+        <span class="tag">布－加综合征</span>
+    </div>
+    
+    <div class="keywords-section">
+        <h3>关键词</h3>
+        <p>急性肝衰竭、ALF、肝性脑病、诊断策略、急诊处理、营养支持、病因诊断、凝血功能、血氨、腹部B超</p>
+    </div>
+    
+    <div class="page-number">页码：140</div>
+    
+    <div class="copy-section">
+        <input type="text" id="copyInput" value="急性肝衰竭诊断与治疗；急性肝衰竭、ALF、肝性脑病、诊断策略、急诊处理、营养支持、病因诊断、凝血功能、血氨、腹部B超；=140" readonly>
+        <button id="copyBtn" onclick="copyToClipboard()">复制</button>
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            navigator.clipboard.writeText(input.value).then(function() {
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        function addToFavorites() {
+            // 获取当前页面信息
+            const title = document.title;
+            const url = window.location.href;
+            
+            // 尝试添加到本地存储的收藏列表
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已存在
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                page: '140'
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试更新index.html（实际应用中需要后端支持）
+            alert('已添加到收藏！\n标题：' + title + '\n页面：140.html');
+            
+            // 向index.html发送消息（如果同域）
+            try {
+                if (window.opener && !window.opener.closed) {
+                    window.opener.postMessage({
+                        type: 'addFavorite',
+                        data: {
+                            title: title,
+                            url: url,
+                            page: '140'
+                        }
+                    }, '*');
+                }
+            } catch(e) {
+                console.log('无法向父窗口发送消息');
+            }
+        }
+    </script>
+</body>
+</html>
