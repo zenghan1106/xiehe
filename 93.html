@@ -1,0 +1,427 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急性呼吸窘迫综合征(ARDS)诊断与检查*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* 右上角导航按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        
+        .nav-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .fav-btn {
+            background: #e8a838;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* 标题样式 */
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 70px 10px 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, #d4e6f1 0%, #aed6f1 100%);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            max-width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        /* 表头蓝色 */
+        thead tr {
+            background: linear-gradient(135deg, #2e86c1 0%, #1a5276 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 18px 15px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        /* 表格内容 */
+        tbody td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #e8eef3;
+            font-size: 15px;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4fd;
+        }
+        
+        /* 分类标题行 */
+        .section-row {
+            background: #d4e6f1 !important;
+            font-weight: 600;
+            color: #1a5276;
+            font-size: 16px;
+        }
+        
+        /* 子项缩进 */
+        .sub-item {
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .sub-item::before {
+            content: "•";
+            position: absolute;
+            left: 10px;
+            color: #2e86c1;
+        }
+        
+        /* 分级样式 */
+        .severity {
+            padding-left: 30px;
+            color: #c0392b;
+            font-weight: 500;
+        }
+        
+        /* 页码显示 */
+        .page-num {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        
+        .keywords-title {
+            color: #1a5276;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        /* 标签样式 */
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .tag {
+            background: linear-gradient(135deg, #e8f4fd 0%, #d4e6f1 100%);
+            color: #1a5276;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid #aed6f1;
+        }
+        
+        .tag-disease {
+            background: linear-gradient(135deg, #fde8e8 0%, #f5b7b1 100%);
+            color: #922b21;
+            border-color: #e74c3c;
+        }
+        
+        .tag-bacteria {
+            background: linear-gradient(135deg, #e8f8f5 0%, #a9dfbf 100%);
+            color: #1e8449;
+            border-color: #27ae60;
+        }
+        
+        .tag-antibiotic {
+            background: linear-gradient(135deg, #fef9e7 0%, #f9e79f 100%);
+            color: #9a7d0a;
+            border-color: #f1c40f;
+        }
+        
+        /* 底部编辑框区域 */
+        .copy-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #aed6f1;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        /* 底部间距 */
+        .bottom-space {
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <button class="home-btn" onclick="location.href='index.html'">← 返回首页</button>
+    
+    <!-- 右上角导航按钮 -->
+    <div class="nav-btns">
+        <button class="nav-btn" onclick="location.href='92.html'">上一页</button>
+        <button class="nav-btn" onclick="location.href='94.html'">下一页</button>
+        <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~急性呼吸窘迫综合征(ARDS)诊断与检查*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~急性呼吸窘迫综合征(ARDS)诊断与检查*****、ARDS 检查项目与诊断标准、4. 必做检查、5. 选做检查、6. 诊断、血常规、肝肾功能、胰功、电解质、心肌酶检测、尿常规、凝血常规检测、PCT检测、ABG、胸部影像学、病原学检查、BNP检测及超声心动图、腹部B超、腹盆CT、时间要求、影像学要求、排除心源性、氧合障碍</div>
+    
+    <!-- 主表格 -->
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">ARDS 检查项目与诊断标准</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="section-row">
+                <td colspan="2">4. 必做检查</td>
+            </tr>
+            <tr>
+                <td width="25%">血常规</td>
+                <td>WBC明显升高可能提示严重细菌感染，病程中可能会出现Hb及PLT下降</td>
+            </tr>
+            <tr>
+                <td>肝肾功能、胰功、电解质、心肌酶检测</td>
+                <td>进行重要脏器功能评估</td>
+            </tr>
+            <tr>
+                <td>尿常规</td>
+                <td>评估肾功能及了解有无泌尿系感染</td>
+            </tr>
+            <tr>
+                <td>凝血常规检测</td>
+                <td>评估出血及血栓形成倾向</td>
+            </tr>
+            <tr>
+                <td>PCT检测</td>
+                <td>明显升高，常提示可能存在细菌感染</td>
+            </tr>
+            <tr>
+                <td>ABG</td>
+                <td>常显示为低氧血症、急性呼吸性碱中毒及乳酸水平升高</td>
+            </tr>
+            <tr>
+                <td>胸部影像学</td>
+                <td>初始胸片通常显示双侧肺泡浸润影，而CT通常显示广泛的斑片状或融合的气腔高密度影，通常在肺部重力依赖区更明显</td>
+            </tr>
+            <tr class="section-row">
+                <td colspan="2">5. 选做检查</td>
+            </tr>
+            <tr>
+                <td>病原学检查</td>
+                <td>发热患者常需要进行寻找病原学证据，包括血、尿、粪便、痰、肺泡灌洗液、脑脊液等病原学检查，必要时可选送病原体二代基因测序</td>
+            </tr>
+            <tr>
+                <td>BNP检测及超声心动图</td>
+                <td>有助于ARDS与心源性肺水肿鉴别</td>
+            </tr>
+            <tr>
+                <td>腹部B超、腹盆CT</td>
+                <td>对脓毒症休克患者有助于评估潜在感染病灶</td>
+            </tr>
+            <tr class="section-row">
+                <td colspan="2">6. 诊断</td>
+            </tr>
+            <tr>
+                <td>时间要求</td>
+                <td>呼吸系统症状必须在已知的临床损伤发生后1周内开始，或在过去1周内患者必须出现新的症状或症状加重</td>
+            </tr>
+            <tr>
+                <td>影像学要求</td>
+                <td>胸片或胸部CT必须存在符合肺水肿的双肺阴影，这些阴影必须不能完全用胸腔积液、肺叶塌陷或肺结节解释</td>
+            </tr>
+            <tr>
+                <td>排除心源性</td>
+                <td>患者的呼吸衰竭必须不能完全用心力衰竭或液体过剩解释。若不存在ARDS危险因素，则需要进行客观评估（如超声心动图）排除流体静力性肺水肿</td>
+            </tr>
+            <tr>
+                <td>氧合障碍</td>
+                <td>必须存在中至重度氧合障碍，由动脉氧分压与吸入氧分数的比值（PaO₂/FiO₂）定义。低氧血症的严重程度定义了ARDS的严重程度</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="severity">✓ 轻度ARDS：呼气末正压通气（PEEP）或持续气道正压（CPAP）呼吸机参数设置为≥5cmH₂O时，PaO₂/FiO₂ > 200mmHg但≤300mmHg</div>
+                    <div class="severity">✓ 中度ARDS：呼吸机设置为PEEP ≥ 5cmH₂O时，PaO₂/FiO₂ > 100mmHg但≤200mmHg</div>
+                    <div class="severity">✓ 重度ARDS：呼吸机设置为PEEP ≥ 5cmH₂O时，PaO₂/FiO₂ ≤ 100mmHg</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 页码 -->
+    <div class="page-num">页码：93</div>
+    
+    <!-- 关键词区域（网页底部） -->
+    <div class="keywords-section">
+        <div class="keywords-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">ARDS</span>
+            <span class="tag tag-disease">急性呼吸窘迫综合征</span>
+            <span class="tag tag-disease">脓毒症休克</span>
+            <span class="tag tag-disease">心源性肺水肿</span>
+            <span class="tag tag-disease">肺水肿</span>
+            <span class="tag tag-disease">低氧血症</span>
+            <span class="tag tag-disease">呼吸衰竭</span>
+            <span class="tag tag-bacteria">细菌感染</span>
+            <span class="tag tag-antibiotic">PEEP</span>
+            <span class="tag tag-antibiotic">CPAP</span>
+        </div>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <div class="keywords-title">📋 快速复制</div>
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyText" value="急性呼吸窘迫综合征(ARDS)诊断与检查；ARDS；急性呼吸窘迫综合征；脓毒症休克；心源性肺水肿；肺水肿；低氧血症；呼吸衰竭；细菌感染；PEEP；CPAP；=93">
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <div class="bottom-space"></div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                alert('已复制到剪贴板！');
+            }).catch(() => {
+                document.execCommand('copy');
+                alert('已复制到剪贴板！');
+            });
+        }
+        
+        // 添加到收藏
+        function addToFavorites() {
+            // 获取当前页面信息
+            const title = document.title.replace(/~~~~~|*****$/g, '');
+            const url = window.location.href;
+            const pageNum = '93';
+            
+            // 存储到localStorage（模拟添加到index的收藏类目）
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.find(f => f.url === url);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                pageNum: pageNum,
+                category: '急诊疾病',
+                addTime: new Date().toLocaleString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert('已添加到收藏！\n标题：' + title + '\n页码：' + pageNum);
+        }
+    </script>
+</body>
+</html>
