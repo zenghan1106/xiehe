@@ -1,0 +1,530 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~氧解离曲线与急诊氧疗技术指南*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f0f5f9;
+            color: #333;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background-color: #2196F3;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background-color: #45a049;
+        }
+        
+        .home-btn:hover {
+            background-color: #1976D2;
+        }
+        
+        .favorite-btn {
+            background-color: #FF9800;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+        
+        .favorite-btn:hover {
+            background-color: #F57C00;
+        }
+        
+        .favorite-btn.active {
+            background-color: #E91E63;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1565C0;
+            font-size: 24px;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #E3F2FD;
+            border-radius: 10px;
+            border-left: 5px solid #2196F3;
+        }
+        
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        thead {
+            background-color: #2196F3;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background-color: #E3F2FD;
+        }
+        
+        td {
+            padding: 14px;
+            font-size: 14px;
+            vertical-align: top;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            color: #1565C0;
+            background-color: #BBDEFB;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 8px 0;
+        }
+        
+        .curve-desc {
+            background-color: #E8F5E9;
+            border: 2px solid #4CAF50;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 8px 0;
+        }
+        
+        .key-point {
+            color: #D32F2F;
+            font-weight: bold;
+        }
+        
+        .note-text {
+            color: #555;
+            font-size: 13px;
+        }
+        
+        .bullet-point {
+            margin-left: 20px;
+            position: relative;
+        }
+        
+        .bullet-point::before {
+            content: "●";
+            position: absolute;
+            left: -18px;
+            color: #2196F3;
+        }
+        
+        .tags-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .tags-title {
+            color: #1565C0;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: #E8F5E9;
+            color: #2E7D32;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            border: 1px solid #A5D6A7;
+        }
+        
+        .copy-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #2196F3;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        
+        .copy-btn {
+            background-color: #9C27B0;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .copy-btn:hover {
+            background-color: #7B1FA2;
+        }
+        
+        .copy-btn.copied {
+            background-color: #4CAF50;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin: 20px 0;
+        }
+        
+        .keywords-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .keywords-title {
+            color: #1565C0;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        .keyword {
+            display: inline-block;
+            background-color: #FFF3E0;
+            color: #E65100;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            border: 1px solid #FFCC80;
+        }
+        
+        .formula {
+            font-family: "Courier New", monospace;
+            background-color: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px;
+            }
+            
+            td {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            .header-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-bar">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="nav-buttons">
+            <a href="321.html" class="nav-btn">⬅ 上一页</a>
+            <a href="323.html" class="nav-btn">➡ 下一页</a>
+            <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+        </div>
+    </div>
+
+    <h1>~~~~~氧解离曲线与急诊氧疗技术指南*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~氧解离曲线与急诊氧疗技术指南*****、氧解离曲线与急诊氧疗技术</div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>氧解离曲线与急诊氧疗技术</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="section-title">📈 图28 氧解离曲线</div>
+                        <div class="curve-desc">
+                            <strong>横坐标：</strong>氧分压（mmHg）<br>
+                            <strong>纵坐标：</strong>血氧饱和度（%）<br><br>
+                            <strong>曲线特征点：</strong><br>
+                            • 氧分压 45 mmHg 对应 血氧饱和度 80%<br>
+                            • 氧分压 55 mmHg 对应 血氧饱和度 88%<br>
+                            • 曲线呈S型，先陡后平
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">📝 注（曲线说明）</div>
+                        <span class="note-text">
+                        当氧饱和度 <span class="key-point">&lt; 80%</span>，氧分压将呈线性下降；<br>
+                        当氧饱和度 <span class="key-point">&gt; 88%</span>，氧饱和度随氧分压变化将趋于平坦。<br><br>
+                        因此将 <span class="key-point">SpO₂ 80%</span> 与 <span class="key-point">88%</span> 作为判断病情的标准<br>
+                        （海平面，1个大气压水平下）。
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">🔍 ESCAPE高危因素复查说明</div>
+                        <span class="note-text">
+                        水平；若不存在ESCAPE高危因素，且临床情况稳定则无须复查血气。
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">💊 氧疗的维持与撤离</div>
+                        <span class="note-text">
+                        稳定的恢复期患者，SpO₂稳定于目标区间高限一段时间后（通常<span class="key-point">4～8小时</span>）可逐渐降低吸入氧气浓度。<br><br>
+                        若心率、呼吸频率、SpO₂稳定，可酌情复查血气，逐渐降低吸入氧浓度直至停止氧疗。<br><br>
+                        终止氧疗后，吸入空气时的SpO₂应当至少监测<span class="key-point">5分钟</span>。<br>
+                        若SpO₂仍处于目标范围内，可随后每<span class="key-point">1小时</span>评估1次。<br><br>
+                        若停止氧疗后出现低氧，则应当寻找恶化的原因，若氧合仍不能维持，应当再次给予重新评估并选择合理的氧疗方法。<br><br>
+                        若患者原发疾病改善，且SpO₂在目标范围，可根据具体情况继续当前氧疗方式，直至停止氧疗。<br><br>
+                        某些患者可能在安全的停止氧疗后，于轻微体力活动时出现间歇性低氧，可考虑允许患者在体力活动增加时接受氧疗，若出现一过性无症状的血氧饱和度下降，并不需要氧疗。
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">🏥 4. 急诊常用氧疗工具</div>
+                        <div class="bullet-point">
+                            <strong>鼻导管：</strong>是临床最常用的吸氧装置。鼻导管吸入氧体积分数与氧流量有关。<br>
+                            在潮气量<span class="formula">500ml</span>，频率<span class="formula">20次/分</span>，呼气末暂停<span class="formula">0.5秒</span>，吸呼比<span class="formula">1:2</span>，口鼻无效腔<span class="formula">50ml</span>，氧气流速<span class="formula">≤5L/min</span>情
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <span class="tag">血氧饱和度</span>
+        <span class="tag">氧分压</span>
+        <span class="tag">SpO₂</span>
+        <span class="tag">ESCAPE</span>
+        <span class="tag">鼻导管</span>
+        <span class="tag">氧疗</span>
+        <span class="tag">低氧</span>
+        <span class="tag">血气</span>
+        <span class="tag">急救技术</span>
+    </div>
+
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="氧解离曲线与急诊氧疗技术指南；血氧饱和度、氧分压、SpO₂、ESCAPE、鼻导管、氧疗、低氧、血气、急救技术；=322" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+    </div>
+
+    <div class="page-number">
+        页码：322
+    </div>
+
+    <div class="keywords-section">
+        <div class="keywords-title">🔑 关键词</div>
+        <span class="keyword">血氧饱和度</span>
+        <span class="keyword">氧分压</span>
+        <span class="keyword">SpO₂</span>
+        <span class="keyword">ESCAPE</span>
+        <span class="keyword">鼻导管</span>
+        <span class="keyword">氧疗</span>
+        <span class="keyword">低氧</span>
+        <span class="keyword">血气</span>
+        <span class="keyword">急救技术</span>
+        <span class="keyword">氧解离曲线</span>
+        <span class="keyword">潮气量</span>
+        <span class="keyword">吸呼比</span>
+        <span class="keyword">无效腔</span>
+        <span class="keyword">氧流量</span>
+        <span class="keyword">心率</span>
+        <span class="keyword">呼吸频率</span>
+        <span class="keyword">间歇性低氧</span>
+    </div>
+
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(function() {
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '已复制';
+                    btn.classList.add('copied');
+                    setTimeout(function() {
+                        btn.textContent = '复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }
+        }
+
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isActive = btn.classList.contains('active');
+            
+            if (!isActive) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                
+                // 保存到localStorage
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '氧解离曲线与急诊氧疗技术指南',
+                    url: '322.html',
+                    pageNum: '322'
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.url === '322.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                alert('已添加到收藏！');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                
+                // 从localStorage移除
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '322.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.url === '322.html');
+            const btn = document.getElementById('favoriteBtn');
+            
+            if (isFavorited) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
