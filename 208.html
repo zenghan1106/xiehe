@@ -1,0 +1,578 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>伤寒诊疗与细菌性痢疾 - 急诊处理</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimHei", "PingFang SC", sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.8;
+            padding: 15px;
+            font-size: 14px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background-color: #2e7d32;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background-color: #1b5e20;
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background-color: #1976d2;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background-color: #0d47a1;
+            transform: translateY(-2px);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            top: 130px;
+            right: 15px;
+            background-color: #ff9800;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: none;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .fav-btn:hover {
+            background-color: #e65100;
+            transform: translateY(-2px);
+        }
+        
+        /* 标题格式 */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1565c0;
+            margin: 60px 15px 25px 15px;
+            padding: 15px;
+            background-color: #e3f2fd;
+            border-radius: 12px;
+            border-left: 5px solid #1976d2;
+        }
+        
+        .page-title::before {
+            content: "~~~~~";
+            color: #1976d2;
+            margin-right: 10px;
+        }
+        
+        .page-title::after {
+            content: "*****";
+            color: #1976d2;
+            margin-left: 10px;
+        }
+        
+        /* 副标题 */
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #424242;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        /* 表格样式 */
+        .main-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+        
+        .main-table th {
+            background-color: #1976d2;
+            color: white;
+            padding: 18px 15px;
+            text-align: left;
+            font-size: 17px;
+            font-weight: bold;
+        }
+        
+        .main-table td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        .main-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .main-table tr:hover {
+            background-color: #e8f4f8;
+        }
+        
+        .section-header {
+            background-color: #bbdefb !important;
+            font-weight: bold;
+            color: #0d47a1;
+            font-size: 15px;
+        }
+        
+        .check-item {
+            color: #2e7d32;
+            font-weight: 600;
+        }
+        
+        .diamond-item {
+            padding-left: 25px;
+            color: #555;
+        }
+        
+        .diamond-item::before {
+            content: "◇ ";
+            color: #1976d2;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1976d2;
+            margin: 20px 0;
+            padding: 12px;
+            background-color: #e3f2fd;
+            border-radius: 8px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #fff3e0;
+            border-radius: 12px;
+            border: 2px solid #ff9800;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #e65100;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 5px;
+            background-color: #ff9800;
+            color: white;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        /* 底部编辑框区域 */
+        .copy-section {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #e8f5e9;
+            border-radius: 12px;
+            border: 2px solid #4caf50;
+        }
+        
+        .copy-section-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #2e7d32;
+            margin-bottom: 12px;
+        }
+        
+        .copy-input-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #4caf50;
+            border-radius: 8px;
+            font-size: 14px;
+            background-color: white;
+        }
+        
+        .copy-btn {
+            padding: 12px 25px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background-color: #2e7d32;
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fce4ec;
+            border-radius: 8px;
+            color: #c62828;
+            font-size: 14px;
+        }
+        
+        .keywords strong {
+            color: #ad1457;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            .page-title {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            
+            .main-table th {
+                font-size: 15px;
+                padding: 14px 10px;
+            }
+            
+            .main-table td {
+                padding: 12px 10px;
+            }
+            
+            .nav-buttons {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                top: 10px;
+                left: 10px;
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+            
+            .fav-btn {
+                top: 115px;
+                right: 10px;
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="207.html" class="nav-btn">◀ 上一页</a>
+        <a href="209.html" class="nav-btn">下一页 ▶</a>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    
+    <!-- 标题 -->
+    <div class="page-title">伤寒诊疗与细菌性痢疾</div>
+    <div class="subtitle">辅助检查、诊断、急诊处理与定义</div>
+    
+    <!-- 主表格 -->
+    <table class="main-table">
+        <thead>
+            <tr>
+                <th colspan="2">伤寒与细菌性痢疾诊疗要点</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="2">
+                    <div>干和腹部的淡红色斑疹）。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>● 可能出现：肝脾大、肠道出血和穿孔，进而导致继发性菌血症和腹膜炎。</div>
+                </td>
+            </tr>
+            <tr class="section-header">
+                <td colspan="2">3. 辅助检查</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>● 实验室检查：可能包括贫血、白细胞减少和肝功能检查异常。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>● 肥达试验：阳性对诊断有提示意义。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>● 体液培养：阳性具有诊断意义。</div>
+                </td>
+            </tr>
+            <tr class="section-header">
+                <td colspan="2">4. 诊断</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>● 流行病学史：对于居住于伤寒流行地区或来自这些地区的发热患者，应考虑伤寒的可能，特别是在持续发热超过3天或有胃肠道症状者。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>● 临床表现</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">✓</div>
+                    <div>有相符的临床表现，同时培养显示有致病菌生长。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">✓</div>
+                    <div>可使用血液、粪便、尿液、玫瑰疹、十二指肠内容物或骨髓作为样本进行培养，但大多数培养的敏感性都不高。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">✓</div>
+                    <div>许多病例是基于有迁延性发热且排除其他原因而推定诊断伤寒。</div>
+                </td>
+            </tr>
+            <tr class="section-header">
+                <td colspan="2">5. 急诊处理</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">● 抗生素治疗</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">✓ 适应证：</div>
+                    <div>病情严重患者，如全身中毒症状重、意识水平下降、持久发热、器官系统功能不全或有其他需要住院的特征。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">✓ 方案：</div>
+                    <div>初始给予静脉抗生素治疗。建议使用喹诺酮类或头孢曲松，后根据药敏试验结果调整经验性抗生素治疗方案。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">● 地塞米松辅助治疗</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">✓ 适应证：</div>
+                    <div>伴发重度全身性疾病，如谵妄、意识混沌、昏睡、昏迷或休克）。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="check-item">✓ 方案：</div>
+                    <div>3mg/kg，然后改为1mg/kg q6h，共48小时。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>● 手术治疗：若并发回肠穿孔，需手术治疗联合抗生素，后者应覆盖肠热症致病菌和肠道微生物。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: right; color: #666;">
+                    （李 妍）
+                </td>
+            </tr>
+            <tr class="section-header">
+                <td colspan="2">■ 细菌性痢疾</td>
+            </tr>
+            <tr class="section-header">
+                <td colspan="2">1. 定义</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>● 细菌性痢疾简称菌痢，又称志贺菌病，是志贺菌属痢疾杆菌引起的肠道传染病。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>● 儿童和青壮年高发。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>● 通常呈自限性，不治疗的情况下腹泻平均持续7天。</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 页码 -->
+    <div class="page-number">196</div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <span class="tag">伤寒</span>
+        <span class="tag">细菌性痢疾</span>
+        <span class="tag">菌痢</span>
+        <span class="tag">志贺菌病</span>
+        <span class="tag">志贺菌</span>
+        <span class="tag">痢疾杆菌</span>
+        <span class="tag">肠道沙门菌</span>
+        <span class="tag">喹诺酮类</span>
+        <span class="tag">头孢曲松</span>
+        <span class="tag">地塞米松</span>
+        <span class="tag">肥达试验</span>
+    </div>
+    
+    <!-- 复制功能区域 -->
+    <div class="copy-section">
+        <div class="copy-section-title">📋 快速复制</div>
+        <div class="copy-input-group">
+            <input type="text" class="copy-input" id="copyText" value="伤寒诊疗与细菌性痢疾；辅助检查、诊断、急诊处理与定义；伤寒,细菌性痢疾,菌痢,志贺菌病,志贺菌,痢疾杆菌,肠道沙门菌,喹诺酮类,头孢曲松,地塞米松,肥达试验；=196" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        <strong>关键词：</strong>伤寒、细菌性痢疾、菌痢、志贺菌病、志贺菌、痢疾杆菌、肠道沙门菌、喹诺酮类、头孢曲松、地塞米松、肥达试验、玫瑰疹、回肠穿孔、菌血症
+    </div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(function() {
+                    alert("已复制到剪贴板！");
+                });
+            } else {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            }
+        }
+        
+        // 添加到收藏
+        function addToFavorites() {
+            const title = "伤寒诊疗与细菌性痢疾";
+            const url = window.location.href;
+            const pageId = "196";
+            
+            try {
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                
+                const exists = favorites.some(f => f.url === url);
+                if (exists) {
+                    alert("该页面已在收藏夹中！");
+                    return;
+                }
+                
+                favorites.push({
+                    title: title,
+                    url: url,
+                    pageId: pageId,
+                    category: "急诊疾病",
+                    date: new Date().toLocaleString()
+                });
+                
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert("已添加到收藏！\n标题：" + title + "\n页码：" + pageId);
+            } catch(e) {
+                alert("收藏功能需要index.html配合实现。\n请确保index.html页面能够读取收藏数据。");
+            }
+        }
+    </script>
+</body>
+</html>
