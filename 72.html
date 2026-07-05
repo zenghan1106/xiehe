@@ -1,0 +1,700 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~AECOPD急性加重治疗指南*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #e6f3ff 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .home-btn {
+            background: linear-gradient(145deg, #4a90d9, #357abd);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 3px 10px rgba(74, 144, 217, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 144, 217, 0.4);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(145deg, #5cb85c, #4cae4c);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(92, 184, 92, 0.4);
+        }
+        
+        .nav-btn.next {
+            background: linear-gradient(145deg, #f0ad4e, #ec971f);
+            box-shadow: 0 2px 8px rgba(240, 173, 78, 0.3);
+        }
+        
+        .nav-btn.next:hover {
+            box-shadow: 0 4px 12px rgba(240, 173, 78, 0.4);
+        }
+        
+        .favorite-btn {
+            background: linear-gradient(145deg, #d9534f, #c9302c);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(217, 83, 79, 0.3);
+            transition: all 0.3s ease;
+            margin-top: 5px;
+        }
+        
+        .favorite-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(217, 83, 79, 0.4);
+        }
+        
+        .favorite-btn.active {
+            background: linear-gradient(145deg, #5cb85c, #4cae4c);
+        }
+        
+        .title {
+            text-align: center;
+            font-size: 26px;
+            color: #1a5276;
+            margin: 25px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #2874a6;
+            margin-bottom: 25px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(31, 97, 141, 0.15);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        thead {
+            background: linear-gradient(145deg, #1a5276, #2874a6);
+            color: white;
+        }
+        
+        thead th {
+            padding: 18px 15px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e8f4f8;
+            transition: background 0.3s ease;
+        }
+        
+        tbody tr:hover {
+            background: #f8fcff;
+        }
+        
+        tbody td {
+            padding: 14px 15px;
+            vertical-align: top;
+            line-height: 1.8;
+        }
+        
+        .section-title {
+            background: linear-gradient(90deg, #e8f6f3 0%, #d1f2eb 100%);
+            color: #1a5276;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .check-mark {
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .diamond {
+            color: #3498db;
+            margin-right: 8px;
+        }
+        
+        .bullet {
+            color: #e74c3c;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(90deg, #fef9e7 0%, #fcf3cf 100%);
+            border-left: 4px solid #f1c40f;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .drug-name {
+            color: #8e44ad;
+            font-weight: bold;
+        }
+        
+        .dosage {
+            color: #c0392b;
+            font-weight: 600;
+        }
+        
+        .tags-section {
+            margin: 30px 0 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: linear-gradient(145deg, #3498db, #2980b9);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+        }
+        
+        .tag.disease {
+            background: linear-gradient(145deg, #e74c3c, #c0392b);
+            box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+        }
+        
+        .tag.disease:hover {
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+        }
+        
+        .tag.antibiotic {
+            background: linear-gradient(145deg, #9b59b6, #8e44ad);
+            box-shadow: 0 2px 8px rgba(155, 89, 182, 0.3);
+        }
+        
+        .tag.antibiotic:hover {
+            box-shadow: 0 4px 12px rgba(155, 89, 182, 0.4);
+        }
+        
+        .tag.bacteria {
+            background: linear-gradient(145deg, #1abc9c, #16a085);
+            box-shadow: 0 2px 8px rgba(26, 188, 156, 0.3);
+        }
+        
+        .tag.bacteria:hover {
+            box-shadow: 0 4px 12px rgba(26, 188, 156, 0.4);
+        }
+        
+        .copy-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .copy-title {
+            font-size: 15px;
+            color: #1a5276;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .copy-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #aed6f1;
+            border-radius: 10px;
+            font-size: 14px;
+            background: #f8fcff;
+            color: #2c3e50;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(145deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+        
+        .copy-btn.copied {
+            background: linear-gradient(145deg, #27ae60, #229954);
+        }
+        
+        .page-number {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 18px;
+            color: #1a5276;
+            font-weight: bold;
+        }
+        
+        .keywords {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 13px;
+            color: #5d6d7e;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 10px;
+        }
+        
+        .keyword-label {
+            color: #1a5276;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .title {
+                font-size: 20px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 14px 10px;
+            }
+            
+            tbody td {
+                padding: 12px 10px;
+                font-size: 13px;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: flex-end;
+                width: 100%;
+            }
+            
+            .copy-wrapper {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            z-index: 1000;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="toast" id="toast"></div>
+    
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="nav-buttons">
+            <a href="71.html" class="nav-btn">← 上一页</a>
+            <a href="73.html" class="nav-btn next">下一页 →</a>
+            <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <h1 class="title">~~~~~AECOPD急性加重治疗指南*****</h1>
+    <p class="subtitle">急诊疾病 · 患者处理策略与药物治疗</p>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">AECOPD（慢性阻塞性肺疾病急性加重）诊疗要点</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2" class="section-title">
+                        <span class="bullet">●</span>重症识别标准（符合以下任一项）
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        ②意识状态改变（如意识模糊、昏睡、昏迷等）；③经氧疗和无创机械通气后，低氧血症仍持续或呈进行性恶化，和/或严重进行性加重的呼吸性酸中毒（pH < 7.25）；④需要有创机械通气；⑤血流动力学不稳定，需要使用血管活性药物。
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2" class="section-title">
+                        <span class="bullet">●</span>患者处理策略
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2" style="background: #f0f8ff;">
+                        <span class="check-mark">✓</span>治疗原则
+                    </td>
+                </tr>
+                <tr>
+                    <td width="30"><span class="diamond">◇</span></td>
+                    <td>评估患者的气道、呼吸和循环，必要时予以保护。</td>
+                </tr>
+                <tr>
+                    <td><span class="diamond">◇</span></td>
+                    <td>控制性氧疗，使SpO₂达到88%～92%，或PaO₂达到60～70mmHg；文丘里面罩可用于滴定FiO₂；高FiO₂通常不需要，并可能导致高碳酸血症（需要较高FiO₂需考虑其他诊断，如肺栓塞）。</td>
+                </tr>
+                <tr>
+                    <td><span class="diamond">◇</span></td>
+                    <td>尽可能根据直接询问或预先声明，确定患者是否插管。</td>
+                </tr>
+                <tr>
+                    <td><span class="diamond">◇</span></td>
+                    <td>提供积极的支气管舒张药治疗和呼吸机支持（无创或有创通气）相结合的治疗方案。</td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2" style="background: #f0f8ff;">
+                        <span class="check-mark">✓</span>监测
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="diamond">◇</span></td>
+                    <td>持续监测血氧饱和度、血压、心率、呼吸频率。</td>
+                </tr>
+                <tr>
+                    <td><span class="diamond">◇</span></td>
+                    <td>密切监测呼吸状况，持续心电监护，监测血糖。</td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2" style="background: #f0f8ff;">
+                        <span class="check-mark">✓</span>无创通气（NIV）
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        适用于大多数严重AECOPD患者，除非需要立即插管或NIV另有禁忌。禁忌证包括：严重意识障碍、不能清除分泌物或保护气道、高误吸风险、心血管系统不稳定（低血压、严重心律失常等）。2小时后获取ABG并与基线比较，恶化或未改善和pH < 7.25是有创通气的指征。
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2" class="section-title">
+                        <span class="bullet">●</span>气管插管与机械通气
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        适用于急性呼吸衰竭、血流动力学不稳定（如心率 < 50次/分、不能控制的心律失常）、NIV禁忌证患者、NIV和积极药物治疗未能改善的患者。
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2" class="section-title">
+                        <span class="bullet">●</span>药物治疗
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2" style="background: #f0f8ff;">
+                        <span class="check-mark">✓</span>吸入β受体激动药
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="drug-name">沙丁胺醇</span> <span class="dosage">2.5mg</span>，雾化吸入，根据患者反应可6～8h雾化1次。
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2" style="background: #f0f8ff;">
+                        <span class="check-mark">✓</span>吸入抗胆碱能药物
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="dosage">500μg</span> <span class="drug-name">异丙托溴铵</span>，雾化吸入，根据患者反应可6～8h雾化1次。
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2" style="background: #f0f8ff;">
+                        <span class="check-mark">✓</span>糖皮质激素
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        （<span class="drug-name">甲泼尼龙</span> <span class="dosage">40mg/d</span>，共5天，胃肠道功能正常者可口服）。
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2" style="background: #f0f8ff;">
+                        <span class="check-mark">✓</span>抗生素治疗
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        适用于大多数严重的AECOPD。根据特定病原体的可能性选择抗生素（如假单胞菌危险因素，既往痰培养，耐药性）。
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="diamond">◇</span></td>
+                    <td>
+                        <strong>无假单胞菌危险因素：</strong><br>
+                        <span class="drug-name">头孢曲松</span> <span class="dosage">1～2g</span> ivgtt，或<br>
+                        <span class="drug-name">头孢噻肟</span> <span class="dosage">1～2g</span> ivgtt，或<br>
+                        <span class="drug-name">左氧氟沙星</span> <span class="dosage">500mg</span> ivgtt或po，或<br>
+                        <span class="drug-name">莫西沙星</span> <span class="dosage">400mg</span> ivgtt或po。
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div class="tags-container">
+            <span class="tag disease">AECOPD</span>
+            <span class="tag disease">慢性阻塞性肺疾病急性加重</span>
+            <span class="tag disease">急诊疾病</span>
+            <span class="tag disease">呼吸衰竭</span>
+            <span class="tag disease">低氧血症</span>
+            <span class="tag disease">呼吸性酸中毒</span>
+            <span class="tag disease">高碳酸血症</span>
+            <span class="tag bacteria">假单胞菌</span>
+            <span class="tag antibiotic">沙丁胺醇</span>
+            <span class="tag antibiotic">异丙托溴铵</span>
+            <span class="tag antibiotic">甲泼尼龙</span>
+            <span class="tag antibiotic">头孢曲松</span>
+            <span class="tag antibiotic">头孢噻肟</span>
+            <span class="tag antibiotic">左氧氟沙星</span>
+            <span class="tag antibiotic">莫西沙星</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制</div>
+        <div class="copy-wrapper">
+            <input type="text" class="copy-input" id="copyInput" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <div class="page-number">第 72 页</div>
+    
+    <div class="keywords">
+        <span class="keyword-label">关键词：</span>
+        AECOPD；慢性阻塞性肺疾病急性加重；控制性氧疗；无创通气；有创通气；支气管舒张药；β受体激动药；抗胆碱能药物；糖皮质激素；抗生素；头孢曲松；头孢噻肟；左氧氟沙星；莫西沙星；假单胞菌；沙丁胺醇；异丙托溴铵；甲泼尼龙
+    </div>
+    
+    <script>
+        // 设置复制输入框内容
+        const title = "AECOPD急性加重治疗指南";
+        const subtitle = "急诊疾病·患者处理策略与药物治疗";
+        const keywords = "AECOPD；慢性阻塞性肺疾病急性加重；控制性氧疗；无创通气；有创通气；支气管舒张药；β受体激动药；抗胆碱能药物；糖皮质激素；抗生素；头孢曲松；头孢噻肟；左氧氟沙星；莫西沙星；假单胞菌；沙丁胺醇；异丙托溴铵；甲泼尼龙";
+        const pageNum = "72";
+        
+        document.getElementById('copyInput').value = `${title}；${subtitle}；${keywords}=${pageNum}`;
+        
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            
+            showToast('已复制到剪贴板！');
+            
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const pageInfo = {
+                title: title,
+                url: '72.html',
+                pageNum: pageNum,
+                category: '急诊疾病'
+            };
+            
+            // 获取现有收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            const existingIndex = favorites.findIndex(f => f.url === pageInfo.url);
+            
+            if (existingIndex >= 0) {
+                // 取消收藏
+                favorites.splice(existingIndex, 1);
+                btn.textContent = '⭐ 收藏';
+                btn.classList.remove('active');
+                showToast('已取消收藏');
+            } else {
+                // 添加收藏
+                favorites.push(pageInfo);
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+                showToast('已添加到收藏！');
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 更新index.html的收藏（通过localStorage通信）
+            localStorage.setItem('favoriteUpdate', JSON.stringify({
+                action: existingIndex >= 0 ? 'remove' : 'add',
+                page: pageInfo,
+                timestamp: Date.now()
+            }));
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const btn = document.getElementById('favoriteBtn');
+            
+            if (favorites.some(f => f.url === '72.html')) {
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+            }
+        };
+    </script>
+</body>
+</html>
