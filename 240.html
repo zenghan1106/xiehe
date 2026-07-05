@@ -1,0 +1,667 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~低血糖症*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #2c3e50;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+        }
+        
+        .home-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        
+        .nav-btn {
+            background: #2ecc71;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(46, 204, 113, 0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+        }
+        
+        .favorite-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(231, 76, 60, 0.3);
+        }
+        
+        .favorite-btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        .favorite-btn.active {
+            background: #f39c12;
+        }
+        
+        .page-title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 15px 0 25px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            letter-spacing: 2px;
+        }
+        
+        .main-table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(31, 97, 141, 0.15);
+        }
+        
+        .main-table th {
+            background: #2874a6;
+            color: white;
+            padding: 18px 15px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .main-table td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #e8f4f8;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #34495e;
+        }
+        
+        .main-table tr:nth-child(even) {
+            background: #f8fbfd;
+        }
+        
+        .main-table tr:hover {
+            background: #e8f6f3;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 16px;
+        }
+        
+        .sub-item {
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .sub-item::before {
+            content: "•";
+            position: absolute;
+            left: 5px;
+            color: #3498db;
+        }
+        
+        .check-item::before {
+            content: "✓";
+            position: absolute;
+            left: 5px;
+            color: #2ecc71;
+        }
+        
+        .tags-section {
+            max-width: 800px;
+            margin: 0 auto 25px auto;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .tag {
+            background: #d5e8f3;
+            color: #1a5276;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #aed6f1;
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            background: #2874a6;
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .tag.disease {
+            background: #fadbd8;
+            color: #922b21;
+            border-color: #f5b7b1;
+        }
+        
+        .tag.disease:hover {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .tag.drug {
+            background: #d5f5e3;
+            color: #1e8449;
+            border-color: #abebc6;
+        }
+        
+        .tag.drug:hover {
+            background: #2ecc71;
+            color: white;
+        }
+        
+        .tag.bacteria {
+            background: #fef9e7;
+            color: #9a7d0a;
+            border-color: #f9e79f;
+        }
+        
+        .tag.bacteria:hover {
+            background: #f1c40f;
+            color: white;
+        }
+        
+        .copy-section {
+            max-width: 800px;
+            margin: 0 auto 25px auto;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .copy-title {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #d5e8f3;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #2c3e50;
+            background: #f8fbfd;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-btn {
+            background: #9b59b6;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #8e44ad;
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn.copied {
+            background: #2ecc71;
+        }
+        
+        .keywords-section {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .keywords-title {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+        
+        .keywords-content {
+            font-size: 15px;
+            color: #2874a6;
+            font-weight: 500;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            color: #1a5276;
+            font-weight: bold;
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 8px;
+            max-width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 14px;
+            display: none;
+            z-index: 1000;
+        }
+        
+        @media (max-width: 600px) {
+            .page-title {
+                font-size: 20px;
+            }
+            
+            .main-table th {
+                font-size: 16px;
+                padding: 14px 10px;
+            }
+            
+            .main-table td {
+                font-size: 13px;
+                padding: 10px;
+            }
+            
+            .header-nav {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-buttons {
+                flex-direction: row;
+                justify-content: flex-end;
+                flex-wrap: wrap;
+            }
+            
+            .copy-box {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="header-nav">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="239.html" class="nav-btn">上一页</a>
+            <a href="241.html" class="nav-btn">下一页</a>
+            <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">~~~~~低血糖症*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~低血糖症*****、低血糖症 - 急诊疾病诊疗要点、病因分类、营养不良、偶发、隐匿性低血糖、3. 临床表现、症状：无特异性、体征、出汗和苍白最常见、心率增快和收缩压升高，但幅度不会很大、常可见神经精神表现、4. 必做检查、5. 选做检查</div>
+    
+    <!-- 主表格 -->
+    <table class="main-table">
+        <thead>
+            <tr>
+                <th>低血糖症 - 急诊疾病诊疗要点</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span class="section-title">病因分类</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item check-item">
+                    <strong>非糖尿病用药：</strong>最常见的是乙醇、喹诺酮类、喷他脒、奎宁、β受体阻断药和ACEI
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item">
+                    <strong>严重疾病：</strong>脓毒症（包括疟疾）、慢性肾病、严重肝衰竭
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item">
+                    <strong>营养不良</strong>
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item">
+                    <strong>皮质醇缺乏、生长激素缺乏等升糖激素不足：</strong>警惕希恩（Sheehan）综合征（常有产后大出血史）
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item">
+                    <strong>非胰岛细胞肿瘤：</strong>通常是间叶细胞性或上皮细胞性的巨大肿瘤，与肿瘤生成不完全的加工的胰岛素样生长因子-2（IGF-2）相关
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item">
+                    <strong>内源性高胰岛素血症：</strong>胰岛素促泌剂，B细胞肿瘤，非胰岛素瘤胰源性低血糖综合征（NIPHS），胰岛素自身免疫性低血糖
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item">
+                    <strong>偶发、隐匿性低血糖</strong>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">3. 临床表现</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>症状：无特异性</strong>
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item check-item">
+                    <strong>自主神经症状：</strong>震颤、心悸和焦虑/觉醒（儿茶酚胺介导的肾上腺素能症状），以及出汗、饥饿和感觉异常（乙酰胆碱介导的胆碱能症状）
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item check-item">
+                    <strong>神经精神症状：</strong>认知损害、行为改变、精神运动异常、癫痫发作和昏迷
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>体征</strong>
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item check-item">
+                    出汗和苍白最常见
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item check-item">
+                    心率增快和收缩压升高，但幅度不会很大
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item check-item">
+                    常可见神经精神表现
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">4. 必做检查</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>血糖检测：</strong>指尖快速血糖检测是发现低血糖最快速的方法。一般空腹血糖下限为3.9mmol/L，出现低血糖症状通常需至3.0mmol/L以下，但个体差异很大。需注意，该方法在较低的血糖范围内可靠性不足，还需检查静脉血糖。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">5. 选做检查</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item">
+                    <strong>血浆胰岛素测定：</strong>低血糖时，若胰岛素浓度升高提示胰岛素相关低血糖；若胰岛素浓度不高则需考虑药物（除外胰岛素和胰岛素促泌剂）、全身疾病等所致低血糖。
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item">
+                    <strong>血浆C肽、胰岛素原测定：</strong>可区分外源性和内源性高胰岛素血症。在高胰岛素血症患者中，若C肽、胰岛素原水平升高，提示内源性高胰岛素血症，否则为外源性高胰岛素血症。
+                </td>
+            </tr>
+            <tr>
+                <td class="sub-item">
+                    <strong>影像学检查：</strong>CT、B超、MRI可发现大部分胰岛素瘤，也可发现引起低血糖的其他原因，如巨大肿瘤、感染灶等。
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag disease">低血糖症</span>
+            <span class="tag disease">脓毒症</span>
+            <span class="tag disease">疟疾</span>
+            <span class="tag disease">慢性肾病</span>
+            <span class="tag disease">严重肝衰竭</span>
+            <span class="tag disease">希恩综合征</span>
+            <span class="tag disease">Sheehan综合征</span>
+            <span class="tag disease">非胰岛细胞肿瘤</span>
+            <span class="tag disease">内源性高胰岛素血症</span>
+            <span class="tag disease">B细胞肿瘤</span>
+            <span class="tag disease">NIPHS</span>
+            <span class="tag disease">胰岛素自身免疫性低血糖</span>
+            <span class="tag disease">隐匿性低血糖</span>
+            <span class="tag drug">乙醇</span>
+            <span class="tag drug">喹诺酮类</span>
+            <span class="tag drug">喷他脒</span>
+            <span class="tag drug">奎宁</span>
+            <span class="tag drug">β受体阻断药</span>
+            <span class="tag drug">ACEI</span>
+            <span class="tag drug">胰岛素促泌剂</span>
+            <span class="tag drug">皮质醇</span>
+            <span class="tag drug">生长激素</span>
+            <span class="tag drug">儿茶酚胺</span>
+            <span class="tag drug">乙酰胆碱</span>
+            <span class="tag drug">IGF-2</span>
+            <span class="tag drug">C肽</span>
+            <span class="tag drug">胰岛素原</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制信息</div>
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyInput" value="低血糖症；急诊疾病；病因分类；临床表现；必做检查；选做检查；血糖检测；血浆胰岛素测定；血浆C肽；胰岛素原测定；影像学检查；CT；B超；MRI；乙醇；喹诺酮类；喷他脒；奎宁；β受体阻断药；ACEI；脓毒症；疟疾；慢性肾病；严重肝衰竭；营养不良；皮质醇缺乏；生长激素缺乏；希恩综合征；Sheehan综合征；非胰岛细胞肿瘤；IGF-2；内源性高胰岛素血症；胰岛素促泌剂；B细胞肿瘤；NIPHS；胰岛素自身免疫性低血糖；隐匿性低血糖；自主神经症状；神经精神症状；=240" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 关键词区域 -->
+    <div class="keywords-section">
+        <div class="keywords-title">🔍 关键词</div>
+        <div class="keywords-content">
+            低血糖症、急诊疾病、病因分类、临床表现、必做检查、选做检查、血糖检测、血浆胰岛素测定、血浆C肽、胰岛素原测定、影像学检查、CT、B超、MRI、乙醇、喹诺酮类、喷他脒、奎宁、β受体阻断药、ACEI、脓毒症、疟疾、慢性肾病、严重肝衰竭、营养不良、皮质醇缺乏、生长激素缺乏、希恩综合征、Sheehan综合征、非胰岛细胞肿瘤、IGF-2、内源性高胰岛素血症、胰岛素促泌剂、B细胞肿瘤、NIPHS、胰岛素自身免疫性低血糖、隐匿性低血糖、自主神经症状、神经精神症状
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">240</div>
+    
+    <!-- 提示框 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '✓ 已复制';
+                btn.classList.add('copied');
+                showToast('复制成功！');
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                showToast('复制失败，请手动复制');
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFavorited = btn.classList.contains('active');
+            
+            if (!isFavorited) {
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+                showToast('已添加到收藏！');
+                
+                // 尝试添加到index.html的收藏类目
+                try {
+                    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                    const pageInfo = {
+                        title: '低血糖症',
+                        url: '240.html',
+                        pageNum: '240',
+                        category: '急诊疾病'
+                    };
+                    
+                    // 检查是否已存在
+                    const exists = favorites.some(f => f.url === '240.html');
+                    if (!exists) {
+                        favorites.push(pageInfo);
+                        localStorage.setItem('favorites', JSON.stringify(favorites));
+                    }
+                } catch (e) {
+                    console.log('localStorage不可用');
+                }
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = '☆ 收藏';
+                showToast('已取消收藏');
+                
+                try {
+                    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                    const filtered = favorites.filter(f => f.url !== '240.html');
+                    localStorage.setItem('favorites', JSON.stringify(filtered));
+                } catch (e) {
+                    console.log('localStorage不可用');
+                }
+            }
+        }
+        
+        // 显示提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            try {
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const isFavorited = favorites.some(f => f.url === '240.html');
+                if (isFavorited) {
+                    const btn = document.getElementById('favoriteBtn');
+                    btn.classList.add('active');
+                    btn.innerHTML = '★ 已收藏';
+                }
+            } catch (e) {
+                console.log('localStorage不可用');
+            }
+        };
+    </script>
+</body>
+</html>
