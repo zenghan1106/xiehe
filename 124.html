@@ -1,0 +1,617 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急性阑尾炎临床表现与辅助检查*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-home {
+            background: #4a90d9;
+            color: white;
+        }
+
+        .btn-home:hover {
+            background: #357abd;
+        }
+
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+
+        .btn-page {
+            background: #5cb85c;
+            color: white;
+            min-width: 80px;
+        }
+
+        .btn-page:hover {
+            background: #4cae4c;
+        }
+
+        .btn-fav {
+            background: #f0ad4e;
+            color: white;
+            min-width: 80px;
+        }
+
+        .btn-fav:hover {
+            background: #ec971f;
+        }
+
+        .btn-fav.active {
+            background: #d9534f;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 22px;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            line-height: 1.6;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        thead th {
+            background: #2e5c8a;
+            color: white;
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+
+        .section-title {
+            font-weight: 700;
+            color: #1a5276;
+            font-size: 15px;
+        }
+
+        .check-item {
+            color: #27ae60;
+            font-weight: 600;
+        }
+
+        .sub-item {
+            padding-left: 20px;
+            color: #555;
+        }
+
+        .highlight-box {
+            background: #e8f6f3;
+            border-left: 4px solid #1abc9c;
+            padding: 10px 12px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .table-inner {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+
+        .table-inner th {
+            background: #4a90d9;
+            color: white;
+            padding: 10px 8px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .table-inner td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            background: #fafafa;
+        }
+
+        .table-inner tr:nth-child(even) td {
+            background: #f0f4f8;
+        }
+
+        .tags-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.85);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .tags-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tag-disease {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+
+        .tag-disease:hover {
+            background: #c62828;
+            color: white;
+        }
+
+        .tag-drug {
+            background: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #90caf9;
+        }
+
+        .tag-drug:hover {
+            background: #1565c0;
+            color: white;
+        }
+
+        .tag-bacteria {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+
+        .tag-bacteria:hover {
+            background: #2e7d32;
+            color: white;
+        }
+
+        .keywords-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(255,255,255,0.85);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            text-align: center;
+        }
+
+        .keywords-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+
+        .keywords-content {
+            font-size: 14px;
+            color: #555;
+            line-height: 2;
+        }
+
+        .keyword {
+            display: inline-block;
+            padding: 4px 12px;
+            margin: 4px;
+            background: #fff3e0;
+            color: #e65100;
+            border-radius: 16px;
+            font-size: 13px;
+        }
+
+        .page-number {
+            margin-top: 15px;
+            font-size: 20px;
+            font-weight: 700;
+            color: #2e5c8a;
+        }
+
+        .copy-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background: #fafafa;
+        }
+
+        .btn-copy {
+            background: #6c5ce7;
+            color: white;
+            padding: 12px 28px;
+            white-space: nowrap;
+        }
+
+        .btn-copy:hover {
+            background: #5b4cdb;
+        }
+
+        .btn-copy.copied {
+            background: #00b894;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .btn {
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .table-inner {
+                font-size: 12px;
+            }
+            
+            .table-inner th, .table-inner td {
+                padding: 6px 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-top">
+        <a href="index.html" class="btn btn-home">← 返回首页</a>
+        <div class="nav-right">
+            <a href="123.html" class="btn btn-page">上一页</a>
+            <a href="125.html" class="btn btn-page">下一页</a>
+            <button class="btn btn-fav" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+
+    <h1>~~~~~急性阑尾炎临床表现与辅助检查*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~急性阑尾炎临床表现与辅助检查*****、急性阑尾炎临床表现、辅助检查与鉴别诊断、阑尾位置、临床表现、体征、描述、提示、前位、后位、盆位、麦氏点压痛、Rovsing征、腰大肌试验、闭孔内肌试验</div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>急性阑尾炎临床表现、辅助检查与鉴别诊断</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="section-title">一、临床表现</div>
+                        <div class="check-item">• 典型临床表现：</div>
+                        <div class="sub-item">从脐周开始转移至右下腹的疼痛</div>
+                        <div class="check-item">• 其他不典型临床表现：</div>
+                        <div class="sub-item">消化不良、胃肠胀气、排便不规律、腹泻及全身不适等</div>
+                        <div class="check-item">• 阑尾炎症状随阑尾尖部位置不同而变化（表16）</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">表16 阑尾位置与急性阑尾炎临床表现</div>
+                        <table class="table-inner">
+                            <tr>
+                                <th>阑尾位置</th>
+                                <th>临床表现</th>
+                            </tr>
+                            <tr>
+                                <td>前位</td>
+                                <td>明显、局限性右下腹疼痛</td>
+                            </tr>
+                            <tr>
+                                <td>后位</td>
+                                <td>腹部钝痛</td>
+                            </tr>
+                            <tr>
+                                <td>盆位</td>
+                                <td>麦氏点下方压痛，可能伴尿频、排尿困难、里急后重、腹泻等</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">二、查体</div>
+                        <div class="check-item">• 早期体征少见，可能出现低热，随炎症进展逐渐出现右下腹局限性压痛及高热（表17）</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">表17 急性阑尾炎体征的提示意义</div>
+                        <table class="table-inner">
+                            <tr>
+                                <th>体征</th>
+                                <th>描述</th>
+                                <th>提示</th>
+                            </tr>
+                            <tr>
+                                <td>麦氏点压痛</td>
+                                <td>右髂前上棘与脐连线外1/3处压痛</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Rovsing征</td>
+                                <td>左下腹触诊出现右下腹疼痛</td>
+                                <td>右侧局部性腹膜激惹</td>
+                            </tr>
+                            <tr>
+                                <td>腰大肌试验</td>
+                                <td>右髋关节被动伸展时出现右下腹痛</td>
+                                <td>后位阑尾</td>
+                            </tr>
+                            <tr>
+                                <td>闭孔内肌试验</td>
+                                <td>屈曲右髋及右膝后内旋右髋，出现右下腹疼痛，敏感性＜10%</td>
+                                <td>盆位阑尾</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">三、辅助检查</div>
+                        <div class="check-item">• 血常规：</div>
+                        <div class="sub-item">轻度白细胞增多及核左移，若有坏疽或穿孔则白细胞显著增多</div>
+                        <div class="check-item">• 肝功能检测：</div>
+                        <div class="sub-item">可见血清胆红素水平轻度升高</div>
+                        <div class="check-item">• 腹部CT：</div>
+                        <div class="sub-item">首选，推荐增强扫描，平扫亦可</div>
+                        <div class="sub-item">提示急性阑尾炎征象：阑尾扩张增粗＞6mm，阑尾壁增厚＞2mm，阑尾周围脂肪索条影，阑尾壁增厚，阑尾结石</div>
+                        <div class="check-item">• 腹部超声：</div>
+                        <div class="sub-item">准确性较低</div>
+                        <div class="sub-item">提示阑尾炎的超声表现：阑尾不可压缩，且直径＞6mm，压迫阑尾时出现局灶性疼痛，阑尾结石，阑尾周围脂肪回声增强，右下腹积液</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">四、鉴别诊断</div>
+                        <div class="check-item">• 阑尾穿孔：</div>
+                        <div class="sub-item">若患者高热、白细胞显著增多且右下腹积液，则高度提示穿孔</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">急性阑尾炎</span>
+            <span class="tag tag-disease">消化不良</span>
+            <span class="tag tag-disease">胃肠胀气</span>
+            <span class="tag tag-disease">腹泻</span>
+            <span class="tag tag-disease">前位阑尾</span>
+            <span class="tag tag-disease">后位阑尾</span>
+            <span class="tag tag-disease">盆位阑尾</span>
+            <span class="tag tag-disease">麦氏点压痛</span>
+            <span class="tag tag-disease">Rovsing征</span>
+            <span class="tag tag-disease">腰大肌试验</span>
+            <span class="tag tag-disease">闭孔内肌试验</span>
+            <span class="tag tag-disease">腹膜激惹</span>
+            <span class="tag tag-disease">白细胞增多</span>
+            <span class="tag tag-disease">核左移</span>
+            <span class="tag tag-disease">坏疽</span>
+            <span class="tag tag-disease">穿孔</span>
+            <span class="tag tag-disease">阑尾结石</span>
+            <span class="tag tag-disease">右下腹积液</span>
+            <span class="tag tag-disease">血清胆红素升高</span>
+            <span class="tag tag-disease">局灶性疼痛</span>
+        </div>
+    </div>
+
+    <div class="keywords-section">
+        <div class="keywords-title">🔍 关键词</div>
+        <div class="keywords-content">
+            <span class="keyword">急性阑尾炎</span>
+            <span class="keyword">麦氏点</span>
+            <span class="keyword">Rovsing征</span>
+            <span class="keyword">腰大肌试验</span>
+            <span class="keyword">闭孔内肌试验</span>
+            <span class="keyword">腹部CT</span>
+            <span class="keyword">腹部超声</span>
+            <span class="keyword">白细胞增多</span>
+            <span class="keyword">核左移</span>
+            <span class="keyword">阑尾穿孔</span>
+        </div>
+        <div class="page-number">124</div>
+    </div>
+
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" readonly>
+        <button class="btn btn-copy" id="copyBtn" onclick="copyToClipboard()">复制</button>
+    </div>
+
+    <script>
+        // 设置复制输入框内容
+        const title = "~~~~~急性阑尾炎临床表现与辅助检查*****";
+        const subtitle = "急性阑尾炎临床表现、辅助检查与鉴别诊断";
+        const keywords = "急性阑尾炎；麦氏点；Rovsing征；腰大肌试验；闭孔内肌试验；腹部CT；腹部超声；白细胞增多；核左移；阑尾穿孔";
+        const pageNum = "124";
+        document.getElementById('copyInput').value = title + "；" + subtitle + "；" + keywords + "；=" + pageNum;
+
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+
+        // 收藏功能
+        let isFavorited = false;
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            isFavorited = !isFavorited;
+            
+            if (isFavorited) {
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+                
+                // 保存到localStorage，用于index.html读取
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const currentPage = {
+                    title: '急性阑尾炎临床表现与辅助检查',
+                    url: window.location.pathname.split('/').pop() || '124.html',
+                    category: '消化系统急诊'
+                };
+                
+                // 避免重复添加
+                const exists = favorites.some(f => f.url === currentPage.url);
+                if (!exists) {
+                    favorites.push(currentPage);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                // 触发index.html更新（如果打开的话）
+                localStorage.setItem('favoritesUpdated', Date.now().toString());
+            } else {
+                btn.textContent = '☆ 收藏';
+                btn.classList.remove('active');
+                
+                // 从收藏中移除
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const currentUrl = window.location.pathname.split('/').pop() || '124.html';
+                favorites = favorites.filter(f => f.url !== currentUrl);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                localStorage.setItem('favoritesUpdated', Date.now().toString());
+            }
+        }
+
+        // 页面加载时检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const currentUrl = window.location.pathname.split('/').pop() || '124.html';
+            const exists = favorites.some(f => f.url === currentUrl);
+            if (exists) {
+                isFavorited = true;
+                document.getElementById('favBtn').textContent = '★ 已收藏';
+                document.getElementById('favBtn').classList.add('active');
+            }
+        };
+    </script>
+
+</body>
+</html>
