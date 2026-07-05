@@ -1,0 +1,411 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急性胰腺炎并发症与辅助检查*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5ee 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-nav {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        .btn-favorite {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        .btn-copy {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #333;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 28px;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 15px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+        }
+        
+        thead tr {
+            background: linear-gradient(135deg, #1e5799 0%, #2989d8 50%, #207cca 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 20px 15px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: rgba(240,248,255,0.6);
+        }
+        
+        tbody tr:hover {
+            background: rgba(255,235,205,0.5);
+        }
+        
+        tbody td {
+            padding: 15px;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #2c3e50;
+            vertical-align: top;
+        }
+        
+        .section-title {
+            color: #1a5276;
+            font-weight: bold;
+            font-size: 17px;
+        }
+        
+        .sub-item {
+            color: #2874a6;
+        }
+        
+        .check-mark {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .diamond {
+            color: #e74c3c;
+        }
+        
+        .square {
+            color: #8e44ad;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            width: calc(100% - 120px);
+            max-width: 600px;
+            padding: 15px;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            font-size: 14px;
+            background: white;
+        }
+        
+        .tags-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 18px;
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            display: inline-block;
+        }
+        
+        .tag-disease {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+        }
+        
+        .tag-antibiotic {
+            background: linear-gradient(135deg, #4834d4 0%, #686de0 100%);
+        }
+        
+        .tag-bacteria {
+            background: linear-gradient(135deg, #00d2d3 0%, #01a3a4 100%);
+        }
+        
+        .page-info {
+            text-align: center;
+            padding: 20px;
+            font-size: 16px;
+            color: #555;
+        }
+        
+        .page-number {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 20px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 15px 10px;
+            }
+            
+            tbody td {
+                font-size: 13px;
+                padding: 10px;
+            }
+            
+            .btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                width: calc(100% - 100px);
+            }
+            
+            .nav-top {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-right {
+                flex-direction: row;
+                justify-content: flex-end;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="126.html" class="btn btn-nav">上一页</a>
+            <a href="128.html" class="btn btn-nav">下一页</a>
+            <button class="btn btn-favorite" onclick="addFavorite()">收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~急性胰腺炎并发症与辅助检查*****</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>急性胰腺炎并发症与辅助检查内容</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span class="check-mark">✓</span> MAP患者有腹部深压痛，但与患者自觉症状不成比例；SAP可出现腹膜刺激征三联征（肌紧张、压痛、反跳痛）。<br>
+                    <span class="check-mark">✓</span> 上腹部扪及块状物：胰腺假性囊肿或胰腺包裹性坏死，多见于起病4周后。<br>
+                    <span class="check-mark">✓</span> 假性肠梗阻：持续24～96小时。<br>
+                    <span class="check-mark">✓</span> Grey-Tuner征：两肋部皮下青紫现象。<br>
+                    <span class="check-mark">✓</span> Cullen征：脐周皮下青紫现象。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sub-item">• 并发症</span><br>
+                    <span class="check-mark">✓</span> 局部并发症<br>
+                    <span class="diamond">◇</span> 急性液体积聚→胰腺假性囊肿。<br>
+                    <span class="diamond">◇</span> 胰腺坏死：增强CT可诊断，可合并感染。<br>
+                    <span class="diamond">◇</span> 上述均可以是无菌性或感染性。<br>
+                    <span class="check-mark">✓</span> 全身并发症<br>
+                    <span class="diamond">◇</span> 低血压、休克：烦躁不安，皮肤苍白、湿冷、花斑，脉搏细弱，血压下降。<br>
+                    <span class="diamond">◇</span> 呼吸功能不全或衰竭：最严重的并发症，可发展至ARDS。<br>
+                    <span class="diamond">◇</span> 急性肾功能不全。<br>
+                    <span class="diamond">◇</span> 消化道出血：应激性溃疡或胰腺坏死穿透消化道，后者预后极差。<br>
+                    <span class="diamond">◇</span> 细菌及真菌感染：早期以革兰阴性菌为主，后期多为多重感染，大量广谱抗生素使用易导致真菌感染。<br>
+                    <span class="diamond">◇</span> 代谢异常：低钙血症、高脂血症、糖代谢异常。<br>
+                    <span class="diamond">◇</span> 心功能不全：严重可发生心力衰竭、恶性心律失常。<br>
+                    <span class="diamond">◇</span> 胰性脑病：神经精神异常，脑灰白质广泛脱髓鞘改变相关，常为一过性，可能遗留精神异常。<br>
+                    <span class="diamond">◇</span> 血液系统异常：贫血、DIC、门静脉/脾静脉栓塞。<br>
+                    <span class="diamond">◇</span> 慢性胰腺炎和糖尿病：胰腺内、外分泌功能不全。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">4. 辅助检查</span><br>
+                    <span class="sub-item">• 实验室检查</span><br>
+                    <span class="check-mark">✓</span> 血清酶学<br>
+                    <span class="diamond">◇</span> 血淀粉酶：AP起病6小时后血淀粉酶＞500U/L，或12小时后尿淀粉酶＞1000U/L。<br>
+                    <span class="diamond">◇</span> 血脂肪酶：升高与淀粉酶平行，但持续时间较长。<br>
+                    <span class="diamond">◇</span> 酶学高低与病情严重程度无相关性。<br>
+                    <span class="check-mark">✓</span> CRP：72小时后＞150mg/L提示胰腺组织坏死。<br>
+                    <span class="check-mark">✓</span> 血常规：白细胞增多，中性粒细胞比例增高，严重者血细胞比容下降。<br>
+                    <span class="check-mark">✓</span> 血钙：低钙血症提示广泛脂肪坏死，Ca²⁺＜1.75mmol/L提
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="急性胰腺炎并发症与辅助检查；并发症、局部并发症、全身并发症、辅助检查、实验室检查、血清酶学；=127" readonly>
+        <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">急性胰腺炎</span>
+            <span class="tag tag-disease">MAP</span>
+            <span class="tag tag-disease">SAP</span>
+            <span class="tag tag-disease">胰腺假性囊肿</span>
+            <span class="tag tag-disease">胰腺包裹性坏死</span>
+            <span class="tag tag-disease">假性肠梗阻</span>
+            <span class="tag tag-disease">Grey-Tuner征</span>
+            <span class="tag tag-disease">Cullen征</span>
+            <span class="tag tag-disease">急性液体积聚</span>
+            <span class="tag tag-disease">胰腺坏死</span>
+            <span class="tag tag-disease">ARDS</span>
+            <span class="tag tag-disease">急性肾功能不全</span>
+            <span class="tag tag-disease">消化道出血</span>
+            <span class="tag tag-disease">胰性脑病</span>
+            <span class="tag tag-disease">慢性胰腺炎</span>
+            <span class="tag tag-disease">糖尿病</span>
+            <span class="tag tag-disease">低钙血症</span>
+            <span class="tag tag-disease">高脂血症</span>
+            <span class="tag tag-bacteria">革兰阴性菌</span>
+            <span class="tag tag-bacteria">真菌</span>
+            <span class="tag tag-antibiotic">广谱抗生素</span>
+        </div>
+    </div>
+    
+    <div class="page-info">
+        <p>页码：<span class="page-number">127</span></p>
+        <p style="margin-top:10px; color:#888;">关键词：急性胰腺炎、MAP、SAP、并发症、局部并发症、全身并发症、Grey-Tuner征、Cullen征、ARDS、胰性脑病、血清酶学、血淀粉酶、血脂肪酶、CRP、低钙血症</p>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            var copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板：" + copyText.value);
+            });
+        }
+        
+        function addFavorite() {
+            var title = document.title;
+            var url = window.location.href;
+            var indexData = localStorage.getItem('favorites') ? JSON.parse(localStorage.getItem('favorites')) : [];
+            var exists = indexData.some(function(item) {
+                return item.url === url;
+            });
+            if (!exists) {
+                indexData.push({
+                    title: title,
+                    url: url,
+                    category: '急诊疾病'
+                });
+                localStorage.setItem('favorites', JSON.stringify(indexData));
+                alert('已添加到收藏！');
+            } else {
+                alert('该页面已在收藏中！');
+            }
+        }
+    </script>
+</body>
+</html>
