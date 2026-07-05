@@ -1,0 +1,430 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~常用抗心律失常药物与用法*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 30px;
+        }
+        .header {
+            background-color: #fff;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .back-btn {
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        .nav-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .nav-btn:hover {
+            opacity: 0.9;
+        }
+        .fav-btn {
+            background-color: #FF9800;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .fav-btn:hover {
+            opacity: 0.9;
+        }
+        .fav-btn.active {
+            background-color: #f44336;
+        }
+        .title {
+            text-align: center;
+            padding: 25px 15px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1565C0;
+        }
+        .table-container {
+            margin: 0 15px;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        thead {
+            background-color: #1976D2;
+            color: white;
+        }
+        thead th {
+            padding: 16px 12px;
+            font-size: 17px;
+            font-weight: bold;
+            text-align: left;
+        }
+        tbody td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 14px;
+            vertical-align: top;
+        }
+        tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .drug-name {
+            color: #1565C0;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        .highlight-box {
+            background-color: #e3f2fd;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        .warning {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        .tags-section {
+            margin: 25px 15px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 12px;
+        }
+        .tag {
+            display: inline-block;
+            background-color: #e3f2fd;
+            color: #1565C0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 5px;
+            border: 1px solid #bbdefb;
+        }
+        .copy-section {
+            margin: 25px 15px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        .copy-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 12px;
+        }
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #bbdefb;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+        }
+        #copyBtn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        #copyBtn:hover {
+            background-color: #45a049;
+        }
+        .page-number {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        .keywords {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 13px;
+            color: #888;
+        }
+        @media (max-width: 600px) {
+            .title {
+                font-size: 18px;
+                padding: 18px 10px;
+            }
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            tbody td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            .header {
+                padding: 10px 12px;
+            }
+            .back-btn, .nav-btn, .fav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            .table-container {
+                margin: 0 10px;
+            }
+            .tags-section, .copy-section {
+                margin: 18px 10px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="390.html" class="nav-btn">上一页</a>
+            <a href="392.html" class="nav-btn">下一页</a>
+            <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+        </div>
+    </div>
+
+    <div class="title">~~~~~常用抗心律失常药物与用法*****</div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">抗心律失常药物详细说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        <div class="highlight-box">
+                            <span class="drug-name">腺苷</span><br>
+                            苷酸环化酶，腺苷还可间接地减少钙离子内流进入细胞，从而减慢窦性心律，延长房室结的传导时间，因此用药后可能会导致短暂的高度房室传导阻滞。室上性心动过速首选。窦性室性心律失常伴室内传导阻滞可使用，很少能逆转室速。<br><br>
+                            腺苷不能逆转心房颤动，且心室率可能会短暂升高，导致心房颤动恶化为心室颤动。常见副作用是面部潮红、呼吸急促、心悸、胸痛和头晕目眩。静脉注射过快可导致暂时性心脏停搏。<span class="warning">腺苷不能用于哮喘患者</span>，可能会导致支气管痉挛。
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="highlight-box">
+                            <span class="drug-name">伊伐布雷定</span><br>
+                            是选择性If通道抑制剂，与窦房结的If通道蛋白结合，减慢电冲动发放频率，从而减慢心率，对心肌收缩力或血流动力学无影响。伊伐布雷定可以在减慢心率的同时延缓心力衰竭进展和改善患者预后。现欧洲批准伊伐布雷定用于减慢窦性心律，缓解心绞痛，也用于不恰当的窦性心动过速。它可与β受体阻断药合用，或替代β受体阻断药。
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="background-color: #e8f4fd; font-weight: bold; font-size: 16px; color: #1565C0;">
+                        6. 常用抗心律失常药制剂与用法
+                    </td>
+                </tr>
+                <tr>
+                    <td width="100"><span class="drug-name">普罗帕酮</span></td>
+                    <td>静脉注射每次70mg，稀释后3～5分钟内注射完毕，如无效，20分钟后可再注射1次，1天总量不超过210mg。</td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">利多卡因</span></td>
+                    <td>冲击量1～1.5mg/kg，2～5分钟静脉注射，维持量1～4mg/min，1小时总量不超过4.5mg/kg。</td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">艾司洛尔</span></td>
+                    <td>负荷量0.5mg/kg，1分钟内静脉注射，继之以0.05mg/(kg·min)静脉滴注，5分钟后心率未达治疗预期可重复上述负荷量，后继以0.1mg/(kg·min)静脉滴注，但静脉滴注最大维持量一般不超过0.2mg/(kg·min)，用药时间不超过48小时。</td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">维拉帕米</span></td>
+                    <td>静脉注射每次5～10mg，缓慢注射。</td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">地尔硫䓬</span></td>
+                    <td>10～20mg（0.25mg/kg）静脉注射，2分钟内注射完毕。如有必要，15分钟内可再静脉注射20～25mg（0.35mg/kg），以后采用3～15mg/h的速率静脉滴注维持。</td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">胺碘酮</span></td>
+                    <td>注射剂，150mg/3ml，对快速性心律失常并需要立即复律者，可缓慢静脉注射，也可600～1000mg溶于葡萄糖中静脉滴注。</td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">索他洛尔</span></td>
+                    <td>静脉注射初始剂量为300mg（0.5～1.5mg/kg），稀释于5%葡萄糖溶液中，10分钟内缓慢注射。若心室颤动持续存在，可追加150mg。</td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">伊布利特</span></td>
+                    <td>体重＜60kg者，首次注射0.01mg/kg；体重≥60kg者，首次注射1mg。首次注射结束后10分钟，如心律失常未消失，可再次注射等量本药，注射时间持续10分钟。</td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">腺苷</span></td>
+                    <td>静脉注射开始6mg，如在1～2分钟内无效，可给予12mg，必要时在1～2分钟后再给予12mg。如果使用腺苷三</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center; color: #666; font-size: 13px;">— 第382页 —</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div>
+            <span class="tag">心律失常</span>
+            <span class="tag">心房颤动</span>
+            <span class="tag">心室颤动</span>
+            <span class="tag">室性心动过速</span>
+            <span class="tag">窦性心动过速</span>
+            <span class="tag">心力衰竭</span>
+            <span class="tag">心绞痛</span>
+            <span class="tag">支气管痉挛</span>
+            <span class="tag">哮喘</span>
+            <span class="tag">腺苷</span>
+            <span class="tag">伊伐布雷定</span>
+            <span class="tag">普罗帕酮</span>
+            <span class="tag">利多卡因</span>
+            <span class="tag">艾司洛尔</span>
+            <span class="tag">维拉帕米</span>
+            <span class="tag">地尔硫䓬</span>
+            <span class="tag">胺碘酮</span>
+            <span class="tag">索他洛尔</span>
+            <span class="tag">伊布利特</span>
+            <span class="tag">β受体阻断药</span>
+            <span class="tag">钙离子</span>
+            <span class="tag">房室传导阻滞</span>
+            <span class="tag">窦性心律</span>
+            <span class="tag">电冲动</span>
+            <span class="tag">If通道</span>
+        </div>
+    </div>
+
+    <div class="copy-section">
+        <div class="copy-title">📋 复制信息</div>
+        <div class="copy-box">
+            <input type="text" id="copyInput" value="常用抗心律失常药物与用法；抗心律失常药制剂与用法；腺苷；伊伐布雷定；普罗帕酮；利多卡因；艾司洛尔；维拉帕米；地尔硫䓬；胺碘酮；索他洛尔；伊布利特；心律失常；心房颤动；心室颤动；=382" readonly>
+            <button id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+
+    <div class="page-number">页码：382</div>
+    <div class="keywords">关键词：心律失常 | 抗心律失常药物 | 腺苷 | 伊伐布雷定 | 普罗帕酮 | 利多卡因 | 艾司洛尔 | 维拉帕米 | 地尔硫䓬 | 胺碘酮 | 索他洛尔 | 伊布利特 | 心房颤动 | 心室颤动 | 窦性心动过速</div>
+
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制!';
+                btn.style.backgroundColor = '#2196F3';
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.style.backgroundColor = '#4CAF50';
+                }, 2000);
+            });
+        }
+
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                
+                // 保存到localStorage，用于index.html读取
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '常用抗心律失常药物与用法',
+                    url: '382.html',
+                    pageNum: '382',
+                    category: '抗心律失常药物'
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.url === pageInfo.url);
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                alert('已添加到收藏！请在首页查看。');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '382.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '382.html');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
