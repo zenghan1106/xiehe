@@ -1,0 +1,375 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~结核性脑膜炎定义与临床表现*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-home {
+            background-color: #4a90d9;
+            color: white;
+        }
+        
+        .btn-nav {
+            background-color: #5a9bd5;
+            color: white;
+        }
+        
+        .btn-favorite {
+            background-color: #e8b339;
+            color: #333;
+            font-size: 13px;
+            padding: 8px 14px;
+        }
+        
+        .btn-copy {
+            background-color: #4caf50;
+            color: white;
+            padding: 12px 20px;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .btn:hover {
+            opacity: 0.85;
+            transform: translateY(-1px);
+        }
+        
+        /* 标题样式 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            color: #1a5276;
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #d6eaf8;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        
+        /* 表格样式 */
+        .content-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        .content-table thead tr {
+            background-color: #2e75b6;
+            color: white;
+        }
+        
+        .content-table thead th {
+            padding: 16px 12px;
+            font-size: 18px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        .content-table tbody td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 15px;
+            vertical-align: top;
+        }
+        
+        .content-table tbody tr:hover {
+            background-color: #f8fbff;
+        }
+        
+        .content-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        /* 内容中的标题样式 */
+        .section-title {
+            color: #1a5276;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+        
+        .check-item {
+            color: #27ae60;
+        }
+        
+        .diamond-item {
+            color: #555;
+            padding-left: 20px;
+        }
+        
+        .bullet-item {
+            color: #333;
+            margin: 4px 0;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1a5276;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background-color: #e8f4f8;
+            color: #2e75b6;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid #b8d4e8;
+        }
+        
+        /* 底部编辑框区域 */
+        .bottom-section {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .copy-area {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+            margin-bottom: 12px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 14px;
+            border: 2px solid #c5e0f7;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+            background-color: #f8fbff;
+        }
+        
+        .page-info {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            padding: 10px;
+        }
+        
+        /* 关键词 */
+        .keywords-section {
+            text-align: center;
+            padding: 15px;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        .keywords-title {
+            color: #1a5276;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="203.html" class="btn btn-nav">上一页</a>
+            <a href="205.html" class="btn btn-nav">下一页</a>
+            <button class="btn btn-favorite" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="main-title">~~~~~结核性脑膜炎定义与临床表现*****</div>
+    
+    <!-- 主内容表格 -->
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th>结核性脑膜炎 - 定义、临床表现、分期及诊断线索</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="section-title">■ 结核性脑膜炎</div>
+                    <br>
+                    <div class="section-title">1. 定义</div>
+                    <div>结核性脑膜炎是中枢神经系统（CNS）结核病的主要临床类型。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="section-title">2. 临床表现</div>
+                    <div class="bullet-item">• 症状：结核性脑膜炎患者通常表现为病情进展经历3个可辨别时期的亚急性发热性疾病。</div>
+                    <div class="check-item">✓ 前驱期：持续2～3周，以不适、倦怠、头痛、低热及人格改变的隐匿起病为特征。</div>
+                    <div class="check-item">✓ 脑膜炎期：表现为更显著的神经系统特征，包括脑膜刺激征、迁延性头痛、呕吐、嗜睡、意识模糊及不同程度的脑神经定位体征等。</div>
+                    <div class="check-item">✓ 麻痹期：随着疾病加速进展而出现；意识模糊进展为昏睡和昏迷、癫痫发作并常出现轻偏瘫。大部分未治疗的患者会在起病5～8周内死亡。</div>
+                    <div class="bullet-item">• 非典型表现：可有多种。</div>
+                    <div class="check-item">✓ 提示化脓性脑膜炎的急性、快速进展性脑膜炎综合征。</div>
+                    <div class="check-item">✓ 以人格改变、社交退缩、性欲丧失和记忆障碍为特征，并在数月甚至数年间缓慢进展为痴呆。</div>
+                    <div class="check-item">✓ 少数患者可能呈现脑炎病程，表现为昏睡、昏迷和惊厥，但不伴明显的脑膜炎体征。</div>
+                    <div class="bullet-item">• 体征：根据精神状态和神经系统定位体征，按疾病分期对其进行分类很有帮助。</div>
+                    <div class="check-item">✓ Ⅰ期：患者神志清醒，不伴神经系统定位体征和脑积水证据。</div>
+                    <div class="check-item">✓ Ⅱ期：患者表现为嗜睡、意识模糊。可能有轻微神经系统定位体征，如脑神经麻痹或轻偏瘫。</div>
+                    <div class="check-item">✓ Ⅲ期：疾病进入晚期，表现为谵妄、昏睡、昏迷、癫痫发作、多发脑神经麻痹和/或重度偏瘫。</div>
+                    <div class="bullet-item">• CNS外结核表现：约1/3患者在就诊时存在全身性（粟粒型）结核。</div>
+                    <div class="check-item">✓ 眼底镜检查常能发现脉络膜结核结节，是病因学诊断的有用线索。</div>
+                    <div class="check-item">✓ 半数病例通过胸片/胸部CT检查可发现异常，从局灶病变到细微粟粒状病变不等。</div>
+                    <div class="check-item">✓ 大多数患者的结核菌素皮肤试验或γ干扰素释放试验（IGRA）呈阳性，但阴性结果不能排除该诊断。</div>
+                    <div class="bullet-item">• 反常反应（PR）：指在开始抗结核化疗后出现临床表现（如</div>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: center; color: #888; font-size: 13px;">
+                    页码：192
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag">结核性脑膜炎</span>
+            <span class="tag">中枢神经系统</span>
+            <span class="tag">CNS</span>
+            <span class="tag">结核病</span>
+            <span class="tag">粟粒型结核</span>
+            <span class="tag">IGRA</span>
+            <span class="tag">抗结核化疗</span>
+        </div>
+    </div>
+    
+    <!-- 复制编辑框区域 -->
+    <div class="bottom-section">
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyText" value="结核性脑膜炎定义与临床表现；定义、临床表现、分期、诊断线索；结核性脑膜炎、中枢神经系统、CNS、结核病、粟粒型结核、IGRA、抗结核化疗；=204" readonly>
+            <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 页码信息 -->
+    <div class="page-info">
+        页码：204
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">关键词</div>
+        <div>结核性脑膜炎 | 中枢神经系统 | CNS | 结核病 | 前驱期 | 脑膜炎期 | 麻痹期 | 脑膜刺激征 | 脑神经麻痹 | 轻偏瘫 | 粟粒型结核 | 脉络膜结核结节 | 结核菌素皮肤试验 | γ干扰素释放试验 | IGRA | 反常反应 | 抗结核化疗</div>
+    </div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(function() {
+                    alert("已复制到剪贴板！");
+                });
+            } else {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            }
+        }
+        
+        // 添加到收藏
+        function addToFavorites() {
+            const title = "结核性脑膜炎定义与临床表现";
+            const url = window.location.href;
+            const pageNum = "204";
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert("该页面已在收藏夹中！");
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                pageNum: pageNum,
+                category: "传染病诊疗"
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert("已添加到收藏！\n标题：" + title + "\n页码：" + pageNum);
+        }
+    </script>
+<div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~结核性脑膜炎定义与临床表现*****、结核性脑膜炎 - 定义、临床表现、分期及诊断线索、页码：192</div></body>
+</html>
