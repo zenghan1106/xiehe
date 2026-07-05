@@ -1,0 +1,438 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~血尿病因与评估检查*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #f5f0ff 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .back-btn {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btns {
+            position: absolute;
+            right: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+        }
+        
+        .favorite-btn {
+            background: #f0ad4e;
+        }
+        
+        .favorite-btn:hover {
+            background: #ec971f;
+        }
+        
+        .favorite-btn.active {
+            background: #d9534f;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c5aa0;
+            font-size: 24px;
+            padding: 50px 20px 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .table-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead th {
+            background: #2c5aa0;
+            color: white;
+            padding: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: left;
+        }
+        
+        tbody td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #e0e8f0;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #444;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background: #e8f2ff;
+        }
+        
+        .section-title {
+            background: #e3f0ff !important;
+            font-weight: 600;
+            color: #1a4a8a;
+        }
+        
+        .disease-name {
+            color: #c0392b;
+            font-weight: 600;
+        }
+        
+        .drug-name {
+            color: #27ae60;
+            font-weight: 600;
+        }
+        
+        .warning {
+            color: #e67e22;
+            font-weight: 600;
+        }
+        
+        .keywords-section {
+            max-width: 900px;
+            margin: 25px auto;
+            padding: 20px;
+            background: rgba(255,255,255,0.85);
+            border-radius: 10px;
+        }
+        
+        .keywords-title {
+            color: #2c5aa0;
+            font-size: 16px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #e8f4f8;
+            color: #2c5aa0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #b8d4e8;
+        }
+        
+        .copy-section {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255,255,255,0.85);
+            border-radius: 10px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #b8d4e8;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background: #5bc0de;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #46b8da;
+        }
+        
+        .copy-btn.copied {
+            background: #5cb85c;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+                padding: 55px 10px 15px;
+            }
+            
+            .back-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px;
+            }
+            
+            tbody td {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-btns">
+            <a href="60.html" class="nav-btn">上一页</a>
+            <a href="62.html" class="nav-btn">下一页</a>
+            <button class="nav-btn favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~血尿病因与评估检查*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~血尿病因与评估检查*****、类别、详细内容、2. 常见病因及临床表现、3. 评估检查、红色尿液鉴别、泌尿道感染、肾和输尿管结石、前列腺炎、肾或泌尿道恶性肿瘤、良性前列腺增生、出血性疾病或抗凝过度或中毒、其他原因、污染、罕见情况、评估原则</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>类别</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="warning">红色尿液鉴别</td>
+                    <td>除泌尿道出血，下列情况也可见红色尿液排出：血红蛋白尿或肌红蛋白尿，使用某些药物（如<span class="drug-name">利福平</span>、<span class="drug-name">苯妥英钠</span>），摄入食用色素、甜菜、大黄或番泻叶，急性间歇性卟啉病。</td>
+                </tr>
+                <tr class="section-title">
+                    <td colspan="2">2. 常见病因及临床表现</td>
+                </tr>
+                <tr>
+                    <td class="disease-name">泌尿道感染</td>
+                    <td>包括膀胱炎（膀胱/下泌尿道感染）和肾盂肾炎（肾/上泌尿道感染）。女性膀胱炎常见，发病率高于男性，通常伴尿频、尿急、尿痛、耻骨上疼痛，亦可有脓尿和细菌尿。若有发热、腰痛、肋脊角压痛、全身性疾病的症状（包括畏寒、寒战、明显乏力和不适等），应考虑复杂性泌尿道感染（包括肾盂肾炎）。</td>
+                </tr>
+                <tr>
+                    <td class="disease-name">肾和输尿管结石</td>
+                    <td>急诊常见。患者可表现出肾绞痛和血尿的典型症状，也可无症状或不典型症状，包括程度不一的腹痛或腰痛、恶心、尿急、排尿困难、阴茎疼痛或睾丸疼痛。上输尿管或肾盂梗阻可导致腰痛及压痛，下输尿管梗阻可引起放射至同侧睾丸或阴唇的疼痛，结石排出后可迅速缓解。肾结石可导致持续性肾梗阻，并引起永久性肾损伤。</td>
+                </tr>
+                <tr>
+                    <td class="disease-name">前列腺炎</td>
+                    <td>病原体多由尿道进入前列腺，因此可能合并膀胱或附睾感染。急性前列腺炎通常急性起病，有发热、寒战、尿路刺激征（尿频、尿急、尿痛、尿失禁）、盆腔或会阴疼痛以及混浊尿，前列腺发生肿胀可引起排尿困难，症状范围可从尿滴沥、排尿踌躇至急性尿潴留。查体前列腺通常质硬、水肿、压痛。</td>
+                </tr>
+                <tr>
+                    <td class="disease-name">肾或泌尿道恶性肿瘤、良性前列腺增生</td>
+                    <td>老年患者多见。恶性肿瘤的危险因素包括：男性，年龄＞35岁，吸烟史，化学物质或染料（苯类或芳香胺类）的职业暴露，反复肉眼血尿病史，反复尿路刺激征病史，慢性泌尿系感染病史，盆腔放疗史，<span class="drug-name">环磷酰胺</span>暴露史，长期留置异物史，<span class="drug-name">马兜铃酸</span>暴露史，长期滥用镇痛药物史。</td>
+                </tr>
+                <tr>
+                    <td class="disease-name">出血性疾病或抗凝过度或中毒</td>
+                    <td>通常为多部位出血。若接受抗凝治疗的患者仅发生血尿，则评估方式与其他患者无异。</td>
+                </tr>
+                <tr>
+                    <td class="disease-name">其他原因</td>
+                    <td>遗传性出血性毛细血管扩张症、放射性膀胱炎、血吸虫病、动静脉畸形和瘘、胡桃夹综合征。急性创伤和剧烈运动可导致一过性血尿。</td>
+                </tr>
+                <tr>
+                    <td class="disease-name">污染</td>
+                    <td>经期和产后女性尿中的血液可能是污染所致，最好在出血停止后采集尿液，如有必要，可在阴道内塞入卫生棉条，并清洗会阴后再行尿液分析。</td>
+                </tr>
+                <tr>
+                    <td class="disease-name">罕见情况</td>
+                    <td>血尿是人为制造的。</td>
+                </tr>
+                <tr class="section-title">
+                    <td colspan="2">3. 评估检查</td>
+                </tr>
+                <tr>
+                    <td>评估原则</td>
+                    <td>大多数情况下，血尿本身并不立即造成危险。需要警惕的情</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="keywords-section">
+        <div class="keywords-title">特色检索标签</div>
+        <div class="tag-container">
+            <span class="tag">血红蛋白尿</span>
+            <span class="tag">肌红蛋白尿</span>
+            <span class="tag">利福平</span>
+            <span class="tag">苯妥英钠</span>
+            <span class="tag">急性间歇性卟啉病</span>
+            <span class="tag">膀胱炎</span>
+            <span class="tag">肾盂肾炎</span>
+            <span class="tag">泌尿道感染</span>
+            <span class="tag">肾和输尿管结石</span>
+            <span class="tag">前列腺炎</span>
+            <span class="tag">肾或泌尿道恶性肿瘤</span>
+            <span class="tag">良性前列腺增生</span>
+            <span class="tag">环磷酰胺</span>
+            <span class="tag">马兜铃酸</span>
+            <span class="tag">出血性疾病</span>
+            <span class="tag">抗凝过度</span>
+            <span class="tag">遗传性出血性毛细血管扩张症</span>
+            <span class="tag">放射性膀胱炎</span>
+            <span class="tag">血吸虫病</span>
+            <span class="tag">胡桃夹综合征</span>
+            <span class="tag">血尿</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="血尿病因与评估检查；红色尿液鉴别、常见病因及临床表现、泌尿道感染、膀胱炎、肾盂肾炎、肾和输尿管结石、前列腺炎、肾或泌尿道恶性肿瘤、良性前列腺增生、出血性疾病、抗凝过度、遗传性出血性毛细血管扩张症、放射性膀胱炎、血吸虫病、胡桃夹综合征、评估检查、利福平、苯妥英钠、环磷酰胺、马兜铃酸、血红蛋白尿、肌红蛋白尿、急性间歇性卟啉病；=61" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyContent()">复制</button>
+    </div>
+    
+    <div class="page-number">页码：61</div>
+    
+    <script>
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            document.execCommand('copy');
+            
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '已复制';
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFav = btn.classList.toggle('active');
+            
+            if (isFav) {
+                btn.textContent = '❤️ 已收藏';
+                
+                try {
+                    const favData = {
+                        title: '血尿病因与评估检查',
+                        url: '61.html',
+                        date: new Date().toISOString()
+                    };
+                    
+                    let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                    const exists = favorites.some(f => f.url === '61.html');
+                    
+                    if (!exists) {
+                        favorites.push(favData);
+                        localStorage.setItem('favorites', JSON.stringify(favorites));
+                        window.dispatchEvent(new CustomEvent('favoriteAdded', { detail: favData }));
+                    }
+                } catch(e) {
+                    console.log('收藏存储失败', e);
+                }
+                
+            } else {
+                btn.textContent = '⭐ 收藏';
+                
+                try {
+                    let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                    favorites = favorites.filter(f => f.url !== '61.html');
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                } catch(e) {
+                    console.log('取消收藏失败', e);
+                }
+            }
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            try {
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const isFav = favorites.some(f => f.url === '61.html');
+                if (isFav) {
+                    const btn = document.getElementById('favoriteBtn');
+                    btn.classList.add('active');
+                    btn.textContent = '❤️ 已收藏';
+                }
+            } catch(e) {}
+        });
+    </script>
+</body>
+</html>
