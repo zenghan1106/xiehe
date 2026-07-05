@@ -1,0 +1,626 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~社区获得性肺炎(CAP)检查与诊断策略*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f0f7ff;
+            background-image: linear-gradient(135deg, #f0f7ff 0%, #e8f4f8 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 收藏按钮 */
+        .favorite-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+        }
+        
+        .favorite-btn:hover {
+            background: #ee5a5a;
+        }
+        
+        .favorite-btn.active {
+            background: #ffd93d;
+            color: #333;
+        }
+        
+        /* 标题样式 */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 60px 0 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            border-left: 5px solid #4a90d9;
+        }
+        
+        /* 表格样式 */
+        .main-table {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto 30px auto;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .main-table thead {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        .main-table thead th {
+            padding: 18px 15px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        .main-table tbody td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #e8f0f8;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #2c3e50;
+        }
+        
+        .main-table tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        .main-table tbody tr:hover {
+            background: #e8f4ff;
+        }
+        
+        .section-header {
+            background: #e8f4ff !important;
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 16px !important;
+        }
+        
+        .bullet-point {
+            color: #4a90d9;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .check-mark {
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .diamond {
+            color: #e67e22;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            max-width: 900px;
+            margin: 0 auto 25px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4a90d9;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #e8f4ff;
+            color: #1a5276;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid #4a90d9;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            max-width: 900px;
+            margin: 0 auto 25px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .keywords-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 15px;
+        }
+        
+        .keywords-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .keyword {
+            display: inline-block;
+            padding: 6px 14px;
+            background: #fff3e0;
+            color: #e65100;
+            border-radius: 15px;
+            font-size: 13px;
+        }
+        
+        /* 页码显示 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #4a90d9;
+            margin: 20px 0;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            max-width: 900px;
+            margin: 0 auto 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #4a90d9;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-btn {
+            padding: 12px 25px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #357abd;
+        }
+        
+        .copy-btn.copied {
+            background: #27ae60;
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #27ae60;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 14px;
+            display: none;
+            z-index: 200;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .page-title {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            
+            .main-table thead th {
+                font-size: 17px;
+                padding: 14px 10px;
+            }
+            
+            .main-table tbody td {
+                font-size: 14px;
+                padding: 12px 10px;
+            }
+            
+            .nav-buttons {
+                position: relative;
+                top: 0;
+                right: 0;
+                flex-direction: row;
+                justify-content: center;
+                margin-bottom: 15px;
+            }
+            
+            .home-btn {
+                position: relative;
+                top: 0;
+                left: 0;
+                margin-bottom: 10px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <button class="home-btn" onclick="location.href='index.html'">← 返回首页</button>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="81.html" class="nav-btn">↑ 上一页</a>
+        <a href="83.html" class="nav-btn">↓ 下一页</a>
+        <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">☆ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">~~~~~社区获得性肺炎(CAP)检查与诊断策略*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~社区获得性肺炎(CAP)检查与诊断策略*****、社区获得性肺炎（CAP）检查与诊断、生化检查：包括空腹血糖、血清钠、肝肾功能等。、5. 选做检查、微生物学检测、其他、ABG。、炎性指标检测：ESR、CRP、PCT等。、HIV血清学检查。、6. 诊断策略、发热。、肺实变体征和/或闻及湿啰音。</div>
+    
+    <!-- 主表格 -->
+    <table class="main-table">
+        <thead>
+            <tr>
+                <th>社区获得性肺炎（CAP）检查与诊断</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="bullet-point">●</span> 生化检查：包括空腹血糖、血清钠、肝肾功能等。</td>
+            </tr>
+            <tr class="section-header">
+                <td>5. 选做检查</td>
+            </tr>
+            <tr>
+                <td><span class="bullet-point">●</span> 胸部CT：适用于胸片阴性但根据临床特征仍怀疑CAP的特定患者，如在免疫功能低下的患者中，胸片可能无法检测到肺浸润；已知接触可导致肺炎的流行性病原体的患者（如军团菌）。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet-point">●</span> 微生物学检测</td>
+            </tr>
+            <tr>
+                <td><span class="check-mark">✓</span> 对于大多数门诊治疗的轻症CAP患者，不需要进行微生物学检测。</td>
+            </tr>
+            <tr>
+                <td><span class="check-mark">✓</span> 对于大多数入住普通病房的中度CAP患者，需进行血培养、痰革兰染色和培养、肺炎链球菌尿抗原检测和军团菌检测。在呼吸道感染病毒流行季节（如北半球的深秋至早春），还需检测呼吸道感染病毒（流感病毒、腺病毒、副流感病毒、呼吸道合胞病毒和人类偏肺病毒）。</td>
+            </tr>
+            <tr>
+                <td><span class="check-mark">✓</span> 对于大多数重症CAP住院患者，需进行血培养、痰培养、尿链球菌抗原和军团菌检测。气管镜支气管吸入物或肺泡灌洗：需氧菌培养、军团菌培养、真菌染色和培养，以及PCR呼吸道病毒检测。</td>
+            </tr>
+            <tr>
+                <td><span class="check-mark">✓</span> 其他</td>
+            </tr>
+            <tr>
+                <td><span class="diamond">◇</span> 对于已知或可能接触流行性病原体（如军团菌或流感病毒）的患者，可扩大评估范围以包括对这些病原体的检测。</td>
+            </tr>
+            <tr>
+                <td><span class="diamond">◇</span> 对于空洞性肺炎患者，可能还要检测结核病、真菌病原体和诺卡菌属。</td>
+            </tr>
+            <tr>
+                <td><span class="diamond">◇</span> 对于免疫功能低下的患者，应扩大鉴别诊断，包括条件致病菌（如肺孢子菌）、真菌、寄生虫，以及不常见的病毒病原体（如巨细胞病毒）。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet-point">●</span> ABG。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet-point">●</span> 炎性指标检测：ESR、CRP、PCT等。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet-point">●</span> HIV血清学检查。</td>
+            </tr>
+            <tr class="section-header">
+                <td>6. 诊断策略</td>
+            </tr>
+            <tr>
+                <td><span class="bullet-point">●</span> 临床诊断：社区发病、符合以下1～4项中任何1项加第5项，除外肺结核、肺部肿瘤、非感染性肺间质性疾病、肺水肿、肺不张、肺栓塞、肺嗜酸性粒细胞浸润症及肺血管炎等。</td>
+            </tr>
+            <tr>
+                <td><span class="check-mark">✓</span> 新近出现的咳嗽、咳痰或原有呼吸道疾病症状加重，伴或不伴脓痰、胸痛、呼吸困难、咯血。</td>
+            </tr>
+            <tr>
+                <td><span class="check-mark">✓</span> 发热。</td>
+            </tr>
+            <tr>
+                <td><span class="check-mark">✓</span> 肺实变体征和/或闻及湿啰音。</td>
+            </tr>
+            <tr>
+                <td><span class="check-mark">✓</span> WBC > 10×10⁹/L或 < 4×10⁹/L，伴或不伴核左移。</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 页码 -->
+    <div class="page-number">页码：82</div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div class="tags-container">
+            <span class="tag">社区获得性肺炎</span>
+            <span class="tag">CAP</span>
+            <span class="tag">肺炎</span>
+            <span class="tag">生化检查</span>
+            <span class="tag">空腹血糖</span>
+            <span class="tag">血清钠</span>
+            <span class="tag">肝肾功能</span>
+            <span class="tag">胸部CT</span>
+            <span class="tag">胸片</span>
+            <span class="tag">肺浸润</span>
+            <span class="tag">军团菌</span>
+            <span class="tag">微生物学检测</span>
+            <span class="tag">轻症CAP</span>
+            <span class="tag">中度CAP</span>
+            <span class="tag">重症CAP</span>
+            <span class="tag">血培养</span>
+            <span class="tag">痰培养</span>
+            <span class="tag">革兰染色</span>
+            <span class="tag">肺炎链球菌</span>
+            <span class="tag">尿抗原检测</span>
+            <span class="tag">流感病毒</span>
+            <span class="tag">腺病毒</span>
+            <span class="tag">副流感病毒</span>
+            <span class="tag">呼吸道合胞病毒</span>
+            <span class="tag">人类偏肺病毒</span>
+            <span class="tag">气管镜</span>
+            <span class="tag">支气管吸入物</span>
+            <span class="tag">肺泡灌洗</span>
+            <span class="tag">需氧菌培养</span>
+            <span class="tag">真菌染色</span>
+            <span class="tag">PCR</span>
+            <span class="tag">呼吸道病毒检测</span>
+            <span class="tag">空洞性肺炎</span>
+            <span class="tag">结核病</span>
+            <span class="tag">真菌病原体</span>
+            <span class="tag">诺卡菌属</span>
+            <span class="tag">免疫功能低下</span>
+            <span class="tag">条件致病菌</span>
+            <span class="tag">肺孢子菌</span>
+            <span class="tag">寄生虫</span>
+            <span class="tag">巨细胞病毒</span>
+            <span class="tag">ABG</span>
+            <span class="tag">动脉血气</span>
+            <span class="tag">ESR</span>
+            <span class="tag">CRP</span>
+            <span class="tag">PCT</span>
+            <span class="tag">HIV</span>
+            <span class="tag">血清学检查</span>
+            <span class="tag">肺结核</span>
+            <span class="tag">肺部肿瘤</span>
+            <span class="tag">肺水肿</span>
+            <span class="tag">肺不张</span>
+            <span class="tag">肺栓塞</span>
+            <span class="tag">肺嗜酸性粒细胞浸润症</span>
+            <span class="tag">肺血管炎</span>
+            <span class="tag">咳嗽</span>
+            <span class="tag">咳痰</span>
+            <span class="tag">脓痰</span>
+            <span class="tag">胸痛</span>
+            <span class="tag">呼吸困难</span>
+            <span class="tag">咯血</span>
+            <span class="tag">发热</span>
+            <span class="tag">肺实变</span>
+            <span class="tag">湿啰音</span>
+            <span class="tag">WBC</span>
+            <span class="tag">白细胞</span>
+            <span class="tag">核左移</span>
+        </div>
+    </div>
+    
+    <!-- 关键词区域 -->
+    <div class="keywords-section">
+        <div class="keywords-title">🔑 关键词</div>
+        <div class="keywords-list">
+            <span class="keyword">社区获得性肺炎</span>
+            <span class="keyword">CAP</span>
+            <span class="keyword">胸部CT</span>
+            <span class="keyword">微生物学检测</span>
+            <span class="keyword">血培养</span>
+            <span class="keyword">痰培养</span>
+            <span class="keyword">军团菌</span>
+            <span class="keyword">肺炎链球菌</span>
+            <span class="keyword">PCR</span>
+            <span class="keyword">HIV</span>
+            <span class="keyword">CRP</span>
+            <span class="keyword">PCT</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="社区获得性肺炎(CAP)检查与诊断策略；选做检查、诊断策略；关键词=社区获得性肺炎,CAP,胸部CT,微生物学检测,血培养,痰培养,军团菌,肺炎链球菌,PCR,HIV,CRP,PCT；页码=82" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <!-- 提示信息 -->
+    <div class="toast" id="toast">已复制到剪贴板！</div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                const btn = document.querySelector('.copy-btn');
+                const toast = document.getElementById('toast');
+                btn.classList.add('copied');
+                btn.textContent = '已复制';
+                toast.style.display = 'block';
+                setTimeout(function() {
+                    btn.classList.remove('copied');
+                    btn.textContent = '复制';
+                    toast.style.display = 'none';
+                }, 2000);
+            });
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isActive = btn.classList.contains('active');
+            
+            if (!isActive) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                
+                // 添加到index.html的收藏类目
+                const favoriteData = {
+                    title: '社区获得性肺炎(CAP)检查与诊断策略',
+                    url: '82.html',
+                    tags: ['CAP', '肺炎', '诊断', '血培养'],
+                    date: new Date().toISOString()
+                };
+                
+                // 保存到localStorage
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites.push(favoriteData);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                // 显示提示
+                const toast = document.getElementById('toast');
+                toast.textContent = '已添加到收藏！';
+                toast.style.display = 'block';
+                toast.style.background = '#ffd93d';
+                toast.style.color = '#333';
+                setTimeout(function() {
+                    toast.style.display = 'none';
+                    toast.textContent = '已复制到剪贴板！';
+                    toast.style.background = '#27ae60';
+                    toast.style.color = 'white';
+                }, 2000);
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+                
+                // 从收藏中移除
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '82.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.url === '82.html');
+            if (isFavorited) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
