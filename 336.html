@@ -1,0 +1,523 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~机械通气技术与呼吸机应用指南*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8f0f8 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #2d3748;
+        }
+        
+        .header {
+            position: relative;
+            margin-bottom: 15px;
+            min-height: 110px;
+        }
+        
+        .home-btn {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: linear-gradient(135deg, #3182ce 0%, #2b6cb0 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(49, 130, 206, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(49, 130, 206, 0.4);
+        }
+        
+        .nav-btns {
+            position: absolute;
+            right: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(56, 161, 105, 0.3);
+            transition: all 0.3s ease;
+            min-width: 70px;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(56, 161, 105, 0.4);
+        }
+        
+        .favorite-btn {
+            background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+            box-shadow: 0 2px 6px rgba(237, 137, 54, 0.3);
+        }
+        
+        .favorite-btn:hover {
+            box-shadow: 0 3px 10px rgba(237, 137, 54, 0.4);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a365d;
+            font-size: 22px;
+            padding: 55px 100px 20px;
+            line-height: 1.5;
+            font-weight: 700;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #2b6cb0 0%, #2c5282 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 18px 14px;
+            font-size: 20px;
+            font-weight: 700;
+            text-align: left;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e2e8f0;
+            transition: background 0.2s ease;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        tbody tr:hover {
+            background: #edf2f7;
+        }
+        
+        tbody td {
+            padding: 14px;
+            color: #4a5568;
+            line-height: 1.8;
+            word-break: break-word;
+            vertical-align: top;
+        }
+        
+        .section-title {
+            color: #2b6cb0;
+            font-weight: 700;
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+        
+        .bullet {
+            color: #e53e3e;
+            font-weight: bold;
+            margin-right: 4px;
+        }
+        
+        .check {
+            color: #38a169;
+            font-weight: bold;
+            margin-right: 4px;
+        }
+        
+        .diamond {
+            color: #805ad5;
+            font-weight: bold;
+            margin-right: 4px;
+        }
+        
+        .tags-section {
+            margin-top: 25px;
+            padding: 22px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 17px;
+            color: #1a365d;
+            margin-bottom: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tags-title::before {
+            content: "🏷️";
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: linear-gradient(135deg, #ebf8ff 0%, #bee3f8 100%);
+            color: #2b6cb0;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #90cdf4;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(43, 108, 176, 0.2);
+        }
+        
+        .page-info {
+            text-align: center;
+            margin-top: 25px;
+            padding: 18px;
+            color: #718096;
+            font-size: 15px;
+        }
+        
+        .page-number {
+            font-size: 22px;
+            color: #2b6cb0;
+            font-weight: 800;
+        }
+        
+        .copy-section {
+            margin-top: 20px;
+            padding: 22px;
+            background: white;
+            border-radius: 16px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 14px 18px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 14px;
+            color: #4a5568;
+            background: #fafafa;
+            transition: border-color 0.3s ease;
+        }
+        
+        .copy-input:focus {
+            outline: none;
+            border-color: #3182ce;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #805ad5 0%, #6b46c1 100%);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 15px;
+            cursor: pointer;
+            white-space: nowrap;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(128, 90, 213, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(128, 90, 213, 0.4);
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .keywords-section {
+            margin-top: 20px;
+            padding: 18px;
+            background: linear-gradient(135deg, #fffaf0 0%, #feebc8 100%);
+            border-radius: 12px;
+            border-left: 5px solid #ed8936;
+        }
+        
+        .keywords-title {
+            font-size: 15px;
+            color: #c05621;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .keywords {
+            color: #744210;
+            font-size: 14px;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 17px;
+                padding: 60px 10px 15px;
+            }
+            
+            .home-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .nav-btn {
+                padding: 6px 14px;
+                font-size: 12px;
+                min-width: 60px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 14px 10px;
+            }
+            
+            tbody td {
+                padding: 12px 10px;
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="nav-btns">
+            <a href="335.html" class="nav-btn">← 上一页</a>
+            <a href="337.html" class="nav-btn">下一页 →</a>
+            <button class="nav-btn favorite-btn" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~机械通气技术与呼吸机应用指南*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~机械通气技术与呼吸机应用指南*****、序号、内容分类、详细内容、前文</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>内容分类</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>前文</td>
+                    <td>机械通气对循环的影响</td>
+                    <td>好，血容量正常，则能通过交感神经反射和血管加压受体使周围静脉收缩，恢复周围静脉与中心静脉的压力差，恢复足够的静脉回流。机械通气还可以增加胸内压，减少左心后负荷，有利于治疗左心衰竭和肺水肿；机械通气一般容易增加右心后负荷，但对于呼吸障碍的患者，通过改善低氧、改善功能残气量，还可以改善肺血管的低氧血管收缩状态，还可能减少右心后负荷。</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>机械通气的目标</td>
+                    <td>提供合适的肺泡通气（目标PaCO₂），维持适宜的动脉氧分压（目标PaO₂）、合适的呼吸肌负担，使患者舒适、避免副作用。</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>呼吸机的组成结构</td>
+                    <td>呼吸机的工作面板均包括3部分。<br>①<span class="check">监测面板</span>：显示患者的实际通气情况；<br>②<span class="check">报警面板</span>：设置各种参数的理想范围；<br>③<span class="check">控制面板</span>：为患者人为设置的通气参数。</td>
+                </tr>
+                <tr>
+                    <td rowspan="5">7</td>
+                    <td rowspan="5">机械通气模式</td>
+                    <td>
+                        <div class="section-title">机械通气模式的选择</div>
+                        定容型、定压型；单一型、复合型；递增波、递减波、正弦波、方波等；容量控制（VC）、压力控制（PC）、同步间歇指令通气（SIMV）、自主通气（PS）。应根据患者实际状态选择合适的通气模式，没有一种模式比另一种模式更加优秀。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">机械通气的模式</div>
+                        主要有控制通气（CMV）、辅助/控制通气（A/CMV）、SIMV和PS。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check">✓</span>完全的CMV：由呼吸机控制所有通气过程，不容许患者进行任何自主呼吸。这种通气模式现在基本被淘汰。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check">✓</span>A/CMV：现在通常所说的控制通气基本都指的是A/CMV。患者在通气过程中仅起送气的触发作用，患者和呼吸机一起决定频率，但其他通气参数均由呼吸机决定，主要有VC和PC。<br><br>
+                        <span class="diamond">◇</span>VC的主要参数包括吸氧浓度（FiO₂）、呼气末正压（PEEP）（FiO₂和PEEP是任何通气模式均有的参数）、潮气量（Vt）、呼吸频率（R），次要参数设置有送气波形、触发方式、触发灵敏度、吸呼比（I:E）等。一个呼吸周期完成后，如果患者能触发送气，呼吸机还会送气。因此，设置的呼吸频率只是保证最低通气频率，不是最终频率。<br><br>
+                        <span class="diamond">◇</span>PC的主要参数包括FiO₂、PEEP、PC、吸气时间Ti、R。同样，一个呼吸周期完成后，如果患者能触发送气，呼
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag">机械通气</span>
+            <span class="tag">呼吸机</span>
+            <span class="tag">左心衰竭</span>
+            <span class="tag">肺水肿</span>
+            <span class="tag">PaCO₂</span>
+            <span class="tag">PaO₂</span>
+            <span class="tag">监测面板</span>
+            <span class="tag">报警面板</span>
+            <span class="tag">控制面板</span>
+            <span class="tag">定容型</span>
+            <span class="tag">定压型</span>
+            <span class="tag">容量控制</span>
+            <span class="tag">VC</span>
+            <span class="tag">压力控制</span>
+            <span class="tag">PC</span>
+            <span class="tag">SIMV</span>
+            <span class="tag">自主通气</span>
+            <span class="tag">PS</span>
+            <span class="tag">CMV</span>
+            <span class="tag">A/CMV</span>
+            <span class="tag">FiO₂</span>
+            <span class="tag">PEEP</span>
+            <span class="tag">潮气量</span>
+            <span class="tag">Vt</span>
+            <span class="tag">呼吸频率</span>
+            <span class="tag">吸呼比</span>
+            <span class="tag">I:E</span>
+        </div>
+    </div>
+    
+    <div class="page-info">
+        当前页码：<span class="page-number">336</span>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="机械通气技术与呼吸机应用指南；机械通气目标；呼吸机组成结构；机械通气模式；VC；PC；SIMV；A/CMV；CMV；FiO₂；PEEP；PaCO₂；PaO₂；=336" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <div class="keywords-section">
+        <div class="keywords-title">🔑 关键词</div>
+        <div class="keywords">336</div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(input.value).then(function() {
+                    showToast('✅ 已复制到剪贴板');
+                }).catch(function() {
+                    fallbackCopy(input);
+                });
+            } else {
+                fallbackCopy(input);
+            }
+        }
+        
+        function fallbackCopy(input) {
+            try {
+                document.execCommand('copy');
+                showToast('✅ 已复制到剪贴板');
+            } catch (err) {
+                showToast('❌ 复制失败，请手动复制');
+            }
+        }
+        
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.8);color:white;padding:16px 28px;border-radius:12px;font-size:15px;z-index:10000;';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2000);
+        }
+        
+        function addToFavorites() {
+            const title = document.title;
+            const url = window.location.href;
+            const pageData = {
+                title: title,
+                url: url,
+                category: '机械通气',
+                time: new Date().toLocaleString('zh-CN')
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('kimi_favorites') || '[]');
+            const exists = favorites.some(f => f.url === url);
+            
+            if (!exists) {
+                favorites.push(pageData);
+                localStorage.setItem('kimi_favorites', JSON.stringify(favorites));
+                showToast('⭐ 已添加到收藏！请在index.html查看');
+            } else {
+                showToast('⚠️ 该页面已在收藏列表中');
+            }
+        }
+    </script>
+</body>
+</html>
