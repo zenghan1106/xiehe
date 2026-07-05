@@ -1,0 +1,514 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~感染性心内膜炎诊断策略与选做检查*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .back-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .fav-btn {
+            background: #f0ad4e;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+        
+        .fav-btn.active {
+            background: #d9534f;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c5282;
+            font-size: 22px;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        thead th {
+            background: #3182ce;
+            color: white;
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+            line-height: 1.8;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        tbody tr:hover {
+            background: #edf2f7;
+        }
+        
+        .section-title {
+            background: #ebf8ff;
+            color: #2b6cb0;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        
+        .sub-item {
+            padding-left: 20px;
+            color: #4a5568;
+        }
+        
+        .check-mark {
+            color: #38a169;
+            font-weight: bold;
+        }
+        
+        .diamond {
+            color: #3182ce;
+        }
+        
+        .square {
+            color: #718096;
+        }
+        
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2d3748;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #bee3f8;
+            color: #2c5282;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        
+        .tag:hover {
+            background: #90cdf4;
+        }
+        
+        .bottom-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        
+        .keywords {
+            color: #4a5568;
+            font-size: 13px;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .page-num {
+            text-align: center;
+            color: #718096;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #4a5568;
+        }
+        
+        .copy-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #5a67d8;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+                padding: 10px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .header {
+                flex-direction: column;
+            }
+            
+            .nav-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                width: 100%;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            #copyInput {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="210.html" class="nav-btn">上一页</a>
+            <a href="212.html" class="nav-btn">下一页</a>
+            <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~感染性心内膜炎诊断策略与选做检查*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>感染性心内膜炎（IE）诊断策略与选做检查</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="section-title">5. 选做检查</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check-mark">●</span> 胸腹盆增强CT：评估有无肺部感染、腹腔重要脏器因栓塞所致缺血性改变。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check-mark">●</span> BNP＋cTnI检测：可评估心功能及心肌损伤严重程度。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check-mark">●</span> 头颅影像学：全面评估颅内缺血或出血等继发改变，对诊断IE帮助不大，但针对存在中枢神经系统定位体征的患者，尽早评估有无中枢病变是指导诊疗及评价预后的关键。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">6. 诊断策略</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check-mark">●</span> 主要临床标准
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item">
+                        <span class="check-mark">✓</span> 血培养阳性（以下情况之一）
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item">
+                        <span class="diamond">◇</span> 2次独立血培养检测出符合IE的典型微生物：金黄色葡萄球菌、草绿色链球菌、牛链球菌、HACEK族（包括嗜血杆菌、放线杆菌、心杆菌、艾肯菌、金氏杆菌），或无原发灶的社区获得性肠球菌；或者
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item">
+                        <span class="diamond">◇</span> 持续血培养阳性
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item">
+                        <span class="square">□</span> 对于心内膜炎的非典型致病微生物：间隔12小时以上采集的血液样本至少有2次血培养阳性。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item">
+                        <span class="square">□</span> 对于更常为皮肤污染物的微生物：3次独立血培养均阳性或≥4次独立血培养中大多数为阳性（首次和末次取样时间至少间隔1小时）；或者
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item">
+                        <span class="diamond">◇</span> 单次血培养贝纳柯克斯体阳性或抗Ⅰ相IgG抗体效价＞1:800。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item">
+                        <span class="check-mark">✓</span> 心内膜受累的证据（以下情况之一）
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item">
+                        <span class="diamond">◇</span> 超声心动图发现IE表现：赘生物（摆动的心内团块，位于瓣膜或支持结构、反流路径、植入材料上，且无其他解剖学解释），或者脓肿，或者新发的人工瓣膜部分裂开。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item">
+                        <span class="diamond">◇</span> 新发瓣膜关闭不全（原有杂音增强或改变不是充分标准）。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="check-mark">●</span> 次要临床标准
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item">
+                        <span class="check-mark">✓</span> 易感因素：静脉注射毒品或存在易感心脏状况（人工心脏瓣膜，或伴明显关闭不全或血液湍流的瓣膜损害）。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item">
+                        <span class="check-mark">✓</span> 发热：体温≥38.0℃。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item">
+                        <span class="check-mark">✓</span> 血管表现：大动脉栓塞、脓毒性肺梗死、感染性动脉瘤、颅内出血、结膜出血或Janeway病变。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item">
+                        <span class="check-mark">✓</span> 免疫学表现：肾小球肾炎、Osler结节、Roth斑或类风湿因子阳性。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-item">
+                        <span class="check-mark">✓</span> 微生物学证据：不符合主要标准的阳性血培养或符合IE的微生物活动性感染血清学证据。
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">检索标签</div>
+        <div class="tags">
+            <span class="tag">感染性心内膜炎</span>
+            <span class="tag">IE</span>
+            <span class="tag">金黄色葡萄球菌</span>
+            <span class="tag">草绿色链球菌</span>
+            <span class="tag">牛链球菌</span>
+            <span class="tag">HACEK族</span>
+            <span class="tag">嗜血杆菌</span>
+            <span class="tag">放线杆菌</span>
+            <span class="tag">心杆菌</span>
+            <span class="tag">艾肯菌</span>
+            <span class="tag">金氏杆菌</span>
+            <span class="tag">肠球菌</span>
+            <span class="tag">贝纳柯克斯体</span>
+            <span class="tag">赘生物</span>
+            <span class="tag">脓肿</span>
+            <span class="tag">人工瓣膜</span>
+            <span class="tag">肾小球肾炎</span>
+            <span class="tag">Osler结节</span>
+            <span class="tag">Roth斑</span>
+            <span class="tag">类风湿因子</span>
+            <span class="tag">Janeway病变</span>
+            <span class="tag">BNP</span>
+            <span class="tag">cTnI</span>
+        </div>
+    </div>
+    
+    <div class="bottom-section">
+        <div class="keywords">
+            <strong>关键词：</strong>感染性心内膜炎；IE；诊断策略；选做检查；血培养；主要临床标准；次要临床标准；超声心动图；赘生物；金黄色葡萄球菌；草绿色链球菌；HACEK族；贝纳柯克斯体；Janeway病变；Osler结节；Roth斑
+        </div>
+        <div class="page-num">211</div>
+        <div class="copy-section">
+            <input type="text" id="copyInput" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <script>
+        // 设置复制框内容
+        const title = "感染性心内膜炎诊断策略与选做检查";
+        const subtitle = "IE诊断标准与选做检查项目";
+        const keywords = "感染性心内膜炎；IE；诊断策略；选做检查；血培养；主要临床标准；次要临床标准；超声心动图；赘生物；金黄色葡萄球菌；草绿色链球菌；HACEK族；贝纳柯克斯体；Janeway病变；Osler结节；Roth斑";
+        const pageNum = "211";
+        document.getElementById('copyInput').value = title + "；" + subtitle + "；" + keywords + "；" + "=" + pageNum;
+        
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                alert('已复制到剪贴板！');
+            }).catch(function(err) {
+                document.execCommand('copy');
+                alert('已复制到剪贴板！');
+            });
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                
+                // 保存到localStorage
+                const favData = {
+                    title: '~~~~~感染性心内膜炎诊断策略与选做检查*****',
+                    url: '211.html',
+                    category: 'index'
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.find(f => f.url === '211.html');
+                if (!exists) {
+                    favorites.push(favData);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                alert('已添加到收藏！');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '211.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                alert('已取消收藏！');
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.find(f => f.url === '211.html');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
