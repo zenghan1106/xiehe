@@ -1,0 +1,457 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~GRACE评分与急性失代偿性心力衰竭*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #e6f3ff 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            z-index: 100;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 导航按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(92,184,92,0.3);
+            text-align: center;
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+        }
+        
+        .fav-btn {
+            background: #f0ad4e;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(240,173,78,0.3);
+        }
+        
+        .fav-btn:hover {
+            background: #ec971f;
+        }
+        
+        /* 标题 */
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 26px;
+            margin: 60px 0 25px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            word-break: break-all;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            font-size: 14px;
+        }
+        
+        /* 表头 */
+        thead tr {
+            background: linear-gradient(135deg, #2980b9, #3498db);
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+            border: 1px solid #1a5276;
+        }
+        
+        /* 第一行 */
+        tbody tr:first-child {
+            background: #d6eaf8;
+        }
+        
+        tbody tr:first-child td {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        /* 普通单元格 */
+        td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 1.6;
+        }
+        
+        /* 斑马纹 */
+        tbody tr:nth-child(even):not(:first-child) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            color: #1a5276;
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: white;
+            font-weight: 500;
+        }
+        
+        .tag-disease {
+            background: #e74c3c;
+        }
+        
+        .tag-bacteria {
+            background: #9b59b6;
+        }
+        
+        .tag-antibiotic {
+            background: #27ae60;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+        }
+        
+        .copy-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #2980b9;
+        }
+        
+        /* 页码 */
+        .page-num {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            color: #888;
+            font-size: 13px;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 20px;
+                margin-top: 80px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            
+            td {
+                padding: 8px;
+                font-size: 13px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-btns">
+        <a href="100.html" class="nav-btn">上一页</a>
+        <a href="102.html" class="nav-btn">下一页</a>
+        <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~GRACE评分与急性失代偿性心力衰竭*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">GRACE评分</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="width:50%; vertical-align:top;">
+                        <table style="width:100%; box-shadow:none; border-radius:0;">
+                            <tr><td colspan="2" style="font-weight:bold; background:#e8f4f8;">项目</td></tr>
+                            <tr><td colspan="2" style="text-align:left; font-weight:bold;">年龄（岁）</td></tr>
+                            <tr><td style="text-align:left;">&lt;40</td><td>0</td></tr>
+                            <tr><td style="text-align:left;">40～49</td><td>18</td></tr>
+                            <tr><td style="text-align:left;">50～59</td><td>36</td></tr>
+                            <tr><td style="text-align:left;">60～69</td><td>55</td></tr>
+                            <tr><td style="text-align:left;">70～79</td><td>73</td></tr>
+                            <tr><td style="text-align:left;">≥80</td><td>91</td></tr>
+                            <tr><td colspan="2" style="text-align:left; font-weight:bold;">心率（次/分）</td></tr>
+                            <tr><td style="text-align:left;">&lt;70</td><td>0</td></tr>
+                            <tr><td style="text-align:left;">70～89</td><td>7</td></tr>
+                            <tr><td style="text-align:left;">90～109</td><td>13</td></tr>
+                            <tr><td style="text-align:left;">110～149</td><td>23</td></tr>
+                            <tr><td style="text-align:left;">150～199</td><td>36</td></tr>
+                            <tr><td style="text-align:left;">≥200</td><td>46</td></tr>
+                            <tr><td colspan="2" style="text-align:left; font-weight:bold;">收缩压（mmHg）</td></tr>
+                            <tr><td style="text-align:left;">&lt;80</td><td>63</td></tr>
+                            <tr><td style="text-align:left;">80～99</td><td>58</td></tr>
+                            <tr><td style="text-align:left;">100～119</td><td>47</td></tr>
+                            <tr><td style="text-align:left;">120～139</td><td>37</td></tr>
+                            <tr><td style="text-align:left;">140～159</td><td>26</td></tr>
+                            <tr><td style="text-align:left;">160～199</td><td>11</td></tr>
+                            <tr><td style="text-align:left;">≥200</td><td>0</td></tr>
+                        </table>
+                    </td>
+                    <td style="width:50%; vertical-align:top;">
+                        <table style="width:100%; box-shadow:none; border-radius:0;">
+                            <tr><td colspan="2" style="font-weight:bold; background:#e8f4f8;">项目</td></tr>
+                            <tr><td colspan="2" style="text-align:left; font-weight:bold;">内生血肌酐（mg/dl）</td></tr>
+                            <tr><td style="text-align:left;">0～0.39</td><td>2</td></tr>
+                            <tr><td style="text-align:left;">0.4～0.79</td><td>5</td></tr>
+                            <tr><td style="text-align:left;">0.8～1.19</td><td>8</td></tr>
+                            <tr><td style="text-align:left;">1.2～1.59</td><td>11</td></tr>
+                            <tr><td style="text-align:left;">1.6～1.99</td><td>14</td></tr>
+                            <tr><td style="text-align:left;">2～3.99</td><td>23</td></tr>
+                            <tr><td style="text-align:left;">≥4.0</td><td>31</td></tr>
+                            <tr><td colspan="2" style="text-align:left; font-weight:bold;">Killip分级</td></tr>
+                            <tr><td style="text-align:left;">Ⅰ级</td><td>0</td></tr>
+                            <tr><td style="text-align:left;">Ⅱ级</td><td>21</td></tr>
+                            <tr><td style="text-align:left;">Ⅲ级</td><td>43</td></tr>
+                            <tr><td style="text-align:left;">Ⅳ级</td><td>64</td></tr>
+                            <tr><td colspan="2" style="text-align:left; font-weight:bold;">心搏骤停</td></tr>
+                            <tr><td style="text-align:left;">心搏骤停</td><td>43</td></tr>
+                            <tr><td colspan="2" style="text-align:left; font-weight:bold;">心肌损伤标志物阳性</td></tr>
+                            <tr><td style="text-align:left;">心肌损伤标志物阳性</td><td>15</td></tr>
+                            <tr><td colspan="2" style="text-align:left; font-weight:bold;">ST段改变</td></tr>
+                            <tr><td style="text-align:left;">ST段改变</td><td>30</td></tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align:left; padding:20px;">
+                        <p style="font-weight:bold; font-size:16px; color:#1a5276; margin-bottom:10px;">■ 急性失代偿性心力衰竭</p>
+                        <p style="font-weight:bold; margin:10px 0;">1. 定义</p>
+                        <p>• 急性失代偿性心力衰竭（ADHF）指心脏在短时间内发生心肌收缩力明显减低或心室负荷急剧加重而致心输出量急剧下降，导致组织器官灌注不足和急性淤血的临床综合征。</p>
+                        <p>• 可能是新发的，也可能是慢性心力衰竭急性发作。</p>
+                        <p style="font-weight:bold; margin:10px 0;">2. 病因</p>
+                        <p>• ACS：为急性心力衰竭的常见原因，急性心肌梗死患者常有胸痛、心电图及心肌酶动态变化。</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags">
+            <span class="tag tag-disease">急性失代偿性心力衰竭</span>
+            <span class="tag tag-disease">ADHF</span>
+            <span class="tag tag-disease">急性心力衰竭</span>
+            <span class="tag tag-disease">慢性心力衰竭急性发作</span>
+            <span class="tag tag-disease">ACS</span>
+            <span class="tag tag-disease">急性心肌梗死</span>
+            <span class="tag tag-disease">心搏骤停</span>
+            <span class="tag tag-disease">Killip分级</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="GRACE评分与急性失代偿性心力衰竭；急性失代偿性心力衰竭；ADHF；急性心力衰竭；慢性心力衰竭急性发作；ACS；急性心肌梗死；心搏骤停；Killip分级；=101" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-num">页码：101</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        关键词：GRACE评分；急性失代偿性心力衰竭；ADHF；急性心力衰竭；慢性心力衰竭急性发作；ACS；急性心肌梗死；心搏骤停；Killip分级；年龄；心率；收缩压；内生血肌酐；心肌损伤标志物；ST段改变
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                alert('已复制到剪贴板！');
+            }).catch(() => {
+                document.execCommand('copy');
+                alert('已复制到剪贴板！');
+            });
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            const title = document.title;
+            const url = window.location.href;
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const item = {
+                title: title,
+                url: url,
+                pageNum: '101'
+            };
+            
+            const exists = favorites.some(f => f.url === url);
+            if (!exists) {
+                favorites.push(item);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已添加到收藏！');
+            } else {
+                alert('该页面已在收藏中！');
+            }
+            
+            try {
+                const indexFavorites = JSON.parse(localStorage.getItem('index_favorites') || '[]');
+                if (!indexFavorites.some(f => f.url === url)) {
+                    indexFavorites.push(item);
+                    localStorage.setItem('index_favorites', JSON.stringify(indexFavorites));
+                }
+            } catch(e) {
+                console.log('localStorage操作完成');
+            }
+        }
+    </script>
+</body>
+</html>
