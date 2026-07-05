@@ -1,0 +1,801 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~成人心搏骤停急救流程图2020*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f0e8 0%, #e8e8f0 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            z-index: 1000;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 导航按钮组 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(92,184,92,0.3);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+        }
+        
+        .nav-btn.next {
+            background: #f0ad4e;
+        }
+        
+        .nav-btn.next:hover {
+            background: #ec971f;
+        }
+        
+        /* 收藏按钮 */
+        .favorite-btn {
+            background: #d9534f;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(217,83,79,0.3);
+        }
+        
+        .favorite-btn:hover {
+            background: #c9302c;
+        }
+        
+        .favorite-btn.active {
+            background: #5cb85c;
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 800px;
+            margin: 70px auto 30px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        /* 标题区域 */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 22px;
+            line-height: 1.5;
+            font-weight: 600;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        
+        .header .subtitle {
+            font-size: 14px;
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+        
+        /* 表格样式 */
+        .content-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .content-table thead {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        .content-table thead th {
+            padding: 18px 15px;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: left;
+        }
+        
+        .content-table tbody td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #444;
+            vertical-align: top;
+        }
+        
+        .content-table tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .content-table tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        /* 流程步骤样式 */
+        .flow-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin: 10px 0;
+            padding: 12px;
+            background: #f0f7ff;
+            border-radius: 10px;
+            border-left: 4px solid #4a90d9;
+        }
+        
+        .step-number {
+            min-width: 32px;
+            height: 32px;
+            background: #4a90d9;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        /* 判断菱形 */
+        .decision-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin: 8px 0;
+            display: inline-block;
+            font-weight: 600;
+            color: #856404;
+        }
+        
+        /* 操作方框 */
+        .action-box {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin: 8px 0;
+            display: inline-block;
+            color: #155724;
+        }
+        
+        /* 电击标记 */
+        .shock-mark {
+            color: #d9534f;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        /* 重点标记 */
+        .highlight {
+            color: #d9534f;
+            font-weight: 600;
+        }
+        
+        .key-point {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #856404;
+        }
+        
+        /* 药物高亮 */
+        .drug-name {
+            background: #e8f5e9;
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: #2e7d32;
+            font-weight: 600;
+        }
+        
+        /* 图注 */
+        .figure-note {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 14px;
+            color: #2c5282;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        /* 流程分支 */
+        .branch-label {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            margin: 0 5px;
+        }
+        
+        .branch-yes {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .branch-no {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 25px 15px;
+            padding: 20px;
+            background: #f0f7ff;
+            border-radius: 12px;
+            border-left: 4px solid #4a90d9;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c5282;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: white;
+            color: #4a90d9;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid #4a90d9;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        /* 底部编辑框区域 */
+        .copy-section {
+            margin: 25px 15px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+        
+        .copy-section-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .copy-box-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #555;
+            background: white;
+            min-height: 50px;
+            resize: vertical;
+        }
+        
+        .copy-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #5a6268;
+        }
+        
+        .copy-btn.copied {
+            background: #28a745;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            padding: 20px;
+            font-size: 18px;
+            color: #888;
+            font-weight: 300;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            margin: 20px 15px;
+            padding: 18px;
+            background: #fff8e1;
+            border-radius: 12px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .keywords-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .keywords-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .keyword-item {
+            background: white;
+            color: #856404;
+            padding: 6px 14px;
+            border-radius: 16px;
+            font-size: 13px;
+            border: 1px solid #ffc107;
+        }
+        
+        /* 页脚 */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #999;
+            font-size: 12px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 18px;
+            }
+            
+            .content-table thead th {
+                font-size: 16px;
+                padding: 14px 12px;
+            }
+            
+            .content-table tbody td {
+                font-size: 14px;
+                padding: 12px;
+            }
+            
+            .flow-step {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .copy-box-wrapper {
+                flex-direction: column;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .nav-btn, .favorite-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="348.html" class="nav-btn">← 上一页</a>
+        <a href="350.html" class="nav-btn next">下一页 →</a>
+        <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">☆ 收藏</button>
+    </div>
+    
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 标题头 -->
+        <div class="header">
+            <h1>~~~~~成人心搏骤停急救流程图2020*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~成人心搏骤停急救流程图2020*****、成人心搏骤停流程（2020）步骤详解、📋 图37 成人心搏骤停流程（2020）、页码信息 本书页码：</div>
+            <p class="subtitle">急救技术 · 心肺复苏流程 · ACLS</p>
+        </div>
+        
+        <!-- 内容表格 -->
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>成人心搏骤停流程（2020）步骤详解</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="figure-note">📋 图37 成人心搏骤停流程（2020）</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="flow-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <div class="action-box">开始CPR</div><br>
+                                • 给患者吸氧<br>
+                                • 连接监护仪/除颤仪
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="flow-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <div class="decision-box">是否为可电击心律？</div><br>
+                                <span class="branch-label branch-yes">是</span> → 进入步骤2（室颤/无脉性室速）<br>
+                                <span class="branch-label branch-no">否</span> → 进入步骤9（心搏停止/无脉性电活动）
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="flow-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <span class="highlight">室颤/无脉性室速</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <span class="shock-mark">⚡ 电击</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <div class="action-box">CPR 2分钟</div><br>
+                                • 建立静脉/骨内通路
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-content" style="margin-left: 44px;">
+                                <div class="decision-box">是否为可电击心律？</div><br>
+                                <span class="branch-label branch-no">否</span> → 返回步骤4继续CPR<br>
+                                <span class="branch-label branch-yes">是</span> → 进入步骤5
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="flow-step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <span class="shock-mark">⚡ 电击</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">6</div>
+                            <div class="step-content">
+                                <div class="action-box">CPR 2分钟</div><br>
+                                • 每3～5分钟给予<span class="drug-name">肾上腺素</span><br>
+                                • 考虑建立高级气道并描记<span class="key-point">二氧化碳波形图</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-content" style="margin-left: 44px;">
+                                <div class="decision-box">是否为可电击心律？</div><br>
+                                <span class="branch-label branch-no">否</span> → 返回步骤6继续CPR<br>
+                                <span class="branch-label branch-yes">是</span> → 进入步骤7
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="flow-step">
+                            <div class="step-number">7</div>
+                            <div class="step-content">
+                                <span class="shock-mark">⚡ 电击</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">8</div>
+                            <div class="step-content">
+                                <div class="action-box">CPR 2分钟</div><br>
+                                • <span class="drug-name">胺碘酮</span>或<span class="drug-name">利多卡因</span><br>
+                                • 治疗可逆性病因
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="flow-step">
+                            <div class="step-number">9</div>
+                            <div class="step-content">
+                                <span class="highlight">心搏停止/无脉性电活动</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">10</div>
+                            <div class="step-content">
+                                <div class="action-box">CPR 2分钟</div><br>
+                                • 建立静脉/骨内通路<br>
+                                • 每3～5分钟给予<span class="drug-name">肾上腺素</span><br>
+                                • 考虑建立高级气道并描记<span class="key-point">二氧化碳波形图</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-content" style="margin-left: 44px;">
+                                <div class="decision-box">是否为可电击心律？</div><br>
+                                <span class="branch-label branch-yes">是</span> → 执行步骤5或7<br>
+                                <span class="branch-label branch-no">否</span> → 进入步骤11
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="flow-step">
+                            <div class="step-number">11</div>
+                            <div class="step-content">
+                                <div class="action-box">CPR 2分钟</div><br>
+                                • 治疗可逆性病因
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-content" style="margin-left: 44px;">
+                                <div class="decision-box">是否为可电击心律？</div><br>
+                                <span class="branch-label branch-yes">是</span> → 执行步骤5或7<br>
+                                <span class="branch-label branch-no">否</span> → 进入步骤12
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="flow-step">
+                            <div class="step-number">12</div>
+                            <div class="step-content">
+                                <div class="action-box">综合判断</div><br>
+                                • 若无自主循环恢复（<span class="key-point">ROSC</span>）征象，则执行10或11<br>
+                                • 如果实验自主循环恢复，请按照"<span class="highlight">心脏骤停自主循环恢复后治疗</span>"流程图进行操作<br>
+                                • 考虑是否适合继续进行CPR
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="highlight">关键要点总结</span><br>
+                        • 可电击心律：<span class="key-point">室颤/无脉性室速</span> → 电击+CPR循环<br>
+                        • 不可电击心律：<span class="key-point">心搏停止/无脉性电活动</span> → CPR+肾上腺素+治疗病因<br>
+                        • 药物：<span class="drug-name">肾上腺素</span>（每3～5分钟）、<span class="drug-name">胺碘酮</span>或<span class="drug-name">利多卡因</span><br>
+                        • 监测：<span class="key-point">二氧化碳波形图</span>（判断复苏效果）
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="highlight">页码信息</span><br>
+                        本书页码：第338页
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 特色检索标签 -->
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 特色检索标签</div>
+            <div class="tags-container">
+                <span class="tag">心搏骤停</span>
+                <span class="tag">室颤</span>
+                <span class="tag">无脉性室速</span>
+                <span class="tag">无脉性电活动</span>
+                <span class="tag">肾上腺素</span>
+                <span class="tag">胺碘酮</span>
+                <span class="tag">利多卡因</span>
+                <span class="tag">ROSC</span>
+                <span class="tag">自主循环恢复</span>
+                <span class="tag">二氧化碳波形图</span>
+            </div>
+        </div>
+        
+        <!-- 复制编辑框 -->
+        <div class="copy-section">
+            <div class="copy-section-title">📋 快速复制（标题、副标题、关键词及页码）</div>
+            <div class="copy-box-wrapper">
+                <textarea class="copy-input" id="copyInput" readonly>成人心搏骤停急救流程图2020；急救技术；心肺复苏流程；ACLS；开始CPR；吸氧；监护仪；除颤仪；可电击心律；室颤；无脉性室速；电击；CPR；静脉通路；骨内通路；肾上腺素；高级气道；二氧化碳波形图；胺碘酮；利多卡因；可逆性病因；心搏停止；无脉性电活动；ROSC；自主循环恢复；=349</textarea>
+                <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+            </div>
+        </div>
+        
+        <!-- 页码显示 -->
+        <div class="page-number">— 349 —</div>
+        
+        <!-- 关键词 -->
+        <div class="keywords-section">
+            <div class="keywords-title">🔑 关键词</div>
+            <div class="keywords-list">
+                <span class="keyword-item">心搏骤停</span>
+                <span class="keyword-item">CPR</span>
+                <span class="keyword-item">除颤</span>
+                <span class="keyword-item">肾上腺素</span>
+                <span class="keyword-item">胺碘酮</span>
+                <span class="keyword-item">利多卡因</span>
+                <span class="keyword-item">ROSC</span>
+                <span class="keyword-item">室颤</span>
+                <span class="keyword-item">无脉性室速</span>
+                <span class="keyword-item">无脉性电活动</span>
+                <span class="keyword-item">急救流程</span>
+                <span class="keyword-item">二氧化碳波形图</span>
+            </div>
+        </div>
+        
+        <!-- 页脚 -->
+        <div class="footer">
+            使用 Scanner Pro 创建 · 医学教材第338页
+        </div>
+    </div>
+    
+    <script>
+        // 复制到剪贴板功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isActive = btn.classList.contains('active');
+            
+            if (!isActive) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '成人心搏骤停急救流程图2020',
+                    url: '349.html',
+                    page: '349',
+                    category: '急救技术'
+                };
+                
+                const exists = favorites.some(f => f.url === '349.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                localStorage.setItem('indexNeedsUpdate', Date.now().toString());
+                alert('已添加到收藏！请在首页查看收藏列表。');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+                
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const updated = favorites.filter(f => f.url !== '349.html');
+                localStorage.setItem('favorites', JSON.stringify(updated));
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.url === '349.html');
+            if (isFavorited) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
