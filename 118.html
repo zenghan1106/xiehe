@@ -1,0 +1,573 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~高血压急症*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        .page-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .btn-page {
+            background: #5cb85c;
+            color: white;
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        .btn-page:hover {
+            background: #4cae4c;
+        }
+        
+        .btn-favorite {
+            background: #f0ad4e;
+            color: white;
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        .btn-favorite:hover {
+            background: #ec971f;
+        }
+        
+        .btn-favorite.active {
+            background: #d9534f;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c5282;
+            font-size: 28px;
+            margin: 20px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        thead th {
+            background: #2b6cb0;
+            color: white;
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+            line-height: 1.8;
+        }
+        
+        tbody tr:hover {
+            background: #f7fafc;
+        }
+        
+        .section-title {
+            background: #ebf8ff;
+            color: #2b6cb0;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .indent {
+            padding-left: 30px !important;
+        }
+        
+        .double-indent {
+            padding-left: 50px !important;
+        }
+        
+        .bullet::before {
+            content: "● ";
+            color: #2b6cb0;
+        }
+        
+        .diamond::before {
+            content: "◇ ";
+            color: #2b6cb0;
+        }
+        
+        .check::before {
+            content: "✓ ";
+            color: #38a169;
+            font-weight: bold;
+        }
+        
+        .author {
+            text-align: right;
+            color: #718096;
+            font-style: italic;
+            padding: 15px;
+        }
+        
+        .tags-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            color: #2b6cb0;
+            font-size: 16px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #fed7d7;
+            color: #c53030;
+        }
+        
+        .tag-disease:hover {
+            background: #fc8181;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .tag-drug:hover {
+            background: #68d391;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #feebc8;
+            color: #c05621;
+        }
+        
+        .tag-bacteria:hover {
+            background: #f6ad55;
+            color: white;
+        }
+        
+        .copy-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .copy-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        #copyInput {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        #copyInput:focus {
+            border-color: #2b6cb0;
+        }
+        
+        .btn-copy {
+            background: #805ad5;
+            color: white;
+            padding: 12px 24px;
+            white-space: nowrap;
+        }
+        
+        .btn-copy:hover {
+            background: #6b46c1;
+        }
+        
+        .btn-copy.copied {
+            background: #38a169;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #718096;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #a0aec0;
+            font-size: 12px;
+            margin-top: 10px;
+            padding-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 22px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .indent {
+                padding-left: 20px !important;
+            }
+            
+            .double-indent {
+                padding-left: 35px !important;
+            }
+            
+            .btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-row {
+                flex-direction: column;
+            }
+            
+            #copyInput {
+                width: 100%;
+            }
+            
+            .btn-copy {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="nav-buttons">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+            <div class="page-nav">
+                <a href="117.html" class="btn btn-page">上一页</a>
+                <a href="119.html" class="btn btn-page">下一页</a>
+                <button class="btn btn-favorite" id="favoriteBtn" onclick="toggleFavorite()">收藏</button>
+            </div>
+        </div>
+    </div>
+    
+    <h1>~~~~~高血压急症*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">高血压急症 - 急诊疾病诊疗要点</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2" class="section-title">【控制心率和血压】</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent check">静脉输注β受体阻断药，控制心率在60次/分左右，目标收缩压100～120mmHg</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="double-indent diamond">艾司洛尔：250～500μg/kg负荷剂量，经1分钟给药，然后以25～50μg/(kg·min)速度输注，最大剂量为300μg/kg</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="double-indent diamond">不能耐受β受体阻断药者：可使用地尔硫䓬或维拉帕米</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="double-indent diamond">降压效果不佳者：可联用多种降压药物（心率尚未控制者不能首选硝普钠）</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">【急性主动脉夹层外科干预（手术或腔内治疗）】</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent check">A型主动脉病变（涉及升主动脉夹层）</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent check">B型主动脉夹层且有以下表现：</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="double-indent">①持续性重度高血压；②持续性或反复性疼痛；③病情进展（成为夹层或夹层扩展）；④动脉瘤扩张；⑤灌注不良导致终末器官缺血；⑥主动脉破裂；⑦马方综合征患者的急性远端夹层</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="author">（唐晗琪）</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">1. 定义</td>
+                </tr>
+                <tr>
+                    <td colspan="2">血压明显升高（收缩压≥180mmHg和/或舒张压≥120mmHg，或者血压急性升高超过既往正常基线值）+ 靶器官（脑、眼、心脏和肾）受损或功能衰竭</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">2. 靶器官受累表现</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent bullet"><strong>脑：</strong>头痛、恶心、呕吐、脑卒中（缺血性或出血性）、全身性神经系统症状（易激惹、谵妄、木僵、癫痫发作）</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent bullet"><strong>眼：</strong>视力下降，眼底检查（出血、渗出、视盘水肿）</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent bullet"><strong>心血管：</strong>胸痛（心肌缺血或主动脉夹层），双上肢血压不对称（主动脉夹层），呼吸困难（心力衰竭、肺水肿）</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent bullet"><strong>肾：</strong>颜面部水肿，血尿、蛋白尿、肾衰竭</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent bullet"><strong>高血压脑病：</strong>高血压视网膜病变+后循环脑白质病（主要累及顶枕叶脑白质）</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent bullet"><strong>其他：</strong>妊娠状态（子痫前期或发生子痫）、微血管病性溶血性贫血</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">3. 必做检查</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent bullet"><strong>ECG+心肌酶检测：</strong>可协助判断是否存在心肌缺血、心肌梗死等</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent bullet"><strong>D-Dimer检测：</strong>阴性基本上可排除主动脉夹层</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="indent bullet"><strong>肾功能+尿常规+尿沉渣：</strong>血尿、尿蛋白、管型尿及血肌酐水平升高常提示肾损害</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease" onclick="filterByTag('高血压急症')">高血压急症</span>
+            <span class="tag tag-disease" onclick="filterByTag('主动脉夹层')">主动脉夹层</span>
+            <span class="tag tag-disease" onclick="filterByTag('高血压脑病')">高血压脑病</span>
+            <span class="tag tag-disease" onclick="filterByTag('子痫前期')">子痫前期</span>
+            <span class="tag tag-disease" onclick="filterByTag('子痫')">子痫</span>
+            <span class="tag tag-disease" onclick="filterByTag('微血管病性溶血性贫血')">微血管病性溶血性贫血</span>
+            <span class="tag tag-disease" onclick="filterByTag('脑卒中')">脑卒中</span>
+            <span class="tag tag-disease" onclick="filterByTag('心肌梗死')">心肌梗死</span>
+            <span class="tag tag-disease" onclick="filterByTag('心力衰竭')">心力衰竭</span>
+            <span class="tag tag-disease" onclick="filterByTag('肺水肿')">肺水肿</span>
+            <span class="tag tag-disease" onclick="filterByTag('肾衰竭')">肾衰竭</span>
+            <span class="tag tag-disease" onclick="filterByTag('马方综合征')">马方综合征</span>
+            <span class="tag tag-drug" onclick="filterByTag('艾司洛尔')">艾司洛尔</span>
+            <span class="tag tag-drug" onclick="filterByTag('β受体阻断药')">β受体阻断药</span>
+            <span class="tag tag-drug" onclick="filterByTag('地尔硫䓬')">地尔硫䓬</span>
+            <span class="tag tag-drug" onclick="filterByTag('维拉帕米')">维拉帕米</span>
+            <span class="tag tag-drug" onclick="filterByTag('硝普钠')">硝普钠</span>
+            <span class="tag tag-drug" onclick="filterByTag('降压药')">降压药</span>
+            <span class="tag tag-drug" onclick="filterByTag('心肌酶')">心肌酶</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <div class="copy-row">
+            <input type="text" id="copyInput" readonly>
+            <button class="btn btn-copy" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <div class="page-number">页码：118</div>
+    <div class="keywords">关键词：高血压急症；急诊疾病；靶器官损害；主动脉夹层；降压治疗</div>
+
+    <script>
+        // 设置复制输入框内容
+        const pageNum = '118';
+        const title = '高血压急症';
+        const subtitle = '急诊疾病';
+        const keywords = '高血压急症；急诊疾病；靶器官损害；主动脉夹层；降压治疗';
+        document.getElementById('copyInput').value = `${title}；${subtitle}；${keywords}=${pageNum}`;
+        
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                const originalText = btn.textContent;
+                btn.textContent = '已复制!';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                // 备用方案
+                navigator.clipboard.writeText(input.value).then(() => {
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '已复制!';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.textContent = '复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFavorited = btn.classList.contains('active');
+            
+            if (!isFavorited) {
+                btn.classList.add('active');
+                btn.textContent = '已收藏';
+                
+                // 保存到localStorage
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '~~~~~高血压急症*****',
+                    url: '118.html',
+                    pageNum: '118',
+                    category: '急诊疾病'
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.url === pageInfo.url);
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                    
+                    // 尝试更新index.html的收藏区域（如果同源）
+                    try {
+                        updateIndexFavorites(pageInfo);
+                    } catch(e) {
+                        console.log('无法直接更新index.html，收藏信息已保存到本地存储');
+                    }
+                }
+                
+                alert('已收藏到收藏列表！');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '收藏';
+                
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const updated = favorites.filter(f => f.url !== '118.html');
+                localStorage.setItem('favorites', JSON.stringify(updated));
+            }
+        }
+        
+        // 更新index.html的收藏（需要同源策略支持）
+        function updateIndexFavorites(pageInfo) {
+            // 通过localStorage事件通知其他页面
+            localStorage.setItem('favoriteUpdate', JSON.stringify({
+                action: 'add',
+                data: pageInfo,
+                timestamp: Date.now()
+            }));
+        }
+        
+        // 标签筛选功能
+        function filterByTag(tag) {
+            alert('正在检索标签: ' + tag);
+            // 实际应用中这里会跳转到搜索结果页或筛选内容
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.url === '118.html');
+            if (isFavorited) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('active');
+                btn.textContent = '已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
