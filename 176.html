@@ -1,0 +1,674 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急性卟啉病：检查方法与急诊处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #faf8f5 0%, #f0ece6 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #5a8fc7;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(90, 143, 199, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #4a7ab0;
+            transform: translateY(-2px);
+        }
+        
+        /* 右上角导航按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #6b9b7a;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            box-shadow: 0 2px 8px rgba(107, 155, 122, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #5a8a69;
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn.next {
+            background: #d4a373;
+            box-shadow: 0 2px 8px rgba(212, 163, 115, 0.3);
+        }
+        
+        .nav-btn.next:hover {
+            background: #c49363;
+        }
+        
+        /* 收藏按钮 */
+        .favorite-btn {
+            background: #c97b7b;
+            box-shadow: 0 2px 8px rgba(201, 123, 123, 0.3);
+        }
+        
+        .favorite-btn:hover {
+            background: #b86a6a;
+        }
+        
+        .favorite-btn.active {
+            background: #6b9b7a;
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 15px 30px;
+        }
+        
+        /* 标题样式 */
+        h1 {
+            text-align: center;
+            color: #3d5a80;
+            font-size: 26px;
+            margin-bottom: 10px;
+            padding: 15px;
+            background: linear-gradient(90deg, #edf2f7 0%, #d6e3f0 50%, #edf2f7 100%);
+            border-radius: 12px;
+            border-left: 5px solid #5a8fc7;
+            border-right: 5px solid #5a8fc7;
+        }
+        
+        h2 {
+            color: #2d3748;
+            font-size: 20px;
+            margin: 20px 0 12px;
+            padding: 10px 15px;
+            background: #edf2f7;
+            border-radius: 8px;
+            border-left: 4px solid #5a8fc7;
+        }
+        
+        h3 {
+            color: #4a5568;
+            font-size: 16px;
+            margin: 15px 0 10px;
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+        
+        /* 表格头部蓝色 */
+        thead tr {
+            background: linear-gradient(135deg, #5a8fc7 0%, #3d5a80 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        /* 表格第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 16px;
+            font-weight: 600;
+            background: #f8fafc;
+        }
+        
+        td, th {
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+            transition: background 0.3s ease;
+        }
+        
+        /* 列表样式 */
+        ul, ol {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+        
+        li {
+            margin: 8px 0;
+            color: #4a5568;
+        }
+        
+        /* 特殊标记 */
+        .check-mark {
+            color: #38a169;
+            font-weight: bold;
+        }
+        
+        .bullet {
+            color: #5a8fc7;
+            font-weight: bold;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            color: #a0aec0;
+            font-size: 16px;
+            margin: 20px 0;
+            padding: 15px;
+        }
+        
+        /* 底部编辑框区域 */
+        .bottom-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #4a5568;
+            background: #f8fafc;
+        }
+        
+        .copy-btn {
+            background: #7b8cde;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #6a7bd0;
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn.copied {
+            background: #6b9b7a;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            text-align: center;
+            padding: 20px;
+            margin: 20px 0;
+            background: linear-gradient(135deg, #f0e6f5 0%, #e6d5f0 100%);
+            border-radius: 12px;
+        }
+        
+        .keywords-title {
+            color: #7b68a6;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .keyword-tag {
+            display: inline-block;
+            background: white;
+            color: #7b68a6;
+            padding: 6px 14px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #d6c2e8;
+            transition: all 0.3s ease;
+        }
+        
+        .keyword-tag:hover {
+            background: #7b68a6;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* 特色检索标签 */
+        .search-tags {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+        
+        .search-tags-title {
+            color: #2d3748;
+            font-size: 16px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .tag-category {
+            margin: 15px 0;
+        }
+        
+        .tag-category-name {
+            color: #4a5568;
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .search-tag {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 5px;
+            border-radius: 25px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .disease-tag {
+            background: #fde2e2;
+            color: #c53030;
+            border: 1px solid #fbb6b6;
+        }
+        
+        .disease-tag:hover {
+            background: #c53030;
+            color: white;
+        }
+        
+        .drug-tag {
+            background: #d4edda;
+            color: #276749;
+            border: 1px solid #a8d5ba;
+        }
+        
+        .drug-tag:hover {
+            background: #276749;
+            color: white;
+        }
+        
+        .bacteria-tag {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .bacteria-tag:hover {
+            background: #856404;
+            color: white;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .container {
+                padding: 70px 10px 20px;
+            }
+            
+            h1 {
+                font-size: 20px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            
+            td, th {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                top: 10px;
+                left: 10px;
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <button class="home-btn" onclick="window.location.href='index.html'">🏠 返回首页</button>
+    
+    <!-- 右上角导航按钮 -->
+    <div class="nav-buttons">
+        <button class="nav-btn" onclick="window.location.href='175.html'">← 上一页</button>
+        <button class="nav-btn next" onclick="window.location.href='177.html'">下一页 →</button>
+        <button class="nav-btn favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">❤ 收藏</button>
+    </div>
+    
+    <div class="container">
+        <!-- 标题 -->
+        <h1>~~~~~急性卟啉病：检查方法与急诊处理*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~急性卟啉病：检查方法与急诊处理*****、急性卟啉病检查方法与急诊处理、性卟啉病中ADP为阴性，AIP、HCP、VP为阳性。、必做检查（续）、4. 选做检查（受累系统检查，对诊断无特异性）、5. 急诊处理、血尿ALA检测、尿卟啉检测、红细胞内原卟啉检测、血清羟甲基胆素合成酶（HMBS）检测、血浆荧光发射峰检测、基因检测、肝肾功能检查、腹部影像学检查、头颅CT或MRI、静脉输注氯高铁血红素治疗、碳水化合物负荷治疗、避免使用诱发加重药物、低钠血症处理、支持治疗</div>
+        
+        <!-- 主要内容表格 -->
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">急性卟啉病检查方法与急诊处理</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        性卟啉病中ADP为阴性，AIP、HCP、VP为阳性。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="background: #edf2f7; font-weight: bold; color: #3d5a80;">必做检查（续）</td>
+                </tr>
+                <tr>
+                    <td style="width: 180px; font-weight: bold; color: #5a8fc7;">血尿ALA检测</td>
+                    <td>急性卟啉病均升高。</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: #5a8fc7;">尿卟啉检测</td>
+                    <td>急性卟啉病可升高。</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: #5a8fc7;">红细胞内原卟啉检测</td>
+                    <td>ADP可升高。</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: #5a8fc7;">血清羟甲基胆素合成酶（HMBS）检测</td>
+                    <td>AIP急性发作期HMBS活性下降（平均下降程度达50%）。</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: #5a8fc7;">血浆荧光发射峰检测</td>
+                    <td>根据荧光波长的差异可协助判断卟啉衍生物的类型。在中性pH环境下稀释时，VP峰值在接近626nm处，AIP、HCP、PCT和CEP的峰值在接近620nm处。</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: #5a8fc7;">基因检测</td>
+                    <td>基因测序可明确具体突变，确定卟啉病类型，如AIP的HMBS基因位于11号染色体，对HMBS基因进行DNA测序、分析可确定AIP的诊断。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="background: #edf2f7; font-weight: bold; color: #3d5a80;">4. 选做检查（受累系统检查，对诊断无特异性）</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: #5a8fc7;">肝肾功能检查</td>
+                    <td>常有低钠血症，多认为由SIADH引起；可能存在氨基转移酶长期升高较常见，但其他肝功能检查（如胆红素）通常正常，晚期可能出现肝硬化表现。</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: #5a8fc7;">腹部影像学检查</td>
+                    <td>可能显示肠蠕动消失引起的小肠和/或结肠扩张。</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: #5a8fc7;">头颅CT或MRI</td>
+                    <td>可有可逆性后部白质脑病、卟啉病脑病或脱髓鞘脑病等的异常表现。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="background: #edf2f7; font-weight: bold; color: #3d5a80;">5. 急诊处理</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: #5a8fc7;">静脉输注氯高铁血红素治疗</td>
+                    <td>
+                        <span class="check-mark">✓</span> 是急性卟啉病发作的首选治疗，抑制ALAS1减少血红素前体及其副产物的累积，表现为血浆和尿液PBG和ALA快速显著降低。<br>
+                        <span class="check-mark">✓</span> 及时给药通常能在4～5天内迅速缓解发作。<br>
+                        <span class="check-mark">✓</span> 给药方案是使用25%人血白蛋白复溶，中心静脉导管予3～4mg/(kg·d)，连用4天。
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: #5a8fc7;">碳水化合物负荷治疗</td>
+                    <td>
+                        <span class="check-mark">✓</span> 适用于不能获得血红素治疗者。<br>
+                        <span class="check-mark">✓</span> 口服或静脉予葡萄糖，剂量为300～400g/d。<br>
+                        <span class="check-mark">✓</span> 需注意静脉输注葡萄糖可能增加低钠血症风险，限液量在2000～2500ml。
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: #5a8fc7;">避免使用诱发加重药物</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: #5a8fc7;">低钠血症处理</td>
+                    <td>限液，可使用托伐普坦，注意避免血钠急速升高引起脱髓鞘病变。</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: #5a8fc7;">支持治疗</td>
+                    <td>必要时予静脉营养支持、机械通气治疗，出现呼吸肌受累者需要长时间机械通气支持，2～3个月后可逐渐康复脱机。</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <p style="text-align: right; color: #718096; font-size: 14px;">（杨 惊）</p>
+        
+        <!-- 页码 -->
+        <div class="page-number">164</div>
+        
+        <!-- 页码链接显示 -->
+        <div style="text-align: center; color: #a0aec0; font-size: 14px; margin-bottom: 20px;">
+            页码：164
+        </div>
+        
+        <!-- 复制编辑框区域 -->
+        <div class="bottom-section">
+            <h3 style="margin-bottom: 15px; color: #4a5568;">📋 快速复制</h3>
+            <div class="copy-section">
+                <input type="text" class="copy-input" id="copyInput" value="急性卟啉病：检查方法与急诊处理；急性卟啉病、ADP、AIP、HCP、VP、ALA、血尿ALA检测、尿卟啉检测、红细胞内原卟啉检测、HMBS、血清羟甲基胆素合成酶、血浆荧光发射峰检测、基因检测、SIADH、低钠血症、肝肾功能检查、腹部影像学检查、头颅CT、MRI、可逆性后部白质脑病、卟啉病脑病、脱髓鞘脑病、氯高铁血红素、ALAS1、PBG、人血白蛋白、碳水化合物负荷、葡萄糖、托伐普坦、机械通气、静脉营养支持；=164" readonly>
+                <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+            </div>
+        </div>
+        
+        <!-- 关键词区域 -->
+        <div class="keywords-section">
+            <div class="keywords-title">🔍 关键词</div>
+            <span class="keyword-tag">急性卟啉病</span>
+            <span class="keyword-tag">血尿ALA检测</span>
+            <span class="keyword-tag">HMBS检测</span>
+            <span class="keyword-tag">基因检测</span>
+            <span class="keyword-tag">血浆荧光发射峰</span>
+            <span class="keyword-tag">氯高铁血红素</span>
+            <span class="keyword-tag">碳水化合物负荷</span>
+            <span class="keyword-tag">低钠血症</span>
+            <span class="keyword-tag">托伐普坦</span>
+            <span class="keyword-tag">机械通气</span>
+        </div>
+        
+        <!-- 特色检索标签 -->
+        <div class="search-tags">
+            <div class="search-tags-title">🏷️ 特色检索标签</div>
+            
+            <div class="tag-category">
+                <div class="tag-category-name">🦠 疾病</div>
+                <a href="#" class="search-tag disease-tag">急性卟啉病</a>
+                <a href="#" class="search-tag disease-tag">ADP</a>
+                <a href="#" class="search-tag disease-tag">AIP</a>
+                <a href="#" class="search-tag disease-tag">HCP</a>
+                <a href="#" class="search-tag disease-tag">VP</a>
+                <a href="#" class="search-tag disease-tag">PCT</a>
+                <a href="#" class="search-tag disease-tag">CEP</a>
+                <a href="#" class="search-tag disease-tag">低钠血症</a>
+                <a href="#" class="search-tag disease-tag">SIADH</a>
+                <a href="#" class="search-tag disease-tag">肝硬化</a>
+                <a href="#" class="search-tag disease-tag">可逆性后部白质脑病</a>
+                <a href="#" class="search-tag disease-tag">卟啉病脑病</a>
+                <a href="#" class="search-tag disease-tag">脱髓鞘脑病</a>
+                <a href="#" class="search-tag disease-tag">脱髓鞘病变</a>
+            </div>
+            
+            <div class="tag-category">
+                <div class="tag-category-name">💊 药物/治疗</div>
+                <a href="#" class="search-tag drug-tag">氯高铁血红素</a>
+                <a href="#" class="search-tag drug-tag">人血白蛋白</a>
+                <a href="#" class="search-tag drug-tag">葡萄糖</a>
+                <a href="#" class="search-tag drug-tag">托伐普坦</a>
+                <a href="#" class="search-tag drug-tag">静脉营养支持</a>
+                <a href="#" class="search-tag drug-tag">机械通气</a>
+            </div>
+            
+            <div class="tag-category">
+                <div class="tag-category-name">🧫 细菌</div>
+                <span style="color: #a0aec0; font-size: 13px;">本页内容主要涉及检查方法与急诊处理，未包含细菌相关内容</span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 复制到剪贴板功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            navigator.clipboard.writeText(input.value).then(function() {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '✓ 已复制';
+                btn.classList.add('copied');
+                
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }).catch(function(err) {
+                // 降级方案
+                document.execCommand('copy');
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '✓ 已复制';
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                }, 2000);
+            });
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFavorited = btn.classList.contains('active');
+            
+            if (!isFavorited) {
+                // 添加到收藏
+                btn.classList.add('active');
+                btn.innerHTML = '✓ 已收藏';
+                
+                // 保存到localStorage
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '急性卟啉病：检查方法与急诊处理',
+                    url: window.location.href,
+                    pageNum: '164'
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.pageNum === '164');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                // 尝试更新index.html的收藏类目
+                try {
+                    const bc = new BroadcastChannel('favorite_channel');
+                    bc.postMessage({
+                        action: 'add',
+                        data: pageInfo
+                    });
+                } catch(e) {
+                    console.log('BroadcastChannel not supported');
+                }
+                
+                alert('已添加到收藏！请在index.html查看收藏列表。');
+            } else {
+                // 取消收藏
+                btn.classList.remove('active');
+                btn.innerHTML = '❤ 收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.pageNum !== '164');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.pageNum === '164');
+            
+            if (isFavorited) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('active');
+                btn.innerHTML = '✓ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
