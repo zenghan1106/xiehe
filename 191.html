@@ -1,0 +1,551 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~自身免疫性脑炎-急诊处理与感染性疾病急诊*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #334e68;
+        }
+        
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 500;
+        }
+        
+        .btn-home {
+            background: #3b82f6;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        
+        .btn-nav {
+            background: #10b981;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+        
+        .btn-fav {
+            background: #f59e0b;
+            color: white;
+        }
+        
+        .btn-fav:hover {
+            background: #d97706;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+        
+        .btn-copy {
+            background: #6366f1;
+            color: white;
+            padding: 12px 25px;
+            white-space: nowrap;
+        }
+        
+        .btn-copy:hover {
+            background: #4f46e5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1e40af;
+            font-size: 26px;
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+            line-height: 1.4;
+        }
+        
+        .main-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+        
+        .main-table thead {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            color: white;
+        }
+        
+        .main-table thead th {
+            padding: 20px 15px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .main-table tbody td {
+            padding: 16px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+            line-height: 1.9;
+            font-size: 15px;
+            color: #475569;
+        }
+        
+        .main-table tbody tr:hover {
+            background: #f8fafc;
+        }
+        
+        .main-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            color: #1e40af;
+            font-weight: bold;
+            font-size: 17px;
+            margin-bottom: 10px;
+        }
+        
+        .bullet {
+            color: #3b82f6;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+        
+        .check-mark {
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+        
+        .highlight-box {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 0 10px 10px 0;
+            color: #92400e;
+        }
+        
+        .new-section {
+            background: #eff6ff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 15px;
+            border: 2px solid #bfdbfe;
+        }
+        
+        .new-section-title {
+            color: #1e40af;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        .sub-section {
+            color: #3730a3;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 15px 0 10px 0;
+        }
+        
+        .tags-section {
+            background: white;
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            color: #1e40af;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .tag-disease {
+            background: #fee2e2;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
+        }
+        
+        .tag-disease:hover {
+            background: #b91c1c;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .tag-drug {
+            background: #dbeafe;
+            color: #1d4ed8;
+            border: 1px solid #bfdbfe;
+        }
+        
+        .tag-drug:hover {
+            background: #1d4ed8;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .tag-bacteria {
+            background: #d1fae5;
+            color: #047857;
+            border: 1px solid #a7f3d0;
+        }
+        
+        .tag-bacteria:hover {
+            background: #047857;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .copy-section {
+            background: white;
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 14px 18px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s;
+            color: #475569;
+            background: #f8fafc;
+        }
+        
+        .copy-input:focus {
+            border-color: #3b82f6;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .page-info {
+            text-align: center;
+            color: #64748b;
+            font-size: 15px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .keywords-section {
+            background: white;
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        }
+        
+        .keywords-title {
+            color: #1e40af;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        .keywords-content {
+            color: #64748b;
+            font-size: 14px;
+            line-height: 2.2;
+        }
+        
+        .drug-name {
+            color: #7c3aed;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 20px;
+            }
+            
+            .main-table thead th {
+                font-size: 16px;
+                padding: 16px 12px;
+            }
+            
+            .main-table tbody td {
+                padding: 14px 12px;
+                font-size: 14px;
+            }
+            
+            .nav-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-right {
+                align-items: stretch;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: flex-end;
+            }
+            
+            .btn {
+                text-align: center;
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .section-title {
+                font-size: 16px;
+            }
+            
+            .new-section-title {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-bar">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="190.html" class="btn btn-nav">上一页</a>
+            <a href="192.html" class="btn btn-nav">下一页</a>
+            <button class="btn btn-fav" onclick="addToFavorites()">收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~自身免疫性脑炎-急诊处理与感染性疾病急诊*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~自身免疫性脑炎-急诊处理与感染性疾病急诊*****、分类、详细内容、5. 选做检查、6. 急诊处理</div>
+    
+    <table class="main-table">
+        <thead>
+            <tr>
+                <th>分类</th>
+                <th>详细内容</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="section-title">5. 选做检查</div>
+                </td>
+                <td>
+                    <span class="bullet">•</span>ABG＋血氨检测：可除外肺性脑病、CO中毒、肝性脑病。<br><br>
+                    <span class="bullet">•</span>免疫指标检测：若患者有系统性红斑狼疮、血管炎等免疫病的可疑线索，可完善ANA、ds-DNA、SSA、SSB、ENA、ANCA等免疫指标以除外狼疮脑病。<br><br>
+                    <span class="bullet">•</span>毒物检测：适用于有可疑药物过量史患者。<br><br>
+                    <span class="bullet">•</span>子宫＋双附件超声：适用于抗NMDAR抗体阳性女性患者（女性抗NMDAR抗体脑炎患者可能合并畸胎瘤，应当早期发现并切除畸胎瘤）。<br><br>
+                    <span class="bullet">•</span>胸腹盆CT：所有患者均建议完善。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="section-title">6. 急诊处理</div>
+                </td>
+                <td>
+                    <span class="bullet">•</span>血流动力学不稳定的治疗：应考虑气管插管、呼吸机辅助呼吸，尽快稳定其循环状态。<br><br>
+                    <span class="bullet">•</span>脱水降颅压治疗：<span class="drug-name">甘露醇</span>（125～250ml q8h ivgtt）和/或<span class="drug-name">甘油果糖</span>（250ml q12h ivgtt）。<br><br>
+                    <span class="bullet">•</span>抗病毒治疗：有部分自身免疫性脑炎患者可能继发于病毒感染，因此对于患病前有过上呼吸道感染症状，临床表现若不能除外病毒感染，可选用合适的抗病毒药物，如<span class="drug-name">阿昔洛韦</span>。<br><br>
+                    <span class="bullet">•</span>预防和控制癫痫发作<br>
+                    <span class="check-mark">✓</span>一旦患者出现癫痫样发作，应当立即送往监护室，进行气道评估和保护，并予以心电监护，留置胃管和尿管。<br>
+                    <span class="check-mark">✓</span>镇静如<span class="drug-name">地西泮</span>、<span class="drug-name">米达唑仑</span>静脉推注或持续泵入，使用时注意患者呼吸和循环状态。<br><br>
+                    <span class="bullet">•</span>脑脊液抗NMDAR抗体阳性治疗<br>
+                    <span class="check-mark">✓</span>一线治疗：可予人免疫球蛋白和大剂量糖皮质激素，必要时可予糖皮质激素冲击治疗。<br>
+                    <span class="check-mark">✓</span>二线治疗：包括血浆置换、<span class="drug-name">环磷酰胺</span>等免疫抑制药治疗。<br><br>
+                    <span class="bullet">•</span>对症治疗<br>
+                    <span class="check-mark">✓</span>发热患者对症降温。<br>
+                    <span class="check-mark">✓</span>营养支持和加强气道。<br>
+                    <span class="check-mark">✓</span>防压疮护理。<br><br>
+                    <span class="bullet">•</span>若发现患者合并肿瘤，应积极考虑手术切除等治疗。<br>
+                    <div style="text-align: right; color: #64748b; margin-top: 10px;">（须 晋）</div>
+                    
+                    <div class="new-section">
+                        <div class="new-section-title">感染性疾病急诊</div>
+                        <div class="sub-section">■ 感染性疾病诊治思维</div>
+                        <div style="line-height: 2; color: #475569;">
+                            在急诊所有发热的患者均应考虑是否存在感染的问题。<br>
+                            急性发热（指自然病程在2周以内）绝大多数为感染性发
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <span class="tag tag-disease" onclick="searchTag('自身免疫性脑炎')">自身免疫性脑炎</span>
+        <span class="tag tag-disease" onclick="searchTag('肺性脑病')">肺性脑病</span>
+        <span class="tag tag-disease" onclick="searchTag('CO中毒')">CO中毒</span>
+        <span class="tag tag-disease" onclick="searchTag('肝性脑病')">肝性脑病</span>
+        <span class="tag tag-disease" onclick="searchTag('系统性红斑狼疮')">系统性红斑狼疮</span>
+        <span class="tag tag-disease" onclick="searchTag('血管炎')">血管炎</span>
+        <span class="tag tag-disease" onclick="searchTag('狼疮脑病')">狼疮脑病</span>
+        <span class="tag tag-disease" onclick="searchTag('抗NMDAR抗体脑炎')">抗NMDAR抗体脑炎</span>
+        <span class="tag tag-disease" onclick="searchTag('畸胎瘤')">畸胎瘤</span>
+        <span class="tag tag-disease" onclick="searchTag('感染性疾病急诊')">感染性疾病急诊</span>
+        <span class="tag tag-disease" onclick="searchTag('急性发热')">急性发热</span>
+        <span class="tag tag-disease" onclick="searchTag('感染性发热')">感染性发热</span>
+        <span class="tag tag-drug" onclick="searchTag('甘露醇')">甘露醇</span>
+        <span class="tag tag-drug" onclick="searchTag('甘油果糖')">甘油果糖</span>
+        <span class="tag tag-drug" onclick="searchTag('阿昔洛韦')">阿昔洛韦</span>
+        <span class="tag tag-drug" onclick="searchTag('地西泮')">地西泮</span>
+        <span class="tag tag-drug" onclick="searchTag('米达唑仑')">米达唑仑</span>
+        <span class="tag tag-drug" onclick="searchTag('环磷酰胺')">环磷酰胺</span>
+        <span class="tag tag-drug" onclick="searchTag('人免疫球蛋白')">人免疫球蛋白</span>
+        <span class="tag tag-drug" onclick="searchTag('糖皮质激素')">糖皮质激素</span>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="自身免疫性脑炎-急诊处理与感染性疾病急诊；感染性疾病诊治思维；甘露醇；甘油果糖；阿昔洛韦；地西泮；米达唑仑；环磷酰胺；人免疫球蛋白；糖皮质激素；=191" readonly>
+        <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="page-info">
+        页码：191
+    </div>
+    
+    <div class="keywords-section">
+        <div class="keywords-title">关键词</div>
+        <div class="keywords-content">
+            自身免疫性脑炎、急诊处理、选做检查、ABG、血氨、肺性脑病、CO中毒、肝性脑病、系统性红斑狼疮、血管炎、ANA、ds-DNA、SSA、SSB、ENA、ANCA、狼疮脑病、毒物检测、NMDAR、畸胎瘤、胸腹盆CT、气管插管、呼吸机、脱水降颅压、甘露醇、甘油果糖、抗病毒治疗、阿昔洛韦、癫痫发作、地西泮、米达唑仑、镇静、免疫球蛋白、糖皮质激素、血浆置换、环磷酰胺、免疫抑制药、营养支持、防压疮、肿瘤切除、感染性疾病急诊、感染性疾病诊治思维、急性发热、感染性发热、发热、感染
+        </div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板：" + copyText.value);
+            }, function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板");
+            });
+        }
+        
+        function addToFavorites() {
+            const title = document.title;
+            const url = window.location.href;
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(fav => fav.url === url);
+            
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                category: '自身免疫性脑炎',
+                date: new Date().toLocaleDateString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert('已添加到收藏夹！');
+            
+            try {
+                window.parent.postMessage({
+                    type: 'addFavorite',
+                    data: {
+                        title: title,
+                        url: url,
+                        pageNum: '191'
+                    }
+                }, '*');
+            } catch(e) {
+                console.log('无法与父页面通信');
+            }
+        }
+        
+        function searchTag(tag) {
+            alert('检索标签：' + tag);
+        }
+        
+        window.onload = function() {
+            const pageNum = window.location.pathname.replace(/.*\/|\.html/g, '') || '191';
+            const copyContent = '自身免疫性脑炎-急诊处理与感染性疾病急诊；感染性疾病诊治思维；甘露醇；甘油果糖；阿昔洛韦；地西泮；米达唑仑；环磷酰胺；人免疫球蛋白；糖皮质激素；=' + pageNum;
+            document.getElementById('copyText').value = copyContent;
+        };
+    </script>
+</body>
+</html>
