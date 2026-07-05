@@ -1,0 +1,430 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~心房颤动*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            background-image: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .back-btn {
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background-color: #45a049;
+        }
+        
+        .favorite-btn {
+            background-color: #FF9800;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+        
+        .favorite-btn:hover {
+            background-color: #e68900;
+        }
+        
+        .favorite-btn.active {
+            background-color: #f44336;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1565C0;
+            font-size: 28px;
+            margin: 20px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .main-table {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto 30px;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .main-table th {
+            background-color: #1976D2;
+            color: white;
+            padding: 18px 15px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .main-table td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #e3f2fd;
+            color: #333;
+            font-size: 15px;
+            line-height: 1.8;
+            vertical-align: top;
+        }
+        
+        .main-table tr:hover {
+            background-color: #f5fbff;
+        }
+        
+        .section-title {
+            background-color: #e3f2fd;
+            font-weight: bold;
+            color: #1565C0;
+            font-size: 16px;
+        }
+        
+        .bullet {
+            color: #1976D2;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+        
+        .check-mark {
+            color: #4CAF50;
+            margin-right: 6px;
+        }
+        
+        .bottom-section {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #90caf9;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+            background-color: #fff;
+        }
+        
+        .copy-btn {
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background-color: #1976D2;
+        }
+        
+        .tags-section {
+            margin-bottom: 20px;
+        }
+        
+        .tags-title {
+            color: #1565C0;
+            font-size: 16px;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: #e3f2fd;
+            color: #1976D2;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 4px;
+            font-size: 13px;
+            border: 1px solid #90caf9;
+        }
+        
+        .keywords-section {
+            text-align: center;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .keywords-title {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .keywords {
+            color: #1976D2;
+            font-size: 15px;
+            word-break: break-all;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+            padding: 10px;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #333;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            display: none;
+            z-index: 1000;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 22px;
+            }
+            
+            .main-table th {
+                font-size: 16px;
+                padding: 14px 10px;
+            }
+            
+            .main-table td {
+                font-size: 14px;
+                padding: 10px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="109.html" class="nav-btn">上一页</a>
+            <a href="111.html" class="nav-btn">下一页</a>
+            <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~心房颤动*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~心房颤动*****、心房颤动、1. 定义、2. 高危因素、3. 临床表现、4. 必做检查</div>
+    
+    <table class="main-table">
+        <tr>
+            <th colspan="2">心房颤动</th>
+        </tr>
+        <tr>
+            <td colspan="2" class="section-title">1. 定义</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <span class="bullet">●</span>心房颤动简称房颤，是最常见的心律失常之一，其心电图特点是RR间期不等，即"绝对不齐"，PP间期即使可以确定也不规整，且通常&lt;200ms（相当于心房率&gt;300次/分）。<br><br>
+                <span class="bullet">●</span>房颤分类：阵发性房颤（在7天内自行终止）、持续性房颤、永久性房颤（经医师和患者达成一致不采取措施恢复窦律或维持窦律者）。
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="section-title">2. 高危因素</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <span class="bullet">●</span>包括但不限于：心脏瓣膜病、心力衰竭、肥厚型心肌病、先天性心脏病、高血压、冠心病、糖尿病、静脉血栓栓塞性疾病（PE或DVT等）、COPD、心肌炎、甲亢以及亚临床型甲亢、既往心脏手术、肥胖、睡眠呼吸暂停综合征、酗酒以及高龄。<br><br>
+                <span class="bullet">●</span>心房肌的解剖和电生理改变可能对房颤的发生十分重要，常可见心房增大、心房压力增高、心房浸润或炎症。
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="section-title">3. 临床表现</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <span class="bullet">●</span>典型症状：心悸、心动过速、疲劳、乏力、头晕、运动能力下降、排尿增多或轻度呼吸困难；严重者可引发静息时呼吸困难、心绞痛、晕厥前兆甚至晕厥，也可诱发和加重心力衰竭。<br><br>
+                <span class="bullet">●</span>询问病史时，除上述临床表现外，还应侧重询问以下内容。<br>
+                <span class="check-mark">✓</span>患者起病或察觉发病的日期、发作频率和持续时间、严重程度和定性特征。<br>
+                <span class="check-mark">✓</span>是否有诱因：如运动、情绪激动、饮酒或失眠等。<br>
+                <span class="check-mark">✓</span>是否同时存在以下疾病：心脑血管疾病、高血压、慢性阻塞性肺疾病、阻塞性睡眠呼吸暂停或其他可能可逆病因（如甲亢、酗酒）。<br><br>
+                <span class="bullet">●</span>查体可发现患者心律绝对不齐，心音强弱不等、脉搏短绌。
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="section-title">4. 必做检查</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <span class="bullet">●</span>ECG：RR间期不等，即"绝对不齐"，PP间期即使可以确定也不规整，且通常&lt;200ms（相当于心房率&gt;300次/分）。
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center; color: #999; font-size: 13px;">- 第98页 -</td>
+        </tr>
+    </table>
+    
+    <div class="bottom-section">
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="心房颤动；房颤；心律失常；RR间期不等；绝对不齐；阵发性房颤；持续性房颤；永久性房颤；心脏瓣膜病；心力衰竭；高血压；冠心病；糖尿病；COPD；甲亢；睡眠呼吸暂停综合征；伊布利特；普鲁卡因胺；维拉帕米；地尔硫䓬；地高辛；β受体阻断药；=110" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+        
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 检索标签</div>
+            <span class="tag">心房颤动</span>
+            <span class="tag">房颤</span>
+            <span class="tag">心律失常</span>
+            <span class="tag">心力衰竭</span>
+            <span class="tag">高血压</span>
+            <span class="tag">冠心病</span>
+            <span class="tag">糖尿病</span>
+            <span class="tag">COPD</span>
+            <span class="tag">甲亢</span>
+            <span class="tag">伊布利特</span>
+            <span class="tag">普鲁卡因胺</span>
+            <span class="tag">维拉帕米</span>
+            <span class="tag">地尔硫䓬</span>
+            <span class="tag">地高辛</span>
+            <span class="tag">β受体阻断药</span>
+        </div>
+        
+        <div class="keywords-section">
+            <div class="keywords-title">关键词</div>
+            <div class="keywords">心房颤动、房颤、心律失常、RR间期不等、绝对不齐、阵发性房颤、持续性房颤、永久性房颤、心脏瓣膜病、心力衰竭、肥厚型心肌病、高血压、冠心病、糖尿病、静脉血栓栓塞性疾病、COPD、心肌炎、甲亢、睡眠呼吸暂停综合征、伊布利特、普鲁卡因胺、维拉帕米、地尔硫䓬、地高辛、β受体阻断药</div>
+        </div>
+        
+        <div class="page-number">页码：110</div>
+    </div>
+    
+    <div class="toast" id="toast">已复制到剪贴板！</div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                showToast('已复制到剪贴板！');
+            }).catch(function() {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            });
+        }
+        
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(function() {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            if (btn.classList.contains('active')) {
+                btn.classList.remove('active');
+                btn.innerHTML = '☆ 收藏';
+                showToast('已取消收藏');
+            } else {
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+                showToast('已添加到收藏');
+                
+                // 尝试添加到index.html的收藏类目
+                try {
+                    const favoriteData = {
+                        title: '心房颤动',
+                        url: window.location.href,
+                        page: '110'
+                    };
+                    localStorage.setItem('favorite_110', JSON.stringify(favoriteData));
+                } catch(e) {
+                    console.log('localStorage not available');
+                }
+            }
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            try {
+                const saved = localStorage.getItem('favorite_110');
+                if (saved) {
+                    const btn = document.getElementById('favoriteBtn');
+                    btn.classList.add('active');
+                    btn.innerHTML = '★ 已收藏';
+                }
+            } catch(e) {}
+        };
+    </script>
+</body>
+</html>
