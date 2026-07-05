@@ -1,0 +1,543 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~肺栓塞PE急诊处理流程_溶栓治疗_抗凝治疗*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #2c3e50;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 30px;
+        }
+        
+        /* 顶部按钮区域 */
+        .left-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 100;
+        }
+        
+        .right-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+            align-items: flex-end;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn-home {
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-nav {
+            background: linear-gradient(45deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        .btn-fav {
+            background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            margin-top: 5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+        
+        .btn-copy {
+            background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 12px 25px;
+            font-size: 15px;
+        }
+        
+        /* 主内容区 */
+        .main-content {
+            padding: 100px 15px 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            color: #1a5276;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            font-weight: 700;
+            line-height: 1.4;
+        }
+        
+        /* 表格样式 */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+        
+        .data-table thead {
+            background: linear-gradient(45deg, #1e88e5 0%, #0d47a1 100%);
+            color: white;
+        }
+        
+        .data-table th {
+            padding: 16px 12px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 17px;
+        }
+        
+        .data-table td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e8f4f8;
+            vertical-align: top;
+        }
+        
+        .data-table tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        .data-table tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        .data-table .section-header {
+            background: #e8f5e9 !important;
+            font-weight: 700;
+            color: #2e7d32;
+            font-size: 16px;
+            text-align: center;
+        }
+        
+        .data-table .sub-header {
+            background: #fff3e0 !important;
+            font-weight: 600;
+            color: #e65100;
+        }
+        
+        .data-table .flow-step {
+            background: #e3f2fd !important;
+            font-weight: 600;
+            color: #1565c0;
+        }
+        
+        .data-table .treatment-box {
+            background: #f3e5f5 !important;
+            border-left: 4px solid #9c27b0;
+        }
+        
+        .data-table .note-row {
+            background: #fff8e1 !important;
+            color: #5d4037;
+            font-size: 14px;
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #90caf9;
+            border-radius: 10px;
+            font-size: 14px;
+            background: white;
+            color: #333;
+        }
+        
+        /* 关键词标签 */
+        .tags-section {
+            margin: 25px 0;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1a5276;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            color: white;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .tag-disease {
+            background: linear-gradient(45deg, #ff6b6b 0%, #ee5a6f 100%);
+        }
+        
+        .tag-drug {
+            background: linear-gradient(45deg, #11998e 0%, #38ef7d 100%);
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            color: #1a5276;
+            font-weight: 700;
+            margin: 20px 0;
+            padding: 12px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+        }
+        
+        /* 关键词底部 */
+        .keywords-bottom {
+            text-align: center;
+            padding: 15px;
+            color: #666;
+            font-size: 13px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .main-content {
+                padding-top: 110px;
+            }
+            
+            .page-title {
+                font-size: 18px;
+            }
+            
+            .data-table {
+                font-size: 13px;
+            }
+            
+            .data-table th, .data-table td {
+                padding: 10px 8px;
+            }
+            
+            .btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <div class="left-btn">
+        <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+    </div>
+    
+    <!-- 右侧导航按钮 -->
+    <div class="right-btns">
+        <a href="79.html" class="btn btn-nav">⬆ 上一页</a>
+        <a href="81.html" class="btn btn-nav">⬇ 下一页</a>
+        <button class="btn btn-fav" onclick="addToFavorites()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 主内容 -->
+    <div class="main-content">
+        <h1 class="page-title">~~~~~肺栓塞PE急诊处理流程_溶栓治疗_抗凝治疗*****</h1>
+        
+        <!-- 主表格：所有内容合并到一个表格 -->
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th style="width: 35%;">项目 / 步骤</th>
+                    <th style="width: 65%;">具体内容 / 处理措施</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 章节标题 -->
+                <tr class="section-header">
+                    <td colspan="2">7. 急诊处理（图12）</td>
+                </tr>
+                
+                <!-- 基础处理 -->
+                <tr class="sub-header">
+                    <td colspan="2">基础生命支持与监测</td>
+                </tr>
+                <tr>
+                    <td>心电监护</td>
+                    <td>建立静脉通路，专科会诊</td>
+                </tr>
+                <tr>
+                    <td>呼吸支持</td>
+                    <td>氧疗，保证SaO₂ > 95%，重症患者需要气管插管、机械通气</td>
+                </tr>
+                
+                <!-- 循环支持 -->
+                <tr class="sub-header">
+                    <td colspan="2">循环支持</td>
+                </tr>
+                <tr>
+                    <td>液体复苏</td>
+                    <td>对于出现低血压的PE患者需要进行液体复苏，但液体量尽量控制在500 ~ 1000ml，警惕右心衰竭加重</td>
+                </tr>
+                <tr>
+                    <td>血管活性药物</td>
+                    <td>可加用血管活性药物，如去甲肾上腺素、多巴胺或多巴酚丁胺</td>
+                </tr>
+                
+                <!-- 抗凝治疗 -->
+                <tr class="sub-header">
+                    <td colspan="2">经验性抗凝</td>
+                </tr>
+                <tr>
+                    <td>抗凝启动</td>
+                    <td>高度怀疑PE患者在评估出血风险后尽快开始肝素或低分子肝素足量抗凝</td>
+                </tr>
+                <tr>
+                    <td>特殊人群</td>
+                    <td>严重肾功能不全（CCr ≤ 30ml/min）、拟直接再灌注或出血风险高者可静脉泵入肝素抗凝</td>
+                </tr>
+                <tr>
+                    <td>监测指标</td>
+                    <td>监测APTT，维持到正常值的1.5 ~ 2.5倍</td>
+                </tr>
+                <tr>
+                    <td>疗程与转换</td>
+                    <td>一般5 ~ 10天，后根据情况换口服抗凝药长期抗凝</td>
+                </tr>
+                
+                <!-- 流程图部分 -->
+                <tr class="section-header">
+                    <td colspan="2">图12 PE急诊处理流程</td>
+                </tr>
+                
+                <!-- 流程步骤 -->
+                <tr class="flow-step">
+                    <td>起始</td>
+                    <td>临床疑诊急性PE</td>
+                </tr>
+                <tr>
+                    <td>判断1</td>
+                    <td>是否伴有休克或持续性低血压？</td>
+                </tr>
+                
+                <!-- 是分支 -->
+                <tr class="sub-header">
+                    <td colspan="2">【是】→ 确诊 → 高危</td>
+                </tr>
+                <tr class="treatment-box">
+                    <td>高危处理</td>
+                    <td>直接再灌注治疗</td>
+                </tr>
+                
+                <!-- 否分支 -->
+                <tr class="sub-header">
+                    <td colspan="2">【否】→ 确诊 → 评估临床风险（PESI或sPESI）</td>
+                </tr>
+                
+                <!-- 中危分支 -->
+                <tr>
+                    <td>中危标准</td>
+                    <td>PESI分级Ⅲ ~ Ⅳ 或 sPESI ≥ 1</td>
+                </tr>
+                <tr>
+                    <td>进一步分层</td>
+                    <td>右心室形态与功能、肌钙蛋白</td>
+                </tr>
+                <tr class="sub-header">
+                    <td colspan="2">危险分层结果</td>
+                </tr>
+                <tr class="treatment-box">
+                    <td>双阳性 → 中高危</td>
+                    <td>抗凝、监测，必要时补救性再灌注治疗</td>
+                </tr>
+                <tr class="treatment-box">
+                    <td>单阳性或双阴性 → 中低危</td>
+                    <td>住院、抗凝治疗</td>
+                </tr>
+                
+                <!-- 低危分支 -->
+                <tr>
+                    <td>低危标准</td>
+                    <td>PESI分级Ⅰ ~ Ⅱ 或 sPESI = 0</td>
+                </tr>
+                <tr class="treatment-box">
+                    <td>低危处理</td>
+                    <td>早期出院、家庭治疗</td>
+                </tr>
+                
+                <!-- 溶栓治疗 -->
+                <tr class="section-header">
+                    <td colspan="2">溶栓治疗</td>
+                </tr>
+                <tr>
+                    <td>适应证</td>
+                    <td>对于高危PE患者，除外禁忌证后尽快进行溶栓治疗，之后序贯肝素抗凝</td>
+                </tr>
+                <tr>
+                    <td>知情同意</td>
+                    <td>提前签署知情同意</td>
+                </tr>
+                <tr>
+                    <td>监测要点</td>
+                    <td>监测神经系统症状和体征，警惕脑出血</td>
+                </tr>
+                <tr>
+                    <td>时间窗</td>
+                    <td>溶栓时间窗一般在14天内</td>
+                </tr>
+                <tr class="note-row">
+                    <td>rt-PA方案</td>
+                    <td>一般选用rt-PA 50 ~ 100mg ivgtt × 2小时，或先用0.6mg/kg iv × 15分钟再持续ivgtt</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <!-- 复制功能 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="肺栓塞PE急诊处理流程_溶栓治疗_抗凝治疗；PE；DVT；休克；低血压；右心衰竭；SaO₂；肝素；低分子肝素；去甲肾上腺素；多巴胺；多巴酚丁胺；rt-PA；APTT；CCr；PESI；sPESI；肌钙蛋白；溶栓；抗凝；再灌注；脑出血；气管插管；机械通气；=80" readonly>
+            <button class="btn btn-copy" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">80</div>
+        
+        <!-- 检索标签 -->
+        <div class="tags-section">
+            <div class="tags-title">🔖 检索标签</div>
+            <div class="tags-container">
+                <!-- 疾病标签 -->
+                <span class="tag tag-disease">PE</span>
+                <span class="tag tag-disease">肺栓塞</span>
+                <span class="tag tag-disease">休克</span>
+                <span class="tag tag-disease">低血压</span>
+                <span class="tag tag-disease">右心衰竭</span>
+                <span class="tag tag-disease">脑出血</span>
+                <!-- 药物标签 -->
+                <span class="tag tag-drug">肝素</span>
+                <span class="tag tag-drug">低分子肝素</span>
+                <span class="tag tag-drug">去甲肾上腺素</span>
+                <span class="tag tag-drug">多巴胺</span>
+                <span class="tag tag-drug">多巴酚丁胺</span>
+                <span class="tag tag-drug">rt-PA</span>
+            </div>
+        </div>
+        
+        <!-- 底部关键词 -->
+        <div class="keywords-bottom">
+            <strong>关键词：</strong>PE | 急诊处理 | 溶栓 | 抗凝 | 肝素 | 低分子肝素 | rt-PA | 去甲肾上腺素 | 多巴胺 | 多巴酚丁胺 | PESI | sPESI | APTT | 再灌注 | 右心衰竭 | 休克 | 低血压 | SaO₂ | 肌钙蛋白 | 气管插管 | 机械通气
+        </div>
+    </div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板：" + copyText.value);
+            }, function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板");
+            });
+        }
+        
+        // 添加到收藏
+        function addToFavorites() {
+            const pageInfo = {
+                title: "肺栓塞PE急诊处理流程_溶栓治疗_抗凝治疗",
+                url: window.location.href,
+                pageNum: "80",
+                tags: ["PE","DVT","休克","低血压","肝素","低分子肝素","rt-PA","溶栓","抗凝"]
+            };
+            
+            // 获取已有收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.pageNum === pageInfo.pageNum);
+            if (exists) {
+                alert("该页面已在收藏夹中！");
+                return;
+            }
+            
+            favorites.push(pageInfo);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 同时更新index.html的收藏列表（通过localStorage通信）
+            localStorage.setItem('newFavorite', JSON.stringify(pageInfo));
+            
+            alert("⭐ 已添加到收藏！\n页面：肺栓塞PE急诊处理流程\n页码：80");
+        }
+    </script>
+</body>
+</html>
