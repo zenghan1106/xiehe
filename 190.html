@@ -1,0 +1,466 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~自身免疫性脑炎*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #357abd;
+        }
+        
+        .btn-nav {
+            background: #5cb85c;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background: #4cae4c;
+        }
+        
+        .btn-fav {
+            background: #f0ad4e;
+            color: white;
+        }
+        
+        .btn-fav:hover {
+            background: #ec971f;
+        }
+        
+        .btn-copy {
+            background: #5bc0de;
+            color: white;
+            padding: 12px 25px;
+        }
+        
+        .btn-copy:hover {
+            background: #46b8da;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c5282;
+            font-size: 28px;
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .main-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+        }
+        
+        .main-table thead {
+            background: linear-gradient(135deg, #4a90d9 0%, #2c5282 100%);
+            color: white;
+        }
+        
+        .main-table thead th {
+            padding: 20px 15px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .main-table tbody td {
+            padding: 15px;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+        
+        .main-table tbody tr:hover {
+            background: #f8fbff;
+        }
+        
+        .main-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            color: #2c5282;
+            font-weight: bold;
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+        
+        .bullet {
+            color: #4a90d9;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .highlight-box {
+            background: #fff3cd;
+            border-left: 4px solid #f0ad4e;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .tags-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            color: #2c5282;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #ffe0e0;
+            color: #c53030;
+            border: 1px solid #feb2b2;
+        }
+        
+        .tag-disease:hover {
+            background: #c53030;
+            color: white;
+        }
+        
+        .copy-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .copy-input:focus {
+            border-color: #4a90d9;
+        }
+        
+        .page-info {
+            text-align: center;
+            color: #718096;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .keywords-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .keywords-title {
+            color: #2c5282;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .keywords-content {
+            color: #4a5568;
+            font-size: 14px;
+            line-height: 2;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 22px;
+            }
+            
+            .main-table thead th {
+                font-size: 16px;
+                padding: 15px 10px;
+            }
+            
+            .main-table tbody td {
+                padding: 12px 10px;
+                font-size: 14px;
+            }
+            
+            .nav-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-right {
+                align-items: stretch;
+            }
+            
+            .btn {
+                text-align: center;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-bar">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="189.html" class="btn btn-nav">上一页</a>
+            <a href="191.html" class="btn btn-nav">下一页</a>
+            <button class="btn btn-fav" onclick="addToFavorites()">收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~自身免疫性脑炎*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~自身免疫性脑炎*****、分类、详细内容、概述、2. 病因及高危因素、3. 临床表现、4. 必做检查</div>
+    
+    <table class="main-table">
+        <thead>
+            <tr>
+                <th>分类</th>
+                <th>详细内容</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="section-title">概述</div>
+                </td>
+                <td>
+                    蛋白抗体相关的脑炎，后者经常称为自身免疫性脑炎。<br>
+                    <span class="bullet">•</span>可表现为多种类型，其中副肿瘤性脑炎综合征涉及类型最广，其他自身免疫性脑炎以边缘性脑炎特点较典型。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="section-title">2. 病因及高危因素</div>
+                </td>
+                <td>
+                    <span class="bullet">•</span>与副肿瘤性边缘性脑炎相关的肿瘤：最常见是肺癌（尤其是小细胞肺癌）、精原细胞瘤和其他睾丸肿瘤、胸腺瘤、乳腺癌和霍奇金淋巴瘤。<br><br>
+                    <span class="bullet">•</span>抗NMDAR抗体脑炎可能相关的肿瘤：女性较常见畸胎瘤，50%的18岁以上女性患者有单侧或双侧卵巢畸胎瘤；男性患者中很少发现肿瘤。其他相关肿瘤包括睾丸生殖细胞肿瘤、纵隔畸胎瘤、小细胞肺癌、霍奇金淋巴瘤、神经母细胞瘤。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="section-title">3. 临床表现</div>
+                </td>
+                <td>
+                    <span class="bullet">•</span>边缘性脑炎特点：急性或亚急性精神行为改变（经常被误认为精神分裂症），记忆障碍，认知障碍，运动功能障碍，语言障碍（失语），睡眠障碍（失眠更多见），癫痫发作，自主神经功能异常（高热、心律失常、中枢性低通气等）及昏迷等。<br><br>
+                    <span class="bullet">•</span>脑干脑炎特点：眼外肌运动障碍、眼阵挛、眼球震颤、吞咽困难、构音障碍、感音神经性聋、面瘫及面部感觉障碍、中枢性低通气和眩晕。<br><br>
+                    <span class="bullet">•</span>脑脊髓炎特点：累及神经系统多个区域，包括颞叶-边缘区、脑干、小脑、脊髓、自主神经系统等，疾病分布和症状各不相同。<br><br>
+                    <span class="bullet">•</span>脊髓炎特点：可出现非对称性感觉、运动、位置觉等各种功能障碍。<br><br>
+                    <div class="highlight-box">
+                        <strong>注意：</strong>早期发作可能仅表现为某种精神行为异常，需要详细追问病史，同时关注流行病学特点以资鉴别诊断，重点神经科查体，并完善GCS。
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="section-title">4. 必做检查</div>
+                </td>
+                <td>
+                    <span class="bullet">•</span>常规检查：血常规、肝肾功能、凝血功能、感染4项等。<br><br>
+                    <span class="bullet">•</span>腰穿+脑脊液查：常规+生化+革兰染色+细胞学+抗酸染色+细菌涂片培养；寡克隆区带；副肿瘤性和自身免疫性抗体检测如Hu、Yo、Ri、NMDAR、LGI1、AMPAR等。<br><br>
+                    <span class="bullet">•</span>头部MRI或增强MRI。<br><br>
+                    <span class="bullet">•</span>EEG。<br><br>
+                    <span class="bullet">•</span>血清肿瘤标志物检测。<br><br>
+                    <span class="bullet">•</span>血清自身免疫性抗体检测。<br><br>
+                    <span class="bullet">•</span>副肿瘤性抗体检测。
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <span class="tag tag-disease" onclick="searchTag('自身免疫性脑炎')">自身免疫性脑炎</span>
+        <span class="tag tag-disease" onclick="searchTag('边缘性脑炎')">边缘性脑炎</span>
+        <span class="tag tag-disease" onclick="searchTag('副肿瘤性脑炎')">副肿瘤性脑炎</span>
+        <span class="tag tag-disease" onclick="searchTag('抗NMDAR抗体脑炎')">抗NMDAR抗体脑炎</span>
+        <span class="tag tag-disease" onclick="searchTag('脑干脑炎')">脑干脑炎</span>
+        <span class="tag tag-disease" onclick="searchTag('脑脊髓炎')">脑脊髓炎</span>
+        <span class="tag tag-disease" onclick="searchTag('脊髓炎')">脊髓炎</span>
+        <span class="tag tag-disease" onclick="searchTag('小细胞肺癌')">小细胞肺癌</span>
+        <span class="tag tag-disease" onclick="searchTag('畸胎瘤')">畸胎瘤</span>
+        <span class="tag tag-disease" onclick="searchTag('霍奇金淋巴瘤')">霍奇金淋巴瘤</span>
+        <span class="tag tag-disease" onclick="searchTag('精原细胞瘤')">精原细胞瘤</span>
+        <span class="tag tag-disease" onclick="searchTag('胸腺瘤')">胸腺瘤</span>
+        <span class="tag tag-disease" onclick="searchTag('乳腺癌')">乳腺癌</span>
+        <span class="tag tag-disease" onclick="searchTag('睾丸生殖细胞肿瘤')">睾丸生殖细胞肿瘤</span>
+        <span class="tag tag-disease" onclick="searchTag('神经母细胞瘤')">神经母细胞瘤</span>
+        <span class="tag tag-disease" onclick="searchTag('精神分裂症')">精神分裂症</span>
+        <span class="tag tag-disease" onclick="searchTag('癫痫')">癫痫</span>
+        <span class="tag tag-disease" onclick="searchTag('失语')">失语</span>
+        <span class="tag tag-disease" onclick="searchTag('寡克隆区带')">寡克隆区带</span>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="自身免疫性脑炎；边缘性脑炎；副肿瘤性脑炎；抗NMDAR抗体脑炎；NMDAR；LGI1；AMPAR；Hu；Yo；Ri；小细胞肺癌；畸胎瘤；霍奇金淋巴瘤；=190" readonly>
+        <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="page-info">
+        页码：190
+    </div>
+    
+    <div class="keywords-section">
+        <div class="keywords-title">关键词</div>
+        <div class="keywords-content">
+            自身免疫性脑炎、边缘性脑炎、副肿瘤性脑炎、抗NMDAR抗体脑炎、脑干脑炎、脑脊髓炎、脊髓炎、小细胞肺癌、畸胎瘤、卵巢畸胎瘤、精原细胞瘤、胸腺瘤、乳腺癌、霍奇金淋巴瘤、睾丸生殖细胞肿瘤、纵隔畸胎瘤、神经母细胞瘤、NMDAR、LGI1、AMPAR、Hu、Yo、Ri、寡克隆区带、GCS、EEG、MRI、精神行为异常、记忆障碍、认知障碍、失语、癫痫、中枢性低通气、眼阵挛、眼球震颤、构音障碍、感音神经性聋、面瘫
+        </div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板：" + copyText.value);
+            }, function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板");
+            });
+        }
+        
+        function addToFavorites() {
+            const title = document.title;
+            const url = window.location.href;
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(fav => fav.url === url);
+            
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                category: '自身免疫性脑炎',
+                date: new Date().toLocaleDateString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert('已添加到收藏夹！');
+            
+            // 尝试更新index.html的收藏类目
+            try {
+                window.parent.postMessage({
+                    type: 'addFavorite',
+                    data: {
+                        title: title,
+                        url: url,
+                        pageNum: '190'
+                    }
+                }, '*');
+            } catch(e) {
+                console.log('无法与父页面通信');
+            }
+        }
+        
+        function searchTag(tag) {
+            alert('检索标签：' + tag);
+            // 实际应用中可以跳转到搜索结果页面
+        }
+        
+        // 页面加载时设置复制框内容
+        window.onload = function() {
+            const pageNum = window.location.pathname.replace(/.*\/|\.html/g, '') || '190';
+            const copyContent = '自身免疫性脑炎；边缘性脑炎；副肿瘤性脑炎；抗NMDAR抗体脑炎；NMDAR；LGI1；AMPAR；Hu；Yo；Ri；小细胞肺癌；畸胎瘤；霍奇金淋巴瘤；=' + pageNum;
+            document.getElementById('copyText').value = copyContent;
+        };
+    </script>
+</body>
+</html>
