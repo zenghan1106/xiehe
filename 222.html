@@ -1,0 +1,388 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~侵袭性真菌感染（IFI）定义、危险因素与临床表现*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        .btn-home {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(33,150,243,0.3);
+            z-index: 100;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-home:hover {
+            background: #1976D2;
+        }
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        .nav-btns a, .nav-btns button {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(33,150,243,0.3);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        .nav-btns a:hover, .nav-btns button:hover {
+            background: #1976D2;
+        }
+        .btn-fav {
+            background: #FF9800 !important;
+        }
+        .btn-fav:hover {
+            background: #F57C00 !important;
+        }
+        .container {
+            max-width: 800px;
+            margin: 60px auto 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #1565C0;
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        thead th {
+            background: #2196F3;
+            color: white;
+            padding: 16px 12px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+        }
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 15px;
+            line-height: 1.7;
+            vertical-align: top;
+        }
+        tbody tr:hover {
+            background: #f0f7ff;
+        }
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        tbody tr:nth-child(even):hover {
+            background: #f0f7ff;
+        }
+        .section-title {
+            font-weight: bold;
+            color: #1565C0;
+            font-size: 16px;
+            white-space: nowrap;
+        }
+        .check-mark {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        .page-num {
+            text-align: center;
+            color: #666;
+            font-size: 16px;
+            margin: 20px 0;
+        }
+        .tags-section {
+            margin-top: 25px;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .tag {
+            display: inline-block;
+            background: #E3F2FD;
+            color: #1565C0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            border: 1px solid #BBDEFB;
+        }
+        .tag-disease {
+            background: #FFEBEE;
+            color: #C62828;
+            border-color: #EF9A9A;
+        }
+        .tag-drug {
+            background: #E8F5E9;
+            color: #2E7D32;
+            border-color: #A5D6A7;
+        }
+        .tag-bacteria {
+            background: #FFF3E0;
+            color: #E65100;
+            border-color: #FFCC80;
+        }
+        .keywords-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            text-align: center;
+        }
+        .keywords {
+            color: #555;
+            font-size: 14px;
+            line-height: 2;
+        }
+        .copy-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #BBDEFB;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+            background: white;
+        }
+        .btn-copy {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .btn-copy:hover {
+            background: #388E3C;
+        }
+        .btn-copy.copied {
+            background: #2196F3;
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 18px;
+                margin-top: 10px;
+            }
+            thead th {
+                font-size: 16px;
+                padding: 12px 8px;
+            }
+            tbody td {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            .btn-home, .nav-btns a, .nav-btns button {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            .copy-section {
+                flex-direction: column;
+            }
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="btn-home">← 返回首页</a>
+    
+    <div class="nav-btns">
+        <a href="221.html">← 上一页</a>
+        <a href="223.html">下一页 →</a>
+        <button class="btn-fav" onclick="addToFavorites()">⭐ 收藏</button>
+    </div>
+
+    <div class="container">
+        <h1>~~~~~侵袭性真菌感染（IFI）定义、危险因素与临床表现*****</h1>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>项目</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="section-title">定义</td>
+                    <td>
+                        侵袭性真菌感染（IFI）指真菌侵入人体，在组织、器官或血液中生长、繁殖，并导致炎症反应及组织损伤的疾病<br><br>
+                        IFI的病原体可分为两类：真性致病菌与条件致病菌<br><br>
+                        真性致病菌仅由少数致病菌组成，主要包括组织胞浆菌与球孢子菌，它们可侵入正常宿主，也常在免疫功能低下的患者中引起疾病，后者常为致命性<br><br>
+                        条件致病菌主要包括念珠菌与曲霉菌，多侵犯免疫功能受损的宿主<br><br>
+                        念珠菌、曲霉菌、隐球菌、毛霉菌是引起IFI最常见的病原菌
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">危险因素</td>
+                    <td>
+                        糖皮质激素与免疫抑制药在临床广泛应用<br>
+                        器官移植的广泛开展<br>
+                        肿瘤化疗/放疗、HIV感染等导致免疫功能低下<br>
+                        合并糖尿病、慢性阻塞性肺疾病、肿瘤等基础疾病<br>
+                        应用广谱抗菌药物<br>
+                        侵入性监测与治疗手段的广泛应用<br>
+                        患者病情危重且复杂<br>
+                        随着ICU诊治水平的提高，使重症患者生存时间与住ICU的时间延长
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">临床表现</td>
+                    <td>
+                        <strong>主要特征：</strong>存在相应部位感染的特殊影像学改变的证据。如侵袭性肺曲霉菌感染的影像学特征包括：早期胸膜下密度增高的结节实变影；光晕征；新月形空气征；实变区域内出现空腔等<br><br>
+                        <strong>次要特征</strong><br>
+                        <span class="check-mark">✓</span> <strong>呼吸系统：</strong>近期有呼吸道感染症状或体征加重的表现；呼吸道分泌物检查提示有感染；影像学出现新的、非上述典型的肺部浸润影<br><br>
+                        <span class="check-mark">✓</span> <strong>腹腔：</strong>具有弥漫性/局灶性腹膜炎的症状或体征；腹水或腹腔分泌物生化或常规检查异常<br><br>
+                        <span class="check-mark">✓</span> <strong>泌尿系统：</strong>具有尿路刺激征；尿沉渣细胞数异常（男性WBC＞5/HP，女性WBC＞10/HP）；尿液中有絮状团块样物漂浮或沉于尿袋时亦应考虑<br><br>
+                        <span class="check-mark">✓</span> <strong>中枢神经系统：</strong>具有中枢神经系统局灶性症状或体征；脑脊液检查示生化或细胞数异常，未见病原体及恶性细胞
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="page-num">222</div>
+
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 检索标签（点击可检索）</div>
+            <span class="tag tag-disease">侵袭性真菌感染</span>
+            <span class="tag tag-disease">IFI</span>
+            <span class="tag tag-disease">炎症反应</span>
+            <span class="tag tag-disease">组织损伤</span>
+            <span class="tag tag-disease">免疫功能低下</span>
+            <span class="tag tag-disease">糖尿病</span>
+            <span class="tag tag-disease">慢性阻塞性肺疾病</span>
+            <span class="tag tag-disease">肿瘤</span>
+            <span class="tag tag-disease">腹膜炎</span>
+            <span class="tag tag-disease">尿路刺激征</span>
+            <span class="tag tag-disease">中枢神经系统局灶性症状</span>
+            <span class="tag tag-drug">糖皮质激素</span>
+            <span class="tag tag-drug">免疫抑制药</span>
+            <span class="tag tag-drug">广谱抗菌药物</span>
+            <span class="tag tag-bacteria">真菌</span>
+            <span class="tag tag-bacteria">真性致病菌</span>
+            <span class="tag tag-bacteria">条件致病菌</span>
+            <span class="tag tag-bacteria">组织胞浆菌</span>
+            <span class="tag tag-bacteria">球孢子菌</span>
+            <span class="tag tag-bacteria">念珠菌</span>
+            <span class="tag tag-bacteria">曲霉菌</span>
+            <span class="tag tag-bacteria">隐球菌</span>
+            <span class="tag tag-bacteria">毛霉菌</span>
+            <span class="tag tag-bacteria">HIV</span>
+            <span class="tag tag-bacteria">革兰阳性菌</span>
+            <span class="tag tag-bacteria">革兰阴性菌</span>
+            <span class="tag tag-bacteria">厌氧病原体</span>
+        </div>
+
+        <div class="keywords-section">
+            <div class="keywords">
+                <strong>关键词：</strong>IFI | 真菌 | 组织胞浆菌 | 球孢子菌 | 念珠菌 | 曲霉菌 | 隐球菌 | 毛霉菌 | 糖皮质激素 | 免疫抑制药 | 器官移植 | HIV | 糖尿病 | 慢性阻塞性肺疾病 | 广谱抗菌药物 | ICU | 光晕征 | 新月形空气征 | 腹膜炎 | 尿路刺激征 | 脑脊液
+            </div>
+        </div>
+
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="侵袭性真菌感染（IFI）定义、危险因素与临床表现；IFI；真菌感染；念珠菌；曲霉菌；隐球菌；毛霉菌；组织胞浆菌；球孢子菌；糖皮质激素；免疫抑制药；广谱抗菌药物；HIV；ICU；光晕征；新月形空气征；腹膜炎；尿路刺激征；脑脊液；=222" readonly>
+            <button class="btn-copy" onclick="copyText()">复制</button>
+        </div>
+    </div>
+
+    <script>
+        function copyText() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                const btn = document.querySelector('.btn-copy');
+                btn.textContent = '已复制!';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        function addToFavorites() {
+            const title = document.title;
+            const url = window.location.href;
+            
+            if (window.sidebar && window.sidebar.addPanel) {
+                window.sidebar.addPanel(title, url, '');
+            } else if (window.external && ('AddFavorite' in window.external)) {
+                window.external.AddFavorite(url, title);
+            } else {
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.some(f => f.url === url);
+                if (!exists) {
+                    favorites.push({
+                        title: '~~~~~侵袭性真菌感染（IFI）定义、危险因素与临床表现*****',
+                        url: '222.html',
+                        category: '急诊医学'
+                    });
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                    alert('已添加到收藏！请在index.html查看收藏列表。');
+                } else {
+                    alert('该页面已在收藏列表中！');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
