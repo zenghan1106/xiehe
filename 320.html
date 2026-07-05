@@ -1,0 +1,684 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~氧疗基本原则与临床实施*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 30px;
+        }
+        
+        /* 顶部导航栏 */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 15px;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .left-btn {
+            margin-top: 5px;
+        }
+        
+        .left-btn a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #2196F3;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .left-btn a:hover {
+            background-color: #1976D2;
+            transform: translateY(-2px);
+        }
+        
+        .right-btns {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+        
+        .right-btns a {
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+        
+        .prev-btn {
+            background-color: #FF9800;
+            color: white;
+        }
+        
+        .prev-btn:hover {
+            background-color: #F57C00;
+        }
+        
+        .next-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .next-btn:hover {
+            background-color: #388E3C;
+        }
+        
+        .fav-btn {
+            background-color: #E91E63;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+        
+        .fav-btn:hover {
+            background-color: #C2185B;
+        }
+        
+        .fav-btn.added {
+            background-color: #9C27B0;
+        }
+        
+        /* 主标题 */
+        .main-title {
+            text-align: center;
+            padding: 25px 15px;
+            background-color: #e3f2fd;
+            margin-bottom: 20px;
+        }
+        
+        .main-title h1 {
+            font-size: 22px;
+            color: #1565C0;
+            font-weight: bold;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            width: 95%;
+            max-width: 900px;
+            margin: 0 auto 25px;
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        /* 表头 */
+        thead {
+            background-color: #2196F3;
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        /* 表格内容 */
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+        
+        tbody tr:hover {
+            background-color: #e3f2fd;
+        }
+        
+        tbody td {
+            padding: 12px;
+            font-size: 14px;
+            color: #444;
+            vertical-align: top;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 15px;
+            font-weight: 500;
+            color: #1565C0;
+        }
+        
+        /* 分类标题行 */
+        .category-row {
+            background-color: #bbdefb !important;
+        }
+        
+        .category-row td {
+            font-weight: bold;
+            color: #0D47A1 !important;
+            font-size: 15px !important;
+        }
+        
+        /* 子项标记 */
+        .sub-item {
+            color: #666;
+            padding-left: 15px;
+            position: relative;
+        }
+        
+        .sub-item::before {
+            content: "◆";
+            position: absolute;
+            left: 0;
+            color: #2196F3;
+        }
+        
+        .check-item {
+            color: #2e7d32;
+            padding-left: 15px;
+            position: relative;
+        }
+        
+        .check-item::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        .diamond-item {
+            color: #666;
+            padding-left: 15px;
+            position: relative;
+        }
+        
+        .diamond-item::before {
+            content: "◇";
+            position: absolute;
+            left: 0;
+            color: #FF9800;
+        }
+        
+        .circle-item {
+            color: #666;
+            padding-left: 15px;
+            position: relative;
+        }
+        
+        .circle-item::before {
+            content: "●";
+            position: absolute;
+            left: 0;
+            color: #2196F3;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #666;
+            margin: 20px 0;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            width: 95%;
+            max-width: 900px;
+            margin: 0 auto 25px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1565C0;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .tag-disease {
+            background-color: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+        
+        .tag-disease:hover {
+            background-color: #ef9a9a;
+            color: white;
+        }
+        
+        .tag-drug {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .tag-drug:hover {
+            background-color: #a5d6a7;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background-color: #fff3e0;
+            color: #ef6c00;
+            border: 1px solid #ffcc80;
+        }
+        
+        .tag-bacteria:hover {
+            background-color: #ffcc80;
+            color: white;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            width: 95%;
+            max-width: 900px;
+            margin: 0 auto 25px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .keywords-title {
+            font-size: 16px;
+            color: #1565C0;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .keywords-content {
+            font-size: 14px;
+            color: #555;
+            line-height: 2;
+        }
+        
+        .keyword {
+            display: inline-block;
+            margin-right: 15px;
+            color: #2196F3;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            width: 95%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .copy-title {
+            font-size: 16px;
+            color: #1565C0;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .copy-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #bbdefb;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        #copyInput:focus {
+            border-color: #2196F3;
+        }
+        
+        #copyBtn {
+            padding: 12px 30px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        #copyBtn:hover {
+            background-color: #1976D2;
+        }
+        
+        #copyBtn.copied {
+            background-color: #4CAF50;
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 15px 30px;
+            background-color: rgba(0,0,0,0.8);
+            color: white;
+            border-radius: 10px;
+            font-size: 14px;
+            z-index: 1000;
+            display: none;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .main-title h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 14px;
+            }
+            
+            .right-btns a, .fav-btn {
+                padding: 6px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            #copyBtn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="top-nav">
+        <div class="left-btn">
+            <a href="index.html">🏠 返回首页</a>
+        </div>
+        <div class="right-btns">
+            <a href="319.html" class="prev-btn">⬅ 上一页</a>
+            <a href="321.html" class="next-btn">下一页 ➡</a>
+            <button class="fav-btn" id="favBtn" onclick="addToFavorites()">❤ 收藏</button>
+        </div>
+    </div>
+    
+    <!-- 主标题 -->
+    <div class="main-title">
+        <h1>~~~~~氧疗基本原则与临床实施*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~氧疗基本原则与临床实施*****、分类、详细内容、2. 氧疗的基本原则、3. 氧疗的临床实施（图27）、缺氧类型、低流量装置、高流量装置、储氧系统、氧疗的处方原则、氧疗的降阶梯原则、氧疗的目标导向原则、评估需求、接诊评估、ESCAPE工具</div>
+    </div>
+    
+    <!-- 表格内容 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 25%;">分类</th>
+                    <th style="width: 75%;">详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>缺氧类型</strong></td>
+                    <td>缺氧按照其原因可分为4类：低张性缺氧、血液性缺氧、循环性缺氧、组织性缺氧。</td>
+                </tr>
+                <tr>
+                    <td class="circle-item">低流量装置</td>
+                    <td>装置提供的空氧混合气体流速低于自主吸气时的气体流速，吸气时有外源性空气补充。</td>
+                </tr>
+                <tr>
+                    <td class="circle-item">高流量装置</td>
+                    <td>装置提供的空氧混合气体流速高于自主吸气时的气体流速，吸气时没有外源性空气补充。</td>
+                </tr>
+                <tr>
+                    <td class="circle-item">储氧系统</td>
+                    <td>可将氧气储存在储气囊中，吸气时可无外源性气体补充，但若储气囊未能储存足够氧气，吸气时将增加吸气负荷。</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="2">2. 氧疗的基本原则</td>
+                </tr>
+                <tr>
+                    <td class="circle-item">氧疗的处方原则</td>
+                    <td>氧疗中应将氧气作为一种特殊药物使用，开具氧疗处方或医嘱。</td>
+                </tr>
+                <tr>
+                    <td class="circle-item">氧疗的降阶梯原则</td>
+                    <td>对于病因未明的严重低氧血症患者，应贯彻降阶梯原则，根据病情选择从高浓度至低浓度的氧疗方式。</td>
+                </tr>
+                <tr>
+                    <td class="circle-item">氧疗的目标导向原则</td>
+                    <td>根据不同疾病选择合理的氧疗目标。有CO₂潴留风险的患者，SpO₂推荐目标为88%～93%；对于无CO₂潴留风险的患者，SpO₂推荐目标为94%～98%。</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="2">3. 氧疗的临床实施（图27）</td>
+                </tr>
+                <tr>
+                    <td class="circle-item">评估需求</td>
+                    <td>保证患者生命安全前提下评估患者是否需要氧疗。</td>
+                </tr>
+                <tr>
+                    <td class="circle-item">接诊评估</td>
+                    <td>接诊患者后，首先判断患者是否为崩溃气道。崩溃气道患者无法保证基本的通气和氧合，参照《急诊气道管理共识》处理。对于非崩溃气道的患者，氧疗应当以纠正患者的低氧血症为目的，需要在氧疗开始前了解患者血氧饱和度情况，采用SpO₂或动脉血氧饱和度（SaO₂）进行监测。不推荐给予无低氧血症的患者氧疗，任何情况下的氧疗均需同时记录吸氧浓度。</td>
+                </tr>
+                <tr>
+                    <td class="circle-item">ESCAPE工具</td>
+                    <td>使用ESCAPE工具设定氧疗目标：健康成人SpO₂的正常范围为96%～98%。吸入高浓度氧可抑制肺血管收缩，导致吸收性肺不张及肺泡通气量下降。慢性CO₂潴留患者吸入高浓度氧可加重病情，因此，推荐使用筛查CO₂潴留的ESCAPE工具，根据是否存在CO₂潴留的高危因素制定不同的氧疗目标。对于存在CO₂潴留高危因素的患者，推荐SpO₂目标为SpO₂ 88%～93%；无CO₂潴留高危因素的患者，推荐SpO₂目标为94%～98%。CO₂潴留危险因素评估ESCAPE工具：E，bronchi Ectasia，支气管扩张；S，Spinal disease，脊柱畸形或截瘫；C，Chest disease，胸壁疾病；A，Airway obstructed disease，气道阻塞性疾病（COPD、哮喘、肺纤维化）；P，Paralysis，瘫痪（神经肌肉接头疾病，药物过量）；E，</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">
+        页码：309
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">低张性缺氧</span>
+            <span class="tag tag-disease">血液性缺氧</span>
+            <span class="tag tag-disease">循环性缺氧</span>
+            <span class="tag tag-disease">组织性缺氧</span>
+            <span class="tag tag-disease">低氧血症</span>
+            <span class="tag tag-disease">CO₂潴留</span>
+            <span class="tag tag-disease">支气管扩张</span>
+            <span class="tag tag-disease">脊柱畸形</span>
+            <span class="tag tag-disease">截瘫</span>
+            <span class="tag tag-disease">胸壁疾病</span>
+            <span class="tag tag-disease">COPD</span>
+            <span class="tag tag-disease">哮喘</span>
+            <span class="tag tag-disease">肺纤维化</span>
+            <span class="tag tag-disease">瘫痪</span>
+        </div>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">🔑 关键词</div>
+        <div class="keywords-content">
+            <span class="keyword">氧疗</span>
+            <span class="keyword">缺氧</span>
+            <span class="keyword">低氧血症</span>
+            <span class="keyword">SpO₂</span>
+            <span class="keyword">SaO₂</span>
+            <span class="keyword">CO₂潴留</span>
+            <span class="keyword">ESCAPE工具</span>
+            <span class="keyword">降阶梯原则</span>
+            <span class="keyword">目标导向原则</span>
+            <span class="keyword">崩溃气道</span>
+            <span class="keyword">COPD</span>
+            <span class="keyword">哮喘</span>
+            <span class="keyword">肺纤维化</span>
+        </div>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <div class="copy-title">📋 复制信息</div>
+        <div class="copy-row">
+            <input type="text" id="copyInput" value="氧疗基本原则与临床实施；氧疗、缺氧、低氧血症、SpO₂、SaO₂、CO₂潴留、ESCAPE工具、降阶梯原则、目标导向原则、崩溃气道、COPD、哮喘、肺纤维化=309" readonly>
+            <button id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                    document.getElementById('copyBtn').classList.add('copied');
+                    document.getElementById('copyBtn').textContent = '已复制';
+                    setTimeout(() => {
+                        document.getElementById('copyBtn').classList.remove('copied');
+                        document.getElementById('copyBtn').textContent = '复制';
+                    }, 2000);
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 添加到收藏
+        function addToFavorites() {
+            const btn = document.getElementById('favBtn');
+            const title = document.querySelector('.main-title h1').textContent;
+            const pageNum = '309';
+            const url = window.location.href;
+            
+            // 获取现有收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.pageNum === pageNum);
+            
+            if (exists) {
+                showToast('该页面已在收藏中！');
+                return;
+            }
+            
+            // 添加收藏
+            favorites.push({
+                title: title,
+                pageNum: pageNum,
+                url: url,
+                time: new Date().toLocaleString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 同时保存到index可读取的格式
+            let indexFavorites = JSON.parse(localStorage.getItem('index_favorites') || '[]');
+            indexFavorites.push({
+                title: title,
+                pageNum: pageNum,
+                url: '309.html',
+                category: '氧疗'
+            });
+            localStorage.setItem('index_favorites', JSON.stringify(indexFavorites));
+            
+            btn.classList.add('added');
+            btn.textContent = '❤ 已收藏';
+            showToast('已添加到收藏！');
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.pageNum === '309');
+            if (exists) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('added');
+                btn.textContent = '❤ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
