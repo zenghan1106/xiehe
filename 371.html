@@ -1,0 +1,440 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~糖皮质激素在重症肌无力危象及其他急症中的应用*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+            color: #333;
+        }
+        .nav-btn {
+            position: fixed;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            z-index: 100;
+        }
+        .home-btn {
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: #fff;
+        }
+        .home-btn:hover {
+            background: #357abd;
+        }
+        .prev-btn {
+            top: 15px;
+            right: 15px;
+            background: #5cb85c;
+            color: #fff;
+        }
+        .prev-btn:hover {
+            background: #449d44;
+        }
+        .next-btn {
+            top: 55px;
+            right: 15px;
+            background: #f0ad4e;
+            color: #fff;
+        }
+        .next-btn:hover {
+            background: #ec971f;
+        }
+        .fav-btn {
+            top: 95px;
+            right: 15px;
+            background: #d9534f;
+            color: #fff;
+        }
+        .fav-btn:hover {
+            background: #c9302c;
+        }
+        .container {
+            max-width: 900px;
+            margin: 80px auto 30px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .page-title {
+            text-align: center;
+            padding: 25px 20px;
+            background: linear-gradient(90deg, #1e5799 0%, #2989d8 50%, #207cca 100%);
+            color: #fff;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .page-title::before {
+            content: "~~~~~";
+            color: #ffd700;
+            margin-right: 8px;
+        }
+        .page-title::after {
+            content: "*****";
+            color: #ffd700;
+            margin-left: 8px;
+        }
+        .subtitle {
+            text-align: center;
+            padding: 10px;
+            background: #e3f2fd;
+            color: #1565c0;
+            font-size: 14px;
+        }
+        .notice-box {
+            margin: 15px;
+            padding: 15px;
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            border-radius: 8px;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #e65100;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        thead {
+            background: linear-gradient(90deg, #1565c0 0%, #1976d2 100%);
+            color: #fff;
+        }
+        thead th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+            border: 1px solid #0d47a1;
+        }
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        tbody td {
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            vertical-align: top;
+            line-height: 1.8;
+        }
+        .disease-name {
+            color: #c62828;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        .section-title {
+            color: #1565c0;
+            font-weight: bold;
+        }
+        .drug-name {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+        .dosage {
+            color: #6a1b9a;
+            background: #f3e5f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .warning {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        .tags-section {
+            padding: 20px;
+            background: #fff3e0;
+            border-top: 3px solid #ff9800;
+        }
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #e65100;
+            margin-bottom: 12px;
+        }
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 4px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .tag-disease {
+            background: #ffcdd2;
+            color: #c62828;
+            border: 1px solid #ef5350;
+        }
+        .tag-drug {
+            background: #c8e6c9;
+            color: #2e7d32;
+            border: 1px solid #66bb6a;
+        }
+        .tag-bacteria {
+            background: #b3e5fc;
+            color: #0277bd;
+            border: 1px solid #29b6f6;
+        }
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .bottom-section {
+            padding: 20px;
+            background: #eceff1;
+            text-align: center;
+        }
+        .keywords {
+            font-size: 13px;
+            color: #546e7a;
+            margin-bottom: 10px;
+        }
+        .page-number {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1565c0;
+        }
+        .copy-section {
+            padding: 20px;
+            background: #fff;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .copy-input {
+            width: calc(100% - 120px);
+            max-width: 700px;
+            padding: 12px 16px;
+            border: 2px solid #90caf9;
+            border-radius: 10px;
+            font-size: 14px;
+            outline: none;
+            background: #f5f5f5;
+        }
+        .copy-btn {
+            padding: 12px 28px;
+            background: linear-gradient(90deg, #42a5f5 0%, #1e88e5 100%);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .copy-btn:hover {
+            background: linear-gradient(90deg, #1e88e5 0%, #1565c0 100%);
+        }
+        .copy-btn.copied {
+            background: #4caf50;
+        }
+        @media (max-width: 600px) {
+            .container {
+                margin: 70px 5px 20px;
+                border-radius: 12px;
+            }
+            .page-title {
+                font-size: 16px;
+                padding: 18px 12px;
+            }
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            tbody td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            .copy-input {
+                width: calc(100% - 100px);
+                font-size: 12px;
+            }
+            .copy-btn {
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="nav-btn home-btn">🏠 返回首页</a>
+    <a href="370.html" class="nav-btn prev-btn">⬅ 上一页</a>
+    <a href="372.html" class="nav-btn next-btn">➡ 下一页</a>
+    <button class="nav-btn fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+
+    <div class="container">
+        <div class="page-title">糖皮质激素在重症肌无力危象及其他急症中的应用</div>
+        <div class="subtitle">其他急症相关的糖皮质激素使用</div>
+
+        <div class="notice-box">
+            <span class="warning">注意：</span>开始使用大剂量糖皮质激素时，多达50%的患者可能出现很严重的短暂病情恶化，多达10%的患者会出现需要机械通气的呼吸衰竭。因此，初始大剂量糖皮质激素治疗大多仅用于同时接受血浆置换或人免疫球蛋白治疗，有机械通气保障的肌无力危象者。
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:22%">疾病/病症</th>
+                    <th style="width:78%">建议、用法及剂量</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="disease-name">肌无力危象</span></td>
+                    <td>
+                        给予紧急冲击方案。在经良好医患沟通并做好充分机械通气准备下，给予<span class="drug-name">甲泼尼龙</span><span class="dosage">1000mg/d</span>，连续3天，然后改为<span class="dosage">500mg/d</span>，连续2天；或者<span class="drug-name">地塞米松</span><span class="dosage">10～20mg/d</span>，连续1周；冲击治疗后改为<span class="drug-name">泼尼松</span>或者<span class="drug-name">甲泼尼龙</span>，晨起顿服。
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="disease-name">吉兰-巴雷综合征（GBS）</span></td>
+                    <td>
+                        <span class="section-title">建议：</span>不推荐<span class="drug-name">糖皮质激素</span>用于GBS。
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="disease-name">急性脊髓损伤（SCI）</span></td>
+                    <td>
+                        <span class="section-title">建议：</span><span class="drug-name">糖皮质激素</span>对于急性非穿透性SCI患者不常规推荐，仅作为一个可考虑的选项。不对损伤8小时以后的SCI患者使用24小时大剂量<span class="drug-name">甲泼尼龙</span>治疗。伴有中至重度创伤性脑损伤的SCI患者不应使用<span class="drug-name">甲泼尼龙</span>。<br><br>
+                        <span class="section-title">用法及剂量：</span>对创伤后8小时内的患者可使用24小时超大剂量<span class="drug-name">甲泼尼龙</span>治疗。负荷剂量：<span class="drug-name">甲泼尼龙</span><span class="dosage">30mg/kg</span>，15分钟内输注。维持剂量：负荷剂量后<span class="dosage">5.4mg/(kg·h)</span>输注45分钟，此后维持同一给药速度23小时。此用法显著超过通常所说的冲击剂量，感染等相关副作用大，需要认真权衡利弊使用。
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="disease-name">脂肪栓塞综合征（FES）</span></td>
+                    <td>
+                        <span class="section-title">建议：</span>危及生命的严重FES病例患者可考虑短期使用<span class="drug-name">糖皮质激素</span>。<br><br>
+                        <span class="section-title">用法及剂量：</span><span class="drug-name">氢化可的松</span><span class="dosage">100mg tid</span>，或<span class="drug-name">甲泼尼龙</span><span class="dosage">1～1.5mg/(kg·d)</span>。疗程<span class="dosage">1～5天</span>。
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="disease-name">放射性肺炎</span></td>
+                    <td>
+                        <span class="section-title">建议：</span>急性放射性肺炎的症状通常发生于放疗后4～12周，可表现为发热、干咳、呼吸困难。使用<span class="drug-name">糖皮质激素</span>治疗起效迅速，推荐使用。<br><br>
+                        <span class="section-title">用法及剂量：</span><span class="drug-name">泼尼松</span><span class="dosage">40～60mg/d</span>，口服<span class="dosage">2～4周</span>，<span class="dosage">3～12周</span>后逐渐减量至停药。
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="disease-name">肾上腺危象</span></td>
+                    <td>
+                        <span class="section-title">建议：</span>对于肾上腺危象需要立即使用<span class="drug-name">糖皮质激素</span>替代。可选用<span class="drug-name">地塞米松</span>、<span class="drug-name">氢化可的松</span>或者其他静脉注射用<span class="drug-name">糖皮质激素</span>制剂。可迅速降低不恰当升高的血管加压素，同时增加自由水的清除和纠正低钠血症。但对此前未诊断为肾上腺皮质
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 检索标签（点击图片中的文字快速检索）</div>
+            <span class="tag tag-disease">肌无力危象</span>
+            <span class="tag tag-disease">吉兰-巴雷综合征</span>
+            <span class="tag tag-disease">GBS</span>
+            <span class="tag tag-disease">急性脊髓损伤</span>
+            <span class="tag tag-disease">SCI</span>
+            <span class="tag tag-disease">脂肪栓塞综合征</span>
+            <span class="tag tag-disease">FES</span>
+            <span class="tag tag-disease">放射性肺炎</span>
+            <span class="tag tag-disease">肾上腺危象</span>
+            <span class="tag tag-drug">糖皮质激素</span>
+            <span class="tag tag-drug">甲泼尼龙</span>
+            <span class="tag tag-drug">地塞米松</span>
+            <span class="tag tag-drug">泼尼松</span>
+            <span class="tag tag-drug">氢化可的松</span>
+            <span class="tag tag-drug">人免疫球蛋白</span>
+        </div>
+
+        <div class="bottom-section">
+            <div class="keywords">关键词：糖皮质激素、肌无力危象、吉兰-巴雷综合征、急性脊髓损伤、脂肪栓塞综合征、放射性肺炎、肾上腺危象、甲泼尼龙、地塞米松、泼尼松、氢化可的松</div>
+            <div class="page-number">页码：362</div>
+        </div>
+
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="糖皮质激素在重症肌无力危象及其他急症中的应用；其他急症相关的糖皮质激素使用；糖皮质激素、肌无力危象、吉兰-巴雷综合征、急性脊髓损伤、脂肪栓塞综合征、放射性肺炎、肾上腺危象、甲泼尼龙、地塞米松、泼尼松、氢化可的松=362" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '✅ 已复制';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '📋 复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        function addToFavorites() {
+            const title = document.querySelector('.page-title').textContent.replace(/~~~~~|\*\*\*\*\*/g, '').trim();
+            const url = window.location.href;
+            const favoriteData = {
+                title: title,
+                url: url,
+                page: '362',
+                tags: ['糖皮质激素', '肌无力危象', '吉兰-巴雷综合征', '急性脊髓损伤', '脂肪栓塞综合征', '放射性肺炎', '肾上腺危象']
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === url);
+            if (!exists) {
+                favorites.push(favoriteData);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                localStorage.setItem('newFavorite', JSON.stringify(favoriteData));
+                
+                const btn = document.querySelector('.fav-btn');
+                btn.textContent = '⭐ 已收藏';
+                btn.style.background = '#4caf50';
+                setTimeout(() => {
+                    alert('已添加到收藏！请在 index.html 页面查看收藏列表。');
+                }, 100);
+            } else {
+                alert('该页面已在收藏列表中！');
+            }
+        }
+
+        window.addEventListener('load', () => {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const currentUrl = window.location.href;
+            if (favorites.some(f => f.url === currentUrl)) {
+                const btn = document.querySelector('.fav-btn');
+                btn.textContent = '⭐ 已收藏';
+                btn.style.background = '#4caf50';
+            }
+        });
+    </script>
+</body>
+</html>
