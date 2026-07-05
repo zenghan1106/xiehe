@@ -1,0 +1,586 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~镇静类药物过量定义分类与临床表现*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #e6f3ff 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 13px;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(92,184,92,0.3);
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .nav-btn:hover {
+            background: #449d44;
+            transform: translateY(-2px);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            top: 130px;
+            right: 15px;
+            background: #f0ad4e;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(240,173,78,0.3);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .fav-btn:hover {
+            background: #ec971f;
+            transform: translateY(-2px);
+        }
+        
+        .fav-btn.active {
+            background: #d9534f;
+        }
+        
+        /* 标题样式 */
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 60px 0 25px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            word-break: break-all;
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+        
+        /* 表头蓝色 */
+        thead tr {
+            background: #2e86de;
+            color: white;
+        }
+        
+        thead th {
+            padding: 18px 12px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        /* 表格内容 */
+        tbody td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e0e8f0;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #2c3e50;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4ff;
+        }
+        
+        /* 特殊标记样式 */
+        .check-mark {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .diamond {
+            color: #2980b9;
+        }
+        
+        .section-title {
+            color: #c0392b;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .sub-section {
+            color: #8e44ad;
+            font-weight: bold;
+        }
+        
+        .bullet {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 25px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .copy-section h3 {
+            color: #2c3e50;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+        }
+        
+        #copyInput {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #2c3e50;
+            background: #fafafa;
+            width: calc(100% - 100px);
+            min-height: 45px;
+        }
+        
+        #copyBtn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+        
+        #copyBtn:hover {
+            background: #2980b9;
+        }
+        
+        #copyBtn.copied {
+            background: #27ae60;
+        }
+        
+        /* 页码 */
+        .page-num {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin: 20px 0;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            color: #95a5a6;
+            font-size: 13px;
+            margin-bottom: 20px;
+            padding: 0 10px;
+            word-break: break-all;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-section h3 {
+            color: #2c3e50;
+            font-size: 16px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .tag {
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .tag.disease {
+            background: #e74c3c;
+        }
+        
+        .tag.drug {
+            background: #9b59b6;
+        }
+        
+        .tag.bacteria {
+            background: #16a085;
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2c3e50;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 200;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 14px 10px;
+            }
+            
+            tbody td {
+                font-size: 14px;
+                padding: 12px 10px;
+            }
+            
+            .home-btn, .nav-btn, .fav-btn {
+                font-size: 12px;
+                padding: 8px 12px;
+            }
+            
+            .copy-box {
+                flex-direction: column;
+            }
+            
+            #copyInput {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-btns">
+        <a href="296.html" class="nav-btn">⬅ 上一页</a>
+        <a href="298.html" class="nav-btn">下一页 ➡</a>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    
+    <!-- 标题 -->
+    <h1>~~~~~镇静类药物过量定义分类与临床表现*****</h1>
+    
+    <!-- 主表格 -->
+    <table>
+        <thead>
+            <tr>
+                <th>镇静类药物过量——定义、分类与临床表现</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span class="section-title">■ 镇静类药物过量</span><br><br>
+                    
+                    <span class="sub-section">1. 定义</span><br><br>
+                    
+                    <span class="bullet">●</span> 镇静催眠药是中枢神经系统抑制药，具有镇静、催眠作用，过大剂量可麻醉全身，包括延髓。<br><br>
+                    
+                    <span class="bullet">●</span> 一次大剂量服用可引起急性镇静催眠药中毒。长期滥用催眠药可引起耐药性和依赖性而导致慢性中毒，突然停药或减量可引起戒断综合征。<br><br>
+                    
+                    <span class="sub-section">2. 镇静类药物分类</span><br><br>
+                    
+                    <span class="bullet">●</span> <b>苯二氮䓬类</b><br>
+                    <span class="check-mark">✓ 长效类</span>（半衰期＞30小时）：氯氮䓬、地西泮、氟西泮。<br>
+                    <span class="check-mark">✓ 中效类</span>（半衰期6～30小时）：阿普唑仑、奥沙西泮、替马西泮。<br>
+                    <span class="check-mark">✓ 短效类</span>（半衰期＜6小时）：三唑仑。<br><br>
+                    
+                    <span class="bullet">●</span> <b>巴比妥类</b><br>
+                    <span class="check-mark">✓ 长效类</span>（作用时间6～8小时）：巴比妥和苯巴比妥（鲁米那）。<br>
+                    <span class="check-mark">✓ 中效类</span>（作用时间3～6小时）：戊巴比妥、异戊巴比妥、布他比妥。<br>
+                    <span class="check-mark">✓ 短效类</span>（作用时间2～3小时）：司可巴比妥。<br>
+                    <span class="check-mark">✓ 超短效类</span>（作用时间＜2小时）：硫喷妥钠。<br><br>
+                    
+                    <span class="bullet">●</span> <b>非巴比妥非苯二氮䓬类</b>（中效至短效）：水合氯醛、格鲁米特（导眠能）、甲喹酮（安眠酮）、甲丙氨酯（眠尔通）。<br><br>
+                    
+                    <span class="bullet">●</span> <b>吩噻嗪类</b>（抗精神病药）：指能治疗各类精神疾病及各种精神症状的药物。又称强安定药或神经阻滞药。按药物侧链结构不同可分为3类。<br>
+                    <span class="check-mark">✓ 脂肪族：</span>如氯丙嗪。<br>
+                    <span class="check-mark">✓ 哌啶类：</span>如硫利达嗪（甲硫达嗪）。<br>
+                    <span class="check-mark">✓ 哌嗪类：</span>如奋乃静、氟奋乃静和三氟拉嗪。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sub-section">3. 临床表现</span><br><br>
+                    
+                    <span class="bullet">●</span> <b>急性中毒</b><br><br>
+                    
+                    <span class="check-mark">✓ 巴比妥类药物中毒：</span>一次服大剂量巴比妥类，引起中枢神经系统抑制，症状严重程度与剂量有关。<br>
+                    <span class="diamond">◇</span> 轻至中度中毒：情绪不稳定、注意力不集中、记忆力减退、共济失调、步态不稳和眼球震颤等。<br>
+                    <span class="diamond">◇</span> 重度中毒：进行性中枢神经系统抑制，由中度昏迷至深昏迷，生命体征有改变，如出现呼吸节律改变、低血压。<br><br>
+                    
+                    <span class="check-mark">✓ 苯二氮䓬类药物中毒：</span>中枢神经系统抑制较轻，主要症状
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 页码 -->
+    <div class="page-num">285</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">关键词：镇静类药物过量；镇静催眠药；急性中毒；慢性中毒；戒断综合征；苯二氮䓬类；巴比妥类；吩噻嗪类；氯丙嗪；地西泮；苯巴比妥；硫喷妥钠；水合氯醛；格鲁米特；甲喹酮；甲丙氨酯；奋乃静；氟奋乃静；三氟拉嗪</div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <h3>📋 快速复制</h3>
+        <div class="copy-box">
+            <input type="text" id="copyInput" readonly>
+            <button id="copyBtn" onclick="copyContent()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <h3>🏷️ 特色检索标签</h3>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag disease">镇静类药物过量</span>
+            <span class="tag disease">急性镇静催眠药中毒</span>
+            <span class="tag disease">慢性中毒</span>
+            <span class="tag disease">戒断综合征</span>
+            <span class="tag disease">巴比妥类药物中毒</span>
+            <span class="tag disease">苯二氮䓬类药物中毒</span>
+            <!-- 药物标签 -->
+            <span class="tag drug">氯氮䓬</span>
+            <span class="tag drug">地西泮</span>
+            <span class="tag drug">氟西泮</span>
+            <span class="tag drug">阿普唑仑</span>
+            <span class="tag drug">奥沙西泮</span>
+            <span class="tag drug">替马西泮</span>
+            <span class="tag drug">三唑仑</span>
+            <span class="tag drug">巴比妥</span>
+            <span class="tag drug">苯巴比妥</span>
+            <span class="tag drug">鲁米那</span>
+            <span class="tag drug">戊巴比妥</span>
+            <span class="tag drug">异戊巴比妥</span>
+            <span class="tag drug">布他比妥</span>
+            <span class="tag drug">司可巴比妥</span>
+            <span class="tag drug">硫喷妥钠</span>
+            <span class="tag drug">水合氯醛</span>
+            <span class="tag drug">格鲁米特</span>
+            <span class="tag drug">导眠能</span>
+            <span class="tag drug">甲喹酮</span>
+            <span class="tag drug">安眠酮</span>
+            <span class="tag drug">甲丙氨酯</span>
+            <span class="tag drug">眠尔通</span>
+            <span class="tag drug">氯丙嗪</span>
+            <span class="tag drug">硫利达嗪</span>
+            <span class="tag drug">甲硫达嗪</span>
+            <span class="tag drug">奋乃静</span>
+            <span class="tag drug">氟奋乃静</span>
+            <span class="tag drug">三氟拉嗪</span>
+        </div>
+    </div>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 设置复制框内容
+        const title = "镇静类药物过量定义分类与临床表现";
+        const subtitle = "镇静类药物过量——定义、分类与临床表现";
+        const keywords = "镇静类药物过量；镇静催眠药；急性中毒；慢性中毒；戒断综合征；苯二氮䓬类；巴比妥类；吩噻嗪类；氯丙嗪；地西泮；苯巴比妥；硫喷妥钠；水合氯醛；格鲁米特；甲喹酮；甲丙氨酯；奋乃静；氟奋乃静；三氟拉嗪";
+        const pageNum = "285";
+        const currentPage = "297"; // 当前页面名称去掉.html
+        
+        document.getElementById('copyInput').value = title + "；" + subtitle + "；" + keywords + "；=" + pageNum;
+        
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            showToast('内容已复制到剪贴板！');
+            
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 提示消息
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = localStorage.getItem('fav_' + currentPage) === 'true';
+            
+            if (!isFav) {
+                // 添加到收藏
+                localStorage.setItem('fav_' + currentPage, 'true');
+                
+                // 保存收藏信息到index可用格式
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const favItem = {
+                    page: currentPage,
+                    title: title,
+                    url: currentPage + '.html',
+                    date: new Date().toLocaleString('zh-CN')
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.page === currentPage);
+                if (!exists) {
+                    favorites.push(favItem);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                btn.textContent = '❤️ 已收藏';
+                btn.classList.add('active');
+                showToast('已添加到收藏！');
+            } else {
+                // 取消收藏
+                localStorage.removeItem('fav_' + currentPage);
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.page !== currentPage);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                btn.textContent = '⭐ 收藏';
+                btn.classList.remove('active');
+                showToast('已取消收藏！');
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const isFav = localStorage.getItem('fav_' + currentPage) === 'true';
+            const btn = document.getElementById('favBtn');
+            if (isFav) {
+                btn.textContent = '❤️ 已收藏';
+                btn.classList.add('active');
+            }
+        };
+    </script>
+</body>
+</html>
