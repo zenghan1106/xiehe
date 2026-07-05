@@ -1,0 +1,492 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~内环境紊乱急诊-高钾血症*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f5f0e8 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 15px 10px;
+            min-height: 100vh;
+        }
+        
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        
+        .btn-home {
+            background-color: #2196F3;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background-color: #1976D2;
+            transform: translateY(-1px);
+        }
+        
+        .btn-nav {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 14px;
+            font-size: 13px;
+        }
+        
+        .btn-nav:hover {
+            background-color: #388E3C;
+        }
+        
+        .btn-favorite {
+            background-color: #FF9800;
+            color: white;
+            padding: 8px 14px;
+            font-size: 13px;
+        }
+        
+        .btn-favorite:hover {
+            background-color: #F57C00;
+        }
+        
+        .btn-favorite.active {
+            background-color: #E91E63;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1565C0;
+            font-size: 24px;
+            margin: 10px 0 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            word-break: break-all;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        thead {
+            background-color: #1976D2;
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 12px;
+            text-align: center;
+            font-weight: 700;
+            border: 1px solid #1565C0;
+            font-size: 15px;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background-color: #e3f2fd;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            color: #444;
+            vertical-align: top;
+        }
+        
+        tbody tr:first-child td {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0D47A1;
+            background-color: #e8f4fd;
+        }
+        
+        .section-title {
+            background-color: #1565C0 !important;
+            color: white !important;
+            font-size: 16px !important;
+            font-weight: 700;
+        }
+        
+        .subsection {
+            background-color: #e3f2fd !important;
+            font-weight: 600;
+            color: #1565C0 !important;
+        }
+        
+        .item-marker {
+            color: #1976D2;
+            font-weight: 700;
+        }
+        
+        .warning {
+            color: #d32f2f;
+            font-weight: 600;
+        }
+        
+        .highlight {
+            background-color: #fff3e0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .tags-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .tags-section h3 {
+            color: #1976D2;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .tag-disease {
+            background-color: #E91E63;
+        }
+        
+        .tag-drug {
+            background-color: #00BCD4;
+        }
+        
+        .copy-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .copy-section h3 {
+            color: #1976D2;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .copy-box-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #90CAF9;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+            background: #fafafa;
+        }
+        
+        .btn-copy {
+            background-color: #2196F3;
+            color: white;
+            padding: 12px 24px;
+        }
+        
+        .btn-copy:hover {
+            background-color: #1976D2;
+        }
+        
+        .btn-copy.copied {
+            background-color: #4CAF50;
+        }
+        
+        .keywords-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        
+        .keywords-section h3 {
+            color: #1976D2;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .page-code {
+            font-size: 20px;
+            color: #E91E63;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 18px;
+                padding: 12px;
+            }
+            
+            .btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th, tbody td {
+                padding: 10px 8px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 14px;
+            }
+            
+            .tag {
+                font-size: 11px;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="251.html" class="btn btn-nav">⬅ 上一页</a>
+            <a href="253.html" class="btn btn-nav">➡ 下一页</a>
+            <button class="btn btn-favorite" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+        </div>
+    </div>
+
+    <h1>~~~~~内环境紊乱急诊-高钾血症*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~内环境紊乱急诊-高钾血症*****、分类/项目、详细内容、📋 高钠血症处理方法、🏥 内环境紊乱急诊 — 高钾血症、急性高钠血症(&lt;48小时)、慢性高钠血症(&gt;48小时)、激素替代治疗(CDI患者)、1. 定义、2. 常见病因、⚠️ 注意事项</div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 25%;">分类/项目</th>
+                    <th style="width: 75%;">详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">📋 高钠血症处理方法</td>
+                </tr>
+                <tr>
+                    <td class="subsection">急性高钠血症<br>(&lt;48小时)</td>
+                    <td>
+                        <span class="item-marker">✓</span> 静脉输注<span class="highlight">5%葡萄糖</span>，<span class="highlight">3～6ml/(kg·h)</span><br>
+                        <span class="item-marker">✓</span> 每<span class="highlight">2～3小时</span>监测血钠和血糖<br>
+                        <span class="item-marker">✓</span> 直至血钠<span class="highlight">&lt;145mmol/L</span>，而后输注速度降为<span class="highlight">1ml/(kg·h)</span><br>
+                        <span class="item-marker">✓</span> 持续至血钠<span class="highlight">140mmol/L</span><br>
+                        <span class="item-marker">✓</span> 目标：每小时降低血钠<span class="highlight">1～2mmol/L</span><br>
+                        <span class="item-marker">✓</span> <span class="highlight">24小时内</span>使血钠恢复至正常值
+                    </td>
+                </tr>
+                <tr>
+                    <td class="subsection">慢性高钠血症<br>(&gt;48小时)</td>
+                    <td>
+                        <span class="item-marker">✓</span> 静脉输注<span class="highlight">5%葡萄糖</span>，速度为<span class="highlight">1.35ml/(kg·h)</span><br>
+                        <span class="item-marker">✓</span> <span class="highlight">70kg患者约100ml/h</span><br>
+                        <span class="item-marker">✓</span> 也可通过<span class="highlight">鼻胃管摄入水</span><br>
+                        <span class="item-marker">✓</span> 目标：<span class="highlight">24小时内</span>降低血钠浓度约<span class="highlight">10mmol/L</span>，<span class="warning">不超过12mmol/L</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="warning">⚠️ 注意事项</td>
+                    <td>
+                        快速输注<span class="highlight">5%葡萄糖</span>可能引起<span class="warning">高血糖</span>，注意监测血糖
+                    </td>
+                </tr>
+                <tr>
+                    <td class="subsection">激素替代治疗<br>(CDI患者)</td>
+                    <td>
+                        <span class="item-marker">●</span> 可加用<span class="highlight">去氨加压素</span>替代治疗<br>
+                        <span class="item-marker">●</span> 弥凝<span class="highlight">100μg/片</span>，每次<span class="highlight">0.5～1片</span>，<span class="highlight">2～3次/日</span><br>
+                        <span class="item-marker">●</span> 需监测出入量，量出为入<br>
+                        <span class="item-marker">●</span> <span class="warning">警惕低钠血症</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: right; color: #666; font-style: italic;">（唐晗琪）</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">🏥 内环境紊乱急诊 — 高钾血症</td>
+                </tr>
+                <tr>
+                    <td class="subsection">1. 定义</td>
+                    <td>
+                        高钾血症指细胞外液钾离子浓度<span class="highlight warning">&gt;5.5mmol/L</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="subsection">2. 常见病因</td>
+                    <td>
+                        <span class="item-marker">●</span> 急性钾摄入增加<br><br>
+                        
+                        <span class="item-marker">●</span> 钾离子由细胞内释放到细胞外：<br>
+                        &nbsp;&nbsp;<span class="item-marker">✓</span> <span class="highlight">假性高钾血症</span>：见于静脉采血时机械性损伤或采血期间反复握拳导致钾移出肌肉细胞<br><br>
+                        &nbsp;&nbsp;<span class="item-marker">✓</span> <span class="highlight">代谢性酸中毒</span>：除有机酸中毒（如乳酸酸中毒、酮症酸中毒）外，其他代谢性酸中毒时为维持细胞的电中性，钾离子转移至细胞外以缓冲细胞内过量的氢离子<br><br>
+                        &nbsp;&nbsp;<span class="item-marker">✓</span> <span class="highlight">胰岛素缺乏、高血糖、高渗透压</span>：除糖尿病患者外，高钠血症或应用<span class="highlight">甘露醇</span>等高渗压药物者，亦可出现血钾升高，合并肾功能不全者更常见<br><br>
+                        &nbsp;&nbsp;<span class="item-marker">✓</span> <span class="highlight">组织分解代谢增加</span>：如严重创伤、烧伤、白血病或淋巴瘤患者接受化疗（<span class="highlight">溶瘤综合征</span>）等<br><br>
+                        &nbsp;&nbsp;<span class="item-marker">✓</span> <span class="highlight">药物因素</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tags-section">
+        <h3>🏷️ 检索标签（仅图片内文字）</h3>
+        <span class="tag tag-disease">高钠血症</span>
+        <span class="tag tag-disease">高钾血症</span>
+        <span class="tag tag-disease">假性高钾血症</span>
+        <span class="tag tag-disease">代谢性酸中毒</span>
+        <span class="tag tag-disease">糖尿病</span>
+        <span class="tag tag-disease">溶瘤综合征</span>
+        <span class="tag tag-disease">低钠血症</span>
+        <span class="tag tag-disease">CDI</span>
+        <span class="tag tag-drug">5%葡萄糖</span>
+        <span class="tag tag-drug">去氨加压素</span>
+        <span class="tag tag-drug">甘露醇</span>
+        <span class="tag tag-drug">弥凝</span>
+    </div>
+
+    <div class="copy-section">
+        <h3>📋 快速复制</h3>
+        <div class="copy-box-wrapper">
+            <input type="text" id="copyInput" readonly>
+            <button class="btn btn-copy" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+
+    <div class="keywords-section">
+        <h3>📄 页码信息</h3>
+        <div class="page-code">240</div>
+    </div>
+
+    <script>
+        // 设置复制框内容
+        const title = "内环境紊乱急诊-高钾血症";
+        const subtitle = "高钠血症处理及高钾血症定义病因";
+        const keywords = "高钠血症；高钾血症；假性高钾血症；代谢性酸中毒；糖尿病；溶瘤综合征；低钠血症；CDI；5%葡萄糖；去氨加压素；甘露醇；弥凝";
+        const pageNum = "240";
+        document.getElementById('copyInput').value = title + "；" + subtitle + "；" + keywords + "；" + "=" + pageNum;
+
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '✓ 已复制';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.toggle('active');
+            
+            if (isFav) {
+                btn.textContent = '❤️ 已收藏';
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                if (!favorites.includes('240')) {
+                    favorites.push('240');
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                alert('已添加到收藏！请在index.html查看收藏列表。');
+            } else {
+                btn.textContent = '⭐ 收藏';
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f !== '240');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+
+        // 初始化收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            if (favorites.includes('240')) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        };
+    </script>
+
+</body>
+</html>
