@@ -1,0 +1,515 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~高钾血症后续处理与低钾血症的诊治*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #e6f3ff 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(33,150,243,0.3);
+            z-index: 100;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background: #1976D2;
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .nav-btns a, .nav-btns button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(76,175,80,0.3);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .nav-btns a:hover, .nav-btns button:hover {
+            background: #388E3C;
+        }
+        
+        /* 收藏按钮 */
+        .favorite-btn {
+            background: #FF9800 !important;
+            box-shadow: 0 3px 10px rgba(255,152,0,0.3) !important;
+        }
+        
+        .favorite-btn:hover {
+            background: #F57C00 !important;
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 900px;
+            margin: 70px auto 30px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            padding: 25px 20px;
+            background: linear-gradient(90deg, #1976D2, #2196F3, #42A5F5);
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+        
+        /* 表头蓝色 */
+        thead tr {
+            background: #1976D2 !important;
+        }
+        
+        thead th {
+            color: white;
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        /* 表格行 */
+        tbody tr:nth-child(odd) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #ffffff;
+        }
+        
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e0e0e0;
+            line-height: 1.8;
+            vertical-align: top;
+        }
+        
+        /* 第一列（分类）加粗 */
+        td:first-child {
+            font-weight: bold;
+            color: #1565C0;
+            white-space: nowrap;
+            width: 120px;
+        }
+        
+        /* 内容中的标记 */
+        .check-mark {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        .bullet {
+            color: #1976D2;
+            font-weight: bold;
+        }
+        
+        .diamond {
+            color: #FF9800;
+        }
+        
+        /* 注意标记 */
+        .notice {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        
+        /* 小标题 */
+        .sub-title {
+            color: #1565C0;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        /* 页码区域 */
+        .page-number {
+            text-align: center;
+            padding: 20px;
+            font-size: 16px;
+            color: #666;
+            background: #f5f5f5;
+        }
+        
+        .page-number span {
+            color: #1976D2;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        /* 关键词标签区域 */
+        .tags-section {
+            padding: 20px;
+            background: #fafafa;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .tag-disease {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+        
+        .tag-drug {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .tag-bacteria {
+            background: #fff3e0;
+            color: #ef6c00;
+            border: 1px solid #ffcc80;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            padding: 20px;
+            background: #fff;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .copy-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #90caf9;
+            border-radius: 8px;
+            font-size: 14px;
+            background: #f8fbff;
+            color: #333;
+        }
+        
+        .copy-btn {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #1976D2;
+        }
+        
+        .copy-btn.copied {
+            background: #4CAF50;
+        }
+        
+        /* 关键词底部 */
+        .keywords-bottom {
+            padding: 15px 20px;
+            background: #e3f2fd;
+            text-align: center;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .keywords-bottom strong {
+            color: #1565C0;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .page-title {
+                font-size: 18px;
+                padding: 18px 15px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 12px 8px;
+            }
+            
+            td {
+                padding: 10px 8px;
+                font-size: 14px;
+            }
+            
+            td:first-child {
+                width: 90px;
+            }
+            
+            .home-btn, .nav-btns a, .nav-btns button {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 右上角导航 -->
+    <div class="nav-btns">
+        <a href="253.html">⬆ 上一页</a>
+        <a href="255.html">⬇ 下一页</a>
+        <button class="favorite-btn" onclick="addToFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <div class="container">
+        <!-- 标题 -->
+        <div class="page-title">~~~~~高钾血症后续处理与低钾血症的诊治*****</div>
+        
+        <!-- 主表格 -->
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">高钾血症后续处理与低钾血症 - 急诊医学</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>高钾血症<br>后续处理</td>
+                    <td>
+                        <span class="diamond">◇</span> 胰岛素：监测血钾的同时注意监测血糖，避免低血糖<br>
+                        <span class="diamond">◇</span> 清除钾离子：肾功能未严重受损者可应用袢利尿药或噻嗪类利尿药；肾功能严重受损者可选择肠道阳离子交换剂（如聚苯乙烯磺酸钠、环硅酸锆盐）、血液透析<br><br>
+                        <span class="notice">注意：</span>聚苯乙烯磺酸钠使用时须配合通便药物同时使用，以便将结合的钾迅速排出体外。以下情况禁用聚苯乙烯磺酸钠（存在肠坏死高风险）：术后、肠梗阻或正在使用阿片类药物、基础肠道疾病如溃疡性结肠炎者<br><br>
+                        <span class="diamond">◇</span> 静脉应用碳酸氢钠：疗效有限，建议联用其他降钾治疗<br>
+                        <span class="diamond">◇</span> 停用潜在导致血钾升高的药物<br>
+                        <span class="diamond">◇</span> 纠正低血容量等可逆因素<br><br>
+                        <span class="notice">注意：</span>以上治疗需在心电监护下实施，每隔1～2小时监测血钾浓度<br><br>
+                        <span class="bullet">●</span> 若高钾血症患者不存在上述紧急情况，可根据病因选择上述方法中的一种或多种方法尽快降钾，并嘱患者低钾饮食
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align:center; background:#e3f2fd; font-size:16px; font-weight:bold; color:#1565C0;">■ 低钾血症</td>
+                </tr>
+                <tr>
+                    <td>定义</td>
+                    <td>低钾血症指细胞外液钾离子浓度＜3.5mmol/L</td>
+                </tr>
+                <tr>
+                    <td>常见病因</td>
+                    <td>
+                        <span class="bullet">●</span> 钾摄入减少<br>
+                        <span class="bullet">●</span> 钾离子转移至细胞内<br>
+                        &nbsp;&nbsp;<span class="check-mark">✓</span> 胰岛素利用度增加：如DKA/非酮症高血糖者应用胰岛素降糖时<br>
+                        &nbsp;&nbsp;<span class="check-mark">✓</span> β肾上腺素能活性增强：如应激诱发肾上腺素释放（见于酒精戒断、急性心肌梗死、头部损伤等），或外源性应用β受体激动药（如沙丁胺醇、特布他林），或者应用拟交感神经药物（如麻黄碱）<br>
+                        &nbsp;&nbsp;<span class="check-mark">✓</span> 外周血pH升高：如代谢性/呼吸性碱中毒，pH每升高0.1，血钾降低＜0.4mmol/L<br>
+                        &nbsp;&nbsp;<span class="check-mark">✓</span> 低钾性周期性麻痹<br>
+                        &nbsp;&nbsp;<span class="check-mark">✓</span> 低体温<br>
+                        <span class="bullet">●</span> 钾丢失增多<br>
+                        &nbsp;&nbsp;<span class="check-mark">✓</span> 经胃肠道丢失：任何原因导致的呕吐、腹泻或留置相关导
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 页码 -->
+        <div class="page-number">
+            页码：<span>254</span>
+        </div>
+        
+        <!-- 检索标签 -->
+        <div class="tags-section">
+            <div class="tags-title">🔍 检索标签（点击可检索）：</div>
+            <div class="tags-container">
+                <span class="tag tag-disease">高钾血症</span>
+                <span class="tag tag-disease">低钾血症</span>
+                <span class="tag tag-disease">低钾性周期性麻痹</span>
+                <span class="tag tag-disease">急性心肌梗死</span>
+                <span class="tag tag-disease">头部损伤</span>
+                <span class="tag tag-disease">溃疡性结肠炎</span>
+                <span class="tag tag-disease">肠梗阻</span>
+                <span class="tag tag-disease">代谢性碱中毒</span>
+                <span class="tag tag-disease">呼吸性碱中毒</span>
+                <span class="tag tag-disease">DKA</span>
+                <span class="tag tag-disease">非酮症高血糖</span>
+                <span class="tag tag-drug">胰岛素</span>
+                <span class="tag tag-drug">袢利尿药</span>
+                <span class="tag tag-drug">噻嗪类利尿药</span>
+                <span class="tag tag-drug">聚苯乙烯磺酸钠</span>
+                <span class="tag tag-drug">环硅酸锆盐</span>
+                <span class="tag tag-drug">碳酸氢钠</span>
+                <span class="tag tag-drug">沙丁胺醇</span>
+                <span class="tag tag-drug">特布他林</span>
+                <span class="tag tag-drug">麻黄碱</span>
+                <span class="tag tag-drug">阿片类药物</span>
+            </div>
+        </div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <div class="copy-wrapper">
+                <input type="text" class="copy-input" id="copyText" value="高钾血症后续处理与低钾血症的诊治；高钾血症、低钾血症、低钾性周期性麻痹、急性心肌梗死、头部损伤、溃疡性结肠炎、肠梗阻、代谢性碱中毒、呼吸性碱中毒、DKA、非酮症高血糖、胰岛素、袢利尿药、噻嗪类利尿药、聚苯乙烯磺酸钠、环硅酸锆盐、碳酸氢钠、沙丁胺醇、特布他林、麻黄碱、阿片类药物；=254" readonly>
+                <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+            </div>
+        </div>
+        
+        <!-- 底部关键词 -->
+        <div class="keywords-bottom">
+            <strong>关键词：</strong>高钾血症 | 低钾血症 | 低钾性周期性麻痹 | 急性心肌梗死 | 头部损伤 | 溃疡性结肠炎 | 肠梗阻 | 代谢性碱中毒 | 呼吸性碱中毒 | DKA | 非酮症高血糖 | 胰岛素 | 袢利尿药 | 噻嗪类利尿药 | 聚苯乙烯磺酸钠 | 环硅酸锆盐 | 碳酸氢钠 | 沙丁胺醇 | 特布他林 | 麻黄碱 | 阿片类药物 | 血液透析 | 心电监护 | 酒精戒断 | β受体激动药
+        </div>
+    </div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 添加到收藏
+        function addToFavorite() {
+            const title = document.querySelector('.page-title').textContent;
+            const pageNum = '254';
+            const url = window.location.href;
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            const exists = favorites.some(f => f.pageNum === pageNum);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                pageNum: pageNum,
+                url: url,
+                time: new Date().toLocaleString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            try {
+                if (window.opener && !window.opener.closed) {
+                    window.opener.postMessage({
+                        type: 'addFavorite',
+                        data: {
+                            title: title,
+                            pageNum: pageNum,
+                            url: '254.html'
+                        }
+                    }, '*');
+                }
+            } catch(e) {}
+            
+            alert('⭐ 已收藏！页面 "' + title + '" 已添加到收藏夹。');
+        }
+        
+        window.addEventListener('message', function(e) {
+            if (e.data && e.data.type === 'addFavorite') {
+                console.log('收到收藏请求:', e.data.data);
+            }
+        });
+    </script>
+</body>
+</html>
