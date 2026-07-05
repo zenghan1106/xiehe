@@ -1,0 +1,481 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~SLEDAI-2000积分表*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f9ff 50%, #fff5f5 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #333;
+        }
+        
+        .header {
+            position: relative;
+            margin-bottom: 20px;
+            padding-top: 10px;
+        }
+        
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            z-index: 100;
+        }
+        
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+        }
+        
+        .fav-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(255,107,107,0.3);
+        }
+        
+        .title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 60px 0 20px 0;
+            padding: 0 10px;
+            line-height: 1.4;
+        }
+        
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #2874a6;
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        thead {
+            background: #2e86c1;
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 10px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4fd;
+        }
+        
+        td {
+            padding: 10px;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        .performance {
+            font-weight: bold;
+            color: #1a5276;
+            white-space: nowrap;
+        }
+        
+        .description {
+            color: #444;
+            word-break: break-all;
+        }
+        
+        .score {
+            text-align: center;
+            font-weight: bold;
+            color: #c0392b;
+            white-space: nowrap;
+        }
+        
+        .tags-section {
+            margin: 25px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            cursor: pointer;
+        }
+        
+        .tag:hover {
+            background: #c0392b;
+        }
+        
+        .page-num {
+            text-align: center;
+            font-size: 18px;
+            color: #2e86c1;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .keywords {
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 15px;
+            padding: 10px;
+        }
+        
+        .copy-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            padding: 0 10px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            max-width: calc(100% - 110px);
+            padding: 12px 15px;
+            border: 2px solid #4a90d9;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #219a52;
+        }
+        
+        @media (max-width: 600px) {
+            .title {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            thead th {
+                font-size: 14px;
+                padding: 10px 6px;
+            }
+            td {
+                padding: 8px 6px;
+                font-size: 13px;
+            }
+            .performance {
+                white-space: normal;
+                min-width: 80px;
+            }
+            .nav-btn, .fav-btn, .home-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            .copy-input {
+                font-size: 12px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <div class="nav-btns">
+        <a href="229.html" class="nav-btn">上一页</a>
+        <a href="231.html" class="nav-btn">下一页</a>
+        <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    </div>
+
+    <h1 class="title">~~~~~SLEDAI-2000积分表*****</h1>
+    <p class="subtitle">表35 系统性红斑狼疮疾病活动度评估</p>
+    <p class="section-title">5. 病情活动度评估</p>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:18%">表现</th>
+                    <th style="width:67%">描述</th>
+                    <th style="width:15%">计分</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="performance">癫痫发作</td>
+                    <td class="description">最近开始发作的，除外代谢、感染、药物所致</td>
+                    <td class="score">8分</td>
+                </tr>
+                <tr>
+                    <td class="performance">精神症状</td>
+                    <td class="description">严重的认知障碍，因而正常活动能力改变，包括幻觉、思维无连贯性、不合理，思维内容缺乏、无衔接，行为紧张、怪异、缺乏条理，除外尿毒症、药物影响</td>
+                    <td class="score">8分</td>
+                </tr>
+                <tr>
+                    <td class="performance">器质性脑病综合征</td>
+                    <td class="description">大脑功能异常，定向力、记忆力及其他智力障碍，临床表现突出并有波动性，包括意识模糊、对周围环境注意力不集中，加上以下至少2项：认知障碍、语言不连贯、嗜睡或睡眠倒错、精神活动增加或减少。除外代谢、感染、药物所致</td>
+                    <td class="score">8分</td>
+                </tr>
+                <tr>
+                    <td class="performance">视觉障碍</td>
+                    <td class="description">SLE视网膜病变，包括絮状渗出、视网膜出血、严重的脉络膜渗出，或出血及视神经炎，除外高血压、感染、药物所致</td>
+                    <td class="score">8分</td>
+                </tr>
+                <tr>
+                    <td class="performance">脑神经病变</td>
+                    <td class="description">累及脑神经的新出现的感觉、运动神经病变</td>
+                    <td class="score">8分</td>
+                </tr>
+                <tr>
+                    <td class="performance">狼疮性头痛</td>
+                    <td class="description">严重持续性头痛，可以为偏头痛，但必须对镇痛药无效</td>
+                    <td class="score">8分</td>
+                </tr>
+                <tr>
+                    <td class="performance">脑血管意外</td>
+                    <td class="description">新出现的脑血管意外，除外动脉硬化</td>
+                    <td class="score">8分</td>
+                </tr>
+                <tr>
+                    <td class="performance">血管炎</td>
+                    <td class="description">溃疡、坏疽、有触痛的手指小结节、甲周碎片状梗死、出血或经活检、血管造影证实</td>
+                    <td class="score">8分</td>
+                </tr>
+                <tr>
+                    <td class="performance">关节炎</td>
+                    <td class="description">2个以上关节痛和炎性体征（压痛、肿胀、渗出）</td>
+                    <td class="score">4分</td>
+                </tr>
+                <tr>
+                    <td class="performance">肌炎</td>
+                    <td class="description">近端肌痛或无力伴CK升高，或肌电图改变或活检证实</td>
+                    <td class="score">4分</td>
+                </tr>
+                <tr>
+                    <td class="performance">管型尿</td>
+                    <td class="description">出现颗粒管型或红细胞管型</td>
+                    <td class="score">4分</td>
+                </tr>
+                <tr>
+                    <td class="performance">血尿</td>
+                    <td class="description">红细胞＞5/HP，除外结石、感染和其他原因</td>
+                    <td class="score">4分</td>
+                </tr>
+                <tr>
+                    <td class="performance">蛋白尿</td>
+                    <td class="description">尿蛋白＞0.5g/24h，新出现或近期增加0.5g/24h以上</td>
+                    <td class="score">4分</td>
+                </tr>
+                <tr>
+                    <td class="performance">脓尿</td>
+                    <td class="description">白细胞＞5/HP，除外感染</td>
+                    <td class="score">4分</td>
+                </tr>
+                <tr>
+                    <td class="performance">脱发</td>
+                    <td class="description">新出现或复发的异常斑片状脱发或弥散性脱发</td>
+                    <td class="score">2分</td>
+                </tr>
+                <tr>
+                    <td class="performance">新出现皮疹</td>
+                    <td class="description">新出现或复发的炎症性皮疹</td>
+                    <td class="score">2分</td>
+                </tr>
+                <tr>
+                    <td class="performance">黏膜溃疡</td>
+                    <td class="description">新出现或复发的口腔或鼻黏膜溃疡</td>
+                    <td class="score">2分</td>
+                </tr>
+                <tr>
+                    <td class="performance">胸膜炎</td>
+                    <td class="description">胸膜炎性胸痛伴胸膜摩擦音、渗出或胸膜肥厚</td>
+                    <td class="score">2分</td>
+                </tr>
+                <tr>
+                    <td class="performance">心包炎</td>
+                    <td class="description">心包痛，加上以下至少1项：心包摩擦音、心包积液或心电图或超声心动图证实</td>
+                    <td class="score">2分</td>
+                </tr>
+                <tr>
+                    <td class="performance">低补体</td>
+                    <td class="description">CH50、C3、C4下降，低于正常最低值</td>
+                    <td class="score">2分</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tags-section">
+        <div class="tags-title">检索标签（点击图片中的关键词可检索）：</div>
+        <span class="tag">癫痫发作</span>
+        <span class="tag">精神症状</span>
+        <span class="tag">器质性脑病综合征</span>
+        <span class="tag">视觉障碍</span>
+        <span class="tag">脑神经病变</span>
+        <span class="tag">狼疮性头痛</span>
+        <span class="tag">脑血管意外</span>
+        <span class="tag">血管炎</span>
+        <span class="tag">关节炎</span>
+        <span class="tag">肌炎</span>
+        <span class="tag">管型尿</span>
+        <span class="tag">血尿</span>
+        <span class="tag">蛋白尿</span>
+        <span class="tag">脓尿</span>
+        <span class="tag">脱发</span>
+        <span class="tag">新出现皮疹</span>
+        <span class="tag">黏膜溃疡</span>
+        <span class="tag">胸膜炎</span>
+        <span class="tag">心包炎</span>
+        <span class="tag">低补体</span>
+        <span class="tag">SLE</span>
+        <span class="tag">CH50</span>
+        <span class="tag">C3</span>
+        <span class="tag">C4</span>
+        <span class="tag">CK</span>
+    </div>
+
+    <div class="page-num">230</div>
+
+    <div class="keywords">
+        关键词：SLEDAI-2000积分表；系统性红斑狼疮；病情活动度评估；狼疮；癫痫发作；精神症状；器质性脑病综合征；视觉障碍；脑神经病变；狼疮性头痛；脑血管意外；血管炎；关节炎；肌炎；管型尿；血尿；蛋白尿；脓尿；脱发；皮疹；黏膜溃疡；胸膜炎；心包炎；低补体；CH50；C3；C4；CK
+    </div>
+
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="SLEDAI-2000积分表；表35 系统性红斑狼疮疾病活动度评估；SLEDAI-2000积分表；系统性红斑狼疮；病情活动度评估；狼疮；癫痫发作；精神症状；器质性脑病综合征；视觉障碍；脑神经病变；狼疮性头痛；脑血管意外；血管炎；关节炎；肌炎；管型尿；血尿；蛋白尿；脓尿；脱发；皮疹；黏膜溃疡；胸膜炎；心包炎；低补体；CH50；C3；C4；CK；=230" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            }, function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板！");
+            });
+        }
+        
+        function addToFavorites() {
+            const title = document.title.replace(/~~~~~|*****/g, '');
+            const favData = {
+                title: title,
+                url: window.location.href,
+                pageNum: '230'
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === favData.url);
+            
+            if (!exists) {
+                favorites.push(favData);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已收藏！可在index.html的收藏类目下查看。');
+            } else {
+                alert('该页面已在收藏中！');
+            }
+            
+            try {
+                localStorage.setItem('lastFavUpdate', Date.now());
+            } catch(e) {}
+        }
+    </script>
+
+</body>
+</html>
