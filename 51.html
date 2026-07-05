@@ -1,0 +1,665 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~头晕选做检查急诊处理及头痛定义病因分类*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #2c3e50;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(52,152,219,0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        /* 右上角导航按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+        }
+        
+        .nav-btns a, .nav-btns button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(52,152,219,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btns a:hover, .nav-btns button:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .nav-btns .fav-btn {
+            background: #e74c3c;
+            box-shadow: 0 2px 8px rgba(231,76,60,0.3);
+        }
+        
+        .nav-btns .fav-btn:hover {
+            background: #c0392b;
+        }
+        
+        /* 标题 */
+        h1 {
+            text-align: center;
+            padding: 80px 20px 20px;
+            font-size: 22px;
+            color: #1a5276;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        /* 副标题 */
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #5d6d7e;
+            margin-bottom: 25px;
+            padding: 0 20px;
+        }
+        
+        /* 主表格容器 */
+        .table-container {
+            width: 95%;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        /* 表格头部 */
+        thead tr {
+            background: #2e86de;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            font-size: 17px;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        /* 表格内容 */
+        tbody tr {
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        td {
+            padding: 14px 12px;
+            vertical-align: top;
+            word-break: break-word;
+        }
+        
+        td:first-child {
+            font-weight: 600;
+            color: #1a5276;
+            background: #ebf5fb;
+            width: 22%;
+        }
+        
+        /* 章节标题 */
+        .section-title {
+            font-weight: 700;
+            color: #1a5276;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+        
+        /* 列表样式 */
+        .list-section {
+            padding: 15px;
+            background: #fefefe;
+        }
+        
+        .item-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .item-list li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+        
+        .item-list li::before {
+            content: "•";
+            position: absolute;
+            left: 5px;
+            color: #3498db;
+            font-weight: bold;
+        }
+        
+        .check-item::before {
+            content: "✓" !important;
+            color: #27ae60 !important;
+        }
+        
+        /* 药物说明 */
+        .drug-name {
+            font-weight: 600;
+            color: #c0392b;
+        }
+        
+        .drug-dose {
+            color: #8e44ad;
+            font-weight: 500;
+        }
+        
+        /* 新章节标记 */
+        .new-chapter {
+            background: #2c3e50;
+            color: white;
+            padding: 12px 15px;
+            font-size: 16px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .new-chapter::before {
+            content: "■";
+            color: #e74c3c;
+        }
+        
+        /* 检索标签 */
+        .tags-section {
+            width: 95%;
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1a5276;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #fadbd8;
+            color: #c0392b;
+        }
+        
+        .tag-disease:hover {
+            background: #f1948a;
+            color: white;
+        }
+        
+        .tag-symptom {
+            background: #d5f5e3;
+            color: #27ae60;
+        }
+        
+        .tag-symptom:hover {
+            background: #82e0aa;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #d6eaf8;
+            color: #2e86de;
+        }
+        
+        .tag-drug:hover {
+            background: #85c1e9;
+            color: white;
+        }
+        
+        .tag-check {
+            background: #fdebd0;
+            color: #e67e22;
+        }
+        
+        .tag-check:hover {
+            background: #f0b27a;
+            color: white;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            width: 95%;
+            max-width: 800px;
+            margin: 25px auto;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 10px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            height: 44px;
+            padding: 0 15px;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #2c3e50;
+            background: white;
+        }
+        
+        .copy-btn {
+            height: 44px;
+            padding: 0 22px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn.copied {
+            background: #7f8c8d;
+        }
+        
+        /* 页码 */
+        .page-num {
+            text-align: center;
+            font-size: 15px;
+            color: #5d6d7e;
+            margin: 20px 0 10px;
+            font-weight: 600;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            font-size: 12px;
+            color: #7f8c8d;
+            padding: 0 20px 30px;
+            line-height: 1.8;
+        }
+        
+        .keywords span {
+            display: inline-block;
+            margin: 2px 5px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 18px;
+                padding-top: 90px;
+            }
+            
+            .subtitle {
+                font-size: 14px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            
+            td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .nav-btns a, .nav-btns button {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 右上角导航 -->
+    <div class="nav-btns">
+        <a href="50.html">← 上一页</a>
+        <a href="52.html">下一页 →</a>
+        <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    </div>
+
+    <!-- 标题 -->
+    <h1>~~~~~头晕选做检查急诊处理及头痛定义病因分类*****</h1>
+    <p class="subtitle">头晕选做检查与急诊处理 | 头痛定义与病因分类</p>
+
+    <!-- 主表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">头晕选做检查、急诊处理及头痛定义病因分类</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 选做检查 -->
+                <tr>
+                    <td colspan="2" style="background:#5dade2; color:white; font-weight:600; font-size:15px;">
+                        4. 选做检查
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="list-section">
+                            <ul class="item-list">
+                                <li><span class="drug-name">听力图：</span>有助于评价梅尼埃病和听神经瘤。</li>
+                                <li><span class="drug-name">脑干听觉诱发电位：</span>异常提示可能有听神经疾病，如多发性硬化和听神经瘤。</li>
+                                <li><span class="drug-name">头颅MRI：</span>对于查找肿瘤及评价其状态很有帮助。</li>
+                                <li><span class="drug-name">颈动脉和椎动脉超声多普勒检查：</span>适用于临床表现提示有短暂性脑缺血发作的患者。</li>
+                                <li><span class="drug-name">前庭功能评价：</span>包括眼震电图（ENG）、旋转试验、步态测定仪。ENG通过测量角膜-视网膜电位记录不同动作时的眼球运动。</li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <!-- 急诊处理 -->
+                <tr>
+                    <td colspan="2" style="background:#5dade2; color:white; font-weight:600; font-size:15px;">
+                        5. 急诊处理
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="list-section">
+                            <ul class="item-list">
+                                <li><b>突发前庭功能异常：</b>治疗目标是控制急性的前庭神经和自主神经症状。
+                                    <ul class="item-list" style="margin-top:8px; padding-left:15px;">
+                                        <li class="check-item">常用以下3类药物：
+                                            <br>①<span class="drug-name">抗组胺药：</span><span class="drug-dose">西替利嗪 10mg qd</span>；
+                                            <br>②<span class="drug-name">苯二氮䓬类：</span><span class="drug-dose">地西泮 1mg q12h</span>；<span class="drug-dose">阿普唑仑 0.5mg q8h</span>；
+                                            <br>③<span class="drug-name">止吐药：</span><span class="drug-dose">昂丹司琼（4mg q8h）</span>、<span class="drug-dose">甲氧氯普胺（5mg q6h）</span>、<span class="drug-dose">多潘立酮（10mg q8h）</span>。
+                                        </li>
+                                        <li class="check-item">所有药物均应谨慎使用。患者的眩晕症状和呕吐停止后，应尽快停用上述对症治疗药物，以避免削弱脑部对前庭功能丧失的代偿适应。</li>
+                                    </ul>
+                                </li>
+                                <li><b>椎基底动脉供血不足或脑干卒中：</b>因患者常有动脉粥样硬化的危险因素，在排除脑出血和其他禁忌证的情况下，都应予<span class="drug-name">阿司匹林</span>或<span class="drug-name">氯吡格雷</span>等抗血小板治疗，以及<span class="drug-name">前列地尔</span>改善微循环障碍。</li>
+                                <li>安排神经科和耳鼻喉专科进一步诊治。</li>
+                            </ul>
+                            <div style="text-align:right; font-size:13px; color:#7f8c8d; margin-top:10px;">（杜铁宽）</div>
+                        </div>
+                    </td>
+                </tr>
+                <!-- 头痛新章节 -->
+                <tr>
+                    <td colspan="2">
+                        <div class="new-chapter">头痛</div>
+                    </td>
+                </tr>
+                <!-- 定义 -->
+                <tr>
+                    <td colspan="2" style="background:#5dade2; color:white; font-weight:600; font-size:15px;">
+                        1. 定义
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="padding:15px; font-size:13px; line-height:1.8;">
+                        额、顶、颞及枕部的疼痛。
+                    </td>
+                </tr>
+                <!-- 病因分类 -->
+                <tr>
+                    <td colspan="2" style="background:#5dade2; color:white; font-weight:600; font-size:15px;">
+                        2. 病因分类
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="list-section">
+                            <ul class="item-list">
+                                <li>在急诊要能够区分高危、低危头痛。</li>
+                                <li>力争做到既不错过危险性病因，又不致在低危头痛上耗费过多资源（表4、表5）。</li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 检索标签（点击图片中的文字检索）</div>
+        <div class="tags-container">
+            <span class="tag tag-check">听力图</span>
+            <span class="tag tag-disease">梅尼埃病</span>
+            <span class="tag tag-disease">听神经瘤</span>
+            <span class="tag tag-check">脑干听觉诱发电位</span>
+            <span class="tag tag-disease">多发性硬化</span>
+            <span class="tag tag-check">头颅MRI</span>
+            <span class="tag tag-check">颈动脉超声</span>
+            <span class="tag tag-check">椎动脉超声</span>
+            <span class="tag tag-check">多普勒检查</span>
+            <span class="tag tag-disease">短暂性脑缺血发作</span>
+            <span class="tag tag-check">前庭功能评价</span>
+            <span class="tag tag-check">眼震电图</span>
+            <span class="tag tag-check">ENG</span>
+            <span class="tag tag-check">旋转试验</span>
+            <span class="tag tag-check">步态测定仪</span>
+            <span class="tag tag-drug">西替利嗪</span>
+            <span class="tag tag-drug">地西泮</span>
+            <span class="tag tag-drug">阿普唑仑</span>
+            <span class="tag tag-drug">昂丹司琼</span>
+            <span class="tag tag-drug">甲氧氯普胺</span>
+            <span class="tag tag-drug">多潘立酮</span>
+            <span class="tag tag-drug">阿司匹林</span>
+            <span class="tag tag-drug">氯吡格雷</span>
+            <span class="tag tag-drug">前列地尔</span>
+            <span class="tag tag-disease">椎基底动脉供血不足</span>
+            <span class="tag tag-disease">脑干卒中</span>
+            <span class="tag tag-disease">脑出血</span>
+            <span class="tag tag-disease">头痛</span>
+        </div>
+    </div>
+
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="头晕选做检查急诊处理及头痛定义病因分类；头晕、选做检查、急诊处理、头痛、梅尼埃病、听神经瘤、多发性硬化、短暂性脑缺血发作、椎基底动脉供血不足、脑干卒中、脑出血、西替利嗪、地西泮、阿普唑仑、昂丹司琼、甲氧氯普胺、多潘立酮、阿司匹林、氯吡格雷、前列地尔、ENG=51" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+
+    <!-- 页码 -->
+    <div class="page-num">51</div>
+
+    <!-- 关键词 -->
+    <div class="keywords">
+        <span>关键词：</span>
+        <span>头晕</span>
+        <span>选做检查</span>
+        <span>急诊处理</span>
+        <span>头痛</span>
+        <span>梅尼埃病</span>
+        <span>听神经瘤</span>
+        <span>多发性硬化</span>
+        <span>短暂性脑缺血发作</span>
+        <span>椎基底动脉供血不足</span>
+        <span>脑干卒中</span>
+        <span>脑出血</span>
+        <span>西替利嗪</span>
+        <span>地西泮</span>
+        <span>阿普唑仑</span>
+        <span>昂丹司琼</span>
+        <span>甲氧氯普胺</span>
+        <span>多潘立酮</span>
+        <span>阿司匹林</span>
+        <span>氯吡格雷</span>
+        <span>前列地尔</span>
+        <span>听力图</span>
+        <span>脑干听觉诱发电位</span>
+        <span>头颅MRI</span>
+        <span>颈动脉超声</span>
+        <span>椎动脉超声</span>
+        <span>多普勒检查</span>
+        <span>前庭功能评价</span>
+        <span>眼震电图</span>
+        <span>ENG</span>
+        <span>旋转试验</span>
+        <span>步态测定仪</span>
+        <span>高危头痛</span>
+        <span>低危头痛</span>
+    </div>
+
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            const pageInfo = {
+                title: '头晕选做检查急诊处理及头痛定义病因分类',
+                url: window.location.href,
+                pageNum: '51'
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.pageNum === pageInfo.pageNum);
+            
+            if (!exists) {
+                favorites.push(pageInfo);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('⭐ 已收藏！页面已添加到收藏列表。\n（请确保index.html页面已配置读取localStorage的收藏数据）');
+            } else {
+                alert('该页面已在收藏列表中');
+            }
+            
+            try {
+                const indexWindow = window.open('index.html?action=addFavorite&title=' + encodeURIComponent(pageInfo.title) + '&page=51', '_blank');
+                if (!indexWindow) {
+                    console.log('弹窗被阻止，请手动刷新index.html查看收藏');
+                }
+            } catch(e) {
+                console.log('跨域或弹窗限制，收藏信息已保存到本地存储');
+            }
+        }
+    </script>
+
+</body>
+</html>
