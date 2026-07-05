@@ -1,0 +1,356 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~胸外心脏按压错误手法与开放气道技术*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f5f5f0;
+            background-image: linear-gradient(135deg, #f5f5f0 0%, #e8e8e0 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .back-home {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        
+        .nav-btn {
+            background: #5a9;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .favorite-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 22px;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fffef8;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        thead tr {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e0e0d0;
+            color: #333;
+            font-size: 14px;
+            vertical-align: top;
+        }
+        
+        tr:hover {
+            background: #f0f8ff;
+        }
+        
+        .section-title {
+            background: #e8f4f8;
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        .error-item {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+        }
+        
+        .correct-item {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+        }
+        
+        .key-point {
+            background: #fff8e1;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .check-mark {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .bottom-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+        
+        .copy-area {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #4a90d9;
+            border-radius: 8px;
+            font-size: 14px;
+            background: #fff;
+        }
+        
+        .copy-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .tags-section {
+            margin-top: 20px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            cursor: pointer;
+        }
+        
+        .tag:hover {
+            background: #c0392b;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #888;
+            font-size: 12px;
+            margin-top: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-nav">
+        <a href="index.html" class="back-home">← 返回首页</a>
+        <div class="nav-right">
+            <a href="345.html" class="nav-btn">上一页</a>
+            <a href="347.html" class="nav-btn">下一页</a>
+            <button class="favorite-btn" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~胸外心脏按压错误手法与开放气道技术*****</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">胸外心脏按压错误手法与开放气道技术详解</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="section-title">
+                <td colspan="2">【常见错误手法】</td>
+            </tr>
+            <tr class="error-item">
+                <td colspan="2">
+                    ◇ 按压部位不正确<br>
+                    向下错位时则受压部位为剑突，可致剑突受压折断，肝受冲击破裂或胃部受压导致呕吐；向胸骨两旁偏移或按压时手指没有翘起时则易至肋骨骨折及连枷胸，导致气胸、血胸并丧失胸廓弹性。因此，按压前一定要按照标准的方法进行定位，手掌根部的长轴应与肋骨的长轴平行，不要偏向一旁，手指、手心翘起，避免接触和按压肋骨或肋软骨。
+                </td>
+            </tr>
+            <tr class="error-item">
+                <td colspan="2">
+                    ◇ 按压时肘部出现弯曲<br>
+                    导致用力不垂直，按压力量不足，按压深度达不到5cm。正确方法是抢救者双臂绷直，双肩在患者胸骨上方正中，垂直向下用力按压。
+                </td>
+            </tr>
+            <tr class="error-item">
+                <td colspan="2">
+                    ◇ 冲击式按压、猛压、按压放松时抬手离开胸骨定位点<br>
+                    导致下次按压部位错误等情况，均可由此引起骨折。正确的方法是按压要平稳，垂直用力向下，有规律地进行，不左右摇摆，按压与放松时间应大致相等。放松时，定位的手掌根部不要离开胸骨定位点，但应尽量放松，使胸骨不承受任何压力，保证胸廓自然回弹。此外，按压时要注意两手掌不要交叉放置，一定要重叠放置，否则影响按压效果。判断按压是否有效：如按标准手法进行操作，应能触及患者颈动脉搏动。
+                </td>
+            </tr>
+            <tr class="section-title">
+                <td colspan="2">【A（开放气道）】</td>
+            </tr>
+            <tr class="key-point">
+                <td colspan="2">
+                    ● A（开放气道）：在双人CPR中，在完成30次胸外心脏按压后，应评估患者的气道开放情况，并给予2次人工呼吸支持。
+                </td>
+            </tr>
+            <tr class="correct-item">
+                <td colspan="2">
+                    <span class="check-mark">✓</span> 徒手开放气道方法<br>
+                    昏迷患者气道阻塞的常见原因为舌后坠，所以要使呼吸道畅通，关键是解除舌肌对呼吸道的堵塞。具体做法是：患者仰卧位，保持头颈脊柱一直线，并使头适度后仰。徒手开放气道手法。
+                </td>
+            </tr>
+            <tr class="section-title">
+                <td colspan="2">【图34 仰头举颏法开放气道示意】</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    ◇ 仰头举颏法（图34）<br>
+                    抢救者左手掌根放在患者前额处，用力下压使头部后仰，右手的示指与中指并拢放在患者下颌骨处，向上抬起下颏。头部后仰的程度是使下颌角与耳垂连线与地面垂直，操作时要注意手指不要压迫患
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center; color: #888; font-size: 12px;">
+                    图34 仰头举颏法开放气道示意<br>
+                    — 第335页 —
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="bottom-section">
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyText" value="胸外心脏按压错误手法与开放气道技术；胸外心脏按压；按压部位；剑突；肋骨骨折；连枷胸；气胸；血胸；肘部弯曲；冲击式按压；开放气道；仰头举颏法；舌后坠；人工呼吸；颈动脉搏动；=346" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+        
+        <div class="page-number">页码：346</div>
+        
+        <div class="keywords">
+            关键词：胸外心脏按压、错误手法、剑突折断、肋骨骨折、连枷胸、气胸、血胸、开放气道、仰头举颏法、舌后坠、人工呼吸、颈动脉搏动
+        </div>
+        
+        <div class="tags-section">
+            <div class="tags-title">🔖 检索标签（点击快速检索）：</div>
+            <span class="tag">剑突</span>
+            <span class="tag">肋骨骨折</span>
+            <span class="tag">连枷胸</span>
+            <span class="tag">气胸</span>
+            <span class="tag">血胸</span>
+            <span class="tag">胸廓弹性</span>
+            <span class="tag">手掌根部</span>
+            <span class="tag">肘部弯曲</span>
+            <span class="tag">冲击式按压</span>
+            <span class="tag">猛压</span>
+            <span class="tag">胸骨定位点</span>
+            <span class="tag">颈动脉搏动</span>
+            <span class="tag">开放气道</span>
+            <span class="tag">双人CPR</span>
+            <span class="tag">人工呼吸</span>
+            <span class="tag">舌后坠</span>
+            <span class="tag">仰头举颏法</span>
+            <span class="tag">下颌骨</span>
+            <span class="tag">下颌角</span>
+            <span class="tag">耳垂连线</span>
+        </div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            }, function() {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            });
+        }
+        
+        function addToFavorites() {
+            const title = document.title;
+            const url = window.location.href;
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === url);
+            if (!exists) {
+                favorites.push({title: title, url: url, category: '急救技术'});
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已添加到收藏！');
+            } else {
+                alert('已在收藏中！');
+            }
+        }
+    </script>
+</body>
+</html>
