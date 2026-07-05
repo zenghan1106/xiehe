@@ -1,0 +1,591 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~灭鼠药中毒_急诊医学*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #2c3e50;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 8px rgba(52,152,219,0.3);
+            z-index: 100;
+        }
+        
+        .home-btn:hover {
+            background: #2980b9;
+        }
+        
+        /* 上一页/下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(52,152,219,0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #2980b9;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            top: 110px;
+            right: 15px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(231,76,60,0.3);
+            z-index: 100;
+        }
+        
+        .fav-btn:hover {
+            background: #c0392b;
+        }
+        
+        .fav-btn.active {
+            background: #27ae60;
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 900px;
+            margin: 60px auto 30px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(31,38,135,0.1);
+            overflow: hidden;
+        }
+        
+        /* 标题区域 */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 25px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header .subtitle {
+            font-size: 14px;
+            margin-top: 8px;
+            opacity: 0.9;
+        }
+        
+        /* 表格样式 */
+        .table-wrap {
+            padding: 20px;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        
+        thead th {
+            background: #3498db;
+            color: white;
+            padding: 16px 14px;
+            text-align: left;
+            font-size: 17px;
+            font-weight: 600;
+        }
+        
+        tbody td {
+            padding: 14px;
+            border-bottom: 1px solid #e8ecf1;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        .section-title {
+            color: #2980b9;
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+        
+        .item-dot {
+            color: #e74c3c;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+        
+        .check-mark {
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+        
+        /* 页码 */
+        .page-num {
+            text-align: center;
+            padding: 15px;
+            font-size: 16px;
+            color: #7f8c8d;
+            font-weight: 600;
+            border-top: 1px solid #e8ecf1;
+        }
+        
+        /* 关键词区域 */
+        .keywords-area {
+            padding: 20px;
+            background: #f0f4f8;
+            border-top: 1px solid #e8ecf1;
+        }
+        
+        .keywords-title {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .keywords-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .keyword-tag {
+            background: #3498db;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+        
+        /* 检索标签 */
+        .search-tags {
+            padding: 20px;
+            background: #fafbfc;
+            border-top: 1px solid #e8ecf1;
+        }
+        
+        .search-tags-title {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag-item {
+            background: #e8f4f8;
+            color: #2980b9;
+            border: 1px solid #bde0fe;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .tag-item:hover {
+            background: #3498db;
+            color: white;
+        }
+        
+        .tag-disease {
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .tag-drug {
+            border-left: 4px solid #27ae60;
+        }
+        
+        .tag-bacteria {
+            border-left: 4px solid #f39c12;
+        }
+        
+        /* 复制区域 */
+        .copy-area {
+            padding: 20px;
+            background: #fff;
+            border-top: 1px solid #e8ecf1;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 16px;
+            border: 2px solid #dde1e7;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #2c3e50;
+            background: #f8fafc;
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(39,174,96,0.3);
+        }
+        
+        .copy-btn:hover {
+            background: #219a52;
+        }
+        
+        .copy-btn.copied {
+            background: #3498db;
+        }
+        
+        /* 提示 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2c3e50;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 200;
+        }
+        
+        .toast.show {
+            opacity: 1;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 640px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 22px;
+            }
+            
+            .home-btn, .nav-btn, .fav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            table {
+                font-size: 14px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 10px;
+            }
+            
+            tbody td {
+                padding: 10px;
+            }
+            
+            .copy-area {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 上一页/下一页 -->
+    <div class="nav-btns">
+        <a href="299.html" class="nav-btn">← 上一页</a>
+        <a href="301.html" class="nav-btn">下一页 →</a>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 标题 -->
+        <div class="header">
+            <h1>~~~~~灭鼠药中毒_急诊医学*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~灭鼠药中毒_急诊医学*****、分类、内容详情、镇静催眠药中毒（续）、慢性中毒及戒断综合征、作者、灭鼠药中毒、1. 定义、2. 病因、3. 临床表现</div>
+            <p class="subtitle">镇静催眠类药物中毒 · 急性中毒诊疗</p>
+        </div>
+        
+        <!-- 表格内容 -->
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">分类</th>
+                        <th style="width: 75%;">内容详情</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="section-title">镇静催眠药中毒（续）</span></td>
+                        <td>
+                            嗪类药物清除，危重患者可考虑应用。苯巴比妥类药物蛋白结合率高，推荐选择血液灌流。血液净化治疗对苯二氮䓬类药物中毒作用有限。<br><br>
+                            <span class="check-mark">✓</span><b>特效解毒疗法：</b>巴比妥类和吩噻嗪类药物中毒无特效解毒药。氟马西尼是苯二氮䓬类拮抗药，能通过竞争抑制苯二氮䓬类受体而阻断苯二氮䓬类药物的中枢神经系统作用。<br><br>
+                            <span class="check-mark">✓</span><b>对症治疗：</b>多数镇静催眠类药物中毒以对症支持治疗为主。<br><br>
+                            <span class="check-mark">✓</span><b>专科会诊：</b>应请精神科医师会诊。
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="section-title">慢性中毒及戒断综合征</span></td>
+                        <td>
+                            <span class="check-mark">✓</span>逐步缓慢减少药量，最终停用镇静催眠药。<br>
+                            <span class="check-mark">✓</span>请精神科专科医师会诊，进行心理治疗。
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="section-title">作者</span></td>
+                        <td>（付阳阳）</td>
+                    </tr>
+                    <tr>
+                        <td><span class="section-title">■ 灭鼠药中毒</span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><span class="section-title">1. 定义</span></td>
+                        <td>
+                            <span class="item-dot">•</span>灭鼠药是专门用来杀死啮齿类动物的市售产品。<br><br>
+                            <span class="item-dot">•</span>临床最常见的灭鼠药中毒都涉及长效"超级华法林"抗凝血药，其中代表为<b>溴敌隆</b>；其次是<b>毒鼠强</b>（四亚甲基二砜四胺）、<b>有机氟类灭鼠剂</b>（氟乙酸钠和氟乙酰胺）、<b>磷化物</b>、<b>铊</b>、<b>砷</b>等剧毒灭鼠药。
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="section-title">2. 病因</span></td>
+                        <td>
+                            <span class="item-dot">•</span>"超级华法林"是最主要的灭鼠药，其他剧毒灭鼠药因许多国家都已禁止使用（表38）。<br><br>
+                            <span class="item-dot">•</span>导致灭鼠药中毒最常见的原因为误食误用，少见于吞服自杀、转移接触二次中毒及投毒。<br><br>
+                            <span class="item-dot">•</span>一旦怀疑灭鼠药中毒，应想办法找到该药的说明书，确定类型及毒力等级。
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="section-title">3. 临床表现</span></td>
+                        <td>
+                            <span class="item-dot">•</span>最常见的暴露途径为消化道，患者可能在暴露后24～48小时出现鼻、口腔、消化道、泌尿生殖道出血甚至颅内出血。<br><br>
+                            <span class="item-dot">•</span>对于高度怀疑灭鼠药中毒的患者，即使48小时无出血倾向，也应警惕长效灭鼠药长达数天的潜伏期。<br><br>
+                            <span class="item-dot">•</span>有明确接触史者，需仔细询问摄入的具体药物、摄入量、摄入时间及是否同时摄入其他药物。<br><br>
+                            <span class="item-dot">•</span>对于无基础肝病、无规律使用抗凝药物的出血患者，应警惕灭鼠药中毒，尤其是有可疑接触史或有自杀倾向的患者，应警惕大剂量灭鼠药中毒的可能性。
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-num">页码：300</div>
+        
+        <!-- 关键词 -->
+        <div class="keywords-area">
+            <div class="keywords-title">🔍 关键词</div>
+            <div class="keywords-list">
+                <span class="keyword-tag">灭鼠药中毒</span>
+                <span class="keyword-tag">超级华法林</span>
+                <span class="keyword-tag">溴敌隆</span>
+                <span class="keyword-tag">毒鼠强</span>
+                <span class="keyword-tag">氟乙酸钠</span>
+                <span class="keyword-tag">氟乙酰胺</span>
+                <span class="keyword-tag">镇静催眠药</span>
+                <span class="keyword-tag">氟马西尼</span>
+                <span class="keyword-tag">血液灌流</span>
+                <span class="keyword-tag">急诊医学</span>
+            </div>
+        </div>
+        
+        <!-- 检索标签 -->
+        <div class="search-tags">
+            <div class="search-tags-title">🏷️ 检索标签（疾病 / 药物 / 毒物）</div>
+            <div class="tag-cloud">
+                <span class="tag-item tag-disease">灭鼠药中毒</span>
+                <span class="tag-item tag-disease">镇静催眠类药物中毒</span>
+                <span class="tag-item tag-disease">慢性中毒</span>
+                <span class="tag-item tag-disease">戒断综合征</span>
+                <span class="tag-item tag-drug">溴敌隆</span>
+                <span class="tag-item tag-drug">毒鼠强</span>
+                <span class="tag-item tag-drug">氟乙酸钠</span>
+                <span class="tag-item tag-drug">氟乙酰胺</span>
+                <span class="tag-item tag-drug">超级华法林</span>
+                <span class="tag-item tag-drug">氟马西尼</span>
+                <span class="tag-item tag-drug">苯巴比妥</span>
+                <span class="tag-item tag-drug">苯二氮䓬类</span>
+                <span class="tag-item tag-drug">吩噻嗪类</span>
+                <span class="tag-item tag-bacteria">磷化物</span>
+                <span class="tag-item tag-bacteria">铊</span>
+                <span class="tag-item tag-bacteria">砷</span>
+            </div>
+        </div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyInput" value="灭鼠药中毒_急诊医学；镇静催眠类药物中毒、超级华法林、溴敌隆、毒鼠强、氟乙酸钠、氟乙酰胺、氟马西尼、血液灌流；=300" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyContent()">📋 复制</button>
+        </div>
+    </div>
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                    document.getElementById('copyBtn').classList.add('copied');
+                    document.getElementById('copyBtn').textContent = '✓ 已复制';
+                    setTimeout(() => {
+                        document.getElementById('copyBtn').classList.remove('copied');
+                        document.getElementById('copyBtn').textContent = '📋 复制';
+                    }, 2000);
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                showToast('已添加到收藏！');
+                
+                // 保存到localStorage，供index.html读取
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const item = {
+                    title: '灭鼠药中毒_急诊医学',
+                    url: '300.html',
+                    page: '300',
+                    tags: ['灭鼠药中毒', '溴敌隆', '毒鼠强', '氟马西尼']
+                };
+                
+                // 避免重复
+                const exists = favorites.some(f => f.url === '300.html');
+                if (!exists) {
+                    favorites.push(item);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                showToast('已取消收藏');
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '300.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 检查是否已收藏
+        function checkFavorite() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const btn = document.getElementById('favBtn');
+            if (favorites.some(f => f.url === '300.html')) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+            }
+        }
+        
+        // Toast提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+        
+        // 初始化
+        checkFavorite();
+    </script>
+</body>
+</html>
