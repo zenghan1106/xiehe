@@ -1,0 +1,364 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急进性肾小球肾炎*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+        }
+        
+        .back-btn {
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        
+        .nav-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover, .back-btn:hover {
+            opacity: 0.85;
+        }
+        
+        .favorite-btn {
+            background-color: #FF9800;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            margin-top: 10px;
+            display: block;
+        }
+        
+        .title {
+            text-align: center;
+            font-size: 22px;
+            color: #1565C0;
+            margin: 15px 0;
+            font-weight: bold;
+            padding: 0 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        thead th {
+            background-color: #1976D2;
+            color: white;
+            padding: 15px;
+            font-size: 18px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        tbody td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 14px;
+            vertical-align: top;
+        }
+        
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .section-title {
+            color: #1565C0;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        
+        .sub-item {
+            margin-left: 15px;
+            color: #444;
+        }
+        
+        .check-mark {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1565C0;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: #E3F2FD;
+            color: #1565C0;
+            padding: 6px 14px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #90CAF9;
+        }
+        
+        .bottom-section {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .page-num {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #90CAF9;
+            border-radius: 6px;
+            font-size: 13px;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-btn {
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background-color: #1976D2;
+        }
+        
+        .keywords {
+            margin-top: 15px;
+            color: #555;
+            font-size: 13px;
+        }
+        
+        .keywords strong {
+            color: #1565C0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div>
+            <div class="nav-buttons">
+                <a href="149.html" class="nav-btn">上一页</a>
+                <a href="151.html" class="nav-btn">下一页</a>
+            </div>
+            <button class="favorite-btn" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <div class="title">~~~~~急进性肾小球肾炎*****</div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>急进性肾小球肾炎（RPGN）—— 新月体性肾小球肾炎</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span class="section-title">1. 定义</span><br>
+                    <span class="sub-item">• 急进性肾小球肾炎（RPGN）又称新月体性肾小球肾炎，是一种临床综合征。</span><br>
+                    <span class="sub-item">• 表现为在急性肾炎综合征基础上（血尿、蛋白尿、水肿、高血压），肾功能迅速恶化，数周至数月达到尿毒症水平，早期可出现少尿和无尿。</span><br>
+                    <span class="sub-item">• 病理多表现为广泛大新月体形成。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">2. 分型</span><br>
+                    <span class="sub-item">• 分为3型：Ⅰ型为抗GBM抗体型，Ⅱ型为免疫复合物型，Ⅲ型为寡免疫复合物型。</span><br>
+                    <span class="sub-item">• Ⅰ型的免疫病理特点为IgG和C3沿肾小球毛细血管袢呈线条样沉积，血清中可检测到抗GBM抗体。</span><br>
+                    <span class="sub-item">• Ⅱ型为免疫球蛋白和补体呈颗粒样或团块样沿肾小球毛细血管袢和系膜区沉积，可在多种肾小球疾病基础上发生，如IgA肾病、过敏性紫癜肾炎、狼疮肾炎和混合性冷球蛋白血症等。</span><br>
+                    <span class="sub-item">• Ⅲ型无明显免疫球蛋白成分沉积，约2/3患者血清中可检测到ANCA，多数该型患者存在全身症状。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">3. 临床表现</span><br>
+                    <span class="sub-item">• 肉眼血尿急性发作、尿量减少、高血压和水肿，部分RPGN隐匿起病或以乏力、发热起病。</span><br>
+                    <span class="sub-item">• Ⅰ型患者可能出现肺泡出血和咯血，寡免疫复合物型患者（无论ANCA阳性还是阴性）常有全身性主诉包括呼吸道、消化道、肌肉骨骼系统、皮肤和神经系统受累。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">补充：高钾血症及相关治疗</span><br>
+                    <span class="sub-item">• 可充分治疗的高钾血症：初期不进行透析治疗，但应考虑对这类患者进行透析治疗准备（如置入透析管）。</span><br>
+                    <span class="sub-item"><span class="check-mark">✓</span> 药物难治性高钾血症：都应接受透析治疗。</span><br>
+                    <span class="sub-item">• 纠正代谢性酸中毒：包括碳酸氢钠及透析治疗。</span><br>
+                    <span class="sub-item">• 纠正高磷血症、低钙血症</span><br>
+                    <span class="sub-item"><span class="check-mark">✓</span> 治疗取决于高磷血症的严重程度及是否存在低钙血症症状。</span><br>
+                    <span class="sub-item"><span class="check-mark">✓</span> 患者无低钙症状但存在高磷血症，应先口服磷酸盐结合剂治疗高磷血症，出血低钙症状应通过静脉补钙纠正。</span><br>
+                    <span class="sub-item"><span class="check-mark">✓</span> 若有低钙症状且血清磷水平＞2.6mmol/L，应予透析治疗。</span><br>
+                    <span class="sub-item">• 急诊透析适应证：AEIOU——严重酸中毒（Acidosis）、电解质紊乱（Electrolytes）、摄入肾毒性物质（Ingestion）、水负荷过多（Overload）、尿毒症相关症状（Uremia）。</span><br>
+                    <span class="sub-item" style="text-align:right;color:#666;">（孙瑞雪）</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="tags-container">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <span class="tag">急进性肾小球肾炎</span>
+        <span class="tag">新月体性肾小球肾炎</span>
+        <span class="tag">RPGN</span>
+        <span class="tag">抗GBM抗体</span>
+        <span class="tag">ANCA</span>
+        <span class="tag">IgA肾病</span>
+        <span class="tag">狼疮肾炎</span>
+        <span class="tag">过敏性紫癜肾炎</span>
+        <span class="tag">高钾血症</span>
+        <span class="tag">尿毒症</span>
+        <span class="tag">透析</span>
+        <span class="tag">碳酸氢钠</span>
+        <span class="tag">磷酸盐结合剂</span>
+        <span class="tag">肺泡出血</span>
+        <span class="tag">咯血</span>
+    </div>
+    
+    <div class="bottom-section">
+        <div class="page-num">页码：150</div>
+        
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="急进性肾小球肾炎；新月体性肾小球肾炎；RPGN；抗GBM抗体；ANCA；IgA肾病；狼疮肾炎；高钾血症；尿毒症；透析；=150" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+        
+        <div class="keywords">
+            <strong>关键词：</strong>急进性肾小球肾炎, 新月体性肾小球肾炎, RPGN, 抗GBM抗体, 免疫复合物, ANCA, IgA肾病, 狼疮肾炎, 过敏性紫癜肾炎, 高钾血症, 代谢性酸中毒, 高磷血症, 低钙血症, 透析, 尿毒症, 肺泡出血, 咯血, 碳酸氢钠, 磷酸盐结合剂
+        </div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            var copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            }, function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板！");
+            });
+        }
+        
+        function addToFavorites() {
+            var title = document.title;
+            var url = window.location.href;
+            
+            // 尝试添加到本地存储的收藏列表
+            var favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            var exists = favorites.some(function(f) { return f.url === url; });
+            
+            if (!exists) {
+                favorites.push({
+                    title: title,
+                    url: url,
+                    category: '肾脏疾病'
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已添加到收藏！请在index.html的收藏类目下查看。');
+            } else {
+                alert('该页面已在收藏列表中！');
+            }
+            
+            // 尝试打开index.html并传递收藏信息
+            try {
+                var indexWindow = window.open('index.html', '_blank');
+                if (indexWindow) {
+                    indexWindow.onload = function() {
+                        if (indexWindow.addFavoriteFromPage) {
+                            indexWindow.addFavoriteFromPage(title, url);
+                        }
+                    };
+                }
+            } catch(e) {
+                console.log('无法直接操作index窗口');
+            }
+        }
+    </script>
+</body>
+</html>
