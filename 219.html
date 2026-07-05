@@ -1,0 +1,533 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~抗生素相关性腹泻与坏死性筋膜膜炎*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f7fa;
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 15px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 导航按钮容器 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #e8a838;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(232,168,56,0.3);
+        }
+        
+        .fav-btn:hover {
+            background: #d49a2f;
+        }
+        
+        .fav-btn.active {
+            background: #c9302c;
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 800px;
+            margin: 70px auto 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        /* 标题样式 */
+        .page-title {
+            background: #2c5aa0;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead th {
+            background: #2c5aa0;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        tbody td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 15px;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #eef4fb;
+        }
+        
+        .section-title {
+            color: #2c5aa0;
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 8px;
+        }
+        
+        .sub-item {
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .sub-item::before {
+            content: "●";
+            position: absolute;
+            left: 0;
+            color: #4a90d9;
+        }
+        
+        .highlight {
+            color: #c9302c;
+            font-weight: 500;
+        }
+        
+        .drug-name {
+            color: #2e7d32;
+            font-weight: 500;
+        }
+        
+        .dose {
+            color: #1565c0;
+        }
+        
+        /* 页码显示 */
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            color: #666;
+            font-size: 14px;
+            background: #f8fafc;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            padding: 20px;
+            background: #f8fafc;
+            border-top: 1px solid #e8e8e8;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        
+        .copy-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #4cae4c;
+        }
+        
+        .copy-btn.copied {
+            background: #5bc0de;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            padding: 20px;
+            background: white;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c5aa0;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #bbdefb;
+        }
+        
+        .tag-disease:hover {
+            background: #1565c0;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+        }
+        
+        .tag-drug:hover {
+            background: #2e7d32;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #fff3e0;
+            color: #e65100;
+            border: 1px solid #ffe0b2;
+        }
+        
+        .tag-bacteria:hover {
+            background: #e65100;
+            color: white;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            padding: 15px 20px;
+            background: #f8fafc;
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+        }
+        
+        .keywords-section span {
+            color: #2c5aa0;
+            font-weight: 500;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .page-title {
+                font-size: 18px;
+                padding: 15px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 12px;
+            }
+            
+            tbody td {
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+            
+            .nav-buttons {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .nav-btn, .fav-btn, .home-btn {
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="218.html" class="nav-btn">↑ 上一页</a>
+        <a href="220.html" class="nav-btn">↓ 下一页</a>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+    </div>
+    
+    <div class="container">
+        <!-- 标题 -->
+        <div class="page-title">~~~~~抗生素相关性腹泻与坏死性筋膜膜炎*****</div>
+        
+        <!-- 主表格 -->
+        <table>
+            <thead>
+                <tr>
+                    <th>内容分类</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="section-title">粪便常规+粪便OB</td>
+                    <td>可见白、红细胞，OB阳性</td>
+                </tr>
+                <tr>
+                    <td class="section-title">粪便培养</td>
+                    <td>对艰难梭菌检出率低，可采用<span class="highlight">ELISA</span>检测</td>
+                </tr>
+                <tr>
+                    <td class="section-title">粪便涂片</td>
+                    <td>粪便中<span class="highlight">念珠菌数量＞10⁵CFU/ml</span>，且患者有严重腹泻，可诊断为<span class="highlight">念珠菌相关性腹泻</span>。粪便涂片发现大量菌丝，也有诊断意义</td>
+                </tr>
+                <tr>
+                    <td class="section-title">5. 选做检查</td>
+                    <td>
+                        <div class="sub-item">ABG、乳酸测定</div>
+                        <div class="sub-item">电解质、肝肾功能、心肌酶检测</div>
+                        <div class="sub-item">腹盆增强CT</div>
+                        <div class="sub-item">小肠CT重建</div>
+                        <div class="sub-item">肠道菌群分析</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">6. 诊断策略</td>
+                    <td>
+                        <div class="sub-item">根据抗生素使用背景和临床表现</div>
+                        <div class="sub-item">结合实验室检查或结肠镜结果</div>
+                        <div class="sub-item">排除其他病因：如各种类型的感染性腹泻、炎症性肠病、肠道恶性肿瘤等</div>
+                        <div class="sub-item">高度怀疑<span class="highlight">CD感染</span>可经验性治疗，无须实验室检查结果</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">7. 急诊处理</td>
+                    <td>
+                        <div class="sub-item">整理近期抗生素使用史，停用相关抗生素</div>
+                        <div class="sub-item">腹泻的基本治疗：补液，纠正电解质紊乱，对症止泻</div>
+                        <div class="sub-item">抗生素治疗：首选口服<span class="drug-name">万古霉素</span><span class="dose">125mg qid</span>，或口服<span class="drug-name">甲硝唑</span><span class="dose">500mg tid</span>；或口服<span class="drug-name">非达霉素</span><span class="dose">200mg bid</span>。疗程<span class="dose">10～14天</span></div>
+                        <div class="sub-item">营养支持治疗：选择流质饮食或可耐受的肠内营养制剂</div>
+                        <div class="sub-item">应用微生态制剂：微生态制剂指一切能促进正常微生物群生长繁殖并产生一定生态效应的制剂，包括<span class="drug-name">益生菌</span>、<span class="drug-name">益生元</span>等</div>
+                        <div class="sub-item">预防措施：合理使用抗生素；补充微生态制剂，维持肠道正常生态系统</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">作者</td>
+                    <td>刘安雷</td>
+                </tr>
+                <tr>
+                    <td class="section-title">坏死性筋膜膜炎 - 定义</td>
+                    <td>
+                        <div class="sub-item">坏死性筋膜炎是坏死性软组织感染（NSTI）的一种，属于深部软组织感染</div>
+                        <div class="sub-item">可进行性破坏肌肉筋膜和上层的皮下脂肪</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">2. 危险因素</td>
+                    <td>
+                        <div class="sub-item">严重穿通伤，轻微的撕裂伤或钝挫伤（肌肉拉伤、扭伤或</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 页码 -->
+        <div class="page-number">页码：219</div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <div class="copy-box">
+                <input type="text" class="copy-input" id="copyInput" value="抗生素相关性腹泻与坏死性筋膜膜炎；抗生素相关性腹泻、坏死性筋膜炎、艰难梭菌、念珠菌、万古霉素、甲硝唑、非达霉素、益生菌、益生元；=219" readonly>
+                <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+            </div>
+        </div>
+        
+        <!-- 标签区域 -->
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 特色检索标签</div>
+            <div class="tags-container">
+                <span class="tag tag-disease">抗生素相关性腹泻</span>
+                <span class="tag tag-disease">坏死性筋膜炎</span>
+                <span class="tag tag-disease">坏死性软组织感染</span>
+                <span class="tag tag-bacteria">艰难梭菌</span>
+                <span class="tag tag-bacteria">念珠菌</span>
+                <span class="tag tag-drug">万古霉素</span>
+                <span class="tag tag-drug">甲硝唑</span>
+                <span class="tag tag-drug">非达霉素</span>
+                <span class="tag tag-drug">益生菌</span>
+                <span class="tag tag-drug">益生元</span>
+            </div>
+        </div>
+        
+        <!-- 关键词 -->
+        <div class="keywords-section">
+            关键词：<span>抗生素相关性腹泻、坏死性筋膜炎、艰难梭菌、万古霉素、甲硝唑、非达霉素、益生菌</span>
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                
+                // 保存到localStorage，用于index页面读取
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const item = {
+                    title: '抗生素相关性腹泻与坏死性筋膜膜炎',
+                    url: '219.html',
+                    page: '219',
+                    tags: ['抗生素相关性腹泻', '坏死性筋膜炎', '艰难梭菌', '万古霉素', '甲硝唑', '非达霉素', '益生菌']
+                };
+                
+                // 避免重复添加
+                const exists = favorites.some(f => f.url === '219.html');
+                if (!exists) {
+                    favorites.push(item);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                alert('已添加到收藏！');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '219.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '219.html');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
