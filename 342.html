@@ -1,0 +1,603 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~心肺复苏与肠外营养通路*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8eef5 50%, #f5f0f8 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .nav-btn {
+            position: fixed;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(145deg, #4a90d9, #357abd);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(74, 144, 217, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 144, 217, 0.4);
+        }
+        
+        .home-btn {
+            top: 15px;
+            left: 15px;
+        }
+        
+        .prev-btn {
+            top: 15px;
+            right: 15px;
+        }
+        
+        .next-btn {
+            top: 60px;
+            right: 15px;
+        }
+        
+        .fav-btn {
+            top: 105px;
+            right: 15px;
+            background: linear-gradient(145deg, #f5a623, #e09400);
+            box-shadow: 0 3px 10px rgba(245, 166, 35, 0.3);
+        }
+        
+        .fav-btn:hover {
+            box-shadow: 0 5px 15px rgba(245, 166, 35, 0.4);
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 80px auto 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(31, 110, 180, 0.15);
+            overflow: hidden;
+        }
+        
+        .page-header {
+            background: linear-gradient(145deg, #1e6db5, #2980d9);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .table-wrapper {
+            padding: 20px;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        thead tr {
+            background: linear-gradient(145deg, #1e6db5, #2980d9);
+            color: white;
+        }
+        
+        thead th {
+            padding: 18px 15px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+            border-bottom: 3px solid #f0f8ff;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e8f0f8;
+            transition: background 0.2s;
+        }
+        
+        tbody tr:hover {
+            background: #f5faff;
+        }
+        
+        tbody td {
+            padding: 14px 15px;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #2c3e50;
+            vertical-align: top;
+        }
+        
+        .section-title {
+            background: #e8f4fc;
+            font-weight: bold;
+            color: #1e6db5;
+        }
+        
+        .sub-item {
+            padding-left: 20px;
+            position: relative;
+            margin: 8px 0;
+        }
+        
+        .sub-item::before {
+            content: "•";
+            position: absolute;
+            left: 5px;
+            color: #2980d9;
+        }
+        
+        .highlight-box {
+            background: #fff8e7;
+            border-left: 4px solid #f5a623;
+            padding: 15px 18px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+        }
+        
+        .author-note {
+            text-align: right;
+            color: #666;
+            font-style: italic;
+            padding: 10px 15px;
+        }
+        
+        .chain-list {
+            background: #f0f8ff;
+            padding: 12px 18px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        
+        .chain-item {
+            padding: 6px 0;
+            padding-left: 10px;
+            border-left: 3px solid #2980d9;
+            margin: 8px 0;
+        }
+        
+        .bottom-section {
+            padding: 20px;
+            background: #f8fbff;
+            border-top: 2px solid #e0ecf8;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 14px 18px;
+            border: 2px solid #b8d4f0;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #2c3e50;
+            background: white;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        #copyInput:focus {
+            border-color: #2980d9;
+        }
+        
+        .copy-btn {
+            padding: 14px 28px;
+            background: linear-gradient(145deg, #27ae60, #219a52);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(39, 174, 96, 0.3);
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .tags-section {
+            margin: 20px 0;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1e6db5;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 18px;
+            margin: 6px;
+            background: linear-gradient(145deg, #e8f4fc, #d0e8f7);
+            color: #1e6db5;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid #b8d4f0;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            background: linear-gradient(145deg, #1e6db5, #2980d9);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .keywords-section {
+            text-align: center;
+            padding: 20px;
+            background: #e8f4fc;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        
+        .keywords-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1e6db5;
+            margin-bottom: 10px;
+        }
+        
+        .keywords-list {
+            font-size: 14px;
+            color: #4a6580;
+            line-height: 2;
+        }
+        
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            font-size: 16px;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #27ae60;
+            color: white;
+            padding: 14px 35px;
+            border-radius: 30px;
+            font-size: 15px;
+            opacity: 0;
+            transition: all 0.4s;
+            z-index: 2000;
+            box-shadow: 0 5px 20px rgba(39, 174, 96, 0.3);
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                margin-top: 70px;
+            }
+            
+            .page-header h1 {
+                font-size: 20px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 14px 12px;
+            }
+            
+            tbody td {
+                font-size: 14px;
+                padding: 12px;
+            }
+            
+            .nav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                top: 10px;
+                left: 10px;
+            }
+            
+            .prev-btn {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .next-btn {
+                top: 50px;
+                right: 10px;
+            }
+            
+            .fav-btn {
+                top: 90px;
+                right: 10px;
+            }
+            
+            #copyInput {
+                width: 100%;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航按钮 -->
+    <a href="index.html" class="nav-btn home-btn">🏠 返回首页</a>
+    <a href="341.html" class="nav-btn prev-btn">← 上一页</a>
+    <a href="343.html" class="nav-btn next-btn">下一页 →</a>
+    <button class="nav-btn fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    
+    <div class="container">
+        <!-- 标题 -->
+        <div class="page-header">
+            <h1>~~~~~心肺复苏与肠外营养通路*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~心肺复苏与肠外营养通路*****、肠外营养通路与心肺复苏、心肺复苏、1. 基础生命支持</div>
+        </div>
+        
+        <!-- 表格内容 -->
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>肠外营养通路与心肺复苏</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="sub-item">经口进食者，可采用外周静脉通路，但需注意脉管炎、血管渗漏等相关并发症。</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sub-item">患者开始肠外营养时，如若长期无法过渡到肠内营养或经口进食者，须及时采用中心静脉通路，如PICC；但须注意导管相关性感染问题。</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sub-item">急诊肠外营养支持中，可经验性采用标准肠外营养袋，如卡文；入住EICU或抢救室的危重患者1周内暂缓以大豆油基础的脂肪乳剂静脉输注。</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sub-item">当遇到特殊病种的危重症患者需要静脉营养支持时，可请肠内肠外营养科专科医师会诊，制订长期个体化肠外营养配方。</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="highlight-box">
+                                <strong>再喂养综合征：</strong>给予营养补充前应注意补充维生素B₁；给予接近且高于静息能量消耗的初始热量恢复体重；注意补充电解质，尤其是磷；监测并减少心血管及肺部并发症。
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="author-note">（须 晋）</td>
+                    </tr>
+                    <tr>
+                        <td class="section-title">■ 心肺复苏</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            心搏骤停常见的心脏机制为心室颤动或无脉性室性心动过速，其次是心室静止及无脉电活动。心搏骤停后即出现意识丧失，脉搏消失及呼吸停止，经及时有效的心肺复苏部分患者可获存活。心肺复苏（CPR）是抢救生命最基本的医疗技术和方法，包括胸外按压、开放气道、人工通气、除颤以及药物治疗等，目的是使患者恢复自主循环和自主呼吸。根据《2020年美国心脏协会心肺复苏及心血管急救指南》，CPR生存链包括6部分，且分为院外心搏骤停和院内心搏骤停两条生存链。
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>院外心搏骤停两条生存链：</strong>
+                            <div class="chain-list">
+                                <div class="chain-item">①立即识别心搏骤停并启动急救系统；</div>
+                                <div class="chain-item">②实施高质量CPR，重点在于胸外按压；</div>
+                                <div class="chain-item">③早期快速除颤；</div>
+                                <div class="chain-item">④有效的高级生命支持；</div>
+                                <div class="chain-item">⑤综合的心搏骤停后治疗；</div>
+                                <div class="chain-item">⑥康复性治疗。</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>院内心搏骤停生存链：</strong>
+                            <div class="chain-list">
+                                <div class="chain-item">①预防和监测心搏骤停的发生，并且进行及早识别；</div>
+                                <div class="chain-item">②立即启动急救系统；</div>
+                                <div class="chain-item">③实施高质量CPR，重点在于胸外按压；</div>
+                                <div class="chain-item">④早期快速除颤；</div>
+                                <div class="chain-item">⑤综合的心搏骤停后治疗；</div>
+                                <div class="chain-item">⑥康复性治疗。</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="section-title">1. 基础生命支持</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            基础生命支持（BLS）包含生存链中前3个环节，目的是迅速建立有效的人工循环给脑组织及其他重要器官以氧合血液而使其得到保护（图31）。主要措施包括重建循环、通畅气道、重建
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- 复制功能区 -->
+        <div class="bottom-section">
+            <div class="copy-section">
+                <input type="text" id="copyInput" value="心肺复苏与肠外营养通路；肠外营养、PICC、卡文、EICU、脂肪乳剂、再喂养综合征、维生素B₁、心搏骤停、心室颤动、无脉性室性心动过速、心室静止、无脉电活动、CPR、胸外按压、开放气道、人工通气、除颤、BLS；=342" readonly>
+                <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+            </div>
+            
+            <!-- 检索标签 -->
+            <div class="tags-section">
+                <div class="tags-title">🏷️ 检索标签</div>
+                <span class="tag">脉管炎</span>
+                <span class="tag">PICC</span>
+                <span class="tag">卡文</span>
+                <span class="tag">EICU</span>
+                <span class="tag">脂肪乳剂</span>
+                <span class="tag">大豆油</span>
+                <span class="tag">再喂养综合征</span>
+                <span class="tag">维生素B₁</span>
+                <span class="tag">心搏骤停</span>
+                <span class="tag">心室颤动</span>
+                <span class="tag">无脉性室性心动过速</span>
+                <span class="tag">心室静止</span>
+                <span class="tag">无脉电活动</span>
+                <span class="tag">CPR</span>
+                <span class="tag">胸外按压</span>
+                <span class="tag">除颤</span>
+                <span class="tag">BLS</span>
+            </div>
+            
+            <!-- 关键词 -->
+            <div class="keywords-section">
+                <div class="keywords-title">🔍 关键词</div>
+                <div class="keywords-list">
+                    肠外营养 | PICC | 卡文 | EICU | 脂肪乳剂 | 再喂养综合征 | 维生素B₁ | 心肺复苏 | 心搏骤停 | 心室颤动 | 无脉性室性心动过速 | 心室静止 | 无脉电活动 | CPR | 胸外按压 | 开放气道 | 人工通气 | 除颤 | BLS | 基础生命支持 | 生存链
+                </div>
+            </div>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">— 第 342 页 —</div>
+    </div>
+    
+    <!-- 提示框 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('✓ 已复制到剪贴板');
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('✓ 已复制到剪贴板');
+            }
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            const title = '心肺复苏与肠外营养通路';
+            const url = window.location.href;
+            
+            if (window.sidebar && window.sidebar.addPanel) {
+                window.sidebar.addPanel(title, url, '');
+                showToast('✓ 已添加到收藏夹');
+            } else if (window.external && ('AddFavorite' in window.external)) {
+                window.external.AddFavorite(url, title);
+                showToast('✓ 已添加到收藏夹');
+            } else {
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '~~~~~心肺复苏与肠外营养通路*****',
+                    url: '342.html',
+                    category: '急诊急救',
+                    tags: ['PICC', '卡文', 'EICU', '脂肪乳剂', '再喂养综合征', '维生素B₁', '心搏骤停', '心室颤动', '无脉性室性心动过速', '心室静止', '无脉电活动', 'CPR', '胸外按压', '除颤', 'BLS']
+                };
+                
+                const exists = favorites.some(f => f.url === pageInfo.url);
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                    showToast('✓ 已添加到收藏（本地存储）');
+                } else {
+                    showToast('⚠ 该页面已在收藏中');
+                }
+            }
+        }
+        
+        // 显示提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+        
+        // 页面加载时设置输入框宽度
+        window.addEventListener('load', function() {
+            const container = document.querySelector('.container');
+            const input = document.getElementById('copyInput');
+            if (container && input) {
+                const containerWidth = container.offsetWidth;
+                input.style.width = (containerWidth - 140) + 'px';
+            }
+        });
+        
+        // 窗口大小改变时调整输入框宽度
+        window.addEventListener('resize', function() {
+            const container = document.querySelector('.container');
+            const input = document.getElementById('copyInput');
+            if (container && input) {
+                const containerWidth = container.offsetWidth;
+                const newWidth = Math.max(200, containerWidth - 140);
+                input.style.width = newWidth + 'px';
+            }
+        });
+    </script>
+</body>
+</html>
