@@ -1,0 +1,543 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊常见疾病在症状鉴别中的陷阱（续）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 顶部导航栏 */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .left-btn {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 100;
+        }
+        
+        .right-btns {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .btn-home {
+            background-color: #4a90d9;
+            color: white;
+        }
+        
+        .btn-nav {
+            background-color: #5cb85c;
+            color: white;
+            min-width: 70px;
+        }
+        
+        .btn-fav {
+            background-color: #f0ad4e;
+            color: white;
+            margin-top: 5px;
+        }
+        
+        .btn:hover {
+            opacity: 0.85;
+            transform: translateY(-1px);
+        }
+        
+        /* 标题区域 */
+        .title-area {
+            text-align: center;
+            margin: 60px 0 20px 0;
+            padding: 15px;
+            background-color: #e8f4fd;
+            border-radius: 10px;
+            border-left: 5px solid #4a90d9;
+        }
+        
+        .main-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 8px;
+        }
+        
+        .sub-title {
+            font-size: 16px;
+            color: #2874a6;
+        }
+        
+        /* 表格样式 */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin: 15px 0;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        thead th {
+            background-color: #4a90d9;
+            color: white;
+            padding: 14px 10px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        
+        tbody td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+            word-break: break-all;
+            white-space: normal;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f4fd;
+        }
+        
+        .section-header {
+            background-color: #d6eaf8 !important;
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 15px;
+        }
+        
+        .item-name {
+            font-weight: bold;
+            color: #2874a6;
+            min-width: 120px;
+        }
+        
+        .item-content {
+            color: #444;
+        }
+        
+        ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        
+        li {
+            margin-bottom: 6px;
+        }
+        
+        /* 底部区域 */
+        .bottom-area {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .page-info {
+            text-align: center;
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f0f7ff;
+            border-radius: 6px;
+        }
+        
+        .page-num {
+            font-size: 20px;
+            font-weight: bold;
+            color: #4a90d9;
+        }
+        
+        /* 复制区域 */
+        .copy-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #4a90d9;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+        
+        .btn-copy {
+            background-color: #5cb85c;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        /* 标签区域 */
+        .tags-area {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff8e6;
+            border-radius: 10px;
+            border: 1px dashed #f0ad4e;
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #8a6d3b;
+            margin-bottom: 10px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            background-color: #d4edda;
+            color: #155724;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #c3e6cb;
+        }
+        
+        /* 关键词区域 */
+        .keywords-area {
+            margin-top: 15px;
+            padding: 12px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .keywords-label {
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .keywords-content {
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0,0,0,0.75);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            display: none;
+            z-index: 1000;
+        }
+        
+        /* 手机适配 */
+        @media (max-width: 600px) {
+            body {
+                padding: 5px;
+            }
+            
+            .main-title {
+                font-size: 18px;
+            }
+            
+            .sub-title {
+                font-size: 14px;
+            }
+            
+            table {
+                font-size: 13px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-area {
+                flex-direction: column;
+            }
+            
+            .btn-copy {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <div class="left-btn">
+        <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+    </div>
+    
+    <!-- 右上角导航按钮 -->
+    <div class="right-btns">
+        <a href="64.html" class="btn btn-nav">← 上一页</a>
+        <a href="66.html" class="btn btn-nav">下一页 →</a>
+        <button class="btn btn-fav" onclick="addToFavorites()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题区域 -->
+    <div class="title-area">
+        <div class="main-title">~~~~~急诊常见疾病在症状鉴别中的陷阱（续）*****</div>
+        <div class="sub-title">上呼吸道感染鉴别、急性胃肠炎、短暂性脑缺血发作、酒精中毒</div>
+    </div>
+    
+    <!-- 表格内容 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">急诊常见疾病在症状鉴别中的陷阱 - 详细内容（续）</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-header">
+                    <td colspan="2">🔍 上呼吸道感染鉴别要点（续）</td>
+                </tr>
+                <tr>
+                    <td class="item-name">急性病毒性脑炎</td>
+                    <td class="item-content">急性病毒性脑炎患者常合并与体温不符合的头痛、头晕、喷射性呕吐、意识淡漠、反应迟钝，甚至昏迷、抽搐、神经系统定位体征</td>
+                </tr>
+                <tr>
+                    <td class="item-name">诊断要点</td>
+                    <td class="item-content">实际上，上呼吸道感染是一个回顾性排除性诊断，只有当患者已经好转时，才可以真正诊断</td>
+                </tr>
+                
+                <tr class="section-header">
+                    <td colspan="2">🤢 2. 急性胃肠炎</td>
+                </tr>
+                <tr>
+                    <td class="item-name">概述</td>
+                    <td class="item-content">急性呕吐和/或腹泻是急诊常见症状，绝大多数是急性胃肠炎。急性胃肠炎是回顾性临床诊断，主要根据临床表现进行，按急性胃肠炎治疗好转后，才能确诊。临床上还有其他疾病也可以是急性胃肠炎的呕吐、腹泻症状，部分还是急性致命性疾病，极易引起医疗纠纷</td>
+                </tr>
+                <tr>
+                    <td class="item-name">急性阑尾炎</td>
+                    <td class="item-content">早期可表现为呕吐、上腹痛不适，伴发热、血白细胞增多，部分有腹泻，与急性胃肠炎表现一致。但阑尾炎的腹泻是炎症刺激性腹泻，常是里急后重感觉为主，腹泻量很少，与胃肠炎的大量腹泻不一致；阑尾炎的疼痛是炎症性疼痛，与胃肠炎的痉挛性疼痛不一致。仔细询问疼痛部位、性质，腹泻性状、量，可以帮助鉴别。少部分起病第一天的阑尾炎无法鉴别，这时需要向患者或家属交代阑尾炎可能性，关注患者病情变化</td>
+                </tr>
+                <tr>
+                    <td class="item-name">异位妊娠</td>
+                    <td class="item-content">部分患者无阴道流血。出血刺激肠道可引起腹泻，也可能有呕吐和低热，而被误诊为急性胃肠炎。但这种腹泻是刺激性腹泻，里急后重明显，每次量少，与胃肠炎的大量腹泻不同；腹痛也是，与胃肠炎的痉挛性腹痛不同，山莨菪碱不能明显缓解</td>
+                </tr>
+                
+                <tr class="section-header">
+                    <td colspan="2">🧠 3. 短暂性脑缺血发作</td>
+                </tr>
+                <tr>
+                    <td class="item-name">概述</td>
+                    <td class="item-content">短暂性脑缺血发作无特异性检查化验，主要依据临床表现诊断。但很多表现为与一过性脑缺血发作类似的患者也可能是其他疾病，需注意排除，如消化道出血、心肌梗死、恶性心律失常、脑出血、蛛网膜下腔出血、癫痫发作、低血糖症、癔症等</td>
+                </tr>
+                <tr>
+                    <td class="item-name">临床注意</td>
+                    <td class="item-content">临床上，对于怀疑短暂性脑缺血发作的患者，尤其是不典型局灶神经系统受损症状发作的患者，需要高度警惕神经症状是其他疾病的继发表现，需要仔细询问病史和查体</td>
+                </tr>
+                
+                <tr class="section-header">
+                    <td colspan="2">🍺 4. 酒精中毒</td>
+                </tr>
+                <tr>
+                    <td class="item-name">概述</td>
+                    <td class="item-content">醉酒是急诊的一大常见就诊原因，一般仅根据病史、满身酒气即可确诊，似乎不存在诊断困难的问题。但酒精中毒的诊断核心并非确认有酒精中毒，而是确认是否合并其他问题</td>
+                </tr>
+                <tr>
+                    <td class="item-name">误吸</td>
+                    <td class="item-content">醉酒后常发生呕吐伴嗜睡等意识障碍，是误吸的两大最核心高危因素，醉酒后呕吐误吸是醉酒患者最常见的并发</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码信息 -->
+    <div class="page-info">
+        页码：<span class="page-num">65</span>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="bottom-area">
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyText" value="急诊常见疾病在症状鉴别中的陷阱（续）；上呼吸道感染鉴别、急性胃肠炎、短暂性脑缺血发作、酒精中毒；上呼吸道感染,急性胃肠炎,急性阑尾炎,异位妊娠,短暂性脑缺血发作,酒精中毒,误吸,急性病毒性脑炎,脑出血,蛛网膜下腔出血,癫痫发作,低血糖症,癔症,心肌梗死,恶性心律失常,消化道出血=65" readonly>
+            <button class="btn-copy" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-area">
+        <span class="keywords-label">关键词：</span>
+        <div class="keywords-content">上呼吸道感染、急性胃肠炎、急性阑尾炎、异位妊娠、短暂性脑缺血发作、酒精中毒、误吸、急性病毒性脑炎、脑出血、蛛网膜下腔出血、癫痫发作、低血糖症、癔症、心肌梗死、恶性心律失常、消化道出血</div>
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-area">
+        <div class="tags-title">🔍 疾病/药物/细菌检索标签（仅含图片中出现的内容）</div>
+        <div class="tags-container">
+            <span class="tag">上呼吸道感染</span>
+            <span class="tag">急性病毒性脑炎</span>
+            <span class="tag">急性胃肠炎</span>
+            <span class="tag">急性阑尾炎</span>
+            <span class="tag">异位妊娠</span>
+            <span class="tag">短暂性脑缺血发作</span>
+            <span class="tag">酒精中毒</span>
+            <span class="tag">误吸</span>
+            <span class="tag">消化道出血</span>
+            <span class="tag">心肌梗死</span>
+            <span class="tag">恶性心律失常</span>
+            <span class="tag">脑出血</span>
+            <span class="tag">蛛网膜下腔出血</span>
+            <span class="tag">癫痫发作</span>
+            <span class="tag">低血糖症</span>
+            <span class="tag">癔症</span>
+        </div>
+    </div>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(function() {
+                    showToast("✅ 已复制到剪贴板");
+                });
+            } else {
+                document.execCommand("copy");
+                showToast("✅ 已复制到剪贴板");
+            }
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById("toast");
+            toast.textContent = msg;
+            toast.style.display = "block";
+            setTimeout(function() {
+                toast.style.display = "none";
+            }, 2000);
+        }
+        
+        // 添加到收藏
+        function addToFavorites() {
+            // 获取当前页面信息
+            const title = "急诊常见疾病在症状鉴别中的陷阱（续）";
+            const url = window.location.href;
+            const pageData = {
+                title: title,
+                url: url,
+                pageNum: "65",
+                category: "急诊症状鉴别"
+            };
+            
+            // 从localStorage获取已有收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                showToast("⚠️ 该页面已在收藏中");
+                return;
+            }
+            
+            // 添加新收藏
+            favorites.push(pageData);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 同时更新index.html的收藏列表（通过localStorage共享）
+            showToast("⭐ 已添加到收藏！请在首页查看");
+        }
+        
+        // 页面加载时设置编辑框宽度
+        window.onload = function() {
+            const containerWidth = document.querySelector('.bottom-area').clientWidth;
+            const input = document.getElementById('copyText');
+            input.style.width = (containerWidth - 100) + 'px';
+        };
+        
+        // 窗口大小改变时调整
+        window.onresize = function() {
+            const containerWidth = document.querySelector('.bottom-area').clientWidth;
+            const input = document.getElementById('copyText');
+            if (window.innerWidth > 600) {
+                input.style.width = (containerWidth - 100) + 'px';
+            }
+        };
+    </script>
+</body>
+</html>
