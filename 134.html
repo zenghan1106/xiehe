@@ -1,0 +1,427 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急性胆管炎诊断与治疗指南*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background-color: #2c5aa0;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        
+        .home-btn:hover {
+            background-color: #1e3d6f;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        
+        .nav-btn {
+            background-color: #4a90d9;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 13px;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background-color: #357abd;
+        }
+        
+        .favorite-btn {
+            background-color: #e8b339;
+            color: #333;
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: none;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .favorite-btn:hover {
+            background-color: #d4a035;
+        }
+        
+        .favorite-btn.active {
+            background-color: #c9302c;
+            color: white;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a3a6e;
+            font-size: 22px;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #e8f0fe;
+            border-radius: 10px;
+            border-left: 5px solid #2c5aa0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        thead tr {
+            background-color: #2c5aa0;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e8e8e8;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f0fe;
+        }
+        
+        td {
+            padding: 12px;
+            vertical-align: top;
+            font-size: 14px;
+        }
+        
+        td:first-child {
+            font-weight: bold;
+            color: #2c5aa0;
+            width: 120px;
+            white-space: nowrap;
+        }
+        
+        .check-item {
+            color: #27ae60;
+            margin-right: 6px;
+        }
+        
+        .section-title {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c5aa0;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: #e8f0fe;
+            color: #2c5aa0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 4px;
+            font-size: 13px;
+            border: 1px solid #c5d9f8;
+        }
+        
+        .tag.disease {
+            background-color: #fde8e8;
+            color: #c0392b;
+            border-color: #f5c6c6;
+        }
+        
+        .tag.drug {
+            background-color: #e8f8f5;
+            color: #27ae60;
+            border-color: #c5e8d5;
+        }
+        
+        .tag.bacteria {
+            background-color: #fef5e7;
+            color: #e8b339;
+            border-color: #f5deb3;
+        }
+        
+        .bottom-section {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 15px;
+            border: 2px solid #c5d9f8;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background-color: #27ae60;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background-color: #219a52;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #ddd;
+        }
+        
+        .keywords span {
+            color: #2c5aa0;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            td:first-child {
+                width: 100px;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-buttons {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="133.html" class="nav-btn">上一页</a>
+            <a href="135.html" class="nav-btn">下一页</a>
+            <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~急性胆管炎诊断与治疗指南*****</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">急性胆管炎（Acute Cholangitis）临床要点</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Charcot三联征</td>
+                <td>腹痛、寒战高热、黄疸</td>
+            </tr>
+            <tr>
+                <td>特殊表现</td>
+                <td><span class="check-item">✓</span>少数患者可能仅出现腹痛症状，而有些患者却可能无腹痛，尤其是老年患者。<br>
+                <span class="check-item">✓</span>合并休克患者可表现为烦躁不安、谵妄等，病情进一步进展可出现中枢神经系统受抑制表现，包括神情淡漠、嗜睡、神志不清甚至昏迷。<br>
+                <span class="check-item">✓</span>Charcot三联征加上休克和中枢神经系统抑制，又称Reynold五联征。</td>
+            </tr>
+            <tr>
+                <td><span class="section-title">查体</span></td>
+                <td><span class="check-item">✓</span>高热，但少数患者因病情危重出现感染性休克，体温可以不升。<br>
+                <span class="check-item">✓</span>脉搏快而弱，血压降低。<br>
+                <span class="check-item">✓</span>全身皮肤可有出血点和瘀斑。<br>
+                <span class="check-item">✓</span>剑突下或右上腹压痛，可有腹膜刺激征。<br>
+                <span class="check-item">✓</span>常有肝大并有压痛、叩击痛。<br>
+                <span class="check-item">✓</span>胆总管梗阻者可有胆囊肿大。</td>
+            </tr>
+            <tr>
+                <td><span class="section-title">必做检查</span></td>
+                <td><strong>实验室检查：</strong><br>
+                <span class="check-item">✓</span>血常规：可出现白细胞增多伴核左移。<br>
+                <span class="check-item">✓</span>炎症指标：CRP水平升高，PCT也出现不同程度升高。<br>
+                <span class="check-item">✓</span>肝生化学检查：血清胆红素、转氨酶、GGT和ALP水平常有异常。尤其在胆管梗阻后的最初72小时内，血清转氨酶会显著升高，若梗阻持续，则ALP和胆红素水平随后逐渐缓慢升高。若在疼痛发作后的最初24小时内肝生化学检查正常，同时超声未发现胆总管扩张者，则存在胆总管结石的可能性较小。<br><br>
+                <strong>影像学检查：</strong><br>
+                <span class="check-item">✓</span>B超：为首选方法。可显示肝大，胆囊或胆总管、肝内胆管内结石，肝内外胆管可显示不同程度扩张，胆囊增大，张力高。对肝外胆管结石主要依靠胆管扩张的间接征象，对胆管梗阻的病因及梗阻部位确定有时困难。<br>
+                <span class="check-item">✓</span>CT：分辨率有所提高，不受肥胖、肠道积气等影响，在诊断胆管扩张程度、梗阻部位和病因方面具有优势，但胆固醇结石在CT检查中不显影，因此对确定胆道梗阻的病因具有局限性。</td>
+            </tr>
+            <tr>
+                <td><span class="section-title">选做检查</span></td>
+                <td><span class="check-item">●</span>MRI：可以协助确定或排除APC的诊断，在症状不典型的老年患者尤其有意义。磁共振胆胰管造影（MRCP）可无重叠地显示肝内胆管树影像、阻塞部位和范围。是较为理想的无创影像学检查。</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="tags-container">
+        <div class="tags-title">特色检索标签</div>
+        <span class="tag disease">急性胆管炎</span>
+        <span class="tag disease">Charcot三联征</span>
+        <span class="tag disease">Reynold五联征</span>
+        <span class="tag disease">胆总管结石</span>
+        <span class="tag disease">胆管梗阻</span>
+        <span class="tag disease">感染性休克</span>
+        <span class="tag disease">APC</span>
+        <span class="tag bacteria">大肠杆菌</span>
+        <span class="tag bacteria">克雷伯菌</span>
+        <span class="tag bacteria">肠球菌</span>
+        <span class="tag drug">抗生素</span>
+        <span class="tag drug">头孢三代</span>
+        <span class="tag drug">喹诺酮类</span>
+        <span class="tag drug">甲硝唑</span>
+        <span class="tag drug">碳青霉烯类</span>
+    </div>
+    
+    <div class="bottom-section">
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="急性胆管炎诊断与治疗指南；Charcot三联征；Reynold五联征；胆总管结石；胆管梗阻；B超；CT；MRCP；CRP；PCT；白细胞；转氨酶；胆红素；ALP；GGT；=134" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+        <div class="page-number">页码：134</div>
+        <div class="keywords">
+            关键词：<span>急性胆管炎、Charcot三联征、Reynold五联征、胆总管结石、胆管梗阻、B超、CT、MRCP、感染性休克、肝生化学检查</span>
+        </div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '已复制';
+                btn.style.backgroundColor = '#219a52';
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.style.backgroundColor = '#27ae60';
+                }, 2000);
+            });
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            if (btn.classList.contains('active')) {
+                btn.classList.remove('active');
+                btn.innerHTML = '☆ 收藏';
+                // 从index收藏中移除的逻辑（需配合后端或localStorage）
+                localStorage.removeItem('fav_134');
+            } else {
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+                // 添加到index收藏的逻辑
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                if (!favorites.includes('134')) {
+                    favorites.push('134');
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                localStorage.setItem('fav_134', '急性胆管炎诊断与治疗指南');
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            if (localStorage.getItem('fav_134')) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
