@@ -1,0 +1,448 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~快速性心律失常*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background-color: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        
+        .nav-btn {
+            background-color: #6b8cae;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .favorite-btn {
+            background-color: #e8a87c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        
+        .favorite-btn.active {
+            background-color: #d4a574;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c5282;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 12px;
+            background-color: #e2e8f0;
+            border-radius: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        thead tr {
+            background-color: #3182ce;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        
+        tbody tr:hover {
+            background-color: #edf2f7;
+        }
+        
+        td {
+            padding: 12px;
+            font-size: 14px;
+            color: #2d3748;
+            vertical-align: top;
+        }
+        
+        .section-title {
+            color: #2c5282;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        
+        .sub-item {
+            padding-left: 20px;
+            color: #4a5568;
+        }
+        
+        .check-mark {
+            color: #38a169;
+            font-weight: bold;
+        }
+        
+        .diamond {
+            color: #805ad5;
+        }
+        
+        .square {
+            color: #dd6b20;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            padding: 20px;
+            background-color: #edf2f7;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .tag {
+            background-color: #bee3f8;
+            color: #2c5282;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        .tag.disease {
+            background-color: #fed7d7;
+            color: #c53030;
+        }
+        
+        .tag.drug {
+            background-color: #c6f6d5;
+            color: #276749;
+        }
+        
+        .tag.bacteria {
+            background-color: #fefcbf;
+            color: #975a16;
+        }
+        
+        .keywords {
+            text-align: center;
+            padding: 15px;
+            background-color: #e2e8f0;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .keywords-label {
+            color: #4a5568;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+        
+        .keywords-content {
+            color: #2c5282;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #718096;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #4a5568;
+        }
+        
+        .copy-btn {
+            background-color: #48bb78;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #48bb78;
+            color: white;
+            padding: 16px 32px;
+            border-radius: 10px;
+            font-size: 16px;
+            display: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="106.html" class="nav-btn">上一页</a>
+            <a href="108.html" class="nav-btn">下一页</a>
+            <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~快速性心律失常*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~快速性心律失常*****、项目、内容、1. 定义、2. 初步评估与诊断、3. 临床治疗决策（图14）</div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>项目</th>
+                <th>内容</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="2" class="section-title">1. 定义</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>• 心室率≥100次/分的心律异常。</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>• 相关症状和体征可包括休克、低血压、心力衰竭、呼吸急促、胸痛、急性心肌梗死、心悸和/或意识水平下降。</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="section-title">2. 初步评估与诊断</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>• 进行12导联心电图检查，简要初步评估患者的整体临床情况。</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>• 患者在临床上（或在血流动力学上）是否存在不稳定。</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span class="check-mark">✓</span> 判断患者是否具有与心率快相关的症状和体征。</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span class="check-mark">✓</span> 包括低血压、呼吸急促、提示冠状动脉缺血的胸痛、休克和/或意识水平下降。若存在上述任意一种，则称为不稳定状态。</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>• QRS波是窄还是宽？规则还是不规则？</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span class="check-mark">✓</span> 窄QRS波：QRS波＜120ms。</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span class="check-mark">✓</span> 宽QRS波：QRS波≥120ms。</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="section-title">3. 临床治疗决策（图14）</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>• 窄QRS波心动过速：包括心室律规则和心室律不规则两类。</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span class="check-mark">✓</span> 规则的窄QRS波心动过速：①窦性心动过速；②房性心动过速；③室上性心动过速；④心房扑动伴等比例下传；⑤交界性异位性心动过速；⑥非阵发性交界性心动过速。</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span class="diamond">◇</span> 窦性心动过速：最常见，应积极查找原因，如呼吸衰竭、低血容量、贫血、发热、疼痛或焦虑等，谨慎应用控制心率药物。</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span class="diamond">◇</span> 阵发性室上性心动过速</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span class="square">□</span> 新发室上性心动过速，且存在心律失常相关血流动力学不稳定：应立即行同步心脏电复律，推荐首次剂量为50～100J双相波，逐渐递增原则。</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span class="square">□</span> 伴心动过速所致严重症状（如心绞痛、低血压、心力衰竭或精神状态改变）且有静脉通路：可用腺苷尝试终止心律失常，而非心脏电复律。若不能使用腺苷或使用后无效，则应立即行心脏电复律。</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="tags-container">
+        <span class="tag disease">心肌炎</span>
+        <span class="tag disease">心力衰竭</span>
+        <span class="tag disease">休克</span>
+        <span class="tag disease">低血压</span>
+        <span class="tag disease">呼吸衰竭</span>
+        <span class="tag disease">急性心肌梗死</span>
+        <span class="tag disease">心绞痛</span>
+        <span class="tag disease">贫血</span>
+        <span class="tag disease">快速性心律失常</span>
+        <span class="tag disease">窦性心动过速</span>
+        <span class="tag disease">房性心动过速</span>
+        <span class="tag disease">室上性心动过速</span>
+        <span class="tag disease">心房扑动</span>
+        <span class="tag disease">交界性异位性心动过速</span>
+        <span class="tag disease">非阵发性交界性心动过速</span>
+        <span class="tag disease">阵发性室上性心动过速</span>
+        <span class="tag drug">腺苷</span>
+        <span class="tag drug">控制心率药物</span>
+    </div>
+    
+    <div class="keywords">
+        <div class="keywords-label">关键词</div>
+        <div class="keywords-content">快速性心律失常、心动过速、心电图、QRS波、电复律、腺苷、心肌炎、心力衰竭</div>
+    </div>
+    
+    <div class="page-number">页码：107</div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="快速性心律失常；初步评估与诊断；临床治疗决策；心肌炎；心力衰竭；休克；低血压；呼吸衰竭；急性心肌梗死；心绞痛；贫血；窦性心动过速；房性心动过速；室上性心动过速；心房扑动；交界性异位性心动过速；非阵发性交界性心动过速；阵发性室上性心动过速；腺苷；控制心率药物；=107" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="toast" id="toast">已复制到剪贴板！</div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                showToast();
+            }, function() {
+                document.execCommand('copy');
+                showToast();
+            });
+        }
+        
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.style.display = 'block';
+            setTimeout(function() {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            if (btn.classList.contains('active')) {
+                btn.classList.remove('active');
+                btn.innerHTML = '☆ 收藏';
+                localStorage.removeItem('fav_107');
+            } else {
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+                localStorage.setItem('fav_107', JSON.stringify({
+                    title: '快速性心律失常',
+                    url: '107.html',
+                    time: new Date().toISOString()
+                }));
+                updateIndexFavorite();
+            }
+        }
+        
+        function updateIndexFavorite() {
+            let favorites = JSON.parse(localStorage.getItem('index_favorites') || '[]');
+            const exists = favorites.find(f => f.url === '107.html');
+            if (!exists) {
+                favorites.push({
+                    title: '快速性心律失常',
+                    url: '107.html',
+                    time: new Date().toISOString()
+                });
+                localStorage.setItem('index_favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        window.onload = function() {
+            const saved = localStorage.getItem('fav_107');
+            if (saved) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
