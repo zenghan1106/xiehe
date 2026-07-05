@@ -1,0 +1,501 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊医学-真菌感染与脓毒症*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #f5f0ff 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-home {
+            background: linear-gradient(135deg, #4a90d9, #357abd);
+            color: white;
+        }
+        
+        .btn-page {
+            background: linear-gradient(135deg, #5cb85c, #449d44);
+            color: white;
+            min-width: 80px;
+        }
+        
+        .btn-fav {
+            background: linear-gradient(135deg, #f0ad4e, #ec971f);
+            color: white;
+            margin-top: 5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 28px;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 15px;
+        }
+        
+        .main-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .main-table thead tr {
+            background: linear-gradient(135deg, #1e5799, #2989d8, #207cca);
+            color: white;
+        }
+        
+        .main-table thead th {
+            padding: 20px 15px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        .main-table tbody td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #444;
+        }
+        
+        .main-table tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        .main-table tbody tr:hover {
+            background: #e3f2fd;
+            transition: background 0.3s;
+        }
+        
+        .section-title {
+            color: #1a5276;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .sub-item {
+            color: #2c3e50;
+            padding-left: 20px;
+        }
+        
+        .check-item {
+            color: #27ae60;
+            font-weight: 500;
+        }
+        
+        .diamond {
+            color: #8e44ad;
+            padding-left: 40px;
+        }
+        
+        .author {
+            text-align: right;
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+        }
+        
+        .tags-section {
+            background: rgba(255,255,255,0.8);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            color: #1a5276;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #ffe0e0;
+            color: #c0392b;
+            border: 1px solid #f5b7b1;
+        }
+        
+        .tag-drug {
+            background: #e0f7e0;
+            color: #27ae60;
+            border: 1px solid #a9dfbf;
+        }
+        
+        .tag-bacteria {
+            background: #e0e0ff;
+            color: #8e44ad;
+            border: 1px solid #d2b4de;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+        
+        .copy-section {
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .copy-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        
+        .copy-input:focus {
+            outline: none;
+            border-color: #4a90d9;
+        }
+        
+        .btn-copy {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            color: white;
+            padding: 12px 25px;
+        }
+        
+        .keywords-section {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .page-number {
+            font-size: 18px;
+            color: #1a5276;
+            font-weight: bold;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            display: none;
+            z-index: 1000;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 22px;
+            }
+            
+            .main-table thead th {
+                font-size: 16px;
+                padding: 15px 10px;
+            }
+            
+            .main-table tbody td {
+                font-size: 14px;
+                padding: 12px 10px;
+            }
+            
+            .nav-top {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-right {
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .btn-fav {
+                margin-top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="223.html" class="btn btn-page">← 上一页</a>
+            <a href="225.html" class="btn btn-page">下一页 →</a>
+            <button class="btn btn-fav" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~急诊医学 - 真菌感染急诊处理与脓毒症*****</h1>
+    
+    <table class="main-table">
+        <thead>
+            <tr>
+                <th>📋 急诊医学 - 真菌感染急诊处理与脓毒症定义</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span class="section-title">● 拟诊：</span>免疫抑制人群，符合1项主要临床特征（或2项次要临床特征），或有微生物学证据。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">7. 急诊处理</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sub-item">● 心电监护，建立静脉通路，专科会诊。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sub-item">● 呼吸支持：</span>氧疗，保证SaO₂ > 95%。重症患者需要气管插管、机械通气。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sub-item">● 循环支持：</span>对于出现低血压的重症感染需要进行液体复苏，可加用血管活性药物。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sub-item">● 经验性抗真菌治疗</span><br>
+                    <span class="check-item">✓ 适应证：</span>免疫缺陷者出现不明原因发热，且广谱抗生素治疗无效者，或起初有效但3～7天后再出现发热，在积极寻找病因的同时，可进行抗真菌的经验治疗。<br>
+                    <span class="check-item">✓ 方案：</span>一般选择抗菌谱较广的抗真菌药物，如伊曲康唑、两性霉素B、卡泊芬净、伏立康唑及米卡芬净。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sub-item">● 确诊后治疗</span><br>
+                    <span class="check-item">✓ 念珠菌感染</span><br>
+                    <span class="diamond">◇ 念珠菌血症：</span>选用伊曲康唑静脉注射液，或采用卡泊芬净、米卡芬净。对于病情进展或确诊为克柔念珠菌或光滑念珠菌感染的患者应选择两性霉素B或卡泊芬净、米卡芬净。<br>
+                    <span class="diamond">◇ 念珠菌性脑膜炎/脑脓肿：</span>可选用伏立康唑、氟康唑或两性霉素B，加或不加5-氟胞嘧啶。对于脓肿患者可手术干预。<br>
+                    <span class="diamond">◇ 泌尿生殖系统念珠菌病：</span>伊曲康唑静脉注射液或氟康唑。治疗无效者可使用两性霉素B或卡泊芬净、米卡芬净。<br>
+                    <span class="check-item">✓ 曲霉菌感染：</span>可选择两性霉素B，或伏立康唑、伊曲康唑、卡泊芬净治疗。<br>
+                    <span class="check-item">✓ 隐球菌脑膜炎：</span>治疗建议联合使用两性霉素B和5-氟胞嘧啶，症状控制后使用氟康唑进行维持治疗，疗程长短应当考虑患者的个体免疫状态。<br>
+                    <span class="check-item">✓ 毛霉菌感染：</span>应选择两性霉素B。若累及中枢神经系统或鼻窦，可考虑手术干预以降低死亡率。<br>
+                    <span class="check-item">✓ 肺孢子菌肺炎：</span>可选择复方磺胺甲噁唑，艾滋病患者需同时用高效抗反转录病毒治疗。若对磺胺过敏或耐药，可用伯氨喹或卡泊芬净。
+                </td>
+            </tr>
+            <tr>
+                <td class="author">
+                    （宋 晓）
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">■ 脓毒症</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">1. 定义</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sub-item">● 感染：</span>具有致病性或潜在致病性的微生物侵入正常无菌的组
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">念珠菌血症</span>
+            <span class="tag tag-disease">念珠菌性脑膜炎</span>
+            <span class="tag tag-disease">脑脓肿</span>
+            <span class="tag tag-disease">泌尿生殖系统念珠菌病</span>
+            <span class="tag tag-disease">曲霉菌感染</span>
+            <span class="tag tag-disease">隐球菌脑膜炎</span>
+            <span class="tag tag-disease">毛霉菌感染</span>
+            <span class="tag tag-disease">肺孢子菌肺炎</span>
+            <span class="tag tag-disease">脓毒症</span>
+            <span class="tag tag-disease">感染</span>
+            <span class="tag tag-drug">伊曲康唑</span>
+            <span class="tag tag-drug">两性霉素B</span>
+            <span class="tag tag-drug">卡泊芬净</span>
+            <span class="tag tag-drug">伏立康唑</span>
+            <span class="tag tag-drug">米卡芬净</span>
+            <span class="tag tag-drug">氟康唑</span>
+            <span class="tag tag-drug">5-氟胞嘧啶</span>
+            <span class="tag tag-drug">复方磺胺甲噁唑</span>
+            <span class="tag tag-drug">伯氨喹</span>
+            <span class="tag tag-drug">血管活性药物</span>
+            <span class="tag tag-drug">广谱抗生素</span>
+            <span class="tag tag-bacteria">念珠菌</span>
+            <span class="tag tag-bacteria">克柔念珠菌</span>
+            <span class="tag tag-bacteria">光滑念珠菌</span>
+            <span class="tag tag-bacteria">曲霉菌</span>
+            <span class="tag tag-bacteria">隐球菌</span>
+            <span class="tag tag-bacteria">毛霉菌</span>
+            <span class="tag tag-bacteria">肺孢子菌</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <div class="copy-row">
+            <input type="text" class="copy-input" id="copyText" value="急诊医学-真菌感染急诊处理与脓毒症；真菌感染、急诊处理、脓毒症、念珠菌、曲霉菌、隐球菌、毛霉菌、肺孢子菌、伊曲康唑、两性霉素B、卡泊芬净、伏立康唑、米卡芬净、氟康唑、5-氟胞嘧啶、复方磺胺甲噁唑、伯氨喹=224" readonly>
+            <button class="btn btn-copy" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+    
+    <div class="keywords-section">
+        <div class="page-number">页码：224</div>
+        <div>关键词：真菌感染 | 急诊处理 | 脓毒症 | 念珠菌 | 曲霉菌 | 隐球菌 | 毛霉菌 | 肺孢子菌 | 伊曲康唑 | 两性霉素B | 卡泊芬净 | 伏立康唑 | 米卡芬净 | 氟康唑 | 5-氟胞嘧啶 | 复方磺胺甲噁唑 | 伯氨喹</div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('✅ 已复制到剪贴板！');
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('✅ 已复制到剪贴板！');
+            }
+        }
+        
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        function addToFavorites() {
+            // 模拟添加到收藏
+            const title = document.querySelector('h1').textContent;
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已存在
+            const exists = favorites.some(f => f.url === window.location.href);
+            if (!exists) {
+                favorites.push({
+                    title: title,
+                    url: window.location.href,
+                    page: '224'
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                showToast('⭐ 已添加到收藏！');
+            } else {
+                showToast('❤️ 已在收藏中！');
+            }
+            
+            // 尝试更新index.html的收藏（需要配合index页面使用）
+            localStorage.setItem('newFavorite', JSON.stringify({
+                title: title,
+                url: '224.html',
+                page: '224'
+            }));
+        }
+        
+        // 页面加载时设置正确的复制内容
+        document.addEventListener('DOMContentLoaded', function() {
+            const pageName = window.location.pathname.split('/').pop().replace('.html', '') || '224';
+            const copyContent = `急诊医学-真菌感染急诊处理与脓毒症；真菌感染、急诊处理、脓毒症、念珠菌、曲霉菌、隐球菌、毛霉菌、肺孢子菌、伊曲康唑、两性霉素B、卡泊芬净、伏立康唑、米卡芬净、氟康唑、5-氟胞嘧啶、复方磺胺甲噁唑、伯氨喹=${pageName}`;
+            document.getElementById('copyText').value = copyContent;
+        });
+    </script>
+</body>
+</html>
