@@ -1,0 +1,511 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>抗生素相关性腹泻（AAD）医学知识</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 15px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            z-index: 100;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #5a9fd4;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+        }
+        
+        .nav-btn:hover {
+            background: #4a8bc2;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #e8a838;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+        }
+        
+        .fav-btn:hover {
+            background: #d4952a;
+        }
+        
+        .fav-btn.active {
+            background: #c9302c;
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            margin: 55px 0 20px 0;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .title-format {
+            color: #e74c3c;
+            font-size: 20px;
+        }
+        
+        /* 表格样式 */
+        .content-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        .content-table th {
+            background: #2e6da4;
+            color: white;
+            padding: 14px 12px;
+            text-align: left;
+            font-size: 17px;
+            font-weight: bold;
+        }
+        
+        .content-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+            font-size: 14px;
+        }
+        
+        .content-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .content-table tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        
+        .content-table tr:hover {
+            background: #f0f4f8;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            color: #2e6da4;
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+        
+        .sub-item {
+            padding-left: 0;
+            margin: 4px 0;
+        }
+        
+        .sub-item::before {
+            content: "● ";
+            color: #2e6da4;
+        }
+        
+        .check-item::before {
+            content: "✓ ";
+            color: #27ae60;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #e3f2fd;
+            color: #1565c0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px 6px 4px 0;
+            border: 1px solid #bbdefb;
+        }
+        
+        .tag-disease {
+            background: #fce4ec;
+            color: #c2185b;
+            border-color: #f8bbd9;
+        }
+        
+        .tag-bacteria {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-color: #c8e6c9;
+        }
+        
+        .tag-drug {
+            background: #fff3e0;
+            color: #e65100;
+            border-color: #ffe0b2;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #666;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        .keywords-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .keywords-content {
+            font-size: 13px;
+            color: #555;
+            line-height: 2;
+        }
+        
+        .keyword {
+            display: inline-block;
+            background: #f5f5f5;
+            padding: 3px 10px;
+            border-radius: 4px;
+            margin: 3px 5px 3px 0;
+            color: #444;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #555;
+            background: #fafafa;
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #219a52;
+        }
+        
+        .copy-btn.copied {
+            background: #7f8c8d;
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.75);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: none;
+            z-index: 200;
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="217.html" class="nav-btn">上一页</a>
+        <a href="219.html" class="nav-btn">下一页</a>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="page-title">
+        <span class="title-format">~~~~~抗生素相关性腹泻（AAD）医学知识*****</span>
+    </div>
+    
+    <!-- 主表格 -->
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th colspan="2">抗生素相关性腹泻（AAD）医学知识要点</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="2">
+                    <div class="section-title">导致AAD常见菌</div>
+                    <div class="sub-item">艰难梭菌、金黄色葡萄球菌、克雷伯菌、产气荚膜杆菌、沙门菌、白念珠菌等。</div>
+                    <div class="sub-item">假膜性肠炎是AAD的严重类型，可引起结肠黏膜坏死性炎症，几乎都是艰难梭菌。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="section-title">2. 危险因素</div>
+                    <div class="sub-item">抗生素种类。</div>
+                    <div class="sub-item">应用抗生素时间长短。</div>
+                    <div class="sub-item">年龄。</div>
+                    <div class="sub-item">基础疾病和原发病严重程度。</div>
+                    <div class="sub-item">既往AAD病史。</div>
+                    <div class="sub-item">既往肠道疾病。</div>
+                    <div class="sub-item">是否存在免疫抑制状态。</div>
+                    <div class="sub-item">住院时间长短。</div>
+                    <div class="sub-item">医疗干预措施。</div>
+                    <div class="sub-item">长期卧床。</div>
+                    <div class="sub-item">滥用抑酸药和抗肠道蠕动药物。</div>
+                    <div class="sub-item">有无外伤/手术/鼻饲等。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="section-title">3. 临床表现</div>
+                    <div class="sub-item">潜伏期：可短至用药当天，长至停药8周，甚至更长，症状多在应用抗生素后的2～7天。</div>
+                    <div class="sub-item">主要表现：腹泻，以稀水样便为主，可伴不同程度的发热、腹痛、腹胀、恶心、呕吐，严重者可引起中毒性巨结肠、肠麻痹、肠穿孔及休克。</div>
+                    <div class="sub-item">病情分度：</div>
+                    <div class="sub-item check-item">轻度：仅有短暂腹泻，很少有全身症状，也缺乏实验室和影像学改变，结肠镜下可能正常或仅黏膜充血、水肿。</div>
+                    <div class="sub-item check-item">中度：腹泻次数更多（>10次/日），水样便或呈蛋花汤样外观，常伴轻度腹痛、腹胀、恶心、乏力、发热等全身表现。</div>
+                    <div class="sub-item check-item">重度：腹泻次数可达20次/日以上，典型表现为假膜性肠炎，可有水样泻，粪便中可见漂浮假膜，严重者可出现中毒性巨结肠、穿孔甚至危及生命。</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="section-title">4. 必做检查</div>
+                    <div class="sub-item">结肠镜：部分患者可见结肠黏膜红斑、水肿、结肠溃疡或出血等，典型假膜性肠炎镜下可见结肠多片微隆起斑片，或地图状黄色斑块覆于炎症黏膜表面，可见黄白色或黄绿色假膜。</div>
+                    <div class="sub-item">腹部平片、CT平扫：可见结肠扩张、结肠袋肥大，结肠壁增厚和水肿，肠腔积液及指压痕等。</div>
+                    <div class="sub-item">血常规：外周血白细胞增多。</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 页码 -->
+    <div class="page-number">页码：218</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">关键词</div>
+        <div class="keywords-content">
+            <span class="keyword">AAD</span>
+            <span class="keyword">抗生素相关性腹泻</span>
+            <span class="keyword">艰难梭菌</span>
+            <span class="keyword">假膜性肠炎</span>
+            <span class="keyword">结肠镜</span>
+            <span class="keyword">中毒性巨结肠</span>
+            <span class="keyword">肠穿孔</span>
+            <span class="keyword">危险因素</span>
+            <span class="keyword">临床表现</span>
+            <span class="keyword">病情分度</span>
+        </div>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <span class="tag tag-disease">抗生素相关性腹泻</span>
+        <span class="tag tag-disease">假膜性肠炎</span>
+        <span class="tag tag-disease">中毒性巨结肠</span>
+        <span class="tag tag-disease">肠麻痹</span>
+        <span class="tag tag-disease">肠穿孔</span>
+        <span class="tag tag-bacteria">艰难梭菌</span>
+        <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+        <span class="tag tag-bacteria">克雷伯菌</span>
+        <span class="tag tag-bacteria">产气荚膜杆菌</span>
+        <span class="tag tag-bacteria">沙门菌</span>
+        <span class="tag tag-bacteria">白念珠菌</span>
+        <span class="tag tag-drug">抗生素</span>
+        <span class="tag tag-drug">抑酸药</span>
+        <span class="tag tag-drug">抗肠道蠕动药物</span>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="抗生素相关性腹泻（AAD）医学知识；AAD；抗生素相关性腹泻；艰难梭菌；假膜性肠炎；结肠镜；中毒性巨结肠；肠穿孔；危险因素；临床表现；病情分度=218" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(function() {
+                    showToast('已复制到剪贴板');
+                    document.getElementById('copyBtn').classList.add('copied');
+                    document.getElementById('copyBtn').textContent = '已复制';
+                    setTimeout(() => {
+                        document.getElementById('copyBtn').classList.remove('copied');
+                        document.getElementById('copyBtn').textContent = '复制';
+                    }, 2000);
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板');
+            }
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                showToast('已添加到收藏');
+                
+                // 保存到localStorage，用于index页面读取
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '抗生素相关性腹泻（AAD）医学知识',
+                    url: '218.html',
+                    pageNum: '218',
+                    tags: ['抗生素相关性腹泻', '艰难梭菌', '假膜性肠炎']
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.url === '218.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+                showToast('已取消收藏');
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '218.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '218.html');
+            const btn = document.getElementById('favBtn');
+            
+            if (isFav) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+            }
+        };
+    </script>
+<div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：抗生素相关性腹泻（AAD）医学知识、抗生素相关性腹泻（AAD）医学知识要点</div></body>
+</html>
