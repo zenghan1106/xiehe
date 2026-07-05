@@ -1,0 +1,381 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~高钠血症补液方案与尿崩症治疗*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f5f0;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background-color: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            background-color: #4a90d9;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .fav-btn {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c5282;
+            font-size: 24px;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #e8f0fe;
+            border-radius: 10px;
+            word-break: break-all;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        thead {
+            background-color: #2c5282;
+            color: white;
+        }
+        
+        th {
+            padding: 15px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 15px;
+            color: #444;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+        
+        tr:hover {
+            background-color: #f0f7ff;
+        }
+        
+        .section-title {
+            color: #2c5282;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .sub-item {
+            padding-left: 20px;
+            color: #555;
+        }
+        
+        .diamond::before {
+            content: "◇ ";
+            color: #4a90d9;
+        }
+        
+        .check::before {
+            content: "✓ ";
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .bullet::before {
+            content: "● ";
+            color: #ff6b6b;
+        }
+        
+        .tags-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c5282;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: #e8f0fe;
+            color: #2c5282;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 14px;
+            border: 1px solid #4a90d9;
+        }
+        
+        .copy-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #4a90d9;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: monospace;
+        }
+        
+        .copy-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            color: #666;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+        
+        .keywords {
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 18px;
+            }
+            th {
+                font-size: 15px;
+            }
+            td {
+                font-size: 13px;
+                padding: 8px;
+            }
+            .copy-input {
+                width: 100%;
+            }
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .nav-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">返回首页</a>
+        <div>
+            <div class="nav-buttons">
+                <a href="257.html" class="nav-btn">上一页</a>
+                <a href="259.html" class="nav-btn">下一页</a>
+            </div>
+            <button class="fav-btn" onclick="addToFavorites()">收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~高钠血症补液方案与尿崩症治疗*****</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>高钠血症补液方案与尿崩症治疗内容</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="bullet">初始补液方案</span></td>
+            </tr>
+            <tr>
+                <td><span class="check">急性高钠血症：</span>不常见，可发生于盐中毒、尿崩症患者急性丧失补充水的能力。</td>
+            </tr>
+            <tr>
+                <td class="sub-item diamond">静脉输注5%葡萄糖[3～6ml/(kg·h)]，每2～3小时监测血清钠和血糖水平，至血清钠降至145mmol/L后，输注速度降为1ml/(kg·h)，持续至血清钠恢复至140mmol/L。</td>
+            </tr>
+            <tr>
+                <td class="sub-item diamond">目标：每小时降低血清钠1～2mmol/L，并于24小时内恢复至正常值。</td>
+            </tr>
+            <tr>
+                <td><span class="check">慢性高钠血症：</span>几乎所有高钠血症都会发展为慢性。</td>
+            </tr>
+            <tr>
+                <td class="sub-item diamond">静脉注射5%葡萄糖[1.35ml/(kg·h)]，低血容量性高钠血症患者需输注等渗溶液。</td>
+            </tr>
+            <tr>
+                <td class="sub-item diamond">若病情允许，也可经口饮水或经鼻胃管鼻饲白开水。</td>
+            </tr>
+            <tr>
+                <td class="sub-item diamond">4～6小时复测血清钠浓度。</td>
+            </tr>
+            <tr>
+                <td class="sub-item diamond">目标：24小时内使血清钠下降约10mmol/L，但不超过12mmol/L。</td>
+            </tr>
+            <tr>
+                <td><span class="check">特殊情况</span></td>
+            </tr>
+            <tr>
+                <td class="sub-item diamond">高血糖伴高钠血症：见于糖尿病酮症酸中毒或高渗性高血糖状态的患者，大多有低血容量和高血糖，因此水补充常采用0.45%盐溶液而非5%葡萄糖，速度6～12ml/(kg·h)。</td>
+            </tr>
+            <tr>
+                <td class="sub-item diamond">儿童及年龄<40岁的患者：降钠方案采用慢性高钠血症所需补液方案缓慢纠正。</td>
+            </tr>
+            <tr>
+                <td class="sub-item diamond">年长患者：尚未报道过快速纠正高血糖期间发生脑水肿。相反，这些患者发生严重高血糖或急性高钠血症产生的高渗状态与渗透性脱髓鞘综合征有关。因此，降钠方案采用急性高钠血症的补液方案迅速纠正。</td>
+            </tr>
+            <tr>
+                <td><span class="check">中枢性尿崩症：</span>通过提高抗利尿激素（ADH）活性而减少尿量。</td>
+            </tr>
+            <tr>
+                <td class="sub-item diamond">去氨加压素：首选治疗，但需警惕低钠血症的风险，因此起始目标为控制多尿所需最小剂量。方案通常为在睡前服用去氨加压素0.05mg片剂（0.1mg片剂半片）。定期复查血钠。</td>
+            </tr>
+            <tr>
+                <td class="sub-item diamond">其他药物：氯磺丙脲、卡马西平、噻嗪类利尿药、NSAID。</td>
+            </tr>
+            <tr>
+                <td class="sub-item diamond">低溶质膳食（低钠、低蛋白质）。</td>
+            </tr>
+            <tr>
+                <td><span class="check">肾性尿崩症（NDI）：</span>肾部分或完全抵抗ADH作用，因此激素（如去氨加压素）或增加肾对ADH反应或增加ADH分泌的药物基本无效。</td>
+            </tr>
+            <tr>
+                <td class="sub-item diamond">药物：利尿药（如噻嗪类利尿药、阿米洛利）、NSAID对</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="tags-section">
+        <div class="tags-title">检索标签：</div>
+        <span class="tag">高钠血症</span>
+        <span class="tag">盐中毒</span>
+        <span class="tag">尿崩症</span>
+        <span class="tag">中枢性尿崩症</span>
+        <span class="tag">肾性尿崩症</span>
+        <span class="tag">糖尿病酮症酸中毒</span>
+        <span class="tag">高渗性高血糖状态</span>
+        <span class="tag">渗透性脱髓鞘综合征</span>
+        <span class="tag">去氨加压素</span>
+        <span class="tag">氯磺丙脲</span>
+        <span class="tag">卡马西平</span>
+        <span class="tag">噻嗪类利尿药</span>
+        <span class="tag">阿米洛利</span>
+        <span class="tag">NSAID</span>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="高钠血症补液方案与尿崩症治疗；初始补液方案；急性高钠血症；慢性高钠血症；特殊情况；中枢性尿崩症；肾性尿崩症；去氨加压素；氯磺丙脲；卡马西平；噻嗪类利尿药；阿米洛利；NSAID；=258" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="page-number">258</div>
+    <div class="keywords">关键词：高钠血症 尿崩症 盐中毒 去氨加压素 氯磺丙脲 卡马西平 噻嗪类利尿药 阿米洛利 NSAID 糖尿病酮症酸中毒 渗透性脱髓鞘综合征</div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板：" + copyText.value);
+            }, function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板：" + copyText.value);
+            });
+        }
+        
+        function addToFavorites() {
+            const title = document.title;
+            const url = window.location.href;
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === url);
+            if (!exists) {
+                favorites.push({title: title, url: url, page: '258'});
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已添加到收藏！');
+            } else {
+                alert('该页面已在收藏中！');
+            }
+        }
+    </script>
+</body>
+</html>
