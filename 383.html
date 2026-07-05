@@ -1,0 +1,451 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~强心苷中毒解救与磷酸二酯酶抑制药*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-home {
+            background-color: #2196F3;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background-color: #1976D2;
+        }
+        
+        .btn-nav {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background-color: #45a049;
+        }
+        
+        .btn-favorite {
+            background-color: #FF9800;
+            color: white;
+        }
+        
+        .btn-favorite:hover {
+            background-color: #F57C00;
+        }
+        
+        .btn-copy {
+            background-color: #9C27B0;
+            color: white;
+            padding: 10px 20px;
+        }
+        
+        .btn-copy:hover {
+            background-color: #7B1FA2;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1565C0;
+            font-size: 22px;
+            margin: 15px 0 20px 0;
+            padding: 12px;
+            background-color: #E3F2FD;
+            border-radius: 8px;
+            word-break: break-all;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        thead {
+            background-color: #1976D2;
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 14px;
+            color: #444;
+            vertical-align: top;
+        }
+        
+        tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            color: #1565C0;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .checkbox {
+            color: #1976D2;
+            margin-right: 4px;
+        }
+        
+        .diamond {
+            color: #D32F2F;
+            margin-right: 4px;
+        }
+        
+        .checkmark {
+            color: #2E7D32;
+            margin-right: 4px;
+        }
+        
+        .tags-section {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            color: #1565C0;
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 4px;
+            background-color: #E8F5E9;
+            color: #2E7D32;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #C8E6C9;
+        }
+        
+        .tag-disease {
+            background-color: #FFEBEE;
+            color: #C62828;
+            border-color: #EF9A9A;
+        }
+        
+        .tag-drug {
+            background-color: #E3F2FD;
+            color: #1565C0;
+            border-color: #90CAF9;
+        }
+        
+        .tag-bacteria {
+            background-color: #FFF3E0;
+            color: #EF6C00;
+            border-color: #FFCC80;
+        }
+        
+        .keywords-section {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .keywords-title {
+            color: #1565C0;
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .copy-section {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 12px;
+            border: 2px solid #BBDEFB;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #555;
+            background-color: #FAFAFA;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            border-radius: 6px;
+            color: white;
+            font-size: 14px;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .notification.success {
+            background-color: #4CAF50;
+        }
+        
+        .notification.info {
+            background-color: #2196F3;
+        }
+        
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            
+            tbody td {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="notification" id="notification"></div>
+    
+    <div class="header-nav">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="382.html" class="btn btn-nav">上一页</a>
+            <a href="384.html" class="btn btn-nav">下一页</a>
+            <button class="btn btn-favorite" onclick="addFavorite()">收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~强心苷中毒解救与磷酸二酯酶抑制药*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~强心苷中毒解救与磷酸二酯酶抑制药*****、强心苷中毒解救措施与其他正性肌力药物详解</div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>强心苷中毒解救措施与其他正性肌力药物详解</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    还能与强心苷竞争Na⁺-K⁺-ATP酶，恢复其活性，因此有解毒效应。③利多卡因，可用于治疗强心苷中毒引起的室性心动过速和心室颤动。④阿托品，可用于强心苷中毒所引起的心动过缓和房室传导阻滞。⑤地高辛抗体，地高辛抗体的Fab片段对强心苷有高度选择性和强大亲和力，能使强心苷从Na⁺-K⁺-ATP酶的结合中解离出来，对严重中毒有明显效果。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="checkbox">□</span><span class="section-title">胃肠道反应：</span><br>
+                    是最常见的早期中毒症状，表现为食欲减退、恶心、呕吐及腹泻，剧烈呕吐可导致失钾而加重强心苷中毒，所以应注意补钾或考虑停药。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="checkbox">□</span><span class="section-title">中枢神经系统反应：</span><br>
+                    表现为眩晕、头痛、失眠、谵妄、黄视、绿视、视物模糊等。视觉异常通常是强心苷中毒的先兆，可作为停药指征。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="diamond">◇</span><span class="section-title">药物相互作用：</span><br>
+                    奎尼丁能使地高辛的血药浓度增加1倍，两药合用时，应减少地高辛用量的30%～50%，否则容易发生中毒，尤其是心脏毒性。其他抗心律失常药胺碘酮、钙通道阻滞药、普罗帕酮也能提高地高辛血药浓度。地高辛与维拉帕米合用时，可使地高辛的血药浓度升高70%，引起缓慢性心律失常，因为维拉帕米能抑制地高辛经肾小管分泌，减少消除，因此两药合用时，应减少地高辛用量的50%。苯妥英钠能增加地高辛的清除而降低地高辛血药浓度。拟肾上腺素药可提高心肌自律性，使心肌对强心苷的敏感性增高，导致强心苷中毒。排钾利尿药可导致低血钾而加重强心苷毒性。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="checkmark">✓</span><span class="section-title">磷酸二酯酶抑制药：</span><br>
+                    磷酸二酯酶抑制药（如氨力农和米力农）通过抑制PDE-3而明显提高心肌细胞内cAMP含量，增加细胞内钙浓度，发挥正性肌力和血管舒张双重作用，属于正性肌力扩血管药，可用于心力衰竭时短时间的支持疗法，尤其是对强心苷、利尿药及扩血管药反应不佳的患者。磷酸二酯酶抑制药的心律失常发生率较多巴酚丁胺低。最常用于治疗心脏功能受损且药物难治的心力衰竭患者，但由于有血管扩张作用因此在低血压患者中使用应谨慎。米力农和氨力农为双吡啶类衍生物，氨力农的不良反应较严重，常见为恶心、呕吐，心律失常发生率较高，还有血小板减少及肝损害。米力农为氨力农的替代品，抑酶作用较氨力农强20倍，不良反应较氨力农少，但仍有室上性及室性心律失常、低血压等不良反应，目前仅供短期静脉给药治疗急性心力衰竭。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="checkmark">✓</span><span class="section-title">钙增敏剂：</span><br>
+                    是新一代正性肌力药物，作用于收缩蛋白，增加肌钙蛋白C对Ca²⁺的亲和力，在不增加细胞内Ca²⁺浓度的
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <span class="tag tag-disease">心力衰竭</span>
+        <span class="tag tag-disease">室性心动过速</span>
+        <span class="tag tag-disease">心室颤动</span>
+        <span class="tag tag-disease">心动过缓</span>
+        <span class="tag tag-disease">房室传导阻滞</span>
+        <span class="tag tag-disease">强心苷中毒</span>
+        <span class="tag tag-disease">心律失常</span>
+        <span class="tag tag-disease">低血压</span>
+        <span class="tag tag-drug">强心苷</span>
+        <span class="tag tag-drug">利多卡因</span>
+        <span class="tag tag-drug">阿托品</span>
+        <span class="tag tag-drug">地高辛抗体</span>
+        <span class="tag tag-drug">奎尼丁</span>
+        <span class="tag tag-drug">胺碘酮</span>
+        <span class="tag tag-drug">普罗帕酮</span>
+        <span class="tag tag-drug">维拉帕米</span>
+        <span class="tag tag-drug">苯妥英钠</span>
+        <span class="tag tag-drug">氨力农</span>
+        <span class="tag tag-drug">米力农</span>
+        <span class="tag tag-drug">多巴酚丁胺</span>
+    </div>
+    
+    <div class="page-number">页码：383</div>
+    
+    <div class="keywords-section">
+        <div class="keywords-title">关键词</div>
+        <div style="color: #555; font-size: 14px;">
+            强心苷中毒、利多卡因、阿托品、地高辛抗体、胃肠道反应、中枢神经系统反应、黄视、绿视、药物相互作用、奎尼丁、维拉帕米、磷酸二酯酶抑制药、氨力农、米力农、钙增敏剂、心力衰竭、心律失常
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="~~~~~强心苷中毒解救与磷酸二酯酶抑制药*****；强心苷中毒、利多卡因、阿托品、地高辛抗体、胃肠道反应、中枢神经系统反应、黄视、绿视、药物相互作用、奎尼丁、维拉帕米、磷酸二酯酶抑制药、氨力农、米力农、钙增敏剂、心力衰竭、心律失常；=383" readonly>
+        <button class="btn btn-copy" onclick="copyContent()">复制</button>
+    </div>
+
+    <script>
+        function showNotification(message, type) {
+            const notif = document.getElementById('notification');
+            notif.textContent = message;
+            notif.className = 'notification ' + type;
+            notif.style.display = 'block';
+            setTimeout(() => {
+                notif.style.display = 'none';
+            }, 2000);
+        }
+        
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showNotification('复制成功！', 'success');
+                }).catch(() => {
+                    document.execCommand('copy');
+                    showNotification('复制成功！', 'success');
+                });
+            } else {
+                document.execCommand('copy');
+                showNotification('复制成功！', 'success');
+            }
+        }
+        
+        function addFavorite() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const currentPage = {
+                title: '~~~~~强心苷中毒解救与磷酸二酯酶抑制药*****',
+                url: window.location.href,
+                pageNum: '383'
+            };
+            
+            const exists = favorites.some(f => f.url === currentPage.url);
+            if (!exists) {
+                favorites.push(currentPage);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                showNotification('已添加到收藏！', 'success');
+            } else {
+                showNotification('已在收藏列表中！', 'info');
+            }
+        }
+    </script>
+</body>
+</html>
