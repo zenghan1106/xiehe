@@ -1,0 +1,672 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~百草枯中毒急诊处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #2c3e50;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .nav-left {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .btn-home {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn-page {
+            background: #2ecc71;
+            color: white;
+            min-width: 80px;
+            justify-content: center;
+        }
+        
+        .btn-page:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
+        }
+        
+        .btn-favorite {
+            background: #e74c3c;
+            color: white;
+            margin-top: 5px;
+        }
+        
+        .btn-favorite:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+        }
+        
+        .btn-favorite.active {
+            background: #f39c12;
+        }
+        
+        /* 标题区域 */
+        .title-section {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+        }
+        
+        .main-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1a5276;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            letter-spacing: 2px;
+        }
+        
+        .sub-title {
+            font-size: 16px;
+            color: #5d6d7e;
+            margin-top: 10px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            max-width: 900px;
+            margin: 0 auto 30px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        /* 表头 - 蓝色 */
+        thead tr {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 18px 15px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+            letter-spacing: 1px;
+        }
+        
+        /* 表格第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a5276;
+            background: #ebf5fb;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #d6eaf8;
+            transition: background 0.3s ease;
+        }
+        
+        td {
+            padding: 15px;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #34495e;
+            border-bottom: 1px solid #e8e8e8;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        .section-title {
+            color: #2980b9;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .item-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .item-list li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .item-list li::before {
+            content: "•";
+            color: #3498db;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .sub-item {
+            padding-left: 30px !important;
+            color: #5d6d7e;
+        }
+        
+        .sub-item::before {
+            content: "✓" !important;
+            color: #2ecc71 !important;
+        }
+        
+        .sub-sub-item {
+            padding-left: 50px !important;
+            color: #7f8c8d;
+        }
+        
+        .sub-sub-item::before {
+            content: "◇" !important;
+            color: #9b59b6 !important;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #7f8c8d;
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            max-width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            max-width: 900px;
+            margin: 0 auto 30px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #2c3e50;
+            background: white;
+            width: calc(100% - 100px);
+        }
+        
+        .btn-copy {
+            background: #9b59b6;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        
+        .btn-copy:hover {
+            background: #8e44ad;
+        }
+        
+        .btn-copy.copied {
+            background: #2ecc71;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            max-width: 900px;
+            margin: 0 auto 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        
+        .keywords-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2980b9;
+            margin-bottom: 15px;
+        }
+        
+        .keywords-content {
+            font-size: 14px;
+            color: #5d6d7e;
+            line-height: 2;
+        }
+        
+        .keyword-tag {
+            display: inline-block;
+            padding: 5px 15px;
+            margin: 5px;
+            background: #e8f4f8;
+            color: #2980b9;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+        
+        /* 检索标签 */
+        .tags-section {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 15px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 20px;
+            margin: 5px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #fdebd0;
+            color: #d35400;
+            border: 2px solid #f39c12;
+        }
+        
+        .tag-disease:hover {
+            background: #f39c12;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #d5f5e3;
+            color: #27ae60;
+            border: 2px solid #2ecc71;
+        }
+        
+        .tag-drug:hover {
+            background: #2ecc71;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #d6eaf8;
+            color: #2980b9;
+            border: 2px solid #3498db;
+        }
+        
+        .tag-bacteria:hover {
+            background: #3498db;
+            color: white;
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #2ecc71;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 22px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 15px 10px;
+            }
+            
+            td {
+                padding: 12px 10px;
+                font-size: 14px;
+            }
+            
+            .btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+                padding: 0 10px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <!-- 顶部导航 -->
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="291.html" class="btn btn-page">← 上一页</a>
+            <a href="293.html" class="btn btn-page">下一页 →</a>
+            <button class="btn btn-favorite" id="favoriteBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="title-section">
+        <h1 class="main-title">~~~~~百草枯中毒急诊处理*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~百草枯中毒急诊处理*****、百草枯中毒（PQ中毒）- 急诊医学指南、概述 注苯妥英钠 作者：王亚</div>
+        <p class="sub-title">PQ中毒的定义、病因与临床表现</p>
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>百草枯中毒（PQ中毒）- 急诊医学指南</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="section-title">概述</div>
+                        <ul class="item-list">
+                            <li>注苯妥英钠</li>
+                            <li>作者：王亚</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">1. 定义</div>
+                        <ul class="item-list">
+                            <li>百草枯（PQ）又名克芜踪、一扫光、对草快，为联吡啶杂环化合物，是一种全球使用的高效能非选择性接触型除草剂</li>
+                            <li>急性PQ中毒指口服后突出表现为进行性弥漫性肺纤维化，最终死于呼吸衰竭和/或多器官功能障碍综合征（MODS），病死率高达90% ~ 100%</li>
+                            <li>PQ中毒目前尚无特效解毒药</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">2. 病因</div>
+                        <ul class="item-list">
+                            <li>常为口服自杀或误服中毒</li>
+                            <li>我国目前市售多为20%溶液，纯品为白色结晶，市售溶液加入着色剂呈蓝色</li>
+                            <li>PQ易溶于水，微溶于低分子量的醇类（如乙醇）及丙酮，不溶于烃类，在酸性及中性溶液中稳定，可被碱水解</li>
+                            <li>成年人口服致死量为20%水溶液5 ~ 15ml（20 ~ 40mg/kg），也可经皮肤、呼吸道吸收及静脉注射中毒</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">3. 临床表现</div>
+                        <ul class="item-list">
+                            <li>与毒物摄入途径、量、速度及基础健康状态有关</li>
+                            <li><strong>局部损伤</strong>
+                                <ul class="item-list">
+                                    <li class="sub-item">接触部位皮肤迟发出现红斑、水疱、糜烂、溃疡和坏死</li>
+                                    <li class="sub-item">口服中毒者，口腔、食管黏膜灼伤及溃烂</li>
+                                    <li class="sub-item">毒物污染眼部时，可灼伤结膜或角膜；吸入者可出现鼻出血</li>
+                                </ul>
+                            </li>
+                            <li><strong>系统损伤</strong>
+                                <ul class="item-list">
+                                    <li class="sub-item"><strong>呼吸系统</strong>
+                                        <ul class="item-list">
+                                            <li class="sub-sub-item">吞入PQ后主要损伤肺，2 ~ 4天逐渐出现咳嗽、呼吸急促（可因代谢性酸中毒、误吸或急性肺泡炎所致）及肺水肿，也可发生纵隔气肿和气胸</li>
+                                            <li class="sub-sub-item">肺损伤者多于2 ~ 3周死于弥漫性肺纤维化所致呼吸衰竭</li>
+                                            <li class="sub-sub-item">大量口服者24小时内发生肺水肿、肺出血，数天内死于急性呼吸窘迫综合征（ARDS）</li>
+                                            <li class="sub-sub-item">中毒后迅速出现发绀和昏迷者，死亡较快</li>
+                                        </ul>
+                                    </li>
+                                    <li class="sub-item"><strong>消化系统</strong>
+                                        <ul class="item-list">
+                                            <li class="sub-sub-item">服毒后胸骨后烧灼感、恶心、呕吐、腹痛、腹泻、胃肠</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">292</div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="百草枯中毒急诊处理；PQ中毒的定义、病因与临床表现；百草枯、PQ、克芜踪、一扫光、对草快、MODS、ARDS、肺纤维化、呼吸衰竭、苯妥英钠；=292" readonly>
+        <button class="btn-copy" onclick="copyContent()">复制</button>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">🔍 关键词</div>
+        <div class="keywords-content">
+            <span class="keyword-tag">百草枯</span>
+            <span class="keyword-tag">PQ</span>
+            <span class="keyword-tag">克芜踪</span>
+            <span class="keyword-tag">一扫光</span>
+            <span class="keyword-tag">对草快</span>
+            <span class="keyword-tag">MODS</span>
+            <span class="keyword-tag">ARDS</span>
+            <span class="keyword-tag">肺纤维化</span>
+            <span class="keyword-tag">呼吸衰竭</span>
+            <span class="keyword-tag">苯妥英钠</span>
+        </div>
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签（点击筛选）</div>
+        <div>
+            <span class="tag tag-disease">百草枯中毒</span>
+            <span class="tag tag-disease">PQ中毒</span>
+            <span class="tag tag-disease">急性PQ中毒</span>
+            <span class="tag tag-disease">肺纤维化</span>
+            <span class="tag tag-disease">呼吸衰竭</span>
+            <span class="tag tag-disease">多器官功能障碍综合征</span>
+            <span class="tag tag-disease">MODS</span>
+            <span class="tag tag-disease">急性呼吸窘迫综合征</span>
+            <span class="tag tag-disease">ARDS</span>
+            <span class="tag tag-disease">代谢性酸中毒</span>
+            <span class="tag tag-disease">肺水肿</span>
+            <span class="tag tag-disease">肺出血</span>
+            <span class="tag tag-disease">纵隔气肿</span>
+            <span class="tag tag-disease">气胸</span>
+            <span class="tag tag-disease">发绀</span>
+            <span class="tag tag-disease">昏迷</span>
+            <span class="tag tag-disease">红斑</span>
+            <span class="tag tag-disease">水疱</span>
+            <span class="tag tag-disease">糜烂</span>
+            <span class="tag tag-disease">溃疡</span>
+            <span class="tag tag-disease">坏死</span>
+            <span class="tag tag-disease">误吸</span>
+            <span class="tag tag-disease">急性肺泡炎</span>
+            <span class="tag tag-disease">胸骨后烧灼感</span>
+            <span class="tag tag-disease">恶心</span>
+            <span class="tag tag-disease">呕吐</span>
+            <span class="tag tag-disease">腹痛</span>
+            <span class="tag tag-disease">腹泻</span>
+            <span class="tag tag-disease">鼻出血</span>
+            <span class="tag tag-drug">苯妥英钠</span>
+            <span class="tag tag-drug">乙醇</span>
+            <span class="tag tag-drug">丙酮</span>
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                    const btn = document.querySelector('.btn-copy');
+                    btn.classList.add('copied');
+                    btn.textContent = '已复制';
+                    setTimeout(() => {
+                        btn.classList.remove('copied');
+                        btn.textContent = '复制';
+                    }, 2000);
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFavorited = btn.classList.contains('active');
+            
+            if (!isFavorited) {
+                btn.classList.add('active');
+                btn.innerHTML = '❤️ 已收藏';
+                
+                // 保存到localStorage，模拟添加到index收藏
+                const favoriteData = {
+                    title: '百草枯中毒急诊处理',
+                    url: '292.html',
+                    category: '急诊疾病',
+                    timestamp: new Date().toISOString()
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.find(f => f.url === '292.html');
+                if (!exists) {
+                    favorites.push(favoriteData);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                showToast('已添加到收藏！');
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = '⭐ 收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '292.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                showToast('已取消收藏！');
+            }
+        }
+        
+        // 检查是否已收藏
+        function checkFavoriteStatus() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.find(f => f.url === '292.html');
+            if (isFavorited) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('active');
+                btn.innerHTML = '❤️ 已收藏';
+            }
+        }
+        
+        // 显示提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = checkFavoriteStatus;
+    </script>
+</body>
+</html>
