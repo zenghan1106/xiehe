@@ -1,0 +1,719 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~NSTE-ACS非ST段抬高急性冠脉综合征诊疗流程与危险分层*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background-color: #f0f8ff;
+            background-image: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(135deg, #4a90d9, #357abd);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            z-index: 1000;
+        }
+        
+        .home-btn:hover {
+            background: linear-gradient(135deg, #357abd, #2a6aa6);
+        }
+        
+        /* 右上角导航按钮组 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #5cb85c, #449d44);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+        }
+        
+        .nav-btn:hover {
+            background: linear-gradient(135deg, #449d44, #398439);
+        }
+        
+        .nav-btn.next {
+            background: linear-gradient(135deg, #f0ad4e, #ec971f);
+        }
+        
+        .nav-btn.next:hover {
+            background: linear-gradient(135deg, #ec971f, #d58512);
+        }
+        
+        /* 收藏按钮 */
+        .favorite-btn {
+            background: linear-gradient(135deg, #d9534f, #c9302c);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(217, 83, 79, 0.3);
+        }
+        
+        .favorite-btn:hover {
+            background: linear-gradient(135deg, #c9302c, #ac2925);
+        }
+        
+        .favorite-btn.added {
+            background: linear-gradient(135deg, #5bc0de, #46b8da);
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 900px;
+            margin: 70px auto 30px;
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* 标题样式 */
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin-bottom: 8px;
+            padding: 15px;
+            background: linear-gradient(135deg, #d4e6f1, #aed6f1);
+            border-radius: 12px;
+            word-break: break-all;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #2874a6;
+            font-size: 15px;
+            margin-bottom: 25px;
+            padding: 10px;
+            background: #ebf5fb;
+            border-radius: 8px;
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            font-size: 14px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #2e86de, #1e6bc7);
+            color: white;
+        }
+        
+        th {
+            padding: 14px 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 16px;
+            border: 1px solid #1a5fb4;
+        }
+        
+        td {
+            padding: 12px 10px;
+            border: 1px solid #d4e6f1;
+            vertical-align: top;
+            word-break: break-all;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f4fd;
+        }
+        
+        /* 流程步骤样式 */
+        .flow-step {
+            background: linear-gradient(135deg, #d5f5e3, #abebc6);
+            color: #1e8449;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin: 2px;
+        }
+        
+        .risk-high {
+            background: linear-gradient(135deg, #f5b7b1, #f1948a);
+            color: #922b21;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin: 2px;
+        }
+        
+        .risk-mid {
+            background: linear-gradient(135deg, #fdebd0, #f9e79f);
+            color: #9a7d0a;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin: 2px;
+        }
+        
+        .risk-low {
+            background: linear-gradient(135deg, #d6eaf8, #aed6f1);
+            color: #1a5276;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin: 2px;
+        }
+        
+        .treatment {
+            background: linear-gradient(135deg, #e8daef, #d2b4de);
+            color: #6c3483;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin: 2px;
+        }
+        
+        /* 列表样式 */
+        .item-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .item-list li {
+            padding: 4px 0;
+            padding-left: 18px;
+            position: relative;
+        }
+        
+        .item-list li::before {
+            content: "•";
+            color: #2e86de;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .check-item::before {
+            content: "✓" !important;
+            color: #27ae60 !important;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: linear-gradient(135deg, #fef9e7, #fcf3cf);
+            border-radius: 12px;
+            border: 2px solid #f9e79f;
+        }
+        
+        .tags-title {
+            color: #9a7d0a;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .tag {
+            background: linear-gradient(135deg, #f8c471, #f5b041);
+            color: #7d6608;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+        }
+        
+        .tag.disease {
+            background: linear-gradient(135deg, #f1948a, #e74c3c);
+            color: white;
+        }
+        
+        .tag.drug {
+            background: linear-gradient(135deg, #85c1e9, #3498db);
+            color: white;
+        }
+        
+        .tag.bacteria {
+            background: linear-gradient(135deg, #82e0aa, #2ecc71);
+            color: white;
+        }
+        
+        /* 关键词和页码区域 */
+        .footer-info {
+            margin-top: 25px;
+            padding: 20px;
+            background: linear-gradient(135deg, #e8f8f5, #d1f2eb);
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .keywords {
+            color: #1e8449;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .keywords strong {
+            color: #145a32;
+        }
+        
+        .page-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #2e86de, #1e6bc7);
+            color: white;
+            padding: 10px 30px;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5eef8, #ebdef0);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #bb8fce;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #6c3483;
+            background: white;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: linear-gradient(135deg, #8e44ad, #7d3c98);
+        }
+        
+        .copy-btn.copied {
+            background: linear-gradient(135deg, #27ae60, #229954);
+        }
+        
+        /* 移动端适配 */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                margin-top: 60px;
+                padding: 15px;
+                border-radius: 12px;
+            }
+            
+            h1 {
+                font-size: 17px;
+                padding: 12px;
+            }
+            
+            .subtitle {
+                font-size: 13px;
+            }
+            
+            th {
+                font-size: 14px;
+                padding: 10px 6px;
+            }
+            
+            td {
+                font-size: 12px;
+                padding: 8px 6px;
+            }
+            
+            .home-btn, .nav-btn, .favorite-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .nav-buttons {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .home-btn {
+                top: 10px;
+                left: 10px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .tag {
+                font-size: 11px;
+                padding: 6px 12px;
+            }
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #27ae60;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 14px;
+            display: none;
+            z-index: 2000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 右上角导航 -->
+    <div class="nav-buttons">
+        <a href="97.html" class="nav-btn">← 上一页</a>
+        <a href="99.html" class="nav-btn next">下一页 →</a>
+        <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">❤️ 收藏</button>
+    </div>
+    
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 标题 -->
+        <h1>~~~~~NSTE-ACS非ST段抬高急性冠脉综合征诊疗流程与危险分层*****</h1>
+        <div class="subtitle">图13 根据初始危险分层选择NSTE-ACS患者的治疗策略和时机</div>
+        
+        <!-- 主表格 -->
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 18%;">阶段/类别</th>
+                    <th style="width: 28%;">项目内容</th>
+                    <th style="width: 54%;">详细说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="2"><strong>初始评估</strong></td>
+                    <td>症状表现</td>
+                    <td>患者出现相关症状，启动诊疗流程</td>
+                </tr>
+                <tr>
+                    <td>首次医疗接触</td>
+                    <td>首次医疗接触→诊断NSTE-ACS（非ST段抬高急性冠脉综合征）</td>
+                </tr>
+                <tr>
+                    <td rowspan="3"><strong>急救中心条件</strong></td>
+                    <td>有PCI条件急救中心</td>
+                    <td>具备经皮冠状动脉介入治疗（PCI）能力的急救中心</td>
+                </tr>
+                <tr>
+                    <td>无PCI条件急救中心</td>
+                    <td>不具备PCI能力的急救中心，需考虑转运</td>
+                </tr>
+                <tr>
+                    <td>转运决策</td>
+                    <td>极高危：立即转运至有PCI条件急救中心；高危：同一天转运至有PCI条件急救中心</td>
+                </tr>
+                <tr>
+                    <td rowspan="3"><strong>风险鉴别</strong></td>
+                    <td><span class="risk-high">极高危</span></td>
+                    <td>需立即识别并紧急处理的高风险患者</td>
+                </tr>
+                <tr>
+                    <td><span class="risk-mid">高危</span></td>
+                    <td>需早期干预的较高风险患者</td>
+                </tr>
+                <tr>
+                    <td><span class="risk-low">低危</span></td>
+                    <td>无极高危与高危的特点，可择期处理</td>
+                </tr>
+                <tr>
+                    <td rowspan="3"><strong>治疗策略</strong></td>
+                    <td><span class="treatment">立即介入（&lt;2小时）</span></td>
+                    <td>适用于极高危患者，从诊断到介入治疗时间小于2小时</td>
+                </tr>
+                <tr>
+                    <td><span class="treatment">早期介入（&lt;24小时）</span></td>
+                    <td>适用于高危患者，从诊断到介入治疗时间小于24小时</td>
+                </tr>
+                <tr>
+                    <td><span class="treatment">选择性介入</span></td>
+                    <td>适用于低危患者，根据情况选择合适时机进行介入治疗</td>
+                </tr>
+                <tr>
+                    <td rowspan="7"><strong>极高危风险分层标准</strong></td>
+                    <td colspan="2">
+                        <ul class="item-list">
+                            <li>血流动力学不稳定</li>
+                            <li>心源性休克</li>
+                            <li>药物治疗后仍反复性/顽固性胸痛</li>
+                            <li>威胁生命的心律失常</li>
+                            <li>合并机械并发症</li>
+                            <li>NSTE-ACS相关急性心力衰竭</li>
+                            <li>6个导联ST段压低&gt;1mm合并aVR和/或V₁导联ST段抬高</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr style="display:none;"><td></td><td></td></tr>
+                <tr>
+                    <td rowspan="4"><strong>高危风险分层标准</strong></td>
+                    <td colspan="2">
+                        <ul class="item-list">
+                            <li>诊断NSTEMI成立</li>
+                            <li>新的连续的ST-T动态变化（伴或不伴症状）</li>
+                            <li>无ST段抬高或心源性休克的心搏骤停复苏</li>
+                            <li>GRACE评分&gt;140分</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr style="display:none;"><td></td><td></td></tr>
+                <tr>
+                    <td rowspan="2"><strong>低危风险分层标准</strong></td>
+                    <td colspan="2">无极高危与高危的特点</td>
+                </tr>
+                <tr style="display:none;"><td></td><td></td></tr>
+                <tr>
+                    <td rowspan="6"><strong>一般治疗措施</strong></td>
+                    <td colspan="2">
+                        <ul class="item-list">
+                            <li class="check-item">按需吸氧（SpO₂&gt;90%）</li>
+                            <li class="check-item">建立静脉通道并进行血液检查（心肌损伤标志物、电解质、凝血功能、肾功能指标及血脂谱）</li>
+                            <li class="check-item">给予阿司匹林300mg</li>
+                            <li class="check-item">给予硝酸盐类（有禁忌者除外）</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr style="display:none;"><td></td><td></td></tr>
+                <tr>
+                    <td rowspan="3"><strong>基础支持治疗</strong></td>
+                    <td colspan="2">
+                        <ul class="item-list">
+                            <li class="check-item">吸氧、心电监护、建立静脉通路</li>
+                            <li class="check-item">必要的镇痛（如使用吗啡）</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 检索标签 -->
+        <div class="tags-section">
+            <div class="tags-title">🔍 特色检索标签（点击图片中的关键词快速检索）</div>
+            <div class="tags-container">
+                <span class="tag disease">NSTE-ACS</span>
+                <span class="tag disease">NSTEMI</span>
+                <span class="tag disease">心源性休克</span>
+                <span class="tag disease">急性心力衰竭</span>
+                <span class="tag disease">心律失常</span>
+                <span class="tag disease">心搏骤停</span>
+                <span class="tag drug">阿司匹林</span>
+                <span class="tag drug">硝酸盐类</span>
+                <span class="tag drug">吗啡</span>
+                <span class="tag">PCI</span>
+                <span class="tag">GRACE评分</span>
+                <span class="tag">ST-T动态变化</span>
+                <span class="tag">心肌损伤标志物</span>
+                <span class="tag">SpO₂</span>
+            </div>
+        </div>
+        
+        <!-- 关键词和页码 -->
+        <div class="footer-info">
+            <div class="keywords">
+                <strong>关键词：</strong>NSTE-ACS；非ST段抬高急性冠脉综合征；危险分层；GRACE评分；PCI介入治疗；心源性休克；NSTEMI；阿司匹林；硝酸盐类；吗啡镇痛；急诊诊疗流程
+            </div>
+            <div class="page-number">页码：98</div>
+        </div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="NSTE-ACS非ST段抬高急性冠脉综合征诊疗流程与危险分层；图13 根据初始危险分层选择NSTE-ACS患者的治疗策略和时机；NSTE-ACS；非ST段抬高急性冠脉综合征；危险分层；GRACE评分；PCI介入治疗；心源性休克；NSTEMI；阿司匹林；硝酸盐类；吗啡镇痛；急诊诊疗流程；=98" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+    
+    <!-- 提示信息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('✅ 已复制到剪贴板！');
+                    document.getElementById('copyBtn').classList.add('copied');
+                    document.getElementById('copyBtn').textContent = '✓ 已复制';
+                    setTimeout(() => {
+                        document.getElementById('copyBtn').classList.remove('copied');
+                        document.getElementById('copyBtn').textContent = '📋 复制';
+                    }, 2000);
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('✅ 已复制到剪贴板！');
+            }
+        }
+        
+        // 显示提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2500);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const title = document.querySelector('h1').textContent.replace(/~~~~~|*****$/g, '').trim();
+            const url = window.location.href;
+            const pageNum = '98';
+            
+            // 获取已收藏的列表
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            const exists = favorites.find(f => f.url === url);
+            
+            if (exists) {
+                // 取消收藏
+                favorites = favorites.filter(f => f.url !== url);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                btn.classList.remove('added');
+                btn.innerHTML = '❤️ 收藏';
+                showToast('❌ 已取消收藏');
+            } else {
+                // 添加收藏
+                favorites.push({
+                    title: title,
+                    url: url,
+                    pageNum: pageNum,
+                    category: '急诊疾病',
+                    date: new Date().toLocaleString('zh-CN')
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                btn.classList.add('added');
+                btn.innerHTML = '★ 已收藏';
+                showToast('⭐ 已添加到index收藏！');
+            }
+            
+            // 触发index.html更新（如果打开的话）
+            try {
+                if (window.opener && !window.opener.closed) {
+                    window.opener.postMessage({type: 'updateFavorites'}, '*');
+                }
+            } catch(e) {}
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const url = window.location.href;
+            const btn = document.getElementById('favoriteBtn');
+            
+            if (favorites.find(f => f.url === url)) {
+                btn.classList.add('added');
+                btn.innerHTML = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
