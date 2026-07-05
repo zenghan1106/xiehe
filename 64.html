@@ -1,0 +1,564 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊常见疾病在症状鉴别中的陷阱*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 顶部导航栏 */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .left-btn {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 100;
+        }
+        
+        .right-btns {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .btn-home {
+            background-color: #4a90d9;
+            color: white;
+        }
+        
+        .btn-nav {
+            background-color: #5cb85c;
+            color: white;
+            min-width: 70px;
+        }
+        
+        .btn-fav {
+            background-color: #f0ad4e;
+            color: white;
+            margin-top: 5px;
+        }
+        
+        .btn:hover {
+            opacity: 0.85;
+            transform: translateY(-1px);
+        }
+        
+        /* 标题区域 */
+        .title-area {
+            text-align: center;
+            margin: 60px 0 20px 0;
+            padding: 15px;
+            background-color: #e8f4fd;
+            border-radius: 10px;
+            border-left: 5px solid #4a90d9;
+        }
+        
+        .main-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 8px;
+        }
+        
+        .sub-title {
+            font-size: 16px;
+            color: #2874a6;
+        }
+        
+        /* 表格样式 */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin: 15px 0;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        thead th {
+            background-color: #4a90d9;
+            color: white;
+            padding: 14px 10px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        
+        tbody td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+            word-break: break-all;
+            white-space: normal;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f4fd;
+        }
+        
+        .section-header {
+            background-color: #d6eaf8 !important;
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 15px;
+        }
+        
+        .item-name {
+            font-weight: bold;
+            color: #2874a6;
+            min-width: 120px;
+        }
+        
+        .item-content {
+            color: #444;
+        }
+        
+        ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        
+        li {
+            margin-bottom: 6px;
+        }
+        
+        /* 底部区域 */
+        .bottom-area {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .page-info {
+            text-align: center;
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f0f7ff;
+            border-radius: 6px;
+        }
+        
+        .page-num {
+            font-size: 20px;
+            font-weight: bold;
+            color: #4a90d9;
+        }
+        
+        /* 复制区域 */
+        .copy-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #4a90d9;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+        
+        .btn-copy {
+            background-color: #5cb85c;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        /* 标签区域 */
+        .tags-area {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff8e6;
+            border-radius: 10px;
+            border: 1px dashed #f0ad4e;
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #8a6d3b;
+            margin-bottom: 10px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            background-color: #d4edda;
+            color: #155724;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #c3e6cb;
+        }
+        
+        /* 关键词区域 */
+        .keywords-area {
+            margin-top: 15px;
+            padding: 12px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .keywords-label {
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .keywords-content {
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0,0,0,0.75);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            display: none;
+            z-index: 1000;
+        }
+        
+        /* 手机适配 */
+        @media (max-width: 600px) {
+            body {
+                padding: 5px;
+            }
+            
+            .main-title {
+                font-size: 18px;
+            }
+            
+            .sub-title {
+                font-size: 14px;
+            }
+            
+            table {
+                font-size: 13px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-area {
+                flex-direction: column;
+            }
+            
+            .btn-copy {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <div class="left-btn">
+        <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+    </div>
+    
+    <!-- 右上角导航按钮 -->
+    <div class="right-btns">
+        <a href="63.html" class="btn btn-nav">← 上一页</a>
+        <a href="65.html" class="btn btn-nav">下一页 →</a>
+        <button class="btn btn-fav" onclick="addToFavorites()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题区域 -->
+    <div class="title-area">
+        <div class="main-title">~~~~~急诊常见疾病在症状鉴别中的陷阱*****</div>
+        <div class="sub-title">少尿诊疗要点与急诊鉴别诊断</div>
+    </div>
+    
+    <!-- 表格内容 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">急诊常见疾病在症状鉴别中的陷阱 - 详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-header">
+                    <td colspan="2">📋 选做检查</td>
+                </tr>
+                <tr>
+                    <td class="item-name">泌尿系B超</td>
+                    <td class="item-content">是否存在肾性病变或肾后梗阻性病变导致的少尿</td>
+                </tr>
+                <tr>
+                    <td class="item-name">胸片</td>
+                    <td class="item-content">了解心脏大小、双侧胸腔积液情况</td>
+                </tr>
+                <tr>
+                    <td class="item-name">腹盆CT</td>
+                    <td class="item-content">是否存在肝脏病变、腹膜后病变，是否存在双侧输尿管结石、子宫双附件肿瘤、前列腺病变、腹盆腔积液、门静脉是否增宽等</td>
+                </tr>
+                <tr>
+                    <td class="item-name">cTnI + BNP/NT-proBNP检测</td>
+                    <td class="item-content">了解是否存在心力衰竭</td>
+                </tr>
+                <tr>
+                    <td class="item-name">凝血功能检查</td>
+                    <td class="item-content">寻找出凝血异常导致血栓形成</td>
+                </tr>
+                <tr>
+                    <td class="item-name">乳酸测定</td>
+                    <td class="item-content">判断是否为循环休克所致</td>
+                </tr>
+                <tr>
+                    <td class="item-name">钠排泄分数和尿钠浓度</td>
+                    <td class="item-content">鉴别肾前性或其他原因</td>
+                </tr>
+                <tr>
+                    <td class="item-name">尿沉渣</td>
+                    <td class="item-content">明确是否存在肾小球疾病</td>
+                </tr>
+                
+                <tr class="section-header">
+                    <td colspan="2">🚨 急诊处理</td>
+                </tr>
+                <tr>
+                    <td class="item-name">肾前性少尿</td>
+                    <td class="item-content">应在除外心力衰竭后，给予补液扩容治疗。若为心力衰竭或休克所致灌注下降，应尽快纠正原发病，控制容量超负荷</td>
+                </tr>
+                <tr>
+                    <td class="item-name">肾后性少尿</td>
+                    <td class="item-content">应首先解除梗阻。例如，前列腺病变存在尿潴留应急诊行导尿术；压迫梗阻应根据压迫病因选择D-J管置入术或肾盂造瘘术</td>
+                </tr>
+                <tr>
+                    <td class="item-name">肾性少尿</td>
+                    <td class="item-content">若不能尽快纠正原发病，可考虑急诊行肾脏替代治疗</td>
+                </tr>
+                <tr>
+                    <td class="item-name">其他治疗</td>
+                    <td class="item-content">纠正电解质紊乱和酸中毒，纠正严重贫血和凝血功能异常</td>
+                </tr>
+                <tr>
+                    <td class="item-name">监测各项指标变化</td>
+                    <td class="item-content">在进行对症处理后应对必做检查进行有效监测，根据动态变化调整治疗方案</td>
+                </tr>
+                
+                <tr class="section-header">
+                    <td colspan="2">⚠️ 急诊常见疾病在症状鉴别中的陷阱</td>
+                </tr>
+                <tr>
+                    <td class="item-name">概述</td>
+                    <td class="item-content">急诊患者多以症状来诊，有部分是以明确诊断的疾病来诊，但都存在很多陷阱。我们时刻要有如履薄冰、如临深渊的高度警惕。下面列举几个急诊科常见的陷阱供大家学习</td>
+                </tr>
+                <tr>
+                    <td class="item-name">1. 上呼吸道感染</td>
+                    <td class="item-content">上呼吸道感染是临床症状性诊断，并无诊断的金标准，也是回顾性排他性诊断。急性病毒性心肌炎、病毒性脑炎的早期表现与上呼吸道感染类似，难以识别，实际上可能就是上感的一个严重并发症。所有表现为上呼吸道感染的患者均需要警惕心肌炎、脑炎的发生。心肌炎患者除上感症状外，还常伴心悸、低血压、低氧、胸闷、憋气等症状，需要检查心电图和心肌酶，以排除心</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码信息 -->
+    <div class="page-info">
+        页码：<span class="page-num">64</span>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="bottom-area">
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyText" value="急诊常见疾病在症状鉴别中的陷阱；少尿诊疗要点与急诊鉴别诊断；少尿,肾前性少尿,肾后性少尿,肾性少尿,心力衰竭,上呼吸道感染,心肌炎,脑炎=64" readonly>
+            <button class="btn-copy" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-area">
+        <span class="keywords-label">关键词：</span>
+        <div class="keywords-content">少尿、肾前性少尿、肾后性少尿、肾性少尿、心力衰竭、上呼吸道感染、心肌炎、脑炎、急诊处理、症状鉴别</div>
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-area">
+        <div class="tags-title">🔍 疾病/药物/细菌检索标签（仅含图片中出现的内容）</div>
+        <div class="tags-container">
+            <span class="tag">少尿</span>
+            <span class="tag">肾前性少尿</span>
+            <span class="tag">肾后性少尿</span>
+            <span class="tag">肾性少尿</span>
+            <span class="tag">心力衰竭</span>
+            <span class="tag">上呼吸道感染</span>
+            <span class="tag">心肌炎</span>
+            <span class="tag">脑炎</span>
+            <span class="tag">休克</span>
+            <span class="tag">酸中毒</span>
+            <span class="tag">贫血</span>
+            <span class="tag">血栓形成</span>
+            <span class="tag">循环休克</span>
+            <span class="tag">肾小球疾病</span>
+            <span class="tag">前列腺病变</span>
+            <span class="tag">尿潴留</span>
+            <span class="tag">电解质紊乱</span>
+        </div>
+    </div>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(function() {
+                    showToast("✅ 已复制到剪贴板");
+                });
+            } else {
+                document.execCommand("copy");
+                showToast("✅ 已复制到剪贴板");
+            }
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById("toast");
+            toast.textContent = msg;
+            toast.style.display = "block";
+            setTimeout(function() {
+                toast.style.display = "none";
+            }, 2000);
+        }
+        
+        // 添加到收藏
+        function addToFavorites() {
+            // 获取当前页面信息
+            const title = "急诊常见疾病在症状鉴别中的陷阱";
+            const url = window.location.href;
+            const pageData = {
+                title: title,
+                url: url,
+                pageNum: "64",
+                category: "急诊症状鉴别"
+            };
+            
+            // 从localStorage获取已有收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                showToast("⚠️ 该页面已在收藏中");
+                return;
+            }
+            
+            // 添加新收藏
+            favorites.push(pageData);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 同时更新index.html的收藏列表（通过localStorage共享）
+            showToast("⭐ 已添加到收藏！请在首页查看");
+        }
+        
+        // 页面加载时设置编辑框宽度
+        window.onload = function() {
+            const containerWidth = document.querySelector('.bottom-area').clientWidth;
+            const input = document.getElementById('copyText');
+            input.style.width = (containerWidth - 100) + 'px';
+        };
+        
+        // 窗口大小改变时调整
+        window.onresize = function() {
+            const containerWidth = document.querySelector('.bottom-area').clientWidth;
+            const input = document.getElementById('copyText');
+            if (window.innerWidth > 600) {
+                input.style.width = (containerWidth - 100) + 'px';
+            }
+        };
+    </script>
+</body>
+</html>
