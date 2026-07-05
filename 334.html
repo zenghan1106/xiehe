@@ -1,0 +1,554 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~PLR操作要点与急诊呼吸支持*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: #f0f4f8;
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #5a9bd5;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background: #4a8bc4;
+            transform: translateY(-2px);
+        }
+        
+        .fav-btn {
+            background: #e8a838;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .fav-btn:hover {
+            background: #d49a2e;
+            transform: translateY(-2px);
+        }
+        
+        .fav-btn.active {
+            background: #c9302c;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0 25px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            border-left: 5px solid #4a90d9;
+            word-break: break-all;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        thead th {
+            background: #2e75b6;
+            color: white;
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        tbody td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e8ecf1;
+            vertical-align: top;
+            line-height: 1.8;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4fd;
+        }
+        
+        .section-title {
+            color: #1a5276;
+            font-weight: 700;
+            font-size: 15px;
+        }
+        
+        .sub-item {
+            color: #2c5aa0;
+            font-weight: 600;
+        }
+        
+        .check-mark {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .warning {
+            color: #c0392b;
+            font-weight: 600;
+        }
+        
+        .highlight-box {
+            background: #fff3cd;
+            border-left: 4px solid #f0ad4e;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 6px;
+        }
+        
+        .author {
+            text-align: right;
+            color: #7f8c8d;
+            font-style: italic;
+            padding: 10px 0;
+        }
+        
+        .copy-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            margin-bottom: 20px;
+        }
+        
+        .copy-row {
+            display: flex;
+            gap: 12px;
+            align-items: stretch;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 14px 16px;
+            border: 2px solid #dde3ea;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #555;
+            background: #fafbfc;
+        }
+        
+        #copyBtn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 15px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+        
+        #copyBtn:hover {
+            background: #219a52;
+            transform: translateY(-2px);
+        }
+        
+        #copyBtn.copied {
+            background: #7f8c8d;
+        }
+        
+        .tags-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            margin-bottom: 20px;
+        }
+        
+        .tags-title {
+            color: #1a5276;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8ecf1;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #e3f2fd;
+            color: #1565c0;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            border: 1px solid #bbdefb;
+            transition: all 0.3s;
+            cursor: default;
+        }
+        
+        .tag:hover {
+            background: #1565c0;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .tag.disease {
+            background: #fce4ec;
+            color: #c2185b;
+            border-color: #f8bbd9;
+        }
+        
+        .tag.disease:hover {
+            background: #c2185b;
+            color: white;
+        }
+        
+        .tag.drug {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-color: #c8e6c9;
+        }
+        
+        .tag.drug:hover {
+            background: #2e7d32;
+            color: white;
+        }
+        
+        .tag.bacteria {
+            background: #fff3e0;
+            color: #ef6c00;
+            border-color: #ffe0b2;
+        }
+        
+        .tag.bacteria:hover {
+            background: #ef6c00;
+            color: white;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #95a5a6;
+            font-size: 12px;
+            padding: 15px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 12px 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+                padding: 12px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .nav-buttons {
+                width: 100%;
+                flex-direction: row;
+                justify-content: flex-end;
+                flex-wrap: wrap;
+            }
+            
+            .copy-row {
+                flex-direction: column;
+            }
+            
+            #copyInput {
+                width: 100%;
+            }
+            
+            #copyBtn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="nav-buttons">
+            <a href="333.html" class="nav-btn">← 上一页</a>
+            <a href="335.html" class="nav-btn">下一页 →</a>
+            <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~PLR操作要点与急诊呼吸支持*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2" class="section-title">PLR操作要点（续）</td>
+                </tr>
+                <tr>
+                    <td class="sub-item">④ PLR结束后</td>
+                    <td>将患者恢复原体位，看变化是否可逆</td>
+                </tr>
+                <tr>
+                    <td class="sub-item">⑤ 避免干扰因素</td>
+                    <td>避免操作过程其他因素的干扰，如咳嗽、髋部过屈引起疼痛、导管移位等，同时操作时腹内压不能太高，需<span class="warning">＜16mmHg</span></td>
+                </tr>
+                <tr>
+                    <td class="sub-item">Mini补液试验</td>
+                    <td>容量窗口窄的患者还可以选择Mini补液试验：<span class="check-mark">1分钟快速补液100ml</span>，但需用超声精确测量速度时间积分（VTI），<span class="warning">cut-off＝10%</span>，此操作对超声手法要求较高</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">需要特别注意的是：</td>
+                </tr>
+                <tr>
+                    <td class="sub-item">● 休克的本质</td>
+                    <td>休克的本质是<span class="warning">微循环血流障碍</span>，抗休克的终极目标是改善微循环，从而恢复细胞代谢和脏器功能。因此，以CO为代表的血流量是休克治疗中最高优先考虑的问题，其他均为下游指标。在循环出现问题时，永远要优先考虑CO是否足够。</td>
+                </tr>
+                <tr>
+                    <td class="sub-item">● 体循环平均充盈压（MSFP）</td>
+                    <td>是静脉回流的基础上游压力，主要取决于血容量与血管床容量。补液的目标是提升MSFP和提升CO，副作用是升高了CVP。CVP是静脉系统下游的压力，<span class="warning">高CVP会减少静脉回流，损害器官灌注</span>（当MAP在器官自身调节范围内时，CVP是决定器官灌注的主要因素）。因此，高CVP是病理状态，一旦血流动力学稳定要尽快努力降低CVP。</td>
+                </tr>
+                <tr>
+                    <td class="sub-item">● "容量反应阳性"</td>
+                    <td><span class="warning">不是扩容的充分理由</span>，必须要有"组织灌注不足"。对于反复"容量反应阳性"的脓毒症者可能更理智的是<span class="check-mark">早用缩血管药物以增加张力性容量</span>。容量过度和容量不足同样会造成组织细胞缺氧。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="author">（刘业成）</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">■ 急诊呼吸支持</td>
+                </tr>
+                <tr>
+                    <td class="sub-item">1. 目的</td>
+                    <td>急诊呼吸支持的主要目的是<span class="check-mark">预防和纠正低氧血症和/或CO₂潴留</span></td>
+                </tr>
+                <tr>
+                    <td class="sub-item">2. 机械通气适应证</td>
+                    <td>从适应证上讲，可以分为<span class="check-mark">预防性和治疗性</span>两大类。</td>
+                </tr>
+                <tr>
+                    <td class="sub-item">● 预防性通气治疗</td>
+                    <td>危重患者有时虽然尚没有发生呼吸衰竭，但如从临床疾病的病理过程、呼吸功、心肺功能储备等诸多方面判断，有发生呼吸衰竭的高度危险性。其适应证如下。</td>
+                </tr>
+                <tr>
+                    <td class="sub-item check-mark">✓ 适应证</td>
+                    <td>有发生呼吸衰竭高度危险性的疾病：<br>
+                    ① 长时间休克；<br>
+                    ② 严[重...]</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="copy-section">
+        <div class="copy-row">
+            <input type="text" id="copyInput" value="PLR操作要点与急诊呼吸支持；被动抬腿试验；Mini补液试验；休克；微循环；体循环平均充盈压；MSFP；CVP；容量反应；组织灌注；脓毒症；缩血管药物；急诊呼吸支持；机械通气；低氧血症；CO₂潴留；预防性通气；治疗性通气；=324" readonly>
+            <button id="copyBtn" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+    
+    <div class="page-number">324</div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag disease">休克</span>
+            <span class="tag disease">脓毒症</span>
+            <span class="tag disease">呼吸衰竭</span>
+            <span class="tag disease">低氧血症</span>
+            <span class="tag drug">缩血管药物</span>
+            <span class="tag drug">补液</span>
+        </div>
+    </div>
+    
+    <div class="keywords">
+        关键词：PLR | 被动抬腿试验 | Mini补液试验 | VTI | 休克 | 微循环 | 体循环平均充盈压 | MSFP | CVP | 容量反应 | 组织灌注 | 脓毒症 | 缩血管药物 | 急诊呼吸支持 | 机械通气 | 低氧血症 | CO₂潴留 | 预防性通气 | 治疗性通气
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '✓ 已复制';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.textContent = '📋 复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '✓ 已复制';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '📋 复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: 'PLR操作要点与急诊呼吸支持',
+                    url: '324.html',
+                    pageNum: '324',
+                    category: '急诊重症'
+                };
+                
+                const exists = favorites.some(f => f.url === '324.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                    
+                    try {
+                        updateIndexFavorites(pageInfo);
+                    } catch(e) {
+                        console.log('无法直接更新index.html');
+                    }
+                }
+                
+                alert('已添加到收藏！请在首页查看收藏内容。');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const filtered = favorites.filter(f => f.url !== '324.html');
+                localStorage.setItem('favorites', JSON.stringify(filtered));
+            }
+        }
+        
+        function updateIndexFavorites(pageInfo) {
+            localStorage.setItem('newFavorite', JSON.stringify(pageInfo));
+        }
+        
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '324.html');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
