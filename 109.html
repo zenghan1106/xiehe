@@ -1,0 +1,441 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~心动过速临床处理方案*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: #f5f7fa;
+            background-image: linear-gradient(180deg, #f5f7fa 0%, #e8eef5 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-home {
+            background-color: #4a90d9;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background-color: #357abd;
+        }
+        
+        .btn-nav {
+            background-color: #5cb85c;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background-color: #449d44;
+        }
+        
+        .btn-favorite {
+            background-color: #f0ad4e;
+            color: white;
+        }
+        
+        .btn-favorite:hover {
+            background-color: #ec971f;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 28px;
+            margin: 20px 0 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+        }
+        
+        thead {
+            background-color: #2e86de;
+            color: white;
+        }
+        
+        th {
+            padding: 18px 15px;
+            text-align: left;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 15px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8fbff;
+        }
+        
+        tr:hover {
+            background-color: #e8f4fd;
+        }
+        
+        .label-cell {
+            background-color: #e3f2fd;
+            color: #1565c0;
+            font-weight: bold;
+            width: 180px;
+            vertical-align: top;
+            white-space: normal;
+            word-break: break-all;
+        }
+        
+        .content-cell {
+            word-break: break-all;
+            line-height: 1.8;
+        }
+        
+        .sub-item {
+            margin-left: 0;
+            color: #555;
+        }
+        
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: white;
+            font-weight: 500;
+        }
+        
+        .tag-disease {
+            background-color: #e74c3c;
+        }
+        
+        .tag-drug {
+            background-color: #27ae60;
+        }
+        
+        .tag-procedure {
+            background-color: #3498db;
+        }
+        
+        .tag-other {
+            background-color: #9b59b6;
+        }
+        
+        .keywords-section {
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .page-number {
+            font-size: 18px;
+            color: #2e86de;
+            font-weight: bold;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            width: calc(100% - 120px);
+            max-width: 600px;
+            padding: 12px 15px;
+            border: 2px solid #2e86de;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+        
+        .btn-copy {
+            background-color: #2e86de;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .btn-copy:hover {
+            background-color: #1a5276;
+        }
+        
+        .success-msg {
+            color: #27ae60;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 20px;
+            }
+            
+            th {
+                font-size: 17px;
+                padding: 14px 12px;
+            }
+            
+            td {
+                font-size: 14px;
+                padding: 10px;
+            }
+            
+            .label-cell {
+                width: 130px;
+            }
+            
+            #copyInput {
+                width: calc(100% - 100px);
+            }
+            
+            .btn {
+                padding: 8px 15px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="108.html" class="btn btn-nav">上一页</a>
+            <a href="110.html" class="btn btn-nav">下一页</a>
+            <button class="btn btn-favorite" onclick="addToFavorites()">收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~心动过速临床处理方案*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~心动过速临床处理方案*****、心动过速临床处理方案、不伴严重症状和血流动力学衰竭（包括无症状者）、迷走神经刺激法、改良Valsalva动作步骤、静脉给予腺苷、静脉给予非二氢吡啶类钙通道阻滞药或β受体阻断药、不规则的窄QRS波心动过速、心房颤动、心房扑动、宽QRS波心动过速、规则的宽QRS波心动过速、无反应或无脉搏患者、病情不稳定但有意识的患者、病情稳定患者、不规则的宽QRS波心动过速、多形性室性心动过速</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">心动过速临床处理方案</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="label-cell">不伴严重症状和血流动力学衰竭（包括无症状者）</td>
+                    <td class="content-cell">建议采用以下方法</td>
+                </tr>
+                <tr>
+                    <td class="label-cell">迷走神经刺激法</td>
+                    <td class="content-cell">颈动脉窦按摩、Valsalva动作（标准或改良技术）、按压眼球（眼心反射）、屏气、做呕吐等。对迷走神经刺激效果不佳者可药物治疗改良的Valsalva动作</td>
+                </tr>
+                <tr>
+                    <td class="label-cell">改良Valsalva动作步骤</td>
+                    <td class="content-cell">①患者体位取半卧位，约45°，使用10ml注射器（压力约为40mmHg）去掉针头，深吸气后口含注射器用力吹起15秒并憋住；②医务人员协助患者立即平卧并抬高双腿至45°～90°，保持姿势45秒不变，观察心率变化，采用心电图判断复律是否成功；③再恢复半卧位，若未成功可反复操作；若反复复律后仍失败，可改为药物复律</td>
+                </tr>
+                <tr>
+                    <td class="label-cell">静脉给予腺苷</td>
+                    <td class="content-cell">第一剂，快速静脉推注6mg，随后10ml生理盐水冲管；第二剂，如有需要，可给予12mg</td>
+                </tr>
+                <tr>
+                    <td class="label-cell">静脉给予非二氢吡啶类钙通道阻滞药或β受体阻断药</td>
+                    <td class="content-cell">包括维拉帕米、美托洛尔或艾司洛尔</td>
+                </tr>
+                <tr>
+                    <td class="label-cell">不规则的窄QRS波心动过速</td>
+                    <td class="content-cell">①心房颤动；②心房扑动伴不等比下传；③多源性房性心动过速</td>
+                </tr>
+                <tr>
+                    <td class="label-cell">心房颤动</td>
+                    <td class="content-cell">对新发（即首次发现或首次诊断的）快速心房颤动患者的早期处理步骤包括评估是否需要心脏电复律、降低心室率的治疗和抗血栓治疗。具体见相关章节</td>
+                </tr>
+                <tr>
+                    <td class="label-cell">心房扑动</td>
+                    <td class="content-cell">与AF一样，对新发心房扑动患者的早期处理步骤包括评估是否需要心脏复律、减缓心室率的治疗和抗血栓治疗</td>
+                </tr>
+                <tr>
+                    <td class="label-cell">宽QRS波心动过速</td>
+                    <td class="content-cell">包括心室律规则和心室律不规则两类</td>
+                </tr>
+                <tr>
+                    <td class="label-cell">规则的宽QRS波心动过速</td>
+                    <td class="content-cell">①单形性室性心动过速；②室上性心动过速伴差异性传导、潜在传导延迟或经旁路传导；③室上性心动过速伴心室起搏</td>
+                </tr>
+                <tr>
+                    <td class="label-cell">无反应或无脉搏患者</td>
+                    <td class="content-cell">按照基础生命支持（BLS）和高级心血管生命支持（ACLS）流程处理</td>
+                </tr>
+                <tr>
+                    <td class="label-cell">病情不稳定但有意识的患者</td>
+                    <td class="content-cell">立即进行同步心脏电复律（推荐首次剂量为100J双相波），逐渐递增原则</td>
+                </tr>
+                <tr>
+                    <td class="label-cell">病情稳定患者</td>
+                    <td class="content-cell">可进行针对性诊断性评估，以确定心律失常病因并指导具体治疗</td>
+                </tr>
+                <tr>
+                    <td class="label-cell">不规则的宽QRS波心动过速</td>
+                    <td class="content-cell">①多形性室性心动过速；②不规则的窄QRS波心动过速伴差异性传导或潜在传导延迟（如心房颤动伴右束支传导阻滞）；③预激综合征伴心房颤动</td>
+                </tr>
+                <tr>
+                    <td class="label-cell">多形性室性心动过速</td>
+                    <td class="content-cell">在任何记录的心电图导联中QRS</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签：</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">心动过速</span>
+            <span class="tag tag-disease">心房颤动</span>
+            <span class="tag tag-disease">心房扑动</span>
+            <span class="tag tag-disease">室性心动过速</span>
+            <span class="tag tag-disease">多形性室性心动过速</span>
+            <span class="tag tag-disease">单形性室性心动过速</span>
+            <span class="tag tag-disease">多源性房性心动过速</span>
+            <span class="tag tag-disease">预激综合征</span>
+            <span class="tag tag-drug">腺苷</span>
+            <span class="tag tag-drug">维拉帕米</span>
+            <span class="tag tag-drug">美托洛尔</span>
+            <span class="tag tag-drug">艾司洛尔</span>
+            <span class="tag tag-procedure">Valsalva动作</span>
+            <span class="tag tag-procedure">颈动脉窦按摩</span>
+            <span class="tag tag-procedure">心脏电复律</span>
+            <span class="tag tag-other">BLS</span>
+            <span class="tag tag-other">ACLS</span>
+        </div>
+    </div>
+    
+    <div class="keywords-section">
+        <div class="page-number">109</div>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" id="copyInput" value="心动过速临床处理方案；心动过速；心房颤动；心房扑动；室性心动过速；多形性室性心动过速；单形性室性心动过速；多源性房性心动过速；预激综合征；腺苷；维拉帕米；美托洛尔；艾司洛尔；Valsalva动作；颈动脉窦按摩；心脏电复律；BLS；ACLS；=109" readonly>
+        <button class="btn btn-copy" onclick="copyContent()">复制</button>
+    </div>
+    <div class="success-msg" id="successMsg">复制成功！</div>
+    
+    <script>
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                const msg = document.getElementById('successMsg');
+                msg.style.display = 'block';
+                setTimeout(function() {
+                    msg.style.display = 'none';
+                }, 2000);
+            });
+        }
+        
+        function addToFavorites() {
+            const title = document.title;
+            const url = window.location.href;
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            const exists = favorites.some(fav => fav.url === url);
+            if (exists) {
+                alert('该页面已在收藏中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                category: '心血管急症处理'
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert('收藏成功！已添加到index.html的收藏类目下。');
+        }
+    </script>
+</body>
+</html>
