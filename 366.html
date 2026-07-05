@@ -1,0 +1,600 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~糖皮质激素胎盘通过特性及社区获得性肺炎CAP应用指南*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #333;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-top: 10px;
+        }
+        
+        .main-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .sub-title {
+            font-size: 14px;
+            color: #5d6d7e;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #2980b9;
+        }
+        
+        .btn-nav {
+            background: #5dade2;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background: #3498db;
+        }
+        
+        .btn-favorite {
+            background: #e74c3c;
+            color: white;
+            font-size: 12px;
+            padding: 6px 14px;
+        }
+        
+        .btn-favorite:hover {
+            background: #c0392b;
+        }
+        
+        .btn-favorite.active {
+            background: #27ae60;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        thead th {
+            background: #2e86c1;
+            color: white;
+            padding: 14px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e8e8e8;
+            line-height: 1.7;
+            color: #444;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 15px;
+        }
+        
+        .highlight-box {
+            background: #eaf2f8;
+            border-left: 4px solid #2e86c1;
+            padding: 10px 12px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .warning-box {
+            background: #fadbd8;
+            border-left: 4px solid #e74c3c;
+            padding: 10px 12px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .table-inner {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        
+        .table-inner th {
+            background: #5dade2;
+            color: white;
+            padding: 10px 8px;
+            text-align: left;
+            font-size: 13px;
+        }
+        
+        .table-inner td {
+            padding: 10px 8px;
+            border: 1px solid #d5dbdb;
+            background: white;
+        }
+        
+        .table-inner tr:nth-child(even) td {
+            background: #f8fafc;
+        }
+        
+        .tags-section {
+            margin: 25px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            padding: 6px 14px;
+            border-radius: 16px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #fdebd0;
+            color: #9a7d0a;
+            border: 1px solid #f9e79f;
+        }
+        
+        .tag-drug {
+            background: #d5f5e3;
+            color: #1e8449;
+            border: 1px solid #abebc6;
+        }
+        
+        .tag-bacteria {
+            background: #fadbd8;
+            color: #943126;
+            border: 1px solid #f5b7b1;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .copy-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .copy-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 14px;
+            border: 2px solid #d5dbdb;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background: #fafafa;
+        }
+        
+        .btn-copy {
+            background: #27ae60;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+        
+        .btn-copy:hover {
+            background: #229954;
+        }
+        
+        .btn-copy.copied {
+            background: #8e44ad;
+        }
+        
+        .page-number {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 16px;
+            color: #5d6d7e;
+            font-weight: bold;
+        }
+        
+        .keywords-section {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .keywords-title {
+            font-size: 13px;
+            color: #7f8c8d;
+            margin-bottom: 8px;
+        }
+        
+        .keywords-list {
+            font-size: 13px;
+            color: #5d6d7e;
+            line-height: 1.8;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 14px;
+            display: none;
+            z-index: 1000;
+        }
+        
+        @media (max-width: 600px) {
+            .main-title {
+                font-size: 18px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .table-inner {
+                font-size: 11px;
+            }
+            
+            .table-inner th,
+            .table-inner td {
+                padding: 6px 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">← 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="365.html" class="btn btn-nav">← 上一页</a>
+            <a href="367.html" class="btn btn-nav">下一页 →</a>
+            <button class="btn btn-favorite" id="favoriteBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <div class="header">
+        <h1 class="main-title">~~~~~糖皮质激素胎盘通过特性及社区获得性肺炎CAP应用指南*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~糖皮质激素胎盘通过特性及社区获得性肺炎CAP应用指南*****、糖皮质激素不同制剂的胎盘通过特性和安全性及CAP应用、药物名称、透过胎盘比例、治疗重点、FDA危险分级、5. 糖皮质激素在不同疾病中的应用、感染相关急症的糖皮质激素的使用、社区获得性肺炎（CAP）、氢化（可的松）、泼尼松（龙）、地塞米松、普通成人CAP</div>
+        <p class="sub-title">表44 | FDA危险分级 | 妊娠期用药 | 感染相关急症 | 甲泼尼龙</p>
+    </div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">糖皮质激素不同制剂的胎盘通过特性和安全性及CAP应用</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        <div class="section-title">表44 糖皮质激素不同制剂的胎盘通过特性和安全性</div>
+                        <table class="table-inner">
+                            <tr>
+                                <th>药物名称</th>
+                                <th>透过胎盘比例</th>
+                                <th>治疗重点</th>
+                                <th>FDA危险分级</th>
+                            </tr>
+                            <tr>
+                                <td>氢化（可的松）</td>
+                                <td>10%～15%（85%经胎盘代谢失活为可的松）</td>
+                                <td>主要用于治疗孕妇所患疾病</td>
+                                <td>D级（1～3个月）<br>C级<br>轻微致畸和毒性作用，但用药的益处远大于危险性，应权衡利弊</td>
+                            </tr>
+                            <tr>
+                                <td>泼尼松（龙）</td>
+                                <td>比例不详，经胎盘代谢失活为泼尼松</td>
+                                <td>可同时治疗孕妇和胎儿所患疾病</td>
+                                <td>D级（1～3个月）<br>C级<br>广泛使用，有轻微致畸作用</td>
+                            </tr>
+                            <tr>
+                                <td>地塞米松</td>
+                                <td>46%（54%经胎盘代谢失活）</td>
+                                <td>主要用于治疗胎儿所患疾病</td>
+                                <td>D级（1～3个月）<br>C级<br>孕妇益处远大于胎儿危险，目前尚无资料证明存在危险性</td>
+                            </tr>
+                        </table>
+                        <div class="highlight-box">
+                            <strong>注：FDA分级。</strong>C级，尚未对妊娠妇女及动物进行研究，只有在权衡对孕妇的益处大于对胎儿的危害后方可使用；D级，有明确证据显示药物对人类胎儿有危害性，但尽管如此，孕妇用药后有益。
+                        </div>
+                        <div class="warning-box">
+                            <strong>建议：</strong>任何情况下，对孕妇使用糖皮质激素时需充分向患者交代可能的致畸风险，并保留好相关字据和文书。
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="section-title">5. 糖皮质激素在不同疾病中的应用</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <strong>感染相关急症的糖皮质激素的使用</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <strong>✓ 社区获得性肺炎（CAP）</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 25%; font-weight: bold; color: #1a5276;">普通成人CAP</td>
+                    <td>
+                        <strong>建议：</strong>糖皮质激素用于CAP辅助治疗尚有争议。若有证据表明CAP患者的宿主炎症反应过度或失调，建议辅助使用糖皮质激素。这些证据定义为脓毒症或需要FiO₂＞50%的呼吸衰竭伴至少1项以下特征：代谢性酸中毒（动脉血pH＜7.3）、乳酸＞4mmol/L、CRP＞150mg/L。这些患者的死亡风险高，很可能获益。<br><br>
+                        若已知CAP患者由流感病毒或真菌（如曲霉菌）引起，使用糖皮质激素应慎重。糖皮质激素应避免用于有重度不良事件危险因素的CAP患者，如近期消化道出血、糖尿病控制不良、重度免疫功能受损者。<br><br>
+                        <div class="highlight-box">
+                            <strong>用法及剂量：</strong>若需辅助使用糖皮质激素，疗程为5天：若患者不能口服药物，静脉给予甲泼尼龙0.5mg/kg q12h。若患者可口服药物，给予口服泼尼松50mg/d。
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">妊娠</span>
+            <span class="tag tag-disease">孕妇</span>
+            <span class="tag tag-disease">胎儿</span>
+            <span class="tag tag-disease">腭裂</span>
+            <span class="tag tag-disease">社区获得性肺炎</span>
+            <span class="tag tag-disease">CAP</span>
+            <span class="tag tag-disease">脓毒症</span>
+            <span class="tag tag-disease">呼吸衰竭</span>
+            <span class="tag tag-disease">代谢性酸中毒</span>
+            <span class="tag tag-disease">消化道出血</span>
+            <span class="tag tag-disease">糖尿病</span>
+            <span class="tag tag-disease">免疫功能受损</span>
+            <span class="tag tag-drug">氢化可的松</span>
+            <span class="tag tag-drug">可的松</span>
+            <span class="tag tag-drug">泼尼松</span>
+            <span class="tag tag-drug">泼尼松龙</span>
+            <span class="tag tag-drug">地塞米松</span>
+            <span class="tag tag-drug">甲泼尼龙</span>
+            <span class="tag tag-drug">糖皮质激素</span>
+            <span class="tag tag-bacteria">流感病毒</span>
+            <span class="tag tag-bacteria">真菌</span>
+            <span class="tag tag-bacteria">曲霉菌</span>
+        </div>
+    </div>
+    
+    <div class="page-number">— 357 —</div>
+    
+    <div class="keywords-section">
+        <div class="keywords-title">关键词</div>
+        <div class="keywords-list">
+            糖皮质激素 | 胎盘通过 | FDA分级 | 妊娠期 | 氢化可的松 | 泼尼松 | 泼尼松龙 | 地塞米松 | 社区获得性肺炎 | CAP | 甲泼尼龙 | 脓毒症 | 呼吸衰竭 | 代谢性酸中毒 | 曲霉菌 | 流感病毒 | 真菌
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <div class="copy-wrapper">
+            <input type="text" class="copy-input" id="copyInput" value="糖皮质激素胎盘通过特性及社区获得性肺炎CAP应用指南；表44、FDA危险分级、妊娠期用药、氢化可的松、泼尼松、泼尼松龙、地塞米松、甲泼尼龙、社区获得性肺炎、CAP、脓毒症、呼吸衰竭、代谢性酸中毒、曲霉菌、流感病毒=357" readonly>
+            <button class="btn-copy" id="copyBtn" onclick="copyContent()">复制</button>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '已复制';
+                    btn.classList.add('copied');
+                    showToast('内容已复制到剪贴板');
+                    setTimeout(() => {
+                        btn.textContent = '复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            } else {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制';
+                btn.classList.add('copied');
+                showToast('内容已复制到剪贴板');
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFavorited = btn.classList.contains('active');
+            
+            if (!isFavorited) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                showToast('已添加到收藏');
+                
+                try {
+                    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                    const pageInfo = {
+                        title: '糖皮质激素胎盘通过特性及社区获得性肺炎CAP应用指南',
+                        url: '357.html',
+                        pageNum: '357'
+                    };
+                    const exists = favorites.some(f => f.url === '357.html');
+                    if (!exists) {
+                        favorites.push(pageInfo);
+                        localStorage.setItem('favorites', JSON.stringify(favorites));
+                    }
+                } catch(e) {
+                    console.log('localStorage not available');
+                }
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+                showToast('已取消收藏');
+                
+                try {
+                    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                    const filtered = favorites.filter(f => f.url !== '357.html');
+                    localStorage.setItem('favorites', JSON.stringify(filtered));
+                } catch(e) {
+                    console.log('localStorage not available');
+                }
+            }
+        }
+        
+        window.onload = function() {
+            try {
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const isFavorited = favorites.some(f => f.url === '357.html');
+                const btn = document.getElementById('favoriteBtn');
+                if (isFavorited) {
+                    btn.classList.add('active');
+                    btn.textContent = '★ 已收藏';
+                }
+            } catch(e) {
+                console.log('localStorage not available');
+            }
+        };
+    </script>
+</body>
+</html>
