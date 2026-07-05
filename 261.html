@@ -1,0 +1,650 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~低钠血症-急诊处理（紧急治疗与非紧急治疗）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: #f0f4f8;
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px 15px 80px;
+            color: #2c3e50;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(52,152,219,0.3);
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        /* 导航按钮组 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(231,76,60,0.3);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .nav-btn.next {
+            background: #27ae60;
+            box-shadow: 0 2px 8px rgba(39,174,96,0.3);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #f39c12;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(243,156,18,0.3);
+            margin-top: 10px;
+        }
+        
+        .fav-btn.active {
+            background: #e67e22;
+        }
+        
+        /* 标题样式 */
+        .page-title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 60px 0 25px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* 表格样式 */
+        .main-table {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto 30px;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(31,38,135,0.15);
+        }
+        
+        .main-table th {
+            background: #2980b9;
+            color: white;
+            padding: 18px 15px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        .main-table td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #ecf0f1;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #34495e;
+        }
+        
+        .main-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .main-table tr:hover {
+            background: #e8f4f8;
+        }
+        
+        .section-header {
+            background: #3498db !important;
+            color: white !important;
+            font-weight: bold;
+            font-size: 17px !important;
+        }
+        
+        .section-header td {
+            color: white !important;
+            padding: 12px 15px !important;
+        }
+        
+        .sub-item {
+            padding-left: 30px !important;
+            color: #555 !important;
+        }
+        
+        .diamond-item {
+            padding-left: 50px !important;
+            color: #666 !important;
+        }
+        
+        .check-mark {
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .diamond-mark {
+            color: #3498db;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        /* 标签样式 */
+        .tags-section {
+            max-width: 900px;
+            margin: 0 auto 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 6px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .tag-disease:hover {
+            background: #2e7d32;
+            color: white;
+        }
+        
+        .tag-symptom {
+            background: #fff3e0;
+            color: #ef6c00;
+            border: 1px solid #ffcc80;
+        }
+        
+        .tag-symptom:hover {
+            background: #ef6c00;
+            color: white;
+        }
+        
+        .tag-treatment {
+            background: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #90caf9;
+        }
+        
+        .tag-treatment:hover {
+            background: #1565c0;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #fce4ec;
+            color: #c2185b;
+            border: 1px solid #f48fb1;
+        }
+        
+        .tag-drug:hover {
+            background: #c2185b;
+            color: white;
+        }
+        
+        /* 页码和关键词 */
+        .footer-info {
+            max-width: 900px;
+            margin: 0 auto 20px;
+            text-align: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 10px;
+        }
+        
+        .page-number {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2980b9;
+            margin-bottom: 10px;
+        }
+        
+        .keywords {
+            font-size: 13px;
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 15px;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            z-index: 999;
+        }
+        
+        .copy-input {
+            width: calc(100% - 120px);
+            max-width: 700px;
+            padding: 12px 15px;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #2c3e50;
+            outline: none;
+        }
+        
+        .copy-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 15px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #2980b9;
+        }
+        
+        .copy-btn.copied {
+            background: #27ae60;
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            display: none;
+            z-index: 2000;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .page-title {
+                font-size: 20px;
+                margin-top: 80px;
+            }
+            
+            .main-table th {
+                font-size: 17px;
+                padding: 14px 12px;
+            }
+            
+            .main-table td {
+                font-size: 14px;
+                padding: 12px;
+            }
+            
+            .copy-input {
+                font-size: 12px;
+                padding: 10px;
+            }
+            
+            .copy-btn {
+                padding: 10px 18px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="260.html" class="nav-btn">← 上一页</a>
+        <a href="262.html" class="nav-btn next">下一页 →</a>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">~~~~~低钠血症-急诊处理（紧急治疗与非紧急治疗）*****</h1>
+    
+    <!-- 主表格 -->
+    <table class="main-table">
+        <thead>
+            <tr>
+                <th colspan="2">低钠血症 - 急诊处理（续）</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 接上文 -->
+            <tr>
+                <td colspan="2">
+                    性低钠血症/颅内病变相关的低钠血症。
+                </td>
+            </tr>
+            
+            <!-- 紧急治疗-目标 -->
+            <tr>
+                <td colspan="2" class="sub-item">
+                    <span class="check-mark">✓</span>目标：数小时（6小时）内使血清钠浓度快速升高4～6mmol/L。需注意24小时内血钠浓度升高不应超过8～12mmol/L。
+                </td>
+            </tr>
+            
+            <!-- 紧急治疗-方法 -->
+            <tr>
+                <td colspan="2" class="sub-item">
+                    <span class="check-mark">✓</span>方法
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="diamond-item">
+                    <span class="diamond-mark">◇</span>通常在10～15分钟内快速输注高渗盐水100ml。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="diamond-item">
+                    <span class="diamond-mark">◇</span>3%盐水100ml，快速输注，可使血清钠浓度快速增加2～3mmol/L，以减轻脑水肿。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="diamond-item">
+                    <span class="diamond-mark">◇</span>若神经系统症状持续恶化，或血清钠浓度无增加，可重复3%盐水1～2次，每次间隔时间10分钟。
+                </td>
+            </tr>
+            
+            <!-- 紧急治疗-监测 -->
+            <tr>
+                <td colspan="2" class="sub-item">
+                    <span class="check-mark">✓</span>监测：每2小时复测血清钠浓度，确保血钠按预期速度增加。
+                </td>
+            </tr>
+            
+            <!-- 非紧急治疗 -->
+            <tr class="section-header">
+                <td colspan="2">● 非紧急治疗</td>
+            </tr>
+            
+            <!-- 非紧急治疗-适应证 -->
+            <tr>
+                <td colspan="2" class="sub-item">
+                    <span class="check-mark">✓</span>适应证：除上述紧急情况外，其他低钠血症患者无须紧急治疗，但以下患者也要尽快开始治疗。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="diamond-item">
+                    <span class="diamond-mark">◇</span>无症状的急性/亚急性低钠血症，采用高渗盐水50ml，单次快速输注或缓慢持续输注。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="diamond-item">
+                    <span class="diamond-mark">◇</span>无症状或有轻至中度症状（如头晕、健忘、步态不稳、恶心、呕吐、意识模糊、嗜睡）的慢性重度低钠血症（血钠浓度≤120mmol/L），采用最初应用高渗盐水以15～30ml/h速度缓慢输注，或单次快速输注50ml，可联合去氨加压素治疗（每8小时静脉/皮下予1～2μg，共24～48小时）。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="diamond-item">
+                    <span class="diamond-mark">◇</span>轻至中度症状的中度慢性低钠血症，通常不需要高渗盐水，治疗取决于基础病。
+                </td>
+            </tr>
+            
+            <!-- 各类患者处理 -->
+            <tr>
+                <td colspan="2" class="sub-item">
+                    <span class="check-mark">✓</span>对于低钠高血容量（如心力衰竭、肝硬化、晚期肾衰竭或原发性烦渴症）或低钠等血容量（如SIADH）患者：予液体限制（＜800ml/d）。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="sub-item">
+                    <span class="check-mark">✓</span>对于心力衰竭或SIADH患者：可予袢利尿药或ADH受体拮抗药，SIAHD患者也可口服氯化钠。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="sub-item">
+                    <span class="check-mark">✓</span>对于低钠低血容量患者（如恶病质钠摄入不足、脑耗盐综合征、利尿药诱导的低钠血症）：可予等渗盐水治疗。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="sub-item">
+                    <span class="check-mark">✓</span>对于利尿药诱导的低钠血症/药物导致的SIADH患者：只需停用致病药物。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="sub-item">
+                    <span class="check-mark">✓</span>目标：缓慢升高血清钠浓度、缓解症状。在任意24小时内，血清钠浓度升高均不应超过8～12mmol/L。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="sub-item">
+                    <span class="check-mark">✓</span>监测：每4小时复测血钠浓度，确保血钠纠正速度适当。
+                </td>
+            </tr>
+            
+            <!-- 7. 注意事项 -->
+            <tr class="section-header">
+                <td colspan="2">7. 注意事项</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    ● 所有患者，在治疗低钠血症的同时，均应尝试纠正低钠血症
+                </td>
+            </tr>
+            
+            <!-- 页码 -->
+            <tr>
+                <td colspan="2" style="text-align:center; font-weight:bold; color:#7f8c8d; background:#f8f9fa;">249</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div>
+            <span class="tag tag-disease">低钠血症</span>
+            <span class="tag tag-disease">急性低钠血症</span>
+            <span class="tag tag-disease">亚急性低钠血症</span>
+            <span class="tag tag-disease">慢性低钠血症</span>
+            <span class="tag tag-disease">慢性重度低钠血症</span>
+            <span class="tag tag-disease">中度慢性低钠血症</span>
+            <span class="tag tag-disease">低钠高血容量</span>
+            <span class="tag tag-disease">低钠等血容量</span>
+            <span class="tag tag-disease">低钠低血容量</span>
+            <span class="tag tag-disease">心力衰竭</span>
+            <span class="tag tag-disease">肝硬化</span>
+            <span class="tag tag-disease">晚期肾衰竭</span>
+            <span class="tag tag-disease">原发性烦渴症</span>
+            <span class="tag tag-disease">SIADH</span>
+            <span class="tag tag-disease">SIAHD</span>
+            <span class="tag tag-disease">恶病质</span>
+            <span class="tag tag-disease">脑耗盐综合征</span>
+            <span class="tag tag-disease">颅内病变</span>
+            <span class="tag tag-symptom">脑水肿</span>
+            <span class="tag tag-symptom">头晕</span>
+            <span class="tag tag-symptom">健忘</span>
+            <span class="tag tag-symptom">步态不稳</span>
+            <span class="tag tag-symptom">恶心</span>
+            <span class="tag tag-symptom">呕吐</span>
+            <span class="tag tag-symptom">意识模糊</span>
+            <span class="tag tag-symptom">嗜睡</span>
+            <span class="tag tag-symptom">神经系统症状</span>
+            <span class="tag tag-treatment">紧急治疗</span>
+            <span class="tag tag-treatment">非紧急治疗</span>
+            <span class="tag tag-treatment">高渗盐水</span>
+            <span class="tag tag-treatment">3%盐水</span>
+            <span class="tag tag-treatment">等渗盐水</span>
+            <span class="tag tag-treatment">液体限制</span>
+            <span class="tag tag-drug">去氨加压素</span>
+            <span class="tag tag-drug">袢利尿药</span>
+            <span class="tag tag-drug">ADH受体拮抗药</span>
+            <span class="tag tag-drug">氯化钠</span>
+            <span class="tag tag-drug">利尿药</span>
+            <span class="tag tag-treatment">血清钠浓度监测</span>
+        </div>
+    </div>
+    
+    <!-- 页码和关键词 -->
+    <div class="footer-info">
+        <div class="page-number">页码：261</div>
+        <div class="keywords">
+            关键词：低钠血症；急诊处理；紧急治疗；非紧急治疗；高渗盐水；3%盐水；等渗盐水；去氨加压素；袢利尿药；ADH受体拮抗药；氯化钠；SIADH；SIAHD；心力衰竭；肝硬化；脑耗盐综合征；脑水肿；血清钠浓度；液体限制
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="低钠血症-急诊处理（紧急治疗与非紧急治疗）；低钠血症；急诊处理；紧急治疗；非紧急治疗；高渗盐水；3%盐水；等渗盐水；去氨加压素；袢利尿药；ADH受体拮抗药；氯化钠；SIADH；SIAHD；心力衰竭；肝硬化；脑耗盐综合征；脑水肿；血清钠浓度；液体限制；=261" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                    document.getElementById('copyBtn').classList.add('copied');
+                    document.getElementById('copyBtn').textContent = '已复制';
+                    setTimeout(() => {
+                        document.getElementById('copyBtn').classList.remove('copied');
+                        document.getElementById('copyBtn').textContent = '复制';
+                    }, 2000);
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '⭐ 已收藏';
+                showToast('已添加到收藏！');
+                
+                // 保存到localStorage
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                if (!favorites.includes('261')) {
+                    favorites.push('261');
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                // 更新index.html的收藏
+                updateIndexFavorites();
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                showToast('已取消收藏！');
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f !== '261');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                updateIndexFavorites();
+            }
+        }
+        
+        // 更新index.html收藏
+        function updateIndexFavorites() {
+            // 获取当前页面信息
+            const pageInfo = {
+                page: '261',
+                title: '低钠血症-急诊处理（紧急治疗与非紧急治疗）'
+            };
+            localStorage.setItem('page_261_info', JSON.stringify(pageInfo));
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            if (favorites.includes('261')) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '⭐ 已收藏';
+            }
+        }
+    </script>
+</body>
+</html>
