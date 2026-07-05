@@ -1,0 +1,536 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~血栓性微血管病与原发性TMA鉴别要点*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            z-index: 100;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 导航按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+        }
+        
+        .nav-btn.next {
+            background: #f0ad4e;
+            box-shadow: 0 2px 8px rgba(240, 173, 78, 0.3);
+        }
+        
+        .nav-btn.next:hover {
+            background: #ec971f;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #d9534f;
+            box-shadow: 0 2px 8px rgba(217, 83, 79, 0.3);
+        }
+        
+        .fav-btn:hover {
+            background: #c9302c;
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 60px 0 25px 0;
+            padding: 0 10px;
+            line-height: 1.4;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            max-width: 100%;
+            overflow-x: auto;
+            margin: 0 auto 25px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 15px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: #2c5aa0;
+            color: white;
+            padding: 14px 10px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            border: 1px solid #1a3a6e;
+        }
+        
+        thead th:first-child {
+            width: 15%;
+        }
+        
+        /* 表格内容 */
+        td {
+            padding: 12px 10px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+        
+        td:first-child {
+            font-weight: bold;
+            color: #2c5aa0;
+            background: #f8fafc;
+            text-align: center;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tr:hover {
+            background: #e8f4f8;
+        }
+        
+        /* 子标题行 */
+        .section-header td {
+            background: #e3f2fd;
+            color: #1565c0;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        
+        .section-header td:first-child {
+            background: #bbdefb;
+            text-align: center;
+        }
+        
+        /* 定义区域 */
+        .definition-box {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 20px;
+            margin: 0 auto 25px;
+        }
+        
+        .definition-box h3 {
+            color: #2c5aa0;
+            font-size: 17px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .definition-box ul {
+            padding-left: 20px;
+        }
+        
+        .definition-box li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+            color: #444;
+        }
+        
+        /* 分类区域 */
+        .classification-box {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 20px;
+            margin: 0 auto 25px;
+        }
+        
+        .classification-box h3 {
+            color: #2c5aa0;
+            font-size: 17px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .classification-box ul {
+            padding-left: 20px;
+        }
+        
+        .classification-box li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+            color: #444;
+        }
+        
+        /* 继发性TMA说明 */
+        .secondary-box {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 20px;
+            margin: 0 auto 25px;
+        }
+        
+        .secondary-box p {
+            line-height: 1.7;
+            color: #444;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 20px;
+            margin: 0 auto 25px;
+        }
+        
+        .tags-section h3 {
+            color: #2c5aa0;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        .tag-disease {
+            background: #ffe0e0;
+            color: #c0392b;
+        }
+        
+        .tag-drug {
+            background: #e0f0ff;
+            color: #2980b9;
+        }
+        
+        .tag-bacteria {
+            background: #e8f5e9;
+            color: #27ae60;
+        }
+        
+        /* 关键词和页码 */
+        .footer-info {
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+        
+        .page-num {
+            font-size: 15px;
+            color: #2c5aa0;
+            font-weight: bold;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 20px;
+            margin: 0 auto 25px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            font-family: monospace;
+        }
+        
+        .copy-btn {
+            background: #6c5ce7;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #5b4cdb;
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 6px;
+            }
+            
+            td {
+                padding: 10px 6px;
+                font-size: 13px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="164.html" class="nav-btn">上一页</a>
+        <a href="166.html" class="nav-btn next">下一页</a>
+        <button class="nav-btn fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~血栓性微血管病与原发性TMA鉴别要点*****</h1>
+    
+    <!-- 定义 -->
+    <div class="definition-box">
+        <h3>📋 1. 定义</h3>
+        <ul>
+            <li>血栓性微血管病（TMA）是以血管腔内血小板聚集形成微血栓、血管腔内栓塞及红细胞碎裂等微血管系统异常为特征的一系列疾病。</li>
+            <li>可导致微血管病性溶血性贫血（MAHA）、血小板减少及脏器功能损害。</li>
+            <li>血涂片可见异常形态红细胞和红细胞碎片。</li>
+        </ul>
+    </div>
+    
+    <!-- 分类 -->
+    <div class="classification-box">
+        <h3>📂 2. 分类</h3>
+        <ul>
+            <li>原发性TMA包括：①血栓性血小板减少性紫癜（TTP）（遗传性或获得性）；②志贺毒素介导的溶血-尿毒综合征（IA-HUS）；③补体介导的TMA（遗传性或获得性，CM-HUS）；④药物诱导的TMA（DITMA）综合征；⑤维生素B₁₂代谢或凝血相关因子有关的罕见遗传性疾病（表27）。</li>
+        </ul>
+    </div>
+    
+    <!-- 表27 原发性TMA鉴别要点 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>疾病</th>
+                    <th>肾功能损伤</th>
+                    <th>血小板水平</th>
+                    <th>其他临床表现</th>
+                    <th>病因</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>TTP</td>
+                    <td>较轻</td>
+                    <td>↓↓</td>
+                    <td>可有发热，中枢神经系统受累</td>
+                    <td>先天性：ADAMTS13基因突变导致ADAMTS13活性↓，无抑制物；获得性：ADAMTS13抗体（抑制物）导致ADAMTS13活性↓</td>
+                </tr>
+                <tr>
+                    <td>HUS</td>
+                    <td>较重</td>
+                    <td>↓</td>
+                    <td>可有其他脏器受累，可先有腹泻</td>
+                    <td>ADAMTS13抗体阴性，活性正常，补体介导或志贺毒素相关</td>
+                </tr>
+                <tr>
+                    <td>DITMA</td>
+                    <td>可有</td>
+                    <td>↓</td>
+                    <td>—</td>
+                    <td>奎宁，化疗药，免疫抑制药，VEGF抑制剂，阿片类药物</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 继发性TMA -->
+    <div class="secondary-box">
+        <p>• 继发性TMA可继发于药物、肿瘤、移植、妊娠、感染、结缔组织病等，治疗均以治疗原发病为主，无须血浆置换。其临床表现在MAHA＋PLT下降基础上多种多样，以妊娠可能合并TMA情况为例（表28）。</p>
+    </div>
+    
+    <!-- 标签 -->
+    <div class="tags-section">
+        <h3>🏷️ 标签检索</h3>
+        <div class="tags">
+            <span class="tag tag-disease">血栓性微血管病</span>
+            <span class="tag tag-disease">TMA</span>
+            <span class="tag tag-disease">TTP</span>
+            <span class="tag tag-disease">HUS</span>
+            <span class="tag tag-disease">DITMA</span>
+            <span class="tag tag-disease">IA-HUS</span>
+            <span class="tag tag-disease">CM-HUS</span>
+            <span class="tag tag-disease">微血管病性溶血性贫血</span>
+            <span class="tag tag-disease">MAHA</span>
+            <span class="tag tag-disease">血小板减少</span>
+            <span class="tag tag-disease">溶血性贫血</span>
+            <span class="tag tag-disease">继发性TMA</span>
+            <span class="tag tag-disease">妊娠</span>
+            <span class="tag tag-disease">感染</span>
+            <span class="tag tag-disease">肿瘤</span>
+            <span class="tag tag-disease">移植</span>
+            <span class="tag tag-disease">结缔组织病</span>
+            <span class="tag tag-drug">奎宁</span>
+            <span class="tag tag-drug">化疗药</span>
+            <span class="tag tag-drug">免疫抑制药</span>
+            <span class="tag tag-drug">VEGF抑制剂</span>
+            <span class="tag tag-drug">阿片类药物</span>
+            <span class="tag tag-drug">维生素B₁₂</span>
+            <span class="tag tag-drug">ADAMTS13</span>
+            <span class="tag tag-drug">血浆置换</span>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="footer-info">
+        <p class="page-num">页码：165</p>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="血栓性微血管病与原发性TMA鉴别要点；血栓性微血管病、TMA、TTP、HUS、DITMA、IA-HUS、CM-HUS、MAHA、血小板减少、ADAMTS13、血浆置换、奎宁、化疗药、免疫抑制药、VEGF抑制剂；=165" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="footer-info" style="margin-bottom: 30px;">
+        <p>关键词：血栓性微血管病 | TMA | TTP | HUS | DITMA | MAHA | 血小板减少 | ADAMTS13 | 血浆置换 | 志贺毒素 | 补体介导 | 药物诱导 | 妊娠 | 肿瘤 | 移植</p>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(() => {
+                    alert("已复制到剪贴板！");
+                });
+            } else {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            }
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            const title = document.title.replace(/~~~~~|*****/g, '');
+            const url = window.location.href;
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                date: new Date().toLocaleString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert('已添加到收藏！\n标题：' + title);
+        }
+    </script>
+</body>
+</html>
