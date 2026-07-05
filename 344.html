@@ -1,0 +1,380 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~BLS医务人员成人心搏骤停流程（2020）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f5f5f0;
+            background-image: linear-gradient(135deg, #f5f5f0 0%, #e8e8e0 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .back-home {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        
+        .nav-btn {
+            background: #5a9;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .favorite-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 22px;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fffef8;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        thead tr {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e0e0d0;
+            color: #333;
+            font-size: 14px;
+            vertical-align: top;
+        }
+        
+        tr:hover {
+            background: #f0f8ff;
+        }
+        
+        .section-title {
+            background: #e8f4f8;
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        .flow-step {
+            background: #fff8e1;
+            font-weight: bold;
+            color: #e65100;
+        }
+        
+        .decision-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .action-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+        }
+        
+        .special-note {
+            background: #fce4ec;
+            border-left: 4px solid #e91e63;
+        }
+        
+        .bottom-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+        
+        .copy-area {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #4a90d9;
+            border-radius: 8px;
+            font-size: 14px;
+            background: #fff;
+        }
+        
+        .copy-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .tags-section {
+            margin-top: 20px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            cursor: pointer;
+        }
+        
+        .tag:hover {
+            background: #c0392b;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #888;
+            font-size: 12px;
+            margin-top: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-nav">
+        <a href="index.html" class="back-home">← 返回首页</a>
+        <div class="nav-right">
+            <a href="343.html" class="nav-btn">上一页</a>
+            <a href="345.html" class="nav-btn">下一页</a>
+            <button class="favorite-btn" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~BLS医务人员成人心搏骤停流程（2020）*****</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">BLS医务人员成人心搏骤停流程详解</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="flow-step">
+                <td colspan="2">【步骤1】确认现场安全</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    · 患者无反应<br>
+                    · 呼叫旁人帮助<br>
+                    · （如果合适）通过移动设备启动应急反应系统<br>
+                    · 取得AED及应急设备（或请其他人去取）
+                </td>
+            </tr>
+            <tr class="decision-box">
+                <td colspan="2">
+                    【判断】检查是否无呼吸或仅是喘息，并检查脉搏（同时）<br>
+                    · 能否在10秒内明确感觉到脉搏
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 50%; vertical-align: top;">
+                    <strong>呼吸正常，有脉搏</strong><br><br>
+                    → 监控患者情况，直到急救人员赶到
+                </td>
+                <td style="width: 50%; vertical-align: top;">
+                    <strong>没有正常呼吸，有脉搏</strong><br><br>
+                    → 提供急救通气：<br>
+                    · 每6秒1次通气，或每分钟10次通气<br>
+                    · 约每2分钟检查1次脉搏。如果没有脉搏，开始心肺复苏<br>
+                    · 对于可能有阿片类药物过量的情况，若能获得纳洛酮，则按照操作要求使用纳洛酮
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="special-note">
+                    <strong>无呼吸或仅是喘息，无脉搏</strong>
+                </td>
+            </tr>
+            <tr class="flow-step">
+                <td colspan="2">【步骤2】CPR</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    · 开始周期：30次按压和2次人工呼吸<br>
+                    · 如有可能，应尽早使用AED
+                </td>
+            </tr>
+            <tr class="flow-step">
+                <td colspan="2">【步骤3】AED到达</td>
+            </tr>
+            <tr class="decision-box">
+                <td colspan="2">
+                    【判断】检查心律是否为可电击心律
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 50%; vertical-align: top;" class="action-box">
+                    <strong>是，可电击</strong><br><br>
+                    · 进行1次电击。立即继续CPR，持续约2分钟（直至有AED可以进行心律检查）<br>
+                    · 持续直至高级生命支持人员接管或者患者有反应
+                </td>
+                <td style="width: 50%; vertical-align: top;" class="action-box">
+                    <strong>否，不可电击</strong><br><br>
+                    · 立即继续CPR，持续约2分钟（直至有AED可以进行心律检查）<br>
+                    · 持续直至高级生命支持人员接管或者患者有反应
+                </td>
+            </tr>
+            <tr class="special-note">
+                <td colspan="2">
+                    【所有情况下的共同要求】<br>
+                    所有情况下，此时应该都已启动应急反应系统或支援，AED和应急设备都已经取得，或已有人去取
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center; color: #888; font-size: 12px;">
+                    图32 BLS医务人员成人心搏骤停流程（2020）<br>
+                    — 第333页 —
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="bottom-section">
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyText" value="BLS医务人员成人心搏骤停流程（2020）；BLS；基础生命支持；心肺复苏；AED；应急反应系统；肾上腺素；纳洛酮；阿片类药物过量；可电击心律；高级生命支持；=344" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+        
+        <div class="page-number">页码：344</div>
+        
+        <div class="keywords">
+            关键词：BLS、基础生命支持、心搏骤停、CPR、AED、除颤、心肺复苏、应急反应系统、纳洛酮、阿片类药物
+        </div>
+        
+        <div class="tags-section">
+            <div class="tags-title">🔖 检索标签（点击快速检索）：</div>
+            <span class="tag">BLS</span>
+            <span class="tag">心搏骤停</span>
+            <span class="tag">心肺复苏</span>
+            <span class="tag">CPR</span>
+            <span class="tag">AED</span>
+            <span class="tag">应急反应系统</span>
+            <span class="tag">纳洛酮</span>
+            <span class="tag">阿片类药物</span>
+            <span class="tag">可电击心律</span>
+            <span class="tag">高级生命支持</span>
+            <span class="tag">人工呼吸</span>
+            <span class="tag">胸外按压</span>
+            <span class="tag">急救通气</span>
+            <span class="tag">脉搏检查</span>
+            <span class="tag">喘息</span>
+            <span class="tag">电击</span>
+            <span class="tag">心律检查</span>
+        </div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            }, function() {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            });
+        }
+        
+        function addToFavorites() {
+            const title = document.title;
+            const url = window.location.href;
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === url);
+            if (!exists) {
+                favorites.push({title: title, url: url, category: '急救技术'});
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已添加到收藏！');
+            } else {
+                alert('已在收藏中！');
+            }
+        }
+    </script>
+</body>
+</html>
