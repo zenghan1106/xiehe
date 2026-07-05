@@ -1,0 +1,358 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~CPR流程与CABD急救技术*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f5f5f0;
+            background-image: linear-gradient(135deg, #f5f5f0 0%, #e8e8e0 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .back-home {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        
+        .nav-btn {
+            background: #5a9;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .favorite-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 22px;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fffef8;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        thead tr {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e0e0d0;
+            color: #333;
+            font-size: 14px;
+            vertical-align: top;
+        }
+        
+        tr:hover {
+            background: #f0f8ff;
+        }
+        
+        .section-title {
+            background: #e8f4f8;
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        .sub-item {
+            padding-left: 20px;
+            color: #555;
+        }
+        
+        .check-mark {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .bottom-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+        
+        .copy-area {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #4a90d9;
+            border-radius: 8px;
+            font-size: 14px;
+            background: #fff;
+        }
+        
+        .copy-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .tags-section {
+            margin-top: 20px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            cursor: pointer;
+        }
+        
+        .tag:hover {
+            background: #c0392b;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #888;
+            font-size: 12px;
+            margin-top: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-nav">
+        <a href="index.html" class="back-home">← 返回首页</a>
+        <div class="nav-right">
+            <a href="342.html" class="nav-btn">上一页</a>
+            <a href="344.html" class="nav-btn">下一页</a>
+            <button class="favorite-btn" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~CPR流程与CABD急救技术*****</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">CPR流程与CABD急救技术详解</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="section-title">
+                <td colspan="2">【图31 CPR流程】</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    开始CPR<br>
+                    · 给氧<br>
+                    · 连接监护仪/除颤器<br><br>
+                    
+                    ↓ 2分钟<br><br>
+                    
+                    检查心律<br><br>
+                    
+                    ├─ 如有室颤/无脉性室速，给予电击<br>
+                    │   ↓<br>
+                    │   持续进行CPR<br>
+                    │<br>
+                    └─ 恢复自主循环 → 心搏骤停后治疗<br><br>
+                    
+                    药物治疗<br>
+                    · 静脉/骨髓腔通路<br>
+                    · 每3~5分钟给予1次肾上腺素<br>
+                    · 使用胺碘酮治疗顽固性室颤/无脉性室速<br><br>
+                    
+                    · 考虑高级气道<br>
+                    · 定量呼气末二氧化碳波形图<br><br>
+                    
+                    治疗可逆性病因<br><br>
+                    
+                    监测CPR质量<br><br>
+                    
+                    ← 持续进行CPR（循环）
+                </td>
+            </tr>
+            <tr class="section-title">
+                <td colspan="2">【CABD流程】</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    呼吸和除颤，简称为CABD（circulation support, airway control, breathing support, defibrillation），其中C、A、B、D分别指循环、气道、通气和除颤（图32）。
+                </td>
+            </tr>
+            <tr class="section-title">
+                <td colspan="2">【CABD流程步骤】</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    首先需要判断患者有无反应、呼吸。若发现无任何反应，立即呼叫急救系统。随后开始实施CPR。有条件时，可考虑实施"D"，即除颤。实施的具体内容如下。<br><br>
+                    
+                    ● 早期识别心搏骤停患者：发现患者突然倒地，意识丧失。<br><br>
+                    
+                    ● 启动急救系统：国内一般呼叫"120"，告知事件地点，需行CPR救援。<br><br>
+                    
+                    ● C（循环支持）：同时判断大动脉搏动和呼吸5～10秒，一般触摸颈动脉搏动。如无搏动和呼吸或无法判断，应立即启动胸外心脏按压。<br><br>
+                    
+                    <span class="check-mark">✓</span> 对非专业医务人员来说，判断动脉搏动易出错，会延误复苏，可不必判断大动脉搏动。<br><br>
+                    
+                    <span class="check-mark">✓</span> 心脏按压操作要领（图33）
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center; color: #888; font-size: 12px;">— 第332页 —</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="bottom-section">
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyText" value="CPR流程与CABD急救技术；CABD；循环支持；气道控制；呼吸支持；除颤；肾上腺素；胺碘酮；室颤；无脉性室速；心搏骤停；胸外心脏按压；颈动脉搏动；=343" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+        
+        <div class="page-number">页码：343</div>
+        
+        <div class="keywords">
+            关键词：CPR、CABD、心肺复苏、急救、除颤、肾上腺素、胺碘酮、室颤、心搏骤停
+        </div>
+        
+        <div class="tags-section">
+            <div class="tags-title">🔖 检索标签（点击快速检索）：</div>
+            <span class="tag">CPR</span>
+            <span class="tag">CABD</span>
+            <span class="tag">循环支持</span>
+            <span class="tag">气道控制</span>
+            <span class="tag">呼吸支持</span>
+            <span class="tag">除颤</span>
+            <span class="tag">肾上腺素</span>
+            <span class="tag">胺碘酮</span>
+            <span class="tag">室颤</span>
+            <span class="tag">无脉性室速</span>
+            <span class="tag">心搏骤停</span>
+            <span class="tag">胸外心脏按压</span>
+            <span class="tag">颈动脉搏动</span>
+            <span class="tag">急救系统</span>
+            <span class="tag">120</span>
+            <span class="tag">自主循环</span>
+            <span class="tag">高级气道</span>
+            <span class="tag">二氧化碳波形图</span>
+            <span class="tag">可逆性病因</span>
+        </div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            }, function() {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            });
+        }
+        
+        function addToFavorites() {
+            const title = document.title;
+            const url = window.location.href;
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === url);
+            if (!exists) {
+                favorites.push({title: title, url: url, category: '急救技术'});
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已添加到收藏！');
+            } else {
+                alert('已在收藏中！');
+            }
+        }
+    </script>
+</body>
+</html>
