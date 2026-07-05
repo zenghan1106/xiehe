@@ -1,0 +1,486 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~HUS与TTP鉴别诊断及弥散性血管内凝血*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.8;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #5a9bd5;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .fav-btn {
+            background: #e8a838;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        
+        h1 {
+            color: #1a5276;
+            font-size: 22px;
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        h2 {
+            color: #2874a6;
+            font-size: 18px;
+            margin: 25px 0 15px;
+            padding-left: 12px;
+            border-left: 4px solid #3498db;
+        }
+        
+        h3 {
+            color: #2e86c1;
+            font-size: 16px;
+            margin: 20px 0 12px;
+        }
+        
+        .content-box {
+            background: rgba(255,255,255,0.85);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        thead {
+            background: #2e86c1;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 14px;
+            font-size: 17px;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        tbody td {
+            padding: 14px;
+            text-align: center;
+            border-bottom: 1px solid #e8f4f8;
+            font-size: 15px;
+            color: #444;
+        }
+        
+        tbody tr:hover {
+            background: #f0f8ff;
+        }
+        
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .yes-cell {
+            color: #27ae60;
+            font-weight: 600;
+        }
+        
+        .no-cell {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+        
+        ul {
+            padding-left: 22px;
+            margin: 12px 0;
+        }
+        
+        li {
+            margin: 10px 0;
+            color: #555;
+            font-size: 15px;
+        }
+        
+        .section {
+            margin-bottom: 25px;
+        }
+        
+        .tags-container {
+            background: rgba(255,255,255,0.9);
+            border-radius: 16px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            color: #1a5276;
+            font-size: 16px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #d4edda;
+            color: #155724;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .tag-disease {
+            background: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+        }
+        
+        .tag-drug {
+            background: #fff3cd;
+            color: #856404;
+            border-color: #ffeaa7;
+        }
+        
+        .tag-bacteria {
+            background: #d1ecf1;
+            color: #0c5460;
+            border-color: #bee5eb;
+        }
+        
+        .bottom-section {
+            background: rgba(255,255,255,0.9);
+            border-radius: 16px;
+            padding: 25px;
+            margin-top: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+        
+        .keywords {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 2;
+        }
+        
+        .keywords strong {
+            color: #2e86c1;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #888;
+            font-size: 15px;
+            margin: 15px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 14px 18px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #555;
+            background: #fafafa;
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 15px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 12px;
+            }
+            
+            h1 {
+                font-size: 18px;
+                padding: 12px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            .content-box, .tags-container, .bottom-section {
+                padding: 18px;
+            }
+            
+            .copy-box {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="168.html" class="nav-btn">上一页</a>
+            <a href="170.html" class="nav-btn">下一页</a>
+            <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+
+    <h1>~~~~~HUS与TTP鉴别诊断及弥散性血管内凝血*****</h1>
+
+    <div class="content-box">
+        <div class="section">
+            <h2>一、溶血性尿毒综合征（HUS）相关检查与诊断</h2>
+            
+            <h3>1. 肝肾功能</h3>
+            <ul>
+                <li>LDH水平增高</li>
+            </ul>
+            
+            <h3>2. ADAMTS13活性及抑制物测定</h3>
+            <ul>
+                <li>活性正常，抑制物阴性</li>
+            </ul>
+            
+            <h3>3. 选做检查</h3>
+            <ul>
+                <li>补体（如C3、C4、CH50）下降、抗补体蛋白抗体阳性、补体基因突变</li>
+            </ul>
+            
+            <h3>4. 诊断</h3>
+            <ul>
+                <li>MAHA、血小板减少和急性肾损伤的三联征</li>
+                <li>腹泻相关HUS常有不洁饮食及腹泻病史</li>
+                <li>补体介导的HUS常无法证实存在由补体蛋白基因突变或补体因子抗体导致的补体调节异常</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>二、HUS和TTP的鉴别诊断（表29）</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ADAMTS13活性<10%</th>
+                        <th>PEX反应好</th>
+                        <th>提示</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="yes-cell">Yes</td>
+                        <td class="yes-cell">Yes</td>
+                        <td>TTP</td>
+                    </tr>
+                    <tr>
+                        <td class="no-cell">No</td>
+                        <td class="yes-cell">Yes</td>
+                        <td>HUS可能</td>
+                    </tr>
+                    <tr>
+                        <td class="no-cell">No</td>
+                        <td>Yes且合并肾衰竭</td>
+                        <td>HUS</td>
+                    </tr>
+                    <tr>
+                        <td class="no-cell">No</td>
+                        <td class="no-cell">No</td>
+                        <td>高度怀疑HUS，可予依库珠单抗</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>三、急诊处理</h2>
+            <ul>
+                <li>大部分HUS血浆置换无效，可抗补体治疗（依库珠单抗）</li>
+                <li>支持治疗：肾脏替代治疗，避免感染</li>
+            </ul>
+            <p style="text-align:right;color:#888;font-size:14px;">（杨 惊）</p>
+        </div>
+
+        <div class="section">
+            <h2>四、弥散性血管内凝血（DIC）</h2>
+            
+            <h3>1. 定义</h3>
+            <ul>
+                <li>弥散性血管内凝血（DIC）又称消耗性凝血病或去纤维蛋白综合征，是可导致血栓形成和出血的全身性疾病</li>
+                <li>可表现为急性、危及生命的急症，也可表现为慢性、亚临床病程，这取决于疾病的严重程度、进展速度及基础病因对发病的影响</li>
+                <li>识别DIC及其基础病因是正确处理DIC的关键</li>
+            </ul>
+            
+            <h3>2. 常见病因</h3>
+            <ul>
+                <li>脓毒症：由各种病原体引起（细菌、真菌、病毒和寄生虫）</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="tags-container">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags">
+            <span class="tag tag-disease">HUS</span>
+            <span class="tag tag-disease">TTP</span>
+            <span class="tag tag-disease">弥散性血管内凝血</span>
+            <span class="tag tag-disease">DIC</span>
+            <span class="tag tag-disease">溶血性尿毒综合征</span>
+            <span class="tag tag-disease">血栓性血小板减少性紫癜</span>
+            <span class="tag tag-disease">消耗性凝血病</span>
+            <span class="tag tag-disease">去纤维蛋白综合征</span>
+            <span class="tag tag-disease">脓毒症</span>
+            <span class="tag tag-drug">依库珠单抗</span>
+            <span class="tag tag-bacteria">细菌</span>
+            <span class="tag tag-bacteria">真菌</span>
+            <span class="tag tag-bacteria">病毒</span>
+            <span class="tag tag-bacteria">寄生虫</span>
+        </div>
+    </div>
+
+    <div class="bottom-section">
+        <div class="page-number">页码：169</div>
+        
+        <div class="keywords">
+            <strong>关键词：</strong>HUS；TTP；ADAMTS13；弥散性血管内凝血；DIC；依库珠单抗；补体；脓毒症；消耗性凝血病；去纤维蛋白综合征；血栓形成；出血；血浆置换；PEX；肾衰竭；MAHA；血小板减少；急性肾损伤；LDH；C3；C4；CH50；病原体；细菌；真菌；病毒；寄生虫
+        </div>
+        
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyText" value="HUS与TTP鉴别诊断及弥散性血管内凝血；HUS、TTP、ADAMTS13、弥散性血管内凝血、DIC、依库珠单抗、补体、脓毒症、消耗性凝血病、去纤维蛋白综合征、血栓形成、出血、血浆置换、PEX、肾衰竭、MAHA、血小板减少、急性肾损伤、LDH、C3、C4、CH50、病原体、细菌、真菌、病毒、寄生虫；=169" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '已复制！';
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                }, 2000);
+            });
+        }
+        
+        function addToFavorites() {
+            const pageData = {
+                title: 'HUS与TTP鉴别诊断及弥散性血管内凝血',
+                url: window.location.href,
+                category: '血液系统疾病'
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === pageData.url);
+            
+            if (!exists) {
+                favorites.push(pageData);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已添加到收藏！');
+            } else {
+                alert('该页面已在收藏中！');
+            }
+        }
+    </script>
+</body>
+</html>
