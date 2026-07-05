@@ -1,0 +1,432 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~抗菌药物敏感性试验报告*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            z-index: 100;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(92,184,92,0.3);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+        }
+        
+        .nav-btn.next {
+            background: #f0ad4e;
+            box-shadow: 0 2px 8px rgba(240,173,78,0.3);
+        }
+        
+        .nav-btn.next:hover {
+            background: #ec971f;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #d9534f;
+            box-shadow: 0 2px 8px rgba(217,83,79,0.3);
+        }
+        
+        .fav-btn:hover {
+            background: #c9302c;
+        }
+        
+        /* 标题 */
+        h1 {
+            text-align: center;
+            color: #2c5282;
+            font-size: 22px;
+            margin: 60px 0 25px 0;
+            padding: 0 10px;
+            word-break: break-all;
+            line-height: 1.4;
+        }
+        
+        /* 表格容器 */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 0 auto 25px auto;
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+            min-width: 320px;
+        }
+        
+        /* 表头 */
+        thead tr {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 10px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        /* 表格内容 */
+        td, th {
+            border: 1px solid #e2e8f0;
+            padding: 10px 8px;
+            text-align: center;
+            word-break: break-all;
+            line-height: 1.5;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #e6f0fa;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 25px auto;
+            max-width: 800px;
+            padding: 0 10px;
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            color: #4a5568;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: white;
+        }
+        
+        .tag-disease {
+            background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+        }
+        
+        .tag-bacteria {
+            background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+        }
+        
+        .tag-antibiotic {
+            background: linear-gradient(135deg, #3182ce 0%, #2b6cb0 100%);
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #4a5568;
+            margin: 20px 0;
+            font-weight: 600;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            font-size: 13px;
+            color: #718096;
+            margin: 15px 0 25px 0;
+            padding: 0 10px;
+            line-height: 1.6;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            margin: 20px auto;
+            max-width: calc(100% - 100px);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            padding: 0 10px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #4a5568;
+            background: white;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(102,126,234,0.3);
+        }
+        
+        .copy-btn:hover {
+            opacity: 0.9;
+        }
+        
+        .copy-btn.copied {
+            background: #48bb78;
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #48bb78;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 25px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 200;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 18px;
+                margin-top: 70px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 6px;
+            }
+            
+            td, th {
+                padding: 8px 5px;
+                font-size: 12px;
+            }
+            
+            .nav-btn, .home-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                max-width: calc(100% - 60px);
+                flex-direction: column;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="111.html" class="nav-btn">← 上一页</a>
+        <a href="113.html" class="nav-btn next">下一页 →</a>
+        <button class="nav-btn fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~抗菌药物敏感性试验报告*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>项目</th>
+                    <th>结果</th>
+                    <th>参考值</th>
+                    <th>单位</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 图片识别内容将填入此处 -->
+                <tr><td>样本类型</td><td>血液</td><td>-</td><td>-</td></tr>
+                <tr><td>检测细菌</td><td>大肠杆菌</td><td>无</td><td>-</td></tr>
+                <tr><td>头孢曲松</td><td>耐药(R)</td><td>敏感</td><td>-</td></tr>
+                <tr><td>头孢他啶</td><td>中介(I)</td><td>敏感</td><td>-</td></tr>
+                <tr><td>亚胺培南</td><td>敏感(S)</td><td>敏感</td><td>-</td></tr>
+                <tr><td>阿米卡星</td><td>敏感(S)</td><td>敏感</td><td>-</td></tr>
+                <tr><td>环丙沙星</td><td>耐药(R)</td><td>敏感</td><td>-</td></tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 快速检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">败血症</span>
+            <span class="tag tag-bacteria">大肠杆菌</span>
+            <span class="tag tag-antibiotic">头孢曲松</span>
+            <span class="tag tag-antibiotic">头孢他啶</span>
+            <span class="tag tag-antibiotic">亚胺培南</span>
+            <span class="tag tag-antibiotic">阿米卡星</span>
+            <span class="tag tag-antibiotic">环丙沙星</span>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">112</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        关键词：抗菌药物敏感性试验；药敏试验；大肠杆菌；败血症；耐药；亚胺培南；阿米卡星
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="抗菌药物敏感性试验报告；败血症；大肠杆菌；头孢曲松；头孢他啶；亚胺培南；阿米卡星；环丙沙星；药敏试验；耐药=112" readonly>
+        <button class="copy-btn" onclick="copyContent()">复制</button>
+    </div>
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast">已复制到剪贴板！</div>
+    
+    <script>
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                const toast = document.getElementById('toast');
+                btn.textContent = '已复制';
+                btn.classList.add('copied');
+                toast.classList.add('show');
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                    toast.classList.remove('show');
+                }, 2000);
+            });
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            // 获取当前页面信息
+            const title = document.querySelector('h1').textContent;
+            const pageNum = document.querySelector('.page-number').textContent.trim();
+            const currentUrl = window.location.href;
+            
+            // 构建收藏数据
+            const favItem = {
+                title: title,
+                pageNum: pageNum,
+                url: currentUrl,
+                time: new Date().toLocaleString()
+            };
+            
+            // 从localStorage获取已有收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites_index') || '[]');
+            
+            // 检查是否已存在
+            const exists = favorites.some(item => item.url === currentUrl);
+            if (exists) {
+                alert('该页面已在收藏中！');
+                return;
+            }
+            
+            // 添加新收藏
+            favorites.push(favItem);
+            localStorage.setItem('favorites_index', JSON.stringify(favorites));
+            
+            // 同时尝试更新index.html的收藏列表（通过localStorage共享）
+            localStorage.setItem('favorites_updated', 'true');
+            localStorage.setItem('latest_favorite', JSON.stringify(favItem));
+            
+            alert('收藏成功！已添加到首页收藏类目。');
+        }
+    </script>
+</body>
+</html>
