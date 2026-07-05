@@ -1,0 +1,392 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~低钠血症诊疗指南*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f5f0;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background-color: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            background-color: #4a90d9;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .fav-btn {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c5282;
+            font-size: 24px;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #e8f0fe;
+            border-radius: 10px;
+            word-break: break-all;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        thead {
+            background-color: #2c5282;
+            color: white;
+        }
+        
+        th {
+            padding: 15px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 15px;
+            color: #444;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+        
+        tr:hover {
+            background-color: #f0f7ff;
+        }
+        
+        .section-title {
+            color: #2c5282;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .sub-item {
+            padding-left: 20px;
+            color: #555;
+        }
+        
+        .diamond::before {
+            content: "◇ ";
+            color: #4a90d9;
+        }
+        
+        .check::before {
+            content: "✓ ";
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .bullet::before {
+            content: "● ";
+            color: #ff6b6b;
+        }
+        
+        .note {
+            color: #666;
+            font-style: italic;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-left: 3px solid #4a90d9;
+        }
+        
+        .tags-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c5282;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: #e8f0fe;
+            color: #2c5282;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 14px;
+            border: 1px solid #4a90d9;
+        }
+        
+        .copy-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #4a90d9;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: monospace;
+        }
+        
+        .copy-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            color: #666;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+        
+        .keywords {
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 18px;
+            }
+            th {
+                font-size: 15px;
+            }
+            td {
+                font-size: 13px;
+                padding: 8px;
+            }
+            .copy-input {
+                width: 100%;
+            }
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .nav-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">返回首页</a>
+        <div>
+            <div class="nav-buttons">
+                <a href="258.html" class="nav-btn">上一页</a>
+                <a href="260.html" class="nav-btn">下一页</a>
+            </div>
+            <button class="fav-btn" onclick="addToFavorites()">收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~低钠血症诊疗指南*****</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>低钠血症诊疗内容</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>减少NDI患者尿量有一定帮助。</td>
+            </tr>
+            <tr>
+                <td class="sub-item diamond">遗传性NDI患者，尤其是婴幼儿人群，因不能独立对口渴做出反应，应以每2小时1次的频率为其提供水分，严重者需持续鼻饲。</td>
+            </tr>
+            <tr>
+                <td class="sub-item diamond">低盐、低蛋白饮食。</td>
+            </tr>
+            <tr>
+                <td style="text-align: right; color: #666;">（王春婷）</td>
+            </tr>
+            <tr>
+                <td><span class="section-title">■ 低钠血症</span></td>
+            </tr>
+            <tr>
+                <td><span class="section-title">1. 定义</span></td>
+            </tr>
+            <tr>
+                <td><span class="bullet">低钠血症指血清钠浓度<135mmol/L。</span></td>
+            </tr>
+            <tr>
+                <td><span class="bullet">根据血清钠浓度界定如下：</span>轻度低钠血症，血清钠浓度130～135mmol/L；中度低钠血症，血清钠浓度121～129mmol/L；重度低钠血症，血清钠浓度≤120mmol/L。</td>
+            </tr>
+            <tr>
+                <td><span class="section-title">2. 常见病因</span></td>
+            </tr>
+            <tr>
+                <td><span class="bullet">稀释性低渗透压（<275mmol/kg）低钠血症病因。</span></td>
+            </tr>
+            <tr>
+                <td class="sub-item check">真性血容量不足：是常见原因，如胃肠道丢失（呕吐、腹泻等）或肾性丢失（常见于应用噻嗪类而非袢利尿药时）或大量失血。</td>
+            </tr>
+            <tr>
+                <td class="sub-item check">血容量过多但有效循环血容量不足：如心力衰竭时心输出量降低或肝硬化时内脏血管扩张而导致组织灌注减少。</td>
+            </tr>
+            <tr>
+                <td class="sub-item check">血容量正常：最常见于抗利尿激素分泌不当综合征（SIADH），可由中枢神经系统疾病、恶性肿瘤、某些药物及近期手术导致。亦可见于肾上腺皮质功能减退症、甲状腺功能减退症等内分泌疾病。一些疾病尽管ADH分泌被适当抑制，患者仍发生低钠血症，如原发性烦渴、低溶质膳食摄入、终末期肾衰竭。</td>
+            </tr>
+            <tr>
+                <td class="note">注：血浆渗透压可通过血清中主要溶质浓度（单位均为mmol/L）计算：血浆渗透压（mmol/kg）=血钠×2+血糖+尿素氮。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet">高渗透压低钠血症病因：</span>大部分低钠血症均伴血浆渗透压成比例降低，但某些疾病情况下，患者低钠血症伴血浆渗透压升高。</td>
+            </tr>
+            <tr>
+                <td class="sub-item check">常见病因：糖尿病酮症酸中毒或高渗性高血糖状态。</td>
+            </tr>
+            <tr>
+                <td class="sub-item check">少见原因：高渗甘露醇、麦芽糖或蔗糖的使用及随后的液体潴留。</td>
+            </tr>
+            <tr>
+                <td><span class="bullet">正常渗透压低钠血症病因</span></td>
+            </tr>
+            <tr>
+                <td class="sub-item check">非导电性灌注液：向细胞外间隙加入等渗（或接近等渗）</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="tags-section">
+        <div class="tags-title">检索标签：</div>
+        <span class="tag">低钠血症</span>
+        <span class="tag">NDI</span>
+        <span class="tag">抗利尿激素分泌不当综合征</span>
+        <span class="tag">SIADH</span>
+        <span class="tag">心力衰竭</span>
+        <span class="tag">肝硬化</span>
+        <span class="tag">肾上腺皮质功能减退症</span>
+        <span class="tag">甲状腺功能减退症</span>
+        <span class="tag">原发性烦渴</span>
+        <span class="tag">终末期肾衰竭</span>
+        <span class="tag">糖尿病酮症酸中毒</span>
+        <span class="tag">高渗性高血糖状态</span>
+        <span class="tag">甘露醇</span>
+        <span class="tag">麦芽糖</span>
+        <span class="tag">蔗糖</span>
+        <span class="tag">噻嗪类</span>
+        <span class="tag">袢利尿药</span>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="低钠血症诊疗指南；定义；常见病因；稀释性低渗透压；高渗透压低钠血症；正常渗透压低钠血症；NDI；SIADH；心力衰竭；肝硬化；糖尿病酮症酸中毒；高渗性高血糖状态；甘露醇；噻嗪类；袢利尿药；=259" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="page-number">259</div>
+    <div class="keywords">关键词：低钠血症 NDI SIADH 心力衰竭 肝硬化 肾上腺皮质功能减退症 甲状腺功能减退症 糖尿病酮症酸中毒 高渗性高血糖状态 甘露醇 噻嗪类 袢利尿药</div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板：" + copyText.value);
+            }, function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板：" + copyText.value);
+            });
+        }
+        
+        function addToFavorites() {
+            const title = document.title;
+            const url = window.location.href;
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === url);
+            if (!exists) {
+                favorites.push({title: title, url: url, page: '259'});
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已添加到收藏！');
+            } else {
+                alert('该页面已在收藏中！');
+            }
+        }
+    </script>
+</body>
+</html>
