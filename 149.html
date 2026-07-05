@@ -1,0 +1,573 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~AKI尿沉渣续表与急诊处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e6eef7 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #2d3748;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .back-btn {
+            background: #3182ce;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(49, 130, 206, 0.3);
+        }
+        
+        .back-btn:hover {
+            background: #2c5282;
+            transform: translateY(-2px);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #4299e1;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(66, 153, 225, 0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #3182ce;
+            transform: translateY(-1px);
+        }
+        
+        .fav-btn {
+            background: #ed8936;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(237, 137, 54, 0.3);
+        }
+        
+        .fav-btn:hover {
+            background: #dd6b20;
+            transform: translateY(-1px);
+        }
+        
+        .fav-btn.active {
+            background: #c53030;
+        }
+        
+        .main-title {
+            text-align: center;
+            font-size: 26px;
+            color: #2b6cb0;
+            margin: 15px 0 25px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.08);
+        }
+        
+        .subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #4a5568;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        thead {
+            background: #2b6cb0;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        
+        tbody td {
+            padding: 10px 12px;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+            vertical-align: top;
+            line-height: 1.7;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        tbody tr:hover {
+            background: #edf2f7;
+        }
+        
+        .section-header {
+            background: #ebf8ff !important;
+            color: #2b6cb0;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        
+        .category-cell {
+            background: #f0fff4;
+            color: #276749;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        .subcategory-cell {
+            background: #fffaf0;
+            color: #c05621;
+            font-weight: 500;
+        }
+        
+        .detail-cell {
+            color: #4a5568;
+        }
+        
+        .important-note {
+            color: #c53030;
+            font-weight: 600;
+        }
+        
+        .drug-name {
+            color: #6b46c1;
+            font-weight: 600;
+        }
+        
+        .dosage {
+            color: #2d3748;
+            background: #fef3c7;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        .tags-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #4a5568;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            border: none;
+        }
+        
+        .tag-disease {
+            background: #fed7d7;
+            color: #c53030;
+        }
+        
+        .tag-disease:hover {
+            background: #fc8181;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .tag-bacteria:hover {
+            background: #68d391;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #e9d8fd;
+            color: #6b46c1;
+        }
+        
+        .tag-drug:hover {
+            background: #b794f4;
+            color: white;
+        }
+        
+        .tag-organ {
+            background: #bee3f8;
+            color: #2b6cb0;
+        }
+        
+        .tag-organ:hover {
+            background: #63b3ed;
+            color: white;
+        }
+        
+        .copy-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #4a5568;
+        }
+        
+        .copy-btn {
+            background: #48bb78;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(72, 187, 120, 0.3);
+        }
+        
+        .copy-btn:hover {
+            background: #38a169;
+        }
+        
+        .copy-btn.copied {
+            background: #805ad5;
+        }
+        
+        .page-info {
+            text-align: center;
+            margin: 20px 0;
+            color: #718096;
+            font-size: 14px;
+        }
+        
+        .keywords {
+            text-align: center;
+            margin: 15px 0 30px;
+            color: #a0aec0;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 20px;
+            }
+            
+            .subtitle {
+                font-size: 15px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                font-size: 12px;
+                padding: 8px;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-buttons {
+                flex-direction: row;
+                justify-content: flex-end;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="148.html" class="nav-btn">上一页</a>
+            <a href="150.html" class="nav-btn">下一页</a>
+            <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <h1 class="main-title">~~~~~AKI尿沉渣续表与急诊处理*****</h1>
+    <div class="subtitle">尿沉渣续表 | 必做检查 | 选做检查 | 急诊处理</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>章节</th>
+                    <th>分类/项目</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-header">
+                    <td colspan="3">续表 — 不同肾脏疾病的尿沉渣结果（表23续）</td>
+                </tr>
+                <tr>
+                    <td rowspan="4" class="category-cell">尿沉渣结果</td>
+                    <td class="subcategory-cell">间质性肾炎</td>
+                    <td class="detail-cell">白细胞尿、轻度蛋白尿、颗粒管型、上皮细胞管型、嗜酸性粒细胞</td>
+                </tr>
+                <tr>
+                    <td class="subcategory-cell">肾小球肾炎</td>
+                    <td class="detail-cell">血尿、显性蛋白尿、红细胞管型（异型红细胞）、颗粒管型</td>
+                </tr>
+                <tr>
+                    <td class="subcategory-cell">肾血管性疾病</td>
+                    <td class="detail-cell">正常或血尿、轻度蛋白尿</td>
+                </tr>
+                <tr>
+                    <td class="subcategory-cell">肾后性</td>
+                    <td class="detail-cell">正常或血尿、颗粒管型、脓尿</td>
+                </tr>
+                <tr class="section-header">
+                    <td colspan="3">4. 必做检查</td>
+                </tr>
+                <tr>
+                    <td rowspan="4" class="category-cell">必做检查</td>
+                    <td class="subcategory-cell">血常规</td>
+                    <td class="detail-cell">可有轻度贫血</td>
+                </tr>
+                <tr>
+                    <td class="subcategory-cell">生化检查</td>
+                    <td class="detail-cell">血清Cr和BUN进行性升高，还需评估白蛋白、尿酸水平</td>
+                </tr>
+                <tr>
+                    <td class="subcategory-cell">ABG</td>
+                    <td class="detail-cell">可评估患者是否出现酸中毒、高钾血症、低钙血症</td>
+                </tr>
+                <tr>
+                    <td class="subcategory-cell">超声检查</td>
+                    <td class="detail-cell">肾大小，肾动脉、深静脉超声，协助区分急、慢性肾功能损伤，协助了解AKI病因</td>
+                </tr>
+                <tr class="section-header">
+                    <td colspan="3">5. 选做检查</td>
+                </tr>
+                <tr>
+                    <td rowspan="4" class="category-cell">选做检查</td>
+                    <td class="subcategory-cell">血免疫指标检测</td>
+                    <td class="detail-cell">ANA、ANCA、抗GBM抗体</td>
+                </tr>
+                <tr>
+                    <td class="subcategory-cell">逆行性造影</td>
+                    <td class="detail-cell">明确有无尿路梗阻</td>
+                </tr>
+                <tr>
+                    <td class="subcategory-cell">影像学检查</td>
+                    <td class="detail-cell">肾动静脉彩超、放射性核素检查、CT或MRI肾血管成像、肾血管造影等</td>
+                </tr>
+                <tr>
+                    <td class="subcategory-cell">肾活检</td>
+                    <td class="detail-cell">除外肾前性及肾后性原因，拟诊肾性AKI需明确病因时，除外禁忌应尽早活检</td>
+                </tr>
+                <tr class="section-header">
+                    <td colspan="3">6. 急诊处理</td>
+                </tr>
+                <tr>
+                    <td rowspan="8" class="category-cell">评估容量</td>
+                    <td class="subcategory-cell">所有AKI患者</td>
+                    <td class="detail-cell">均应进行容量状态评估，及时纠正容量不足或超负荷，逆转或改善AKI</td>
+                </tr>
+                <tr>
+                    <td class="subcategory-cell">存在液体丢失病史、出现低血压或心动过速或少尿患者</td>
+                    <td class="detail-cell">除外禁忌后，应静脉补液，也可借此识别肾前性AKI</td>
+                </tr>
+                <tr>
+                    <td class="subcategory-cell">慎用</td>
+                    <td class="detail-cell">含钾的晶体液</td>
+                </tr>
+                <tr>
+                    <td class="subcategory-cell">容量超负荷患者</td>
+                    <td class="detail-cell">应用利尿药缓解，首选袢利尿药（<span class="drug-name">呋塞米</span>），推荐<span class="dosage">40 ~ 80mg</span>呋塞米静脉给药开始，逐渐加量，以评估是否有反应。可加用一种噻嗪类利尿药增强利尿。若患者反应极小，应考虑开始肾脏替代治疗</td>
+                </tr>
+                <tr>
+                    <td class="subcategory-cell" colspan="2" style="background: #ebf8ff; color: #2b6cb0; font-weight: bold;">控制高钾血症</td>
+                </tr>
+                <tr>
+                    <td class="subcategory-cell">轻度高钾血症和由已知可逆病因引起的AKI</td>
+                    <td class="detail-cell">给予低钾饮食、补液和/或停用<span class="drug-name">ACEI</span>或<span class="drug-name">ARB</span>。环硅酸锆钠对高钾血症有一定作用</td>
+                </tr>
+                <tr>
+                    <td class="subcategory-cell">由不易逆转病因（如急性肾小管坏死）导致的AKI和药物</td>
+                    <td class="detail-cell">—</td>
+                </tr>
+                <tr>
+                    <td class="detail-cell">—</td>
+                    <td class="detail-cell">—</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签（点击筛选）</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">间质性肾炎</span>
+            <span class="tag tag-disease">肾小球肾炎</span>
+            <span class="tag tag-disease">肾血管性疾病</span>
+            <span class="tag tag-disease">急性肾损伤</span>
+            <span class="tag tag-disease">AKI</span>
+            <span class="tag tag-disease">酸中毒</span>
+            <span class="tag tag-disease">高钾血症</span>
+            <span class="tag tag-disease">低钙血症</span>
+            <span class="tag tag-disease">尿路梗阻</span>
+            <span class="tag tag-disease">急性肾小管坏死</span>
+            <span class="tag tag-drug">呋塞米</span>
+            <span class="tag tag-drug">ACEI</span>
+            <span class="tag tag-drug">ARB</span>
+            <span class="tag tag-drug">环硅酸锆钠</span>
+            <span class="tag tag-organ">肾</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="AKI尿沉渣续表与急诊处理；尿沉渣续表；必做检查；选做检查；急诊处理；间质性肾炎；肾小球肾炎；肾血管性疾病；AKI；酸中毒；高钾血症；低钙血症；尿路梗阻；急性肾小管坏死；呋塞米；ACEI；ARB；环硅酸锆钠；=149" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyContent()">复制</button>
+    </div>
+    
+    <div class="page-info">页码：149</div>
+    
+    <div class="keywords">关键词：AKI尿沉渣续表 | 急诊处理 | 间质性肾炎 | 肾小球肾炎 | 肾血管性疾病 | 肾后性 | 血常规 | 生化检查 | ABG | 超声检查 | 血免疫指标 | ANA | ANCA | 抗GBM抗体 | 逆行性造影 | 肾活检 | 评估容量 | 控制高钾血症 | 呋塞米 | ACEI | ARB | 环硅酸锆钠 | 急性肾小管坏死</div>
+    
+    <script>
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制 ✓';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            if (isFav) {
+                btn.classList.remove('active');
+                btn.innerHTML = '☆ 收藏';
+                removeFromIndex();
+            } else {
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+                addToIndex();
+            }
+        }
+        
+        function addToIndex() {
+            const title = 'AKI尿沉渣续表与急诊处理';
+            const url = window.location.href;
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            favorites.push({ title: title, url: url, page: '149' });
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert('已添加到收藏！请在首页查看。');
+        }
+        
+        function removeFromIndex() {
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            favorites = favorites.filter(f => !f.url.includes('149'));
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert('已取消收藏！');
+        }
+        
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url.includes('149') || f.page === '149');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
