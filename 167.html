@@ -1,0 +1,423 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~血栓性血小板减少性紫癜的临床表现诊断与急诊处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8f0e8 100%);
+            color: #2c3e50;
+            line-height: 1.6;
+            padding: 15px;
+            min-height: 100vh;
+        }
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .left-btns {
+            display: flex;
+            gap: 8px;
+        }
+        .right-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        .btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+        .btn-home {
+            background: #3498db;
+            color: white;
+        }
+        .btn-home:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        .btn-nav {
+            background: #ecf0f1;
+            color: #34495e;
+            border: 1px solid #bdc3c7;
+        }
+        .btn-nav:hover {
+            background: #d5dbdb;
+        }
+        .btn-fav {
+            background: #e74c3c;
+            color: white;
+            font-size: 12px;
+            padding: 6px 14px;
+        }
+        .btn-fav:hover {
+            background: #c0392b;
+        }
+        .btn-fav.active {
+            background: #27ae60;
+        }
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0 20px;
+            padding: 12px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        .table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        thead {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+        thead th {
+            padding: 14px 10px;
+            font-size: 15px;
+            font-weight: 600;
+            text-align: center;
+        }
+        tbody td {
+            padding: 10px;
+            border-bottom: 1px solid #ecf0f1;
+            vertical-align: top;
+        }
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        tbody td:first-child {
+            font-weight: 600;
+            color: #1a5276;
+            background: rgba(52,152,219,0.05);
+            white-space: nowrap;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .first-row td {
+            font-size: 16px !important;
+            font-weight: 700;
+            padding: 14px 10px;
+        }
+        .content-cell {
+            text-align: left;
+            line-height: 1.8;
+        }
+        .content-cell ul {
+            padding-left: 18px;
+            margin: 0;
+        }
+        .content-cell li {
+            margin-bottom: 8px;
+        }
+        .check-item {
+            color: #27ae60;
+            font-weight: 600;
+        }
+        .bottom-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+            justify-content: center;
+        }
+        .tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .keywords {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 13px;
+            margin: 10px 0;
+        }
+        .page-num {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #3498db;
+            margin: 10px 0;
+        }
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .copy-input {
+            width: calc(100% - 120px);
+            max-width: 500px;
+            padding: 10px 14px;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #2c3e50;
+            background: white;
+        }
+        .btn-copy {
+            background: #27ae60;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .btn-copy:hover {
+            background: #229954;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 18px;
+            }
+            table {
+                font-size: 11px;
+            }
+            thead th {
+                font-size: 12px;
+                padding: 10px 6px;
+            }
+            tbody td {
+                padding: 8px 6px;
+            }
+            .first-row td {
+                font-size: 13px !important;
+            }
+            .copy-input {
+                width: calc(100% - 100px);
+                font-size: 12px;
+            }
+            .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="top-nav">
+        <div class="left-btns">
+            <a href="index.html" class="btn btn-home">← 返回首页</a>
+        </div>
+        <div class="right-btns">
+            <a href="166.html" class="btn btn-nav">上一页</a>
+            <a href="168.html" class="btn btn-nav">下一页</a>
+            <button class="btn btn-fav" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+
+    <!-- 标题 -->
+    <h1>~~~~~血栓性血小板减少性紫癜的临床表现诊断与急诊处理*****</h1>
+
+    <!-- 表格区域 -->
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>章节</th>
+                    <th>内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="first-row">
+                    <td>获得性TTP</td>
+                    <td class="content-cell">
+                        获得性TTP为抗ADAMTS13抗体存在而导致ADAMTS13活性下降，可有结缔组织病（CTD）、HIV感染、CMV感染、妊娠、药物等因素。
+                    </td>
+                </tr>
+                <tr>
+                    <td>2. 临床表现</td>
+                    <td class="content-cell">
+                        <ul>
+                            <li>经典TTP五联征：血小板减少、微血管性溶血性贫血（MAHA）、肾功能不全、发热、神经系统异常（头痛、癫痫、神志改变、脑卒中）。</li>
+                            <li>五联征除血小板减少和MAHA为必须，其他均为可能出现。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3. 必做检查</td>
+                    <td class="content-cell">
+                        <ul>
+                            <li>血涂片：破碎红细胞，明确MAHA证据。</li>
+                            <li>溶血证据：Hb↓，Ret↑，LDH↑，结合珠蛋白↓。</li>
+                            <li>血常规：血小板减少多为重度，中位值（10～17）×10⁹/L。</li>
+                            <li>肝功能检查：间接胆红素↑。</li>
+                            <li>肾功能检查：肌酐可能↑。</li>
+                            <li>Coombs试验：（-）。</li>
+                            <li>ADAMTS13活性及抑制物测定：活性＜正常活性的10%，抑制物阳性提示原发性TTP。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>4. 诊断</td>
+                    <td class="content-cell">
+                        <ul>
+                            <li>发现ADAMTS13严重缺乏（活性＜正常活性的10%）和/或存在ADAMTS13抑制物可确诊。</li>
+                            <li>若暂时无法获得ADAMTS13活性，可行PLASMIC评分，以预测TTP诊断成立可能性。以下每项特征的评分均计1分，评分较高（6～7分）预测TTP可能性大，其敏感性约为91%；评分较低（0～4分）提示TTP可能性小，其特异性约为99%；评分介于上述两个评分之间（4～5分），则预测其他疾病，如DITMA、DIC或HUS。</li>
+                            <li><span class="check-item">✓</span> PLT＜30×10⁹/L。</li>
+                            <li><span class="check-item">✓</span> 溶血：Ret＞2.5%、结合珠蛋白无法测得或间接胆红素＞34.2μmmol/L。</li>
+                            <li><span class="check-item">✓</span> 无活动性癌症。</li>
+                            <li><span class="check-item">✓</span> 无实体器官移植或干细胞移植。</li>
+                            <li><span class="check-item">✓</span> MCV＜90fL。</li>
+                            <li><span class="check-item">✓</span> INR＜1.5。</li>
+                            <li><span class="check-item">✓</span> 肌酐＜176.8μmol/L。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>5. 急诊处理</td>
+                    <td class="content-cell">
+                        <ul>
+                            <li><strong>血浆置换</strong></li>
+                            <li><span class="check-item">✓</span> TTP患者应在确诊和/或疑诊的24～48小时内尽快进行血浆置换。</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <!-- 检索标签 -->
+        <div class="tags">
+            <span class="tag">TTP</span>
+            <span class="tag">血栓性血小板减少性紫癜</span>
+            <span class="tag">ADAMTS13</span>
+            <span class="tag">MAHA</span>
+            <span class="tag">HIV</span>
+            <span class="tag">CMV</span>
+            <span class="tag">CTD</span>
+            <span class="tag">PLASMIC评分</span>
+            <span class="tag">DITMA</span>
+            <span class="tag">DIC</span>
+            <span class="tag">HUS</span>
+            <span class="tag">血浆置换</span>
+        </div>
+
+        <!-- 关键词 -->
+        <div class="keywords">
+            关键词：血栓性血小板减少性紫癜；TTP；获得性TTP；ADAMTS13；五联征；MAHA；PLASMIC评分；血浆置换；DITMA；DIC；HUS；Coombs试验
+        </div>
+
+        <!-- 页码 -->
+        <div class="page-num">167</div>
+
+        <!-- 复制功能 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="血栓性血小板减少性紫癜的临床表现诊断与急诊处理；获得性TTP病因临床表现必做检查诊断急诊处理；TTP、ADAMTS13、MAHA、PLASMIC评分、血浆置换、DITMA、DIC、HUS=167" readonly>
+            <button class="btn-copy" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                const btn = document.querySelector('.btn-copy');
+                btn.textContent = '已复制!';
+                btn.style.background = '#2980b9';
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.style.background = '#27ae60';
+                }, 1500);
+            });
+        }
+
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            const title = '血栓性血小板减少性紫癜的临床表现诊断与急诊处理';
+            const url = '167.html';
+            
+            if (!isFav) {
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.find(f => f.url === url);
+                if (!exists) {
+                    favorites.push({ title, url, date: new Date().toISOString() });
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+                localStorage.setItem('indexUpdate', JSON.stringify({
+                    action: 'add',
+                    title: title,
+                    url: url,
+                    category: '血液疾病'
+                }));
+            } else {
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== url);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                btn.classList.remove('active');
+                btn.innerHTML = '☆ 收藏';
+            }
+        }
+
+        // 检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.find(f => f.url === '167.html');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
