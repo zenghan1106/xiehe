@@ -1,0 +1,372 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~心肺复苏要领与胸外心脏按压操作规范*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f5f5f0;
+            background-image: linear-gradient(135deg, #f5f5f0 0%, #e8e8e0 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .back-home {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        
+        .nav-btn {
+            background: #5a9;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .favorite-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 22px;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fffef8;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        thead tr {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e0e0d0;
+            color: #333;
+            font-size: 14px;
+            vertical-align: top;
+        }
+        
+        tr:hover {
+            background: #f0f8ff;
+        }
+        
+        .section-title {
+            background: #e8f4f8;
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        .key-point {
+            background: #fff8e1;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .warning {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+        }
+        
+        .check-mark {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .bottom-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+        
+        .copy-area {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #4a90d9;
+            border-radius: 8px;
+            font-size: 14px;
+            background: #fff;
+        }
+        
+        .copy-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .tags-section {
+            margin-top: 20px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            cursor: pointer;
+        }
+        
+        .tag:hover {
+            background: #c0392b;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #888;
+            font-size: 12px;
+            margin-top: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-nav">
+        <a href="index.html" class="back-home">← 返回首页</a>
+        <div class="nav-right">
+            <a href="344.html" class="nav-btn">上一页</a>
+            <a href="346.html" class="nav-btn">下一页</a>
+            <button class="favorite-btn" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~心肺复苏要领与胸外心脏按压操作规范*****</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">图33 心肺复苏要领示意与操作规范</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="section-title">
+                <td colspan="2">【图示说明】图33 心肺复苏要领示意</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    （图示：抢救者跪于患者一侧，双手重叠按压患者胸骨下半段，双臂伸直，身体前倾，利用身体重力垂直向下按压）
+                </td>
+            </tr>
+            <tr class="section-title">
+                <td colspan="2">【操作要领】</td>
+            </tr>
+            <tr class="key-point">
+                <td colspan="2">
+                    ◇ 患者体位<br>
+                    患者仰卧于硬板床或地上，如为软床，身下应放一木板，以保证按压有效，但不要为了找木板而延误抢救时间。
+                </td>
+            </tr>
+            <tr class="key-point">
+                <td colspan="2">
+                    ◇ 抢救者体位<br>
+                    抢救者应紧靠患者胸部一侧，一般为其右侧，为保证按压时力量垂直作用于胸骨，抢救者可根据患者所处位置的高低采用跪式等不同体位。
+                </td>
+            </tr>
+            <tr class="key-point">
+                <td colspan="2">
+                    ◇ 按压部位<br>
+                    正确的按压部位是胸骨下半段，定位：标准体型者为胸部正中两乳头之间，即把手掌放在胸部正中，双乳头之间的胸骨上，另一只手重叠压在其背上。肘关节伸直，借助身体之力向下按压。抢救者双肘关节伸直，双肩在患者胸骨上方正中，肩、臂和手保持垂直用力向下按压，肘关节不能弯曲。
+                </td>
+            </tr>
+            <tr class="key-point">
+                <td colspan="2">
+                    ◇ 按压深度<br>
+                    ≥5cm，避免超过6cm。
+                </td>
+            </tr>
+            <tr class="key-point">
+                <td colspan="2">
+                    ◇ 按压频率<br>
+                    按压快速、有力，频率为100～120次/分，按压与放松时间大致相等。胸外心脏按压和人工呼吸比例为30:2。
+                </td>
+            </tr>
+            <tr class="key-point">
+                <td colspan="2">
+                    ◇ 胸廓回弹<br>
+                    每次按压后保证胸廓完全回弹。
+                </td>
+            </tr>
+            <tr class="key-point">
+                <td colspan="2">
+                    ◇ 减少中断<br>
+                    尽可能减少按压中断。
+                </td>
+            </tr>
+            <tr class="section-title">
+                <td colspan="2">【儿童与婴儿按压标准】</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    ◇ 儿童心脏按压标准：按压部位与按压频率与成人相同，但按压深度为胸廓前后径1/3，动作要平稳，不可用力过猛。如胸外心脏按压的对象是婴儿，其操作与成人及儿童有一定区别。婴儿的按压部位在胸骨上两乳头连线与胸骨中线交点下一横指，抢救者用中指和无名指按压，按压深度为胸廓厚度的1/3或约4cm，按压频率100～120次/分。
+                </td>
+            </tr>
+            <tr class="warning">
+                <td colspan="2">
+                    <span class="check-mark">✓</span> 胸外心脏按压注意事项和常见错误手法：胸外心脏按压如操作不标准，常会导致并发症的发生。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center; color: #888; font-size: 12px;">
+                    — 第334页 —
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="bottom-section">
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyText" value="心肺复苏要领与胸外心脏按压操作规范；心肺复苏；胸外心脏按压；按压部位；按压深度；按压频率；胸廓回弹；儿童心脏按压；婴儿心脏按压；人工呼吸；并发症；=345" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+        
+        <div class="page-number">页码：345</div>
+        
+        <div class="keywords">
+            关键词：心肺复苏、胸外心脏按压、胸骨下半段、按压深度、按压频率、胸廓回弹、儿童按压、婴儿按压、人工呼吸、并发症
+        </div>
+        
+        <div class="tags-section">
+            <div class="tags-title">🔖 检索标签（点击快速检索）：</div>
+            <span class="tag">心肺复苏</span>
+            <span class="tag">胸外心脏按压</span>
+            <span class="tag">硬板床</span>
+            <span class="tag">木板</span>
+            <span class="tag">抢救者体位</span>
+            <span class="tag">跪式</span>
+            <span class="tag">胸骨下半段</span>
+            <span class="tag">两乳头之间</span>
+            <span class="tag">肘关节伸直</span>
+            <span class="tag">按压深度</span>
+            <span class="tag">按压频率</span>
+            <span class="tag">100～120次/分</span>
+            <span class="tag">30:2</span>
+            <span class="tag">胸廓回弹</span>
+            <span class="tag">按压中断</span>
+            <span class="tag">儿童心脏按压</span>
+            <span class="tag">婴儿心脏按压</span>
+            <span class="tag">中指和无名指</span>
+            <span class="tag">并发症</span>
+            <span class="tag">人工呼吸</span>
+        </div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            }, function() {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            });
+        }
+        
+        function addToFavorites() {
+            const title = document.title;
+            const url = window.location.href;
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === url);
+            if (!exists) {
+                favorites.push({title: title, url: url, category: '急救技术'});
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已添加到收藏！');
+            } else {
+                alert('已在收藏中！');
+            }
+        }
+    </script>
+</body>
+</html>
