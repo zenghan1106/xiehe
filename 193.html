@@ -1,0 +1,471 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~特殊人群感染与破伤风*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 20px;
+        }
+        
+        /* 顶部导航 */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: rgba(255,255,255,0.9);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 5px;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .fav-btn {
+            background: #f0ad4e;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            padding: 20px 15px;
+            font-size: 22px;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            margin: 0 10px;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        /* 表头 */
+        thead tr {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 12px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        /* 表格内容 */
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 14px;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4fd;
+        }
+        
+        /* 小标题样式 */
+        .section-title {
+            color: #2c3e50;
+            font-weight: bold;
+            font-size: 15px;
+            margin: 10px 0 5px;
+        }
+        
+        .sub-item {
+            color: #555;
+            margin: 5px 0;
+            padding-left: 15px;
+            position: relative;
+        }
+        
+        .sub-item::before {
+            content: "•";
+            color: #4a90d9;
+            position: absolute;
+            left: 0;
+        }
+        
+        .highlight-box {
+            background: #e8f4fd;
+            padding: 10px;
+            border-radius: 6px;
+            margin: 8px 0;
+            border-left: 3px solid #4a90d9;
+        }
+        
+        .author {
+            text-align: right;
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            font-size: 16px;
+            color: #666;
+        }
+        
+        /* 底部编辑框区域 */
+        .bottom-section {
+            margin: 20px 10px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .copy-area {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 20px 10px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+        
+        /* 关键词 */
+        .keywords-section {
+            margin: 20px 10px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .keywords-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .keywords-content {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 16px;
+            }
+            
+            tbody td {
+                font-size: 13px;
+                padding: 10px;
+            }
+            
+            .copy-area {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="top-nav">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-right">
+            <a href="192.html" class="nav-btn">上一页</a>
+            <a href="194.html" class="nav-btn">下一页</a>
+            <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~特殊人群感染与破伤风*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~特殊人群感染与破伤风*****、特殊人群感染与破伤风、破伤风</div>
+    
+    <!-- 主表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>特殊人群感染与破伤风</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="highlight-box">
+                            <strong>粒细胞缺乏患者（续）：</strong>初始经验性治疗应覆盖假单胞菌。对于以下情况建议加用万古霉素：血流动力学不稳定、可疑导管相关性感染、既往有MASA定植、有严重的黏膜炎、血培养为革兰阳性菌。发热＞5天的患者应开始经验性抗真菌治疗。
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">2. 器官移植的患者</div>
+                        <div class="sub-item">移植后1～2个月内，90%为典型院内感染</div>
+                        <div class="sub-item">移植后1～6个月为机会性感染的高峰期。病毒：巨细胞病毒、EB病毒、水痘-带状疱疹病毒、腺病毒、流感病毒。细菌：结核分枝杆菌、奴卡菌、李斯特菌。真菌：念珠菌、曲霉菌、肺孢子菌、隐球菌。寄生虫：类圆线虫、利什曼原虫、弓形虫</div>
+                        <div class="sub-item">移植6个月后，感染风险取决于患者的健康状态恢复程度。恢复顺利的患者80%的感染同普通社区获得性感染患者，存在严重排斥反应者机会性感染的风险同移植后1～6个月</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">3. 无脾患者</div>
+                        <div class="sub-item">有荚膜细菌：肺炎链球菌、脑膜炎球菌、流感嗜血杆菌</div>
+                        <div class="sub-item">细胞内寄生虫感染</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">4. 糖皮质激素治疗的患者</div>
+                        <div class="sub-item">对普通病原体感染的风险显著增加，还会出现各种细胞内病原体和机会性致病菌的感染</div>
+                        <div class="sub-item">细胞内病原体：分枝杆菌、李斯特菌属、沙门菌、军团菌以及各类病毒等</div>
+                        <div class="sub-item">机会性致病菌：念珠菌、曲霉菌、隐球菌、奴卡菌、弓形虫、孢子菌等</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">5. 糖尿病患者</div>
+                        <div class="sub-item">糖尿病患者的感染易形成脓肿，易发生结核、泌尿系统感染和下肢软组织感染</div>
+                        <div class="sub-item">某些特殊感染几乎仅见于糖尿病如鼻脑型毛霉菌病</div>
+                        <div class="author">（黎 波）</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title" style="color: #c0392b; font-size: 16px;">■ 破伤风</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="section-title">1. 定义</div>
+                        <div class="sub-item">破伤风是由破伤风梭状芽胞杆菌（产毒素专性厌氧菌）侵入机体伤口引起的急性特异性感染</div>
+                        <div class="sub-item">产生的外毒素主要引起中枢神经系统暂时性功能改变，以牙关紧闭、全身肌肉强直及阵发性痉挛为临床特征</div>
+                        <div class="sub-item">重症患者可出现喉痉挛、窒息、肺部感染和多器官功能衰竭</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">— 181 —</div>
+    
+    <!-- 底部编辑框 -->
+    <div class="bottom-section">
+        <div style="margin-bottom: 10px; font-weight: bold; color: #2c3e50;">编辑框（可复制内容）</div>
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyContent" value="特殊人群感染与破伤风；器官移植；无脾患者；糖皮质激素；糖尿病；破伤风；破伤风梭状芽胞杆菌；万古霉素；假单胞菌；MASA；巨细胞病毒；EB病毒；水痘-带状疱疹病毒；结核分枝杆菌；奴卡菌；李斯特菌；念珠菌；曲霉菌；肺孢子菌；隐球菌；类圆线虫；利什曼原虫；弓形虫；肺炎链球菌；脑膜炎球菌；流感嗜血杆菌；分枝杆菌；沙门菌；军团菌；毛霉菌；=181" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div class="tags-container">
+            <span class="tag">假单胞菌</span>
+            <span class="tag">万古霉素</span>
+            <span class="tag">MASA</span>
+            <span class="tag">抗真菌治疗</span>
+            <span class="tag">器官移植</span>
+            <span class="tag">巨细胞病毒</span>
+            <span class="tag">EB病毒</span>
+            <span class="tag">水痘-带状疱疹病毒</span>
+            <span class="tag">腺病毒</span>
+            <span class="tag">流感病毒</span>
+            <span class="tag">结核分枝杆菌</span>
+            <span class="tag">奴卡菌</span>
+            <span class="tag">李斯特菌</span>
+            <span class="tag">念珠菌</span>
+            <span class="tag">曲霉菌</span>
+            <span class="tag">肺孢子菌</span>
+            <span class="tag">隐球菌</span>
+            <span class="tag">类圆线虫</span>
+            <span class="tag">利什曼原虫</span>
+            <span class="tag">弓形虫</span>
+            <span class="tag">无脾患者</span>
+            <span class="tag">肺炎链球菌</span>
+            <span class="tag">脑膜炎球菌</span>
+            <span class="tag">流感嗜血杆菌</span>
+            <span class="tag">糖皮质激素</span>
+            <span class="tag">分枝杆菌</span>
+            <span class="tag">沙门菌</span>
+            <span class="tag">军团菌</span>
+            <span class="tag">孢子菌</span>
+            <span class="tag">糖尿病</span>
+            <span class="tag">毛霉菌</span>
+            <span class="tag">破伤风</span>
+            <span class="tag">破伤风梭状芽胞杆菌</span>
+        </div>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">🔑 关键词</div>
+        <div class="keywords-content">
+            181 | 特殊人群感染 | 器官移植 | 无脾患者 | 糖皮质激素 | 糖尿病 | 破伤风 | 破伤风梭状芽胞杆菌 | 假单胞菌 | 万古霉素 | MASA | 巨细胞病毒 | EB病毒 | 结核分枝杆菌 | 奴卡菌 | 李斯特菌 | 念珠菌 | 曲霉菌 | 肺孢子菌 | 隐球菌 | 类圆线虫 | 利什曼原虫 | 弓形虫 | 肺炎链球菌 | 脑膜炎球菌 | 流感嗜血杆菌 | 分枝杆菌 | 沙门菌 | 军团菌 | 毛霉菌
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyContent');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                alert('已复制到剪贴板：' + input.value);
+            }).catch(err => {
+                document.execCommand('copy');
+                alert('已复制到剪贴板');
+            });
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            // 获取当前页面信息
+            const title = document.title.replace(/~~~~~|\\\\*\\\\*/g, '');
+            const url = window.location.href;
+            const pageNum = '181';
+            
+            // 尝试使用localStorage保存收藏信息（用于index.html读取）
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            // 添加收藏
+            favorites.push({
+                title: title,
+                url: url,
+                pageNum: pageNum,
+                category: '感染性疾病',
+                date: new Date().toLocaleString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert('已成功添加到收藏夹！\n标题：' + title + '\n页码：' + pageNum);
+        }
+    </script>
+</body>
+</html>
