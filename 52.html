@@ -1,0 +1,548 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>头痛病因分类与高危头痛识别</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 标题格式 ~~~~~标题***** */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 15px 0 20px 0;
+            padding: 10px;
+        }
+        
+        .page-title::before {
+            content: "~~~~~";
+            color: #3498db;
+            margin-right: 8px;
+        }
+        
+        .page-title::after {
+            content: "*****";
+            color: #3498db;
+            margin-left: 8px;
+        }
+        
+        /* 按钮区域 */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .left-btn {
+            order: 1;
+        }
+        
+        .right-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            order: 2;
+            align-items: flex-end;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-home {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .btn-nav {
+            background-color: #2ecc71;
+            color: white;
+            min-width: 80px;
+        }
+        
+        .btn-favorite {
+            background-color: #e74c3c;
+            color: white;
+            min-width: 80px;
+        }
+        
+        .btn-copy {
+            background-color: #9b59b6;
+            color: white;
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+        
+        /* 表格样式 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        thead th {
+            background-color: #2e86c1;
+            color: white;
+            padding: 12px 8px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            border: 1px solid #1a5276;
+        }
+        
+        tbody td {
+            padding: 10px 8px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+            word-break: break-all;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f4f8;
+        }
+        
+        .section-header {
+            background-color: #d6eaf8 !important;
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        .table-caption {
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a5276;
+            padding: 12px;
+            background-color: #ebf5fb;
+            border-bottom: 2px solid #2e86c1;
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            margin-top: 20px;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #3498db;
+            border-radius: 6px;
+            font-size: 13px;
+            width: calc(100% - 100px);
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #eaf2f8;
+            border-radius: 8px;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 5px 12px;
+            margin: 4px;
+            background-color: #5dade2;
+            color: white;
+            border-radius: 15px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        .tag:hover {
+            background-color: #2e86c1;
+        }
+        
+        /* 页码和关键词 */
+        .page-info {
+            text-align: center;
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        
+        .page-number {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 8px;
+        }
+        
+        .keywords {
+            font-size: 12px;
+            color: #666;
+            margin-top: 8px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            
+            .page-title {
+                font-size: 18px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 8px 4px;
+            }
+            
+            tbody td {
+                padding: 6px 4px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部导航 -->
+    <div class="top-nav">
+        <div class="left-btn">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="right-btns">
+            <a href="51.html" class="btn btn-nav">上一页</a>
+            <a href="53.html" class="btn btn-nav">下一页</a>
+            <button class="btn btn-favorite" onclick="addToFavorite()">收藏</button>
+        </div>
+    </div>
+
+    <!-- 标题 -->
+    <h1 class="page-title">头痛病因分类与高危头痛识别</h1>
+
+    <!-- 表格4 -->
+    <div class="table-container">
+        <div class="table-caption">表4 头痛病因分类</div>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:18%">器官系统</th>
+                    <th style="width:22%">危急</th>
+                    <th style="width:30%">急症</th>
+                    <th style="width:30%">非急症</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>中枢神经系统、血管</td>
+                    <td>蛛网膜下腔出血<br>颈动脉夹层<br>脑静脉窦血栓</td>
+                    <td>分流术失败<br>牵引性头痛<br>肿瘤/其他肿物<br>硬膜下血肿</td>
+                    <td>各类偏头痛<br>三叉神经痛<br>创伤后/腰穿后头痛</td>
+                </tr>
+                <tr>
+                    <td>中毒</td>
+                    <td>—</td>
+                    <td>CO中毒</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td>环境</td>
+                    <td>—</td>
+                    <td>高原反应</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td>结缔组织病</td>
+                    <td>颞动脉炎（失明）</td>
+                    <td>—</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td>眼/耳鼻喉</td>
+                    <td>—</td>
+                    <td>青光眼<br>副鼻窦炎</td>
+                    <td>牙病<br>颞下颌关节痛</td>
+                </tr>
+                <tr>
+                    <td>肌肉骨骼</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>紧张性头痛、颈部劳损</td>
+                </tr>
+                <tr>
+                    <td>变态反应</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>丛集性/组胺性头痛</td>
+                </tr>
+                <tr>
+                    <td>感染</td>
+                    <td>脑膜炎/脑炎</td>
+                    <td>脑脓肿</td>
+                    <td>发热性头痛/非神经源性感染</td>
+                </tr>
+                <tr>
+                    <td>肺/缺氧</td>
+                    <td>—</td>
+                    <td>缺氧性头痛<br>贫血</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td>心血管</td>
+                    <td>—</td>
+                    <td>高血压危象</td>
+                    <td>高血压</td>
+                </tr>
+                <tr>
+                    <td>其他</td>
+                    <td>—</td>
+                    <td>子痫前期<br>特发性颅内压升高</td>
+                    <td>运动依赖性/性交性头痛</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 表格5 -->
+    <div class="table-container">
+        <div class="table-caption">表5 高危头痛在病史和查体中的提示</div>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:50%">病史</th>
+                    <th style="width:50%">查体</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>突然暴发，起始就很严重</td>
+                    <td>生命体征异常（体温、血压升高）</td>
+                </tr>
+                <tr>
+                    <td>过去无类似头痛</td>
+                    <td>神经体征异常</td>
+                </tr>
+                <tr>
+                    <td>伴感染征象</td>
+                    <td>意识水平下降</td>
+                </tr>
+                <tr>
+                    <td>意识状态改变或抽搐</td>
+                    <td>脑膜刺激征</td>
+                </tr>
+                <tr>
+                    <td>与用力相关</td>
+                    <td>毒性面容</td>
+                </tr>
+                <tr>
+                    <td>免疫抑制状态（如HIV感染、应用糖皮质激素）</td>
+                    <td>视盘水肿等眼部异常</td>
+                </tr>
+                <tr>
+                    <td>年龄＞50岁</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>视觉障碍</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>妊娠或产后状态</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>特殊药物（如抗凝药、毒品）</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 复制功能区 -->
+    <div class="bottom-section">
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" readonly>
+            <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签（点击检索）</div>
+        <span class="tag">蛛网膜下腔出血</span>
+        <span class="tag">颈动脉夹层</span>
+        <span class="tag">脑静脉窦血栓</span>
+        <span class="tag">CO中毒</span>
+        <span class="tag">高原反应</span>
+        <span class="tag">颞动脉炎</span>
+        <span class="tag">青光眼</span>
+        <span class="tag">副鼻窦炎</span>
+        <span class="tag">紧张性头痛</span>
+        <span class="tag">丛集性头痛</span>
+        <span class="tag">组胺性头痛</span>
+        <span class="tag">脑膜炎</span>
+        <span class="tag">脑炎</span>
+        <span class="tag">脑脓肿</span>
+        <span class="tag">发热性头痛</span>
+        <span class="tag">缺氧性头痛</span>
+        <span class="tag">贫血</span>
+        <span class="tag">高血压危象</span>
+        <span class="tag">高血压</span>
+        <span class="tag">子痫前期</span>
+        <span class="tag">特发性颅内压升高</span>
+        <span class="tag">偏头痛</span>
+        <span class="tag">三叉神经痛</span>
+        <span class="tag">牙病</span>
+        <span class="tag">颞下颌关节痛</span>
+        <span class="tag">颈部劳损</span>
+        <span class="tag">HIV感染</span>
+        <span class="tag">抗凝药</span>
+        <span class="tag">视盘水肿</span>
+        <span class="tag">脑膜刺激征</span>
+    </div>
+
+    <!-- 页码和关键词 -->
+    <div class="page-info">
+        <div class="page-number">52</div>
+        <div class="keywords">
+            关键词：头痛病因分类；高危头痛；病史；查体；蛛网膜下腔出血；脑膜炎；脑炎；高血压危象；偏头痛；紧张性头痛；丛集性头痛；颞动脉炎；青光眼；脑脓肿；子痫前期
+        </div>
+    </div>
+
+    <script>
+        // 设置复制框内容
+        const pageTitle = "头痛病因分类与高危头痛识别";
+        const subTitle = "表4头痛病因分类;表5高危头痛在病史和查体中的提示";
+        const keywords = "头痛病因分类;高危头痛;病史;查体;蛛网膜下腔出血;脑膜炎;脑炎;高血压危象;偏头痛;紧张性头痛;丛集性头痛;颞动脉炎;青光眼;脑脓肿;子痫前期";
+        const pageNum = "52";
+        
+        document.getElementById('copyText').value = pageTitle + "；" + subTitle + "；" + keywords + "=" + pageNum;
+
+        // 复制功能
+        function copyToClipboard() {
+            const copyText = document.getElementById('copyText');
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert('已复制到剪贴板：' + copyText.value);
+            }, function(err) {
+                document.execCommand('copy');
+                alert('已复制到剪贴板');
+            });
+        }
+
+        // 收藏功能
+        function addToFavorite() {
+            // 获取当前页面信息
+            const title = document.title;
+            const url = window.location.href;
+            
+            // 尝试使用本地存储模拟收藏功能
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                pageNum: '52'
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试更新index.html的收藏（通过postMessage或本地存储）
+            alert('已添加到收藏！\n标题：' + title + '\n页码：52');
+            
+            // 同时尝试打开index.html并传递收藏信息
+            try {
+                localStorage.setItem('newFavorite', JSON.stringify({
+                    title: title,
+                    url: url,
+                    pageNum: '52',
+                    addTime: new Date().toLocaleString()
+                }));
+            } catch(e) {
+                console.log('localStorage not available');
+            }
+        }
+
+        // 标签点击检索功能
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const keyword = this.textContent;
+                alert('检索关键词：' + keyword);
+                // 实际应用中这里可以跳转到搜索页面
+            });
+        });
+    </script>
+
+</body>
+</html>
