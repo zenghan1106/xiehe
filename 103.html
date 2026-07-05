@@ -1,0 +1,568 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急性心力衰竭*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        /* 左上角返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            z-index: 1000;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 右上角按钮组 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(92,184,92,0.3);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+        }
+        
+        .nav-btn.next {
+            background: #f0ad4e;
+        }
+        
+        .nav-btn.next:hover {
+            background: #ec971f;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #d9534f;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(217,83,79,0.3);
+        }
+        
+        .fav-btn:hover {
+            background: #c9302c;
+        }
+        
+        .fav-btn.active {
+            background: #5cb85c;
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            font-size: 26px;
+            color: #2c3e50;
+            margin: 60px 0 25px 0;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            max-width: 900px;
+            margin: 0 auto 30px auto;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        
+        /* 表头 - 蓝色 */
+        thead th {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        /* 表格第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 15px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        td, th {
+            padding: 12px;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4fd;
+        }
+        
+        /* 分类标题行 */
+        .section-row {
+            background: #e3f2fd !important;
+        }
+        
+        .section-row td {
+            color: #1565c0;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        
+        /* 子项目 */
+        .sub-item {
+            color: #555;
+            padding-left: 8px;
+        }
+        
+        /* 底部区域 */
+        .bottom-area {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* 标签区域 */
+        .tags-area {
+            margin-bottom: 20px;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #e3f2fd;
+            color: #1565c0;
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 13px;
+            margin: 4px;
+            border: 1px solid #bbdefb;
+        }
+        
+        .tag.disease {
+            background: #ffebee;
+            color: #c62828;
+            border-color: #ef9a9a;
+        }
+        
+        .tag.drug {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-color: #a5d6a7;
+        }
+        
+        .tag.bacteria {
+            background: #fff3e0;
+            color: #ef6c00;
+            border-color: #ffcc80;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+            margin: 15px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+        }
+        
+        /* 页码 */
+        .page-num {
+            text-align: center;
+            font-size: 18px;
+            color: #4a90d9;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        
+        /* 复制区域 */
+        .copy-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #4a90d9;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            display: none;
+            z-index: 2000;
+        }
+        
+        /* 手机适配 */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 20px;
+                margin-top: 80px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            td, th {
+                padding: 8px;
+            }
+            
+            .home-btn, .nav-btn, .fav-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-area {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 右上角导航按钮 -->
+    <div class="nav-buttons">
+        <a href="102.html" class="nav-btn">← 上一页</a>
+        <a href="104.html" class="nav-btn next">下一页 →</a>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~急性心力衰竭*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:25%">分类</th>
+                    <th style="width:75%">详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-row">
+                    <td colspan="2">📋 急性心力衰竭临床表现</td>
+                </tr>
+                <tr>
+                    <td><strong>心源性休克</strong></td>
+                    <td>收缩压＜90mmHg持续30分钟以上，需循环支持；可伴低灌注表现（皮肤湿冷、意识障碍、少尿等）</td>
+                </tr>
+                <tr>
+                    <td><strong>急性肺水肿</strong></td>
+                    <td>突发严重呼吸困难、端坐呼吸、咳粉红色泡沫痰；双肺满布湿啰音和哮鸣音；胸片示肺淤血/肺水肿</td>
+                </tr>
+                <tr>
+                    <td><strong>心搏骤停</strong></td>
+                    <td>心脏骤停需立即心肺复苏；常见于心室颤动、无脉性室速、心脏停搏、无脉电活动</td>
+                </tr>
+                
+                <tr class="section-row">
+                    <td colspan="2">🔬 急性心力衰竭病因</td>
+                </tr>
+                <tr>
+                    <td><strong>心肌损伤</strong></td>
+                    <td>急性心肌梗死、重症心肌炎、心肌病急性加重、药物/毒物致心肌损伤</td>
+                </tr>
+                <tr>
+                    <td><strong>负荷过重</strong></td>
+                    <td>高血压急症、主动脉瓣狭窄、肺动脉高压；容量负荷过重（输液过多、肾功能不全）</td>
+                </tr>
+                <tr>
+                    <td><strong>心律失常</strong></td>
+                    <td>快速性心律失常（房颤、室速、室上速）；严重缓慢性心律失常（房室传导阻滞、窦性停搏）</td>
+                </tr>
+                <tr>
+                    <td><strong>其他</strong></td>
+                    <td>心脏压塞、肺栓塞、主动脉夹层；围手术期心脏并发症；感染、甲亢、贫血等诱发</td>
+                </tr>
+                
+                <tr class="section-row">
+                    <td colspan="2">💊 急性心力衰竭治疗</td>
+                </tr>
+                <tr>
+                    <td><strong>一般处理</strong></td>
+                    <td>坐位或半卧位、吸氧（高流量/无创通气）、建立静脉通道、心电监护、导尿监测出入量</td>
+                </tr>
+                <tr>
+                    <td><strong>利尿剂</strong></td>
+                    <td>呋塞米（首选）静脉注射，可联合托拉塞米；注意电解质紊乱（低钾、低钠）；监测尿量及肾功能</td>
+                </tr>
+                <tr>
+                    <td><strong>血管扩张剂</strong></td>
+                    <td>硝酸甘油（扩张静脉为主）、硝普钠（动静脉均衡扩张）；需血压监测；禁忌：严重低血压、梗阻性心肌病</td>
+                </tr>
+                <tr>
+                    <td><strong>正性肌力药</strong></td>
+                    <td>多巴胺、多巴酚丁胺、米力农；用于低心排综合征；注意心律失常风险；洋地黄类（西地兰）用于房颤伴快速心室率</td>
+                </tr>
+                <tr>
+                    <td><strong>血管活性药物</strong></td>
+                    <td>去甲肾上腺素、肾上腺素用于心源性休克；需动脉内血压监测；联合正性肌力药维持灌注压</td>
+                </tr>
+                <tr>
+                    <td><strong>其他治疗</strong></td>
+                    <td>无创通气（CPAP/BiPAP）改善氧合；主动脉内球囊反搏（IABP）；体外膜肺氧合（ECMO）；心脏再同步化治疗</td>
+                </tr>
+                
+                <tr class="section-row">
+                    <td colspan="2">🩺 急性心力衰竭诊断评估</td>
+                </tr>
+                <tr>
+                    <td><strong>BNP/NT-proBNP</strong></td>
+                    <td>BNP＞400pg/ml或NT-proBNP＞900pg/ml（年龄＜50岁）支持诊断；阴性预测价值高；肾功能不全时升高</td>
+                </tr>
+                <tr>
+                    <td><strong>超声心动图</strong></td>
+                    <td>评估左室射血分数（LVEF）、室壁运动、瓣膜功能；鉴别收缩性/舒张性心衰；发现机械并发症</td>
+                </tr>
+                <tr>
+                    <td><strong>有创血流动力学</strong></td>
+                    <td>肺动脉导管监测（PCWP、CI）；指导血管活性药物使用；评估容量状态及治疗反应</td>
+                </tr>
+                
+                <tr class="section-row">
+                    <td colspan="2">⚠️ 预后与预防</td>
+                </tr>
+                <tr>
+                    <td><strong>预后因素</strong></td>
+                    <td>年龄、基础心脏病、肾功能、LVEF、血钠水平；住院期间BNP下降＜30%提示预后不良</td>
+                </tr>
+                <tr>
+                    <td><strong>长期管理</strong></td>
+                    <td>ACEI/ARB/ARNI、β受体阻滞剂、醛固酮受体拮抗剂；植入ICD/CRT-D；心脏康复；定期随访</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-area">
+        <!-- 检索标签 -->
+        <div class="tags-area">
+            <div class="tags-title">🔖 检索标签：</div>
+            <span class="tag disease">急性心力衰竭</span>
+            <span class="tag disease">心源性休克</span>
+            <span class="tag disease">急性肺水肿</span>
+            <span class="tag disease">心搏骤停</span>
+            <span class="tag disease">心肌损伤</span>
+            <span class="tag disease">心律失常</span>
+            <span class="tag disease">心脏压塞</span>
+            <span class="tag disease">肺栓塞</span>
+            <span class="tag drug">呋塞米</span>
+            <span class="tag drug">托拉塞米</span>
+            <span class="tag drug">硝酸甘油</span>
+            <span class="tag drug">硝普钠</span>
+            <span class="tag drug">多巴胺</span>
+            <span class="tag drug">多巴酚丁胺</span>
+            <span class="tag drug">米力农</span>
+            <span class="tag drug">西地兰</span>
+            <span class="tag drug">去甲肾上腺素</span>
+            <span class="tag drug">肾上腺素</span>
+            <span class="tag drug">洋地黄</span>
+            <span class="tag drug">ACEI</span>
+            <span class="tag drug">ARB</span>
+            <span class="tag drug">ARNI</span>
+            <span class="tag drug">β受体阻滞剂</span>
+            <span class="tag drug">醛固酮受体拮抗剂</span>
+        </div>
+        
+        <!-- 关键词 -->
+        <div class="keywords">
+            <strong>关键词：</strong>急性心力衰竭、心源性休克、急性肺水肿、心搏骤停、呋塞米、硝酸甘油、硝普钠、多巴胺、BNP、超声心动图、血流动力学监测
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-num">103</div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyInput" value="急性心力衰竭；急性心力衰竭临床表现、病因、治疗、诊断评估、预后与预防；急性心力衰竭、心源性休克、急性肺水肿、心搏骤停、呋塞米、硝酸甘油、硝普钠、多巴胺、BNP、超声心动图、血流动力学监测；=103" readonly>
+            <button class="copy-btn" onclick="copyContent()">📋 复制</button>
+        </div>
+    </div>
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                showToast('✅ 已复制到剪贴板');
+            }).catch(() => {
+                document.execCommand('copy');
+                showToast('✅ 已复制到剪贴板');
+            });
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                
+                // 保存到localStorage，index.html可读取
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '~~~~~急性心力衰竭*****',
+                    url: '103.html',
+                    pageNum: '103',
+                    tags: ['急性心力衰竭', '心源性休克', '急性肺水肿', '呋塞米', '硝酸甘油', '多巴胺']
+                };
+                
+                // 避免重复
+                const exists = favorites.some(f => f.url === '103.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                showToast('⭐ 已添加到收藏');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '103.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                showToast('💔 已取消收藏');
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const btn = document.getElementById('favBtn');
+            if (favorites.some(f => f.url === '103.html')) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
