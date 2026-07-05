@@ -1,0 +1,442 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~主动脉夹层诊断策略与急诊处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            background-image: linear-gradient(135deg, #e8f4f8 0%, #f5f0e8 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .nav-left {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-home {
+            background: #2196F3;
+            color: white;
+        }
+        .btn-home:hover {
+            background: #1976D2;
+            transform: translateY(-2px);
+        }
+        .btn-nav {
+            background: #4CAF50;
+            color: white;
+        }
+        .btn-nav:hover {
+            background: #388E3C;
+            transform: translateY(-2px);
+        }
+        .btn-fav {
+            background: #FF9800;
+            color: white;
+        }
+        .btn-fav:hover {
+            background: #F57C00;
+            transform: translateY(-2px);
+        }
+        .btn-copy {
+            background: #9C27B0;
+            color: white;
+            padding: 12px 24px;
+        }
+        .btn-copy:hover {
+            background: #7B1FA2;
+        }
+        .page-title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            color: #1565C0;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .content-table {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto 25px;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .content-table th {
+            background: #1565C0;
+            color: white;
+            padding: 16px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .content-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #424242;
+        }
+        .content-table tr:hover {
+            background: #f5f5f5;
+        }
+        .content-table tr:last-child td {
+            border-bottom: none;
+        }
+        .section-header {
+            background: #E3F2FD !important;
+            font-weight: bold;
+            color: #1565C0;
+        }
+        .bullet {
+            color: #1565C0;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+        .check-mark {
+            color: #4CAF50;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+        .sub-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        .sub-table th {
+            background: #1976D2;
+            color: white;
+            padding: 10px;
+            font-size: 14px;
+            text-align: left;
+        }
+        .sub-table td {
+            padding: 8px 10px;
+            border: 1px solid #e0e0e0;
+            font-size: 14px;
+        }
+        .sub-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        .note {
+            background: #FFF8E1;
+            padding: 10px;
+            border-radius: 6px;
+            margin: 10px 0;
+            font-size: 14px;
+            color: #666;
+        }
+        .copy-section {
+            max-width: 900px;
+            margin: 0 auto 25px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .copy-input {
+            flex: 1;
+            padding: 14px;
+            border: 2px solid #BBDEFB;
+            border-radius: 10px;
+            font-size: 14px;
+            background: white;
+            color: #333;
+        }
+        .tags-section {
+            max-width: 900px;
+            margin: 0 auto 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 12px;
+        }
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 6px;
+            background: #E8F5E9;
+            color: #2E7D32;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid #A5D6A7;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .tag:hover {
+            background: #C8E6C9;
+            transform: scale(1.05);
+        }
+        .tag-disease {
+            background: #FFEBEE;
+            color: #C62828;
+            border-color: #EF9A9A;
+        }
+        .tag-disease:hover {
+            background: #FFCDD2;
+        }
+        .tag-drug {
+            background: #FFF3E0;
+            color: #EF6C00;
+            border-color: #FFCC80;
+        }
+        .tag-drug:hover {
+            background: #FFE0B2;
+        }
+        .tag-bacteria {
+            background: #F3E5F5;
+            color: #7B1FA2;
+            border-color: #CE93D8;
+        }
+        .tag-bacteria:hover {
+            background: #E1BEE7;
+        }
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            color: #666;
+            margin: 15px 0;
+            font-weight: 500;
+        }
+        .keywords {
+            text-align: center;
+            font-size: 13px;
+            color: #888;
+            margin-top: 10px;
+            padding: 10px;
+        }
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #333;
+            color: white;
+            padding: 16px 32px;
+            border-radius: 10px;
+            font-size: 16px;
+            display: none;
+            z-index: 1000;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            .page-title {
+                font-size: 20px;
+            }
+            .content-table th {
+                font-size: 16px;
+                padding: 12px;
+            }
+            .content-table td {
+                font-size: 14px;
+                padding: 10px;
+            }
+            .btn {
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+            .copy-section {
+                flex-direction: column;
+            }
+            .copy-input {
+                width: 100%;
+            }
+            .nav-top {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .nav-right {
+                align-items: stretch;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="116.html" class="btn btn-nav">上一页</a>
+            <a href="118.html" class="btn btn-nav">下一页</a>
+            <button class="btn btn-fav" onclick="addToFavorites()">收藏</button>
+        </div>
+    </div>
+
+    <div class="page-title">~~~~~主动脉夹层诊断策略与急诊处理*****</div>
+
+    <table class="content-table">
+        <tr>
+            <th colspan="2">主动脉夹层 - 急诊疾病</th>
+        </tr>
+        <tr class="section-header">
+            <td colspan="2"><span class="bullet">●</span> 6. 诊断策略</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <span class="bullet">●</span> 高危临床特征：AD危险评分（表15）：0分为低危，1分为中危，≥2分为高危。<br><br>
+                
+                <table class="sub-table">
+                    <tr>
+                        <th style="width: 25%;">组别</th>
+                        <th>表现</th>
+                    </tr>
+                    <tr>
+                        <td>高危病史</td>
+                        <td>马方综合征等结缔组织病<br>主动脉疾病家族史<br>已知的主动脉瓣疾病<br>已知的胸主动脉瘤<br>曾行主动脉介入或外科操作</td>
+                    </tr>
+                    <tr>
+                        <td>高危胸痛症状</td>
+                        <td>突发疼痛<br>剧烈疼痛，难以忍受<br>撕裂样、刀割样尖锐痛</td>
+                    </tr>
+                    <tr>
+                        <td>高危体征</td>
+                        <td>新发主动脉瓣杂音<br>动脉搏动消失或无脉<br>四肢血压差异明显<br>局灶性神经功能缺失<br>主动脉舒张期杂音<br>低血压或休克</td>
+                    </tr>
+                </table>
+                
+                <div class="note">
+                    注：表现与某组中至少一个标准相符时得1分，3组都有相符表现时得最高分3分。
+                </div>
+                
+                <span class="bullet">●</span> 主动脉CTA诊断证据：内膜瓣从真腔中分隔出假腔，以及相关并发症。<br>
+                <span class="bullet">●</span> 需鉴别的其他诊断：ACS、PE、自发性气胸、食管破裂等。<br>
+                <span class="bullet">●</span> 慢性夹层患者出现新症状：应详细比较现有的与先前的影像学资料，以判断症状来自于夹层蔓延还是其他病因。
+            </td>
+        </tr>
+        <tr class="section-header">
+            <td colspan="2"><span class="bullet">●</span> 7. 急诊处理</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <span class="bullet">●</span> 原则：治疗取决于受累主动脉水平和病因。局限于降主动脉和/或腹主动脉的夹层（B型主动脉病变）采用内科治疗，除非有灌注不良的证据。<br>
+                <span class="bullet">●</span> 一般治疗<br>
+                <span class="check-mark">✓</span> 高危患者尽快送入ICU，行心电监护，建立双静脉通路，专科会诊。<br>
+                <span class="check-mark">✓</span> 有血流动力学不稳定或气道损害患者行气管插管。<br>
+                <span class="bullet">●</span> 内科药物治疗<br>
+                <span class="check-mark">✓</span> 镇痛：除外禁忌后，按需静脉注射阿片类药物（吗啡、哌替啶）或患者自控镇痛。
+            </td>
+        </tr>
+    </table>
+
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="主动脉夹层诊断策略与急诊处理；急诊疾病；AD危险评分、主动脉夹层、ACS、PE、自发性气胸、食管破裂、ICU、吗啡、哌替啶；=117" readonly>
+        <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+    </div>
+
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <div>
+            <span class="tag tag-disease">主动脉夹层</span>
+            <span class="tag tag-disease">马方综合征</span>
+            <span class="tag tag-disease">结缔组织病</span>
+            <span class="tag tag-disease">胸主动脉瘤</span>
+            <span class="tag tag-disease">ACS</span>
+            <span class="tag tag-disease">PE</span>
+            <span class="tag tag-disease">自发性气胸</span>
+            <span class="tag tag-disease">食管破裂</span>
+            <span class="tag tag-disease">B型主动脉病变</span>
+            <span class="tag tag-drug">吗啡</span>
+            <span class="tag tag-drug">哌替啶</span>
+        </div>
+    </div>
+
+    <div class="page-number">117</div>
+
+    <div class="keywords">
+        关键词：主动脉夹层、AD危险评分、诊断策略、急诊处理、高危病史、高危胸痛症状、高危体征、CTA、ACS、PE、自发性气胸、食管破裂、ICU、吗啡、哌替啶、镇痛
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                showToast("已复制到剪贴板");
+            }, function() {
+                document.execCommand("copy");
+                showToast("已复制到剪贴板");
+            });
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.textContent = message;
+            toast.style.display = "block";
+            setTimeout(function() {
+                toast.style.display = "none";
+            }, 2000);
+        }
+
+        function addToFavorites() {
+            let favorites = localStorage.getItem('favorites') ? JSON.parse(localStorage.getItem('favorites')) : [];
+            const currentPage = {
+                title: '主动脉夹层诊断策略与急诊处理',
+                url: '117.html',
+                category: '急诊疾病'
+            };
+            const exists = favorites.some(f => f.url === currentPage.url);
+            if (!exists) {
+                favorites.push(currentPage);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                showToast("已添加到收藏");
+            } else {
+                showToast("已在收藏中");
+            }
+        }
+    </script>
+</body>
+</html>
