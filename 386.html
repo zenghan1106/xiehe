@@ -1,0 +1,486 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~抗心律失常药物分类与临床应用*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #2c3e50;
+            line-height: 1.8;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn-page {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .btn-page:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+        
+        .btn-fav {
+            background: #f39c12;
+            color: white;
+            font-size: 12px;
+            padding: 8px 16px;
+        }
+        
+        .btn-fav:hover {
+            background: #e67e22;
+            transform: translateY(-2px);
+        }
+        
+        .btn-copy {
+            background: #27ae60;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            border: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-copy:hover {
+            background: #219a52;
+            transform: translateY(-2px);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 26px;
+            margin: 20px 0 30px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #1e5799 0%, #2989d8 50%, #207cca 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 20px 15px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        tbody td {
+            padding: 15px;
+            border-bottom: 1px solid #ecf0f1;
+            vertical-align: top;
+        }
+        
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:nth-child(even):hover {
+            background: #e9ecef;
+        }
+        
+        .highlight {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        
+        .drug-name {
+            color: #8e44ad;
+            font-weight: bold;
+        }
+        
+        .check-mark {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .section-title {
+            color: #1a5276;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        
+        .copy-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        .copy-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 15px;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .copy-input:focus {
+            border-color: #2980b9;
+        }
+        
+        .tags-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 18px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #ffeaa7;
+            color: #d63031;
+        }
+        
+        .tag-drug {
+            background: #dfe6e9;
+            color: #2d3436;
+        }
+        
+        .tag-bacteria {
+            background: #a8e6cf;
+            color: #00b894;
+        }
+        
+        .tag:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        
+        .page-num {
+            text-align: center;
+            font-size: 16px;
+            color: #7f8c8d;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #95a5a6;
+            font-size: 12px;
+            margin-top: 15px;
+            padding: 10px;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #2ecc71;
+            color: white;
+            padding: 20px 40px;
+            border-radius: 10px;
+            font-size: 16px;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 20px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 15px 10px;
+            }
+            
+            tbody td {
+                padding: 12px 10px;
+                font-size: 13px;
+            }
+            
+            .btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .btn-copy {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">← 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="385.html" class="btn btn-page">上一页</a>
+            <a href="387.html" class="btn btn-page">下一页</a>
+            <button class="btn btn-fav" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~抗心律失常药物分类与临床应用*****</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">抗心律失常药物分类、作用机制及临床应用</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="2">
+                    <span class="highlight">Ic类药物：</span>明显阻滞钠通道，显著降低0期上升速率，明显减慢传导，对复极的影响相对较小。代表药物为<span class="drug-name">普罗帕酮</span>，目前主要用于治疗<span class="highlight">室上性心律失常</span>。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <span class="section-title">Ⅱ类抗心律失常药（β受体阻断药）：</span>Ⅱ类药物通过抑制交感神经活性发挥作用，其对钠通道也有轻度抑制作用。通过阻断儿茶酚胺和交感神经介导的作用，β受体阻断药降低起搏细胞动作电位4期自动除极的斜率，延长不应期，减慢房室结的传导速度，也可减慢前向和逆向异常通路的传导。常见选择性β受体阻断药有<span class="drug-name">阿替洛尔、美托洛尔、艾司洛尔</span>。非选择性β受体阻断药为<span class="drug-name">普萘洛尔</span>。中枢活性药物为<span class="drug-name">美托洛尔和普萘洛尔</span>。总体来说，β受体阻断药对于大多数心源性肾上腺素受体兴奋所致的心律失常有显著效果，如术后、<span class="highlight">嗜铬细胞瘤、甲状腺毒症、情绪激动</span>等。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <span class="check-mark">✓ 适应证：</span><br>
+                    ①<span class="highlight">室上性心动过速（SVT）</span>，β受体阻断药对于终止SVT有效果，但对于房室折返性心动过速和房室结折返性心动过速引发的SVT治疗效果不如腺苷。对于<span class="highlight">心房颤动和心房扑动</span>患者，β受体阻断药无法转复，但可以降低心室率。β受体阻断药也可用于多灶性房性心动过速的治疗。另外，需注意，β受体阻断药在<span class="highlight">慢性阻塞性通气障碍和肺源性心脏病</span>的SVT患者中应慎用。<br>
+                    ②<span class="highlight">室性心动过速</span>，β受体阻断药对于持续室性心动过速无效，但如果根据电生理结果配合使用，该药可预防部分患者的室性心动过速发生。由于室性心动过速常发生于<span class="highlight">左心室功能极差</span>的患者中，而这部分患者有很多都不能耐受β受体阻断药，或对β受体阻断药有使用禁忌。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <span class="check-mark">✓ 相对禁忌证：</span>包括<span class="highlight">可逆性气道疾病和左心室功能降低</span>。另外，<span class="highlight">糖尿病和周围血管疾病</span>患者也可能无法耐受β受体阻断药。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <span class="section-title">Ⅲ类抗心律失常药（钾通道阻滞药）：</span>Ⅲ类药物可阻断钾通道，延长动作电位时程，延长有效不应期。代表药物包括<span class="drug-name">胺碘酮、伊布利特、多非利特、索他洛尔</span>等。其中<span class="drug-name">索他洛尔</span>具有β受体阻断作用。<span class="drug-name">胺碘酮和决奈达隆</span>可阻滞去极化时的钠通道（I b类效应），也可阻断钙通道、钾通道和肾上腺素受体。胺碘酮可导致<span class="highlight">甲状腺功能亢进或甲状腺功能减退</span>，而<span class="drug-name">决奈达隆</span>（一种胺碘酮的无碘衍生物）对甲状腺没有影响。<span class="drug-name">伊布利特</span>可用于急性终止<span class="highlight">心房扑动和心房颤动</span>，其可通过增强缓慢而延迟的内向钠电流以及在复极过程中阻滞钾通道，延长QT
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="copy-section">
+        <div class="copy-row">
+            <input type="text" class="copy-input" id="copyText" value="抗心律失常药物分类与临床应用；Ic类；Ⅱ类；Ⅲ类；β受体阻断药；钾通道阻滞药；普罗帕酮；阿替洛尔；美托洛尔；艾司洛尔；普萘洛尔；胺碘酮；伊布利特；多非利特；索他洛尔；决奈达隆；室上性心动过速；心房颤动；心房扑动；室性心动过速；甲状腺功能亢进；甲状腺功能减退=377" readonly>
+            <button class="btn-copy" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div>
+            <span class="tag tag-disease">室上性心律失常</span>
+            <span class="tag tag-disease">室上性心动过速</span>
+            <span class="tag tag-disease">心房颤动</span>
+            <span class="tag tag-disease">心房扑动</span>
+            <span class="tag tag-disease">室性心动过速</span>
+            <span class="tag tag-disease">嗜铬细胞瘤</span>
+            <span class="tag tag-disease">甲状腺毒症</span>
+            <span class="tag tag-disease">甲状腺功能亢进</span>
+            <span class="tag tag-disease">甲状腺功能减退</span>
+            <span class="tag tag-disease">慢性阻塞性通气障碍</span>
+            <span class="tag tag-disease">肺源性心脏病</span>
+            <span class="tag tag-disease">左心室功能降低</span>
+            <span class="tag tag-disease">糖尿病</span>
+            <span class="tag tag-disease">周围血管疾病</span>
+            <span class="tag tag-disease">可逆性气道疾病</span>
+            <span class="tag tag-drug">利多卡因</span>
+            <span class="tag tag-drug">普罗帕酮</span>
+            <span class="tag tag-drug">阿替洛尔</span>
+            <span class="tag tag-drug">美托洛尔</span>
+            <span class="tag tag-drug">艾司洛尔</span>
+            <span class="tag tag-drug">普萘洛尔</span>
+            <span class="tag tag-drug">胺碘酮</span>
+            <span class="tag tag-drug">伊布利特</span>
+            <span class="tag tag-drug">多非利特</span>
+            <span class="tag tag-drug">索他洛尔</span>
+            <span class="tag tag-drug">决奈达隆</span>
+            <span class="tag tag-drug">腺苷</span>
+        </div>
+    </div>
+    
+    <div class="page-num">377</div>
+    
+    <div class="keywords">
+        关键词：抗心律失常药物 | Ic类 | Ⅱ类β受体阻断药 | Ⅲ类钾通道阻滞药 | 普罗帕酮 | 美托洛尔 | 胺碘酮 | 索他洛尔 | 决奈达隆 | 伊布利特 | 室上性心动过速 | 心房颤动 | 室性心动过速
+    </div>
+    
+    <div class="toast" id="toast">已复制到剪贴板！</div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(function() {
+                    showToast();
+                });
+            } else {
+                document.execCommand("copy");
+                showToast();
+            }
+        }
+        
+        function showToast() {
+            const toast = document.getElementById("toast");
+            toast.style.display = "block";
+            setTimeout(function() {
+                toast.style.display = "none";
+            }, 2000);
+        }
+        
+        function addToFavorites() {
+            // 获取当前页面信息
+            const title = document.title;
+            const url = window.location.href;
+            
+            // 尝试使用本地存储来模拟收藏功能
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(fav => fav.url === url);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                date: new Date().toLocaleString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试打开index.html并传递收藏信息（同源策略限制，主要依赖localStorage）
+            alert('已添加到收藏！请在首页查看收藏内容。');
+            
+            // 向index.html发送消息（如果已打开）
+            try {
+                const indexWindow = window.open('index.html', '_blank');
+                if (indexWindow) {
+                    setTimeout(() => {
+                        indexWindow.postMessage({type: 'favorites', data: favorites}, '*');
+                    }, 1000);
+                }
+            } catch(e) {
+                console.log('无法自动跳转，请手动打开首页查看收藏');
+            }
+        }
+    </script>
+</body>
+</html>
