@@ -1,0 +1,609 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~血流动力学监测方法详解*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            z-index: 100;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 导航按钮容器 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .nav-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #e8b339;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(232, 179, 57, 0.3);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .fav-btn:hover {
+            background: #d4a030;
+        }
+        
+        .fav-btn.active {
+            background: #c9302c;
+        }
+        
+        /* 主标题 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 70px 0 20px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        /* 表头 */
+        thead tr {
+            background: linear-gradient(135deg, #2e86de 0%, #1a5276 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 17px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        
+        /* 表格内容 */
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e8eef4;
+            vertical-align: top;
+            line-height: 1.7;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4fd;
+        }
+        
+        /* 分类标题行 */
+        .category-row {
+            background: #d4e6f1 !important;
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        .category-row td {
+            font-size: 15px;
+            padding: 14px 12px;
+        }
+        
+        /* 子项缩进 */
+        .sub-item {
+            padding-left: 20px;
+            color: #555;
+        }
+        
+        .sub-item::before {
+            content: "◇ ";
+            color: #2e86de;
+        }
+        
+        .sub-sub-item {
+            padding-left: 40px;
+            color: #666;
+            font-size: 13px;
+        }
+        
+        .sub-sub-item::before {
+            content: "□ ";
+            color: #5dade2;
+        }
+        
+        /* 页码标注 */
+        .page-num {
+            text-align: center;
+            color: #888;
+            font-size: 13px;
+            margin: 15px 0;
+        }
+        
+        /* 底部编辑框区域 */
+        .copy-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 15px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #d4e6f1;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background: #fafbfc;
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #219a52;
+        }
+        
+        .copy-btn.copied {
+            background: #7f8c8d;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            text-align: center;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .page-code {
+            font-size: 15px;
+            color: #1a5276;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .keywords {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .keyword-tag {
+            background: #e8f4fd;
+            color: #2e86de;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #d4e6f1;
+        }
+        
+        /* 特色检索标签 */
+        .special-tags {
+            background: white;
+            padding: 20px 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        
+        .special-tags-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .tag {
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #fde8e8;
+            color: #c0392b;
+            border: 1px solid #f5b7b1;
+        }
+        
+        .tag-disease:hover {
+            background: #f5b7b1;
+        }
+        
+        .tag-antibiotic {
+            background: #e8f8f5;
+            color: #27ae60;
+            border: 1px solid #a9dfbf;
+        }
+        
+        .tag-antibiotic:hover {
+            background: #a9dfbf;
+        }
+        
+        .tag-bacteria {
+            background: #fef9e7;
+            color: #d4ac0d;
+            border: 1px solid #f9e79f;
+        }
+        
+        .tag-bacteria:hover {
+            background: #f9e79f;
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 200;
+        }
+        
+        .toast.show {
+            opacity: 1;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .main-title {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .nav-buttons {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .nav-btn, .fav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="328.html" class="nav-btn">◀ 上一页</a>
+        <a href="330.html" class="nav-btn">下一页 ▶</a>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 主标题 -->
+    <h1 class="main-title">~~~~~血流动力学监测方法详解*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~血流动力学监测方法详解*****、监测类别、具体方法 / 参数、原理 / 特点 / 临床意义、无创监测、超声监测、阻抗法血流动力学监测、经外周动脉连续性CO监测、CO₂部分重复呼吸法无创性CO测定、有创监测、中心静脉压（CVP）、影响因素、容量负荷判断、正常值、补液参考、肺动脉内热稀释漂浮导管</div>
+    
+    <!-- 表格内容 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>监测类别</th>
+                    <th>具体方法 / 参数</th>
+                    <th>原理 / 特点 / 临床意义</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="3">无创监测</td>
+                </tr>
+                <tr>
+                    <td>超声监测</td>
+                    <td>① 床旁超声（经胸超声）</td>
+                    <td>通过腔静脉变异率等指标和流程（如FALL流程等），具有直观、实时、可重复的特点，但应用时存在一定的局限性和主观性，结果可靠程度和操作者的经验有很大关系</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>② USCOM（经体表多普勒超声）</td>
+                    <td>是一种经体表的多普勒超声，具有便携性的优势，结果可靠性和操作者密切相关</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>③ 经食管超声</td>
+                    <td>包括经食管二维超声和经食管多普勒超声，具有一定侵入性，使用受到限制</td>
+                </tr>
+                <tr>
+                    <td>阻抗法血流动力学监测</td>
+                    <td>生物电阻抗法</td>
+                    <td>需要专门的仪器和耗材，通过电极片获得身体阻抗随血液流动变化的数据，通过电脑计算得到心输出量（CO）、体循环阻力（SVR）等相关参数，受影响因素多，结果可靠性有待进一步发展</td>
+                </tr>
+                <tr>
+                    <td>经外周动脉连续性CO监测</td>
+                    <td>如唯捷流等产品</td>
+                    <td>创伤性介于纯无创的阻抗法和有创监测之间，准确性也介于二者之间</td>
+                </tr>
+                <tr>
+                    <td>CO₂部分重复呼吸法无创性CO测定</td>
+                    <td>二氧化碳重复呼吸法</td>
+                    <td>具有较好的准确性，但只能适用于有气管插管的患者</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="3">有创监测</td>
+                </tr>
+                <tr>
+                    <td rowspan="5">中心静脉压（CVP）</td>
+                    <td>定义</td>
+                    <td>CVP是右心房开口或位于胸腔内的上、下腔静脉的压力。常经锁骨下静脉、颈内静脉将导管置入到上腔静脉右心房开口水平，需注意，一般经股静脉置管时，导管尖难以到达右心房开口水平，其测得的数据不是CVP</td>
+                </tr>
+                <tr>
+                    <td>影响因素</td>
+                    <td>CVP的高低取决于心功能、血容量、静脉血管张力、胸内压、静脉血回流量和肺循环阻力等因素，其中尤以静脉回流与右心室输出量之间的平衡关系最重要。因此，CVP是临床上反映心功能和血管内容量负荷之间动态平衡的简便实用的指标</td>
+                </tr>
+                <tr>
+                    <td>容量负荷判断</td>
+                    <td>在容量输注过程中，CVP不高，表明右心室尚能排出回心脏的血量，心脏对液体负荷的承受力较好</td>
+                </tr>
+                <tr>
+                    <td>正常值</td>
+                    <td>一般认为CVP的正常值为5～12cmH₂O，但CVP与动脉压不同，不应强调所谓正常值，将其作为一个血流动力学指标连续测定，观察动态变化，比单次的绝对值更有指导意义</td>
+                </tr>
+                <tr>
+                    <td>补液参考</td>
+                    <td>一个可以参考的做法是，补液时持续监测CVP，当CVP较基础值上升2mmHg之内时，可以继续安全补液；较基础值上升超过5mmHg，通常提示已容量过负荷</td>
+                </tr>
+                <tr>
+                    <td>肺动脉内热稀释漂浮导管</td>
+                    <td>Swan-Ganz导管</td>
+                    <td>虽然其对患者预后的总体价值备受争议，漂浮导管在血流动力学监测中的金标准地位依然不可动摇。只是随着脉搏指示</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-num">— 第 318 页 —</div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="血流动力学监测方法详解；中心静脉压；Swan-Ganz导管；心输出量；=318" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyContent()">📋 复制</button>
+    </div>
+    
+    <!-- 关键词区域 -->
+    <div class="keywords-section">
+        <div class="page-code">页码：318</div>
+        <div class="keywords">
+            <span class="keyword-tag">血流动力学</span>
+            <span class="keyword-tag">CVP</span>
+            <span class="keyword-tag">心输出量</span>
+            <span class="keyword-tag">Swan-Ganz</span>
+            <span class="keyword-tag">超声监测</span>
+            <span class="keyword-tag">容量负荷</span>
+        </div>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="special-tags">
+        <div class="special-tags-title">🔍 特色检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">心功能不全</span>
+            <span class="tag tag-disease">容量过负荷</span>
+            <!-- 抗生素/药物标签（本页无具体抗生素，以下为监测相关药物/耗材） -->
+            <span class="tag tag-antibiotic">唯捷流</span>
+            <!-- 细菌标签（本页无具体细菌） -->
+        </div>
+    </div>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '✓ 已复制';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.textContent = '📋 复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = localStorage.getItem('fav_318') === 'true';
+            
+            if (!isFav) {
+                localStorage.setItem('fav_318', 'true');
+                localStorage.setItem('fav_318_title', '血流动力学监测方法详解');
+                localStorage.setItem('fav_318_url', '318.html');
+                btn.textContent = '❤️ 已收藏';
+                btn.classList.add('active');
+                showToast('已添加到收藏！');
+                updateIndexFavorite();
+            } else {
+                localStorage.removeItem('fav_318');
+                localStorage.removeItem('fav_318_title');
+                localStorage.removeItem('fav_318_url');
+                btn.textContent = '⭐ 收藏';
+                btn.classList.remove('active');
+                showToast('已取消收藏！');
+            }
+        }
+        
+        // 更新index.html的收藏
+        function updateIndexFavorite() {
+            // 通过localStorage通知index页面更新收藏列表
+            const favList = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favList.find(f => f.url === '318.html');
+            if (!exists) {
+                favList.push({
+                    url: '318.html',
+                    title: '血流动力学监测方法详解',
+                    page: '318'
+                });
+                localStorage.setItem('favorites', JSON.stringify(favList));
+            }
+        }
+        
+        // 检查收藏状态
+        function checkFavorite() {
+            const isFav = localStorage.getItem('fav_318') === 'true';
+            const btn = document.getElementById('favBtn');
+            if (isFav) {
+                btn.textContent = '❤️ 已收藏';
+                btn.classList.add('active');
+            }
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+        
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            checkFavorite();
+        });
+    </script>
+</body>
+</html>
