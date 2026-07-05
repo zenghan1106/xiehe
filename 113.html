@@ -1,0 +1,490 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~缓慢性心律失常临床诊疗要点*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8f0e8 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            z-index: 100;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(92,184,92,0.3);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+        }
+        
+        .nav-btn.next {
+            background: #f0ad4e;
+            box-shadow: 0 2px 8px rgba(240,173,78,0.3);
+        }
+        
+        .nav-btn.next:hover {
+            background: #ec971f;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #d9534f;
+            box-shadow: 0 2px 8px rgba(217,83,79,0.3);
+        }
+        
+        .fav-btn:hover {
+            background: #c9302c;
+        }
+        
+        /* 标题 */
+        h1 {
+            text-align: center;
+            color: #2c5282;
+            font-size: 22px;
+            margin: 70px 0 25px 0;
+            padding: 0 10px;
+            word-break: break-all;
+            line-height: 1.4;
+        }
+        
+        /* 表格容器 */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 0 auto 25px auto;
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+            min-width: 320px;
+        }
+        
+        /* 表头 */
+        thead tr {
+            background: linear-gradient(135deg, #2b6cb0 0%, #2c5282 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            text-align: center;
+            font-size: 17px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        /* 表格内容 */
+        td, th {
+            border: 1px solid #e2e8f0;
+            padding: 12px 10px;
+            text-align: left;
+            word-break: break-all;
+            line-height: 1.6;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #e6f0fa;
+        }
+        
+        .section-title {
+            background: #edf2f7;
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 15px;
+        }
+        
+        .content-cell {
+            color: #4a5568;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 25px auto;
+            max-width: 800px;
+            padding: 0 10px;
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            color: #4a5568;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: white;
+        }
+        
+        .tag-disease {
+            background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+        }
+        
+        .tag-symptom {
+            background: linear-gradient(135deg, #dd6b20 0%, #c05621 100%);
+        }
+        
+        .tag-exam {
+            background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+        }
+        
+        .tag-treatment {
+            background: linear-gradient(135deg, #3182ce 0%, #2b6cb0 100%);
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #4a5568;
+            margin: 20px 0;
+            font-weight: 600;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            font-size: 13px;
+            color: #718096;
+            margin: 15px 0 25px 0;
+            padding: 0 10px;
+            line-height: 1.6;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            margin: 20px auto;
+            max-width: calc(100% - 100px);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            padding: 0 10px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #4a5568;
+            background: white;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(102,126,234,0.3);
+        }
+        
+        .copy-btn:hover {
+            opacity: 0.9;
+        }
+        
+        .copy-btn.copied {
+            background: #48bb78;
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #48bb78;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 25px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 200;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 14px 8px;
+            }
+            
+            td, th {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .nav-btn, .home-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                max-width: calc(100% - 60px);
+                flex-direction: column;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="112.html" class="nav-btn">← 上一页</a>
+        <a href="114.html" class="nav-btn next">下一页 →</a>
+        <button class="nav-btn fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~缓慢性心律失常临床诊疗要点*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:25%">分类</th>
+                    <th style="width:75%">详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="section-title">病因</td>
+                    <td class="content-cell">冠心病、ACS、冠状动脉再灌注治疗过程中、心肌病、心肌炎、高钾血症、甲状腺功能减退症、特殊感染性疾病如莱姆病等、药物过量（如地高辛、β受体阻断药等致缓慢性心律失常药物）、急性颅内压增高、先天性心脏病</td>
+                </tr>
+                <tr>
+                    <td class="section-title">临床表现-症状</td>
+                    <td class="content-cell">乏力、头晕、心悸、心前区不适、运动耐量差、晕厥前兆及晕厥，甚至出现休克，或有过不明原因抽搐</td>
+                </tr>
+                <tr>
+                    <td class="section-title">临床表现-查体</td>
+                    <td class="content-cell">心率缓慢（&lt;60次/分），可能合并心律不齐，可能伴面色发白、低血压、肢端湿冷等表现</td>
+                </tr>
+                <tr>
+                    <td class="section-title">必做检查</td>
+                    <td class="content-cell">ECG：最好有长Ⅱ导联心电图，症状反复时需要及时复查；血常规+电解质（血钾水平）+心肌酶谱检测</td>
+                </tr>
+                <tr>
+                    <td class="section-title">选做检查-药物过量</td>
+                    <td class="content-cell">若怀疑地高辛等药物过量，应完善毒物筛查或此类药物浓度测定</td>
+                </tr>
+                <tr>
+                    <td class="section-title">选做检查-心电监测</td>
+                    <td class="content-cell">超声心动图+24小时动态心电图</td>
+                </tr>
+                <tr>
+                    <td class="section-title">选做检查-感染指标</td>
+                    <td class="content-cell">有临床提示时，可筛查甲功、病原体检测等感染方面指标</td>
+                </tr>
+                <tr>
+                    <td class="section-title">分类诊断-病态窦房结综合征确诊标准</td>
+                    <td class="content-cell">符合下列心电表现至少一项即可确诊：①窦性心动过缓≤40次/分，持续1分钟以上；②二度Ⅱ型窦房传导阻滞；③窦性停搏&gt;3秒；④窦缓伴短阵心房颤动、心房扑动、室上性心动过速，发作停止时窦性搏动恢复时间&gt;2秒</td>
+                </tr>
+                <tr>
+                    <td class="section-title">分类诊断-病态窦房结综合征可疑标准</td>
+                    <td class="content-cell">下列心电图表现之一为可疑：①窦性缓慢心律≤50次/分，但未达到上述标准者；②窦性心动过缓≤60次/分，在运动、发热、剧痛时心率明显少于正常反应；③间歇或持续出现二度Ⅰ型窦房传导阻滞、结性异搏心律；④显著窦性心律失常，多次RR间期超过2秒</td>
+                </tr>
+                <tr>
+                    <td class="section-title">分类诊断-房室传导阻滞</td>
+                    <td class="content-cell">二度Ⅱ型房室传导阻滞、三度房室传导阻滞：主要通过心电图确定。二度Ⅱ型房室传导阻滞：指间歇P波后无QRS波群，且PR</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 快速检索标签（仅来自图片内容）</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">冠心病</span>
+            <span class="tag tag-disease">ACS</span>
+            <span class="tag tag-disease">心肌病</span>
+            <span class="tag tag-disease">心肌炎</span>
+            <span class="tag tag-disease">高钾血症</span>
+            <span class="tag tag-disease">甲状腺功能减退症</span>
+            <span class="tag tag-disease">莱姆病</span>
+            <span class="tag tag-disease">先天性心脏病</span>
+            <span class="tag tag-disease">病态窦房结综合征</span>
+            <span class="tag tag-disease">二度Ⅱ型房室传导阻滞</span>
+            <span class="tag tag-disease">三度房室传导阻滞</span>
+            <span class="tag tag-disease">二度Ⅱ型窦房传导阻滞</span>
+            <span class="tag tag-symptom">乏力</span>
+            <span class="tag tag-symptom">头晕</span>
+            <span class="tag tag-symptom">心悸</span>
+            <span class="tag tag-symptom">晕厥</span>
+            <span class="tag tag-symptom">休克</span>
+            <span class="tag tag-symptom">抽搐</span>
+            <span class="tag tag-exam">ECG</span>
+            <span class="tag tag-exam">血常规</span>
+            <span class="tag tag-exam">电解质</span>
+            <span class="tag tag-exam">心肌酶谱</span>
+            <span class="tag tag-exam">超声心动图</span>
+            <span class="tag tag-exam">24小时动态心电图</span>
+            <span class="tag tag-treatment">地高辛</span>
+            <span class="tag tag-treatment">β受体阻断药</span>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">113</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        关键词：缓慢性心律失常；冠心病；ACS；心肌病；心肌炎；高钾血症；甲状腺功能减退症；莱姆病；地高辛；β受体阻断药；病态窦房结综合征；窦性心动过缓；窦房传导阻滞；房室传导阻滞；二度Ⅱ型房室传导阻滞；三度房室传导阻滞；ECG；超声心动图；动态心电图
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="缓慢性心律失常临床诊疗要点；冠心病；ACS；心肌病；心肌炎；高钾血症；甲状腺功能减退症；莱姆病；地高辛；β受体阻断药；病态窦房结综合征；窦性心动过缓；窦房传导阻滞；房室传导阻滞；二度Ⅱ型房室传导阻滞；三度房室传导阻滞；ECG；超声心动图；动态心电图；乏力；头晕；心悸；晕厥；休克；抽搐=113" readonly>
+        <button class="copy-btn" onclick="copyContent()">复制</button>
+    </div>
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast">已复制到剪贴板！</div>
+    
+    <script>
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                const toast = document.getElementById('toast');
+                btn.textContent = '已复制';
+                btn.classList.add('copied');
+                toast.classList.add('show');
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                    toast.classList.remove('show');
+                }, 2000);
+            });
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            const title = document.querySelector('h1').textContent;
+            const pageNum = document.querySelector('.page-number').textContent.trim();
+            const currentUrl = window.location.href;
+            
+            const favItem = {
+                title: title,
+                pageNum: pageNum,
+                url: currentUrl,
+                time: new Date().toLocaleString()
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites_index') || '[]');
+            
+            const exists = favorites.some(item => item.url === currentUrl);
+            if (exists) {
+                alert('该页面已在收藏中！');
+                return;
+            }
+            
+            favorites.push(favItem);
+            localStorage.setItem('favorites_index', JSON.stringify(favorites));
+            localStorage.setItem('favorites_updated', 'true');
+            localStorage.setItem('latest_favorite', JSON.stringify(favItem));
+            
+            alert('收藏成功！已添加到首页收藏类目。');
+        }
+    </script>
+</body>
+</html>
