@@ -1,0 +1,398 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~坏死性筋膜炎诊断与急诊处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        .btn-home {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(33,150,243,0.3);
+            z-index: 100;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-home:hover {
+            background: #1976D2;
+        }
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        .nav-btns a, .nav-btns button {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(33,150,243,0.3);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        .nav-btns a:hover, .nav-btns button:hover {
+            background: #1976D2;
+        }
+        .btn-fav {
+            background: #FF9800 !important;
+        }
+        .btn-fav:hover {
+            background: #F57C00 !important;
+        }
+        .container {
+            max-width: 800px;
+            margin: 60px auto 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #1565C0;
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        thead th {
+            background: #2196F3;
+            color: white;
+            padding: 16px 12px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+        }
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 15px;
+            line-height: 1.7;
+            vertical-align: top;
+        }
+        tbody tr:hover {
+            background: #f0f7ff;
+        }
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        tbody tr:nth-child(even):hover {
+            background: #f0f7ff;
+        }
+        .section-title {
+            font-weight: bold;
+            color: #1565C0;
+            font-size: 16px;
+        }
+        .sub-item {
+            padding-left: 20px;
+            color: #444;
+        }
+        .check-mark {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        .page-num {
+            text-align: center;
+            color: #666;
+            font-size: 16px;
+            margin: 20px 0;
+        }
+        .tags-section {
+            margin-top: 25px;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .tag {
+            display: inline-block;
+            background: #E3F2FD;
+            color: #1565C0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            border: 1px solid #BBDEFB;
+        }
+        .tag-disease {
+            background: #FFEBEE;
+            color: #C62828;
+            border-color: #EF9A9A;
+        }
+        .tag-drug {
+            background: #E8F5E9;
+            color: #2E7D32;
+            border-color: #A5D6A7;
+        }
+        .tag-bacteria {
+            background: #FFF3E0;
+            color: #E65100;
+            border-color: #FFCC80;
+        }
+        .keywords-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            text-align: center;
+        }
+        .keywords {
+            color: #555;
+            font-size: 14px;
+            line-height: 2;
+        }
+        .copy-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #BBDEFB;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+            background: white;
+        }
+        .btn-copy {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .btn-copy:hover {
+            background: #388E3C;
+        }
+        .btn-copy.copied {
+            background: #2196F3;
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 18px;
+                margin-top: 10px;
+            }
+            thead th {
+                font-size: 16px;
+                padding: 12px 8px;
+            }
+            tbody td {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            .btn-home, .nav-btns a, .nav-btns button {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            .copy-section {
+                flex-direction: column;
+            }
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="btn-home">← 返回首页</a>
+    
+    <div class="nav-btns">
+        <a href="220.html">← 上一页</a>
+        <a href="222.html">下一页 →</a>
+        <button class="btn-fav" onclick="addToFavorites()">⭐ 收藏</button>
+    </div>
+
+    <div class="container">
+        <h1>~~~~~坏死性筋膜炎诊断与急诊处理*****</h1>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>项目</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="section-title">实验室检查</td>
+                    <td>
+                        坏死性筋膜炎实验室风险指标评分(LRINEC)：基于实验室检查指标<br>
+                        PCT检测
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">选做检查</td>
+                    <td>
+                        <strong>微生物学检测：</strong>血培养、分泌物培养、脓液及组织培养等<br><br>
+                        <strong>影像学检查：</strong>感染部位CT(平扫和/或增强)、MRI、骨扫描等
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">诊断策略</td>
+                    <td>
+                        <strong>手术探查：</strong>是诊断坏死性感染的唯一方法<br><br>
+                        <strong>直视下表现：</strong>筋膜肿胀呈暗灰色、无明显化脓的稀薄渗出物<br><br>
+                        <strong>坏死性筋膜炎病理学特征：</strong>广泛组织破坏、血管血栓形成、大量细菌沿筋膜层蔓延，以及急性炎症细胞浸润<br><br>
+                        <strong>坏死性肌炎病理学特征：</strong>包括骨骼肌纤维变性和坏死、粒细胞浸润，以及肌肉坏死区有大量细菌<br><br>
+                        <strong>影像学检查：</strong>CT扫描可见软组织中有气体、液体积聚、静脉造影后未见或有不均匀的组织增强，以及筋膜下炎症性改变
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">鉴别诊断</td>
+                    <td>
+                        蜂窝织炎<br>
+                        坏疽性脓皮病<br>
+                        气性坏疽(梭状芽胞杆菌性肌坏死)<br>
+                        化脓性肌炎<br>
+                        深静脉血栓形成
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">急诊处理</td>
+                    <td>
+                        <strong>手术探查+坏死组织清创：</strong>早起积极清创有利于改善预后，可考虑应持续负压吸引设备(VSD)用于清创后持续引流<br><br>
+                        <strong>抗生素治疗</strong><br>
+                        <span class="check-mark">✓</span> <strong>原则：</strong>早期广谱抗生素治疗，兼顾抗革兰阳性、革兰阴性和厌氧病原体的药物<br>
+                        <span class="check-mark">✓</span> <strong>经验性抗生素治疗方案：</strong>包括亚胺培南、美罗培南或厄他培南。必要时联合甲硝唑，革兰阳性菌可选用万古霉素或达托霉素等<br>
+                        <span class="check-mark">✓</span> <strong>疗程：</strong>必须根据患者个体情况进行调整<br><br>
+                        <strong>血流动力学支持：</strong>血流动力学不稳定者需补液及应用血管活性药物<br><br>
+                        <strong>免疫球蛋白：</strong>对于免疫力低下患者，可尝试使用IVIG<br><br>
+                        <div style="text-align:right;color:#666;">(刘安雷)</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="page-num">221</div>
+
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 检索标签（点击可检索）</div>
+            <span class="tag tag-disease">坏死性筋膜炎</span>
+            <span class="tag tag-disease">坏死性肌炎</span>
+            <span class="tag tag-disease">蜂窝织炎</span>
+            <span class="tag tag-disease">坏疽性脓皮病</span>
+            <span class="tag tag-disease">气性坏疽</span>
+            <span class="tag tag-disease">梭状芽胞杆菌性肌坏死</span>
+            <span class="tag tag-disease">化脓性肌炎</span>
+            <span class="tag tag-disease">深静脉血栓形成</span>
+            <span class="tag tag-drug">亚胺培南</span>
+            <span class="tag tag-drug">美罗培南</span>
+            <span class="tag tag-drug">厄他培南</span>
+            <span class="tag tag-drug">甲硝唑</span>
+            <span class="tag tag-drug">万古霉素</span>
+            <span class="tag tag-drug">达托霉素</span>
+            <span class="tag tag-drug">IVIG</span>
+            <span class="tag tag-bacteria">革兰阳性菌</span>
+            <span class="tag tag-bacteria">革兰阴性菌</span>
+            <span class="tag tag-bacteria">厌氧病原体</span>
+            <span class="tag tag-bacteria">梭状芽胞杆菌</span>
+        </div>
+
+        <div class="keywords-section">
+            <div class="keywords">
+                <strong>关键词：</strong>LRINEC | PCT | 血培养 | CT | MRI | 手术探查 | VSD | 广谱抗生素 | 血流动力学 | 免疫球蛋白 | 刘安雷
+            </div>
+        </div>
+
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="坏死性筋膜炎诊断与急诊处理；LRINEC；PCT；手术探查；抗生素治疗；亚胺培南；美罗培南；厄他培南；甲硝唑；万古霉素；达托霉素；=221" readonly>
+            <button class="btn-copy" onclick="copyText()">复制</button>
+        </div>
+    </div>
+
+    <script>
+        function copyText() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                const btn = document.querySelector('.btn-copy');
+                btn.textContent = '已复制!';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        function addToFavorites() {
+            const title = document.title;
+            const url = window.location.href;
+            
+            // 尝试使用浏览器收藏API
+            if (window.sidebar && window.sidebar.addPanel) {
+                window.sidebar.addPanel(title, url, '');
+            } else if (window.external && ('AddFavorite' in window.external)) {
+                window.external.AddFavorite(url, title);
+            } else {
+                // 保存到localStorage，供index.html读取
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.some(f => f.url === url);
+                if (!exists) {
+                    favorites.push({
+                        title: '~~~~~坏死性筋膜炎诊断与急诊处理*****',
+                        url: '221.html',
+                        category: '急诊医学'
+                    });
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                    alert('已添加到收藏！请在index.html查看收藏列表。');
+                } else {
+                    alert('该页面已在收藏列表中！');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
