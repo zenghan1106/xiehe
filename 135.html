@@ -1,0 +1,442 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急性胆管炎诊断策略与急诊处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 15px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background-color: #1e5aa8;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.3s;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background-color: #154785;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        
+        .nav-btn {
+            background-color: #4a90d9;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 13px;
+            transition: background-color 0.3s;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background-color: #357abd;
+        }
+        
+        .favorite-btn {
+            background-color: #f0ad4e;
+            color: #333;
+            padding: 8px 18px;
+            border-radius: 6px;
+            border: none;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .favorite-btn:hover {
+            background-color: #ec971f;
+        }
+        
+        .favorite-btn.active {
+            background-color: #d9534f;
+            color: white;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a3a6e;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #e8f0fe;
+            border-radius: 10px;
+            border-left: 5px solid #1e5aa8;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        thead tr {
+            background-color: #1e5aa8;
+            color: white;
+        }
+        
+        thead th {
+            padding: 18px 12px;
+            text-align: left;
+            font-size: 17px;
+            font-weight: bold;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f0fe;
+        }
+        
+        td {
+            padding: 12px;
+            vertical-align: top;
+            font-size: 14px;
+        }
+        
+        td:first-child {
+            font-weight: bold;
+            color: #1e5aa8;
+            width: 130px;
+            white-space: nowrap;
+        }
+        
+        .check-item {
+            color: #28a745;
+            margin-right: 6px;
+            font-weight: bold;
+        }
+        
+        .bullet-item {
+            color: #333;
+            margin-right: 6px;
+        }
+        
+        .sub-item {
+            margin-left: 20px;
+            display: block;
+        }
+        
+        .sub-sub-item {
+            margin-left: 40px;
+            display: block;
+        }
+        
+        .section-title {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            margin-top: 20px;
+            padding: 18px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1e5aa8;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 4px;
+            font-size: 13px;
+            border: 1px solid;
+        }
+        
+        .tag.disease {
+            background-color: #fde8e8;
+            color: #c0392b;
+            border-color: #f5c6c6;
+        }
+        
+        .tag.drug {
+            background-color: #e8f8f5;
+            color: #27ae60;
+            border-color: #c5e8d5;
+        }
+        
+        .tag.bacteria {
+            background-color: #fef5e7;
+            color: #e8b339;
+            border-color: #f5deb3;
+        }
+        
+        .bottom-section {
+            margin-top: 20px;
+            padding: 18px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 15px;
+            border: 2px solid #c5d9f8;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 22px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background-color: #218838;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #ddd;
+        }
+        
+        .keywords span {
+            color: #1e5aa8;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+                padding: 12px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 14px 10px;
+            }
+            
+            td {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            td:first-child {
+                width: 100px;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-buttons {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="134.html" class="nav-btn">上一页</a>
+            <a href="136.html" class="nav-btn">下一页</a>
+            <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~急性胆管炎诊断策略与急诊处理*****</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">急性胆管炎诊断策略与急诊处理要点</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>ERCP</td>
+                <td><span class="bullet-item">●</span>对胆总管结石诊断的准确率在89%～98%，是目前诊断胆总管结石准确性最高的方法之一，诊断的同时可以进行内镜下介入治疗。但是ERCP需要插管造影，有造成胆管炎、出血和继发胰腺炎等并发症的风险。</td>
+            </tr>
+            <tr>
+                <td>超声内镜</td>
+                <td><span class="bullet-item">●</span>对微小结石（直径&lt;3mm）的诊断优于ERCP，能显示胆管、壶腹部、胰腺的恶性肿瘤及其浸润范围。</td>
+            </tr>
+            <tr>
+                <td><span class="section-title">诊断策略</span></td>
+                <td><span class="bullet-item">●</span><strong>Charcot三联征：</strong>右上腹疼痛、有压痛，高热，通常伴寒战，以及黄疸。特异性高但敏感性低，并非所有急性化脓性胆管炎均发生腹痛。<br>
+                <span class="bullet-item">●</span><strong>Reynold五联征：</strong>Charcot三联征基础上若出现休克和中枢神经系统抑制表现，则称Reynold五联征阳性。<br>
+                <span class="bullet-item">●</span><strong>实验室指标：</strong>可表现为白细胞增多伴核左移、血清CRP浓度升高；转氨酶酶活性和胆汁淤积指标通常在疼痛发作后的最初数小时内升高。<br>
+                <span class="bullet-item">●</span><strong>辅助检查</strong><br>
+                <span class="sub-item"><span class="check-item">✓</span>腹部超声：常见胆总管扩张。但超声检查对诊断胆总管结石敏感性相对低，且在急性炎症时通过超声检查远端胆管更困难。</span>
+                <span class="sub-item"><span class="check-item">✓</span>病情稳定者可选择CT、MRCP等影像学检查，有助于进一步发现胆管扩张或狭窄的病因如肿瘤、结石等。</span>
+                <span class="sub-item"><span class="check-item">✓</span>对需要同时行经皮经肝胆管引流术（PTCD）或经内镜鼻胆管引流术（ENBD）减压者可行PTC或ERCP。</span></td>
+            </tr>
+            <tr>
+                <td><span class="section-title">急诊处理</span></td>
+                <td><span class="bullet-item">●</span><strong>紧急处理原则</strong>是立即解除胆道梗阻并充分引流。<br>
+                <span class="bullet-item">●</span><strong>一般治疗</strong><br>
+                <span class="sub-item"><span class="check-item">✓</span>支持治疗：静脉补液，纠正水电解质紊乱，对症镇痛，密切监测器官功能障碍及脓毒症休克征象。若出现休克等多器官功能障碍者应迅速行抗休克及相应器官支持治疗，如机械通气、血液净化等。</span><br>
+                <span class="bullet-item">●</span><strong>抗菌治疗</strong><br>
+                <span class="sub-item">◇ 所有怀疑急性胆管炎的患者应立即使用抗菌药物治疗，同时行血培养，有条件还可送检胆汁培养。</span>
+                <span class="sub-item">◇ 分层抗感染策略</span>
+                <span class="sub-sub-item">□ 轻度APC：常由单一肠道致病菌如大肠埃希菌引起，应使用单一抗菌药物治疗，首选第三代头孢菌素或喹诺酮类药物。</span>
+                <span class="sub-sub-item">□ 中重度APC：常为多重耐药菌感染，首选含β-内酰胺酶抑制剂的复合制剂、第三代或第四代头孢菌素、单</span></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="tags-container">
+        <div class="tags-title">特色检索标签</div>
+        <span class="tag disease">急性胆管炎</span>
+        <span class="tag disease">急性化脓性胆管炎</span>
+        <span class="tag disease">Charcot三联征</span>
+        <span class="tag disease">Reynold五联征</span>
+        <span class="tag disease">胆总管结石</span>
+        <span class="tag disease">胆道梗阻</span>
+        <span class="tag disease">脓毒症休克</span>
+        <span class="tag disease">APC</span>
+        <span class="tag bacteria">大肠埃希菌</span>
+        <span class="tag bacteria">肠道致病菌</span>
+        <span class="tag bacteria">多重耐药菌</span>
+        <span class="tag drug">第三代头孢菌素</span>
+        <span class="tag drug">喹诺酮类药物</span>
+        <span class="tag drug">β-内酰胺酶抑制剂</span>
+        <span class="tag drug">第四代头孢菌素</span>
+        <span class="tag drug">抗菌药物</span>
+    </div>
+    
+    <div class="bottom-section">
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="急性胆管炎诊断策略与急诊处理；Charcot三联征；Reynold五联征；胆总管结石；ERCP；超声内镜；PTCD；ENBD；抗菌治疗；第三代头孢菌素；喹诺酮类；β-内酰胺酶抑制剂；大肠埃希菌；脓毒症休克；=135" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+        <div class="page-number">页码：135</div>
+        <div class="keywords">
+            关键词：<span>急性胆管炎、Charcot三联征、Reynold五联征、ERCP、超声内镜、PTCD、ENBD、抗菌治疗、第三代头孢菌素、喹诺酮类、β-内酰胺酶抑制剂、大肠埃希菌、脓毒症休克、胆总管结石</span>
+        </div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '已复制';
+                btn.style.backgroundColor = '#218838';
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.style.backgroundColor = '#28a745';
+                }, 2000);
+            });
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            if (btn.classList.contains('active')) {
+                btn.classList.remove('active');
+                btn.innerHTML = '☆ 收藏';
+                localStorage.removeItem('fav_135');
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f !== '135');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            } else {
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                if (!favorites.includes('135')) {
+                    favorites.push('135');
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                localStorage.setItem('fav_135', '急性胆管炎诊断策略与急诊处理');
+            }
+        }
+        
+        window.onload = function() {
+            if (localStorage.getItem('fav_135')) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
