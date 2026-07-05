@@ -1,0 +1,592 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~常用缩略语表续表*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .nav-btn {
+            position: fixed;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .nav-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .home-btn {
+            top: 20px;
+            left: 20px;
+            background-color: #4a90d9;
+            color: white;
+        }
+        
+        .prev-btn {
+            top: 20px;
+            right: 20px;
+            background-color: #5cb85c;
+            color: white;
+        }
+        
+        .next-btn {
+            top: 60px;
+            right: 20px;
+            background-color: #f0ad4e;
+            color: white;
+        }
+        
+        .favorite-btn {
+            top: 100px;
+            right: 20px;
+            background-color: #d9534f;
+            color: white;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 100px auto 40px;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 6px 30px rgba(0,0,0,0.08);
+            padding: 40px;
+        }
+        
+        .title-section {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: linear-gradient(90deg, #e8f4f8 0%, #f0f7ff 100%);
+            border-radius: 12px;
+            border-left: 5px solid #4a90d9;
+        }
+        
+        .main-title {
+            font-size: 36px;
+            color: #2c5f7c;
+            font-weight: bold;
+            letter-spacing: 8px;
+        }
+        
+        .subtitle {
+            font-size: 15px;
+            color: #7a9ab0;
+            margin-top: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+            table-layout: fixed;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+        }
+        
+        th {
+            padding: 16px 12px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            word-break: break-all;
+        }
+        
+        td {
+            padding: 12px;
+            border: 1px solid #d0d8e0;
+            text-align: left;
+            color: #333;
+            line-height: 1.7;
+            word-break: break-all;
+            white-space: normal;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f4f8;
+            transition: background-color 0.3s;
+        }
+        
+        .col-short {
+            width: 18%;
+        }
+        
+        .col-long {
+            width: 41%;
+        }
+        
+        .tags-section {
+            margin: 35px 0;
+            padding: 22px;
+            background: linear-gradient(135deg, #f0f7ff 0%, #e8f4f8 100%);
+            border-radius: 12px;
+            border: 1px solid #b8d4e8;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #4a90d9;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 18px;
+            margin: 6px;
+            background: linear-gradient(135deg, #e1ecf4 0%, #d4e8f7 100%);
+            color: #2c5f7c;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #b3d3ea;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(74,144,217,0.2);
+        }
+        
+        .copy-section {
+            margin: 30px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 14px 18px;
+            border: 2px solid #4a90d9;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #333;
+            background-color: #fafafa;
+            outline: none;
+        }
+        
+        .copy-btn {
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #5cb85c 0%, #4cae4c 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(92,184,92,0.3);
+        }
+        
+        .copy-btn.copied {
+            background: linear-gradient(135deg, #5bc0de 0%, #46b8da 100%);
+        }
+        
+        .keywords-section {
+            text-align: center;
+            margin-top: 25px;
+            padding: 18px;
+            color: #888;
+            font-size: 13px;
+            background-color: #f8fafc;
+            border-radius: 8px;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 15px;
+            color: #999;
+            margin-top: 15px;
+            font-weight: 500;
+        }
+        
+        .watermark {
+            text-align: center;
+            color: #bbb;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin-top: 130px;
+            }
+            
+            .main-title {
+                font-size: 24px;
+                letter-spacing: 4px;
+            }
+            
+            th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            
+            td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .nav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .prev-btn, .next-btn, .favorite-btn {
+                right: 10px;
+            }
+            
+            .home-btn {
+                left: 10px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <button class="nav-btn home-btn" onclick="window.location.href='index.html'">返回首页</button>
+    
+    <!-- 上一页按钮 -->
+    <button class="nav-btn prev-btn" onclick="window.location.href='398.html'">上一页</button>
+    
+    <!-- 下一页按钮 -->
+    <button class="nav-btn next-btn" onclick="window.location.href='400.html'">下一页</button>
+    
+    <!-- 收藏按钮 -->
+    <button class="nav-btn favorite-btn" onclick="addToFavorites()">收藏</button>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <div class="title-section">
+            <h1 class="main-title">续表</h1>
+            <p class="subtitle">常用缩略语表续 - 医学英文缩略语对照表（AP-CRT）</p>
+        </div>
+        
+        <!-- 主表格 -->
+        <table>
+            <thead>
+                <tr>
+                    <th class="col-short">英文缩略语</th>
+                    <th class="col-long">英文全称</th>
+                    <th class="col-long">中文全称</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>AP</td>
+                    <td>acute pancreatitis</td>
+                    <td>急性胰腺炎</td>
+                </tr>
+                <tr>
+                    <td>APC</td>
+                    <td>acute purulent cholangitis</td>
+                    <td>急性化脓性胆管炎</td>
+                </tr>
+                <tr>
+                    <td>APS</td>
+                    <td>antiphosphlipid syndrome</td>
+                    <td>抗磷脂综合征</td>
+                </tr>
+                <tr>
+                    <td>APTT</td>
+                    <td>activity partial thromboplastin time</td>
+                    <td>活化部分凝血活酶时间</td>
+                </tr>
+                <tr>
+                    <td>ARB</td>
+                    <td>angiotonin receptor blocker</td>
+                    <td>血管紧张素受体拮抗药</td>
+                </tr>
+                <tr>
+                    <td>ARDS</td>
+                    <td>acute respiratory distress syndrome</td>
+                    <td>急性呼吸窘迫综合征</td>
+                </tr>
+                <tr>
+                    <td>ART</td>
+                    <td>anti-retroviral therapy</td>
+                    <td>抗反转录病毒治疗</td>
+                </tr>
+                <tr>
+                    <td>BAS</td>
+                    <td>body surface area</td>
+                    <td>体表面积</td>
+                </tr>
+                <tr>
+                    <td>BCS</td>
+                    <td>Budd-Chiari syndrome</td>
+                    <td>巴德-基里亚综合征</td>
+                </tr>
+                <tr>
+                    <td>BLS</td>
+                    <td>basic life support</td>
+                    <td>基础生命支持</td>
+                </tr>
+                <tr>
+                    <td>BNP</td>
+                    <td>brain natriuretic peptide</td>
+                    <td>脑钠肽</td>
+                </tr>
+                <tr>
+                    <td>BUN</td>
+                    <td>blood urea nitrogen</td>
+                    <td>尿素氮</td>
+                </tr>
+                <tr>
+                    <td>CA</td>
+                    <td>cardiac arrest</td>
+                    <td>心搏骤停</td>
+                </tr>
+                <tr>
+                    <td>CABG</td>
+                    <td>coronary aftery bypass grafting</td>
+                    <td>冠状动脉旁路移植术</td>
+                </tr>
+                <tr>
+                    <td>CAP</td>
+                    <td>community-acquired pneumonia</td>
+                    <td>社区获得性肺炎</td>
+                </tr>
+                <tr>
+                    <td>CAVH</td>
+                    <td>continuous artery-venous hemofiltration</td>
+                    <td>连续性动静脉血液滤过</td>
+                </tr>
+                <tr>
+                    <td>CD</td>
+                    <td>Clostridium difficile</td>
+                    <td>艰难梭菌</td>
+                </tr>
+                <tr>
+                    <td>CDI</td>
+                    <td>central diabetes insipidus</td>
+                    <td>中枢性尿崩症</td>
+                </tr>
+                <tr>
+                    <td>CHS</td>
+                    <td>classical heat stroke</td>
+                    <td>经典型热射病</td>
+                </tr>
+                <tr>
+                    <td>CK</td>
+                    <td>creatine kinase</td>
+                    <td>肌酸激酶</td>
+                </tr>
+                <tr>
+                    <td>CO</td>
+                    <td>cardiac output</td>
+                    <td>心输出量</td>
+                </tr>
+                <tr>
+                    <td>COPD</td>
+                    <td>chronic obstructive pulmonary disease</td>
+                    <td>慢性阻塞性肺疾病</td>
+                </tr>
+                <tr>
+                    <td>CPAP</td>
+                    <td>continuous positive airway pressure</td>
+                    <td>持续气道正压</td>
+                </tr>
+                <tr>
+                    <td>CPE</td>
+                    <td>cardiogenic pulmonary edema</td>
+                    <td>心源性肺水肿</td>
+                </tr>
+                <tr>
+                    <td>CPIS</td>
+                    <td>clinical pulmonary infection score</td>
+                    <td>临床肺部感染评分</td>
+                </tr>
+                <tr>
+                    <td>CPP</td>
+                    <td>cerebral perfusion pressure</td>
+                    <td>脑灌注压</td>
+                </tr>
+                <tr>
+                    <td>CPR</td>
+                    <td>cardiopulmonary resuscitation</td>
+                    <td>心肺复苏</td>
+                </tr>
+                <tr>
+                    <td>Cr</td>
+                    <td>creatinine</td>
+                    <td>肌酐</td>
+                </tr>
+                <tr>
+                    <td>CRP</td>
+                    <td>C reactive protein</td>
+                    <td>C反应蛋白</td>
+                </tr>
+                <tr>
+                    <td>CRRT</td>
+                    <td>continuous renal replacement therapy</td>
+                    <td>连续性肾脏替代治疗</td>
+                </tr>
+                <tr>
+                    <td>CRT</td>
+                    <td>capillary refill time</td>
+                    <td>毛细血管再充盈时间</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 特色检索标签 -->
+        <div class="tags-section">
+            <div class="tags-title">特色检索标签（疾病 · 抗生素药物 · 细菌相关）</div>
+            <span class="tag">急性胰腺炎</span>
+            <span class="tag">急性化脓性胆管炎</span>
+            <span class="tag">抗磷脂综合征</span>
+            <span class="tag">急性呼吸窘迫综合征</span>
+            <span class="tag">巴德-基里亚综合征</span>
+            <span class="tag">心搏骤停</span>
+            <span class="tag">社区获得性肺炎</span>
+            <span class="tag">艰难梭菌</span>
+            <span class="tag">中枢性尿崩症</span>
+            <span class="tag">经典型热射病</span>
+            <span class="tag">慢性阻塞性肺疾病</span>
+            <span class="tag">心源性肺水肿</span>
+            <span class="tag">临床肺部感染评分</span>
+            <span class="tag">心肺复苏</span>
+            <span class="tag">C反应蛋白</span>
+            <span class="tag">连续性肾脏替代治疗</span>
+            <span class="tag">抗反转录病毒治疗</span>
+        </div>
+        
+        <!-- 复制功能区 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+        
+        <!-- 关键词 -->
+        <div class="keywords-section">
+            关键词：续表；常用缩略语表；医学术语；英文缩略语；急性胰腺炎；急性化脓性胆管炎；抗磷脂综合征；急性呼吸窘迫综合征；艰难梭菌；社区获得性肺炎；心搏骤停；慢性阻塞性肺疾病；心源性肺水肿；心肺复苏；C反应蛋白；连续性肾脏替代治疗；抗反转录病毒治疗；经典型热射病；中枢性尿崩症
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">392</div>
+        
+        <!-- 水印 -->
+        <div class="watermark">使用 Scanner Pro 创建</div>
+    </div>
+    
+    <script>
+        // 设置复制框内容
+        const pageNum = window.location.pathname.split('/').pop().replace('.html', '');
+        const title = '续表';
+        const subtitle = '常用缩略语表续-医学英文缩略语对照表';
+        const keywords = '续表；常用缩略语表；医学术语；英文缩略语；急性胰腺炎；急性化脓性胆管炎；抗磷脂综合征；急性呼吸窘迫综合征；艰难梭菌；社区获得性肺炎；心搏骤停；慢性阻塞性肺疾病；心源性肺水肿；心肺复苏；C反应蛋白；连续性肾脏替代治疗；抗反转录病毒治疗；经典型热射病；中枢性尿崩症';
+        document.getElementById('copyText').value = title + '；' + subtitle + '；' + keywords + '=' + pageNum;
+        
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                }).catch(() => {
+                    fallbackCopy(input);
+                });
+            } else {
+                fallbackCopy(input);
+            }
+        }
+        
+        function fallbackCopy(input) {
+            try {
+                document.execCommand('copy');
+                showCopied();
+            } catch (err) {
+                alert('复制失败，请手动复制');
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.textContent;
+            btn.textContent = '已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 添加到收藏
+        function addToFavorites() {
+            const pageInfo = {
+                title: '~~~~~常用缩略语表续表*****',
+                url: window.location.href,
+                pageNum: pageNum,
+                category: '医学缩略语'
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            const exists = favorites.some(f => f.url === pageInfo.url);
+            if (exists) {
+                alert('该页面已在收藏中！');
+                return;
+            }
+            
+            favorites.push(pageInfo);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            localStorage.setItem('indexNeedsUpdate', 'true');
+            
+            alert('已添加到收藏！请在首页查看。');
+        }
+    </script>
+</body>
+</html>
