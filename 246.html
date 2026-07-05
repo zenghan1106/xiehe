@@ -1,0 +1,462 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~肾上腺危象-急诊疾病*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 顶部导航 */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .left-btns {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .right-btns {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: #2196F3;
+            color: white;
+        }
+        
+        .btn-page {
+            background: #4CAF50;
+            color: white;
+            min-width: 70px;
+            text-align: center;
+        }
+        
+        .btn-fav {
+            background: #FF9800;
+            color: white;
+            font-size: 13px;
+            padding: 6px 14px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            color: #1565C0;
+            margin: 15px 0 20px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        /* 表格容器 */
+        .table-wrap {
+            overflow-x: auto;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+        
+        /* 表头蓝色 */
+        thead th {
+            background: linear-gradient(135deg, #1976D2 0%, #2196F3 100%);
+            color: white;
+            padding: 14px 12px;
+            font-size: 17px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        td, th {
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        .section-title {
+            color: #1565C0;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .bullet {
+            color: #2196F3;
+            font-weight: bold;
+            margin-right: 4px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 4px;
+            border-radius: 20px;
+            font-size: 13px;
+            background: #e3f2fd;
+            color: #1565C0;
+            border: 1px solid #90caf9;
+        }
+        
+        .tag-disease {
+            background: #ffebee;
+            color: #c62828;
+            border-color: #ef9a9a;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 14px;
+            border: 2px solid #90caf9;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+        
+        .btn-copy {
+            background: #9C27B0;
+            color: white;
+            padding: 10px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        /* 页码 */
+        .page-num {
+            text-align: center;
+            font-size: 18px;
+            color: #666;
+            margin: 15px 0;
+            font-weight: 500;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .keywords-title {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 8px;
+        }
+        
+        .keyword-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            margin: 3px;
+            background: #fff3e0;
+            color: #e65100;
+            border-radius: 15px;
+            font-size: 13px;
+        }
+        
+        /* 底部信息 */
+        .footer {
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            padding: 15px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px 8px;
+            }
+            
+            .main-title {
+                font-size: 18px;
+            }
+            
+            table {
+                font-size: 13px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 10px 8px;
+            }
+            
+            td, th {
+                padding: 8px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部导航 -->
+    <div class="top-nav">
+        <div class="left-btns">
+            <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+        </div>
+        <div class="right-btns">
+            <a href="245.html" class="btn btn-page">⬆ 上一页</a>
+            <a href="247.html" class="btn btn-page">⬇ 下一页</a>
+            <button class="btn btn-fav" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~肾上腺危象-急诊疾病*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~肾上腺危象-急诊疾病*****、肾上腺危象 - 急诊疾病诊疗要点、概述 肠紊乱、休克、淡漠、躁动、谵妄甚至昏迷。 ●应尽早干预以提高患者生存率。</div>
+
+    <!-- 表格 -->
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">肾上腺危象 - 急诊疾病诊疗要点</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        <span class="section-title">概述</span><br>
+                        肠紊乱、休克、淡漠、躁动、谵妄甚至昏迷。<br>
+                        <span class="bullet">●</span>应尽早干预以提高患者生存率。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="section-title">2. 危险因素</span><br>
+                        <span class="bullet">●</span>慢性原发性肾上腺皮质功能减退患者，发生严重感染或其他重大应激。<br>
+                        <span class="bullet">●</span>已知存在原发性或继发性肾上腺皮质功能减退患者，替代治疗不足：<br>
+                        &nbsp;&nbsp;①补充糖皮质激素和/或盐皮质激素的日剂量不足；<br>
+                        &nbsp;&nbsp;②感染或其他重大疾病期间未增加糖皮质激素剂量；<br>
+                        &nbsp;&nbsp;③胃肠疾病导致药物吸收减少。<br>
+                        <span class="bullet">●</span>肾上腺破坏急性病因：双侧肾上腺梗死或出血。<br>
+                        <span class="bullet">●</span>继发性肾上腺皮质功能减退的急性病因：垂体梗死。<br>
+                        <span class="bullet">●</span>突然停用超生理剂量糖皮质激素。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="section-title">3. 临床表现</span><br>
+                        <span class="bullet">●</span>症状：休克是主要表现，常有非特异性症状，如食欲减退、恶心、呕吐、腹痛、无力、疲乏、嗜睡、发热、意识模糊或昏迷。<br>
+                        <span class="bullet">●</span>查体：特异性体征有直立性低血压、嗜盐。原发性肾上腺皮质功能不全者可出现皮肤色素过度沉着。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="section-title">4. 必做检查</span><br>
+                        <span class="bullet">●</span>血常规：可有正细胞性贫血。<br>
+                        <span class="bullet">●</span>生化检查：可有低钠血症、高钾血症等电解质异常，以及低血糖。<br>
+                        <span class="bullet">●</span>清晨血清皮质醇浓度测定：&lt;82.8nmol/L应高度怀疑肾上腺皮质功能减退。应激情况下抽血查皮质醇和ACTH水平同样有助于评估肾上腺皮质功能。<br>
+                        <span class="bullet">●</span>保留血样用于血浆ACTH浓度和血总皮质醇测定，同时抽血查甲功、GH、IGF-1、性激素，以全面评估腺垂体功能。血皮质醇低ACTH高，考虑为原发性肾上腺皮质功能减退；血F和ACTH浓度均减低，则为继发性。<br>
+                        <span class="bullet">●</span>腹部CT：判断有无肾上腺增大或钙化（结核病），以及有无感染性、出血性或转移性病因。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="section-title">5. 诊断策略</span><br>
+                        <span class="bullet">●</span>对于慢性肾上腺皮质功能减退、皮质醇合成不足的患者，一旦有感染、外伤或手术等应激，出现明显消化道症状、神志改变和循环衰竭即可诊断肾上腺危象。<br>
+                        <span class="bullet">●</span>不明原因的休克或昏迷，注意有无色素沉着及电解质异常。<br>
+                        <span class="bullet">●</span>休克患者积极抗休克仍无好转。
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 页码 -->
+    <div class="page-num">246</div>
+
+    <!-- 关键词 -->
+    <div class="keywords">
+        <div class="keywords-title">关键词</div>
+        <span class="keyword-tag">肾上腺危象</span>
+        <span class="keyword-tag">肾上腺皮质功能减退</span>
+        <span class="keyword-tag">休克</span>
+        <span class="keyword-tag">皮质醇</span>
+        <span class="keyword-tag">ACTH</span>
+        <span class="keyword-tag">低钠血症</span>
+        <span class="keyword-tag">高钾血症</span>
+        <span class="keyword-tag">急诊</span>
+    </div>
+
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="肾上腺危象-急诊疾病；肾上腺皮质功能减退、休克、皮质醇、ACTH、低钠血症、高钾血症、急诊；=246" readonly>
+        <button class="btn-copy" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">检索标签（疾病 · 药物 · 细菌）</div>
+        <span class="tag tag-disease">肾上腺危象</span>
+        <span class="tag tag-disease">肾上腺皮质功能减退</span>
+        <span class="tag tag-disease">休克</span>
+        <span class="tag">皮质醇</span>
+        <span class="tag">ACTH</span>
+        <span class="tag tag-disease">低钠血症</span>
+        <span class="tag tag-disease">高钾血症</span>
+        <span class="tag tag-disease">正细胞性贫血</span>
+        <span class="tag tag-disease">低血糖</span>
+        <span class="tag tag-disease">结核病</span>
+        <span class="tag">糖皮质激素</span>
+        <span class="tag">盐皮质激素</span>
+    </div>
+
+    <div class="footer">
+        急诊疾病 · 第246页
+    </div>
+
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                alert('已复制到剪贴板：' + input.value);
+            }).catch(() => {
+                document.execCommand('copy');
+                alert('已复制到剪贴板');
+            });
+        }
+
+        // 收藏功能
+        function addToFavorites() {
+            // 获取当前页面信息
+            const title = '~~~~~肾上腺危象-急诊疾病*****';
+            const url = window.location.href;
+            const pageNum = '246';
+            
+            // 尝试添加到index的收藏类目（通过localStorage模拟）
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                pageNum: pageNum,
+                category: '急诊疾病',
+                timestamp: new Date().toISOString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 同时尝试打开index.html并传递收藏信息（通过URL参数）
+            const indexUrl = 'index.html?action=addFavorite&title=' + encodeURIComponent(title) 
+                + '&url=' + encodeURIComponent(url) 
+                + '&page=' + pageNum;
+            
+            alert('已收藏！页面信息：\n标题：' + title + '\n页码：' + pageNum);
+            
+            // 可选：跳转到index.html
+            // window.location.href = indexUrl;
+        }
+    </script>
+
+</body>
+</html>
