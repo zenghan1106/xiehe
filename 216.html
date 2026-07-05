@@ -1,0 +1,633 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急性腹泻诊疗要点：病原体鉴别、检查与诊断策略*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+            min-height: 100vh;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 12px;
+            left: 12px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            z-index: 100;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 右上角导航按钮容器 */
+        .nav-btns {
+            position: fixed;
+            top: 12px;
+            right: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+        }
+        
+        .nav-btn.next {
+            background: #f0ad4e;
+        }
+        
+        .nav-btn.next:hover {
+            background: #ec971f;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #d9534f;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+        
+        .fav-btn:hover {
+            background: #c9302c;
+        }
+        
+        .fav-btn.active {
+            background: #5bc0de;
+        }
+        
+        /* 标题 */
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 22px;
+            margin: 75px 0 8px 0;
+            padding: 0 10px;
+            line-height: 1.4;
+        }
+        
+        h2 {
+            text-align: center;
+            color: #5a6c7d;
+            font-size: 15px;
+            margin-bottom: 18px;
+            font-weight: normal;
+        }
+        
+        /* 主表格 */
+        .main-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        .main-table thead th {
+            background: #2e7ad1;
+            color: white;
+            padding: 16px 12px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .main-table tbody th {
+            background: #e8f0fe;
+            color: #1a5276;
+            padding: 12px;
+            text-align: left;
+            font-size: 15px;
+            font-weight: bold;
+            border-bottom: 1px solid #d0d7de;
+            width: 22%;
+            vertical-align: top;
+        }
+        
+        .main-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+            font-size: 14px;
+        }
+        
+        .main-table tr:last-child th,
+        .main-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .main-table tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        
+        .main-table tr:hover {
+            background: #f0f5fa;
+        }
+        
+        /* 列表样式 */
+        .content-list {
+            margin: 0;
+            padding-left: 18px;
+        }
+        
+        .content-list li {
+            margin-bottom: 6px;
+        }
+        
+        .diamond-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .diamond-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+        }
+        
+        .diamond-list li::before {
+            content: "◇";
+            position: absolute;
+            left: 0;
+            color: #2e7ad1;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            user-select: none;
+        }
+        
+        .tag-disease {
+            background: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #bbdefb;
+        }
+        
+        .tag-disease:hover {
+            background: #1565c0;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+        }
+        
+        .tag-bacteria:hover {
+            background: #2e7d32;
+            color: white;
+        }
+        
+        .tag-antibiotic {
+            background: #fff3e0;
+            color: #e65100;
+            border: 1px solid #ffe0b2;
+        }
+        
+        .tag-antibiotic:hover {
+            background: #e65100;
+            color: white;
+        }
+        
+        /* 页码和关键词区域 */
+        .footer-section {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+        }
+        
+        .page-number {
+            font-size: 28px;
+            color: #2e7ad1;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .keywords {
+            color: #666;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            margin: 15px 0 25px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 14px;
+            border: 1px solid #d0d7de;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background: #fafbfc;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-btn {
+            background: #5bc0de;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        .copy-btn:hover {
+            background: #46b8da;
+        }
+        
+        .copy-btn.copied {
+            background: #5cb85c;
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 14px;
+            display: none;
+            z-index: 200;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 17px;
+                margin-top: 85px;
+            }
+            
+            h2 {
+                font-size: 13px;
+            }
+            
+            .main-table thead th {
+                font-size: 16px;
+                padding: 14px 10px;
+            }
+            
+            .main-table tbody th {
+                font-size: 13px;
+                padding: 10px 8px;
+                width: 26%;
+            }
+            
+            .main-table td {
+                font-size: 12px;
+                padding: 10px 8px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+            
+            .tag {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 首页</a>
+    
+    <!-- 右上角导航 -->
+    <div class="nav-btns">
+        <a href="215.html" class="nav-btn">↑ 上一页</a>
+        <a href="217.html" class="nav-btn next">↓ 下一页</a>
+        <button class="fav-btn" onclick="toggleFavorite()" id="favBtn">☆ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~急性腹泻诊疗要点：病原体鉴别、检查与诊断策略*****</h1>
+    <h2>小肠与结肠感染鉴别 · 不同病原体特点 · 必做/选做检查 · 诊断策略</h2>
+    
+    <!-- 主表格：所有内容在一个表格内 -->
+    <table class="main-table">
+        <thead>
+            <tr>
+                <th colspan="2">📋 急性腹泻诊疗完整内容</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>小肠感染性腹泻特点</th>
+                <td>
+                    周或右下腹痛，伴腹胀或肠鸣，腹泻5～10次/日，粪便量多呈稀水便，混有泡沫及未消化食物残渣
+                </td>
+            </tr>
+            <tr>
+                <th>结肠感染性腹泻特点</th>
+                <td>
+                    腹痛常在下腹或左下腹部，一般不伴肠鸣，腹泻频繁，较小肠感染性腹泻次数显著增多，粪便量少，呈脓血便外观
+                </td>
+            </tr>
+            <tr>
+                <th>不同病原体感染特点</th>
+                <td>
+                    <ul class="diamond-list">
+                        <li>急性细菌性痢疾先为稀便后呈脓血便，伴里急后重</li>
+                        <li>空肠弯曲菌、小肠结肠耶尔森菌、侵袭性大肠埃希菌等引起的肠炎同细菌性痢疾表现</li>
+                        <li>急性阿米巴痢疾、血吸虫病和胃肠型恶性疟疾。典型阿米巴痢疾大便为深红色果酱样。粪便稀薄如水，伴明显恶臭、呕吐者，多见于食物中毒性感染</li>
+                        <li>食后2～5小时发病，多为金黄色葡萄球菌、蜡样芽胞杆菌食物中毒</li>
+                        <li>食后6～24小时发病，以沙门菌、变形杆菌、A型产气荚膜梭状芽胞杆菌引起者可能性大</li>
+                        <li>腹泻呕吐物呈米泔水样，失水严重，应考虑霍乱</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th>查体要点</th>
+                <td>
+                    脱水情况（生命体征不稳定、尿量减少、皮肤弹性差、出汗、意识模糊等）、体温变化、腹部压痛、皮疹等
+                </td>
+            </tr>
+            <tr>
+                <th>必做检查</th>
+                <td>
+                    <ul class="content-list">
+                        <li>血常规：白细胞增多或中性粒细胞比例升高，血红蛋白可升高或存在便血者可有降低</li>
+                        <li>粪便常规+OB：细菌感染可见粪便白细胞增多，偶可见红细胞；细菌性痢疾等可见大量红、白细胞</li>
+                        <li>肝肾功+电解质+CRP</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th>选做检查</th>
+                <td>
+                    <ul class="content-list">
+                        <li>粪便病原学检测：志贺菌、沙门菌、弯曲杆菌、大肠埃希菌O157:H7菌株、贾第鞭毛虫、隐孢子虫、阿米巴和轮状病毒等</li>
+                        <li>粪便艰难梭菌毒素鉴定、粪便培养：使用抗生素且病因不明确者需完善</li>
+                        <li>心电图+心肌酶+超声心动图：有胸闷、胸痛或出现心律失常等者，需除外心肌炎</li>
+                        <li>乳酸测定+血气分析：循环动力学不稳定者需评估</li>
+                        <li>腹部超声+腹盆CT等影像学</li>
+                        <li>小肠超声、小肠CT重建、结肠镜、甲功等</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th>诊断策略</th>
+                <td>
+                    初步鉴定腹泻病因：见表32
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔖 特色检索标签（点击图片内文字标签筛选）</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease" onclick="filterTag(this)">急性细菌性痢疾</span>
+            <span class="tag tag-disease" onclick="filterTag(this)">急性阿米巴痢疾</span>
+            <span class="tag tag-disease" onclick="filterTag(this)">血吸虫病</span>
+            <span class="tag tag-disease" onclick="filterTag(this)">胃肠型恶性疟疾</span>
+            <span class="tag tag-disease" onclick="filterTag(this)">霍乱</span>
+            <span class="tag tag-disease" onclick="filterTag(this)">食物中毒</span>
+            <span class="tag tag-disease" onclick="filterTag(this)">心肌炎</span>
+            <!-- 细菌/病原体标签 -->
+            <span class="tag tag-bacteria" onclick="filterTag(this)">空肠弯曲菌</span>
+            <span class="tag tag-bacteria" onclick="filterTag(this)">小肠结肠耶尔森菌</span>
+            <span class="tag tag-bacteria" onclick="filterTag(this)">侵袭性大肠埃希菌</span>
+            <span class="tag tag-bacteria" onclick="filterTag(this)">大肠埃希菌O157:H7菌株</span>
+            <span class="tag tag-bacteria" onclick="filterTag(this)">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria" onclick="filterTag(this)">蜡样芽胞杆菌</span>
+            <span class="tag tag-bacteria" onclick="filterTag(this)">沙门菌</span>
+            <span class="tag tag-bacteria" onclick="filterTag(this)">变形杆菌</span>
+            <span class="tag tag-bacteria" onclick="filterTag(this)">A型产气荚膜梭状芽胞杆菌</span>
+            <span class="tag tag-bacteria" onclick="filterTag(this)">志贺菌</span>
+            <span class="tag tag-bacteria" onclick="filterTag(this)">弯曲杆菌</span>
+            <span class="tag tag-bacteria" onclick="filterTag(this)">艰难梭菌</span>
+            <span class="tag tag-bacteria" onclick="filterTag(this)">贾第鞭毛虫</span>
+            <span class="tag tag-bacteria" onclick="filterTag(this)">隐孢子虫</span>
+            <span class="tag tag-bacteria" onclick="filterTag(this)">阿米巴</span>
+            <span class="tag tag-bacteria" onclick="filterTag(this)">轮状病毒</span>
+            <!-- 抗生素相关标签 -->
+            <span class="tag tag-antibiotic" onclick="filterTag(this)">使用抗生素</span>
+        </div>
+    </div>
+    
+    <!-- 页码和关键词 -->
+    <div class="footer-section">
+        <div class="page-number">216</div>
+        <div class="keywords">
+            关键词：急性腹泻 | 感染性腹泻 | 细菌性痢疾 | 阿米巴痢疾 | 食物中毒 | 霍乱 | 
+            粪便检查 | 病原体检测 | 空肠弯曲菌 | 沙门菌 | 艰难梭菌 | 急诊疾病
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" 
+               value="急性腹泻诊疗要点：病原体鉴别、检查与诊断策略；小肠与结肠感染鉴别、不同病原体特点、必做选做检查、诊断策略；急性腹泻、感染性腹泻、细菌性痢疾、阿米巴痢疾、食物中毒、霍乱、粪便检查、病原体检测、空肠弯曲菌、沙门菌、艰难梭菌、急诊疾病；=216" 
+               readonly>
+        <button class="copy-btn" onclick="copyText()" id="copyBtn">复制</button>
+    </div>
+    
+    <!-- 提示信息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制功能
+        function copyText() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '✓ 已复制';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.textContent = '复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2500);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const title = document.querySelector('h1').textContent.replace(/~~~~~|*****$/g, '').trim();
+            const url = window.location.href;
+            const pageNum = '216';
+            const category = '急诊疾病';
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.find(f => f.url === url);
+            
+            if (exists) {
+                favorites = favorites.filter(f => f.url !== url);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                btn.textContent = '☆ 收藏';
+                btn.classList.remove('active');
+                showToast('已取消收藏');
+            } else {
+                favorites.push({
+                    title: title,
+                    url: url,
+                    pageNum: pageNum,
+                    category: category,
+                    addTime: new Date().toLocaleString()
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                // 同步到index收藏数据
+                let indexFavs = JSON.parse(localStorage.getItem('indexFavorites') || '[]');
+                if (!indexFavs.find(f => f.url === url)) {
+                    indexFavs.push({ title, url, pageNum, category });
+                    localStorage.setItem('indexFavorites', JSON.stringify(indexFavs));
+                }
+                
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+                showToast('已添加到收藏！');
+            }
+        }
+        
+        // 标签筛选
+        function filterTag(element) {
+            const tagText = element.textContent;
+            showToast('筛选: ' + tagText);
+            
+            // 高亮包含该标签的表格行
+            const allRows = document.querySelectorAll('.main-table tbody tr');
+            allRows.forEach(row => {
+                const cell = row.querySelector('td');
+                if (cell && cell.textContent.includes(tagText)) {
+                    row.style.background = '#fff8e1';
+                    setTimeout(() => {
+                        row.style.background = '';
+                    }, 2000);
+                }
+            });
+        }
+        
+        // 页面加载检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const currentUrl = window.location.href;
+            const isFav = favorites.find(f => f.url === currentUrl);
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+            }
+        };
+    </script>
+</body>
+</html>
