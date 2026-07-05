@@ -1,0 +1,517 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~M100 2024 肠杆菌目、弧菌目和巴斯德菌目*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 10px;
+            color: #333;
+        }
+        
+        .header {
+            position: relative;
+            margin-bottom: 15px;
+            padding-top: 50px;
+        }
+        
+        .back-btn {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btns {
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .fav-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 22px;
+            margin: 20px 0 10px 0;
+            padding: 0 80px;
+            line-height: 1.4;
+        }
+        
+        h2 {
+            text-align: center;
+            color: #34495e;
+            font-size: 16px;
+            margin-bottom: 20px;
+            font-weight: normal;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        thead {
+            background: #2980b9;
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 10px;
+            text-align: left;
+            font-weight: bold;
+            font-size: 15px;
+            border-right: 1px solid rgba(255,255,255,0.3);
+            white-space: nowrap;
+        }
+        
+        thead th:last-child {
+            border-right: none;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        tbody td {
+            padding: 12px 10px;
+            border-right: 1px solid #ecf0f1;
+            vertical-align: top;
+            line-height: 1.6;
+            word-break: break-all;
+        }
+        
+        tbody td:last-child {
+            border-right: none;
+        }
+        
+        .first-row {
+            font-size: 15px !important;
+            font-weight: bold;
+            color: #c0392b;
+        }
+        
+        .note {
+            color: #e74c3c;
+            font-size: 12px;
+        }
+        
+        .tags-section {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            cursor: default;
+        }
+        
+        .tag.disease {
+            background: #e74c3c;
+        }
+        
+        .tag.bacteria {
+            background: #9b59b6;
+        }
+        
+        .tag.antibiotic {
+            background: #27ae60;
+        }
+        
+        .footer-section {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .page-num {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #2c3e50;
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:active {
+            background: #219a52;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 18px;
+                padding: 0 60px;
+            }
+            
+            h2 {
+                font-size: 14px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 10px 6px;
+            }
+            
+            tbody td {
+                padding: 8px 6px;
+            }
+            
+            .first-row {
+                font-size: 13px !important;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-btns">
+            <a href="281.html" class="nav-btn">上一页</a>
+            <a href="283.html" class="nav-btn">下一页</a>
+            <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~M100 2024 肠杆菌目、弧菌目和巴斯德菌目*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~M100 2024 肠杆菌目、弧菌目和巴斯德菌目*****、试验/报告、肠杆菌目、弧菌目、巴斯德菌目、青霉素类、β-内酰胺/β-内酰胺酶抑制剂类、头孢类（注射，包括抗假单胞菌）、头孢类（口服）、碳青霉烯类、单环β-内酰胺类、氨基糖苷类、氟喹诺酮类、叶酸代谢途径抑制剂类、四环素类、硝基呋喃类、甘氨酰环素类、脂肽类、磷霉素类、氯霉素类、大环内酯类、其他、注释</div>
+    <h2>肠杆菌目、弧菌目和巴斯德菌目</h2>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>试验/报告</th>
+                    <th>肠杆菌目</th>
+                    <th>弧菌目</th>
+                    <th>巴斯德菌目</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="first-row">
+                    <td>青霉素类</td>
+                    <td>青霉素；氨苄西林；阿莫西林-克拉维酸</td>
+                    <td>氨苄西林</td>
+                    <td>氨苄西林；阿莫西林-克拉维酸</td>
+                </tr>
+                <tr>
+                    <td>β-内酰胺/β-内酰胺酶抑制剂类</td>
+                    <td>哌拉西林-他唑巴坦</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>头孢类（注射，包括抗假单胞菌）</td>
+                    <td>头孢唑林；头孢噻肟或头孢曲松；头孢他啶；头孢吡肟</td>
+                    <td>头孢噻肟或头孢曲松；头孢他啶</td>
+                    <td>头孢噻肟或头孢曲松</td>
+                </tr>
+                <tr>
+                    <td>头孢类（口服）</td>
+                    <td>头孢泊肟；头孢呋辛；头孢地尼或头孢克肟</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>碳青霉烯类</td>
+                    <td>亚胺培南或美罗培南或多利培南；厄他培南</td>
+                    <td>亚胺培南或美罗培南</td>
+                    <td>美罗培南</td>
+                </tr>
+                <tr>
+                    <td>单环β-内酰胺类</td>
+                    <td>氨曲南</td>
+                    <td>氨曲南</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>氨基糖苷类</td>
+                    <td>庆大霉素；妥布霉素；阿米卡星</td>
+                    <td>庆大霉素</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>氟喹诺酮类</td>
+                    <td>环丙沙星或左氧氟沙星</td>
+                    <td>环丙沙星或左氧氟沙星</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>叶酸代谢途径抑制剂类</td>
+                    <td>复方新诺明</td>
+                    <td>复方新诺明</td>
+                    <td>复方新诺明</td>
+                </tr>
+                <tr>
+                    <td>四环素类</td>
+                    <td>四环素；多西环素；米诺环素</td>
+                    <td>四环素；多西环素</td>
+                    <td>四环素</td>
+                </tr>
+                <tr>
+                    <td>硝基呋喃类</td>
+                    <td>呋喃妥因</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>甘氨酰环素类</td>
+                    <td>替加环素</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>脂肽类</td>
+                    <td>多黏菌素B或多黏菌素E</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>磷霉素类</td>
+                    <td>磷霉素（仅用于泌尿道）</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>氯霉素类</td>
+                    <td>-</td>
+                    <td>氯霉素</td>
+                    <td>氯霉素</td>
+                </tr>
+                <tr>
+                    <td>大环内酯类</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>阿奇霉素或克拉霉素</td>
+                </tr>
+                <tr>
+                    <td>其他</td>
+                    <td>厄他培南（ESBL筛选）；头孢他啶-阿维巴坦；头孢洛扎-他唑巴坦；美罗培南-韦博巴坦；亚胺培南-瑞来巴坦；头孢地尔</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td class="note">注释</td>
+                    <td class="note" colspan="3">A：警告：对于沙门菌属和志贺菌属，第一代、第二代头孢菌素和头霉素类在体外可能显示活性，但临床上无效，故不应报告敏感。<br>B：对于肠杆菌目，头孢唑林可用于预测口服头孢菌素的敏感性。<br>C：对于肠杆菌目，头孢噻肟、头孢曲松和头孢唑林的敏感结果可预测其对头孢克肟、头孢地尼敏感。</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">检索标签：</div>
+        <span class="tag disease">感染</span>
+        <span class="tag bacteria">肠杆菌目</span>
+        <span class="tag bacteria">弧菌目</span>
+        <span class="tag bacteria">巴斯德菌目</span>
+        <span class="tag bacteria">沙门菌属</span>
+        <span class="tag bacteria">志贺菌属</span>
+        <span class="tag antibiotic">青霉素</span>
+        <span class="tag antibiotic">氨苄西林</span>
+        <span class="tag antibiotic">阿莫西林-克拉维酸</span>
+        <span class="tag antibiotic">哌拉西林-他唑巴坦</span>
+        <span class="tag antibiotic">头孢唑林</span>
+        <span class="tag antibiotic">头孢噻肟</span>
+        <span class="tag antibiotic">头孢曲松</span>
+        <span class="tag antibiotic">头孢他啶</span>
+        <span class="tag antibiotic">头孢吡肟</span>
+        <span class="tag antibiotic">头孢泊肟</span>
+        <span class="tag antibiotic">头孢呋辛</span>
+        <span class="tag antibiotic">头孢地尼</span>
+        <span class="tag antibiotic">头孢克肟</span>
+        <span class="tag antibiotic">亚胺培南</span>
+        <span class="tag antibiotic">美罗培南</span>
+        <span class="tag antibiotic">多利培南</span>
+        <span class="tag antibiotic">厄他培南</span>
+        <span class="tag antibiotic">氨曲南</span>
+        <span class="tag antibiotic">庆大霉素</span>
+        <span class="tag antibiotic">妥布霉素</span>
+        <span class="tag antibiotic">阿米卡星</span>
+        <span class="tag antibiotic">环丙沙星</span>
+        <span class="tag antibiotic">左氧氟沙星</span>
+        <span class="tag antibiotic">复方新诺明</span>
+        <span class="tag antibiotic">四环素</span>
+        <span class="tag antibiotic">多西环素</span>
+        <span class="tag antibiotic">米诺环素</span>
+        <span class="tag antibiotic">呋喃妥因</span>
+        <span class="tag antibiotic">替加环素</span>
+        <span class="tag antibiotic">多黏菌素B</span>
+        <span class="tag antibiotic">多黏菌素E</span>
+        <span class="tag antibiotic">磷霉素</span>
+        <span class="tag antibiotic">氯霉素</span>
+        <span class="tag antibiotic">阿奇霉素</span>
+        <span class="tag antibiotic">克拉霉素</span>
+        <span class="tag antibiotic">头孢他啶-阿维巴坦</span>
+        <span class="tag antibiotic">头孢洛扎-他唑巴坦</span>
+        <span class="tag antibiotic">美罗培南-韦博巴坦</span>
+        <span class="tag antibiotic">亚胺培南-瑞来巴坦</span>
+        <span class="tag antibiotic">头孢地尔</span>
+    </div>
+    
+    <div class="footer-section">
+        <div class="page-num">282</div>
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="M100 2024 肠杆菌目、弧菌目和巴斯德菌目；肠杆菌目、弧菌目和巴斯德菌目；感染、肠杆菌目、弧菌目、巴斯德菌目、沙门菌属、志贺菌属、青霉素、氨苄西林、阿莫西林-克拉维酸、哌拉西林-他唑巴坦、头孢唑林、头孢噻肟、头孢曲松、头孢他啶、头孢吡肟、头孢泊肟、头孢呋辛、头孢地尼、头孢克肟、亚胺培南、美罗培南、多利培南、厄他培南、氨曲南、庆大霉素、妥布霉素、阿米卡星、环丙沙星、左氧氟沙星、复方新诺明、四环素、多西环素、米诺环素、呋喃妥因、替加环素、多黏菌素B、多黏菌素E、磷霉素、氯霉素、阿奇霉素、克拉霉素、头孢他啶-阿维巴坦、头孢洛扎-他唑巴坦、美罗培南-韦博巴坦、亚胺培南-瑞来巴坦、头孢地尔；=282" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            var copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            }, function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板！");
+            });
+        }
+        
+        function addToFavorites() {
+            var title = document.title;
+            var url = window.location.href;
+            var favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            var exists = favorites.some(function(fav) {
+                return fav.url === url;
+            });
+            
+            if (exists) {
+                alert('该页面已在收藏中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                category: 'M100临床指南',
+                date: new Date().toISOString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert('已添加到收藏！');
+        }
+    </script>
+</body>
+</html>
