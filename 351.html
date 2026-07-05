@@ -1,0 +1,544 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急救技术-复苏药物与机械通气*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        .page-nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .page-btn {
+            background: #6ab04c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .page-btn:hover {
+            background: #5a9e3d;
+            transform: translateY(-2px);
+        }
+        
+        .fav-btn {
+            background: #f39c12;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .fav-btn:hover {
+            background: #e67e22;
+            transform: translateY(-2px);
+        }
+        
+        .fav-btn.active {
+            background: #e74c3c;
+        }
+        
+        .main-table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(31, 97, 168, 0.15);
+        }
+        
+        .table-header {
+            background: linear-gradient(135deg, #1e5799 0%, #2989d8 50%, #207cca 100%);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+        
+        .table-header h1 {
+            font-size: 22px;
+            font-weight: bold;
+            line-height: 1.4;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        .table-content {
+            padding: 20px;
+        }
+        
+        .content-row {
+            border-bottom: 1px solid #e8f0fe;
+            padding: 15px 0;
+        }
+        
+        .content-row:last-child {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            color: #1e5799;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title::before {
+            content: "▸";
+            color: #2989d8;
+            margin-right: 8px;
+            font-size: 18px;
+        }
+        
+        .image-area {
+            text-align: center;
+            padding: 20px;
+            background: #f8fbff;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .image-placeholder {
+            width: 280px;
+            height: 200px;
+            background: linear-gradient(145deg, #e0e0e0, #f0f0f0);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            color: #888;
+            font-size: 14px;
+            border: 2px dashed #ccc;
+        }
+        
+        .image-caption {
+            color: #555;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .text-content {
+            color: #444;
+            font-size: 14px;
+            line-height: 1.8;
+            text-align: justify;
+        }
+        
+        .text-content p {
+            margin-bottom: 12px;
+        }
+        
+        .bullet-list {
+            margin-left: 20px;
+            margin-top: 8px;
+        }
+        
+        .bullet-list li {
+            margin-bottom: 8px;
+            line-height: 1.7;
+        }
+        
+        .sub-item {
+            margin-left: 25px;
+            margin-top: 5px;
+            color: #555;
+        }
+        
+        .highlight-box {
+            background: #fff8e7;
+            border-left: 4px solid #f39c12;
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 15px 0;
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .sidebar-label {
+            writing-mode: vertical-rl;
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #1e5799;
+            color: white;
+            padding: 15px 8px;
+            font-size: 14px;
+            border-radius: 0 8px 8px 0;
+            letter-spacing: 4px;
+        }
+        
+        .tags-section {
+            max-width: 800px;
+            margin: 25px auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            color: #1e5799;
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #e8f4fd;
+            color: #1e5799;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #b8d4f0;
+        }
+        
+        .bottom-section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        }
+        
+        .copy-area {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #555;
+            background: #fafafa;
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #219a52;
+        }
+        
+        .copy-btn.copied {
+            background: #7f8c8d;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #888;
+            font-size: 16px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .keywords {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .keywords-title {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+        
+        .keywords-list {
+            color: #888;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+        
+        @media (max-width: 600px) {
+            .table-header h1 {
+                font-size: 18px;
+            }
+            
+            .section-title {
+                font-size: 14px;
+            }
+            
+            .text-content {
+                font-size: 13px;
+            }
+            
+            .copy-area {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .sidebar-label {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 侧边标签 -->
+    <div class="sidebar-label">急救技术</div>
+    
+    <!-- 顶部导航 -->
+    <div class="nav-top">
+        <a href="index.html" class="home-btn">◀ 返回首页</a>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+            <div class="page-nav">
+                <a href="350.html" class="page-btn">◀ 上一页</a>
+                <a href="352.html" class="page-btn">下一页 ▶</a>
+            </div>
+            <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <!-- 主表格 -->
+    <div class="main-table">
+        <!-- 表头 -->
+        <div class="table-header">
+            <h1>急救技术 — 复苏药物与机械通气</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：急救技术 — 复苏药物与机械通气</div>
+        </div>
+        
+        <!-- 表格内容 -->
+        <div class="table-content">
+            <!-- 图片区域 -->
+            <div class="content-row">
+                <div class="image-area">
+                    <div class="image-placeholder">[图40 球囊面罩]</div>
+                    <div class="image-caption">图40 球囊面罩</div>
+                </div>
+            </div>
+            
+            <!-- 机械通气 -->
+            <div class="content-row">
+                <div class="section-title">机械通气</div>
+                <div class="text-content">
+                    <p>进行。一般来说，作为一项有效的治疗措施，气管插管既适用于昏迷患者，也适用于清醒患者，是最常用的人工气道。特殊情况下可能需要行环甲膜切开。</p>
+                    <p>呼吸停止或昏迷患者仅靠口对口或口对鼻人工通气是不够的。口对口或口对鼻人工通气的目的是解决患者的紧急供氧问题，避免因长时间缺氧造成心、脑等重要器官的不可逆损伤，一旦条件具备，应立即建立人工气道并使用呼吸机进行机械通气，确保机体对氧的需求。</p>
+                </div>
+            </div>
+            
+            <!-- 复苏药物 -->
+            <div class="content-row">
+                <div class="section-title">复苏药物</div>
+                <div class="text-content">
+                    <p><strong>✓ 给药途径：</strong>首选静脉给药，如不能够建立静脉通路，可以考虑骨髓腔内给药。</p>
+                    
+                    <div class="sub-item">
+                        <p>◇ <strong>静脉内给药：</strong>心肺复苏开始后，应尽快建立静脉通路，以供输液及用药之需。初期复苏期间一般多采用上腔静脉系统内静脉给药。</p>
+                    </div>
+                    
+                    <div class="sub-item">
+                        <p>◇ <strong>骨髓腔给药：</strong>骨髓腔内中空的未塌陷的静脉丛，能起到与中心静脉给药相似的作用。已有资料表明，骨髓腔内给药对液体复苏、药物输送、血标本采集是安全有效的，而且对各年龄组均可行。如果静脉通道无法建立，可以考虑骨髓腔内注射。</p>
+                    </div>
+                    
+                    <div class="sub-item">
+                        <p>◇ <strong>经气管支气管树给药：</strong>如一时静脉通道不能建立而气管插管已成功时，可将复苏药物以静脉用量的2～2.5倍，加5～10ml生理盐水或注射用水稀释，经气管插管注入气管支气管树，因肺内丰富的毛细血管网，药物作用速度和静脉内给药无明显区别。</p>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <strong>注意：</strong>因心内注射可引起气胸、损伤心脏及冠状动脉、心内注射时胸外心脏按压必须停止等缺点，临床上现已不主张心内注射。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div class="tags-container">
+            <span class="tag">心肺复苏</span>
+            <span class="tag">机械通气</span>
+            <span class="tag">气管插管</span>
+            <span class="tag">静脉给药</span>
+            <span class="tag">骨髓腔给药</span>
+            <span class="tag">复苏药物</span>
+            <span class="tag">球囊面罩</span>
+            <span class="tag">人工气道</span>
+            <span class="tag">环甲膜切开</span>
+            <span class="tag">心内注射</span>
+            <span class="tag">生理盐水</span>
+            <span class="tag">注射用水</span>
+        </div>
+    </div>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <!-- 复制功能 -->
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyInput" value="急救技术-复苏药物与机械通气；复苏药物；机械通气；气管插管；静脉给药；骨髓腔给药；心肺复苏；球囊面罩；=340" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">
+            页码：<strong>340</strong>
+        </div>
+        
+        <!-- 关键词 -->
+        <div class="keywords">
+            <div class="keywords-title">🔍 关键词</div>
+            <div class="keywords-list">
+                急救技术 | 复苏药物 | 机械通气 | 气管插管 | 静脉给药 | 骨髓腔给药 | 经气管支气管树给药 | 球囊面罩 | 心肺复苏 | 人工气道 | 环甲膜切开 | 心内注射 | 生理盐水 | 注射用水
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const title = '急救技术-复苏药物与机械通气';
+            const url = window.location.href;
+            
+            // 获取现有收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const existingIndex = favorites.findIndex(f => f.url === url);
+            
+            if (existingIndex >= 0) {
+                // 取消收藏
+                favorites.splice(existingIndex, 1);
+                btn.innerHTML = '☆ 收藏';
+                btn.classList.remove('active');
+                alert('已取消收藏');
+            } else {
+                // 添加收藏
+                favorites.push({
+                    title: title,
+                    url: url,
+                    category: '急救技术',
+                    date: new Date().toISOString()
+                });
+                btn.innerHTML = '★ 已收藏';
+                btn.classList.add('active');
+                alert('已添加到收藏！可在index.html的收藏类目下查看。');
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 同步到index.html的收藏（通过localStorage事件）
+            localStorage.setItem('favoritesUpdated', Date.now().toString());
+        }
+        
+        // 检查收藏状态
+        function checkFavoriteStatus() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const btn = document.getElementById('favBtn');
+            if (favorites.find(f => f.url === window.location.href)) {
+                btn.innerHTML = '★ 已收藏';
+                btn.classList.add('active');
+            }
+        }
+        
+        // 页面加载时检查
+        checkFavoriteStatus();
+    </script>
+</body>
+</html>
