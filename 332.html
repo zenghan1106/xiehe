@@ -1,0 +1,650 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊休克血流动力学治疗四阶段与药物应用详解*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            z-index: 100;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 导航按钮容器 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .nav-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #e8b339;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(232, 179, 57, 0.3);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .fav-btn:hover {
+            background: #d4a030;
+        }
+        
+        .fav-btn.active {
+            background: #c9302c;
+        }
+        
+        /* 主标题 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 70px 0 20px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        /* 表头 */
+        thead tr {
+            background: linear-gradient(135deg, #2e86de 0%, #1a5276 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 17px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        
+        /* 表格内容 */
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e8eef4;
+            vertical-align: top;
+            line-height: 1.7;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4fd;
+        }
+        
+        /* 分类标题行 */
+        .category-row {
+            background: #d4e6f1 !important;
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        .category-row td {
+            font-size: 15px;
+            padding: 14px 12px;
+        }
+        
+        /* 阶段表格特殊样式 */
+        .phase-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 8px 0;
+            font-size: 13px;
+        }
+        
+        .phase-table th {
+            background: #5dade2;
+            color: white;
+            padding: 10px 8px;
+            text-align: center;
+            font-size: 13px;
+        }
+        
+        .phase-table td {
+            border: 1px solid #d4e6f1;
+            padding: 8px;
+            text-align: center;
+            background: #f8fbff;
+        }
+        
+        /* 页码标注 */
+        .page-num {
+            text-align: center;
+            color: #888;
+            font-size: 13px;
+            margin: 15px 0;
+        }
+        
+        /* 底部编辑框区域 */
+        .copy-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 15px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #d4e6f1;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background: #fafbfc;
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #219a52;
+        }
+        
+        .copy-btn.copied {
+            background: #7f8c8d;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            text-align: center;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .page-code {
+            font-size: 15px;
+            color: #1a5276;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .keywords {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .keyword-tag {
+            background: #e8f4fd;
+            color: #2e86de;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #d4e6f1;
+        }
+        
+        /* 特色检索标签 */
+        .special-tags {
+            background: white;
+            padding: 20px 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        
+        .special-tags-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .tag {
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #fde8e8;
+            color: #c0392b;
+            border: 1px solid #f5b7b1;
+        }
+        
+        .tag-disease:hover {
+            background: #f5b7b1;
+        }
+        
+        .tag-antibiotic {
+            background: #e8f8f5;
+            color: #27ae60;
+            border: 1px solid #a9dfbf;
+        }
+        
+        .tag-antibiotic:hover {
+            background: #a9dfbf;
+        }
+        
+        .tag-bacteria {
+            background: #fef9e7;
+            color: #d4ac0d;
+            border: 1px solid #f9e79f;
+        }
+        
+        .tag-bacteria:hover {
+            background: #f9e79f;
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 200;
+        }
+        
+        .toast.show {
+            opacity: 1;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .main-title {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .nav-buttons {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .nav-btn, .fav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .phase-table th, .phase-table td {
+                font-size: 11px;
+                padding: 6px 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="331.html" class="nav-btn">◀ 上一页</a>
+        <a href="333.html" class="nav-btn">下一页 ▶</a>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 主标题 -->
+    <h1 class="main-title">~~~~~急诊休克血流动力学治疗四阶段与药物应用详解*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~急诊休克血流动力学治疗四阶段与药物应用详解*****、类别、具体项目、详细内容、大量补液阶段、容量优化阶段、容量稳定阶段、容量撤退阶段、血流动力学支持（续）、强心药物、肾上腺素、米力农、容量负荷与压力、急诊休克血流动力学治疗4个阶段（表41）、达到一个可接受的最低血压、开展急救性的操作、容量复苏阶段（Salvage）、容量优化阶段（Optimization）、容量稳定阶段（Stabilization）、容量撤退阶段（De-escalation）</div>
+    
+    <!-- 表格内容 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>类别</th>
+                    <th>具体项目</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="3">血流动力学支持（续）</td>
+                </tr>
+                <tr>
+                    <td rowspan="4">强心药物</td>
+                    <td>西孟旦</td>
+                    <td>对于合并心房颤动的患者，西地兰可能是不错的选择，但其在心肌梗死急性期禁止使用</td>
+                </tr>
+                <tr>
+                    <td>肾上腺素</td>
+                    <td>肾上腺素可诱发乳酸酸中毒，使用需谨慎，仅在其他药物无效时作为二线治疗</td>
+                </tr>
+                <tr>
+                    <td>米力农</td>
+                    <td>虽然可能短期改善心脏泵血，但对长期预后的作用不容乐观</td>
+                </tr>
+                <tr>
+                    <td>容量负荷与压力</td>
+                    <td>和收缩性心功能不全患者相比，舒张性心功能不全患者需要更高的容量负荷以维持心室功能。当CO足够时，仍需要考虑给予足够的压力以分配流量，升压药包括各种血管加压药物，首选去甲肾上腺素，二线用药包括多巴胺、间羟胺、肾上腺素等</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="3">急诊休克血流动力学治疗4个阶段（表41）</td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <table class="phase-table">
+                            <tr>
+                                <th>大量补液阶段</th>
+                                <th>容量优化阶段</th>
+                                <th>容量稳定阶段</th>
+                                <th>容量撤退阶段</th>
+                            </tr>
+                            <tr>
+                                <td>达到一个可接受的最低血压</td>
+                                <td>提供足够的氧供</td>
+                                <td>提供脏器支持</td>
+                                <td>撤退血管活性药物</td>
+                            </tr>
+                            <tr>
+                                <td>开展急救性的操作</td>
+                                <td>优化心输出量、减少并发症</td>
+                                <td></td>
+                                <td>保证负平衡</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>SvO₂、乳酸</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>容量复苏阶段（Salvage）</td>
+                    <td>阶段特点</td>
+                    <td>患者刚发生原发疾病加重和休克，血管内容量缺失量很大，需要快速、大量补液，基本不用太担心容量过负荷的问题。此时患者多在抢救室，直接遵循休克复苏的VIP原则：Ventilation（保证氧合及DO₂）、Infuse（补液，增加CO）、Pump（血管活性药物，保证MAP，以保证血流量进入组织）</td>
+                </tr>
+                <tr>
+                    <td>容量优化阶段（Optimization）</td>
+                    <td>阶段特点</td>
+                    <td>此时经过容量复苏，患者的血管内容量接近需求，可能还存在一定容量不足，但已有容量过负荷、肺水肿的风险。对于心功能脆弱的患者，可能从容量不足到容量过负荷的窗口非常窄，而如果容量方向判断错误，可能导致患者的情况恶化并产生不良后果。因此，此时需要强调目标治疗：设定合适的CVP目标、MAP目标、CO目标，最终目的是改善微循环，降低乳酸。并通过各种方法，精细地判断和滴定患者的容量。具体的容量判断方法将在后面讨论</td>
+                </tr>
+                <tr>
+                    <td>容量稳定阶段（Stabilization）</td>
+                    <td>阶段特点</td>
+                    <td>此时患者容量状态合适，不需要明显的正平衡或负平衡。患者的血流动力学情况应该是稳定的，如果不稳定则说明出现了新的问题，需要重新查找相关原因</td>
+                </tr>
+                <tr>
+                    <td>容量撤退阶段（De-escalation）</td>
+                    <td>阶段特点</td>
+                    <td>又称反向复苏阶段。此时</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-num">— 第 321 页 —</div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="急诊休克血流动力学治疗四阶段与药物应用详解；西孟旦；西地兰；肾上腺素；米力农；去甲肾上腺素；多巴胺；间羟胺；容量复苏；容量优化；容量稳定；容量撤退；Salvage；Optimization；Stabilization；De-escalation；休克；心房颤动；心肌梗死；乳酸酸中毒；收缩性心功能不全；舒张性心功能不全；=321" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyContent()">📋 复制</button>
+    </div>
+    
+    <!-- 关键词区域 -->
+    <div class="keywords-section">
+        <div class="page-code">页码：321</div>
+        <div class="keywords">
+            <span class="keyword-tag">西孟旦</span>
+            <span class="keyword-tag">西地兰</span>
+            <span class="keyword-tag">肾上腺素</span>
+            <span class="keyword-tag">米力农</span>
+            <span class="keyword-tag">去甲肾上腺素</span>
+            <span class="keyword-tag">多巴胺</span>
+            <span class="keyword-tag">间羟胺</span>
+            <span class="keyword-tag">容量复苏</span>
+            <span class="keyword-tag">Salvage</span>
+            <span class="keyword-tag">Optimization</span>
+            <span class="keyword-tag">Stabilization</span>
+            <span class="keyword-tag">De-escalation</span>
+            <span class="keyword-tag">VIP原则</span>
+            <span class="keyword-tag">休克</span>
+            <span class="keyword-tag">心房颤动</span>
+            <span class="keyword-tag">心肌梗死</span>
+        </div>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="special-tags">
+        <div class="special-tags-title">🔍 特色检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">休克</span>
+            <span class="tag tag-disease">心房颤动</span>
+            <span class="tag tag-disease">心肌梗死</span>
+            <span class="tag tag-disease">乳酸酸中毒</span>
+            <span class="tag tag-disease">收缩性心功能不全</span>
+            <span class="tag tag-disease">舒张性心功能不全</span>
+            <span class="tag tag-disease">容量过负荷</span>
+            <span class="tag tag-disease">肺水肿</span>
+            <!-- 抗生素/药物标签 -->
+            <span class="tag tag-antibiotic">西孟旦</span>
+            <span class="tag tag-antibiotic">西地兰</span>
+            <span class="tag tag-antibiotic">肾上腺素</span>
+            <span class="tag tag-antibiotic">米力农</span>
+            <span class="tag tag-antibiotic">去甲肾上腺素</span>
+            <span class="tag tag-antibiotic">多巴胺</span>
+            <span class="tag tag-antibiotic">间羟胺</span>
+            <span class="tag tag-antibiotic">升压药</span>
+            <span class="tag tag-antibiotic">血管加压药物</span>
+            <span class="tag tag-antibiotic">血管活性药物</span>
+            <!-- 细菌标签（本页无具体细菌） -->
+        </div>
+    </div>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '✓ 已复制';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.textContent = '📋 复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = localStorage.getItem('fav_321') === 'true';
+            
+            if (!isFav) {
+                localStorage.setItem('fav_321', 'true');
+                localStorage.setItem('fav_321_title', '急诊休克血流动力学治疗四阶段与药物应用详解');
+                localStorage.setItem('fav_321_url', '321.html');
+                btn.textContent = '❤️ 已收藏';
+                btn.classList.add('active');
+                showToast('已添加到收藏！');
+                updateIndexFavorite();
+            } else {
+                localStorage.removeItem('fav_321');
+                localStorage.removeItem('fav_321_title');
+                localStorage.removeItem('fav_321_url');
+                btn.textContent = '⭐ 收藏';
+                btn.classList.remove('active');
+                showToast('已取消收藏！');
+            }
+        }
+        
+        // 更新index.html的收藏
+        function updateIndexFavorite() {
+            const favList = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favList.find(f => f.url === '321.html');
+            if (!exists) {
+                favList.push({
+                    url: '321.html',
+                    title: '急诊休克血流动力学治疗四阶段与药物应用详解',
+                    page: '321'
+                });
+                localStorage.setItem('favorites', JSON.stringify(favList));
+            }
+        }
+        
+        // 检查收藏状态
+        function checkFavorite() {
+            const isFav = localStorage.getItem('fav_321') === 'true';
+            const btn = document.getElementById('favBtn');
+            if (isFav) {
+                btn.textContent = '❤️ 已收藏';
+                btn.classList.add('active');
+            }
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+        
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            checkFavorite();
+        });
+    </script>
+</body>
+</html>
