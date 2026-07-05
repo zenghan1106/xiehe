@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>xiehe</title>
+<style>
+  :root{
+    --ink:#1a1714;
+    --paper:#f4f1ea;
+    --accent:#e2452b;
+    --muted:#8a8175;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Noto Serif SC",Georgia,"Songti SC",serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:0 28px}
+  header{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:28px 0;border-bottom:1px solid rgba(26,23,20,.12);
+  }
+  .mark{font-size:22px;font-weight:700;letter-spacing:.04em}
+  .mark span{color:var(--accent)}
+  nav a{color:var(--muted);text-decoration:none;margin-left:24px;font-size:15px}
+  nav a:hover{color:var(--ink)}
+  .hero{padding:120px 0 96px}
+  .kicker{
+    color:var(--accent);font-size:14px;letter-spacing:.22em;
+    text-transform:uppercase;margin-bottom:22px;
+  }
+  h1{
+    font-size:clamp(48px,9vw,104px);line-height:.98;font-weight:700;
+    letter-spacing:-.01em;margin-bottom:28px;
+  }
+  .lede{font-size:clamp(18px,2.4vw,22px);color:#4a443c;max-width:40ch}
+  .cta{
+    display:inline-block;margin-top:40px;background:var(--ink);color:var(--paper);
+    padding:15px 34px;border-radius:999px;text-decoration:none;font-size:16px;
+    transition:transform .2s ease;
+  }
+  .cta:hover{transform:translateY(-2px)}
+  .note{
+    margin-top:64px;padding:18px 22px;border:1px dashed rgba(26,23,20,.25);
+    border-radius:12px;color:var(--muted);font-size:14px;
+  }
+  footer{
+    padding:40px 0;border-top:1px solid rgba(26,23,20,.12);
+    color:var(--muted);font-size:13px;display:flex;justify-content:space-between;
+  }
+  @media(max-width:600px){
+    nav{display:none}
+    .hero{padding:80px 0 64px}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="mark">xie<span>he</span></div>
+      <nav>
+        <a href="#">关于</a>
+        <a href="#">作品</a>
+        <a href="#">联系</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="kicker">GitHub Pages · 占位首页</div>
+      <h1>这里将是<br>xiehe 的网站</h1>
+      <p class="lede">内容待定。告诉我这个站是做什么的，我把它换成真正能打的页面。</p>
+      <a class="cta" href="#">了解更多</a>
+
+      <div class="note">
+        这是本地生成的占位页，用于验证 GitHub Pages 部署链路。<br>
+        等你给内容，我会替换成定制设计（可升级为 React / Vite 版本）。
+      </div>
+    </section>
+
+    <footer>
+      <span>© <span id="y"></span> xiehe</span>
+      <span>Hosted on GitHub Pages</span>
+    </footer>
+  </div>
+  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+</body>
+</html>

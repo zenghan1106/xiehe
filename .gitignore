@@ -1,0 +1,4 @@
+# 依赖忽略（纯静态站点暂无构建产物）
+node_modules/
+.DS_Store
+*.log
