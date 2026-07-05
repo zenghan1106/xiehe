@@ -1,0 +1,399 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~一氧化碳中毒*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f5f5f0;
+            background-image: linear-gradient(135deg, #f5f5f0 0%, #e8e8e0 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background-color: #4a90d9;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background-color: #357abd;
+        }
+        
+        .btn-nav {
+            background-color: #6b8e6b;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background-color: #5a7a5a;
+        }
+        
+        .btn-favorite {
+            background-color: #d4a574;
+            color: white;
+        }
+        
+        .btn-favorite:hover {
+            background-color: #c49464;
+        }
+        
+        .btn-copy {
+            background-color: #4a90d9;
+            color: white;
+            padding: 12px 24px;
+        }
+        
+        .btn-copy:hover {
+            background-color: #357abd;
+        }
+        
+        .title {
+            text-align: center;
+            font-size: 26px;
+            color: #2c3e50;
+            margin: 20px 0;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fffef8;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+        
+        thead th {
+            background-color: #4a90d9;
+            color: white;
+            padding: 18px 15px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        tbody td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #e8e6d8;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #444;
+            vertical-align: top;
+        }
+        
+        tbody tr:hover {
+            background-color: #f9f8f0;
+        }
+        
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 16px;
+        }
+        
+        .sub-item {
+            padding-left: 20px;
+            color: #555;
+        }
+        
+        .sub-sub-item {
+            padding-left: 40px;
+            color: #666;
+        }
+        
+        .tags-section {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #fffef8;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 5px;
+            background-color: #e8f0e8;
+            color: #4a7c4a;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid #c8d8c8;
+        }
+        
+        .copy-section {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #fffef8;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #d4d0c8;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #555;
+            background-color: #fafaf5;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            color: #666;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+        
+        .keywords {
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+            margin-top: 10px;
+            padding: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .title {
+                font-size: 20px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 14px 10px;
+            }
+            
+            tbody td {
+                font-size: 13px;
+                padding: 10px;
+            }
+            
+            .btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .header-nav {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-right {
+                align-items: stretch;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-nav">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="289.html" class="btn btn-nav">上一页</a>
+            <a href="291.html" class="btn btn-nav">下一页</a>
+            <button class="btn btn-favorite" onclick="addFavorite()">收藏</button>
+        </div>
+    </div>
+    
+    <h1 class="title">~~~~~一氧化碳中毒*****</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>一氧化碳中毒（CO中毒/煤气中毒）</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span class="section-title">CO对全身组织细胞均有毒性作用，尤其对大脑皮质的影响最严重。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">2. 危险因素</span><br>
+                    <span class="sub-item">✓ 工业上炼钢、炼焦、烧窑等生产过程中炉门不严，煤气管道漏气，汽车排放尾气，都可逸出大量CO。</span><br>
+                    <span class="sub-item">✓ 矿井打眼放炮产生的炮烟及煤矿瓦斯爆炸均能引起大量CO产生。</span><br>
+                    <span class="sub-item">✓ 化学工业合成氨、甲醇、丙酮等都要接触CO。</span><br>
+                    <span class="sub-item">✓ 冬季用煤炉取暖室内门窗紧闭。</span><br>
+                    <span class="sub-item">✓ 失火现场空气中CO浓度高。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">3. 临床表现</span><br>
+                    <span class="sub-item">● 有产生煤气的条件及接触史：职业性中毒常为集体性，生活性中毒常为冬季生火取暖而室内通风不良所致，同室人也有中毒表现，使用燃气热水器也是煤气中毒的重要原因。</span><br>
+                    <span class="sub-item">● 症状</span><br>
+                    <span class="sub-sub-item">✓ 多变且主要为非特异性。</span><br>
+                    <span class="sub-sub-item">✓ 口唇、皮肤呈樱桃色，呼吸及脉搏加快。</span><br>
+                    <span class="sub-sub-item">✓ 轻度或中度CO中毒</span><br>
+                    <span class="sub-sub-item">◇ 通常表现为全身症状，包括头痛（最常见主诉）、不适、恶心及头晕，并可能被误诊为急性病毒性综合征。</span><br>
+                    <span class="sub-sub-item">◇ 临床医师还应特别询问患者和/或目击者患者是否有意识丧失。</span><br>
+                    <span class="sub-sub-item">✓ 重度CO中毒</span><br>
+                    <span class="sub-sub-item">◇ 神经系统症状：如癫痫发作、晕厥或昏迷。</span><br>
+                    <span class="sub-sub-item">◇ 心血管和代谢表现：如心肌缺血、室性心律失常、肺水肿和严重的乳酸酸中毒。</span><br>
+                    <span class="sub-sub-item">✓ 迟发性脑病：急性CO中毒患者在清醒后，经过2～60天的假愈期，可出现下列临床表现。</span><br>
+                    <span class="sub-sub-item">◇ 精神意识障碍：出现幻视、幻听、抑郁、烦躁等精神异常，少数可发展为痴呆。</span><br>
+                    <span class="sub-sub-item">◇ 锥体外系症状：出现震颤麻痹，部分患者逐渐出现表情缺乏、肌张力增加、肢体震颤及运动迟缓。</span><br>
+                    <span class="sub-sub-item">◇ 锥体系神经损害及大脑局灶性功能障碍：可发生肢体瘫痪、尿便失禁、失语、失明等。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">4. 必做检查</span><br>
+                    <span class="sub-item">ABG：尤其是血中COHb测定，正常人血液中COHb含量最高不超过10%；CO中毒者COHb明显升高，但脱离CO接触8小时后COHb即可降至正常。轻度中毒：血液COHb浓度</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="page-number">290</div>
+    
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <span class="tag">CO</span>
+        <span class="tag">一氧化碳</span>
+        <span class="tag">煤气中毒</span>
+        <span class="tag">COHb</span>
+        <span class="tag">大脑皮质</span>
+        <span class="tag">樱桃色</span>
+        <span class="tag">迟发性脑病</span>
+        <span class="tag">ABG</span>
+        <span class="tag">乳酸酸中毒</span>
+        <span class="tag">震颤麻痹</span>
+        <span class="tag">癫痫</span>
+        <span class="tag">昏迷</span>
+        <span class="tag">肺水肿</span>
+        <span class="tag">心肌缺血</span>
+        <span class="tag">失语</span>
+        <span class="tag">失明</span>
+        <span class="tag">痴呆</span>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="一氧化碳中毒；CO中毒；煤气中毒；CO；COHb；迟发性脑病；樱桃色；乳酸酸中毒；=290" readonly>
+        <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="keywords">
+        关键词：一氧化碳中毒 | CO中毒 | 煤气中毒 | CO | COHb | 迟发性脑病 | 樱桃色 | 乳酸酸中毒
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            var copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            });
+        }
+        
+        function addFavorite() {
+            var title = "~~~~~一氧化碳中毒*****";
+            var url = window.location.href;
+            
+            var favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            var exists = favorites.some(function(fav) {
+                return fav.url === url;
+            });
+            
+            if (!exists) {
+                favorites.push({
+                    title: title,
+                    url: url,
+                    category: '急诊疾病'
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已添加到收藏！');
+            } else {
+                alert('该页面已在收藏中！');
+            }
+            
+            // 尝试更新index.html的收藏
+            try {
+                var indexFavorites = JSON.parse(localStorage.getItem('indexFavorites') || '[]');
+                if (!indexFavorites.some(function(fav) { return fav.url === url; })) {
+                    indexFavorites.push({
+                        title: title,
+                        url: url
+                    });
+                    localStorage.setItem('indexFavorites', JSON.stringify(indexFavorites));
+                }
+            } catch(e) {}
+        }
+    </script>
+</body>
+</html>
