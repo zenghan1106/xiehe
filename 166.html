@@ -1,0 +1,546 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~妊娠合并TMA的鉴别与血栓性血小板减少性紫癜*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #2c3e50;
+            line-height: 1.6;
+            padding: 15px;
+            min-height: 100vh;
+        }
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .left-btns {
+            display: flex;
+            gap: 8px;
+        }
+        .right-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        .btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+        .btn-home {
+            background: #3498db;
+            color: white;
+        }
+        .btn-home:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        .btn-nav {
+            background: #ecf0f1;
+            color: #34495e;
+            border: 1px solid #bdc3c7;
+        }
+        .btn-nav:hover {
+            background: #d5dbdb;
+        }
+        .btn-fav {
+            background: #e74c3c;
+            color: white;
+            font-size: 12px;
+            padding: 6px 14px;
+        }
+        .btn-fav:hover {
+            background: #c0392b;
+        }
+        .btn-fav.active {
+            background: #27ae60;
+        }
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0 20px;
+            padding: 12px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        .table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        thead {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+        thead th {
+            padding: 14px 10px;
+            font-size: 15px;
+            font-weight: 600;
+            text-align: center;
+            white-space: nowrap;
+        }
+        tbody td {
+            padding: 10px;
+            border-bottom: 1px solid #ecf0f1;
+            text-align: center;
+            vertical-align: middle;
+        }
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        tbody td:first-child {
+            font-weight: 600;
+            color: #1a5276;
+            text-align: left;
+            background: rgba(52,152,219,0.05);
+        }
+        .first-row {
+            font-size: 16px !important;
+            font-weight: 700;
+        }
+        .first-row td {
+            padding: 14px 10px;
+        }
+        .note {
+            background: rgba(255,243,205,0.6);
+            padding: 12px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 13px;
+            color: #856404;
+            border-left: 4px solid #f39c12;
+        }
+        .definition {
+            background: white;
+            padding: 18px;
+            border-radius: 12px;
+            margin: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .definition h2 {
+            color: #1a5276;
+            font-size: 18px;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3498db;
+        }
+        .definition ul {
+            padding-left: 20px;
+        }
+        .definition li {
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #34495e;
+        }
+        .bottom-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+            justify-content: center;
+        }
+        .tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .keywords {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 13px;
+            margin: 10px 0;
+        }
+        .page-num {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #3498db;
+            margin: 10px 0;
+        }
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .copy-input {
+            width: calc(100% - 120px);
+            max-width: 500px;
+            padding: 10px 14px;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #2c3e50;
+            background: white;
+        }
+        .btn-copy {
+            background: #27ae60;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .btn-copy:hover {
+            background: #229954;
+        }
+        .author {
+            text-align: right;
+            color: #7f8c8d;
+            font-size: 13px;
+            margin: 10px 0;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 18px;
+            }
+            table {
+                font-size: 11px;
+            }
+            thead th {
+                font-size: 12px;
+                padding: 10px 6px;
+            }
+            tbody td {
+                padding: 8px 6px;
+            }
+            .first-row {
+                font-size: 13px !important;
+            }
+            .copy-input {
+                width: calc(100% - 100px);
+                font-size: 12px;
+            }
+            .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="top-nav">
+        <div class="left-btns">
+            <a href="index.html" class="btn btn-home">← 返回首页</a>
+        </div>
+        <div class="right-btns">
+            <a href="165.html" class="btn btn-nav">上一页</a>
+            <a href="167.html" class="btn btn-nav">下一页</a>
+            <button class="btn btn-fav" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+
+    <!-- 标题 -->
+    <h1>~~~~~妊娠合并TMA的鉴别与血栓性血小板减少性紫癜*****</h1>
+
+    <!-- 表格区域 -->
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>特点</th>
+                    <th>TTP</th>
+                    <th>HUS</th>
+                    <th>HELLP</th>
+                    <th>PE</th>
+                    <th>AFLP</th>
+                    <th>Ob-APL</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="first-row">
+                    <td>起病时间</td>
+                    <td>任何时期</td>
+                    <td>产后</td>
+                    <td>>20周</td>
+                    <td>>20周</td>
+                    <td>27～40周</td>
+                    <td>任何时期</td>
+                </tr>
+                <tr>
+                    <td>发热</td>
+                    <td>-/+</td>
+                    <td>-/+</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-/+</td>
+                    <td>-/+</td>
+                </tr>
+                <tr>
+                    <td>腹部症状</td>
+                    <td>-/+++</td>
+                    <td>-/+++</td>
+                    <td>-/+++</td>
+                    <td>-/+</td>
+                    <td>-/+++</td>
+                    <td>-/+</td>
+                </tr>
+                <tr>
+                    <td>神经系统<br>症状</td>
+                    <td>-/++++</td>
+                    <td>-/+</td>
+                    <td>-/+</td>
+                    <td>-/+</td>
+                    <td>-/++<br>+</td>
+                    <td>-/+++</td>
+                </tr>
+                <tr>
+                    <td>肾脏</td>
+                    <td>-/+++</td>
+                    <td>-/++++</td>
+                    <td>-/+</td>
+                    <td>-/+</td>
+                    <td>-/+</td>
+                    <td>-/+</td>
+                </tr>
+                <tr>
+                    <td>高血压</td>
+                    <td>-/+</td>
+                    <td>-/+++</td>
+                    <td>++</td>
+                    <td>+++</td>
+                    <td>-/+</td>
+                    <td>+/++<br>+</td>
+                </tr>
+                <tr>
+                    <td>MAHA</td>
+                    <td>++++</td>
+                    <td>++</td>
+                    <td></td>
+                    <td>-/+</td>
+                    <td>-/+</td>
+                    <td>+</td>
+                </tr>
+                <tr>
+                    <td>血小板下降</td>
+                    <td>++++</td>
+                    <td>++</td>
+                    <td>++</td>
+                    <td>-/+</td>
+                    <td>-/+</td>
+                    <td>++</td>
+                </tr>
+                <tr>
+                    <td>LDH升高</td>
+                    <td>++++</td>
+                    <td>++/+<br>++</td>
+                    <td>++/+<br>++</td>
+                    <td>+/++<br>+</td>
+                    <td>+/+++</td>
+                    <td>+</td>
+                </tr>
+                <tr>
+                    <td>心肌酶升高</td>
+                    <td>+/+++</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>肝酶升高</td>
+                    <td>-/+</td>
+                    <td>-/+</td>
+                    <td>++/+<br>++</td>
+                    <td>+</td>
+                    <td>++++</td>
+                    <td>+</td>
+                </tr>
+                <tr>
+                    <td>低血糖</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-/++<br>+</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>蛋白尿</td>
+                    <td>可有血尿</td>
+                    <td>++</td>
+                    <td>++</td>
+                    <td>+++</td>
+                    <td>-/+</td>
+                    <td>-/+++</td>
+                </tr>
+                <tr>
+                    <td>ADAMTS13<br>活性</td>
+                    <td><10%</td>
+                    <td>-/↓</td>
+                    <td>-/↓</td>
+                    <td>-/↓</td>
+                    <td>-</td>
+                    <td>-/↓</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 注释 -->
+    <div class="note">
+        <strong>注：</strong>HELLP综合征（溶血，肝酶升高，血小板下降），PE：先兆子痫；AFLP：妊娠期急性脂肪肝；Ob-APL（妊娠期抗磷脂综合征）。
+    </div>
+
+    <div class="author">（杨 惊）</div>
+
+    <!-- 定义部分 -->
+    <div class="definition">
+        <h2>■ 血栓性血小板减少性紫癜</h2>
+        <p style="font-weight:600;margin-bottom:10px;">1. 定义</p>
+        <ul>
+            <li>血栓性血小板减少性紫癜（TTP）指由血管性血友病因子（vWF）裂解酶金属蛋白酶ADAMTS13活性严重降低导致的一种血栓性微血管病。</li>
+            <li>金属蛋白酶ADAMTS13缺乏，导致无法裂解vWF多聚体，使其附着于血管内皮，导致血小板聚集、纤维蛋白原沉积，引起微血栓形成。</li>
+            <li>先天性TTP为基因异常在某些诱因（如感染、妊娠、应激、手术等）作用下可导致ADAMTS13合成减少。</li>
+        </ul>
+    </div>
+
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <!-- 检索标签 -->
+        <div class="tags">
+            <span class="tag">TTP</span>
+            <span class="tag">HUS</span>
+            <span class="tag">HELLP</span>
+            <span class="tag">PE</span>
+            <span class="tag">AFLP</span>
+            <span class="tag">Ob-APL</span>
+            <span class="tag">血栓性血小板减少性紫癜</span>
+            <span class="tag">妊娠</span>
+            <span class="tag">TMA</span>
+            <span class="tag">ADAMTS13</span>
+            <span class="tag">vWF</span>
+            <span class="tag">微血管病</span>
+        </div>
+
+        <!-- 关键词 -->
+        <div class="keywords">
+            关键词：妊娠合并TMA；血栓性血小板减少性紫癜；TTP；HUS；HELLP；先兆子痫；妊娠期急性脂肪肝；抗磷脂综合征；ADAMTS13；微血管病
+        </div>
+
+        <!-- 页码 -->
+        <div class="page-num">166</div>
+
+        <!-- 复制功能 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="妊娠合并TMA的鉴别与血栓性血小板减少性紫癜；血栓性血小板减少性紫癜定义；TTP、HUS、HELLP、PE、AFLP、Ob-APL、ADAMTS13、vWF、微血管病=166" readonly>
+            <button class="btn-copy" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                const btn = document.querySelector('.btn-copy');
+                btn.textContent = '已复制!';
+                btn.style.background = '#2980b9';
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.style.background = '#27ae60';
+                }, 1500);
+            });
+        }
+
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            const title = '妊娠合并TMA的鉴别与血栓性血小板减少性紫癜';
+            const url = '166.html';
+            
+            if (!isFav) {
+                // 添加到收藏
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.find(f => f.url === url);
+                if (!exists) {
+                    favorites.push({ title, url, date: new Date().toISOString() });
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+                
+                // 尝试更新index.html的收藏（通过localStorage通知）
+                localStorage.setItem('indexUpdate', JSON.stringify({
+                    action: 'add',
+                    title: title,
+                    url: url,
+                    category: '妊娠疾病'
+                }));
+            } else {
+                // 取消收藏
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== url);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                btn.classList.remove('active');
+                btn.innerHTML = '☆ 收藏';
+            }
+        }
+
+        // 检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.find(f => f.url === '166.html');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
