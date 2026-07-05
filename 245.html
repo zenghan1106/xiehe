@@ -1,0 +1,496 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>黏液性水肿昏迷-急诊处理_肾上腺危象</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 15px;
+        }
+
+        /* 返回首页按钮 */
+        .back-home {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 100;
+        }
+
+        .back-home a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #2e7d32;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        .back-home a:hover {
+            background-color: #1b5e20;
+        }
+
+        /* 上一页下一页按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+
+        .nav-buttons a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #1565c0;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        .nav-buttons a:hover {
+            background-color: #0d47a1;
+        }
+
+        /* 收藏按钮 */
+        .favorite-btn {
+            position: fixed;
+            top: 130px;
+            right: 15px;
+            z-index: 100;
+        }
+
+        .favorite-btn button {
+            padding: 8px 16px;
+            background-color: #e65100;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        .favorite-btn button:hover {
+            background-color: #bf360c;
+        }
+
+        /* 标题样式 */
+        .page-title {
+            text-align: center;
+            margin: 60px 0 25px 0;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a237e;
+        }
+
+        .page-title::before {
+            content: "~~~~~";
+            color: #1565c0;
+            margin-right: 10px;
+        }
+
+        .page-title::after {
+            content: "*****";
+            color: #1565c0;
+            margin-left: 10px;
+        }
+
+        /* 表格样式 */
+        table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 25px auto;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* 表头 */
+        thead th {
+            background-color: #1565c0;
+            color: white;
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* 表格内容 */
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e3f2fd;
+            vertical-align: top;
+            font-size: 15px;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f5f9ff;
+        }
+
+        /* 子标题加粗 */
+        .section-title {
+            font-weight: bold;
+            color: #0d47a1;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+
+        /* 列表项 */
+        .list-item {
+            margin: 6px 0;
+            padding-left: 5px;
+        }
+
+        .check-item {
+            margin: 4px 0;
+            padding-left: 15px;
+            color: #444;
+        }
+
+        .check-item::before {
+            content: "✓ ";
+            color: #2e7d32;
+            font-weight: bold;
+        }
+
+        /* 页码显示 */
+        .page-number {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        /* 标签区域 */
+        .tags-section {
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border-radius: 16px;
+            font-size: 13px;
+            border: 1px solid #c8e6c9;
+        }
+
+        /* 编辑框区域 */
+        .copy-section {
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .copy-section input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid #bbdefb;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #555;
+            background-color: #fafafa;
+        }
+
+        .copy-section button {
+            padding: 10px 20px;
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .copy-section button:hover {
+            background-color: #1b5e20;
+        }
+
+        /* 关键词区域 */
+        .keywords-section {
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            text-align: center;
+        }
+
+        .keywords-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .keywords-content {
+            font-size: 13px;
+            color: #888;
+        }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .page-title {
+                font-size: 18px;
+                margin-top: 70px;
+            }
+
+            thead th {
+                font-size: 16px;
+                padding: 12px 10px;
+            }
+
+            tbody td {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .nav-buttons {
+                top: 10px;
+                right: 10px;
+            }
+
+            .nav-buttons a {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+
+            .back-home {
+                top: 10px;
+                left: 10px;
+            }
+
+            .back-home a {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+
+            .favorite-btn {
+                top: 110px;
+                right: 10px;
+            }
+
+            .favorite-btn button {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+
+            .copy-section {
+                flex-direction: column;
+            }
+
+            .copy-section input {
+                width: 100%;
+            }
+
+            .copy-section button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 返回首页按钮 -->
+    <div class="back-home">
+        <a href="index.html">返回首页</a>
+    </div>
+
+    <!-- 上一页下一页按钮 -->
+    <div class="nav-buttons">
+        <a href="244.html">上一页</a>
+        <a href="246.html">下一页</a>
+    </div>
+
+    <!-- 收藏按钮 -->
+    <div class="favorite-btn">
+        <button onclick="addToFavorite()">⭐ 收藏</button>
+    </div>
+
+    <!-- 标题 -->
+    <h1 class="page-title">黏液性水肿昏迷-急诊处理_肾上腺危象</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：黏液性水肿昏迷-急诊处理_肾上腺危象、黏液性水肿昏迷-急诊处理 / 肾上腺危象</div>
+
+    <!-- 主表格 -->
+    <table>
+        <thead>
+            <tr>
+                <th>黏液性水肿昏迷-急诊处理 / 肾上腺危象</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="section-title">5. 选做检查</div>
+                    <div class="list-item">影像学检查：如胸腹盆CT、超声等，明确有无感染等诱因证据。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="section-title">6. 诊断策略</div>
+                    <div class="list-item">昏迷或精神状态低下患者，若伴低体温、低钠血症和/或高碳酸血症，应考虑黏液性水肿昏迷。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="section-title">7. 急诊处理</div>
+                    <div class="list-item">• 甲状腺激素：建议使用T₄（左甲状腺素）和T₃（碘塞罗宁）联合治疗，而不是单用T₄。推荐静脉用药，因为患者的胃肠道吸收功能可能受损。</div>
+                    <div class="check-item">用法：通常静脉予200～400μg T₄作为初始剂量，随后静脉予50～100μg/d，直到患者可以口服T₄。同时静脉给予T₃，初始剂量为5～20μg，随后为2.5～10μg q8h。继续使用T₃直到临床改善且病情稳定。</div>
+                    <div class="check-item">监测：每1～2天应检测1次血清T₄（或游离T₄）和T₃，以证实治疗有效并避免T₃水平过高。血清TSH通常每周降低约50%。血清TSH未降低则表明治疗不充分。</div>
+                    <div class="check-item">风险：快速增加血清甲状腺激素浓度后，有促发心肌梗死或房性心律失常的风险。</div>
+                    <div class="list-item">• 糖皮质激素：排除并存的肾上腺皮质功能减退症前，必须采用应激剂量的糖皮质激素治疗，可静脉予氢化可的松100mg q8h。</div>
+                    <div class="list-item">• 支持治疗</div>
+                    <div class="check-item">低钠血症：不应使用稀释液体，以免血浆钠浓度进一步降低。</div>
+                    <div class="check-item">血流动力学：若存在并非由容量不足引起的低血压，持续数小时至数日的甲状腺激素治疗可予以纠正。输注液体无效的重度低血压应采用血管加压药治疗，直到T₄发挥作用。</div>
+                    <div class="check-item">低体温：纠正低体温时，优先使用毛毯被动复温。主动复温可能引起血管扩张和低血压恶化。</div>
+                    <div class="check-item">抗感染：与任何危重昏迷患者一样，应考虑经验性使用抗生素，直至恰当培养结果证实为阴性。</div>
+                    <div style="text-align: right; color: #666; margin-top: 10px;">（宗 良）</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="section-title">■ 肾上腺危象</div>
+                    <div class="section-title">1. 定义</div>
+                    <div class="list-item">• 肾上腺危象指各种原因引起的肾上腺皮质功能衰竭状态，可产生一系列肾上腺皮质激素缺乏的急性临床表现：高热、胃</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- 页码 -->
+    <div class="page-number">233</div>
+
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签：</div>
+        <div class="tags-container">
+            <span class="tag">黏液性水肿昏迷</span>
+            <span class="tag">肾上腺危象</span>
+            <span class="tag">甲状腺激素</span>
+            <span class="tag">左甲状腺素</span>
+            <span class="tag">碘塞罗宁</span>
+            <span class="tag">糖皮质激素</span>
+            <span class="tag">氢化可的松</span>
+            <span class="tag">抗生素</span>
+            <span class="tag">T₄</span>
+            <span class="tag">T₃</span>
+            <span class="tag">TSH</span>
+            <span class="tag">低钠血症</span>
+            <span class="tag">低血压</span>
+            <span class="tag">低体温</span>
+            <span class="tag">心肌梗死</span>
+            <span class="tag">房性心律失常</span>
+            <span class="tag">心包积液</span>
+            <span class="tag">感染</span>
+            <span class="tag">胸腹盆CT</span>
+            <span class="tag">超声</span>
+            <span class="tag">肾上腺皮质功能减退症</span>
+            <span class="tag">血管加压药</span>
+            <span class="tag">毛毯被动复温</span>
+            <span class="tag">经验性使用抗生素</span>
+            <span class="tag">培养</span>
+            <span class="tag">肾上腺皮质激素</span>
+            <span class="tag">高热</span>
+        </div>
+    </div>
+
+    <!-- 编辑框和复制按钮 -->
+    <div class="copy-section">
+        <input type="text" id="copyText" value="黏液性水肿昏迷-急诊处理_肾上腺危象；甲状腺激素；左甲状腺素；碘塞罗宁；糖皮质激素；氢化可的松；抗生素；T₄；T₃；TSH；低钠血症；低血压；低体温；心肌梗死；房性心律失常；感染；肾上腺危象；肾上腺皮质功能减退症；血管加压药；经验性使用抗生素；培养；高热；=233" readonly>
+        <button onclick="copyToClipboard()">复制</button>
+    </div>
+
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">关键词</div>
+        <div class="keywords-content">233</div>
+    </div>
+
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            var copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            }).catch(function() {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            });
+        }
+
+        // 添加到收藏
+        function addToFavorite() {
+            var title = "黏液性水肿昏迷-急诊处理_肾上腺危象";
+            var url = window.location.href;
+            
+            var favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            var exists = favorites.some(function(item) {
+                return item.url === url;
+            });
+            
+            if (exists) {
+                alert("该页面已在收藏夹中！");
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                category: "急诊疾病"
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert("已添加到收藏！请在首页查看。");
+        }
+    </script>
+
+</body>
+</html>
