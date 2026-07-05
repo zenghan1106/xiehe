@@ -1,0 +1,560 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~嗜铬细胞瘤急诊处理与尿崩症*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8f0f8 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            z-index: 100;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 导航按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(92,184,92,0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            top: 110px;
+            right: 15px;
+            background: #f0ad4e;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(240,173,78,0.3);
+            z-index: 100;
+        }
+        
+        .fav-btn:hover {
+            background: #ec971f;
+        }
+        
+        .fav-btn.active {
+            background: #d9534f;
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            color: #2c5282;
+            margin: 60px 0 20px 0;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        /* 副标题 */
+        .sub-title {
+            text-align: center;
+            font-size: 15px;
+            color: #4a5568;
+            margin-bottom: 25px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: #3182ce;
+            color: white;
+            padding: 16px 12px;
+            font-size: 17px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        /* 表格内容 */
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+            line-height: 1.7;
+            color: #2d3748;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        tbody tr:hover {
+            background: #edf2f7;
+        }
+        
+        /* 项目符号样式 */
+        .bullet {
+            color: #3182ce;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .check-mark {
+            color: #38a169;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .diamond {
+            color: #805ad5;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        /* 章节标题 */
+        .section-title {
+            color: #2b6cb0;
+            font-weight: bold;
+            font-size: 15px;
+            margin: 8px 0;
+        }
+        
+        /* 疾病标题 */
+        .disease-title {
+            color: #1a365d;
+            font-weight: bold;
+            font-size: 17px;
+            margin: 12px 0;
+            padding: 8px 0;
+            border-bottom: 2px solid #3182ce;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #4a5568;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            background: white;
+            border-radius: 12px;
+            padding: 18px;
+            margin: 20px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .keywords-title {
+            font-size: 15px;
+            color: #2c5282;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .keywords-content {
+            font-size: 13px;
+            color: #4a5568;
+            line-height: 1.8;
+            word-break: break-all;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background: white;
+            border-radius: 12px;
+            padding: 18px;
+            margin: 20px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            color: #2c5282;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #ebf8ff;
+            color: #2b6cb0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            border: 1px solid #bee3f8;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            background: white;
+            border-radius: 12px;
+            padding: 18px;
+            margin: 20px 0 30px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .copy-title {
+            font-size: 15px;
+            color: #2c5282;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        .copy-box-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #4a5568;
+            background: #f7fafc;
+            outline: none;
+        }
+        
+        .copy-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #5a67d8;
+        }
+        
+        .copy-btn.copied {
+            background: #38a169;
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 14px;
+            display: none;
+            z-index: 200;
+        }
+        
+        /* 手机适配 */
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 18px;
+                margin-top: 70px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 10px;
+            }
+            
+            tbody td {
+                font-size: 13px;
+                padding: 10px;
+            }
+            
+            .home-btn, .nav-btn, .fav-btn {
+                font-size: 12px;
+                padding: 7px 12px;
+            }
+            
+            .copy-box-wrapper {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="248.html" class="nav-btn">↑ 上一页</a>
+        <a href="250.html" class="nav-btn">↓ 下一页</a>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~嗜铬细胞瘤急诊处理与尿崩症*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~嗜铬细胞瘤急诊处理与尿崩症*****、嗜铬细胞瘤急诊处理与尿崩症 - 详细内容</div>
+    <p class="sub-title">急诊疾病 | 内分泌危象 | 药物治疗 | 手术治疗</p>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>嗜铬细胞瘤急诊处理与尿崩症 - 详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span class="bullet">●</span>需鉴别的其他诊断：ACS、顽固性高血压、主动脉夹层、脑血管事件、甲亢等。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="disease-title">■ 嗜铬细胞瘤</div>
+                        <div class="section-title">7. 急诊处理</div>
+                        <span class="bullet">●</span>一般治疗：吸氧，心电监护，建立静脉通路。<br><br>
+                        <span class="bullet">●</span>嗜铬细胞瘤危象<br>
+                        <span class="check-mark">✓</span>高血压危象：降压治疗，迅速酚妥拉明1～5mg iv（5% GS 20ml稀释），血压160/100mmHg→酚妥拉明10～50mg稀释后持续静脉滴注以控制血压150/90mmHg；必要时可加用硝普钠静脉注射［0.5～5.0μg/(kg·min)］、尼卡地平5～15mg/h静脉滴注；若加用酚妥拉明后心率加快，可使用普萘洛尔（但切勿单独使用，因为单独使用将加重高血压）。<br><br>
+                        <span class="check-mark">✓</span>低血压<br>
+                        <span class="diamond">◇</span>补充血容量，适当补液。<br>
+                        <span class="diamond">◇</span>术前正常进食或高钠饮食（心力衰竭、肾衰竭者慎用）。<br>
+                        <span class="diamond">◇</span>必要时输注血浆或胶体溶液，消除直立性低血压（目标：坐位＜120/80mmHg，HR 60～70次/分，站位SBP＞90mmHg，HR 70～80次/分，Hct＜45%）。<br>
+                        <span class="diamond">◇</span>除非处于持续休克状态，原则上不宜用升压药维持血压。<br><br>
+                        <span class="check-mark">✓</span>其他并发症<br>
+                        <span class="diamond">◇</span>心律失常：应使用利多卡因（50～100mg iv）或艾司洛尔［50～200μg/(kg·min)］。<br>
+                        <span class="diamond">◇</span>低血糖：禁止使用肾上腺素及糖皮质激素。<br><br>
+                        <span class="bullet">●</span>避免诱因：如挤压、创伤、情绪激动、手术、运动、分娩等，避免应用吗啡、组胺、甲氧氯普胺等药物。<br><br>
+                        <span class="bullet">●</span>积极处理诱因：如外伤、感染等。<br><br>
+                        <span class="bullet">●</span>手术治疗<br>
+                        <span class="check-mark">✓</span>90%以上病例可通过切除病灶而治愈，尽可能在手术前纠正病理状态。<br>
+                        <span class="check-mark">✓</span>术前降压：最重要的药物是α受体阻断药，如酚苄明、乌拉地尔。降压效果不佳者可静脉泵入乌拉地尔。<br>
+                        <span class="check-mark">✓</span>纠正低血容量：至关重要，尤其对于出现低血压患者。<br>
+                        <span class="check-mark">✓</span>评估肿瘤：内分泌科及泌尿外科会诊，完善相关检查。<br>
+                        <span class="check-mark">✓</span>择期手术切除肿瘤。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="disease-title">■ 尿崩症</div>
+                        <div class="section-title">1. 定义</div>
+                        <span class="bullet">●</span>尿崩症（DI）是以多尿为主要临床表现的功能失常。
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">页码：249</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">关键词</div>
+        <div class="keywords-content">
+            嗜铬细胞瘤；尿崩症；急诊处理；高血压危象；低血压；酚妥拉明；硝普钠；尼卡地平；普萘洛尔；利多卡因；艾司洛尔；α受体阻断药；酚苄明；乌拉地尔；低血容量；心律失常；低血糖；ACS；主动脉夹层；甲亢；多尿
+        </div>
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">检索标签</div>
+        <div>
+            <span class="tag">嗜铬细胞瘤</span>
+            <span class="tag">尿崩症</span>
+            <span class="tag">高血压</span>
+            <span class="tag">低血压</span>
+            <span class="tag">心律失常</span>
+            <span class="tag">低血糖</span>
+            <span class="tag">酚妥拉明</span>
+            <span class="tag">硝普钠</span>
+            <span class="tag">尼卡地平</span>
+            <span class="tag">普萘洛尔</span>
+            <span class="tag">利多卡因</span>
+            <span class="tag">艾司洛尔</span>
+            <span class="tag">酚苄明</span>
+            <span class="tag">乌拉地尔</span>
+            <span class="tag">ACS</span>
+            <span class="tag">主动脉夹层</span>
+            <span class="tag">甲亢</span>
+            <span class="tag">多尿</span>
+            <span class="tag">肿瘤</span>
+            <span class="tag">手术</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <div class="copy-title">复制信息</div>
+        <div class="copy-box-wrapper">
+            <input type="text" class="copy-input" id="copyInput" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 设置复制框内容
+        const title = "嗜铬细胞瘤急诊处理与尿崩症";
+        const subtitle = "急诊疾病 | 内分泌危象 | 药物治疗 | 手术治疗";
+        const keywords = "嗜铬细胞瘤；尿崩症；急诊处理；高血压危象；低血压；酚妥拉明；硝普钠；尼卡地平；普萘洛尔；利多卡因；艾司洛尔；α受体阻断药；酚苄明；乌拉地尔；低血容量；心律失常；低血糖；ACS；主动脉夹层；甲亢；多尿";
+        const pageNum = "249";
+        document.getElementById('copyInput').value = title + "；" + subtitle + "；" + keywords + "；=" + pageNum;
+        
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                    document.getElementById('copyBtn').classList.add('copied');
+                    document.getElementById('copyBtn').textContent = '已复制';
+                    setTimeout(() => {
+                        document.getElementById('copyBtn').classList.remove('copied');
+                        document.getElementById('copyBtn').textContent = '复制';
+                    }, 2000);
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                showToast('已添加到收藏！');
+                
+                // 保存到localStorage模拟添加到index收藏类目
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '~~~~~嗜铬细胞瘤急诊处理与尿崩症*****',
+                    url: '249.html',
+                    page: '249'
+                };
+                // 检查是否已存在
+                const exists = favorites.some(f => f.url === '249.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+                showToast('已取消收藏！');
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '249.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '249.html');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
