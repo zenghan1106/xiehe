@@ -1,0 +1,377 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~流行性脑脊髓膜炎辅助检查与急诊处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-home {
+            background-color: #4a90d9;
+            color: white;
+        }
+        
+        .btn-nav {
+            background-color: #5a9bd5;
+            color: white;
+        }
+        
+        .btn-favorite {
+            background-color: #e8b339;
+            color: #333;
+            font-size: 13px;
+            padding: 8px 14px;
+        }
+        
+        .btn-copy {
+            background-color: #4caf50;
+            color: white;
+            padding: 12px 20px;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .btn:hover {
+            opacity: 0.85;
+            transform: translateY(-1px);
+        }
+        
+        /* 标题样式 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            color: #1a5276;
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #d6eaf8;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        
+        /* 表格样式 */
+        .content-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        .content-table thead tr {
+            background-color: #2e75b6;
+            color: white;
+        }
+        
+        .content-table thead th {
+            padding: 16px 12px;
+            font-size: 18px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        .content-table tbody td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 15px;
+            vertical-align: top;
+        }
+        
+        .content-table tbody tr:hover {
+            background-color: #f8fbff;
+        }
+        
+        .content-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        /* 内容中的标题样式 */
+        .section-title {
+            color: #1a5276;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+        
+        .check-item {
+            color: #27ae60;
+        }
+        
+        .diamond-item {
+            color: #555;
+            padding-left: 20px;
+        }
+        
+        .bullet-item {
+            color: #333;
+            margin: 4px 0;
+        }
+        
+        .author {
+            text-align: right;
+            color: #666;
+            font-style: italic;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1a5276;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background-color: #e8f4f8;
+            color: #2e75b6;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid #b8d4e8;
+        }
+        
+        /* 底部编辑框区域 */
+        .bottom-section {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .copy-area {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+            margin-bottom: 12px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 14px;
+            border: 2px solid #c5e0f7;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+            background-color: #f8fbff;
+        }
+        
+        .page-info {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            padding: 10px;
+        }
+        
+        /* 关键词 */
+        .keywords-section {
+            text-align: center;
+            padding: 15px;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        .keywords-title {
+            color: #1a5276;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="202.html" class="btn btn-nav">上一页</a>
+            <a href="204.html" class="btn btn-nav">下一页</a>
+            <button class="btn btn-favorite" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="main-title">~~~~~流行性脑脊髓膜炎辅助检查与急诊处理*****</div>
+    
+    <!-- 主内容表格 -->
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th>流行性脑脊髓膜炎 - 辅助检查、细菌学检查与急诊处理</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="section-title">3. 辅助检查</div>
+                    <div class="bullet-item">• 血常规：白细胞总数明显增高，一般在20×10⁹/L左右，高者达40×10⁹/L或以上，中性粒细胞占80%～90%。</div>
+                    <div class="bullet-item">• 脑脊液检查：病程初期仅有压力增高，外观正常。典型脑膜炎期压力高达330mmH₂O以上，外观呈混浊或脓样，白细胞明显增多，以中性粒细胞为主，蛋白含量显著增高，而糖含量明显减少，有时可完全测不出，氯化物降低。若临床有脑膜炎症状及体征而早期脑脊液检查正常，应于12～24小时后复验。流脑经抗菌药物治疗后，脑脊液改变可不典型。</div>
+                    <div class="bullet-item">• 细菌学检查</div>
+                    <div class="check-item">✓ 涂片检查：用针尖刺破皮肤瘀点，挤出少许血液及组织液，涂片染色后镜检，阳性率高达80%以上，脑脊液沉淀涂片的阳性率为60%～70%。脑脊液不宜搁置太久，否则病原菌易自溶而影响检出。</div>
+                    <div class="check-item">✓ 细菌培养</div>
+                    <div class="diamond-item">◇ 血培养：在流脑时阳性率较低，但对普通型流脑败血症期、暴发型败血症及慢性脑膜炎球菌败血症诊断甚为重要，故必须注意在应用抗菌药物前采血做细菌培养，并宜多次采血送验。</div>
+                    <div class="diamond-item">◇ 脑脊液培养：应于无菌试管内离心，取沉渣直接接种于巧克力琼脂上，同时注入葡萄糖肉汤中，在5%～10% CO₂环境下培养。</div>
+                    <div class="bullet-item">• 免疫学试验：是近年来开展的流脑快速诊断方法。脑脊液中抗原检测有利于早期诊断，敏感性高，特异性强。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="section-title">4. 急诊处理</div>
+                    <div class="bullet-item">• 病因治疗：疑似病例，在等待脑脊液细菌生长、分离鉴定及药敏结果期间，应予覆盖最可能病原体的经验性治疗。</div>
+                    <div class="check-item">✓ 推荐在等待细菌分离鉴定及药敏结果时予第三代头孢菌素（如头孢曲松2.0g ivgtt q12h），联合万古霉素1.0g ivgtt q12h（根据肾功能调整剂量）。</div>
+                    <div class="check-item">✓ 证实分离菌株对青霉素敏感后，采用青霉素G能很好地治疗脑膜炎球菌性脑膜炎。成人常用剂量是400万U ivgtt q4h。若病原体对青霉素不完全敏感或患者有其他青霉素使用禁忌的，则采用第三代头孢菌素。氯霉素〔100mg/(kg·d)，静脉给药，最大剂量为4g/d〕是青霉素过敏者的另一种有效选择。</div>
+                    <div class="bullet-item">• 对症治疗：血管活性药物治疗和积极补液是休克处理中必不可少的部分。DIC是极其严重的并发症。对DIC主要予支持治疗。</div>
+                    <div class="author">（李 妍）</div>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: center; color: #888; font-size: 13px;">
+                    页码：191
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag">流行性脑脊髓膜炎</span>
+            <span class="tag">流脑</span>
+            <span class="tag">脑膜炎球菌</span>
+            <span class="tag">头孢曲松</span>
+            <span class="tag">第三代头孢菌素</span>
+            <span class="tag">万古霉素</span>
+            <span class="tag">青霉素</span>
+            <span class="tag">青霉素G</span>
+            <span class="tag">氯霉素</span>
+            <span class="tag">DIC</span>
+        </div>
+    </div>
+    
+    <!-- 复制编辑框区域 -->
+    <div class="bottom-section">
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyText" value="流行性脑脊髓膜炎辅助检查与急诊处理；辅助检查、细菌学检查、急诊处理、药物治疗；流行性脑脊髓膜炎、流脑、脑膜炎球菌、头孢曲松、第三代头孢菌素、万古霉素、青霉素、青霉素G、氯霉素、DIC；=203" readonly>
+            <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 页码信息 -->
+    <div class="page-info">
+        页码：203
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">关键词</div>
+        <div>流行性脑脊髓膜炎 | 流脑 | 脑脊液检查 | 涂片检查 | 细菌培养 | 血培养 | 脑脊液培养 | 免疫学试验 | 第三代头孢菌素 | 头孢曲松 | 万古霉素 | 青霉素G | 氯霉素 | DIC | 休克 | 脑膜炎球菌</div>
+    </div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(function() {
+                    alert("已复制到剪贴板！");
+                });
+            } else {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            }
+        }
+        
+        // 添加到收藏
+        function addToFavorites() {
+            const title = "流行性脑脊髓膜炎辅助检查与急诊处理";
+            const url = window.location.href;
+            const pageNum = "203";
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert("该页面已在收藏夹中！");
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                pageNum: pageNum,
+                category: "传染病诊疗"
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert("已添加到收藏！\n标题：" + title + "\n页码：" + pageNum);
+        }
+    </script>
+<div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~流行性脑脊髓膜炎辅助检查与急诊处理*****、流行性脑脊髓膜炎 - 辅助检查、细菌学检查与急诊处理、页码：191</div></body>
+</html>
