@@ -1,0 +1,642 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~灭鼠药中毒诊疗_中暑_环境和创伤急诊*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #2c3e50;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 8px rgba(52,152,219,0.3);
+            z-index: 100;
+        }
+        
+        .home-btn:hover {
+            background: #2980b9;
+        }
+        
+        /* 上一页/下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(52,152,219,0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #2980b9;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            top: 110px;
+            right: 15px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(231,76,60,0.3);
+            z-index: 100;
+        }
+        
+        .fav-btn:hover {
+            background: #c0392b;
+        }
+        
+        .fav-btn.active {
+            background: #27ae60;
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 900px;
+            margin: 60px auto 30px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(31,38,135,0.1);
+            overflow: hidden;
+        }
+        
+        /* 标题区域 */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 25px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header .subtitle {
+            font-size: 14px;
+            margin-top: 8px;
+            opacity: 0.9;
+        }
+        
+        /* 提示框 */
+        .tip-box {
+            margin: 20px;
+            padding: 16px 20px;
+            background: #fff3cd;
+            border-left: 4px solid #f39c12;
+            border-radius: 8px;
+            color: #856404;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        
+        /* 表格样式 */
+        .table-wrap {
+            padding: 20px;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        
+        thead th {
+            background: #3498db;
+            color: white;
+            padding: 16px 14px;
+            text-align: left;
+            font-size: 17px;
+            font-weight: 600;
+        }
+        
+        tbody td {
+            padding: 14px;
+            border-bottom: 1px solid #e8ecf1;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        .section-title {
+            color: #2980b9;
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+        
+        .item-dot {
+            color: #e74c3c;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+        
+        .highlight-red {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+        
+        .highlight-blue {
+            color: #2980b9;
+            font-weight: 600;
+        }
+        
+        .author {
+            text-align: right;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-top: 10px;
+            padding-right: 10px;
+        }
+        
+        .new-section {
+            background: #e8f4f8;
+            border-left: 4px solid #3498db;
+        }
+        
+        .new-section td {
+            padding: 20px 14px;
+        }
+        
+        /* 页码 */
+        .page-num {
+            text-align: center;
+            padding: 15px;
+            font-size: 16px;
+            color: #7f8c8d;
+            font-weight: 600;
+            border-top: 1px solid #e8ecf1;
+        }
+        
+        /* 关键词区域 */
+        .keywords-area {
+            padding: 20px;
+            background: #f0f4f8;
+            border-top: 1px solid #e8ecf1;
+        }
+        
+        .keywords-title {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .keywords-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .keyword-tag {
+            background: #3498db;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+        
+        /* 检索标签 */
+        .search-tags {
+            padding: 20px;
+            background: #fafbfc;
+            border-top: 1px solid #e8ecf1;
+        }
+        
+        .search-tags-title {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag-item {
+            background: #e8f4f8;
+            color: #2980b9;
+            border: 1px solid #bde0fe;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .tag-item:hover {
+            background: #3498db;
+            color: white;
+        }
+        
+        .tag-disease {
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .tag-drug {
+            border-left: 4px solid #27ae60;
+        }
+        
+        .tag-check {
+            border-left: 4px solid #f39c12;
+        }
+        
+        /* 复制区域 */
+        .copy-area {
+            padding: 20px;
+            background: #fff;
+            border-top: 1px solid #e8ecf1;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 16px;
+            border: 2px solid #dde1e7;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #2c3e50;
+            background: #f8fafc;
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(39,174,96,0.3);
+        }
+        
+        .copy-btn:hover {
+            background: #219a52;
+        }
+        
+        .copy-btn.copied {
+            background: #3498db;
+        }
+        
+        /* 提示 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2c3e50;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 200;
+        }
+        
+        .toast.show {
+            opacity: 1;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 640px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 20px;
+            }
+            
+            .home-btn, .nav-btn, .fav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            table {
+                font-size: 14px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 10px;
+            }
+            
+            tbody td {
+                padding: 10px;
+            }
+            
+            .tip-box {
+                font-size: 14px;
+                padding: 12px 16px;
+            }
+            
+            .copy-area {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 上一页/下一页 -->
+    <div class="nav-btns">
+        <a href="301.html" class="nav-btn">← 上一页</a>
+        <a href="303.html" class="nav-btn">下一页 →</a>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 标题 -->
+        <div class="header">
+            <h1>~~~~~灭鼠药中毒诊疗_中暑_环境和创伤急诊*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~灭鼠药中毒诊疗_中暑_环境和创伤急诊*****、分类、内容详情、环境和创伤急诊、4. 必做检查、5. 选做检查、6. 急诊处理、中暑、1. 定义</div>
+            <p class="subtitle">急诊医学 · 灭鼠药中毒必做检查/选做检查/急诊处理 · 中暑定义</p>
+        </div>
+        
+        <!-- 提示框 -->
+        <div class="tip-box">
+            <b>💡 需谨记：</b>接触史是建立灭鼠药中毒诊断的基础，临床表现是分析推断或验证诊断的主要依据，实验室检测则是确诊的必要补充。
+        </div>
+        
+        <!-- 表格内容 -->
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 22%;">分类</th>
+                        <th style="width: 78%;">内容详情</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="section-title">4. 必做检查</span></td>
+                        <td>
+                            <span class="item-dot">•</span><b>凝血功能检查：</b><span class="highlight-blue">PT、INR、APTT</span>等，测定基线值或了解凝血功能受损程度。<br><br>
+                            <span class="item-dot">•</span><b>血常规：</b>了解血红蛋白基线值。<br><br>
+                            <span class="item-dot">•</span><b>血型、感染4项、肝肾功能：</b>做好输血前准备。<br><br>
+                            <span class="item-dot">•</span><b>粪便常规＋粪便OB＋尿常规：</b>寻找可能出血部位。<br><br>
+                            <span class="item-dot">•</span><b>血糖＋电解质检测。</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="section-title">5. 选做检查</span></td>
+                        <td>
+                            <span class="item-dot">•</span><b>毒物检测：</b>建议不明病因的凝血功能异常患者常规检查。<br><br>
+                            <span class="item-dot">•</span><b>肝胆脾超声：</b>鉴别肝病。<br><br>
+                            <span class="item-dot">•</span><b>头颅CT：</b>合并意识障碍者需除外颅内出血。
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="section-title">6. 急诊处理</span></td>
+                        <td>
+                            <span class="item-dot">•</span><b>大量（摄入量＞1mg）暴露：</b>尽快（1小时内）服用<span class="highlight-red">活性炭</span>以去污染（清醒状态下）。<br><br>
+                            <span class="item-dot">•</span><b>仅凝血功能异常但无出血：</b>可口服<span class="highlight-red">维生素K₁</span>拮抗（根据INR值）。<br><br>
+                            <span class="item-dot">•</span><b>轻微出血：</b>如鼻出血或瘀斑，可口服<span class="highlight-red">维生素K₁</span>（根据INR值）。<br><br>
+                            <span class="item-dot">•</span><b>危及生命的出血或大出血：</b>如颅内出血、消化道出血或尿血，应及时补充<span class="highlight-red">凝血酶原复合物（25～50U/kg）</span>或输注<span class="highlight-red">新鲜血浆30ml/kg</span>，同时予以<span class="highlight-red">维生素K₁拮抗（0.3mg/kg，每剂不超过10mg）</span>。<br><br>
+                            <span class="item-dot">•</span><b>定期监测凝血功能</b>，避免可能导致出血的活动，大出血患者需卧床静养。<br><br>
+                            <span class="item-dot">•</span><b>因自杀原因导致的抗凝血药灭鼠药中毒的患者</b>，在离院前需请心理科医师会诊，稳定患者情绪。
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="author">（须　晋）</td>
+                    </tr>
+                    <tr class="new-section">
+                        <td colspan="2">
+                            <span class="section-title" style="font-size: 18px;">■ 环境和创伤急诊</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="section-title">■ 中暑</span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><span class="section-title">1. 定义</span></td>
+                        <td>
+                            <span class="item-dot">•</span><b>中暑（HI）</b>指在温度或湿度较高、不透风的环境下，因体温调节中枢功能障碍或汗腺功能衰竭，以及水电解质丢失过多，
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-num">页码：302</div>
+        
+        <!-- 关键词 -->
+        <div class="keywords-area">
+            <div class="keywords-title">🔍 关键词</div>
+            <div class="keywords-list">
+                <span class="keyword-tag">灭鼠药中毒</span>
+                <span class="keyword-tag">PT</span>
+                <span class="keyword-tag">INR</span>
+                <span class="keyword-tag">APTT</span>
+                <span class="keyword-tag">凝血功能</span>
+                <span class="keyword-tag">活性炭</span>
+                <span class="keyword-tag">维生素K₁</span>
+                <span class="keyword-tag">凝血酶原复合物</span>
+                <span class="keyword-tag">新鲜血浆</span>
+                <span class="keyword-tag">毒物检测</span>
+                <span class="keyword-tag">头颅CT</span>
+                <span class="keyword-tag">中暑</span>
+                <span class="keyword-tag">环境和创伤急诊</span>
+                <span class="keyword-tag">急诊医学</span>
+            </div>
+        </div>
+        
+        <!-- 检索标签 -->
+        <div class="search-tags">
+            <div class="search-tags-title">🏷️ 检索标签（疾病 / 药物 / 检查）</div>
+            <div class="tag-cloud">
+                <span class="tag-item tag-disease">灭鼠药中毒</span>
+                <span class="tag-item tag-disease">中暑</span>
+                <span class="tag-item tag-disease">凝血功能异常</span>
+                <span class="tag-item tag-disease">颅内出血</span>
+                <span class="tag-item tag-disease">消化道出血</span>
+                <span class="tag-item tag-disease">肝病</span>
+                <span class="tag-item tag-disease">意识障碍</span>
+                <span class="tag-item tag-disease">HI</span>
+                <span class="tag-item tag-drug">维生素K₁</span>
+                <span class="tag-item tag-drug">活性炭</span>
+                <span class="tag-item tag-drug">凝血酶原复合物</span>
+                <span class="tag-item tag-drug">新鲜血浆</span>
+                <span class="tag-item tag-check">PT</span>
+                <span class="tag-item tag-check">INR</span>
+                <span class="tag-item tag-check">APTT</span>
+                <span class="tag-item tag-check">血常规</span>
+                <span class="tag-item tag-check">粪便OB</span>
+                <span class="tag-item tag-check">尿常规</span>
+                <span class="tag-item tag-check">血糖</span>
+                <span class="tag-item tag-check">电解质</span>
+                <span class="tag-item tag-check">毒物检测</span>
+                <span class="tag-item tag-check">肝胆脾超声</span>
+                <span class="tag-item tag-check">头颅CT</span>
+            </div>
+        </div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyInput" value="灭鼠药中毒诊疗_中暑_环境和创伤急诊；急诊医学、灭鼠药中毒、PT、INR、APTT、凝血功能、活性炭、维生素K₁、凝血酶原复合物、新鲜血浆、毒物检测、头颅CT、中暑、环境和创伤急诊；=302" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyContent()">📋 复制</button>
+        </div>
+    </div>
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                    document.getElementById('copyBtn').classList.add('copied');
+                    document.getElementById('copyBtn').textContent = '✓ 已复制';
+                    setTimeout(() => {
+                        document.getElementById('copyBtn').classList.remove('copied');
+                        document.getElementById('copyBtn').textContent = '📋 复制';
+                    }, 2000);
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                showToast('已添加到收藏！');
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const item = {
+                    title: '灭鼠药中毒诊疗_中暑_环境和创伤急诊',
+                    url: '302.html',
+                    page: '302',
+                    tags: ['灭鼠药中毒', '中暑', '维生素K₁', '活性炭', '凝血功能']
+                };
+                
+                const exists = favorites.some(f => f.url === '302.html');
+                if (!exists) {
+                    favorites.push(item);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                showToast('已取消收藏');
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '302.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 检查是否已收藏
+        function checkFavorite() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const btn = document.getElementById('favBtn');
+            if (favorites.some(f => f.url === '302.html')) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+            }
+        }
+        
+        // Toast提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+        
+        // 初始化
+        checkFavorite();
+    </script>
+</body>
+</html>
