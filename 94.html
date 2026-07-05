@@ -1,0 +1,434 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急性呼吸窘迫综合征(ARDS)鉴别诊断与急诊处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* 右上角导航按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        
+        .nav-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .fav-btn {
+            background: #e8a838;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* 标题样式 */
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 70px 10px 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, #d4e6f1 0%, #aed6f1 100%);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        /* 注意事项 */
+        .notice {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 0 0 15px;
+            font-size: 15px;
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            max-width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        /* 表头蓝色 */
+        thead tr {
+            background: linear-gradient(135deg, #2e86c1 0%, #1a5276 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 18px 15px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        /* 表格内容 */
+        tbody td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #e8eef3;
+            font-size: 15px;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4fd;
+        }
+        
+        /* 分类标题行 */
+        .section-row {
+            background: #d4e6f1 !important;
+            font-weight: 600;
+            color: #1a5276;
+            font-size: 16px;
+        }
+        
+        /* 子项缩进 */
+        .sub-item {
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .sub-item::before {
+            content: "•";
+            position: absolute;
+            left: 10px;
+            color: #2e86c1;
+        }
+        
+        /* 支持治疗子项 */
+        .support-item {
+            padding-left: 30px;
+            position: relative;
+            margin: 8px 0;
+        }
+        
+        .support-item::before {
+            content: "✓";
+            position: absolute;
+            left: 10px;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        /* 页码显示 */
+        .page-num {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        
+        .keywords-title {
+            color: #1a5276;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        /* 标签样式 */
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .tag {
+            background: linear-gradient(135deg, #e8f4fd 0%, #d4e6f1 100%);
+            color: #1a5276;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid #aed6f1;
+        }
+        
+        .tag-disease {
+            background: linear-gradient(135deg, #fde8e8 0%, #f5b7b1 100%);
+            color: #922b21;
+            border-color: #e74c3c;
+        }
+        
+        .tag-bacteria {
+            background: linear-gradient(135deg, #e8f8f5 0%, #a9dfbf 100%);
+            color: #1e8449;
+            border-color: #27ae60;
+        }
+        
+        .tag-antibiotic {
+            background: linear-gradient(135deg, #fef9e7 0%, #f9e79f 100%);
+            color: #9a7d0a;
+            border-color: #f1c40f;
+        }
+        
+        /* 底部编辑框区域 */
+        .copy-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #aed6f1;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        /* 底部间距 */
+        .bottom-space {
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <button class="home-btn" onclick="location.href='index.html'">← 返回首页</button>
+    
+    <!-- 右上角导航按钮 -->
+    <div class="nav-btns">
+        <button class="nav-btn" onclick="location.href='93.html'">上一页</button>
+        <button class="nav-btn" onclick="location.href='95.html'">下一页</button>
+        <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~急性呼吸窘迫综合征(ARDS)鉴别诊断与急诊处理*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~急性呼吸窘迫综合征(ARDS)鉴别诊断与急诊处理*****、ARDS 鉴别诊断与急诊处理、7. 鉴别诊断、8. 急诊处理、心源性肺水肿、慢性间质性肺疾病急性加重、弥漫性肺泡出血、肺泡癌、积极治疗原发病、机械通气策略、俯卧位通气、其他支持治疗</div>
+    
+    <!-- 注意事项 -->
+    <div class="notice">
+        <strong>注意：</strong>ARDS的柏林定义要求满足下列所有条件才能诊断。
+    </div>
+    
+    <!-- 主表格 -->
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">ARDS 鉴别诊断与急诊处理</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="section-row">
+                <td colspan="2">7. 鉴别诊断</td>
+            </tr>
+            <tr>
+                <td width="25%">心源性肺水肿</td>
+                <td>通常为左心室收缩或舒张功能障碍所致，也有可能因液体负荷过重、重度高血压、肾衰竭引起，超声心动图、BNP检测有助于区分心源性肺水肿和ARDS</td>
+            </tr>
+            <tr>
+                <td>慢性间质性肺疾病急性加重</td>
+                <td>患者既往常有间质性肺疾病病史，既往肺部影像学有助于鉴别评估。需注意，在慢性间质性肺疾病基础上并发感染时，常合并ARDS存在</td>
+            </tr>
+            <tr>
+                <td>弥漫性肺泡出血</td>
+                <td>常有基础疾病（如系统性红斑狼疮、抗肾小球基膜病），临床表现为咯血、Hb水平明显下降，支气管镜检查发现整个气道血性分泌物及肺泡灌洗液中红细胞计数明显增多，肺泡灌洗液中发现充满含铁血黄素的巨噬细胞强烈提示弥漫性肺泡出血</td>
+            </tr>
+            <tr>
+                <td>肺泡癌</td>
+                <td>可快速进展，影像学可表现为双肺弥漫性病变，有时与ARDS难以鉴别，痰或肺泡灌洗液中可能发现肿瘤细胞</td>
+            </tr>
+            <tr class="section-row">
+                <td colspan="2">8. 急诊处理</td>
+            </tr>
+            <tr>
+                <td>积极治疗原发病</td>
+                <td>如脓毒症休克时需积极抗感染及纠正休克治疗，重症胰腺炎患者需要积极液体复苏</td>
+            </tr>
+            <tr>
+                <td>机械通气策略</td>
+                <td>对于多数ARDS患者，应行气管插管实施有创机械通气。可采取低潮气量通气策略（初始潮气量设为6～8ml/kg预测体重，气道平台压＜30cmH₂O），应避免常规使用开放性肺通气（OLV）、高PEEP和肺复张操作（某些重度ARDS患者可考虑使用）</td>
+            </tr>
+            <tr>
+                <td>俯卧位通气</td>
+                <td>重度ARDS经低潮气量通气策略通气治疗后未能改善，可尝试俯卧位通气</td>
+            </tr>
+            <tr>
+                <td>其他支持治疗</td>
+                <td>
+                    <div class="support-item">镇静镇痛：早期机械通气时应充分镇静镇痛，必要时应用肌松药</div>
+                    <div class="support-item">营养支持：尽早启动肠内营养鼻饲泵入</div>
+                    <div class="support-item">血糖控制：若持续血糖＞10mmol/L，开始静脉胰岛素治疗，血糖目标为7.8～10mmol/L</div>
+                    <div class="support-item">医院获得性肺炎治疗：积极寻找病原学证据，针对性使用抗生素</div>
+                    <div class="support-item">预防DVT：可使用弹力袜、血栓泵及预防性抗凝等措施</div>
+                    <div class="support-item">预防消化道出血：早期启动肠内营养，预防性使用质子泵抑制剂（PPI）</div>
+                    <div class="support-item">糖皮质激素使用：早期经积极机械通气等措施治疗但PaO₂/</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 页码 -->
+    <div class="page-num">页码：94</div>
+    
+    <!-- 关键词区域（网页底部） -->
+    <div class="keywords-section">
+        <div class="keywords-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">ARDS</span>
+            <span class="tag tag-disease">急性呼吸窘迫综合征</span>
+            <span class="tag tag-disease">心源性肺水肿</span>
+            <span class="tag tag-disease">慢性间质性肺疾病</span>
+            <span class="tag tag-disease">弥漫性肺泡出血</span>
+            <span class="tag tag-disease">系统性红斑狼疮</span>
+            <span class="tag tag-disease">抗肾小球基膜病</span>
+            <span class="tag tag-disease">肺泡癌</span>
+            <span class="tag tag-disease">脓毒症休克</span>
+            <span class="tag tag-disease">重症胰腺炎</span>
+            <span class="tag tag-disease">医院获得性肺炎</span>
+            <span class="tag tag-antibiotic">抗生素</span>
+            <span class="tag tag-antibiotic">PEEP</span>
+            <span class="tag tag-antibiotic">OLV</span>
+            <span class="tag tag-antibiotic">PPI</span>
+            <span class="tag tag-antibiotic">肌松药</span>
+            <span class="tag tag-antibiotic">胰岛素</span>
+            <span class="tag tag-antibiotic">糖皮质激素</span>
+            <span class="tag tag-antibiotic">质子泵抑制剂</span>
+        </div>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <div class="keywords-title">📋 快速复制</div>
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyText" value="急性呼吸窘迫综合征(ARDS)鉴别诊断与急诊处理；ARDS；急性呼吸窘迫综合征；心源性肺水肿；慢性间质性肺疾病；弥漫性肺泡出血；系统性红斑狼疮；抗肾小球基膜病；肺泡癌；脓毒症休克；重症胰腺炎；医院获得性肺炎；抗生素；PEEP；OLV；PPI；肌松药；胰岛素；糖皮质激素；质子泵抑制剂；=94">
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <div class="bottom-space"></div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                alert('已复制到剪贴板！');
+            }).catch(() => {
+                document.execCommand('copy');
+                alert('已复制到剪贴板！');
+            });
+        }
+        
+        // 添加到收藏
+        function addToFavorites() {
+            // 获取当前页面信息
+            const title = document.title.replace(/~~~~~|*****$/g, '');
+            const url = window.location.href;
+            const pageNum = '94';
+            
+            // 存储到localStorage（模拟添加到index的收藏类目）
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.find(f => f.url === url);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                pageNum: pageNum,
+                category: '急诊疾病',
+                addTime: new Date().toLocaleString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert('已添加到收藏！\n标题：' + title + '\n页码：' + pageNum);
+        }
+    </script>
+</body>
+</html>
