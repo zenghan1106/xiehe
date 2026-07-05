@@ -1,0 +1,528 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急性粒细胞缺乏症检查与处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #4a90d9;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .nav-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            top: 130px;
+            right: 15px;
+            background: #e74c3c;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(231,76,60,0.3);
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            z-index: 100;
+        }
+        
+        .fav-btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        .fav-btn.active {
+            background: #27ae60;
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding-top: 50px;
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: bold;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+        
+        /* 表头 */
+        thead tr {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        /* 表格第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 15px;
+            font-weight: 600;
+            background: #f8fbff;
+        }
+        
+        /* 表格内容 */
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e8ecf1;
+            font-size: 14px;
+            line-height: 1.8;
+            vertical-align: top;
+        }
+        
+        tr:hover {
+            background: #f8fbff;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        /* 列表样式 */
+        td ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        
+        td li {
+            margin-bottom: 6px;
+        }
+        
+        /* 勾选标记 */
+        .check {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        /* 页码 */
+        .page-num {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        .copy-section h3 {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 12px;
+        }
+        
+        .copy-box-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+        }
+        
+        #copyInput {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e8ecf1;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            resize: none;
+            min-height: 60px;
+            outline: none;
+        }
+        
+        #copyInput:focus {
+            border-color: #4a90d9;
+        }
+        
+        #copyBtn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        #copyBtn:hover {
+            background: #357abd;
+        }
+        
+        #copyBtn.copied {
+            background: #27ae60;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        .tags-section h3 {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 12px;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            display: inline-block;
+        }
+        
+        .tag.disease {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .tag.drug {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+        
+        .tag.bacteria {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            color: #95a5a6;
+            font-size: 12px;
+            padding: 15px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .main-title {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            td {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 14px;
+            }
+            
+            .home-btn, .nav-btn, .fav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-box-wrapper {
+                flex-direction: column;
+            }
+            
+            #copyBtn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-btns">
+        <a href="160.html" class="nav-btn">上一页</a>
+        <a href="162.html" class="nav-btn">下一页</a>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+    
+    <div class="container">
+        <!-- 标题 -->
+        <h1 class="main-title">~~~~~急性粒细胞缺乏症检查与处理*****</h1>
+        
+        <!-- 主表格 -->
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 25%;">项目</th>
+                    <th style="width: 75%;">内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>查体（续）</strong></td>
+                    <td>
+                        <ul>
+                            <li>活检及骨髓穿刺部位、牙齿、口咽及牙龈表面、鼻窦、肺、腹部、生殖器及肛周区域</li>
+                            <li><span class="check">✓</span> 肺部是化疗诱导中性粒细胞减少患者的常见感染部位，应检查是否存在肺炎体征（如啰音、呼吸过速、呼吸功增加、低氧血症）</li>
+                            <li><span class="check">✓</span> 若患者存在腹膜刺激征和/或腹部压痛，提示可能有中性粒细胞减少性小肠结肠炎或艰难梭菌结肠炎</li>
+                            <li><span class="check">✓</span> 检查皮肤和黏膜是否有以下体征，如红斑、皮疹、蜂窝织炎、溃疡、疖、水疱、甲沟炎、黏膜炎、牙或扁桃体周蜂窝织炎、肛裂</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>4. 必做检查</strong></td>
+                    <td>
+                        <ul>
+                            <li>血常规：明确中性粒细胞计数，是否同时存在其他两系减低</li>
+                            <li>尿常规＋粪便常规：寻找泌尿系感染、肠道感染证据</li>
+                            <li>生化检查：转氨酶、胆红素、电解质、血肌酐、血尿素氮、血清乳酸</li>
+                            <li>炎性指标：如CRP、PCT、ESR等，提示是否存在炎症或感染</li>
+                            <li>血清真菌标志物：曲霉菌半乳甘露聚糖抗原、β-D-葡聚糖试验</li>
+                            <li>病原学：若患者发热，需完善血培养、痰培养、尿培养、脑脊液检查等，评估感染灶及病原学</li>
+                            <li>影像学：低危患者可完善胸片；中高危患者建议根据可疑感染部位完善头/鼻窦/胸/腹盆CT</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>5. 选做检查</strong></td>
+                    <td>
+                        <p>骨髓穿刺＋活检：主要用于中性粒细胞缺乏症的鉴别诊断，或不明原因粒细胞缺乏的诊断。</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>6. 诊断策略</strong></td>
+                    <td>
+                        <ul>
+                            <li>突然起病，高热和口咽黏膜坏死等症状，有可致中性粒细胞缺乏症危险因素</li>
+                            <li>白细胞数和中性粒细胞数进行性急速下降，中性粒细胞绝对值＜0.5×10⁹/L或缺如</li>
+                            <li>骨髓增生活跃或减低，粒系减少或明显成熟受阻</li>
+                            <li>尽可能在应用抗生素前留取病原学</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>7. 急诊处理</strong></td>
+                    <td>
+                        <ul>
+                            <li>病因治疗：停用可疑药物或可疑毒物</li>
+                            <li>一般处理
+                                <ul style="margin-top: 5px;">
+                                    <li><span class="check">✓</span> 粒细胞缺乏症者需戴好口罩防护</li>
+                                    <li><span class="check">✓</span> 发热者行心电监护，建立静脉通路，积极补液支持治疗</li>
+                                </ul>
+                            </li>
+                            <li>感染治疗</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 页码 -->
+        <div class="page-num">— 149 —</div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <h3>📋 快速复制</h3>
+            <div class="copy-box-wrapper">
+                <textarea id="copyInput" readonly>急性粒细胞缺乏症检查与处理；急性粒细胞缺乏症、查体、必做检查、选做检查、诊断策略、急诊处理、血常规、尿常规、粪便常规、CRP、PCT、ESR、曲霉菌、β-D-葡聚糖、血培养、痰培养、尿培养、骨髓穿刺、活检、抗生素、口罩、心电监护、补液、感染治疗=161</textarea>
+                <button id="copyBtn" onclick="copyContent()">复制</button>
+            </div>
+        </div>
+        
+        <!-- 标签区域 -->
+        <div class="tags-section">
+            <h3>🏷️ 检索标签</h3>
+            <div class="tags">
+                <span class="tag disease">急性粒细胞缺乏症</span>
+                <span class="tag disease">中性粒细胞减少性小肠结肠炎</span>
+                <span class="tag bacteria">艰难梭菌</span>
+                <span class="tag disease">肺炎</span>
+                <span class="tag disease">蜂窝织炎</span>
+                <span class="tag disease">甲沟炎</span>
+                <span class="tag disease">黏膜炎</span>
+                <span class="tag disease">扁桃体炎</span>
+                <span class="tag drug">CRP</span>
+                <span class="tag drug">PCT</span>
+                <span class="tag drug">ESR</span>
+                <span class="tag drug">抗生素</span>
+                <span class="tag bacteria">曲霉菌</span>
+                <span class="tag drug">β-D-葡聚糖</span>
+            </div>
+        </div>
+        
+        <!-- 关键词 -->
+        <div class="keywords">
+            关键词：急性粒细胞缺乏症 | 中性粒细胞 | 必做检查 | 选做检查 | 诊断策略 | 急诊处理 | CRP | PCT | ESR | 曲霉菌 | β-D-葡聚糖 | 血培养 | 骨髓穿刺 | 活检 | 抗生素 | 艰难梭菌 | 心电监护 | 补液
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            document.execCommand('copy');
+            
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '已复制 ✓';
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+                
+                // 保存到localStorage
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '急性粒细胞缺乏症检查与处理',
+                    url: '161.html',
+                    pageNum: '161'
+                };
+                
+                // 避免重复
+                const exists = favorites.some(f => f.url === '161.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                // 更新index.html的收藏
+                localStorage.setItem('index_update', Date.now().toString());
+                
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '☆ 收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '161.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                localStorage.setItem('index_update', Date.now().toString());
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '161.html');
+            
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
