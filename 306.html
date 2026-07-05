@@ -1,0 +1,688 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~热射病急诊处理与创伤早期处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5f0 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 10px;
+            background: linear-gradient(145deg, #4a90d9, #357abd);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(74,144,217,0.3);
+            z-index: 1000;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .home-btn:hover {
+            background: linear-gradient(145deg, #357abd, #2a6aa0);
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页/下一页按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(145deg, #5cb85c, #4cae4c);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(92,184,92,0.3);
+            text-decoration: none;
+            text-align: center;
+        }
+        
+        .nav-btn:hover {
+            background: linear-gradient(145deg, #4cae4c, #449d44);
+            transform: translateY(-1px);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: linear-gradient(145deg, #f0ad4e, #ec971f);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(240,173,78,0.3);
+            margin-top: 5px;
+        }
+        
+        .fav-btn:hover {
+            background: linear-gradient(145deg, #ec971f, #d58512);
+        }
+        
+        .fav-btn.active {
+            background: linear-gradient(145deg, #d9534f, #c9302c);
+        }
+        
+        /* 标题区域 */
+        .title-section {
+            text-align: center;
+            padding: 60px 15px 25px;
+        }
+        
+        .main-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            line-height: 1.4;
+        }
+        
+        .sub-title {
+            font-size: 16px;
+            color: #2874a6;
+            margin-top: 8px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            max-width: 800px;
+            margin: 0 auto 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        /* 表头 */
+        thead tr {
+            background: linear-gradient(145deg, #2e86c1, #1a5276);
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 12px;
+            text-align: left;
+            font-size: 17px;
+            font-weight: bold;
+            border: none;
+        }
+        
+        /* 表格内容 */
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        td {
+            padding: 12px;
+            line-height: 1.7;
+            color: #2c3e50;
+            vertical-align: top;
+        }
+        
+        td:first-child {
+            font-weight: bold;
+            color: #1a5276;
+            width: 22%;
+            min-width: 100px;
+            background: rgba(46,134,193,0.05);
+        }
+        
+        /* 列表样式 */
+        td ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        td li {
+            position: relative;
+            padding-left: 18px;
+            margin-bottom: 6px;
+        }
+        
+        td li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        td li.bullet::before {
+            content: "●";
+            color: #2e86c1;
+        }
+        
+        /* 分隔标题行 */
+        .section-row td {
+            background: linear-gradient(135deg, #d5e8f3, #e8f4f8);
+            font-size: 15px;
+            font-weight: bold;
+            color: #1a5276;
+            text-align: center;
+            padding: 14px;
+        }
+        
+        .section-row td:first-child {
+            background: linear-gradient(135deg, #d5e8f3, #e8f4f8);
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #1a5276;
+            font-weight: bold;
+            margin: 20px 0 10px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            max-width: 800px;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 10px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #2e86c1;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #555;
+            background: white;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-btn {
+            background: linear-gradient(145deg, #9b59b6, #8e44ad);
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(155,89,182,0.3);
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: linear-gradient(145deg, #8e44ad, #7d3c98);
+        }
+        
+        .copy-btn.copied {
+            background: linear-gradient(145deg, #27ae60, #229954);
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .keywords-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .keyword-tag {
+            display: inline-block;
+            background: linear-gradient(145deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin: 4px;
+        }
+        
+        /* 检索标签 */
+        .tags-section {
+            max-width: 800px;
+            margin: 25px auto;
+            padding: 20px 15px;
+            background: rgba(255,255,255,0.85);
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            color: #1a5276;
+            font-weight: bold;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        
+        .tag-category {
+            margin-bottom: 12px;
+        }
+        
+        .tag-label {
+            display: inline-block;
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+        
+        .tag-item {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            margin: 3px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #ffeaa7;
+            color: #d63031;
+        }
+        
+        .tag-drug {
+            background: #dfe6e9;
+            color: #2d3436;
+        }
+        
+        .tag-bacteria {
+            background: #a8e6cf;
+            color: #00b894;
+        }
+        
+        .tag-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* 页脚 */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #888;
+            font-size: 12px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .main-title {
+                font-size: 18px;
+            }
+            
+            .sub-title {
+                font-size: 14px;
+            }
+            
+            table {
+                font-size: 13px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            
+            td {
+                padding: 10px 8px;
+            }
+            
+            td:first-child {
+                width: 28%;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                top: 10px;
+                right: 5px;
+            }
+            
+            .nav-btn, .fav-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                top: 10px;
+                left: 5px;
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="305.html" class="nav-btn">⬅ 上一页</a>
+        <a href="307.html" class="nav-btn">下一页 ➡</a>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="title-section">
+        <h1 class="main-title">~~~~~热射病急诊处理与创伤早期处理*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~热射病急诊处理与创伤早期处理*****、热射病急诊处理与创伤早期处理、热射病急诊处理（续）、创伤、呼吸支持、循环监测与管理、凝血功能障碍、中枢神经系统损伤与脑保护、横纹肌溶解综合征的治疗、定义、创伤处理必须掌握的3个原则、重大事故优先处理原则、成人创伤的早期处理</div>
+        <p class="sub-title">急诊疾病 | 热射病急诊处理·创伤定义·处理原则·ABCDE评估</p>
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">热射病急诊处理与创伤早期处理</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-row">
+                    <td colspan="2">热射病急诊处理（续）</td>
+                </tr>
+                <tr>
+                    <td>呼吸支持</td>
+                    <td>
+                        <ul>
+                            <li class="bullet">多数热射病患者存在意识障碍，需要进行气道保护，建议早期积极进行气管插管。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>循环监测与管理</td>
+                    <td>
+                        <ul>
+                            <li class="bullet">推荐以MAP为65mmHg作为初始复苏目标，既要充分液体复苏，又要避免液体过负荷。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>凝血功能障碍</td>
+                    <td>
+                        <ul>
+                            <li class="bullet">主要以替代治疗为主。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>中枢神经系统损伤与脑保护</td>
+                    <td>
+                        <ul>
+                            <li class="bullet">有效镇痛镇静，循环稳定后尽早启动脱水治疗。高压氧治疗可能会改善神经功能。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>横纹肌溶解综合征的治疗</td>
+                    <td>
+                        <ul>
+                            <li class="bullet">液体治疗及碱化尿液。对于难治性高钙血症、严重高钾血症、代谢性酸中毒和无尿患者，建议血液净化治疗，治疗模式选择连续血液滤过（CVVH）或连续透析滤过（CVVHDF）。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr class="section-row">
+                    <td colspan="2">创伤</td>
+                </tr>
+                <tr>
+                    <td>定义</td>
+                    <td>
+                        <ul>
+                            <li class="bullet">创伤指机体遭受外力（机械、物理、化学等）直接或间接打击后，在外力直接作用下造成局部组织破坏；或在力的作用下，继发远处组织器官的损伤甚至发生全身反应。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>创伤处理必须掌握的3个原则</td>
+                    <td>
+                        <ul>
+                            <li class="bullet">群体伤时优先处理有生命危险的伤员，多发伤时优先处理威胁生命的伤情。</li>
+                            <li class="bullet">不应因诊断不明确而延误有效的治疗。</li>
+                            <li class="bullet">应综合分析伤情，在首次评估与诊治中病史采集并非必需。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>重大事故优先处理原则</td>
+                    <td>
+                        <ul>
+                            <li class="bullet">在伤员数量与严重程度不超过医务人员的处理能力时，优先处理病情危重、多发创伤者。</li>
+                            <li class="bullet">在伤员数量与严重程度超过医务人员的处理能力时，优先处理耗时短、所需医疗人力与设备少者。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>成人创伤的早期处理</td>
+                    <td>
+                        <ul>
+                            <li class="bullet">初步评估与治疗（ABCDE）</li>
+                            <li>Airway（气道评估和保护，必要时保持颈椎稳定）：气管插管，环甲膜穿刺。</li>
+                            <li>Breathing and ventilation（呼吸和通气评估，保持充足氧合）：查看是否存在张力性气胸、大量血胸和急性心脏压塞，一旦确诊，应及时解除。</li>
+                            <li>Circulation（循环评估，控制出血和保持足够的终末器官灌注）：开放外周/中心静脉或骨内通路补液扩容，控制危及生命的出血，必要时予紧急输血。</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">306</div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">关键词</div>
+        <span class="keyword-tag">热射病</span>
+        <span class="keyword-tag">创伤</span>
+        <span class="keyword-tag">MAP</span>
+        <span class="keyword-tag">CVVH</span>
+        <span class="keyword-tag">CVVHDF</span>
+        <span class="keyword-tag">ABCDE</span>
+        <span class="keyword-tag">气管插管</span>
+        <span class="keyword-tag">张力性气胸</span>
+        <span class="keyword-tag">血胸</span>
+        <span class="keyword-tag">心脏压塞</span>
+        <span class="keyword-tag">高压氧</span>
+        <span class="keyword-tag">横纹肌溶解</span>
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 特色检索标签</div>
+        
+        <div class="tag-category">
+            <span class="tag-label">疾病：</span><br>
+            <span class="tag-item tag-disease">热射病</span>
+            <span class="tag-item tag-disease">创伤</span>
+            <span class="tag-item tag-disease">多发伤</span>
+            <span class="tag-item tag-disease">意识障碍</span>
+            <span class="tag-item tag-disease">凝血功能障碍</span>
+            <span class="tag-item tag-disease">横纹肌溶解综合征</span>
+            <span class="tag-item tag-disease">高钙血症</span>
+            <span class="tag-item tag-disease">高钾血症</span>
+            <span class="tag-item tag-disease">代谢性酸中毒</span>
+            <span class="tag-item tag-disease">张力性气胸</span>
+            <span class="tag-item tag-disease">大量血胸</span>
+            <span class="tag-item tag-disease">急性心脏压塞</span>
+        </div>
+        
+        <div class="tag-category">
+            <span class="tag-label">药物/治疗：</span><br>
+            <span class="tag-item tag-drug">气管插管</span>
+            <span class="tag-item tag-drug">液体复苏</span>
+            <span class="tag-item tag-drug">替代治疗</span>
+            <span class="tag-item tag-drug">镇痛镇静</span>
+            <span class="tag-item tag-drug">脱水治疗</span>
+            <span class="tag-item tag-drug">高压氧治疗</span>
+            <span class="tag-item tag-drug">液体治疗</span>
+            <span class="tag-item tag-drug">碱化尿液</span>
+            <span class="tag-item tag-drug">血液净化治疗</span>
+            <span class="tag-item tag-drug">连续血液滤过</span>
+            <span class="tag-item tag-drug">CVVH</span>
+            <span class="tag-item tag-drug">连续透析滤过</span>
+            <span class="tag-item tag-drug">CVVHDF</span>
+            <span class="tag-item tag-drug">环甲膜穿刺</span>
+            <span class="tag-item tag-drug">补液扩容</span>
+            <span class="tag-item tag-drug">紧急输血</span>
+        </div>
+        
+        <div class="tag-category">
+            <span class="tag-label">细菌：</span><br>
+            <span class="tag-item tag-bacteria">（本页无细菌相关）</span>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <div class="footer">
+        急诊疾病 · 热射病/创伤 · 第294页
+    </div>
+    
+    <script>
+        // 设置复制框内容
+        const title = "热射病急诊处理与创伤早期处理";
+        const subtitle = "急诊疾病|热射病急诊处理|创伤定义|处理原则|ABCDE评估";
+        const keywords = "热射病;创伤;MAP;CVVH;CVVHDF;ABCDE;气管插管;张力性气胸;血胸;心脏压塞;高压氧;横纹肌溶解;液体复苏;替代治疗;镇痛镇静;脱水治疗;碱化尿液;血液净化;连续血液滤过;连续透析滤过;环甲膜穿刺;补液扩容;紧急输血;多发伤;意识障碍;凝血功能障碍;高钙血症;高钾血症;代谢性酸中毒";
+        const pageNum = "306";
+        document.getElementById('copyInput').value = title + ";" + subtitle + ";" + keywords + "=306";
+        
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        let isFavorited = false;
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            isFavorited = !isFavorited;
+            
+            if (isFavorited) {
+                btn.textContent = '❤ 已收藏';
+                btn.classList.add('active');
+                
+                // 保存到localStorage模拟添加到index收藏
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const currentPage = {
+                    title: '~~~~~热射病急诊处理与创伤早期处理*****',
+                    url: '306.html',
+                    category: '急诊疾病',
+                    date: new Date().toISOString()
+                };
+                
+                // 避免重复
+                const exists = favorites.some(f => f.url === currentPage.url);
+                if (!exists) {
+                    favorites.push(currentPage);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                alert('已添加到收藏！请在 index.html 收藏类目查看');
+            } else {
+                btn.textContent = '⭐ 收藏';
+                btn.classList.remove('active');
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '306.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            if (favorites.some(f => f.url === '306.html')) {
+                isFavorited = true;
+                const btn = document.getElementById('favBtn');
+                btn.textContent = '❤ 已收藏';
+                btn.classList.add('active');
+            }
+        };
+    </script>
+</body>
+</html>
