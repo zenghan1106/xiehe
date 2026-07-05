@@ -1,0 +1,500 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>黏液性水肿昏迷</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 15px;
+        }
+
+        /* 返回首页按钮 */
+        .back-home {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 100;
+        }
+
+        .back-home a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #4a90d9;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        .back-home a:hover {
+            background-color: #357abd;
+        }
+
+        /* 上一页下一页按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+
+        .nav-buttons a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #4a90d9;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        .nav-buttons a:hover {
+            background-color: #357abd;
+        }
+
+        /* 收藏按钮 */
+        .favorite-btn {
+            position: fixed;
+            top: 130px;
+            right: 15px;
+            z-index: 100;
+        }
+
+        .favorite-btn button {
+            padding: 8px 16px;
+            background-color: #e67e22;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        .favorite-btn button:hover {
+            background-color: #d35400;
+        }
+
+        /* 标题样式 */
+        .page-title {
+            text-align: center;
+            margin: 60px 0 25px 0;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .page-title::before {
+            content: "~~~~~";
+            color: #4a90d9;
+            margin-right: 10px;
+        }
+
+        .page-title::after {
+            content: "*****";
+            color: #4a90d9;
+            margin-left: 10px;
+        }
+
+        /* 表格样式 */
+        table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 25px auto;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* 表头 */
+        thead th {
+            background-color: #4a90d9;
+            color: white;
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* 表格内容 */
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e8ecf1;
+            vertical-align: top;
+            font-size: 15px;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        /* 子标题加粗 */
+        .section-title {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 16px;
+        }
+
+        /* 列表项 */
+        .list-item {
+            margin: 6px 0;
+            padding-left: 5px;
+        }
+
+        .check-item {
+            margin: 4px 0;
+            padding-left: 15px;
+            color: #555;
+        }
+
+        .check-item::before {
+            content: "✓ ";
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        /* 页码显示 */
+        .page-number {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        /* 标签区域 */
+        .tags-section {
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            background-color: #e3f2fd;
+            color: #1976d2;
+            border-radius: 16px;
+            font-size: 13px;
+            border: 1px solid #bbdefb;
+        }
+
+        /* 编辑框区域 */
+        .copy-section {
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .copy-section input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .copy-section button {
+            padding: 10px 20px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .copy-section button:hover {
+            background-color: #219a52;
+        }
+
+        /* 关键词区域 */
+        .keywords-section {
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            text-align: center;
+        }
+
+        .keywords-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .keywords-content {
+            font-size: 13px;
+            color: #888;
+        }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .page-title {
+                font-size: 18px;
+                margin-top: 70px;
+            }
+
+            thead th {
+                font-size: 16px;
+                padding: 12px 10px;
+            }
+
+            tbody td {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .nav-buttons {
+                top: 10px;
+                right: 10px;
+            }
+
+            .nav-buttons a {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+
+            .back-home {
+                top: 10px;
+                left: 10px;
+            }
+
+            .back-home a {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+
+            .favorite-btn {
+                top: 110px;
+                right: 10px;
+            }
+
+            .favorite-btn button {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+
+            .copy-section {
+                flex-direction: column;
+            }
+
+            .copy-section input {
+                width: 100%;
+            }
+
+            .copy-section button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 返回首页按钮 -->
+    <div class="back-home">
+        <a href="index.html">返回首页</a>
+    </div>
+
+    <!-- 上一页下一页按钮 -->
+    <div class="nav-buttons">
+        <a href="243.html">上一页</a>
+        <a href="245.html">下一页</a>
+    </div>
+
+    <!-- 收藏按钮 -->
+    <div class="favorite-btn">
+        <button onclick="addToFavorite()">⭐ 收藏</button>
+    </div>
+
+    <!-- 标题 -->
+    <h1 class="page-title">黏液性水肿昏迷</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：黏液性水肿昏迷</div>
+
+    <!-- 主表格 -->
+    <table>
+        <thead>
+            <tr>
+                <th>黏液性水肿昏迷</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="section-title">1. 定义</div>
+                    <div class="list-item">• 黏液性水肿昏迷指重度甲状腺功能减退症（简称甲减）导致的精神状态下降、低体温及多器官功能减慢相关的其他症状。</div>
+                    <div class="list-item">• 是内分泌科急症，病死率可达30%～50%。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="section-title">2. 危险因素</div>
+                    <div class="list-item">• 老年女性最常受累。</div>
+                    <div class="list-item">• 长期重度甲减的极端表现。</div>
+                    <div class="list-item">• 急性事件诱发的表现，如感染、心肌梗死、寒冷暴露、手术或使用镇静药（尤其是阿片类药物）。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="section-title">3. 临床表现</div>
+                    <div class="list-item">• 神经系统表现</div>
+                    <div class="check-item">轻度意识改变常见，表现为意识模糊伴嗜睡和意识混沌。</div>
+                    <div class="check-item">也可能出现较活跃的表现，具有突出的精神病性特征。</div>
+                    <div class="check-item">若不治疗可进展为昏迷。</div>
+                    <div class="list-item">• 低体温。</div>
+                    <div class="list-item">• 黏液性水肿。</div>
+                    <div class="list-item">• 心血管异常</div>
+                    <div class="check-item">重度甲减可有心动过缓、心肌收缩力下降和心输出量降低，有时可致低血压。</div>
+                    <div class="check-item">可能存在心包积液，可有心音减弱、心电图低电压，胸片显示心影增大。</div>
+                    <div class="list-item">• 通气不足。</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="section-title">4. 必做检查</div>
+                    <div class="list-item">• 甲功</div>
+                    <div class="check-item">血清T₄浓度通常很低。</div>
+                    <div class="check-item">若血清TSH浓度较高，表明存在原发性甲减。</div>
+                    <div class="check-item">若血清TSH浓度较低、正常或略高，表明存在中枢性甲减。</div>
+                    <div class="check-item">大多数黏液性水肿昏迷患者存在原发性甲减。</div>
+                    <div class="list-item">• 肾上腺皮质功能检查：ACTH、血清皮质醇，以除外肾上腺皮质功能不全。</div>
+                    <div class="list-item">• 血糖检测：常有低血糖。</div>
+                    <div class="list-item">• 肝肾功能＋电解质检测：多合并低钠血症。</div>
+                    <div class="list-item">• ABG：通气不足通常导致呼吸性酸中毒和高碳酸血症。</div>
+                    <div class="list-item">• 头颅CT：除外颅内疾病所致意识障碍。</div>
+                    <div class="list-item">• 超声心动图：评价心功能，是否存在心包积液（大部分患者存在心包积液，部分患者甚至存在大量心包积液）。</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- 页码 -->
+    <div class="page-number">232</div>
+
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签：</div>
+        <div class="tags-container">
+            <span class="tag">黏液性水肿昏迷</span>
+            <span class="tag">甲减</span>
+            <span class="tag">甲状腺功能减退症</span>
+            <span class="tag">低体温</span>
+            <span class="tag">心包积液</span>
+            <span class="tag">原发性甲减</span>
+            <span class="tag">中枢性甲减</span>
+            <span class="tag">低血糖</span>
+            <span class="tag">低钠血症</span>
+            <span class="tag">呼吸性酸中毒</span>
+            <span class="tag">高碳酸血症</span>
+            <span class="tag">心动过缓</span>
+            <span class="tag">低血压</span>
+            <span class="tag">意识障碍</span>
+            <span class="tag">阿片类药物</span>
+            <span class="tag">镇静药</span>
+            <span class="tag">T₄</span>
+            <span class="tag">TSH</span>
+            <span class="tag">ACTH</span>
+            <span class="tag">皮质醇</span>
+        </div>
+    </div>
+
+    <!-- 编辑框和复制按钮 -->
+    <div class="copy-section">
+        <input type="text" id="copyText" value="黏液性水肿昏迷；甲减；甲状腺功能减退症；低体温；心包积液；原发性甲减；中枢性甲减；低血糖；低钠血症；呼吸性酸中毒；高碳酸血症；心动过缓；低血压；意识障碍；=232" readonly>
+        <button onclick="copyToClipboard()">复制</button>
+    </div>
+
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">关键词</div>
+        <div class="keywords-content">232</div>
+    </div>
+
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            var copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            }).catch(function() {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            });
+        }
+
+        // 添加到收藏
+        function addToFavorite() {
+            var title = "黏液性水肿昏迷";
+            var url = window.location.href;
+            
+            // 尝试使用localStorage存储收藏信息
+            var favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已存在
+            var exists = favorites.some(function(item) {
+                return item.url === url;
+            });
+            
+            if (exists) {
+                alert("该页面已在收藏夹中！");
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                category: "急诊疾病"
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert("已添加到收藏！请在首页查看。");
+        }
+    </script>
+
+</body>
+</html>
