@@ -1,0 +1,502 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊常用止血药物的使用*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.7;
+            padding-bottom: 40px;
+        }
+        .header {
+            background-color: #fff;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .back-btn {
+            background-color: #1976D2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        .back-btn:hover {
+            background-color: #1565C0;
+        }
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        .nav-btn {
+            background-color: #43A047;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        .nav-btn:hover {
+            background-color: #388E3C;
+        }
+        .fav-btn {
+            background-color: #FF8F00;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .fav-btn:hover {
+            background-color: #F57C00;
+        }
+        .fav-btn.active {
+            background-color: #E53935;
+        }
+        .title {
+            text-align: center;
+            padding: 28px 15px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #0D47A1;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-top: -15px;
+            margin-bottom: 20px;
+            padding: 0 15px;
+        }
+        .table-container {
+            margin: 0 15px;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        thead {
+            background-color: #1565C0;
+            color: white;
+        }
+        thead th {
+            padding: 18px 14px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+        }
+        tbody td {
+            padding: 14px 14px;
+            border-bottom: 1px solid #e8eaf6;
+            font-size: 14px;
+            vertical-align: top;
+        }
+        tbody tr:hover {
+            background-color: #f5f7ff;
+        }
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .section-title {
+            background-color: #e8eaf6;
+            color: #1565C0;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .drug-name {
+            color: #0D47A1;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        .highlight-box {
+            background-color: #e3f2fd;
+            padding: 14px;
+            border-radius: 8px;
+            margin: 8px 0;
+            border-left: 4px solid #1976D2;
+        }
+        .source-note {
+            background-color: #fff3e0;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 4px solid #FF8F00;
+            font-style: italic;
+            color: #E65100;
+        }
+        .author {
+            text-align: right;
+            color: #666;
+            font-size: 13px;
+            padding: 10px 0;
+        }
+        .tags-section {
+            margin: 28px 15px;
+            padding: 22px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        }
+        .tags-title {
+            font-size: 17px;
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .tag {
+            display: inline-block;
+            background-color: #e8eaf6;
+            color: #1565C0;
+            padding: 7px 16px;
+            border-radius: 24px;
+            font-size: 13px;
+            margin: 5px;
+            border: 1px solid #c5cae9;
+            transition: all 0.3s;
+        }
+        .tag:hover {
+            background-color: #1565C0;
+            color: white;
+        }
+        .copy-section {
+            margin: 28px 15px;
+            padding: 22px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        }
+        .copy-title {
+            font-size: 17px;
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .copy-box {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 14px;
+            border: 2px solid #c5cae9;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        #copyInput:focus {
+            border-color: #1565C0;
+        }
+        #copyBtn {
+            background-color: #43A047;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+        #copyBtn:hover {
+            background-color: #388E3C;
+        }
+        .page-number {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 15px;
+            color: #555;
+            font-weight: 500;
+        }
+        .keywords {
+            text-align: center;
+            margin-top: 16px;
+            font-size: 13px;
+            color: #777;
+            padding: 0 15px;
+            line-height: 1.8;
+        }
+        @media (max-width: 600px) {
+            .title {
+                font-size: 19px;
+                padding: 20px 10px;
+            }
+            .subtitle {
+                font-size: 12px;
+            }
+            thead th {
+                font-size: 16px;
+                padding: 14px 10px;
+            }
+            tbody td {
+                padding: 12px 10px;
+                font-size: 13px;
+            }
+            .header {
+                padding: 10px 12px;
+            }
+            .back-btn, .nav-btn, .fav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            .table-container {
+                margin: 0 10px;
+            }
+            .tags-section, .copy-section {
+                margin: 20px 10px;
+                padding: 16px;
+            }
+            .copy-box {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            #copyInput {
+                width: 100%;
+            }
+            #copyBtn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="391.html" class="nav-btn">上一页</a>
+            <a href="393.html" class="nav-btn">下一页</a>
+            <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+        </div>
+    </div>
+
+    <div class="title">~~~~~急诊常用止血药物的使用*****</div>
+    <div class="subtitle">——摘自《非创伤性出血的急诊处理专家共识/意见》</div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">急诊止血药物详细说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        <div class="highlight-box">
+                            <span class="drug-name">磷酸</span><br>
+                            静脉注射开始20mg，如在1～2分钟内无效，可给予40mg。
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="highlight-box">
+                            <span class="drug-name">阿托品</span><br>
+                            第一次0.5mg静脉注射，必要时每3～5分钟重复使用，最大剂量2mg/次。
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="highlight-box">
+                            <span class="drug-name">毛花苷丙</span><br>
+                            0.4mg稀释后缓慢静脉注射。2小时无效可再给0.2～0.4mg。
+                        </div>
+                        <div class="author">（刘 霜）</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">
+                        ■ 急诊常用止血药物的使用
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="source-note">
+                            ——摘自《非创伤性出血的急诊处理专家共识/意见》
+                        </div>
+                        急诊出血时，需要在紧急评估和初步处理稳定之后，立即对患者进行全面评估，针对不同部位、病因的出血，有针对性地给予处理，包括内科保守治疗（如对上消化道出血患者使用质子泵抑制剂，对咯血患者使用酚妥拉明等）、介入栓塞治疗、外科手术治疗。同时，对部分出血可以考虑使用作用于血液系统本身的止血药物。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">
+                        1. 促进凝血系统功能的药物
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="drug-name">● 补充凝血因子类药物</span><br>
+                        大量出血会导致凝血因子消耗性降低，尤其在有肝病基础的患者，会出现明显的凝血功能障碍，加重出血治疗的难度，应予积极补充凝血因子。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="highlight-box">
+                            <span class="drug-name">✓ 新鲜冰冻血浆（FFP）</span><br>
+                            含有单位原血中所含的全部凝血因子和其他蛋白质，是急性出血伴凝血异常患者的合理选择。大多数成人通常血浆输注的剂量为10～15ml/kg（即800～1200ml）。在实际工作中，危重或大量出血患者根据临床反应、之前的异常凝血时间是否适当缩短以及缺乏或减少的凝血因子的半衰期，可能需要重复输注血浆。而有时FFP效果受限通常是由于过敏的风险、输血传染疾病的风险、大量输注导致的容量负荷过重风险以及获得所需时间等的限制。
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="highlight-box">
+                            <span class="drug-name">✓ 人凝血酶原复合物（PCC）</span><br>
+                            又称因子Ⅸ复合物，是血浆来源的凝血因子提取物，最初被用于治疗因子Ⅸ缺乏。PCC还含有因子Ⅱ、Ⅶ和Ⅹ，因此，PCC更加被推荐用于纠正华法林引起的凝血异常。PCC的优点在于易于给药，代谢快且可迅速应用，凝血因子浓度高而体积小，且不会引起像FFP所造成的容量负荷，不会造成传染性疾病传播。PCC常在给药后10分钟内使INR正常化，这比单纯输注FFP或维生素K更迅速。然而，对于所有华法林相关脑出血患者都应给予维生素K，因为PCC的作用较短暂（数小时）。一般PCC的使用剂量为1500～2000U，以100U/min的速度进
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center; color: #666; font-size: 13px; padding: 16px;">— 第383页 —</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div>
+            <span class="tag">出血</span>
+            <span class="tag">急诊出血</span>
+            <span class="tag">上消化道出血</span>
+            <span class="tag">咯血</span>
+            <span class="tag">脑出血</span>
+            <span class="tag">华法林</span>
+            <span class="tag">凝血异常</span>
+            <span class="tag">凝血功能障碍</span>
+            <span class="tag">肝病</span>
+            <span class="tag">过敏</span>
+            <span class="tag">传染性疾病</span>
+            <span class="tag">磷酸</span>
+            <span class="tag">阿托品</span>
+            <span class="tag">毛花苷丙</span>
+            <span class="tag">质子泵抑制剂</span>
+            <span class="tag">酚妥拉明</span>
+            <span class="tag">新鲜冰冻血浆</span>
+            <span class="tag">FFP</span>
+            <span class="tag">人凝血酶原复合物</span>
+            <span class="tag">PCC</span>
+            <span class="tag">维生素K</span>
+            <span class="tag">凝血因子</span>
+            <span class="tag">因子Ⅱ</span>
+            <span class="tag">因子Ⅶ</span>
+            <span class="tag">因子Ⅸ</span>
+            <span class="tag">因子Ⅹ</span>
+            <span class="tag">INR</span>
+        </div>
+    </div>
+
+    <div class="copy-section">
+        <div class="copy-title">📋 复制信息</div>
+        <div class="copy-box">
+            <input type="text" id="copyInput" value="急诊常用止血药物的使用；促进凝血系统功能的药物；补充凝血因子类药物；新鲜冰冻血浆；人凝血酶原复合物；磷酸；阿托品；毛花苷丙；出血；急诊出血；上消化道出血；咯血；脑出血；华法林；凝血异常；凝血功能障碍；肝病；过敏；传染性疾病；质子泵抑制剂；酚妥拉明；FFP；PCC；维生素K；凝血因子；因子Ⅱ；因子Ⅶ；因子Ⅸ；因子Ⅹ；INR；=383" readonly>
+            <button id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+
+    <div class="page-number">页码：383</div>
+    <div class="keywords">关键词：急诊止血 | 出血 | 上消化道出血 | 咯血 | 脑出血 | 华法林 | 凝血异常 | 凝血功能障碍 | 肝病 | 磷酸 | 阿托品 | 毛花苷丙 | 质子泵抑制剂 | 酚妥拉明 | 新鲜冰冻血浆 | FFP | 人凝血酶原复合物 | PCC | 维生素K | 凝血因子 | 因子Ⅱ | 因子Ⅶ | 因子Ⅸ | 因子Ⅹ | INR | 刘霜 | 非创伤性出血</div>
+
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '✓ 已复制!';
+                btn.style.backgroundColor = '#1976D2';
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.style.backgroundColor = '#43A047';
+                }, 2000);
+            });
+        }
+
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '急诊常用止血药物的使用',
+                    url: '383.html',
+                    pageNum: '383',
+                    category: '急诊止血药物'
+                };
+                
+                const exists = favorites.some(f => f.url === pageInfo.url);
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                alert('已添加到收藏！请在首页查看。');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '383.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '383.html');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
