@@ -1,0 +1,443 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~糖皮质激素急诊应用*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #4a90d9;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            z-index: 100;
+        }
+        
+        .home-btn:hover {
+            background-color: #357abd;
+        }
+        
+        /* 右上角导航 */
+        .nav-right {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-right a {
+            background-color: #4a90d9;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+        }
+        
+        .nav-right a:hover {
+            background-color: #357abd;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background-color: #e67e22 !important;
+        }
+        
+        .fav-btn:hover {
+            background-color: #d35400 !important;
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            font-size: 24px;
+            color: #2c3e50;
+            margin: 70px 0 30px;
+            padding: 15px;
+            background-color: #e8f4fd;
+            border-radius: 12px;
+            border-left: 5px solid #4a90d9;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        /* 表头 */
+        thead th {
+            background-color: #4a90d9;
+            color: white;
+            padding: 18px 15px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        /* 表格第一行（数据行）字体大一点 */
+        tbody tr:first-child td {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        /* 表格单元格 */
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e8ecf1;
+            font-size: 14px;
+            vertical-align: top;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            max-width: 100%;
+        }
+        
+        /* 斑马纹 */
+        tbody tr:nth-child(even) {
+            background-color: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f4fd;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #e8f4fd;
+            color: #4a90d9;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #b8d4f0;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            color: #4a90d9;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        /* 关键词 */
+        .keywords-section {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff8e1;
+            border-radius: 8px;
+        }
+        
+        .keywords {
+            color: #e67e22;
+            font-size: 14px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            max-width: calc(100vw - 140px);
+        }
+        
+        #copyInput {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #4a90d9;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+            background-color: #f8fbff;
+        }
+        
+        #copyBtn {
+            padding: 12px 25px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        #copyBtn:hover {
+            background-color: #219a52;
+        }
+        
+        #copyBtn.copied {
+            background-color: #7f8c8d;
+        }
+        
+        /* 手机适配 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 18px;
+                margin: 80px 0 20px;
+            }
+            
+            .home-btn, .nav-right a {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 14px 10px;
+            }
+            
+            td {
+                padding: 12px 10px;
+                font-size: 13px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 14px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+                max-width: calc(100vw - 40px);
+            }
+            
+            #copyInput {
+                width: 100%;
+            }
+            
+            #copyBtn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 右上角导航 -->
+    <div class="nav-right">
+        <a href="368.html">上一页</a>
+        <a href="370.html">下一页</a>
+        <a href="javascript:void(0)" class="fav-btn" onclick="addToFavorites()">⭐ 收藏</a>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~糖皮质激素急诊应用*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>疾病/情况</th>
+                    <th>建议与用法及剂量</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>重症哮喘发作（危及生命）</td>
+                    <td>初始常给予更大剂量的糖皮质激素。氢化可的松400～1000mg/d，分2～3次给药，或甲泼尼龙40～80mg q12h。初始超大剂量（如甲泼尼龙500mg快速静脉给予）并不比初始大剂量（甲泼尼龙125mg）更有效。几乎所有需急诊重症哮喘发作都需序贯使用5～10天的口服糖皮质激素。多数重度发作需要10～14天缓解（肺功能恢复至基线）。</td>
+                </tr>
+                <tr>
+                    <td>过敏性重症药疹（SJS/TEN）</td>
+                    <td>建议：全身性糖皮质激素治疗重症的药物过敏性皮疹导致的Stevens-Johnson综合征（SJS）和中毒性表皮坏死松解症（TEN）的作用仍不清楚，需要个体化权衡利弊使用。
+用法及剂量：如需使用，建议：泼尼松1～2mg/(kg·d)，连续3～5天。必要时可静脉冲击治疗，甲泼尼龙1000mg/d，连续静脉滴注3～5天，但需注意感染的副作用。</td>
+                </tr>
+                <tr>
+                    <td>过敏性紫癜</td>
+                    <td>建议：对于重度腹痛无法经口摄食且NSAID治疗无效的过敏性紫癜患者，建议予以全身性糖皮质激素。不推荐经验性应用糖皮质激素预防肾脏或胃肠道并发症。
+糖皮质激素治疗有潜在副作用，包括在肠套叠发生后开始治疗有掩盖肠道活力受损征象，以及掩盖发热和疼痛征象的风险。因此对采用糖皮质激素治疗重度腹痛的患者需保持高度警觉。
+用法及剂量：静脉给予氢化可的松200～300mg/d，或甲泼尼龙0.8～1.6mg/(kg·d)。对于能耐受口服药物的患者，可口服给予等效剂量的泼尼松。减量时必须缓慢，通常需要4～8周。</td>
+                </tr>
+                <tr>
+                    <td>系统性红斑狼疮（SLE）- 急性狼疮活动</td>
+                    <td>建议：所有活动性SLE患者都需要使用糖皮质激素。
+用法及剂量：通常为泼尼松0.5～1mg/(kg·d)，诱导缓解6～8周后糖皮质激素逐渐减到维持量。</td>
+                </tr>
+                <tr>
+                    <td>系统性红斑狼疮（SLE）- 狼疮危象</td>
+                    <td>通常需大剂量糖皮质激素冲击治疗。甲泼尼龙500～1000mg/d，连续3天，序贯泼尼松0.5～1mg/(kg·d)，疗程4～8周。对重症神经精神狼疮，包括横贯性脊髓炎在内，在排除中枢感染的情况下，可鞘内注射。</td>
+                </tr>
+                <tr>
+                    <td>一般用法（无法口服患者）</td>
+                    <td>5～7天。无法口服的患者应静脉用糖皮质激素，可考虑氢化可的松100mg q6h。但当患者能够耐受和吸收口服药时，糖皮质激素即可从胃肠外给予转为口服。</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">369</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <span class="keywords">关键词：糖皮质激素；急诊用药；氢化可的松；甲泼尼龙；泼尼松；哮喘；过敏性药疹；过敏性紫癜；系统性红斑狼疮；SJS；TEN；NSAID；狼疮危象</span>
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div class="tags-container">
+            <span class="tag">哮喘</span>
+            <span class="tag">过敏性重症药疹</span>
+            <span class="tag">Stevens-Johnson综合征</span>
+            <span class="tag">SJS</span>
+            <span class="tag">中毒性表皮坏死松解症</span>
+            <span class="tag">TEN</span>
+            <span class="tag">过敏性紫癜</span>
+            <span class="tag">系统性红斑狼疮</span>
+            <span class="tag">SLE</span>
+            <span class="tag">狼疮危象</span>
+            <span class="tag">氢化可的松</span>
+            <span class="tag">甲泼尼龙</span>
+            <span class="tag">泼尼松</span>
+            <span class="tag">NSAID</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" id="copyInput" value="糖皮质激素急诊应用；急诊用药；糖皮质激素；氢化可的松；甲泼尼龙；泼尼松；哮喘；过敏性药疹；过敏性紫癜；系统性红斑狼疮；SJS；TEN；NSAID；狼疮危象=369" readonly>
+        <button id="copyBtn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.textContent;
+            btn.textContent = '已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            // 获取当前页面信息
+            const title = document.querySelector('.main-title').textContent.trim();
+            const pageNum = '369';
+            const currentUrl = window.location.href;
+            
+            // 从localStorage获取收藏列表
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === currentUrl);
+            if (exists) {
+                alert('该页面已在收藏中！');
+                return;
+            }
+            
+            // 添加收藏
+            favorites.push({
+                title: title,
+                url: currentUrl,
+                pageNum: pageNum,
+                category: '急诊用药'
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试更新index.html的收藏（同源策略限制，仅演示）
+            alert('已添加到收藏！\n标题：' + title + '\n页码：' + pageNum);
+            
+            // 如果index.html在同一目录，可以尝试通过localStorage传递
+            localStorage.setItem('newFavorite', JSON.stringify({
+                title: title,
+                url: '369.html',
+                pageNum: pageNum,
+                category: '急诊用药'
+            }));
+        }
+    </script>
+</body>
+</html>
