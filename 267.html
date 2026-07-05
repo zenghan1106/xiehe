@@ -1,0 +1,566 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~乳酸酸中毒*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 20px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 导航按钮区域 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #5a6c7d;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(90, 108, 125, 0.3);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .nav-btn:hover {
+            background: #4a5a6a;
+            transform: translateY(-2px);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #e8a838;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(232, 168, 56, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .fav-btn:hover {
+            background: #d49a2e;
+            transform: translateY(-2px);
+        }
+        
+        .fav-btn.active {
+            background: #c9302c;
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 70px 15px 20px;
+        }
+        
+        /* 标题样式 */
+        .main-title {
+            text-align: center;
+            color: #2c5282;
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        /* 表格样式 */
+        .medical-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        .medical-table thead {
+            background: #2b6cb0;
+            color: white;
+        }
+        
+        .medical-table th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .medical-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 15px;
+            vertical-align: top;
+        }
+        
+        .medical-table tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        .medical-table tr:hover {
+            background: #edf2f7;
+        }
+        
+        /* 内容分区样式 */
+        .section-header {
+            background: #bee3f8;
+            color: #2c5282;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .subsection {
+            padding-left: 20px;
+            color: #4a5568;
+        }
+        
+        .check-item {
+            color: #2f855a;
+        }
+        
+        .bullet-item {
+            color: #2d3748;
+        }
+        
+        /* 页码显示 */
+        .page-number {
+            text-align: center;
+            color: #718096;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+        
+        /* 底部编辑框区域 */
+        .copy-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        .copy-box {
+            width: calc(100% - 90px);
+            padding: 12px;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #4a5568;
+            resize: none;
+            height: 60px;
+        }
+        
+        .copy-btn {
+            width: 80px;
+            height: 60px;
+            background: #48bb78;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            float: right;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: #38a169;
+        }
+        
+        .copy-btn.copied {
+            background: #2f855a;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        .tags-title {
+            color: #2c5282;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #fed7d7;
+            color: #c53030;
+        }
+        
+        .tag-drug {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .tag-bacteria {
+            background: #bee3f8;
+            color: #2c5282;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        
+        .keywords-title {
+            color: #2c5282;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .keywords {
+            color: #4a5568;
+            font-size: 14px;
+            line-height: 2;
+        }
+        
+        /* 清除浮动 */
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .container {
+                padding: 65px 10px 15px;
+            }
+            
+            .main-title {
+                font-size: 20px;
+            }
+            
+            .medical-table th {
+                font-size: 16px;
+                padding: 12px 8px;
+            }
+            
+            .medical-table td {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            
+            .copy-box {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            .copy-btn {
+                width: 100%;
+                float: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <button class="home-btn" onclick="window.location.href='index.html'">← 返回首页</button>
+    
+    <!-- 右上角导航按钮 -->
+    <div class="nav-buttons">
+        <button class="nav-btn" onclick="window.location.href='266.html'">← 上一页</button>
+        <button class="nav-btn" onclick="window.location.href='268.html'">下一页 →</button>
+        <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+    </div>
+    
+    <div class="container">
+        <!-- 标题 -->
+        <h1 class="main-title">~~~~~乳酸酸中毒*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~乳酸酸中毒*****、低钙血症治疗要点与乳酸酸中毒、钙剂输注注意事项、钙剂输注不宜过快，否则可能导致严重心律失常或心功能不全。、必要时内分泌科专科会诊，协助诊治。（刘 洋）、乳酸酸中毒、1. 定义、乳酸酸中毒定义为血清乳酸浓度＞4mmol/L。、正常血乳酸浓度为0.5～1.5mmol/L。、2. 病因及临床表现、A型乳酸酸中毒：组织氧合明显受损。、常见病因：低血容量、心力衰竭、脓毒症、呼吸心搏骤停所致组织灌注严重不足。、B型乳酸酸中毒：全身灌注不足的证据不明显。、可能机制：毒素诱导的细胞代谢障碍及局部缺血。、病因：短肠综合征或其他原因所致胃肠道吸收不良，快速大量摄入丙二醇，DKA。</div>
+        
+        <!-- 主表格 -->
+        <table class="medical-table">
+            <thead>
+                <tr>
+                    <th colspan="2">低钙血症治疗要点与乳酸酸中毒</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2" class="section-header">钙剂输注注意事项</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="check-item">✓ 钙剂输注不宜过快，否则可能导致严重心律失常或心功能不全。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="bullet-item">● 慢性或有轻微神经肌肉易激惹症状（感觉异常）且校正后血钙＞1.9mmol/L者：碳酸钙500～1000mg tid po，联合服用维生素D。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="bullet-item">● 继发于短暂或永久性甲旁减或维生素D缺乏的低钙血症：补钙只有短暂效果（需要不停输注），且口服补钙不易吸收。只有加用维生素D才能治疗成功，且通常还可降低补钙剂量。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="bullet-item">● 肾功能受损的无症状性低钙血症：初始治疗不需要静脉补钙，首要目标通常是纠正高磷血症和循环1,25（OH）₂维生素D低下。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="bullet-item">● 低镁血症合并低钙血症：只有先纠正低镁才能有效纠正低钙。硫酸镁1～2g入液或联合门冬氨酸钾镁，注意监测。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="bullet-item">● 必要时内分泌科专科会诊，协助诊治。（刘 洋）</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-header" style="background: #2b6cb0; color: white; font-size: 18px;">■ 乳酸酸中毒</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-header">1. 定义</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="bullet-item">● 乳酸酸中毒定义为血清乳酸浓度＞4mmol/L。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="bullet-item">● 正常血乳酸浓度为0.5～1.5mmol/L。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-header">2. 病因及临床表现</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="bullet-item">● A型乳酸酸中毒：组织氧合明显受损。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="check-item subsection">✓ 常见病因：低血容量、心力衰竭、脓毒症、呼吸心搏骤停所致组织灌注严重不足。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="check-item subsection">✓ 临床表现：体循环血压降低、肢端湿冷（脓毒症休克等高动力型休克患者早期可有皮肤潮红）、少尿或无尿、精神状态改变。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="bullet-item">● B型乳酸酸中毒：全身灌注不足的证据不明显。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="check-item subsection">✓ 可能机制：毒素诱导的细胞代谢障碍及局部缺血。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="check-item subsection">✓ 常见病因：糖尿病（见于采用二甲双胍治疗的2型糖尿病、DKA、D-乳酸积聚）、恶性肿瘤（包括白血病、淋巴瘤、恶性实体肿瘤）、酗酒、HIV感染、应用β受体激动药、线粒体功能障碍（包括先天性线粒体缺陷）、药物（如抗反转录病毒药物、丙泊酚、利奈唑胺等）诱导的线粒体功能障碍。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="bullet-item">● D-乳酸酸中毒：罕见，L-乳酸是人类产生的主要异构体，D-乳酸是L-乳酸的立体异构体。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="check-item subsection">✓ 病因：短肠综合征或其他原因所致胃肠道吸收不良，快速大量摄入丙二醇，DKA。</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 页码 -->
+        <div class="page-number">页码：255</div>
+        
+        <!-- 复制编辑框 -->
+        <div class="copy-section">
+            <div class="clearfix">
+                <textarea class="copy-box" id="copyText" readonly>乳酸酸中毒；低钙血症；A型乳酸酸中毒；B型乳酸酸中毒；D-乳酸酸中毒；=255</textarea>
+                <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+            </div>
+        </div>
+        
+        <!-- 特色检索标签 -->
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 特色检索标签</div>
+            <div>
+                <span class="tag tag-disease" onclick="searchTag('乳酸酸中毒')">乳酸酸中毒</span>
+                <span class="tag tag-disease" onclick="searchTag('低钙血症')">低钙血症</span>
+                <span class="tag tag-disease" onclick="searchTag('A型乳酸酸中毒')">A型乳酸酸中毒</span>
+                <span class="tag tag-disease" onclick="searchTag('B型乳酸酸中毒')">B型乳酸酸中毒</span>
+                <span class="tag tag-disease" onclick="searchTag('D-乳酸酸中毒')">D-乳酸酸中毒</span>
+                <span class="tag tag-disease" onclick="searchTag('脓毒症')">脓毒症</span>
+                <span class="tag tag-disease" onclick="searchTag('休克')">休克</span>
+                <span class="tag tag-disease" onclick="searchTag('心力衰竭')">心力衰竭</span>
+                <span class="tag tag-disease" onclick="searchTag('糖尿病')">糖尿病</span>
+                <span class="tag tag-disease" onclick="searchTag('DKA')">DKA</span>
+                <span class="tag tag-disease" onclick="searchTag('恶性肿瘤')">恶性肿瘤</span>
+                <span class="tag tag-disease" onclick="searchTag('白血病')">白血病</span>
+                <span class="tag tag-disease" onclick="searchTag('淋巴瘤')">淋巴瘤</span>
+                <span class="tag tag-disease" onclick="searchTag('HIV感染')">HIV感染</span>
+                <span class="tag tag-disease" onclick="searchTag('短肠综合征')">短肠综合征</span>
+                <span class="tag tag-disease" onclick="searchTag('甲旁减')">甲旁减</span>
+                <span class="tag tag-disease" onclick="searchTag('低镁血症')">低镁血症</span>
+                <span class="tag tag-drug" onclick="searchTag('碳酸钙')">碳酸钙</span>
+                <span class="tag tag-drug" onclick="searchTag('维生素D')">维生素D</span>
+                <span class="tag tag-drug" onclick="searchTag('硫酸镁')">硫酸镁</span>
+                <span class="tag tag-drug" onclick="searchTag('门冬氨酸钾镁')">门冬氨酸钾镁</span>
+                <span class="tag tag-drug" onclick="searchTag('二甲双胍')">二甲双胍</span>
+                <span class="tag tag-drug" onclick="searchTag('β受体激动药')">β受体激动药</span>
+                <span class="tag tag-drug" onclick="searchTag('丙泊酚')">丙泊酚</span>
+                <span class="tag tag-drug" onclick="searchTag('利奈唑胺')">利奈唑胺</span>
+                <span class="tag tag-drug" onclick="searchTag('抗反转录病毒药物')">抗反转录病毒药物</span>
+                <span class="tag tag-drug" onclick="searchTag('丙二醇')">丙二醇</span>
+            </div>
+        </div>
+        
+        <!-- 关键词 -->
+        <div class="keywords-section">
+            <div class="keywords-title">🔑 关键词</div>
+            <div class="keywords">
+                乳酸酸中毒 | 低钙血症 | A型乳酸酸中毒 | B型乳酸酸中毒 | D-乳酸酸中毒 | 血清乳酸 | 组织氧合 | 组织灌注 | 脓毒症 | 休克 | 心力衰竭 | 二甲双胍 | DKA | 恶性肿瘤 | 线粒体功能障碍 | 碳酸钙 | 维生素D | 硫酸镁 | 门冬氨酸钾镁 | 丙泊酚 | 利奈唑胺 | 短肠综合征 | 255
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand("copy");
+                const btn = document.getElementById("copyBtn");
+                btn.textContent = "已复制";
+                btn.classList.add("copied");
+                setTimeout(() => {
+                    btn.textContent = "复制";
+                    btn.classList.remove("copied");
+                }, 2000);
+            } catch(err) {
+                alert("复制失败，请手动复制");
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById("favBtn");
+            const isFav = btn.classList.contains("active");
+            
+            if (!isFav) {
+                btn.classList.add("active");
+                btn.innerHTML = "★ 已收藏";
+                
+                // 保存到localStorage
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: "乳酸酸中毒",
+                    url: "255.html",
+                    pageNum: "255",
+                    category: "内分泌代谢"
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.url === "255.html");
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                    
+                    // 尝试更新index.html的收藏（如果同域）
+                    try {
+                        updateIndexFavorite(pageInfo);
+                    } catch(e) {
+                        console.log("无法自动更新index.html，请手动添加");
+                    }
+                }
+                
+                alert("已添加到收藏！");
+            } else {
+                btn.classList.remove("active");
+                btn.innerHTML = "☆ 收藏";
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== "255.html");
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 尝试更新index.html收藏（同域情况下）
+        function updateIndexFavorite(pageInfo) {
+            // 此功能需要index.html配合，使用postMessage或共享localStorage
+            localStorage.setItem('index_update_' + Date.now(), JSON.stringify({
+                action: 'add_favorite',
+                data: pageInfo
+            }));
+        }
+        
+        // 标签搜索
+        function searchTag(tag) {
+            alert("正在搜索: " + tag);
+            // 实际应用中可跳转至搜索结果页
+            console.log("搜索标签:", tag);
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === "255.html");
+            if (isFav) {
+                const btn = document.getElementById("favBtn");
+                btn.classList.add("active");
+                btn.innerHTML = "★ 已收藏";
+            }
+        };
+    </script>
+</body>
+</html>
