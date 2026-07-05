@@ -1,0 +1,600 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊处理与急性肾损伤*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e6eef7 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #2d3748;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .back-btn {
+            background: #3182ce;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(49, 130, 206, 0.3);
+        }
+        
+        .back-btn:hover {
+            background: #2c5282;
+            transform: translateY(-2px);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #4299e1;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(66, 153, 225, 0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #3182ce;
+            transform: translateY(-1px);
+        }
+        
+        .fav-btn {
+            background: #ed8936;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(237, 137, 54, 0.3);
+        }
+        
+        .fav-btn:hover {
+            background: #dd6b20;
+            transform: translateY(-1px);
+        }
+        
+        .fav-btn.active {
+            background: #c53030;
+        }
+        
+        .main-title {
+            text-align: center;
+            font-size: 26px;
+            color: #2b6cb0;
+            margin: 15px 0 25px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.08);
+        }
+        
+        .subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #4a5568;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        thead {
+            background: #2b6cb0;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        
+        tbody td {
+            padding: 10px 12px;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+            vertical-align: top;
+            line-height: 1.7;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        tbody tr:hover {
+            background: #edf2f7;
+        }
+        
+        .section-header {
+            background: #ebf8ff !important;
+            color: #2b6cb0;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        
+        .category-cell {
+            background: #f0fff4;
+            color: #276749;
+            font-weight: 600;
+        }
+        
+        .subcategory-cell {
+            background: #fffaf0;
+            color: #c05621;
+            font-weight: 500;
+        }
+        
+        .detail-cell {
+            color: #4a5568;
+        }
+        
+        .important-note {
+            color: #c53030;
+            font-weight: 600;
+        }
+        
+        .drug-name {
+            color: #6b46c1;
+            font-weight: 600;
+        }
+        
+        .dosage {
+            color: #2d3748;
+            background: #fef3c7;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        .tags-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #4a5568;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            border: none;
+        }
+        
+        .tag-disease {
+            background: #fed7d7;
+            color: #c53030;
+        }
+        
+        .tag-disease:hover {
+            background: #fc8181;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .tag-bacteria:hover {
+            background: #68d391;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #e9d8fd;
+            color: #6b46c1;
+        }
+        
+        .tag-drug:hover {
+            background: #b794f4;
+            color: white;
+        }
+        
+        .tag-organ {
+            background: #bee3f8;
+            color: #2b6cb0;
+        }
+        
+        .tag-organ:hover {
+            background: #63b3ed;
+            color: white;
+        }
+        
+        .copy-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #4a5568;
+        }
+        
+        .copy-btn {
+            background: #48bb78;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(72, 187, 120, 0.3);
+        }
+        
+        .copy-btn:hover {
+            background: #38a169;
+        }
+        
+        .copy-btn.copied {
+            background: #805ad5;
+        }
+        
+        .page-info {
+            text-align: center;
+            margin: 20px 0;
+            color: #718096;
+            font-size: 14px;
+        }
+        
+        .keywords {
+            text-align: center;
+            margin: 15px 0 30px;
+            color: #a0aec0;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+        
+        .aki-table {
+            margin-top: 10px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .aki-table th {
+            background: #4299e1;
+            color: white;
+            padding: 10px;
+            font-size: 13px;
+        }
+        
+        .aki-table td {
+            padding: 10px;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 20px;
+            }
+            
+            .subtitle {
+                font-size: 15px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                font-size: 12px;
+                padding: 8px;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-buttons {
+                flex-direction: row;
+                justify-content: flex-end;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="146.html" class="nav-btn">上一页</a>
+            <a href="148.html" class="nav-btn">下一页</a>
+            <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <h1 class="main-title">~~~~~急诊处理与急性肾损伤*****</h1>
+    <div class="subtitle">肝硬化腹水急诊处理 | 急性肾损伤（AKI）分期</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>章节</th>
+                    <th>分类</th>
+                    <th>项目/标准</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-header">
+                    <td colspan="4">3. 急诊处理</td>
+                </tr>
+                <tr>
+                    <td rowspan="6" class="category-cell">肝硬化性腹水</td>
+                    <td rowspan="6" class="subcategory-cell">治疗措施</td>
+                    <td class="detail-cell">改善生活方式</td>
+                    <td class="detail-cell">戒酒、限钠（<span class="dosage">< 2g/d</span>）</td>
+                </tr>
+                <tr>
+                    <td class="detail-cell">利尿药</td>
+                    <td class="detail-cell"><span class="drug-name">螺内酯</span> + <span class="drug-name">呋塞米</span>（剂量按照 <span class="dosage">10:4</span> 比例配比，以减少K⁺失衡）</td>
+                </tr>
+                <tr>
+                    <td class="detail-cell">慎用药物</td>
+                    <td class="detail-cell"><span class="drug-name">ACEI</span>、<span class="drug-name">ARB</span>、<span class="drug-name">β受体阻断药</span>、<span class="drug-name">NSAID</span></td>
+                </tr>
+                <tr>
+                    <td class="detail-cell">腹水穿刺</td>
+                    <td class="detail-cell">用于张力性腹水，放液 <span class="dosage">> 5L</span> 可加用白蛋白（<span class="dosage">6 ~ 8g/L</span>）</td>
+                </tr>
+                <tr>
+                    <td class="detail-cell">—</td>
+                    <td class="detail-cell">—</td>
+                </tr>
+                <tr>
+                    <td class="detail-cell">—</td>
+                    <td class="detail-cell">—</td>
+                </tr>
+                <tr>
+                    <td class="category-cell">肿瘤性腹水</td>
+                    <td class="subcategory-cell">治疗措施</td>
+                    <td class="detail-cell">穿刺置管引流</td>
+                    <td class="detail-cell">可考虑腹腔内化疗</td>
+                </tr>
+                <tr>
+                    <td rowspan="6" class="category-cell">感染性腹水</td>
+                    <td rowspan="6" class="subcategory-cell">自发性细菌性腹膜炎</td>
+                    <td class="detail-cell">停用药物</td>
+                    <td class="detail-cell">停用非选择性<span class="drug-name">β受体阻断药</span></td>
+                </tr>
+                <tr>
+                    <td class="detail-cell">抗生素使用指征</td>
+                    <td class="detail-cell">体温 <span class="dosage">> 37.8℃</span>；腹痛/腹部压痛；精神状态改变；腹水中性粒细胞 <span class="dosage">≥ 250×10⁶/L</span></td>
+                </tr>
+                <tr>
+                    <td class="detail-cell">抗生素选择（首选）</td>
+                    <td class="detail-cell"><span class="drug-name">头孢噻肟</span> <span class="dosage">2g q8h</span>（危重者 <span class="dosage">4g q8h</span>）</td>
+                </tr>
+                <tr>
+                    <td class="detail-cell">抗生素选择（备选）</td>
+                    <td class="detail-cell"><span class="drug-name">哌拉西林/他唑巴坦</span> <span class="dosage">3.375g q6h/4.5g q8h/3.375g q8h</span>，或<span class="drug-name">厄他培南</span> <span class="dosage">1g qd</span>，疗程 <span class="dosage">5天</span></td>
+                </tr>
+                <tr>
+                    <td class="detail-cell">静脉输注人血白蛋白</td>
+                    <td class="detail-cell">指征：Cr <span class="dosage">> 88μmol/L</span> 或 BUN <span class="dosage">> 10.7mmol/L</span> 或 TBil <span class="dosage">> 46.8μmol/L</span></td>
+                </tr>
+                <tr>
+                    <td class="detail-cell">白蛋白用量</td>
+                    <td class="detail-cell">第1天 <span class="dosage">1.5g/kg</span>，第3天 <span class="dosage">1.0g/kg</span></td>
+                </tr>
+                <tr class="section-header">
+                    <td colspan="4">泌尿系统疾病急诊 — 急性肾损伤</td>
+                </tr>
+                <tr>
+                    <td rowspan="3" class="category-cell">1. 定义</td>
+                    <td rowspan="3" class="subcategory-cell">KDIGO指南</td>
+                    <td class="detail-cell">急性肾损伤（AKI）</td>
+                    <td class="detail-cell">48小时内血清Cr升高 <span class="dosage">≥ 26.5μmol/L（0.3mg/dl）</span>，或血清Cr升高至基线值的 <span class="dosage">1.5倍</span> 及以上，且这种升高已知或推测发生在之前7天内，或尿量 <span class="dosage">< 0.5ml/(kg·h)</span> 持续 <span class="dosage">6小时</span></td>
+                </tr>
+                <tr>
+                    <td class="detail-cell">AKI分期</td>
+                    <td class="detail-cell">根据KDIGO标准，AKI分期见下表</td>
+                </tr>
+                <tr>
+                    <td class="detail-cell" colspan="2">
+                        <table class="aki-table">
+                            <thead>
+                                <tr>
+                                    <th>分期</th>
+                                    <th>血肌酐</th>
+                                    <th>尿量</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>基线值的1.5 ~ 1.9倍，或 ≥ 26.5μmol/L（0.3mg/dl）</td>
+                                    <td>< 0.5ml/(kg·h)，持续6 ~ 12小时</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>基线值的2.0 ~ 2.9倍</td>
+                                    <td>< 0.5ml/(kg·h)，持续12小时及以上</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签（点击筛选）</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">肝硬化性腹水</span>
+            <span class="tag tag-disease">肿瘤性腹水</span>
+            <span class="tag tag-disease">感染性腹水</span>
+            <span class="tag tag-disease">自发性细菌性腹膜炎</span>
+            <span class="tag tag-disease">急性肾损伤</span>
+            <span class="tag tag-disease">AKI</span>
+            <span class="tag tag-bacteria">细菌性</span>
+            <span class="tag tag-drug">螺内酯</span>
+            <span class="tag tag-drug">呋塞米</span>
+            <span class="tag tag-drug">ACEI</span>
+            <span class="tag tag-drug">ARB</span>
+            <span class="tag tag-drug">β受体阻断药</span>
+            <span class="tag tag-drug">NSAID</span>
+            <span class="tag tag-drug">白蛋白</span>
+            <span class="tag tag-drug">头孢噻肟</span>
+            <span class="tag tag-drug">哌拉西林</span>
+            <span class="tag tag-drug">他唑巴坦</span>
+            <span class="tag tag-drug">厄他培南</span>
+            <span class="tag tag-organ">肾</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="急诊处理与急性肾损伤；肝硬化腹水急诊处理；急性肾损伤AKI分期；螺内酯；呋塞米；ACEI；ARB；β受体阻断药；NSAID；白蛋白；头孢噻肟；哌拉西林；他唑巴坦；厄他培南；自发性细菌性腹膜炎；KDIGO；=135" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyContent()">复制</button>
+    </div>
+    
+    <div class="page-info">页码：135</div>
+    
+    <div class="keywords">关键词：急诊处理 | 急性肾损伤 | 肝硬化性腹水 | 肿瘤性腹水 | 感染性腹水 | 自发性细菌性腹膜炎 | 螺内酯 | 呋塞米 | ACEI | ARB | β受体阻断药 | NSAID | 白蛋白 | 头孢噻肟 | 哌拉西林 | 他唑巴坦 | 厄他培南 | KDIGO | AKI分期 | 血肌酐 | 尿量</div>
+    
+    <script>
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制 ✓';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            if (isFav) {
+                btn.classList.remove('active');
+                btn.innerHTML = '☆ 收藏';
+                removeFromIndex();
+            } else {
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+                addToIndex();
+            }
+        }
+        
+        function addToIndex() {
+            const title = '急诊处理与急性肾损伤';
+            const url = window.location.href;
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            favorites.push({ title: title, url: url, page: '135' });
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert('已添加到收藏！请在首页查看。');
+        }
+        
+        function removeFromIndex() {
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            favorites = favorites.filter(f => !f.url.includes('135'));
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert('已取消收藏！');
+        }
+        
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url.includes('135') || f.page === '135');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
