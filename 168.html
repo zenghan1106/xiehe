@@ -1,0 +1,441 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~TTP急诊处理与溶血性尿毒综合征HUS*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #2c3e50;
+            line-height: 1.6;
+            padding: 15px;
+            min-height: 100vh;
+        }
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .left-btns {
+            display: flex;
+            gap: 8px;
+        }
+        .right-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        .btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+        .btn-home {
+            background: #3498db;
+            color: white;
+        }
+        .btn-home:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        .btn-nav {
+            background: #ecf0f1;
+            color: #34495e;
+            border: 1px solid #bdc3c7;
+        }
+        .btn-nav:hover {
+            background: #d5dbdb;
+        }
+        .btn-fav {
+            background: #e74c3c;
+            color: white;
+            font-size: 12px;
+            padding: 6px 14px;
+        }
+        .btn-fav:hover {
+            background: #c0392b;
+        }
+        .btn-fav.active {
+            background: #27ae60;
+        }
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0 20px;
+            padding: 12px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        .table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        thead {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+        thead th {
+            padding: 14px 10px;
+            font-size: 15px;
+            font-weight: 600;
+            text-align: center;
+        }
+        tbody td {
+            padding: 10px;
+            border-bottom: 1px solid #ecf0f1;
+            vertical-align: top;
+        }
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        tbody td:first-child {
+            font-weight: 600;
+            color: #1a5276;
+            background: rgba(52,152,219,0.05);
+            white-space: nowrap;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .first-row td {
+            font-size: 16px !important;
+            font-weight: 700;
+            padding: 14px 10px;
+        }
+        .content-cell {
+            text-align: left;
+            line-height: 1.8;
+        }
+        .content-cell ul {
+            padding-left: 18px;
+            margin: 0;
+        }
+        .content-cell li {
+            margin-bottom: 8px;
+        }
+        .check-item {
+            color: #27ae60;
+            font-weight: 600;
+        }
+        .section-title {
+            color: #1a5276;
+            font-weight: 700;
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+        .bottom-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+            justify-content: center;
+        }
+        .tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .keywords {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 13px;
+            margin: 10px 0;
+        }
+        .page-num {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #3498db;
+            margin: 10px 0;
+        }
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .copy-input {
+            width: calc(100% - 120px);
+            max-width: 500px;
+            padding: 10px 14px;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #2c3e50;
+            background: white;
+        }
+        .btn-copy {
+            background: #27ae60;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .btn-copy:hover {
+            background: #229954;
+        }
+        .author {
+            text-align: right;
+            color: #7f8c8d;
+            font-size: 13px;
+            margin: 10px 0;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 18px;
+            }
+            table {
+                font-size: 11px;
+            }
+            thead th {
+                font-size: 12px;
+                padding: 10px 6px;
+            }
+            tbody td {
+                padding: 8px 6px;
+            }
+            .first-row td {
+                font-size: 13px !important;
+            }
+            .copy-input {
+                width: calc(100% - 100px);
+                font-size: 12px;
+            }
+            .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="top-nav">
+        <div class="left-btns">
+            <a href="index.html" class="btn btn-home">← 返回首页</a>
+        </div>
+        <div class="right-btns">
+            <a href="167.html" class="btn btn-nav">上一页</a>
+            <a href="169.html" class="btn btn-nav">下一页</a>
+            <button class="btn btn-fav" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+
+    <!-- 标题 -->
+    <h1>~~~~~TTP急诊处理与溶血性尿毒综合征HUS*****</h1>
+
+    <!-- 表格区域 -->
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>章节</th>
+                    <th>内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="first-row">
+                    <td>TTP急诊处理<br>（续）</td>
+                    <td class="content-cell">
+                        <div class="section-title">血浆置换（续）</div>
+                        <ul>
+                            <li><span class="check-item">✓</span> 若无条件立即进行血浆置换，可先输注大量血浆直到可进行血浆置换。</li>
+                            <li><span class="check-item">✓</span> 有条件应治疗至病情缓解后2天（LDH和血小板正常，Hb上升，精神症状消失）。</li>
+                        </ul>
+                        <div class="section-title" style="margin-top:10px;">免疫抑制治疗</div>
+                        <ul>
+                            <li>用于获得性TTP，抑制ADAMTS13抗体产生。</li>
+                            <li><span class="check-item">✓</span> 一线治疗：泼尼松1～2mg/(kg·d)，必要时可行甲泼尼龙冲击治疗，1000mg×3天。加大糖皮质激素治疗剂量疗效有争议。</li>
+                            <li><span class="check-item">✓</span> 二线治疗：首选利妥昔单抗（美罗华），其他可选择硼替佐米、环磷酰胺等其他免疫抑制药。</li>
+                        </ul>
+                        <div class="section-title" style="margin-top:10px;">支持治疗</div>
+                        <ul>
+                            <li><span class="check-item">✓</span> 对于肾衰竭的患者必要时行CRRT。</li>
+                            <li><span class="check-item">✓</span> 积极呼吸、循环支持治疗，避免感染。</li>
+                        </ul>
+                        <div class="section-title" style="margin-top:10px;">输注血小板</div>
+                        <ul>
+                            <li><span class="check-item">✓</span> 应慎重，因可能增加血栓形成。</li>
+                            <li><span class="check-item">✓</span> 适用于明显出血的重度血小板减少（如PLT＜20×10⁹/L）和需要大型侵入性操作的重度血小板减少（如PLT＜50×10⁹/L）患者。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>■ 溶血性尿毒综合征</td>
+                    <td class="content-cell">
+                        <div class="section-title">1. 定义</div>
+                        <ul>
+                            <li>溶血性尿毒综合征（HUS）定义为同时出现微血管病性溶血性贫血、血小板减少和急性肾损伤。</li>
+                            <li>腹泻相关HUS：多见于儿童，常先有腹泻，后发生急性肾衰竭。大多与血清型O157:H7为主的大肠埃希菌及痢疾志贺菌感染有关。</li>
+                            <li>非典型HUS：成人多见，可伴发热与神经系统表现，预后较差，约50%患者可进展至终末期肾病。多数补体介导的HUS由补体因子的基因突变所致。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2. 临床表现</td>
+                    <td class="content-cell">
+                        可先有腹泻、血便，后有血小板减少、MAHA，急性肾损伤表现突出，可迅速进展至无尿肾衰竭。
+                    </td>
+                </tr>
+                <tr>
+                    <td>3. 必做检查</td>
+                    <td class="content-cell">
+                        <ul>
+                            <li>血常规：Ret↑。</li>
+                            <li>血涂片：可见破碎红细胞。</li>
+                            <li>尿常规。</li>
+                            <li>粪便常规＋粪便培养。</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="author">（杨 惊）</div>
+
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <!-- 检索标签 -->
+        <div class="tags">
+            <span class="tag">TTP</span>
+            <span class="tag">HUS</span>
+            <span class="tag">溶血性尿毒综合征</span>
+            <span class="tag">ADAMTS13</span>
+            <span class="tag">MAHA</span>
+            <span class="tag">CRRT</span>
+            <span class="tag">泼尼松</span>
+            <span class="tag">甲泼尼龙</span>
+            <span class="tag">利妥昔单抗</span>
+            <span class="tag">美罗华</span>
+            <span class="tag">硼替佐米</span>
+            <span class="tag">环磷酰胺</span>
+            <span class="tag">O157:H7</span>
+            <span class="tag">大肠埃希菌</span>
+            <span class="tag">志贺菌</span>
+            <span class="tag">Ret</span>
+        </div>
+
+        <!-- 关键词 -->
+        <div class="keywords">
+            关键词：TTP急诊处理；血浆置换；免疫抑制治疗；支持治疗；输注血小板；溶血性尿毒综合征；HUS；腹泻相关HUS；非典型HUS；O157:H7；大肠埃希菌；志贺菌；补体；CRRT；泼尼松；甲泼尼龙；利妥昔单抗；美罗华；硼替佐米；环磷酰胺
+        </div>
+
+        <!-- 页码 -->
+        <div class="page-num">168</div>
+
+        <!-- 复制功能 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="TTP急诊处理与溶血性尿毒综合征HUS；TTP血浆置换免疫抑制治疗支持治疗输注血小板HUS定义临床表现必做检查；TTP、HUS、ADAMTS13、MAHA、CRRT、泼尼松、甲泼尼龙、利妥昔单抗、美罗华、硼替佐米、环磷酰胺、O157:H7、大肠埃希菌、志贺菌=168" readonly>
+            <button class="btn-copy" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                const btn = document.querySelector('.btn-copy');
+                btn.textContent = '已复制!';
+                btn.style.background = '#2980b9';
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.style.background = '#27ae60';
+                }, 1500);
+            });
+        }
+
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            const title = 'TTP急诊处理与溶血性尿毒综合征HUS';
+            const url = '168.html';
+            
+            if (!isFav) {
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.find(f => f.url === url);
+                if (!exists) {
+                    favorites.push({ title, url, date: new Date().toISOString() });
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+                localStorage.setItem('indexUpdate', JSON.stringify({
+                    action: 'add',
+                    title: title,
+                    url: url,
+                    category: '血液疾病'
+                }));
+            } else {
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== url);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                btn.classList.remove('active');
+                btn.innerHTML = '☆ 收藏';
+            }
+        }
+
+        // 检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.find(f => f.url === '168.html');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.innerHTML = '★ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
