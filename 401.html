@@ -1,0 +1,666 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~医学缩略语续表394页*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimSun", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 顶部导航区域 */
+        .nav-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .left-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .right-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #4a90d9;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 3px 8px rgba(74, 144, 217, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页下一页按钮 */
+        .page-btn {
+            display: inline-block;
+            padding: 8px 18px;
+            background: #5cb85c;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            box-shadow: 0 2px 6px rgba(92, 184, 92, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .page-btn:hover {
+            background: #4cae4c;
+            transform: translateY(-2px);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            display: inline-block;
+            padding: 8px 18px;
+            background: #f0ad4e;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(240, 173, 78, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .fav-btn:hover {
+            background: #ec971f;
+            transform: translateY(-2px);
+        }
+        
+        /* 标题样式 */
+        .main-title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 15px 0 25px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            letter-spacing: 2px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        /* 表头样式 - 蓝色 */
+        thead th {
+            background: linear-gradient(180deg, #4a90d9 0%, #357abd 100%);
+            color: #fff;
+            padding: 15px 12px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        
+        thead th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+        
+        thead th:last-child {
+            border-radius: 0 12px 0 0;
+        }
+        
+        /* 表格内容样式 */
+        tbody td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4fd;
+            transition: background 0.3s ease;
+        }
+        
+        tbody td:first-child {
+            font-weight: bold;
+            color: #2c3e50;
+            width: 18%;
+        }
+        
+        tbody td:nth-child(2) {
+            color: #555;
+            width: 42%;
+            word-break: break-all;
+        }
+        
+        tbody td:nth-child(3) {
+            color: #444;
+            width: 40%;
+        }
+        
+        /* 标签区域 */
+        .tag-section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .tag-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4a90d9;
+        }
+        
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.4);
+        }
+        
+        .tag.disease {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .tag.bacteria {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .tag.drug {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+        
+        /* 底部编辑框区域 */
+        .bottom-section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .copy-area {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #555;
+            background: #fafafa;
+        }
+        
+        .copy-btn {
+            padding: 12px 25px;
+            background: #5cb85c;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #4cae4c;
+        }
+        
+        .copy-btn.copied {
+            background: #5bc0de;
+        }
+        
+        /* 页码显示 */
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #777;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #ddd;
+        }
+        
+        .page-number span {
+            color: #4a90d9;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        
+        /* 关键词区域 */
+        .keywords {
+            text-align: center;
+            margin-top: 15px;
+            padding: 15px;
+            background: #f0f4f8;
+            border-radius: 8px;
+        }
+        
+        .keywords-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .keywords-content {
+            font-size: 13px;
+            color: #888;
+            line-height: 1.8;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 20px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 8px;
+                font-size: 13px;
+            }
+            
+            .copy-area {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航区域 -->
+    <div class="nav-area">
+        <div class="left-nav">
+            <a href="index.html" class="home-btn">← 返回首页</a>
+        </div>
+        <div class="right-nav">
+            <a href="400.html" class="page-btn">上一页</a>
+            <a href="402.html" class="page-btn">下一页</a>
+            <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~医学缩略语续表394页*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~医学缩略语续表394页*****、英文缩略语、英文全称、中文全称、ESWL、FAST、FDP、FES、FEV₁、FFP、Fib、FMC、G6PD、GBS、GCS、GGT、GH、GNS、GOLD、GS、G试验、GM试验、HAP、Hb、HCG、HHFNC、HHS、HRCT、HS、hs-CRP、HSP、HUS、IABP、Ibil</div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>英文缩略语</th>
+                    <th>英文全称</th>
+                    <th>中文全称</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ESWL</td>
+                    <td>extracorporeal shock wave lithotripsy</td>
+                    <td>体外冲击波碎石</td>
+                </tr>
+                <tr>
+                    <td>FAST</td>
+                    <td>focussed assessment sonograph tmuma</td>
+                    <td>FAST超声</td>
+                </tr>
+                <tr>
+                    <td>FDP</td>
+                    <td>fibrin degradation product</td>
+                    <td>纤维蛋白降解产物</td>
+                </tr>
+                <tr>
+                    <td>FES</td>
+                    <td>fat embolism syndrome</td>
+                    <td>脂肪栓塞综合征</td>
+                </tr>
+                <tr>
+                    <td>FEV₁</td>
+                    <td>forced expiratory volume in one second</td>
+                    <td>第1秒用力呼气容积</td>
+                </tr>
+                <tr>
+                    <td>FFP</td>
+                    <td>fresh frozen plasma</td>
+                    <td>新鲜冰冻血浆</td>
+                </tr>
+                <tr>
+                    <td>Fib</td>
+                    <td>fibrinogen</td>
+                    <td>纤维蛋白原</td>
+                </tr>
+                <tr>
+                    <td>FMC</td>
+                    <td>first medical contact</td>
+                    <td>首次医疗接触</td>
+                </tr>
+                <tr>
+                    <td>G6PD</td>
+                    <td>lucose-6-phosphate dehydrogenase</td>
+                    <td>葡萄糖-6-磷酸脱氢酶</td>
+                </tr>
+                <tr>
+                    <td>GBS</td>
+                    <td>Guillain-Barré syndrome</td>
+                    <td>吉兰-巴雷综合征</td>
+                </tr>
+                <tr>
+                    <td>GCS</td>
+                    <td>Glasgow Coma Scale</td>
+                    <td>格拉斯哥昏迷评分</td>
+                </tr>
+                <tr>
+                    <td>GGT</td>
+                    <td>γ-glutamyl transpeptidase</td>
+                    <td>γ-谷氨酰转肽酶</td>
+                </tr>
+                <tr>
+                    <td>GH</td>
+                    <td>growth hormone</td>
+                    <td>生长激素</td>
+                </tr>
+                <tr>
+                    <td>GNS</td>
+                    <td>glucose normal saline</td>
+                    <td>糖盐水</td>
+                </tr>
+                <tr>
+                    <td>GOLD</td>
+                    <td>Global Initiative for Chronic Obstructive Lung Disease</td>
+                    <td>慢性阻塞性肺疾病全球倡议</td>
+                </tr>
+                <tr>
+                    <td>GS</td>
+                    <td>glucose</td>
+                    <td>葡萄糖</td>
+                </tr>
+                <tr>
+                    <td>G试验</td>
+                    <td>1,3-β-D-glucan test</td>
+                    <td>1,3-β-D葡聚糖试验</td>
+                </tr>
+                <tr>
+                    <td>GM试验</td>
+                    <td>galactomannan test</td>
+                    <td>半乳甘露聚糖试验</td>
+                </tr>
+                <tr>
+                    <td>HAP</td>
+                    <td>hospital-acquired pneumonia</td>
+                    <td>医院获得性肺炎</td>
+                </tr>
+                <tr>
+                    <td>Hb</td>
+                    <td>hemoglobin</td>
+                    <td>血红蛋白</td>
+                </tr>
+                <tr>
+                    <td>HCG</td>
+                    <td>human chorionic gonadotropin</td>
+                    <td>人绒毛膜促性腺激素</td>
+                </tr>
+                <tr>
+                    <td>HHFNC</td>
+                    <td>humidified high flow nasal cannula</td>
+                    <td>经湿化高流量鼻导管通气</td>
+                </tr>
+                <tr>
+                    <td>HHS</td>
+                    <td>hyperosmolar hyperglycemic state</td>
+                    <td>高渗性高血糖状态</td>
+                </tr>
+                <tr>
+                    <td>HRCT</td>
+                    <td>high resolution computed tomography</td>
+                    <td>高分辨率CT</td>
+                </tr>
+                <tr>
+                    <td>HS</td>
+                    <td>heat stroke</td>
+                    <td>中暑</td>
+                </tr>
+                <tr>
+                    <td>hs-CRP</td>
+                    <td>hypersensitive C reactive protein</td>
+                    <td>超敏C反应蛋白</td>
+                </tr>
+                <tr>
+                    <td>HSP</td>
+                    <td>Henoch-Schönlein purpura</td>
+                    <td>过敏性紫癜</td>
+                </tr>
+                <tr>
+                    <td>HUS</td>
+                    <td>hemolytic uremic syndrome</td>
+                    <td>溶血性尿毒综合征</td>
+                </tr>
+                <tr>
+                    <td>IABP</td>
+                    <td>Intra-aortic balloon pump</td>
+                    <td>主动脉内球囊反搏</td>
+                </tr>
+                <tr>
+                    <td>Ibil</td>
+                    <td>indirect bilirubin</td>
+                    <td>间接胆红素</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tag-section">
+        <div class="tag-title">🏷️ 特色检索标签</div>
+        <div class="tag-container">
+            <span class="tag disease">脂肪栓塞综合征</span>
+            <span class="tag disease">吉兰-巴雷综合征</span>
+            <span class="tag disease">慢性阻塞性肺疾病</span>
+            <span class="tag disease">医院获得性肺炎</span>
+            <span class="tag disease">高渗性高血糖状态</span>
+            <span class="tag disease">中暑</span>
+            <span class="tag disease">过敏性紫癜</span>
+            <span class="tag disease">溶血性尿毒综合征</span>
+            <span class="tag drug">纤维蛋白降解产物</span>
+            <span class="tag drug">新鲜冰冻血浆</span>
+            <span class="tag drug">纤维蛋白原</span>
+            <span class="tag drug">葡萄糖</span>
+            <span class="tag drug">糖盐水</span>
+            <span class="tag drug">血红蛋白</span>
+            <span class="tag drug">人绒毛膜促性腺激素</span>
+            <span class="tag drug">生长激素</span>
+            <span class="tag bacteria">1,3-β-D葡聚糖试验</span>
+            <span class="tag bacteria">半乳甘露聚糖试验</span>
+        </div>
+    </div>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <!-- 复制编辑框 -->
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyText" value="医学缩略语续表394页；ESWL,FAST,FDP,FES,FEV1,FFP,Fib,FMC,G6PD,GBS,GCS,GGT,GH,GNS,GOLD,GS,G试验,GM试验,HAP,Hb,HCG,HHFNC,HHS,HRCT,HS,hs-CRP,HSP,HUS,IABP,Ibil；体外冲击波碎石,FAST超声,纤维蛋白降解产物,脂肪栓塞综合征,第1秒用力呼气容积,新鲜冰冻血浆,纤维蛋白原,首次医疗接触,葡萄糖-6-磷酸脱氢酶,吉兰-巴雷综合征,格拉斯哥昏迷评分,γ-谷氨酰转肽酶,生长激素,糖盐水,慢性阻塞性肺疾病全球倡议,葡萄糖,1,3-β-D葡聚糖试验,半乳甘露聚糖试验,医院获得性肺炎,血红蛋白,人绒毛膜促性腺激素,经湿化高流量鼻导管通气,高渗性高血糖状态,高分辨率CT,中暑,超敏C反应蛋白,过敏性紫癜,溶血性尿毒综合征,主动脉内球囊反搏,间接胆红素=394" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+        
+        <!-- 关键词 -->
+        <div class="keywords">
+            <div class="keywords-title">🔍 关键词</div>
+            <div class="keywords-content">
+                ESWL | FAST | FDP | FES | FEV₁ | FFP | Fib | FMC | G6PD | GBS | GCS | GGT | GH | GNS | GOLD | GS | G试验 | GM试验 | HAP | Hb | HCG | HHFNC | HHS | HRCT | HS | hs-CRP | HSP | HUS | IABP | Ibil
+            </div>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">
+            页码：<span>394</span>
+        </div>
+    </div>
+    
+    <script>
+        // 复制到剪贴板功能
+        function copyToClipboard() {
+            const copyInput = document.getElementById('copyText');
+            copyInput.select();
+            copyInput.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyInput.value).then(function() {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            
+            setTimeout(function() {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            const btn = document.querySelector('.fav-btn');
+            const title = document.querySelector('.main-title').textContent.replace(/[~*]/g, '');
+            const url = window.location.href;
+            
+            // 尝试使用本地存储模拟收藏功能
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === url);
+            
+            if (!exists) {
+                favorites.push({
+                    title: title,
+                    url: url,
+                    page: '394'
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                btn.textContent = '★ 已收藏';
+                btn.style.background = '#d9534f';
+                
+                // 尝试更新index.html的收藏（通过localStorage通知）
+                localStorage.setItem('newFavorite', JSON.stringify({
+                    title: title,
+                    url: url,
+                    page: '394',
+                    time: new Date().toLocaleString()
+                }));
+                
+                alert('已成功添加到收藏！请在首页查看。');
+            } else {
+                alert('该页面已在收藏夹中！');
+            }
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const url = window.location.href;
+            const exists = favorites.some(f => f.url === url);
+            
+            if (exists) {
+                const btn = document.querySelector('.fav-btn');
+                btn.textContent = '★ 已收藏';
+                btn.style.background = '#d9534f';
+            }
+        };
+        
+        // 标签点击搜索功能
+        document.querySelectorAll('.tag').forEach(function(tag) {
+            tag.addEventListener('click', function() {
+                const text = this.textContent;
+                alert('搜索标签: ' + text + '\n（可在此实现跳转或筛选功能）');
+            });
+        });
+    </script>
+</body>
+</html>
