@@ -1,0 +1,332 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~过敏性休克*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btns a {
+            background: #4a90d9;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            top: 130px;
+            right: 15px;
+            background: #e6a23c;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 60px 0 20px 0;
+            padding: 0 10px;
+        }
+        
+        /* 表格样式 */
+        .main-table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 20px;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        .main-table th {
+            background: #2e75b6;
+            color: white;
+            font-size: 18px;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .main-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 14px;
+            vertical-align: top;
+        }
+        
+        .main-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .section-num {
+            color: #2e75b6;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        
+        .bullet {
+            color: #666;
+            margin-right: 5px;
+        }
+        
+        .sub-bullet {
+            color: #4a90d9;
+            margin-right: 5px;
+        }
+        
+        .diamond {
+            color: #e6a23c;
+            margin-right: 5px;
+        }
+        
+        /* 页码 */
+        .page-num {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            max-width: 800px;
+            margin: 20px auto;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            padding: 0 10px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background: #67c23a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 10px;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #e8f4fd;
+            color: #2e75b6;
+            padding: 5px 14px;
+            border-radius: 15px;
+            font-size: 13px;
+            margin: 3px;
+            border: 1px solid #b8d4f0;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 10px;
+            text-align: center;
+        }
+        
+        .keywords-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .keyword-text {
+            font-size: 13px;
+            color: #888;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 上一页下一页 -->
+    <div class="nav-btns">
+        <a href="274.html">↑ 上一页</a>
+        <a href="276.html">↓ 下一页</a>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" onclick="addToFavorites()">★ 收藏</button>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">~~~~~过敏性休克*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~过敏性休克*****、过敏性休克</div>
+    
+    <!-- 主表格 -->
+    <table class="main-table">
+        <tr>
+            <th>■ 过敏性休克</th>
+        </tr>
+        <tr>
+            <td>
+                <span class="section-num">1. 定义</span><br>
+                过敏性休克指外界某些抗原性物质进入已致敏的机体后，通过免疫机制在短时间内发生的一种强烈的多脏器受累的症状群。
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="section-num">2. 临床表现</span><br>
+                <span class="bullet">•</span>常为急性发病，一般在接触过敏原后数分钟至30分钟内发病，出现血压下降，SBP＜90mmHg或比基础值下降＞30%。<br>
+                <span class="bullet">•</span>以周围循环衰竭为主要特征，通常有四肢冰冷、脉搏细而弱、意识障碍。<br>
+                <span class="bullet">•</span>伴过敏表现，如面色潮红、皮肤发痒、全身皮疹、腹痛、呕吐，或胸闷、气急，甚至因喉头水肿、支气管痉挛导致呼吸困难、缺氧、发绀等。<br><br>
+                应注意，对有明显呼吸窘迫症状而尚未发生血压下降者，参照过敏性休克进行处理。
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="section-num">3. 急诊处理（图22）</span><br>
+                <span class="bullet">•</span>终止接触可疑的过敏原，立即将患者放置平车送至抢救室（抢救区）。<br>
+                <span class="bullet">•</span>持续心电、血压、SpO₂等生命体征监测。<br>
+                <span class="bullet">•</span>平卧位休息，保持安静、注意保暖。<br>
+                <span class="bullet">•</span>保持呼吸道通畅，警惕气道堵塞或误吸，必要时行气管插管或紧急气管切开。<br>
+                <span class="bullet">•</span>采用鼻导管或面罩吸氧，必要时可用简易呼吸器辅助通气。<br>
+                <span class="bullet">•</span>立即开放外周静脉通路并快速补液（NS 500ml快速输注），必要时适当增加输液量。<br>
+                <span class="bullet">•</span>应用肾上腺素<br>
+                <span class="sub-bullet">✓</span>立即肌内注射肾上腺素0.3～0.5mg（按照0.01mg/kg给予，成人最大剂量0.5mg；对＜14岁的儿童最大剂量0.3mg），浓度为1mg/ml（1:1000），等同于现有1ml:1mg肾上腺素的浓度。<br>
+                <span class="sub-bullet">✓</span>应用肾上腺素5～15分钟后，若血压仍不回升，可重复使用一次相同剂量肾上腺素，严重者可缩短用药间隔。<br>
+                <span class="sub-bullet">✓</span>对于意识丧失、血压严重下降（如SBP＜80mmHg），即将发生心搏骤停的患者，可静脉注射肾上腺素0.1～0.2mg。<br>
+                <span class="diamond">◇</span>对＜14岁的儿童，剂量为2～10μg/kg。<br>
+                <span class="diamond">◇</span>注意静脉注射肾上腺素需要将现有1ml:1mg肾上腺素稀
+            </td>
+        </tr>
+    </table>
+    
+    <!-- 页码 -->
+    <div class="page-num">263</div>
+    
+    <!-- 复制功能 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="过敏性休克；定义；临床表现；急诊处理；肾上腺素；=263" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <!-- 标签 -->
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签：</div>
+        <span class="tag">过敏性休克</span>
+        <span class="tag">肾上腺素</span>
+        <span class="tag">支气管痉挛</span>
+        <span class="tag">喉头水肿</span>
+        <span class="tag">周围循环衰竭</span>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        <div class="keywords-title">关键词</div>
+        <div class="keyword-text">过敏性休克 定义 临床表现 急诊处理 肾上腺素 肌内注射 静脉注射 血压下降 周围循环衰竭 喉头水肿 支气管痉挛 心搏骤停 抢救 补液 气管插管</div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            var copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            });
+        }
+        
+        function addToFavorites() {
+            var title = document.title;
+            var url = window.location.href;
+            var favData = JSON.parse(localStorage.getItem('favorites') || '[]');
+            var exists = favData.some(function(item) {
+                return item.url === url;
+            });
+            if (!exists) {
+                favData.push({
+                    title: title,
+                    url: url,
+                    category: '急诊疾病'
+                });
+                localStorage.setItem('favorites', JSON.stringify(favData));
+                alert('已添加到收藏！');
+            } else {
+                alert('该页面已在收藏中！');
+            }
+        }
+    </script>
+</body>
+</html>
