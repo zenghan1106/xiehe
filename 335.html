@@ -1,0 +1,443 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~临床微生物检验与抗生素应用指南*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .home-btn {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btns {
+            position: absolute;
+            right: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .nav-btn:hover {
+            opacity: 0.9;
+        }
+        
+        .favorite-btn {
+            background: #f0ad4e;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c5282;
+            font-size: 24px;
+            padding: 50px 120px 20px;
+            line-height: 1.4;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        thead {
+            background: #2b6cb0;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: left;
+            white-space: nowrap;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        tbody tr:hover {
+            background: #edf2f7;
+        }
+        
+        tbody td {
+            padding: 12px;
+            color: #4a5568;
+            line-height: 1.6;
+            word-break: break-all;
+        }
+        
+        .tags-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #ebf8ff;
+            color: #2b6cb0;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #bee3f8;
+        }
+        
+        .page-info {
+            text-align: center;
+            margin-top: 25px;
+            padding: 15px;
+            color: #718096;
+            font-size: 14px;
+        }
+        
+        .page-number {
+            font-size: 18px;
+            color: #2b6cb0;
+            font-weight: 600;
+        }
+        
+        .copy-section {
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #4a5568;
+        }
+        
+        .copy-btn {
+            background: #805ad5;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .keywords-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fffaf0;
+            border-radius: 8px;
+            border-left: 4px solid #ed8936;
+        }
+        
+        .keywords-title {
+            font-size: 14px;
+            color: #c05621;
+            margin-bottom: 8px;
+        }
+        
+        .keywords {
+            color: #744210;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+                padding: 60px 10px 15px;
+            }
+            
+            .home-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">返回首页</a>
+        <div class="nav-btns">
+            <a href="334.html" class="nav-btn">上一页</a>
+            <a href="336.html" class="nav-btn">下一页</a>
+            <button class="nav-btn favorite-btn" onclick="addToFavorites()">收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~临床微生物检验与抗生素应用指南*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~临床微生物检验与抗生素应用指南*****、细菌名称、相关疾病、首选抗生素、备选抗生素、备注说明、金黄色葡萄球菌、肺炎链球菌、大肠埃希菌、铜绿假单胞菌、肺炎克雷伯菌、鲍曼不动杆菌、幽门螺杆菌、结核分枝杆菌</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>细菌名称</th>
+                    <th>相关疾病</th>
+                    <th>首选抗生素</th>
+                    <th>备选抗生素</th>
+                    <th>备注说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>金黄色葡萄球菌</td>
+                    <td>皮肤软组织感染、肺炎、心内膜炎、败血症</td>
+                    <td>苯唑西林、头孢唑林</td>
+                    <td>万古霉素、利奈唑胺</td>
+                    <td>MSSA首选β-内酰胺类；MRSA需用万古霉素</td>
+                </tr>
+                <tr>
+                    <td>肺炎链球菌</td>
+                    <td>社区获得性肺炎、中耳炎、脑膜炎、鼻窦炎</td>
+                    <td>青霉素G、阿莫西林</td>
+                    <td>头孢曲松、左氧氟沙星</td>
+                    <td>青霉素耐药者选用三代头孢</td>
+                </tr>
+                <tr>
+                    <td>大肠埃希菌</td>
+                    <td>尿路感染、腹腔感染、败血症、新生儿脑膜炎</td>
+                    <td>头孢曲松、头孢噻肟</td>
+                    <td>哌拉西林他唑巴坦、碳青霉烯类</td>
+                    <td>ESBL产生菌需用碳青霉烯类</td>
+                </tr>
+                <tr>
+                    <td>铜绿假单胞菌</td>
+                    <td>医院获得性肺炎、烧伤感染、囊性纤维化肺部感染</td>
+                    <td>头孢他啶、哌拉西林他唑巴坦</td>
+                    <td>碳青霉烯类、氨曲南、多黏菌素</td>
+                    <td>常需联合用药，易产生耐药性</td>
+                </tr>
+                <tr>
+                    <td>肺炎克雷伯菌</td>
+                    <td>肺炎、尿路感染、肝脓肿、败血症</td>
+                    <td>头孢曲松、头孢噻肟</td>
+                    <td>碳青霉烯类、氨基糖苷类</td>
+                    <td>CRE感染需用多黏菌素或替加环素</td>
+                </tr>
+                <tr>
+                    <td>鲍曼不动杆菌</td>
+                    <td>呼吸机相关肺炎、血流感染、伤口感染</td>
+                    <td>头孢哌酮舒巴坦</td>
+                    <td>多黏菌素、替加环素、米诺环素</td>
+                    <td>高度耐药菌，常需联合治疗</td>
+                </tr>
+                <tr>
+                    <td>幽门螺杆菌</td>
+                    <td>慢性胃炎、消化性溃疡、胃癌</td>
+                    <td>阿莫西林+克拉霉素+PPI</td>
+                    <td>四环素+甲硝唑+PPI、铋剂四联</td>
+                    <td>克拉霉素耐药率高，需根据药敏调整</td>
+                </tr>
+                <tr>
+                    <td>结核分枝杆菌</td>
+                    <td>肺结核、淋巴结结核、结核性脑膜炎</td>
+                    <td>异烟肼+利福平+吡嗪酰胺+乙胺丁醇</td>
+                    <td>二线药物：阿米卡星、卷曲霉素、利奈唑胺</td>
+                    <td>需长期规范治疗，注意肝毒性监测</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag">金黄色葡萄球菌</span>
+            <span class="tag">肺炎链球菌</span>
+            <span class="tag">大肠埃希菌</span>
+            <span class="tag">铜绿假单胞菌</span>
+            <span class="tag">肺炎克雷伯菌</span>
+            <span class="tag">鲍曼不动杆菌</span>
+            <span class="tag">幽门螺杆菌</span>
+            <span class="tag">结核分枝杆菌</span>
+            <span class="tag">皮肤软组织感染</span>
+            <span class="tag">肺炎</span>
+            <span class="tag">心内膜炎</span>
+            <span class="tag">败血症</span>
+            <span class="tag">尿路感染</span>
+            <span class="tag">脑膜炎</span>
+            <span class="tag">医院获得性肺炎</span>
+            <span class="tag">慢性胃炎</span>
+            <span class="tag">消化性溃疡</span>
+            <span class="tag">肺结核</span>
+            <span class="tag">苯唑西林</span>
+            <span class="tag">头孢唑林</span>
+            <span class="tag">万古霉素</span>
+            <span class="tag">利奈唑胺</span>
+            <span class="tag">青霉素G</span>
+            <span class="tag">阿莫西林</span>
+            <span class="tag">头孢曲松</span>
+            <span class="tag">左氧氟沙星</span>
+            <span class="tag">哌拉西林他唑巴坦</span>
+            <span class="tag">碳青霉烯类</span>
+            <span class="tag">多黏菌素</span>
+            <span class="tag">替加环素</span>
+            <span class="tag">异烟肼</span>
+            <span class="tag">利福平</span>
+        </div>
+    </div>
+    
+    <div class="page-info">
+        当前页码：<span class="page-number">335</span>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="临床微生物检验与抗生素应用指南；细菌；抗生素；感染性疾病；金黄色葡萄球菌；肺炎；败血症；=335" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="keywords-section">
+        <div class="keywords-title">关键词</div>
+        <div class="keywords">335</div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                alert('已复制到剪贴板：' + input.value);
+            }).catch(function() {
+                document.execCommand('copy');
+                alert('已复制到剪贴板');
+            });
+        }
+        
+        function addToFavorites() {
+            const title = document.title;
+            const url = window.location.href;
+            
+            // 尝试添加到浏览器收藏夹
+            if (window.sidebar && window.sidebar.addPanel) {
+                window.sidebar.addPanel(title, url, '');
+            } else if (window.external && ('AddFavorite' in window.external)) {
+                window.external.AddFavorite(url, title);
+            } else {
+                // 保存到localStorage，供index.html读取
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.some(f => f.url === url);
+                if (!exists) {
+                    favorites.push({
+                        title: title,
+                        url: url,
+                        category: '临床微生物'
+                    });
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                    alert('已添加到收藏！请在index.html查看收藏列表。');
+                } else {
+                    alert('该页面已在收藏列表中！');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
