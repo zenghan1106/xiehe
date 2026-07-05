@@ -1,0 +1,527 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊医学目录-神经感染免疫内分泌系统疾病*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .page-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .page-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .fav-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(255,107,107,0.3);
+            z-index: 1000;
+        }
+        
+        .fav-btn:hover {
+            background: #ee5a5a;
+        }
+        
+        .main-title {
+            text-align: center;
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .sub-title {
+            text-align: center;
+            font-size: 16px;
+            color: #5a6c7d;
+            margin-bottom: 25px;
+        }
+        
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead {
+            background: #4a90d9;
+        }
+        
+        th {
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .category {
+            background: #e3f2fd;
+            font-weight: bold;
+            color: #1565c0;
+        }
+        
+        .sub-item {
+            padding-left: 30px;
+            color: #444;
+        }
+        
+        .page-num {
+            text-align: right;
+            color: #666;
+            font-family: monospace;
+            white-space: nowrap;
+        }
+        
+        .tags-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #e3f2fd;
+            color: #1565c0;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid #bbdefb;
+        }
+        
+        .bottom-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .page-indicator {
+            text-align: center;
+            font-size: 18px;
+            color: #4a90d9;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            width: calc(100% - 120px);
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: monospace;
+        }
+        
+        .copy-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .copy-btn:hover {
+            background: #218838;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 18px;
+            }
+            
+            th {
+                font-size: 16px;
+                padding: 12px;
+            }
+            
+            td {
+                font-size: 14px;
+                padding: 10px;
+            }
+            
+            .sub-item {
+                padding-left: 15px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .fav-btn {
+                position: static;
+                margin-bottom: 10px;
+                align-self: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    
+    <div class="top-nav">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="page-nav">
+            <a href="11.html" class="page-btn">上一页</a>
+            <a href="13.html" class="page-btn">下一页</a>
+        </div>
+    </div>
+    
+    <h1 class="main-title">~~~~~急诊医学目录-神经感染免疫内分泌系统疾病*****</h1>
+    <p class="sub-title">急诊内科学疾病分类目录</p>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>疾病名称</th>
+                    <th style="width: 80px; text-align: center;">页码</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category">
+                    <td>过敏性紫癜</td>
+                    <td class="page-num">160</td>
+                </tr>
+                <tr class="category">
+                    <td>急性卟啉病</td>
+                    <td class="page-num">162</td>
+                </tr>
+                <tr class="category">
+                    <td>神经系统疾病急诊</td>
+                    <td class="page-num">165</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>缺血性脑卒中</td>
+                    <td class="page-num">165</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>脑出血</td>
+                    <td class="page-num">168</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>蛛网膜下腔出血</td>
+                    <td class="page-num">170</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>急性播散性脑脊髓炎</td>
+                    <td class="page-num">173</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>流行性乙型脑炎</td>
+                    <td class="page-num">175</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>自身免疫性脑炎</td>
+                    <td class="page-num">177</td>
+                </tr>
+                <tr class="category">
+                    <td>感染性疾病急诊</td>
+                    <td class="page-num">179</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>感染性疾病诊治思维</td>
+                    <td class="page-num">179</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>需要注意的特殊人群感染</td>
+                    <td class="page-num">180</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>破伤风</td>
+                    <td class="page-num">181</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>狂犬病</td>
+                    <td class="page-num">183</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>流行性出血热</td>
+                    <td class="page-num">185</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>鼠疫</td>
+                    <td class="page-num">187</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>流行性脑脊髓膜炎</td>
+                    <td class="page-num">189</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>结核性脑膜炎</td>
+                    <td class="page-num">192</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>隐球菌脑膜炎</td>
+                    <td class="page-num">194</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>伤寒</td>
+                    <td class="page-num">195</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>细菌性痢疾</td>
+                    <td class="page-num">196</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>感染性心内膜炎</td>
+                    <td class="page-num">197</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>泌尿系感染</td>
+                    <td class="page-num">201</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>急性感染性腹泻</td>
+                    <td class="page-num">203</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>抗生素相关性腹泻</td>
+                    <td class="page-num">205</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>坏死性筋膜炎</td>
+                    <td class="page-num">207</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>侵袭性真菌感染</td>
+                    <td class="page-num">210</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>脓毒症</td>
+                    <td class="page-num">212</td>
+                </tr>
+                <tr class="category">
+                    <td>免疫疾病急诊</td>
+                    <td class="page-num">215</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>狼疮急症</td>
+                    <td class="page-num">215</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>硬皮病肾危象</td>
+                    <td class="page-num">219</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>抗磷脂综合征</td>
+                    <td class="page-num">221</td>
+                </tr>
+                <tr class="category">
+                    <td>内分泌急诊</td>
+                    <td class="page-num">222</td>
+                </tr>
+                <tr class="sub-item">
+                    <td>糖尿病酮症酸中毒</td>
+                    <td class="page-num">222</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div class="tags-container">
+            <span class="tag">过敏性紫癜</span>
+            <span class="tag">急性卟啉病</span>
+            <span class="tag">神经系统疾病急诊</span>
+            <span class="tag">缺血性脑卒中</span>
+            <span class="tag">脑出血</span>
+            <span class="tag">蛛网膜下腔出血</span>
+            <span class="tag">急性播散性脑脊髓炎</span>
+            <span class="tag">流行性乙型脑炎</span>
+            <span class="tag">自身免疫性脑炎</span>
+            <span class="tag">感染性疾病急诊</span>
+            <span class="tag">感染性疾病诊治思维</span>
+            <span class="tag">需要注意的特殊人群感染</span>
+            <span class="tag">破伤风</span>
+            <span class="tag">狂犬病</span>
+            <span class="tag">流行性出血热</span>
+            <span class="tag">鼠疫</span>
+            <span class="tag">流行性脑脊髓膜炎</span>
+            <span class="tag">结核性脑膜炎</span>
+            <span class="tag">隐球菌脑膜炎</span>
+            <span class="tag">伤寒</span>
+            <span class="tag">细菌性痢疾</span>
+            <span class="tag">感染性心内膜炎</span>
+            <span class="tag">泌尿系感染</span>
+            <span class="tag">急性感染性腹泻</span>
+            <span class="tag">抗生素相关性腹泻</span>
+            <span class="tag">坏死性筋膜炎</span>
+            <span class="tag">侵袭性真菌感染</span>
+            <span class="tag">脓毒症</span>
+            <span class="tag">免疫疾病急诊</span>
+            <span class="tag">狼疮急症</span>
+            <span class="tag">硬皮病肾危象</span>
+            <span class="tag">抗磷脂综合征</span>
+            <span class="tag">内分泌急诊</span>
+            <span class="tag">糖尿病酮症酸中毒</span>
+        </div>
+    </div>
+    
+    <div class="bottom-section">
+        <div class="keywords">
+            关键词：急诊医学、神经系统疾病、感染性疾病、免疫疾病、内分泌急诊、缺血性脑卒中、脑出血、蛛网膜下腔出血、流行性乙型脑炎、自身免疫性脑炎、破伤风、狂犬病、鼠疫、流行性脑脊髓膜炎、结核性脑膜炎、隐球菌脑膜炎、伤寒、细菌性痢疾、感染性心内膜炎、抗生素相关性腹泻、坏死性筋膜炎、侵袭性真菌感染、脓毒症、狼疮急症、硬皮病肾危象、抗磷脂综合征、糖尿病酮症酸中毒
+        </div>
+        <div class="page-indicator">12</div>
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="急诊医学目录-神经感染免疫内分泌系统疾病；急诊内科学疾病分类目录；急诊医学、神经系统疾病、感染性疾病、免疫疾病、内分泌急诊、缺血性脑卒中、脑出血、蛛网膜下腔出血、流行性乙型脑炎、自身免疫性脑炎、破伤风、狂犬病、鼠疫、流行性脑脊髓膜炎、结核性脑膜炎、隐球菌脑膜炎、伤寒、细菌性痢疾、感染性心内膜炎、抗生素相关性腹泻、坏死性筋膜炎、侵袭性真菌感染、脓毒症、狼疮急症、硬皮病肾危象、抗磷脂综合征、糖尿病酮症酸中毒；=12" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                alert('已复制到剪贴板！');
+            }).catch(function() {
+                document.execCommand('copy');
+                alert('已复制到剪贴板！');
+            });
+        }
+        
+        function addToFavorites() {
+            const title = document.title;
+            const url = window.location.href;
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const newFav = {
+                title: title,
+                url: url,
+                time: new Date().toISOString()
+            };
+            
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            favorites.push(newFav);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            alert('已添加到收藏！请确保index.html页面支持读取localStorage中的favorites数据。');
+            
+            try {
+                localStorage.setItem('addFavorite', JSON.stringify(newFav));
+            } catch(e) {}
+        }
+    </script>
+</body>
+</html>
