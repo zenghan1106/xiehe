@@ -1,0 +1,663 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~发热-急诊症状学常见病因及临床表现*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            z-index: 1000;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 右上角导航按钮组 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 收藏按钮 */
+        .favorite-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+            margin-top: 5px;
+        }
+        
+        .favorite-btn:hover {
+            background: #ee5a5a;
+        }
+        
+        .favorite-btn.added {
+            background: #51cf66;
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 900px;
+            margin: 70px auto 30px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        /* 标题区域 */
+        .header {
+            background: linear-gradient(90deg, #4a90d9, #63b3ed);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            line-height: 1.4;
+        }
+        
+        .header .subtitle {
+            font-size: 15px;
+            margin-top: 8px;
+            opacity: 0.95;
+        }
+        
+        /* 表格样式 */
+        .table-wrapper {
+            padding: 20px;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        
+        /* 表格头部蓝色 */
+        thead th {
+            background: #4a90d9;
+            color: white;
+            padding: 16px 14px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 17px;
+            font-weight: 600;
+            background: #f0f7ff;
+        }
+        
+        th, td {
+            padding: 14px;
+            border: 1px solid #d0e3f0;
+            vertical-align: top;
+        }
+        
+        td {
+            background: #fff;
+        }
+        
+        tbody tr:nth-child(even) td {
+            background: #f8fbff;
+        }
+        
+        tbody tr:hover td {
+            background: #e8f4fd;
+        }
+        
+        /* 内容换行 */
+        td {
+            word-break: break-all;
+            white-space: pre-wrap;
+        }
+        
+        /* 列表样式 */
+        td ul, td ol {
+            margin: 8px 0;
+            padding-left: 22px;
+        }
+        
+        td li {
+            margin: 6px 0;
+        }
+        
+        /* 标记符号 */
+        .bullet::before {
+            content: "● ";
+            color: #4a90d9;
+            font-weight: bold;
+        }
+        
+        .check::before {
+            content: "✓ ";
+            color: #51cf66;
+            font-weight: bold;
+        }
+        
+        /* 页码区域 */
+        .page-number {
+            text-align: center;
+            padding: 20px;
+            font-size: 18px;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .page-number span {
+            display: inline-block;
+            background: #4a90d9;
+            color: white;
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            padding: 20px;
+            background: #f8fbff;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .keywords-section h3 {
+            color: #4a90d9;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .keywords-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .keyword-tag {
+            background: #e8f4fd;
+            color: #2c5aa0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #b8d4f0;
+        }
+        
+        /* 特色检索标签 */
+        .tags-section {
+            padding: 25px 20px;
+            background: #fff5f5;
+            border-top: 2px solid #ffd0d0;
+        }
+        
+        .tags-section h3 {
+            color: #c92a2a;
+            font-size: 16px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .tag {
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .tag-disease {
+            background: #ffe3e3;
+            color: #c92a2a;
+            border: 2px solid #ffa8a8;
+        }
+        
+        .tag-bacteria {
+            background: #e7f5ff;
+            color: #1864ab;
+            border: 2px solid #74c0fc;
+        }
+        
+        .tag-antibiotic {
+            background: #e6fcf5;
+            color: #087f5b;
+            border: 2px solid #63e6be;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            padding: 25px 20px;
+            background: #f0f7ff;
+            border-top: 1px solid #d0e3f0;
+        }
+        
+        .copy-section h3 {
+            color: #4a90d9;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        
+        .copy-box-wrapper {
+            display: flex;
+            gap: 12px;
+            align-items: stretch;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 14px 16px;
+            border: 2px solid #4a90d9;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #333;
+            background: white;
+            font-family: monospace;
+        }
+        
+        .copy-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 15px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.2s;
+        }
+        
+        .copy-btn:hover {
+            background: #357abd;
+        }
+        
+        .copy-btn.copied {
+            background: #51cf66;
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #333;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 2000;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 20px;
+            }
+            
+            .home-btn, .nav-btn, .favorite-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            table {
+                font-size: 13px;
+            }
+            
+            th, td {
+                padding: 10px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 14px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 10px;
+            }
+            
+            .copy-box-wrapper {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 右上角导航按钮 -->
+    <div class="nav-buttons">
+        <a href="55.html" class="nav-btn">← 上一页</a>
+        <a href="57.html" class="nav-btn">下一页 →</a>
+        <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 标题 -->
+        <div class="header">
+            <h1>~~~~~发热-急诊症状学常见病因及临床表现*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~发热-急诊症状学常见病因及临床表现*****、分类、详细内容、发热定义、临床分度（口腔内舌下温度）、原因不明发热（FUO）、常见病因及临床表现、感染性疾病、肿瘤、结缔组织病、药物热</div>
+            <p class="subtitle">急诊症状学 | 第43页内容整理</p>
+        </div>
+        
+        <!-- 表格内容 -->
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">分类</th>
+                        <th style="width: 75%;">详细内容</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>发热定义</strong></td>
+                        <td>口温/腋温＞37.3℃，肛温＞37.6℃，或一日内体温变动＞1.2℃</td>
+                    </tr>
+                    <tr>
+                        <td>临床分度（口腔内舌下温度）</td>
+                        <td>低热37.4℃～38.0℃，中度热38.1℃～39.0℃，高热39.1℃～41.0℃，超高热＞41.0℃</td>
+                    </tr>
+                    <tr>
+                        <td>原因不明发热（FUO）</td>
+                        <td>指发热持续2周以上，体温＞38℃，经完整的病史询问、查体及常规实验室检查不能明确诊断者。在FUO中感染、肿瘤、结缔组织病最常见。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>常见病因及临床表现</strong></td>
+                        <td><strong>感染性疾病、肿瘤、结缔组织病、药物热</strong></td>
+                    </tr>
+                    <tr>
+                        <td>感染性疾病</td>
+                        <td>各种病原体（细菌、病毒、支原体、衣原体、螺旋体、立克次体、寄生虫）引起各种急性或慢性、全身性或局灶性感染。常见的呼吸系统、消化系统、泌尿系统、中枢神经系统感染各有其临床特征，伴发热。
+- 呼吸系统感染：咽痛、咳嗽、咳痰、喘憋伴发热。查体：可发现咽红，扁桃体肿大化脓，双肺可闻及干、湿啰音，呼吸音减弱消失。
+- 消化系统感染：恶心、呕吐、腹痛伴发热。查体：可发现腹部压痛，肝大，肝区叩痛。
+- 泌尿系统感染：尿频、尿急、尿痛、腰痛伴发热。查体：肾区叩击痛。
+- 中枢神经系统感染：头痛、恶心、剧烈呕吐、神志障碍、抽搐伴发热，查体：神志障碍，脑膜刺激征阳性。
+- 部分感染可以累及全身各系统。例如，伤寒可有高热，伴腹痛、腹泻、神志异常，查体可发现皮疹、肝脾淋巴结肿大，白细胞正常或减少，嗜酸性粒细胞减少，血培养、骨髓培养阳性，肥达试验、外斐反应阳性。</td>
+                    </tr>
+                    <tr>
+                        <td>肿瘤</td>
+                        <td>多数肿瘤可以引起低热或中等程度的发热，少数肿瘤可有高热，如白血病、淋巴瘤、恶性组织细胞增多症、弥漫性肝癌、肾上腺肿瘤。</td>
+                    </tr>
+                    <tr>
+                        <td>结缔组织病</td>
+                        <td>多数结缔组织病可以引起发热，如成人斯蒂尔（Still）病、颞动脉炎、风湿热、类风湿关节炎、结节病、干燥综合征、肉芽肿性血管炎、结节红斑等。</td>
+                    </tr>
+                    <tr>
+                        <td>药物热</td>
+                        <td>多数在药物使用一段时间后出现，有时是抗感染体温控制后再次发热，或是以前无发热症状，突然出现发热，此时应除外其他导致发热的疾病才能诊断。停药可以使体温</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">
+            页码：<span>56</span>
+        </div>
+        
+        <!-- 关键词 -->
+        <div class="keywords-section">
+            <h3>🔍 关键词</h3>
+            <div class="keywords-list">
+                <span class="keyword-tag">发热</span>
+                <span class="keyword-tag">急诊症状学</span>
+                <span class="keyword-tag">FUO</span>
+                <span class="keyword-tag">感染性疾病</span>
+                <span class="keyword-tag">肿瘤</span>
+                <span class="keyword-tag">结缔组织病</span>
+                <span class="keyword-tag">药物热</span>
+                <span class="keyword-tag">呼吸系统感染</span>
+                <span class="keyword-tag">消化系统感染</span>
+                <span class="keyword-tag">泌尿系统感染</span>
+                <span class="keyword-tag">中枢神经系统感染</span>
+            </div>
+        </div>
+        
+        <!-- 特色检索标签 -->
+        <div class="tags-section">
+            <h3>🏷️ 特色检索标签（点击筛选同类内容）</h3>
+            <div class="tags-container">
+                <span class="tag tag-disease">发热</span>
+                <span class="tag tag-disease">感染性疾病</span>
+                <span class="tag tag-disease">肿瘤</span>
+                <span class="tag tag-disease">结缔组织病</span>
+                <span class="tag tag-disease">药物热</span>
+                <span class="tag tag-disease">呼吸系统感染</span>
+                <span class="tag tag-disease">消化系统感染</span>
+                <span class="tag tag-disease">泌尿系统感染</span>
+                <span class="tag tag-disease">中枢神经系统感染</span>
+                <span class="tag tag-disease">伤寒</span>
+                <span class="tag tag-disease">白血病</span>
+                <span class="tag tag-disease">淋巴瘤</span>
+                <span class="tag tag-disease">恶性组织细胞增多症</span>
+                <span class="tag tag-disease">弥漫性肝癌</span>
+                <span class="tag tag-disease">肾上腺肿瘤</span>
+                <span class="tag tag-disease">成人斯蒂尔病</span>
+                <span class="tag tag-disease">颞动脉炎</span>
+                <span class="tag tag-disease">风湿热</span>
+                <span class="tag tag-disease">类风湿关节炎</span>
+                <span class="tag tag-disease">结节病</span>
+                <span class="tag tag-disease">干燥综合征</span>
+                <span class="tag tag-disease">肉芽肿性血管炎</span>
+                <span class="tag tag-disease">结节红斑</span>
+                <span class="tag tag-bacteria">细菌</span>
+                <span class="tag tag-bacteria">病毒</span>
+                <span class="tag tag-bacteria">支原体</span>
+                <span class="tag tag-bacteria">衣原体</span>
+                <span class="tag tag-bacteria">螺旋体</span>
+                <span class="tag tag-bacteria">立克次体</span>
+                <span class="tag tag-bacteria">寄生虫</span>
+            </div>
+        </div>
+        
+        <!-- 编辑框和复制按钮 -->
+        <div class="copy-section">
+            <h3>📋 快速复制信息</h3>
+            <div class="copy-box-wrapper">
+                <input type="text" class="copy-input" id="copyInput" value="发热-急诊症状学常见病因及临床表现；急诊症状学、FUO、感染性疾病、肿瘤、结缔组织病、药物热、呼吸系统感染、消化系统感染、泌尿系统感染、中枢神经系统感染、伤寒、白血病、淋巴瘤、细菌、病毒、支原体、衣原体=56" readonly>
+                <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 提示框 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            showToast('内容已复制到剪贴板！');
+            
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+        
+        // 收藏功能（使用localStorage本地存储）
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const pageInfo = {
+                title: '~~~~~发热-急诊症状学常见病因及临床表现*****',
+                url: '56.html',
+                pageNum: '56',
+                tags: ['发热', '感染性疾病', '细菌', '病毒']
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.findIndex(f => f.url === pageInfo.url);
+            
+            if (exists >= 0) {
+                favorites.splice(exists, 1);
+                btn.textContent = '⭐ 收藏';
+                btn.classList.remove('added');
+                showToast('已取消收藏');
+            } else {
+                favorites.push(pageInfo);
+                btn.textContent = '✓ 已收藏';
+                btn.classList.add('added');
+                showToast('已添加到收藏！请在index.html查看');
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 同时尝试向index.html发送消息（同源情况下）
+            try {
+                if (window.opener && window.opener.location.pathname.includes('index.html')) {
+                    window.opener.postMessage({type: 'favorite', data: pageInfo}, '*');
+                }
+            } catch(e) {}
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const btn = document.getElementById('favoriteBtn');
+            if (favorites.find(f => f.url === '56.html')) {
+                btn.textContent = '✓ 已收藏';
+                btn.classList.add('added');
+            }
+        };
+        
+        // 标签点击搜索
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const text = this.textContent;
+                showToast('正在搜索: ' + text);
+                // 实际可跳转搜索页面
+                // window.location.href = 'search.html?q=' + encodeURIComponent(text);
+            });
+        });
+    </script>
+</body>
+</html>
