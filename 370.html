@@ -1,0 +1,425 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~糖皮质激素在血液病及自身免疫病中的应用*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+            color: #333;
+        }
+        .nav-btn {
+            position: fixed;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            z-index: 100;
+        }
+        .home-btn {
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: #fff;
+        }
+        .home-btn:hover {
+            background: #357abd;
+        }
+        .prev-btn {
+            top: 15px;
+            right: 15px;
+            background: #5cb85c;
+            color: #fff;
+        }
+        .prev-btn:hover {
+            background: #449d44;
+        }
+        .next-btn {
+            top: 55px;
+            right: 15px;
+            background: #f0ad4e;
+            color: #fff;
+        }
+        .next-btn:hover {
+            background: #ec971f;
+        }
+        .fav-btn {
+            top: 95px;
+            right: 15px;
+            background: #d9534f;
+            color: #fff;
+        }
+        .fav-btn:hover {
+            background: #c9302c;
+        }
+        .container {
+            max-width: 900px;
+            margin: 80px auto 30px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .page-title {
+            text-align: center;
+            padding: 25px 20px;
+            background: linear-gradient(90deg, #1e5799 0%, #2989d8 50%, #207cca 100%);
+            color: #fff;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .page-title::before {
+            content: "~~~~~";
+            color: #ffd700;
+            margin-right: 8px;
+        }
+        .page-title::after {
+            content: "*****";
+            color: #ffd700;
+            margin-left: 8px;
+        }
+        .subtitle {
+            text-align: center;
+            padding: 10px;
+            background: #e3f2fd;
+            color: #1565c0;
+            font-size: 14px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        thead {
+            background: linear-gradient(90deg, #1565c0 0%, #1976d2 100%);
+            color: #fff;
+        }
+        thead th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+            border: 1px solid #0d47a1;
+        }
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        tbody td {
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            vertical-align: top;
+            line-height: 1.8;
+        }
+        .disease-name {
+            color: #c62828;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        .section-title {
+            color: #1565c0;
+            font-weight: bold;
+        }
+        .drug-name {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+        .dosage {
+            color: #6a1b9a;
+            background: #f3e5f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .note {
+            color: #e65100;
+            font-style: italic;
+        }
+        .tags-section {
+            padding: 20px;
+            background: #fff3e0;
+            border-top: 3px solid #ff9800;
+        }
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #e65100;
+            margin-bottom: 12px;
+        }
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 4px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .tag-disease {
+            background: #ffcdd2;
+            color: #c62828;
+            border: 1px solid #ef5350;
+        }
+        .tag-drug {
+            background: #c8e6c9;
+            color: #2e7d32;
+            border: 1px solid #66bb6a;
+        }
+        .tag-bacteria {
+            background: #b3e5fc;
+            color: #0277bd;
+            border: 1px solid #29b6f6;
+        }
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .bottom-section {
+            padding: 20px;
+            background: #eceff1;
+            text-align: center;
+        }
+        .keywords {
+            font-size: 13px;
+            color: #546e7a;
+            margin-bottom: 10px;
+        }
+        .page-number {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1565c0;
+        }
+        .copy-section {
+            padding: 20px;
+            background: #fff;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .copy-input {
+            width: calc(100% - 120px);
+            max-width: 700px;
+            padding: 12px 16px;
+            border: 2px solid #90caf9;
+            border-radius: 10px;
+            font-size: 14px;
+            outline: none;
+            background: #f5f5f5;
+        }
+        .copy-btn {
+            padding: 12px 28px;
+            background: linear-gradient(90deg, #42a5f5 0%, #1e88e5 100%);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .copy-btn:hover {
+            background: linear-gradient(90deg, #1e88e5 0%, #1565c0 100%);
+        }
+        .copy-btn.copied {
+            background: #4caf50;
+        }
+        @media (max-width: 600px) {
+            .container {
+                margin: 70px 5px 20px;
+                border-radius: 12px;
+            }
+            .page-title {
+                font-size: 16px;
+                padding: 18px 12px;
+            }
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            tbody td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            .copy-input {
+                width: calc(100% - 100px);
+                font-size: 12px;
+            }
+            .copy-btn {
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="nav-btn home-btn">🏠 返回首页</a>
+    <a href="369.html" class="nav-btn prev-btn">⬅ 上一页</a>
+    <a href="371.html" class="nav-btn next-btn">➡ 下一页</a>
+    <button class="nav-btn fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+
+    <div class="container">
+        <div class="page-title">糖皮质激素在血液病及自身免疫病中的应用</div>
+        <div class="subtitle">内注射地塞米松10mg/甲氨蝶呤10mg，每周1次，共3～5次</div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:22%">疾病/病症</th>
+                    <th style="width:78%">建议、治疗指征、用法及剂量</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="disease-name">原发性免疫性血小板减少症/<br>特发性血小板减少性紫癜（ITP）</span></td>
+                    <td>
+                        <span class="section-title">建议：</span>ITP的一线治疗包括<span class="drug-name">糖皮质激素</span>和<span class="drug-name">免疫球蛋白</span>。<br><br>
+                        <span class="section-title">治疗指征：</span>若患者有出血症状，无论血小板减少程度如何，都应积极治疗。但是对于PLT≥30×10⁹/L且无出血表现者危险性比较小，可予观察和随访。<br><br>
+                        <span class="section-title">用法及剂量：</span><br>
+                        ◇ <span class="drug-name">泼尼松</span>：起始剂量为<span class="dosage">1.0mg/(kg·d)</span>，病情稳定后快速减至最小维持量（<span class="dosage">&lt;15mg/d</span>）。如不能维持应考虑二线治疗，治疗4周仍无反应，说明泼尼松治疗无效，应迅速减量至停用。<br>
+                        ◇ <span class="drug-name">大剂量地塞米松</span>：<span class="dosage">40mg/d</span>，连续4天，建议口服用药。无效患者可在半个月后重复1个疗程。治疗过程中应注意监测血压、血糖的变化，预防感染，保护胃黏膜。
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="disease-name">自身免疫性溶血性贫血（AIHA）</span></td>
+                    <td>
+                        <span class="section-title">建议：</span>对于温抗体型AIHA，<span class="drug-name">糖皮质激素</span>仍然是最主要的治疗方法。而冷抗体型AIHA多为继发性，IgM抗体为主，以治疗原发病为主。<br><br>
+                        <span class="section-title">用法及剂量：</span><br>
+                        ◇ <span class="drug-name">急性AIHA</span>：<span class="drug-name">泼尼松</span><span class="dosage">0.5～1.5mg/(kg·d)</span>。<span class="drug-name">糖皮质激素</span>用至Hct&gt;30%或Hb水平稳定于100g/L以上才考虑减量。若使用推荐剂量治疗4周仍未达到上述疗效，考虑二线用药。<br>
+                        ◇ <span class="drug-name">急性重型AIHA</span>：<span class="drug-name">甲泼尼龙</span><span class="dosage">100～200mg/d</span>，使用10～14天。有效者剂量在4周内逐渐减量至停用。
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="disease-name">自身免疫性脑炎</span></td>
+                    <td>
+                        <span class="section-title">建议：</span>推荐大剂量<span class="drug-name">糖皮质激素</span>联合<span class="drug-name">人免疫球蛋白</span>作为自身免疫性脑炎中抗NMDA受体脑炎的一线治疗。<br><br>
+                        <span class="section-title">用法及剂量：</span><span class="drug-name">甲泼尼龙</span><span class="dosage">1000mg/d</span>联合<span class="drug-name">人免疫球蛋白</span><span class="dosage">0.4g/(kg·d)</span>，疗程5天。
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="disease-name">重症肌无力（MG）</span></td>
+                    <td>
+                        <span class="section-title">建议：</span><span class="drug-name">糖皮质激素</span>可以减缓眼肌型MG和全身型MG的进展。<span class="drug-name">糖皮质激素</span>和<span class="drug-name">硫唑嘌呤</span>是治疗MG的一线免疫抑制药物，可使70%～80%的MG患者症状得到显著改善。<br><br>
+                        <span class="section-title">用法及剂量：</span><br>
+                        ◇ <span class="drug-name">新发重症肌无力</span>：给予剂量递增方案。初始给予<span class="drug-name">泼尼松</span><span class="dosage">20mg/d</span>晨顿服。每3天增加<span class="drug-name">泼尼松</span><span class="dosage">5mg</span>直至足量（<span class="dosage">60～80mg</span>）。通常2周内起效，6～8周效果最显著。
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 检索标签（点击图片中的文字快速检索）</div>
+            <span class="tag tag-disease">原发性免疫性血小板减少症</span>
+            <span class="tag tag-disease">特发性血小板减少性紫癜</span>
+            <span class="tag tag-disease">ITP</span>
+            <span class="tag tag-disease">自身免疫性溶血性贫血</span>
+            <span class="tag tag-disease">AIHA</span>
+            <span class="tag tag-disease">自身免疫性脑炎</span>
+            <span class="tag tag-disease">重症肌无力</span>
+            <span class="tag tag-disease">MG</span>
+            <span class="tag tag-drug">地塞米松</span>
+            <span class="tag tag-drug">甲氨蝶呤</span>
+            <span class="tag tag-drug">糖皮质激素</span>
+            <span class="tag tag-drug">免疫球蛋白</span>
+            <span class="tag tag-drug">泼尼松</span>
+            <span class="tag tag-drug">甲泼尼龙</span>
+            <span class="tag tag-drug">人免疫球蛋白</span>
+            <span class="tag tag-drug">硫唑嘌呤</span>
+        </div>
+
+        <div class="bottom-section">
+            <div class="keywords">关键词：糖皮质激素、血液病、自身免疫病、ITP、AIHA、重症肌无力、自身免疫性脑炎、泼尼松、甲泼尼龙、免疫球蛋白</div>
+            <div class="page-number">页码：361</div>
+        </div>
+
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="糖皮质激素在血液病及自身免疫病中的应用；内注射地塞米松10mg/甲氨蝶呤10mg每周1次共3～5次；糖皮质激素、血液病、自身免疫病、ITP、AIHA、重症肌无力、自身免疫性脑炎、泼尼松、甲泼尼龙、免疫球蛋白=361" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '✅ 已复制';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '📋 复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        function addToFavorites() {
+            const title = document.querySelector('.page-title').textContent.replace(/~~~~~|\\*\\*\\*\\*\\*/g, '').trim();
+            const url = window.location.href;
+            const favoriteData = {
+                title: title,
+                url: url,
+                page: '361',
+                tags: ['糖皮质激素', '血液病', '自身免疫病', 'ITP', 'AIHA', '重症肌无力']
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === url);
+            if (!exists) {
+                favorites.push(favoriteData);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                // 尝试同步到index.html的收藏（通过localStorage事件）
+                localStorage.setItem('newFavorite', JSON.stringify(favoriteData));
+                
+                const btn = document.querySelector('.fav-btn');
+                btn.textContent = '⭐ 已收藏';
+                btn.style.background = '#4caf50';
+                setTimeout(() => {
+                    alert('已添加到收藏！请在 index.html 页面查看收藏列表。');
+                }, 100);
+            } else {
+                alert('该页面已在收藏列表中！');
+            }
+        }
+
+        // 检查是否已收藏
+        window.addEventListener('load', () => {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const currentUrl = window.location.href;
+            if (favorites.some(f => f.url === currentUrl)) {
+                const btn = document.querySelector('.fav-btn');
+                btn.textContent = '⭐ 已收藏';
+                btn.style.background = '#4caf50';
+            }
+        });
+    </script>
+</body>
+</html>
