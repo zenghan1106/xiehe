@@ -1,0 +1,480 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~SLE分类标准*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f9ff 50%, #fff5f5 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #333;
+        }
+        
+        .header {
+            position: relative;
+            margin-bottom: 20px;
+            padding-top: 10px;
+        }
+        
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            z-index: 100;
+        }
+        
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+        }
+        
+        .fav-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(255,107,107,0.3);
+        }
+        
+        .title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 60px 0 20px 0;
+            padding: 0 10px;
+            line-height: 1.4;
+        }
+        
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #2874a6;
+            margin-bottom: 20px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        thead {
+            background: #2e86c1;
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 10px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4fd;
+        }
+        
+        td {
+            padding: 10px;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        .category {
+            font-weight: bold;
+            color: #1a5276;
+            background: #d4e6f1;
+        }
+        
+        .subcategory {
+            padding-left: 25px;
+            color: #2c3e50;
+        }
+        
+        .definition {
+            color: #444;
+        }
+        
+        .weight {
+            text-align: center;
+            font-weight: bold;
+            color: #c0392b;
+            white-space: nowrap;
+        }
+        
+        .note {
+            background: #fef9e7;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 13px;
+            color: #7d6608;
+            line-height: 1.8;
+            border-left: 4px solid #f4d03f;
+        }
+        
+        .tags-section {
+            margin: 25px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            cursor: pointer;
+        }
+        
+        .tag:hover {
+            background: #c0392b;
+        }
+        
+        .page-num {
+            text-align: center;
+            font-size: 18px;
+            color: #2e86c1;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .keywords {
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 15px;
+            padding: 10px;
+        }
+        
+        .copy-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            padding: 0 10px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            max-width: calc(100% - 110px);
+            padding: 12px 15px;
+            border: 2px solid #4a90d9;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #219a52;
+        }
+        
+        @media (max-width: 600px) {
+            .title {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            thead th {
+                font-size: 14px;
+                padding: 10px 6px;
+            }
+            td {
+                padding: 8px 6px;
+                font-size: 13px;
+            }
+            .subcategory {
+                padding-left: 15px;
+            }
+            .nav-btn, .fav-btn, .home-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            .copy-input {
+                font-size: 12px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <div class="nav-btns">
+        <a href="228.html" class="nav-btn">上一页</a>
+        <a href="230.html" class="nav-btn">下一页</a>
+        <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    </div>
+
+    <h1 class="title">~~~~~SLE分类标准*****</h1>
+    <p class="subtitle">表34 系统性红斑狼疮分类标准</p>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:25%">分类标准</th>
+                    <th style="width:60%">定义</th>
+                    <th style="width:15%">权重</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="3" class="category">临床分类标准</td>
+                </tr>
+                <tr>
+                    <td class="subcategory">全身状况</td>
+                    <td class="definition">体温＞38.3℃</td>
+                    <td class="weight">2分</td>
+                </tr>
+                <tr>
+                    <td rowspan="3" class="subcategory">血液系统</td>
+                    <td class="definition">WBC＜4×10⁹/L</td>
+                    <td class="weight">3分</td>
+                </tr>
+                <tr>
+                    <td class="definition">PLT＜100×10⁹/L</td>
+                    <td class="weight">4分</td>
+                </tr>
+                <tr>
+                    <td class="definition">溶血性贫血</td>
+                    <td class="weight">4分</td>
+                </tr>
+                <tr>
+                    <td rowspan="3" class="subcategory">神经系统</td>
+                    <td class="definition">谵妄（意识改变或唤醒水平下降，和症状发展时间数小时至2天内，和1天内症状起伏波动，和认知力急性或亚急性改变，或习惯、情绪改变）</td>
+                    <td class="weight">2分</td>
+                </tr>
+                <tr>
+                    <td class="definition">精神异常（无洞察力的妄想或幻觉，但无精神错乱）</td>
+                    <td class="weight">3分</td>
+                </tr>
+                <tr>
+                    <td class="definition">癫痫（癫痫大发作或部分/病灶性发作）</td>
+                    <td class="weight">5分</td>
+                </tr>
+                <tr>
+                    <td rowspan="4" class="subcategory">皮肤黏膜</td>
+                    <td class="definition">非瘢痕性脱发</td>
+                    <td class="weight">2分</td>
+                </tr>
+                <tr>
+                    <td class="definition">口腔溃疡</td>
+                    <td class="weight">2分</td>
+                </tr>
+                <tr>
+                    <td class="definition">亚急性皮肤狼疮</td>
+                    <td class="weight">4分</td>
+                </tr>
+                <tr>
+                    <td class="definition">急性皮肤狼疮</td>
+                    <td class="weight">6分</td>
+                </tr>
+                <tr>
+                    <td rowspan="2" class="subcategory">浆膜腔</td>
+                    <td class="definition">胸腔积液或心包积液</td>
+                    <td class="weight">5分</td>
+                </tr>
+                <tr>
+                    <td class="definition">急性心包炎</td>
+                    <td class="weight">6分</td>
+                </tr>
+                <tr>
+                    <td class="subcategory">肌肉骨骼</td>
+                    <td class="definition">关节受累（≥2个关节滑膜炎或≥2个关节压痛+≥30分钟的晨僵）</td>
+                    <td class="weight">6分</td>
+                </tr>
+                <tr>
+                    <td rowspan="3" class="subcategory">肾</td>
+                    <td class="definition">蛋白尿＞0.5g/24h</td>
+                    <td class="weight">4分</td>
+                </tr>
+                <tr>
+                    <td class="definition">肾活检：Ⅱ或Ⅴ型狼疮肾炎</td>
+                    <td class="weight">8分</td>
+                </tr>
+                <tr>
+                    <td class="definition">肾活检：Ⅲ或Ⅳ型狼疮肾炎</td>
+                    <td class="weight">10分</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="category">免疫学标准</td>
+                </tr>
+                <tr>
+                    <td class="subcategory">抗磷脂抗体</td>
+                    <td class="definition">aCL IgG＞40GPL单位或抗β₂GPI IgG＞40单位或LA（+）</td>
+                    <td class="weight">2分</td>
+                </tr>
+                <tr>
+                    <td rowspan="2" class="subcategory">补体</td>
+                    <td class="definition">低C3或低C4</td>
+                    <td class="weight">3分</td>
+                </tr>
+                <tr>
+                    <td class="definition">低C3和低C4</td>
+                    <td class="weight">4分</td>
+                </tr>
+                <tr>
+                    <td class="subcategory">特异抗体</td>
+                    <td class="definition">抗ds-DNA抗体（+）或抗Smith抗体（+）</td>
+                    <td class="weight">6分</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="note">
+        <strong>注：</strong>如该标准可以被其他比SLE更符合的疾病解释，不计分；SLE分类标准要求至少包括1条临床分类标准，总分≥10分可诊断；所有的标准，不需要同时发生；在每个计分项，只计算最高分。
+    </div>
+
+    <div class="tags-section">
+        <div class="tags-title">检索标签（点击图片中的关键词可检索）：</div>
+        <span class="tag">SLE</span>
+        <span class="tag">系统性红斑狼疮</span>
+        <span class="tag">狼疮</span>
+        <span class="tag">狼疮肾炎</span>
+        <span class="tag">抗ds-DNA抗体</span>
+        <span class="tag">抗Smith抗体</span>
+        <span class="tag">抗磷脂抗体</span>
+        <span class="tag">aCL</span>
+        <span class="tag">抗β₂GPI</span>
+        <span class="tag">LA</span>
+        <span class="tag">补体</span>
+        <span class="tag">C3</span>
+        <span class="tag">C4</span>
+    </div>
+
+    <div class="page-num">229</div>
+
+    <div class="keywords">
+        关键词：SLE分类标准；系统性红斑狼疮；狼疮肾炎；抗ds-DNA抗体；抗Smith抗体；抗磷脂抗体；补体；临床分类标准；免疫学标准
+    </div>
+
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="SLE分类标准；表34 系统性红斑狼疮分类标准；SLE分类标准；系统性红斑狼疮；狼疮肾炎；抗ds-DNA抗体；抗Smith抗体；抗磷脂抗体；补体；临床分类标准；免疫学标准；=229" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            }, function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板！");
+            });
+        }
+        
+        function addToFavorites() {
+            const title = document.title.replace(/~~~~~|*****/g, '');
+            const favData = {
+                title: title,
+                url: window.location.href,
+                pageNum: '229'
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === favData.url);
+            
+            if (!exists) {
+                favorites.push(favData);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已收藏！可在index.html的收藏类目下查看。');
+            } else {
+                alert('该页面已在收藏中！');
+            }
+            
+            // 同时尝试更新index.html的收藏列表（如果同源）
+            try {
+                localStorage.setItem('lastFavUpdate', Date.now());
+            } catch(e) {}
+        }
+    </script>
+
+</body>
+</html>
