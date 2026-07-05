@@ -1,0 +1,468 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~钙增敏剂与血管调节药物及并发症*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-home {
+            background-color: #2196F3;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background-color: #1976D2;
+        }
+        
+        .btn-nav {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background-color: #45a049;
+        }
+        
+        .btn-favorite {
+            background-color: #FF9800;
+            color: white;
+        }
+        
+        .btn-favorite:hover {
+            background-color: #F57C00;
+        }
+        
+        .btn-copy {
+            background-color: #9C27B0;
+            color: white;
+            padding: 10px 20px;
+        }
+        
+        .btn-copy:hover {
+            background-color: #7B1FA2;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1565C0;
+            font-size: 22px;
+            margin: 15px 0 20px 0;
+            padding: 12px;
+            background-color: #E3F2FD;
+            border-radius: 8px;
+            word-break: break-all;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        thead {
+            background-color: #1976D2;
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 14px;
+            color: #444;
+            vertical-align: top;
+        }
+        
+        tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            color: #1565C0;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .bullet {
+            color: #1976D2;
+            margin-right: 4px;
+        }
+        
+        .checkmark {
+            color: #2E7D32;
+            margin-right: 4px;
+        }
+        
+        .number-title {
+            color: #1565C0;
+            font-weight: bold;
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+        
+        .tags-section {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            color: #1565C0;
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 4px;
+            background-color: #E8F5E9;
+            color: #2E7D32;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #C8E6C9;
+        }
+        
+        .tag-disease {
+            background-color: #FFEBEE;
+            color: #C62828;
+            border-color: #EF9A9A;
+        }
+        
+        .tag-drug {
+            background-color: #E3F2FD;
+            color: #1565C0;
+            border-color: #90CAF9;
+        }
+        
+        .tag-bacteria {
+            background-color: #FFF3E0;
+            color: #EF6C00;
+            border-color: #FFCC80;
+        }
+        
+        .keywords-section {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .keywords-title {
+            color: #1565C0;
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .copy-section {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 12px;
+            border: 2px solid #BBDEFB;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #555;
+            background-color: #FAFAFA;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            border-radius: 6px;
+            color: white;
+            font-size: 14px;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .notification.success {
+            background-color: #4CAF50;
+        }
+        
+        .notification.info {
+            background-color: #2196F3;
+        }
+        
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            
+            tbody td {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="notification" id="notification"></div>
+    
+    <div class="header-nav">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="383.html" class="btn btn-nav">上一页</a>
+            <a href="385.html" class="btn btn-nav">下一页</a>
+            <button class="btn btn-favorite" onclick="addFavorite()">收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~钙增敏剂与血管调节药物及并发症*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~钙增敏剂与血管调节药物及并发症*****、钙增敏剂、血管调节药物及并发症详解、3. 并发症</div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>钙增敏剂、血管调节药物及并发症详解</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    条件下，增强心肌收缩力，可避免细胞内Ca²⁺浓度过高引起的损伤、坏死不良后果。大多数钙增敏剂还兼具对PDE-3的抑制作用，可部分抵消钙增敏剂的副作用。左西孟旦通过与心肌肌钙蛋白C结合，在整个心动周期内增加钙的敏感性，从而引起心脏变力和松弛功能的改善。左西孟旦是剂量依赖的选择性磷酸二酯酶抑制药，低剂量水平下，钙增敏剂作用占优势，而高剂量则PDE抑制效应占优势。左西孟旦的半衰期比PDE抑制剂更短，都可通过输液给药。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="bullet">●</span><span class="section-title">血管调节药物：</span><br>
+                    除了肾上腺素调节外，神经体液对于维持血管紧张度的调节通过肾素-血管紧张素-醛固酮和局部介质介导。整个神经体液反应在休克状态可能发生变化，因此血管舒缩的反应可看作多器官衰竭的一部分。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="checkmark">✓</span><span class="section-title">血管加压素（抗利尿激素）：</span><br>
+                    血管加压素是一种由神经垂体分泌的天然多肽，虽然尚不清楚该药对于血管扩张性休克的确切作用，但该药可作为二线药物治疗难治性血管扩张性休克，尤其是对肾上腺素无反应的感染性休克或全身过敏反应，并可用于需要高水平儿茶酚胺严重感染性休克的患者中减少儿茶酚胺的用量。目前尚未证实血管加压素对严重休克患者死亡率的影响。停用后常出现反跳性低血压，为避免反跳，应缓慢减量。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="checkmark">✓</span><span class="section-title">糖皮质激素：</span><br>
+                    在感染性休克的患者中，"应激反应"的剂量替代治疗（每天100～200mg氢化可的松）已经显示在部分难治性休克中改善儿茶酚胺输注的血管反应性。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="number-title">3. 并发症</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="bullet">●</span><span class="section-title">灌注不足：</span><br>
+                    机体对血管活性药的过度血管收缩反应，可引起四肢、肠系膜或肾灌注不足，若心输出量不足或容量复苏不充分，可引起血管收缩过度伴灌注不足。四肢表现为指/趾尖端皮肤颜色变暗，可进展为凝固性坏疽，若有基础外周动脉疾病的患者可出现急性肢体缺血。肠系膜和肾灌注不足可出现肠缺血、肠道菌群易位、肾功能不全和少尿，但采用血管加压药维持平均动脉压的机制似乎更能有效维持肾和肠系膜血流。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="bullet">●</span><span class="section-title">心律失常：</span><br>
+                    许多血管活性药可通过激动β₁受体而发挥强效的正性频率作用，这可增加窦性心动过速、心房颤动、房室折返性心动过速或快速性室性心律失常的风险。足够的容量负荷可能尽量降低发生心律失常的频率和严重程度。研究证实，接受多巴胺与接受去甲肾上腺素的患者相比，前者心律失常的发病率显著更高。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="bullet">●</span><span class="section-title">心肌缺血：</span><br>
+                    β受体激动引起的正性肌力和正性频率作用可增加
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <span class="tag tag-disease">心力衰竭</span>
+        <span class="tag tag-disease">血管扩张性休克</span>
+        <span class="tag tag-disease">感染性休克</span>
+        <span class="tag tag-disease">全身过敏反应</span>
+        <span class="tag tag-disease">休克</span>
+        <span class="tag tag-disease">灌注不足</span>
+        <span class="tag tag-disease">凝固性坏疽</span>
+        <span class="tag tag-disease">急性肢体缺血</span>
+        <span class="tag tag-disease">肠缺血</span>
+        <span class="tag tag-disease">肾功能不全</span>
+        <span class="tag tag-disease">少尿</span>
+        <span class="tag tag-disease">心律失常</span>
+        <span class="tag tag-disease">窦性心动过速</span>
+        <span class="tag tag-disease">心房颤动</span>
+        <span class="tag tag-disease">心肌缺血</span>
+        <span class="tag tag-drug">左西孟旦</span>
+        <span class="tag tag-drug">血管加压素</span>
+        <span class="tag tag-drug">抗利尿激素</span>
+        <span class="tag tag-drug">糖皮质激素</span>
+        <span class="tag tag-drug">氢化可的松</span>
+        <span class="tag tag-drug">多巴胺</span>
+        <span class="tag tag-drug">去甲肾上腺素</span>
+        <span class="tag tag-drug">肾上腺素</span>
+        <span class="tag tag-drug">儿茶酚胺</span>
+    </div>
+    
+    <div class="page-number">页码：384</div>
+    
+    <div class="keywords-section">
+        <div class="keywords-title">关键词</div>
+        <div style="color: #555; font-size: 14px;">
+            钙增敏剂、左西孟旦、PDE-3抑制剂、血管调节药物、血管加压素、抗利尿激素、糖皮质激素、氢化可的松、感染性休克、血管扩张性休克、灌注不足、心律失常、心肌缺血、多巴胺、去甲肾上腺素、儿茶酚胺
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="~~~~~钙增敏剂与血管调节药物及并发症*****；钙增敏剂、左西孟旦、PDE-3抑制剂、血管调节药物、血管加压素、抗利尿激素、糖皮质激素、氢化可的松、感染性休克、血管扩张性休克、灌注不足、心律失常、心肌缺血、多巴胺、去甲肾上腺素、儿茶酚胺；=384" readonly>
+        <button class="btn btn-copy" onclick="copyContent()">复制</button>
+    </div>
+
+    <script>
+        function showNotification(message, type) {
+            const notif = document.getElementById('notification');
+            notif.textContent = message;
+            notif.className = 'notification ' + type;
+            notif.style.display = 'block';
+            setTimeout(() => {
+                notif.style.display = 'none';
+            }, 2000);
+        }
+        
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showNotification('复制成功！', 'success');
+                }).catch(() => {
+                    document.execCommand('copy');
+                    showNotification('复制成功！', 'success');
+                });
+            } else {
+                document.execCommand('copy');
+                showNotification('复制成功！', 'success');
+            }
+        }
+        
+        function addFavorite() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const currentPage = {
+                title: '~~~~~钙增敏剂与血管调节药物及并发症*****',
+                url: window.location.href,
+                pageNum: '384'
+            };
+            
+            const exists = favorites.some(f => f.url === currentPage.url);
+            if (!exists) {
+                favorites.push(currentPage);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                showNotification('已添加到收藏！', 'success');
+            } else {
+                showNotification('已在收藏列表中！', 'info');
+            }
+        }
+    </script>
+</body>
+</html>
