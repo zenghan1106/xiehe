@@ -1,0 +1,515 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~胸腔积液-急诊疾病诊疗*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #333;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .nav-btn {
+            background: #5a9fd4;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .fav-btn {
+            background: #e8a838;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        
+        .fav-btn.active {
+            background: #c17a1a;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 12px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        thead tr {
+            background: #2e75b6;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: left;
+        }
+        
+        tbody td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 15px;
+            line-height: 1.7;
+            color: #444;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #edf4fb;
+        }
+        
+        .section-title {
+            color: #1a5276;
+            font-weight: 700;
+            font-size: 16px;
+        }
+        
+        .sub-section {
+            color: #2874a6;
+            font-weight: 600;
+        }
+        
+        .content-text {
+            color: #444;
+        }
+        
+        .tags-container {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 4px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #e8f4fd;
+            color: #1a5276;
+            border: 1px solid #aed6f1;
+        }
+        
+        .tag-bacteria {
+            background: #fde8e8;
+            color: #7b241c;
+            border: 1px solid #f5b7b1;
+        }
+        
+        .tag-antibiotic {
+            background: #e8f8e8;
+            color: #1e7b1e;
+            border: 1px solid #a9dfbf;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+        
+        .bottom-section {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        
+        .copy-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 14px;
+            border: 2px solid #d5d8dc;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #219a52;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #666;
+            padding: 10px;
+        }
+        
+        .keywords {
+            text-align: center;
+            font-size: 13px;
+            color: #888;
+            padding: 8px;
+            word-break: break-all;
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+                font-size: 14px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="89.html" class="nav-btn">上一页</a>
+            <a href="91.html" class="nav-btn">下一页</a>
+            <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+        </div>
+    </div>
+    
+    <h1>~~~~~胸腔积液-急诊疾病诊疗*****</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>胸腔积液 — 急诊疾病</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span class="section-title">鉴别诊断（续）</span><br>
+                    <span class="content-text">学有助于鉴别。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sub-section">● 急性PE：</span><span class="content-text">高危因素（长期卧床制动）＋突发呼吸困难＋低氧血症＋D-Dimer升高。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sub-section">● 肺大疱：</span><span class="content-text">先天性或有COPD肺气肿病史，影像学上病变常局限。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sub-section">● 急性心肌梗死：</span><span class="content-text">突发胸闷或胸痛＋ECG及心肌酶动态变化＋ACS高危因素。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sub-section">● 其他：</span><span class="content-text">如胸膜炎、肋软骨炎、急腹症等。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">8. 急诊处理</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="content-text">● 严格卧床休息，吸氧，镇咳，镇痛，保持二便通畅。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="content-text">● 胸腔闭式引流指征：①患者存在明显呼吸困难；②评估气胸容量＞50%（侧胸壁距离肺边缘2cm以上或肺尖气胸线距离胸腔顶部3cm以上）；③张力性气胸。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="content-text">● 胸腔闭式引流无效情况下，可考虑胸腔粘连剂使用或外科手术。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="content-text">● 针对原发病治疗，如肺部感染性疾病使用抗生素。</span><br>
+                    <span class="content-text" style="text-align:right;display:block;">（桂耀松）</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title" style="font-size:17px;">■ 胸腔积液</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">1. 定义</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="content-text">● 正常胸腔含5～15ml液体，CT上可见肺和胸壁1～2mm厚的线状液体密度影。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="content-text">● 胸腔积液增多可能提示相关疾病。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">2. 病因</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sub-section">● 感染性：</span><span class="content-text">细菌、结核分枝杆菌、寄生虫、真菌、病毒、支原体、立克次体。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sub-section">● 肿瘤性：</span><span class="content-text">肺癌、胸膜转移瘤、胸膜间皮瘤、淋巴瘤、白血病。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sub-section">● 免疫性：</span><span class="content-text">系统性红斑狼疮、风湿热、类风湿关节炎。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sub-section">● 物理性：</span><span class="content-text">外伤。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sub-section">● 其他：</span><span class="content-text">心功能不全、低蛋白血症、甲状腺功能减退症等。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">3. 胸腔穿刺术适应证</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="content-text">● 积液深度超过1cm。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="content-text">● 新出现的胸腔积液，为明确其性质及原因。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="content-text">● 缓解大量胸腔积液患者喘憋症状。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="content-text">● 典型心力衰竭伴胸腔积液患者一般无须行胸腔穿刺。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="section-title">4. 必做检查</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="content-text">● 血常规＋CRP＋PCT：了解患者基础情况，评估感染情况。</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="content-text">● 肝肾功能检查：除外低蛋白血症等因素引起的积液。</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="tags-container">
+        <div class="tags-title">🔍 特色检索标签</div>
+        <span class="tag tag-disease">胸腔积液</span>
+        <span class="tag tag-disease">急性PE</span>
+        <span class="tag tag-disease">肺大疱</span>
+        <span class="tag tag-disease">急性心肌梗死</span>
+        <span class="tag tag-disease">胸膜炎</span>
+        <span class="tag tag-disease">张力性气胸</span>
+        <span class="tag tag-disease">COPD肺气肿</span>
+        <span class="tag tag-disease">系统性红斑狼疮</span>
+        <span class="tag tag-disease">风湿热</span>
+        <span class="tag tag-disease">类风湿关节炎</span>
+        <span class="tag tag-disease">心功能不全</span>
+        <span class="tag tag-disease">低蛋白血症</span>
+        <span class="tag tag-disease">甲状腺功能减退症</span>
+        <span class="tag tag-disease">心力衰竭</span>
+        <span class="tag tag-bacteria">细菌</span>
+        <span class="tag tag-bacteria">结核分枝杆菌</span>
+        <span class="tag tag-bacteria">寄生虫</span>
+        <span class="tag tag-bacteria">真菌</span>
+        <span class="tag tag-bacteria">病毒</span>
+        <span class="tag tag-bacteria">支原体</span>
+        <span class="tag tag-bacteria">立克次体</span>
+        <span class="tag tag-antibiotic">抗生素</span>
+    </div>
+    
+    <div class="bottom-section">
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyInput" value="胸腔积液-急诊疾病诊疗；胸腔积液；急性PE；肺大疱；急性心肌梗死；胸膜炎；张力性气胸；COPD肺气肿；系统性红斑狼疮；风湿热；类风湿关节炎；心功能不全；低蛋白血症；甲状腺功能减退症；心力衰竭；细菌；结核分枝杆菌；寄生虫；真菌；病毒；支原体；立克次体；抗生素；=90" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+        <div class="page-number">90</div>
+        <div class="keywords">关键词：胸腔积液、急诊处理、胸腔穿刺、感染、肿瘤、免疫、抗生素、细菌、结核分枝杆菌</div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                alert('已复制到剪贴板！');
+            }, function() {
+                document.execCommand('copy');
+                alert('已复制到剪贴板！');
+            });
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            btn.classList.toggle('active');
+            if (btn.classList.contains('active')) {
+                btn.textContent = '⭐ 已收藏';
+                // 存储收藏信息到localStorage，供index.html读取
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '胸腔积液-急诊疾病诊疗',
+                    url: '90.html',
+                    pageNum: '90'
+                };
+                if (!favorites.find(f => f.url === '90.html')) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                alert('已添加到收藏！');
+            } else {
+                btn.textContent = '⭐ 收藏';
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '90.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const btn = document.getElementById('favBtn');
+            if (favorites.find(f => f.url === '90.html')) {
+                btn.classList.add('active');
+                btn.textContent = '⭐ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>
