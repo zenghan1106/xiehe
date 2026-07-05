@@ -1,0 +1,391 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~严重过敏反应抢救流程*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: #4CAF50;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btn {
+            position: fixed;
+            right: 10px;
+            padding: 8px 15px;
+            background: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .prev-btn {
+            top: 10px;
+        }
+        
+        .next-btn {
+            top: 50px;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            top: 90px;
+            right: 10px;
+            padding: 8px 15px;
+            background: #FF9800;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .fav-btn:hover {
+            background: #F57C00;
+        }
+        
+        /* 标题 */
+        h1 {
+            text-align: center;
+            color: #1565C0;
+            font-size: 22px;
+            margin: 60px 10px 20px;
+            padding: 10px;
+            background: #E3F2FD;
+            border-radius: 8px;
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        /* 表头蓝色 */
+        th {
+            background: #1976D2;
+            color: white;
+            padding: 15px 10px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        /* 第一行字体大一点 */
+        tr:first-child td {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        td {
+            padding: 12px 10px;
+            border: 1px solid #E0E0E0;
+            font-size: 14px;
+            vertical-align: top;
+        }
+        
+        tr:nth-child(even) {
+            background: #F5F5F5;
+        }
+        
+        tr:hover {
+            background: #E8F5E9;
+        }
+        
+        /* 症状列 */
+        .symptom {
+            background: #FFF3E0;
+            font-weight: bold;
+            color: #E65100;
+            width: 30%;
+        }
+        
+        /* 处理措施列 */
+        .treatment {
+            background: #E8F5E9;
+            color: #1B5E20;
+            width: 40%;
+        }
+        
+        /* 转归列 */
+        .outcome {
+            background: #E3F2FD;
+            color: #0D47A1;
+            width: 30%;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        #copyInput {
+            width: calc(100% - 120px);
+            max-width: 600px;
+            padding: 10px;
+            border: 2px solid #1976D2;
+            border-radius: 5px;
+            font-size: 13px;
+        }
+        
+        .copy-btn {
+            padding: 10px 20px;
+            background: #9C27B0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .copy-btn:hover {
+            background: #7B1FA2;
+        }
+        
+        /* 页码 */
+        .page-num {
+            text-align: center;
+            font-size: 16px;
+            color: #666;
+            margin: 15px 0;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            font-size: 13px;
+            color: #555;
+            margin: 10px 0 20px;
+            padding: 10px;
+            background: #FFF8E1;
+            border-radius: 5px;
+        }
+        
+        /* 标签 */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: white;
+        }
+        
+        .tag-disease {
+            background: #E53935;
+        }
+        
+        .tag-drug {
+            background: #43A047;
+        }
+        
+        .tag-bacteria {
+            background: #1E88E5;
+        }
+        
+        /* 手机适配 */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            
+            th {
+                font-size: 15px;
+            }
+            
+            td {
+                font-size: 12px;
+                padding: 8px 5px;
+            }
+            
+            .symptom, .treatment, .outcome {
+                width: auto;
+            }
+            
+            #copyInput {
+                width: calc(100% - 100px);
+                font-size: 11px;
+            }
+            
+            .nav-btn, .home-btn, .fav-btn {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 上一页下一页 -->
+    <a href="275.html" class="nav-btn prev-btn">⬅ 上一页</a>
+    <a href="277.html" class="nav-btn next-btn">➡ 下一页</a>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    
+    <!-- 标题 -->
+    <h1>~~~~~严重过敏反应抢救流程*****</h1>
+    
+    <!-- 表格 -->
+    <table>
+        <tr>
+            <th colspan="3">严重过敏反应分级抢救处理</th>
+        </tr>
+        <tr>
+            <td class="symptom">症状分级</td>
+            <td class="treatment">处理措施</td>
+            <td class="outcome">转归/后续</td>
+        </tr>
+        <tr>
+            <td class="symptom">症状1：前驱症状<br>手足心瘙痒、头皮瘙痒、全身皮肤潮红、风团样皮疹（出现越早、病情越凶险）</td>
+            <td class="treatment">• 立即停药<br>• 抽肾上腺素0.5mg（半支）<br>• 肌内注射苯海拉明20mg<br>• 肌内注射地塞米松5mg<br>• 建立新的静脉通道</td>
+            <td class="outcome">恶化，出现3、4症状</td>
+        </tr>
+        <tr>
+            <td class="symptom">症状2：腹痛、恶心、呕吐、尿便失禁（儿童易发生）</td>
+            <td class="treatment">• 立即停药<br>• 抽肾上腺素0.5mg（半支）<br>• 肌内注射苯海拉明20mg<br>• 肌内注射地塞米松5mg<br>• 建立新的静脉通道</td>
+            <td class="outcome">恶化，出现3、4症状</td>
+        </tr>
+        <tr>
+            <td class="symptom">症状3：直接发生休克（神志改变、皮肤湿冷、血压下降）</td>
+            <td class="treatment">• 立即停药<br>• 肾上腺素0.3~0.5mg，儿童0.01mg/kg，肌内注射，总量不超过0.3mg<br>• 紧急呼叫二线<br>• 保持气道通畅，高流量吸氧<br>• 监护心电、血压、血氧、呼吸<br>• 肌内注射苯海拉明20~40mg<br>• 建立新的静脉通道，生理盐水快速补液<br>• 肌内注射地塞米松5~10mg</td>
+            <td class="outcome">尽快将患者转到急诊抢救室</td>
+        </tr>
+        <tr>
+            <td class="symptom">症状4：呼吸困难、呼吸急促、声音嘶哑等</td>
+            <td class="treatment">• 立即停药<br>• 肾上腺素0.3~0.5mg，儿童0.01mg/kg，肌内注射，总量不超过0.3mg<br>• 紧急呼叫二线<br>• 保持气道通畅，高流量吸氧<br>• 监护心电、血压、血氧、呼吸<br>• 肌内注射苯海拉明20~40mg<br>• 建立新的静脉通道，生理盐水快速补液<br>• 肌内注射地塞米松5~10mg</td>
+            <td class="outcome">尽快将患者转到急诊抢救室</td>
+        </tr>
+        <tr>
+            <td class="symptom">症状5：意识丧失、呼吸消失、颈动脉搏动消失</td>
+            <td class="treatment">心肺复苏（见基础生命支持流程）</td>
+            <td class="outcome">尽快将患者转到急诊抢救室</td>
+        </tr>
+    </table>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" id="copyInput" value="严重过敏反应抢救流程；过敏反应；休克；肾上腺素；苯海拉明；地塞米米松；心肺复苏；=276" readonly>
+        <button class="copy-btn" onclick="copyContent()">📋 复制</button>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-num">276</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        <strong>关键词：</strong>严重过敏反应、抢救流程、过敏性休克、肾上腺素、苯海拉明、地塞米松、心肺复苏、急诊抢救
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags">
+        <span class="tag tag-disease">过敏反应</span>
+        <span class="tag tag-disease">过敏性休克</span>
+        <span class="tag tag-drug">肾上腺素</span>
+        <span class="tag tag-drug">苯海拉明</span>
+        <span class="tag tag-drug">地塞米松</span>
+        <span class="tag tag-drug">生理盐水</span>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyContent() {
+            var input = document.getElementById("copyInput");
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                alert("已复制到剪贴板：" + input.value);
+            }).catch(function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板");
+            });
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            var title = "~~~~~严重过敏反应抢救流程*****";
+            var url = window.location.href;
+            var favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            var exists = favorites.some(function(fav) {
+                return fav.url === url;
+            });
+            
+            if (exists) {
+                alert("该页面已在收藏夹中！");
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                date: new Date().toLocaleString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert("已添加到收藏！请在 index.html 的收藏类目下查看。");
+        }
+    </script>
+</body>
+</html>
