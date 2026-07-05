@@ -1,0 +1,410 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~流行性乙型脑炎选做检查急诊处理与自身免疫性脑炎*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f0f4f8;
+            background-image: linear-gradient(135deg, #e8f4f8 0%, #f5f7fa 100%);
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .nav-left {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-home {
+            background-color: #4a90d9;
+            color: white;
+        }
+        .btn-home:hover {
+            background-color: #357abd;
+        }
+        .btn-nav {
+            background-color: #5cb85c;
+            color: white;
+        }
+        .btn-nav:hover {
+            background-color: #4cae4c;
+        }
+        .btn-fav {
+            background-color: #f0ad4e;
+            color: white;
+            margin-top: 5px;
+        }
+        .btn-fav:hover {
+            background-color: #ec971f;
+        }
+        .btn-copy {
+            background-color: #5bc0de;
+            color: white;
+            padding: 10px 20px;
+        }
+        .btn-copy:hover {
+            background-color: #46b8da;
+        }
+        h1 {
+            text-align: center;
+            color: #2c5282;
+            font-size: 24px;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            word-break: break-all;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+        thead {
+            background-color: #2b6cb0;
+            color: white;
+        }
+        thead th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        tbody td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+            word-break: break-word;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        tbody tr:hover {
+            background-color: #edf2f7;
+        }
+        .section-title {
+            font-weight: bold;
+            color: #2c5282;
+            font-size: 17px;
+        }
+        .sub-item {
+            padding-left: 20px;
+            color: #4a5568;
+        }
+        .check-item {
+            padding-left: 30px;
+            color: #4a5568;
+        }
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+        .tags-title {
+            font-size: 16px;
+            color: #2c5282;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .tag {
+            background-color: #ebf8ff;
+            color: #2b6cb0;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid #bee3f8;
+        }
+        .copy-section {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            color: #4a5568;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        .keywords-section {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+        .keywords-title {
+            font-size: 16px;
+            color: #2c5282;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .keywords-list {
+            color: #4a5568;
+            font-size: 14px;
+            line-height: 2;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 18px;
+            }
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            tbody td {
+                padding: 10px 8px;
+                font-size: 14px;
+            }
+            .btn {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+            .nav-top {
+                flex-direction: column;
+            }
+            .nav-right {
+                align-items: flex-start;
+                width: 100%;
+            }
+            .copy-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="188.html" class="btn btn-nav">← 上一页</a>
+            <a href="190.html" class="btn btn-nav">下一页 →</a>
+            <button class="btn btn-fav" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+    </div>
+
+    <!-- 标题 -->
+    <h1>~~~~~流行性乙型脑炎选做检查急诊处理与自身免疫性脑炎*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~流行性乙型脑炎选做检查急诊处理与自身免疫性脑炎*****、分类、详细内容、5. 选做检查、6. 急诊处理、自身免疫性脑炎、EEG、血清学检查、抗原检测、病毒分离、急性期治疗、对症治疗、恢复期及后遗症治疗、1. 定义</div>
+
+    <!-- 表格内容 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类</th>
+                    <th>详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="section-title" colspan="2">5. 选做检查</td>
+                </tr>
+                <tr>
+                    <td class="section-title">● EEG</td>
+                    <td>表现为非特异性，弥漫性慢波及癫痫样放电等改变。</td>
+                </tr>
+                <tr>
+                    <td class="section-title">● 血清学检查</td>
+                    <td>常用酶联免疫法在脑脊液或血中检测特异性IgM抗体。乙脑病毒IgM抗体在感染后4～7天出现，2～3周达高峰。敏感性、特异性均高达95%，单一脑脊液或血清标本阳性即可诊断，是目前最常用的早期诊断检测方法。</td>
+                </tr>
+                <tr>
+                    <td class="section-title">● 抗原检测</td>
+                    <td>采用反向被动血凝、免疫荧光、多克隆或单克隆金黄色葡萄球菌凝集试验及单克隆抗体/免疫金/银染色（M-IGSS，用于检测单核细胞和脑脊液）等方法。</td>
+                </tr>
+                <tr>
+                    <td class="section-title">● 病毒分离</td>
+                    <td>乙脑病毒主要存在于脑组织中，血及脑脊液不易分离出病毒。</td>
+                </tr>
+                <tr>
+                    <td class="section-title" colspan="2">6. 急诊处理</td>
+                </tr>
+                <tr>
+                    <td class="section-title">● 急性期治疗</td>
+                    <td>保证足够营养，高热、惊厥者易有脱水，酌情补液。观察患者精神、意识、呼吸、脉搏、血压及瞳孔等变化。</td>
+                </tr>
+                <tr>
+                    <td class="section-title">● 对症治疗</td>
+                    <td>
+                        ✓ 高热：采用药物及物理降温，使体温保持在38℃左右。<br>
+                        ✓ 控制颅内压：保持15°～30°半卧体位，控制体温，应用镇静药，积极控制惊厥，应用甘露醇降颅压，可联合使用呋塞米。<br>
+                        ✓ 抗惊厥：应用止痉药，如地西泮、苯巴比妥（鲁米那）、异戊巴比妥（阿米妥）钠等，并对发生惊厥的原因采取相应的措施。<br>
+                        ✓ 呼吸衰竭及气道管理：痰液增多时应加强吸痰，必要时行气管插管或气管切开，出现中枢性呼吸衰竭时及时应用机械通气。<br>
+                        ✓ 循环衰竭：如为心源性心力衰竭则应用强心药物如西地兰等；如因高热、昏迷、脱水过多造成血容量不足则应以扩容为主。<br>
+                        ✓ 其他：无特异性抗病毒治疗药物。重症患者可早期短程应用糖皮质激素，但仍缺乏有效性证据。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="section-title">● 恢复期及后遗症治疗</td>
+                    <td>重点在于功能锻炼，可用理疗、体疗、中药、针灸、按摩、推拿等。（崔庆宏）</td>
+                </tr>
+                <tr>
+                    <td class="section-title" colspan="2">■ 自身免疫性脑炎</td>
+                </tr>
+                <tr>
+                    <td class="section-title">1. 定义</td>
+                    <td>免疫介导的脑炎有多种类型，包括经典的副肿瘤性脑炎综合征，常与抗神经元内蛋白的抗体有关；以及神经元表面/突触</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 页码 -->
+    <div class="page-number">189</div>
+
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔖 检索标签</div>
+        <div class="tags-container">
+            <span class="tag">流行性乙型脑炎</span>
+            <span class="tag">乙脑</span>
+            <span class="tag">自身免疫性脑炎</span>
+            <span class="tag">副肿瘤性脑炎</span>
+            <span class="tag">地西泮</span>
+            <span class="tag">苯巴比妥</span>
+            <span class="tag">鲁米那</span>
+            <span class="tag">异戊巴比妥</span>
+            <span class="tag">阿米妥</span>
+            <span class="tag">甘露醇</span>
+            <span class="tag">呋塞米</span>
+            <span class="tag">西地兰</span>
+            <span class="tag">糖皮质激素</span>
+            <span class="tag">金黄色葡萄球菌</span>
+            <span class="tag">中枢性呼吸衰竭</span>
+            <span class="tag">心源性心力衰竭</span>
+            <span class="tag">癫痫样放电</span>
+        </div>
+    </div>
+
+    <!-- 复制功能区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="流行性乙型脑炎选做检查急诊处理与自身免疫性脑炎；流行性乙型脑炎、乙脑、自身免疫性脑炎、副肿瘤性脑炎、地西泮、苯巴比妥、鲁米那、异戊巴比妥、阿米妥、甘露醇、呋塞米、西地兰、糖皮质激素、金黄色葡萄球菌、中枢性呼吸衰竭、心源性心力衰竭、癫痫样放电=189" readonly>
+        <button class="btn btn-copy" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">🔑 关键词</div>
+        <div class="keywords-list">
+            流行性乙型脑炎、乙脑、自身免疫性脑炎、副肿瘤性脑炎、选做检查、EEG、血清学检查、酶联免疫法、IgM抗体、抗原检测、反向被动血凝、免疫荧光、金黄色葡萄球菌凝集试验、单克隆抗体、免疫金、银染色、M-IGSS、病毒分离、急诊处理、急性期治疗、对症治疗、高热、物理降温、控制颅内压、半卧体位、镇静药、惊厥、甘露醇、呋塞米、抗惊厥、止痉药、地西泮、苯巴比妥、鲁米那、异戊巴比妥、阿米妥、呼吸衰竭、气道管理、吸痰、气管插管、气管切开、机械通气、循环衰竭、心源性心力衰竭、强心药物、西地兰、扩容、糖皮质激素、恢复期、后遗症、功能锻炼、理疗、体疗、中药、针灸、按摩、推拿、免疫介导、抗神经元内蛋白抗体、神经元表面、突触
+        </div>
+    </div>
+
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            }, function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板！");
+            });
+        }
+
+        // 添加到收藏
+        function addToFavorites() {
+            // 获取当前页面信息
+            const title = "流行性乙型脑炎选做检查急诊处理与自身免疫性脑炎";
+            const url = window.location.href;
+            const pageNum = "189";
+            
+            // 从localStorage获取已有的收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(fav => fav.url === url);
+            if (exists) {
+                alert("该页面已在收藏夹中！");
+                return;
+            }
+            
+            // 添加新收藏
+            favorites.push({
+                title: title,
+                url: url,
+                pageNum: pageNum,
+                category: "神经系统疾病",
+                addTime: new Date().toLocaleString()
+            });
+            
+            // 保存到localStorage
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 同时尝试更新index.html的收藏列表（通过同源策略）
+            alert("已添加到收藏！\n标题：" + title + "\n页码：" + pageNum);
+        }
+    </script>
+</body>
+</html>
