@@ -1,0 +1,227 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>低钙血症的诊断与治疗 (265)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+        table, th, td {
+            border: 1px solid #cbd5e1;
+        }
+        th {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .btn-shadow {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="text-slate-800 pb-24">
+
+    <!-- 顶部导航栏 -->
+    <div class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 py-3 flex justify-between items-center shadow-sm">
+        <a href="index.html" class="flex items-center gap-1 text-blue-600 hover:text-blue-800 font-semibold transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            <span>首页</span>
+        </a>
+
+        <div class="flex gap-2">
+            <a href="264.html" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded text-sm font-medium transition-colors border border-slate-300">
+                上一页
+            </a>
+            <a href="266.html" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded text-sm font-medium transition-colors border border-slate-300">
+                下一页
+            </a>
+        </div>
+    </div>
+
+    <!-- 收藏按钮 -->
+    <div class="fixed top-16 right-4 z-40">
+        <button onclick="addToFavorites()" class="bg-yellow-400 hover:bg-yellow-500 text-white p-2 rounded-full shadow-lg transition-transform hover:scale-110" title="添加到收藏">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+            </svg>
+        </button>
+    </div>
+
+    <!-- 主要内容区域 -->
+    <main class="max-w-4xl mx-auto mt-6 px-4">
+        
+        <!-- 标题区域 -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-slate-800 mb-2">
+                <span class="text-blue-600">~~~~~</span>低钙血症的诊断与治疗<span class="text-blue-600">*****</span>
+            </h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~低钙血症的诊断与治疗*****、分类、详细内容、血液透析、1. 定义、2. 病因、3. 临床表现、4. 必做检查</div>
+            <p class="text-slate-500 text-sm">页码: 253 | 急诊医学参考资料</p>
+        </div>
+
+        <!-- 表格区域 -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden table-container border border-slate-200">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr>
+                        <th class="p-4 text-lg font-bold w-1/4 border-r border-blue-400">分类</th>
+                        <th class="p-4 text-lg font-bold">详细内容</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200">
+                    <!-- 第一行特殊样式 -->
+                    <tr class="bg-blue-50">
+                        <td class="p-4 font-bold text-slate-900 border-r border-slate-200 text-lg">血液透析</td>
+                        <td class="p-4 text-slate-700">
+                            适用于重度高钙血症合并心/肾功能不全者。
+                            <div class="text-right text-sm text-slate-500 mt-1">（刘 洋）</div>
+                        </td>
+                    </tr>
+                    
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-4 font-semibold text-slate-800 border-r border-slate-200 align-top">1. 定义</td>
+                        <td class="p-4 text-slate-700">
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>血清校正钙（mmol/L）< 2.2mmol/L。</li>
+                                <li>离子钙（血气中Ca²⁺）< 1.1mmol/L。</li>
+                                <li>低钙血症病因以术后甲状旁腺功能减退症（简称甲旁减）、自身免疫性甲状旁腺功能减退症和维生素D缺乏最常见。</li>
+                                <li>低钙血症症状和体征的严重程度取决于钙的绝对含量及下降速度。急性低钙血症比慢性低钙血症出现症状的血清钙阈值更高。</li>
+                            </ul>
+                        </td>
+                    </tr>
+
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-4 font-semibold text-slate-800 border-r border-slate-200 align-top">2. 病因</td>
+                        <td class="p-4 text-slate-700">
+                            <div class="mb-2"><strong>甲状旁腺功能减退症（低PTH）：</strong> 术后、放疗后、自身免疫性、遗传性、甲状旁腺浸润（含铁血黄素沉着症、转移瘤）、骨饥饿综合征、HIV感染。</div>
+                            <div class="mb-2"><strong>高PTH：</strong> PTH抵抗（假性甲旁减）、维生素D缺乏/抵抗、肾病、血管外沉积（高磷血症、溶瘤综合征、胰腺炎、成骨性转移癌/瘤、碱中毒、脓毒症或其他严重疾病）。</div>
+                            <div class="mb-2"><strong>药物：</strong> 降钙素、双膦酸盐、地诺单抗、钙螯合剂（EDTA、枸橼酸）、膦甲酸钠、苯妥英钠、氟化物、呋塞米等。</div>
+                            <div><strong>镁代谢紊乱。</strong></div>
+                        </td>
+                    </tr>
+
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-4 font-semibold text-slate-800 border-r border-slate-200 align-top">3. 临床表现</td>
+                        <td class="p-4 text-slate-700">
+                            <div class="mb-2"><strong>症状：特征是神经肌肉易激惹。</strong></div>
+                            <ul class="list-disc list-inside space-y-1 mb-2 ml-2">
+                                <li>手足搐搦：肌肉痉挛、声门和呼吸肌痉挛、口周和肢端感觉异常。</li>
+                                <li>癫痫发作。</li>
+                                <li>自主神经：出汗、支气管痉挛和胆绞痛。</li>
+                                <li>心血管：低血压和/或充血性心力衰竭，心律失常不多见。</li>
+                            </ul>
+                            <div class="mb-1"><strong>体征</strong></div>
+                            <ul class="list-disc list-inside space-y-1 ml-2">
+                                <li>陶瑟征：血压计袖带充气至收缩压以上持续3分钟诱发手痉挛。</li>
+                                <li>面神经征：叩击恰好在耳前的面神经引出同侧面部肌肉收缩。</li>
+                                <li>视盘水肿。</li>
+                            </ul>
+                        </td>
+                    </tr>
+
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-4 font-semibold text-slate-800 border-r border-slate-200 align-top">4. 必做检查</td>
+                        <td class="p-4 text-slate-700">
+                            <strong>生化检查：</strong> 多次重复测量经白蛋白校正的血清总钙浓度，以确定低钙血症的存在。血清镁、磷、血肌酐、淀粉酶、肌...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 特色检索标签 -->
+        <div class="mt-8 mb-12">
+            <h3 class="text-lg font-bold text-slate-700 mb-3 border-l-4 border-blue-500 pl-3">相关检索标签</h3>
+            <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-white border border-slate-300 rounded-full text-sm text-slate-600 shadow-sm">低钙血症</span>
+                <span class="px-3 py-1 bg-white border border-slate-300 rounded-full text-sm text-slate-600 shadow-sm">甲旁减</span>
+                <span class="px-3 py-1 bg-white border border-slate-300 rounded-full text-sm text-slate-600 shadow-sm">维生素D缺乏</span>
+                <span class="px-3 py-1 bg-white border border-slate-300 rounded-full text-sm text-slate-600 shadow-sm">PTH抵抗</span>
+                <span class="px-3 py-1 bg-white border border-slate-300 rounded-full text-sm text-slate-600 shadow-sm">假性甲旁减</span>
+                <span class="px-3 py-1 bg-white border border-slate-300 rounded-full text-sm text-slate-600 shadow-sm">溶瘤综合征</span>
+                <span class="px-3 py-1 bg-white border border-slate-300 rounded-full text-sm text-slate-600 shadow-sm">胰腺炎</span>
+                <span class="px-3 py-1 bg-white border border-slate-300 rounded-full text-sm text-slate-600 shadow-sm">降钙素</span>
+                <span class="px-3 py-1 bg-white border border-slate-300 rounded-full text-sm text-slate-600 shadow-sm">双膦酸盐</span>
+                <span class="px-3 py-1 bg-white border border-slate-300 rounded-full text-sm text-slate-600 shadow-sm">地诺单抗</span>
+                <span class="px-3 py-1 bg-white border border-slate-300 rounded-full text-sm text-slate-600 shadow-sm">EDTA</span>
+                <span class="px-3 py-1 bg-white border border-slate-300 rounded-full text-sm text-slate-600 shadow-sm">苯妥英钠</span>
+                <span class="px-3 py-1 bg-white border border-slate-300 rounded-full text-sm text-slate-600 shadow-sm">呋塞米</span>
+                <span class="px-3 py-1 bg-white border border-slate-300 rounded-full text-sm text-slate-600 shadow-sm">手足搐搦</span>
+                <span class="px-3 py-1 bg-white border border-slate-300 rounded-full text-sm text-slate-600 shadow-sm">陶瑟征</span>
+                <span class="px-3 py-1 bg-white border border-slate-300 rounded-full text-sm text-slate-600 shadow-sm">面神经征</span>
+                <span class="px-3 py-1 bg-white border border-slate-300 rounded-full text-sm text-slate-600 shadow-sm">视盘水肿</span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- 底部功能区 -->
+    <div class="fixed bottom-0 left-0 w-full bg-white border-t border-slate-200 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-50">
+        <div class="max-w-4xl mx-auto px-4 py-3">
+            <div class="flex gap-2 items-center justify-center">
+                <input type="text" id="copyInput" readonly 
+                    class="flex-1 h-10 px-3 text-sm text-slate-600 bg-slate-50 border border-slate-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 truncate"
+                    value="低钙血症的诊断与治疗; 低钙血症,甲旁减,维生素D缺乏,手足搐搦,陶瑟征,面神经征,降钙素,双膦酸盐,地诺单抗,呋塞米,EDTA; =265">
+                
+                <button onclick="copyToClipboard()" 
+                    class="h-10 px-6 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded shadow transition-colors flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                    </svg>
+                    复制
+                </button>
+            </div>
+            <div class="text-center mt-2">
+                <span class="text-xs text-slate-400">页码: 265</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyInput");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(copyText.value).then(() => {
+                    alert("内容已复制到剪贴板: " + copyText.value);
+                });
+            } catch (err) {
+                document.execCommand("copy");
+                alert("内容已复制到剪贴板: " + copyText.value);
+            }
+        }
+
+        function addToFavorites() {
+            const pageTitle = "低钙血症的诊断与治疗";
+            const pageUrl = window.location.href;
+            
+            let favorites = JSON.parse(localStorage.getItem('myFavorites')) || [];
+            
+            const exists = favorites.some(item => item.url === pageUrl);
+            
+            if (exists) {
+                alert("该页面已在您的收藏夹中！");
+            } else {
+                favorites.push({
+                    title: pageTitle,
+                    url: pageUrl,
+                    date: new Date().toLocaleDateString()
+                });
+                
+                localStorage.setItem('myFavorites', JSON.stringify(favorites));
+                alert("收藏成功！请在首页查看您的收藏列表。");
+            }
+        }
+    </script>
+</body>
+</html>
