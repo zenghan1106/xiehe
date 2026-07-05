@@ -1,0 +1,393 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~慢性阻塞性肺疾病急性加重-分级与急诊处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        .header-btns {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .nav-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            min-width: 80px;
+            text-align: center;
+        }
+        .fav-btn {
+            background: #f0ad4e;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            min-width: 80px;
+        }
+        .fav-btn.active {
+            background: #d9534f;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 26px;
+            margin: 15px 0;
+            padding: 10px;
+            background: #e8f4fd;
+            border-radius: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        thead {
+            background: #4a90d9;
+            color: white;
+        }
+        thead th {
+            padding: 18px 12px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+        tbody td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 15px;
+            vertical-align: top;
+        }
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        tbody tr:hover {
+            background: #f0f7ff;
+        }
+        .section-title {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 17px;
+            white-space: nowrap;
+            width: 120px;
+        }
+        .content-cell {
+            color: #444;
+            line-height: 1.8;
+        }
+        .sub-item {
+            margin-left: 0;
+            padding-left: 15px;
+            position: relative;
+        }
+        .sub-item::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #4a90d9;
+        }
+        .sub-sub {
+            margin-left: 20px;
+            color: #555;
+        }
+        .check-mark {
+            color: #5cb85c;
+            font-weight: bold;
+        }
+        .tags-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .tags-title {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .tag {
+            display: inline-block;
+            background: #e8f4fd;
+            color: #4a90d9;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin: 4px;
+            border: 1px solid #b8daff;
+        }
+        .tag.disease {
+            background: #fde8e8;
+            color: #d9534f;
+            border-color: #f5c6cb;
+        }
+        .tag.bacteria {
+            background: #e8fdef;
+            color: #5cb85c;
+            border-color: #c3e6cb;
+        }
+        .bottom-section {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            margin-bottom: 15px;
+        }
+        .keywords {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+            word-break: break-all;
+        }
+        .page-num {
+            text-align: center;
+            font-size: 18px;
+            color: #4a90d9;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: monospace;
+        }
+        .copy-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .copy-btn:active {
+            background: #357abd;
+        }
+        @media (max-width: 600px) {
+            h1 { font-size: 20px; }
+            thead th { font-size: 17px; padding: 14px 8px; }
+            tbody td { font-size: 14px; padding: 10px 8px; }
+            .section-title { font-size: 15px; width: 100px; }
+            .home-btn, .nav-btn, .fav-btn { padding: 8px 14px; font-size: 13px; }
+            .copy-section { flex-direction: column; }
+            .copy-input { width: 100%; }
+            .copy-btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部按钮 -->
+    <div class="header-btns">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-btns">
+            <a href="70.html" class="nav-btn">上一页</a>
+            <a href="72.html" class="nav-btn">下一页</a>
+            <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+
+    <!-- 标题 -->
+    <h1>~~~~~慢性阻塞性肺疾病急性加重-分级与急诊处理*****</h1>
+
+    <!-- 主表格 -->
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">慢性阻塞性肺疾病急性加重 — 分级与急诊处理</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="section-title">AECOPD Ⅲ级</td>
+                <td class="content-cell">
+                    <div class="sub-item">急性呼吸衰竭－有生命危险。呼吸频率＞30次/分；应用辅助呼吸肌群；精神意识状态急剧改变；低氧血症不能通过文丘里面罩吸氧或＞40%浓度吸氧而改善；高碳酸血症即PaCO₂较基础值升高或＞60mmHg或存在酸中毒（pH≤7.25），需要入住ICU治疗。</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="section-title">8. 严重AECOPD的初步急诊评估策略</td>
+                <td class="content-cell">
+                    <div style="font-weight:bold;color:#2c3e50;margin-bottom:5px;">临床特点</div>
+                    <div class="sub-sub"><span class="check-mark">✓</span> COPD急性加重的特点：弥漫性哮鸣音，呼吸音减低，桶状胸，呼吸急促，心动过速，吸烟＞20包/年。</div>
+                    <div class="sub-sub"><span class="check-mark">✓</span> 严重呼吸功能不全的特点：使用辅助肌群进行呼吸，言语简短、不连贯；不能仰卧，大汗，烦躁不安，呼吸时胸腹运动不同步，经初步急救未能改善。</div>
+                    <div class="sub-sub"><span class="check-mark">✓</span> 即将发生呼吸骤停的特征：无法维持呼吸功能，发绀，血流动力学不稳定，精神状态低落。</div>
+                    <div class="sub-sub"><span class="check-mark">✓</span> 肺心病特点：颈静脉怒张，左胸骨旁隆起，周围水肿。</div>
+                    <div style="font-weight:bold;color:#2c3e50;margin:10px 0 5px;">诊断及检测</div>
+                    <div class="sub-sub"><span class="check-mark">✓</span> 连续脉搏血氧仪监测血氧饱和度。</div>
+                    <div class="sub-sub"><span class="check-mark">✓</span> 对所有严重的AECOPD患者进行ABG。</div>
+                    <div class="sub-sub"><span class="check-mark">✓</span> AECOPD患者呼气末CO₂监测（ETCO₂）与动脉血二氧化碳分压（PaCO₂）只有中度相关性。</div>
+                    <div class="sub-sub"><span class="check-mark">✓</span> 不要评估严重AECOPD患者的呼气峰流量或肺活量，因为结果不准确。</div>
+                    <div class="sub-sub"><span class="check-mark">✓</span> 胸片：寻找肺炎、急性心力衰竭、气胸的征象。</div>
+                    <div class="sub-sub"><span class="check-mark">✓</span> 完善血常规、电解质（Na⁺、K⁺、Cl⁻、HCO₃⁻）、BUN和Cr检测。若诊断不明确，还应完善cTnI/cTnT、BNP或NT-proBNP检测。</div>
+                    <div class="sub-sub"><span class="check-mark">✓</span> 在流感季节进行流感感染相关检测。</div>
+                    <div class="sub-sub"><span class="check-mark">✓</span> 获取ECG：寻找心律失常、心肌缺血、肺心病的征象。</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="section-title">9. 急诊处理</td>
+                <td class="content-cell">
+                    <div style="font-weight:bold;color:#2c3e50;margin-bottom:5px;">患者分流策略</div>
+                    <div class="sub-sub"><span class="check-mark">✓</span> 门急诊治疗：对于COPD加重早期、病情较轻的患者，可以在门诊治疗，有时是在急诊经初步治疗后在门诊继续治疗。</div>
+                    <div class="sub-sub"><span class="check-mark">✓</span> 普通病房住院治疗指征：①症状显著加剧，如突然出现的静息状况下呼吸困难；②重度COPD；③出现新的体征或原有体征加重（如发绀、神志改变、外周水肿）；④有严重的合并症（如心力衰竭或新出现的心律失常）；⑤初始药物治疗急性加重失败；⑥高龄患者；⑦诊断不明确；⑧院外治疗无效或医疗条件差。</div>
+                    <div class="sub-sub"><span class="check-mark">✓</span> 入住监护室的指征：①严重呼吸困难且对初始治疗反应差；</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 检索标签（疾病 / 抗生素药物 / 细菌）</div>
+        <span class="tag disease">慢性阻塞性肺疾病急性加重</span>
+        <span class="tag disease">AECOPD</span>
+        <span class="tag disease">COPD</span>
+        <span class="tag disease">急性呼吸衰竭</span>
+        <span class="tag disease">呼吸衰竭</span>
+        <span class="tag disease">低氧血症</span>
+        <span class="tag disease">高碳酸血症</span>
+        <span class="tag disease">酸中毒</span>
+        <span class="tag disease">肺心病</span>
+        <span class="tag disease">肺炎</span>
+        <span class="tag disease">急性心力衰竭</span>
+        <span class="tag disease">心力衰竭</span>
+        <span class="tag disease">气胸</span>
+        <span class="tag disease">心律失常</span>
+        <span class="tag disease">心肌缺血</span>
+        <span class="tag disease">流感</span>
+        <span class="tag">ICU</span>
+        <span class="tag">ABG</span>
+        <span class="tag">ETCO₂</span>
+        <span class="tag">PaCO₂</span>
+        <span class="tag">pH</span>
+        <span class="tag">cTnI</span>
+        <span class="tag">cTnT</span>
+        <span class="tag">BNP</span>
+        <span class="tag">NT-proBNP</span>
+        <span class="tag">BUN</span>
+        <span class="tag">Cr</span>
+        <span class="tag">ECG</span>
+        <span class="tag">Na⁺</span>
+        <span class="tag">K⁺</span>
+        <span class="tag">Cl⁻</span>
+        <span class="tag">HCO₃⁻</span>
+    </div>
+
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <div class="keywords">
+            <strong>关键词：</strong>慢性阻塞性肺疾病急性加重；AECOPD；COPD；急性呼吸衰竭；低氧血症；高碳酸血症；酸中毒；pH；PaCO₂；ICU；临床特点；诊断及检测；血氧饱和度；ABG；ETCO₂；呼气峰流量；肺活量；胸片；肺炎；急性心力衰竭；气胸；血常规；电解质；Na⁺；K⁺；Cl⁻；HCO₃⁻；BUN；Cr；cTnI；cTnT；BNP；NT-proBNP；流感；ECG；心律失常；心肌缺血；肺心病；急诊处理；患者分流策略；门急诊治疗；普通病房；入住监护室；呼吸困难；发绀；神志改变；外周水肿
+        </div>
+        <div class="page-num">71</div>
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="慢性阻塞性肺疾病急性加重-分级与急诊处理；AECOPD；COPD；急性呼吸衰竭；低氧血症；高碳酸血症；酸中毒；pH；PaCO₂；ICU；临床特点；诊断及检测；血氧饱和度；ABG；ETCO₂；呼气峰流量；肺活量；胸片；肺炎；急性心力衰竭；气胸；血常规；电解质；Na⁺；K⁺；Cl⁻；HCO₃⁻；BUN；Cr；cTnI；cTnT；BNP；NT-proBNP；流感；ECG；心律失常；心肌缺血；肺心病；急诊处理；患者分流策略；门急诊治疗；普通病房；入住监护室；呼吸困难；发绀；神志改变；外周水肿；=71" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value);
+            } else {
+                document.execCommand('copy');
+            }
+            const btn = document.querySelector('.copy-btn');
+            btn.textContent = '✓ 已复制';
+            setTimeout(() => btn.textContent = '📋 复制', 1500);
+        }
+
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const title = document.querySelector('h1').textContent;
+            const page = '71';
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const existing = favorites.findIndex(f => f.page === page);
+            
+            if (existing >= 0) {
+                favorites.splice(existing, 1);
+                btn.textContent = '☆ 收藏';
+                btn.classList.remove('active');
+                alert('已取消收藏');
+            } else {
+                favorites.push({ title: title, page: page, url: '71.html', time: new Date().toLocaleString() });
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+                alert('已添加到收藏！');
+            }
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+        }
+
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const btn = document.getElementById('favBtn');
+            if (favorites.find(f => f.page === '71')) {
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+            }
+        };
+    </script>
+</body>
+</html>
