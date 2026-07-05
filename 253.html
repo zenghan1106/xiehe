@@ -1,0 +1,505 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~高钾血症的临床表现与急诊处理*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #e6f3ff 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(33,150,243,0.3);
+            z-index: 100;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background: #1976D2;
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .nav-btns a, .nav-btns button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(76,175,80,0.3);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .nav-btns a:hover, .nav-btns button:hover {
+            background: #388E3C;
+        }
+        
+        /* 收藏按钮 */
+        .favorite-btn {
+            background: #FF9800 !important;
+            box-shadow: 0 3px 10px rgba(255,152,0,0.3) !important;
+        }
+        
+        .favorite-btn:hover {
+            background: #F57C00 !important;
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 900px;
+            margin: 70px auto 30px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            padding: 25px 20px;
+            background: linear-gradient(90deg, #1976D2, #2196F3, #42A5F5);
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+        
+        /* 表头蓝色 */
+        thead tr {
+            background: #1976D2 !important;
+        }
+        
+        thead th {
+            color: white;
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        /* 表格行 */
+        tbody tr:nth-child(odd) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #ffffff;
+        }
+        
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e0e0e0;
+            line-height: 1.8;
+            vertical-align: top;
+        }
+        
+        /* 第一列（分类）加粗 */
+        td:first-child {
+            font-weight: bold;
+            color: #1565C0;
+            white-space: nowrap;
+            width: 120px;
+        }
+        
+        /* 内容中的标记 */
+        .check-mark {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        .bullet {
+            color: #1976D2;
+            font-weight: bold;
+        }
+        
+        .diamond {
+            color: #FF9800;
+        }
+        
+        /* 页码区域 */
+        .page-number {
+            text-align: center;
+            padding: 20px;
+            font-size: 16px;
+            color: #666;
+            background: #f5f5f5;
+        }
+        
+        .page-number span {
+            color: #1976D2;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        /* 关键词标签区域 */
+        .tags-section {
+            padding: 20px;
+            background: #fafafa;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .tag-disease {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+        
+        .tag-drug {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .tag-bacteria {
+            background: #fff3e0;
+            color: #ef6c00;
+            border: 1px solid #ffcc80;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            padding: 20px;
+            background: #fff;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .copy-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #90caf9;
+            border-radius: 8px;
+            font-size: 14px;
+            background: #f8fbff;
+            color: #333;
+        }
+        
+        .copy-btn {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #1976D2;
+        }
+        
+        .copy-btn.copied {
+            background: #4CAF50;
+        }
+        
+        /* 关键词底部 */
+        .keywords-bottom {
+            padding: 15px 20px;
+            background: #e3f2fd;
+            text-align: center;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .keywords-bottom strong {
+            color: #1565C0;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .page-title {
+                font-size: 18px;
+                padding: 18px 15px;
+            }
+            
+            thead th {
+                font-size: 16px;
+                padding: 12px 8px;
+            }
+            
+            td {
+                padding: 10px 8px;
+                font-size: 14px;
+            }
+            
+            td:first-child {
+                width: 90px;
+            }
+            
+            .home-btn, .nav-btns a, .nav-btns button {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 右上角导航 -->
+    <div class="nav-btns">
+        <a href="252.html">⬆ 上一页</a>
+        <a href="254.html">⬇ 下一页</a>
+        <button class="favorite-btn" onclick="addToFavorite()">⭐ 收藏</button>
+    </div>
+    
+    <div class="container">
+        <!-- 标题 -->
+        <div class="page-title">~~~~~高钾血症的临床表现与急诊处理*****</div>
+        
+        <!-- 主表格 -->
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">高钾血症 - 急诊医学</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>病因</td>
+                    <td>
+                        <span class="check-mark">✓</span> 高钾性周期性麻痹<br>
+                        <span class="bullet">●</span> 钾排出减少<br>
+                        &nbsp;&nbsp;<span class="check-mark">✓</span> 醛固酮分泌减少<br>
+                        &nbsp;&nbsp;<span class="check-mark">✓</span> 醛固酮反应降低：如应用保钾利尿药（如螺内酯、依普利酮、阿米洛利或氨苯蝶啶），或存在电压依赖型肾小管性酸中毒（如尿路梗阻）<br>
+                        &nbsp;&nbsp;<span class="check-mark">✓</span> 肾小管远端钠输送减少，最常见原因是有效循环血量减少<br>
+                        &nbsp;&nbsp;<span class="check-mark">✓</span> 急性/慢性肾病，急性肾损伤
+                    </td>
+                </tr>
+                <tr>
+                    <td>临床表现</td>
+                    <td>
+                        <span class="bullet">●</span> 血钾轻度升高者：临床表现不明显<br>
+                        <span class="bullet">●</span> 血钾严重升高者：血清钾缓慢升高＞7mmol/L或急剧升高＜7mmol/L，可有以下表现<br>
+                        &nbsp;&nbsp;<span class="check-mark">✓</span> 肌无力/麻痹：通常从下肢开始，逐渐进展至躯干、上肢，呼吸肌一般不受影响<br>
+                        &nbsp;&nbsp;<span class="check-mark">✓</span> 心电图异常/心律失常：高钾血症可伴多种心电图改变，T波高尖伴QT间期缩短最常见，可伴左/右束支传导阻滞、高度房室传导阻滞、窦性心动过缓、窦性停搏、缓慢性室性自主心律、室性心动过速、心室颤动甚至心搏骤停
+                    </td>
+                </tr>
+                <tr>
+                    <td>必做检查</td>
+                    <td>ABG、血常规、肝肾功能、肌酸激酶（CK、CK-MB）、肌红蛋白、心电图</td>
+                </tr>
+                <tr>
+                    <td>选做检查</td>
+                    <td>cTn、NT-proBNP、血浆渗透压、尿常规等</td>
+                </tr>
+                <tr>
+                    <td>急诊处理</td>
+                    <td>
+                        <span class="bullet">●</span> 紧急处理<br>
+                        &nbsp;&nbsp;<span class="check-mark">✓</span> 指征：①肌无力/肌麻痹；②心电图呈现心脏传导异常/心律失常，如窦性心动过缓、窦性停搏、缓慢性心室自主心律、室性心动过速、心室颤动、心搏骤停等；③高钾血症：血钾＞6.5mmol/L，或血钾＞5.5mol/L伴导致血钾升高的其他因素，如活动性消化道出血、横纹肌溶解等<br>
+                        &nbsp;&nbsp;<span class="check-mark">✓</span> 方案<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="diamond">◇</span> 钙剂：静脉给予钙剂拮抗高钾血症的细胞膜作用，对于有心电图改变的高钾血症患者应尽快使用，通常选择葡萄糖酸钙，常用剂量1g（10%溶液10ml），静脉推注2～3分钟。若高钾血症仍存在且血钙不高，可每30～60分钟重复给药<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="diamond">◇</span> 高糖胰岛素：静脉给予高糖胰岛素促进血钾向细胞内转移。常用方案为在500ml浓度为10%GS中加入10～20U
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 页码 -->
+        <div class="page-number">
+            页码：<span>253</span>
+        </div>
+        
+        <!-- 检索标签 -->
+        <div class="tags-section">
+            <div class="tags-title">🔍 检索标签（点击可检索）：</div>
+            <div class="tags-container">
+                <span class="tag tag-disease">高钾血症</span>
+                <span class="tag tag-disease">高钾性周期性麻痹</span>
+                <span class="tag tag-disease">急性肾病</span>
+                <span class="tag tag-disease">慢性肾病</span>
+                <span class="tag tag-disease">急性肾损伤</span>
+                <span class="tag tag-disease">肌无力</span>
+                <span class="tag tag-disease">心律失常</span>
+                <span class="tag tag-disease">心搏骤停</span>
+                <span class="tag tag-disease">横纹肌溶解</span>
+                <span class="tag tag-drug">螺内酯</span>
+                <span class="tag tag-drug">依普利酮</span>
+                <span class="tag tag-drug">阿米洛利</span>
+                <span class="tag tag-drug">氨苯蝶啶</span>
+                <span class="tag tag-drug">葡萄糖酸钙</span>
+                <span class="tag tag-drug">胰岛素</span>
+            </div>
+        </div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <div class="copy-wrapper">
+                <input type="text" class="copy-input" id="copyText" value="高钾血症的临床表现与急诊处理；高钾血症、高钾性周期性麻痹、急性肾病、慢性肾病、急性肾损伤、肌无力、心律失常、心搏骤停、横纹肌溶解、螺内酯、依普利酮、阿米洛利、氨苯蝶啶、葡萄糖酸钙、胰岛素；=253" readonly>
+                <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+            </div>
+        </div>
+        
+        <!-- 底部关键词 -->
+        <div class="keywords-bottom">
+            <strong>关键词：</strong>高钾血症 | 高钾性周期性麻痹 | 急性肾病 | 慢性肾病 | 急性肾损伤 | 肌无力 | 心律失常 | 心搏骤停 | 横纹肌溶解 | 螺内酯 | 依普利酮 | 阿米洛利 | 氨苯蝶啶 | 葡萄糖酸钙 | 胰岛素 | 醛固酮 | 保钾利尿药 | 肾小管性酸中毒 | 心电图异常 | 心室颤动 | 钙剂 | 高糖胰岛素
+        </div>
+    </div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 添加到收藏
+        function addToFavorite() {
+            // 获取当前页面信息
+            const title = document.querySelector('.page-title').textContent;
+            const pageNum = '253';
+            const url = window.location.href;
+            
+            // 尝试保存到localStorage（模拟添加到index收藏）
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.pageNum === pageNum);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                pageNum: pageNum,
+                url: url,
+                time: new Date().toLocaleString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试向index.html发送消息（同域情况下）
+            try {
+                if (window.opener && !window.opener.closed) {
+                    window.opener.postMessage({
+                        type: 'addFavorite',
+                        data: {
+                            title: title,
+                            pageNum: pageNum,
+                            url: '253.html'
+                        }
+                    }, '*');
+                }
+            } catch(e) {}
+            
+            alert('⭐ 已收藏！页面 "' + title + '" 已添加到收藏夹。\n\n注意：实际项目中需要index.html配合接收收藏数据。');
+        }
+        
+        // 页面加载时检查是否有来自子页面的收藏消息
+        window.addEventListener('message', function(e) {
+            if (e.data && e.data.type === 'addFavorite') {
+                console.log('收到收藏请求:', e.data.data);
+            }
+        });
+    </script>
+</body>
+</html>
