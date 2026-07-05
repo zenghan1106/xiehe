@@ -1,0 +1,538 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~肾上腺素药理作用详解*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #fefce8 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+            color: #1e293b;
+        }
+        
+        /* 导航按钮 */
+        .nav-btn {
+            position: fixed;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+        }
+        
+        .home-btn {
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .prev-btn {
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        
+        .next-btn {
+            top: 60px;
+            right: 15px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+        
+        .fav-btn {
+            top: 105px;
+            right: 15px;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 900px;
+            margin: 85px auto 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            padding: 28px 20px;
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #06b6d4 100%);
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            line-height: 1.6;
+        }
+        
+        /* 表格样式 */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        .data-table thead {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            color: white;
+        }
+        
+        .data-table thead th {
+            padding: 18px 14px;
+            font-size: 17px;
+            font-weight: bold;
+            text-align: center;
+            border: 1px solid #3b82f6;
+        }
+        
+        .data-table tbody td {
+            padding: 14px 12px;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+            color: #334155;
+            line-height: 1.8;
+            vertical-align: top;
+        }
+        
+        .data-table tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        .data-table tbody tr:hover {
+            background-color: #dbeafe;
+            transition: background-color 0.3s;
+        }
+        
+        /* 药物名称高亮 */
+        .drug-name {
+            color: #1e40af;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        
+        /* 分类标题 */
+        .category-title {
+            color: #7c3aed;
+            font-weight: bold;
+        }
+        
+        /* 受体类型 */
+        .receptor {
+            color: #059669;
+            font-weight: bold;
+        }
+        
+        /* 不良反应 */
+        .adverse {
+            color: #dc2626;
+        }
+        
+        /* 临床应用 */
+        .clinical {
+            color: #059669;
+        }
+        
+        /* 机制说明 */
+        .mechanism {
+            color: #7c3aed;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            padding: 24px 20px;
+            background: #f0f9ff;
+            border-top: 2px solid #e0e7ff;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 14px;
+            font-weight: 500;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 7px 18px;
+            margin: 6px;
+            border-radius: 24px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1.5px solid;
+        }
+        
+        .disease-tag {
+            background: #fef3c7;
+            color: #92400e;
+            border-color: #fcd34d;
+        }
+        
+        .drug-tag {
+            background: #dbeafe;
+            color: #1e40af;
+            border-color: #93c5fd;
+        }
+        
+        .receptor-tag {
+            background: #d1fae5;
+            color: #065f46;
+            border-color: #6ee7b7;
+        }
+        
+        .symptom-tag {
+            background: #fce7f3;
+            color: #be185d;
+            border-color: #f9a8d4;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            padding: 24px 20px;
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .keywords {
+            font-size: 12px;
+            color: #64748b;
+            text-align: center;
+            margin-bottom: 16px;
+            line-height: 2;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 15px;
+            color: #3b82f6;
+            font-weight: bold;
+            margin-bottom: 22px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            max-width: calc(100% - 100px);
+            margin: 0 auto;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 14px 16px;
+            border: 2px solid #3b82f6;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #475569;
+            background: white;
+            outline: none;
+        }
+        
+        .copy-btn {
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%) translateY(120px);
+            background: #1e293b;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 2000;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 640px) {
+            .page-title {
+                font-size: 16px;
+                padding: 20px 15px;
+            }
+            
+            .data-table {
+                font-size: 12px;
+            }
+            
+            .data-table thead th {
+                font-size: 14px;
+                padding: 14px 8px;
+            }
+            
+            .data-table tbody td {
+                padding: 10px 8px;
+                line-height: 1.7;
+            }
+            
+            .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                top: 10px;
+                left: 10px;
+            }
+            
+            .prev-btn, .next-btn, .fav-btn {
+                right: 10px;
+            }
+            
+            .prev-btn { top: 10px; }
+            .next-btn { top: 50px; }
+            .fav-btn { top: 90px; }
+            
+            .copy-section {
+                flex-direction: column;
+                max-width: 100%;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+            
+            .container {
+                margin-top: 135px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航按钮 -->
+    <button class="nav-btn home-btn" onclick="location.href='index.html'">🏠 返回首页</button>
+    <button class="nav-btn prev-btn" onclick="location.href='375.html'">← 上一页</button>
+    <button class="nav-btn next-btn" onclick="location.href='377.html'">下一页 →</button>
+    <button class="nav-btn fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 标题 -->
+        <div class="page-title">~~~~~肾上腺素药理作用详解*****</div>
+        
+        <!-- 数据表格 -->
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th style="width: 20%;">分类/项目</th>
+                    <th style="width: 80%;">详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="drug-name">去氧肾上腺素<br>（续前）</td>
+                    <td>
+                        去甲肾上腺素更明显，作用维持时间较久，可静脉滴注也可肌内注射，用于抗休克及防治脊髓麻醉或全身麻醉的低血压。去氧肾上腺素能通过收缩血管、升高血压使迷走反射性兴奋而减慢心率。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="drug-name">α+β受体<br>激动药</td>
+                    <td>
+                        <span class="category-title">◇ 肾上腺素</span>：是肾上腺髓质的主要激素，在髓质嗜铬细胞中首先形成去甲肾上腺素，然后再甲基化形成肾上腺素。肾上腺素化学性质不稳定，见光易失效。<br><br>
+                        
+                        <span class="mechanism">□ 药理作用</span>：对于<span class="receptor">α₁、α₂、β₁、β₂</span>受体均有作用。其作用与机体生理状态、靶器官中肾上腺素受体亚型的分布及神经末梢的反馈调节有关。<br><br>
+                        
+                        <span class="clinical">心脏</span>：作用于心肌、传导系统和窦房结的<span class="receptor">β₁及β₂</span>受体，加强心肌收缩性，加速传导，加快心率，提高心肌兴奋性，增加心输出量。肾上腺素兴奋心脏，使心肌耗氧量增加，剂量过大、静脉注射过快、患者处于心肌缺血以及缺氧及心力衰竭时可引起<span class="adverse">心律失常，甚至心室颤动</span>发生。<br><br>
+                        
+                        <span class="clinical">血管</span>：激动血管平滑肌上的<span class="receptor">α</span>受体，<span class="clinical">血管收缩</span>，激动<span class="receptor">β₂</span>受体，<span class="clinical">血管舒张</span>，根据体内各部位血管的肾上腺素受体种类和密度不同效用不同。当<span class="receptor">α₁</span>受体激动时，皮肤黏膜、肾和胃肠道的血管平滑肌收缩最为明显，其次为小动脉、毛细血管前括约肌血管，而脑和肺血管收缩作用非常微弱，甚至有时由于血压升高而被动舒张；而静脉和大动脉的肾上腺素受体密度低，因此收缩作用较弱。骨骼肌和肝血管平滑肌<span class="receptor">β₂</span>受体占优势，因此小剂量的肾上腺素使这些血管舒张。肾上腺素在不增加主动脉血压时也可舒张冠状动脉，原因为兴奋冠脉血管<span class="receptor">β₂</span>受体，血管舒张；心脏收缩期缩短，相对延长舒张期；肾上腺素引起心肌收缩力增强，心肌耗氧量增加，心肌细胞释放腺苷扩张冠状动脉。<br><br>
+                        
+                        <span class="clinical">血压</span>：低剂量肾上腺素静脉滴注时，由于心脏兴奋，皮肤黏膜血管收缩，使收缩压和舒张压升高；由于骨骼肌血管的舒张作用，抵消或超过了皮肤血管收缩作用的影响，故舒张压不变或下降，脉压增加，身体各部位血液重新分配。大剂量肾上腺素静脉注射时，由于缩血管反应使收缩压和舒张压均升高。肾上腺素典型血压改变为双相反应，即给药后迅速出现升压作用，然后出现微弱的降压反应，后者持续时间较长。<br><br>
+                        
+                        <span class="clinical">平滑肌</span>：肾上腺素在支气管平滑肌上可激动<span class="receptor">β</span>受...
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 标签区域 -->
+        <div class="tags-section">
+            <div class="tags-title">🔖 检索标签（点击可筛选，仅含图片内文字）：</div>
+            <div>
+                <span class="disease-tag">休克</span>
+                <span class="disease-tag">低血压</span>
+                <span class="disease-tag">心肌缺血</span>
+                <span class="disease-tag">缺氧</span>
+                <span class="disease-tag">心力衰竭</span>
+                <span class="disease-tag">心律失常</span>
+                <span class="disease-tag">心室颤动</span>
+                <span class="drug-tag">去氧肾上腺素</span>
+                <span class="drug-tag">肾上腺素</span>
+                <span class="drug-tag">去甲肾上腺素</span>
+                <span class="receptor-tag">α₁受体</span>
+                <span class="receptor-tag">α₂受体</span>
+                <span class="receptor-tag">β₁受体</span>
+                <span class="receptor-tag">β₂受体</span>
+                <span class="receptor-tag">α受体</span>
+                <span class="symptom-tag">脊髓麻醉</span>
+                <span class="symptom-tag">全身麻醉</span>
+                <span class="symptom-tag">嗜铬细胞</span>
+                <span class="symptom-tag">肾上腺髓质</span>
+                <span class="symptom-tag">心肌收缩性</span>
+                <span class="symptom-tag">心输出量</span>
+                <span class="symptom-tag">血管收缩</span>
+                <span class="symptom-tag">血管舒张</span>
+                <span class="symptom-tag">冠状动脉</span>
+                <span class="symptom-tag">收缩压</span>
+                <span class="symptom-tag">舒张压</span>
+                <span class="symptom-tag">脉压</span>
+                <span class="symptom-tag">双相反应</span>
+                <span class="symptom-tag">支气管平滑肌</span>
+            </div>
+        </div>
+        
+        <!-- 底部区域 -->
+        <div class="bottom-section">
+            <div class="keywords">
+                <strong>关键词：</strong>肾上腺素、去氧肾上腺素、α受体、β受体、α₁受体、α₂受体、β₁受体、β₂受体、心肌收缩、心律失常、心室颤动、血管收缩、血管舒张、血压、双相反应、冠状动脉、心输出量、脊髓麻醉、全身麻醉、休克、低血压、嗜铬细胞、肾上腺髓质
+            </div>
+            <div class="page-number">页码：376</div>
+            
+            <!-- 复制区域 -->
+            <div class="copy-section">
+                <input type="text" class="copy-input" id="copyInput" readonly>
+                <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 提示框 -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // 页面信息
+        const pageInfo = {
+            title: "肾上腺素药理作用详解",
+            subtitle: "α+β受体激动药、心血管系统药理",
+            keywords: "肾上腺素、去氧肾上腺素、α受体、β受体、α₁受体、α₂受体、β₁受体、β₂受体、心肌收缩、心律失常、心室颤动、血管收缩、血管舒张、血压、双相反应、冠状动脉、心输出量、脊髓麻醉、全身麻醉、休克、低血压",
+            pageNum: "376"
+        };
+        
+        // 设置复制输入框内容
+        const copyContent = `${pageInfo.title}；${pageInfo.subtitle}；${pageInfo.keywords}=${pageInfo.pageNum}`;
+        document.getElementById('copyInput').value = copyContent;
+        
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('✅ 已复制到剪贴板！');
+                }).catch(() => {
+                    document.execCommand('copy');
+                    showToast('✅ 已复制到剪贴板！');
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('✅ 已复制到剪贴板！');
+            }
+        }
+        
+        // 显示提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            const favItem = {
+                title: document.title,
+                url: window.location.href,
+                pageNum: pageInfo.pageNum,
+                addTime: new Date().toLocaleString('zh-CN')
+            };
+            
+            const exists = favorites.some(f => f.pageNum === pageInfo.pageNum);
+            if (exists) {
+                showToast('⚠️ 该页面已在收藏中！');
+                return;
+            }
+            
+            favorites.push(favItem);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            localStorage.setItem('newFavorite', JSON.stringify(favItem));
+            
+            showToast('⭐ 已添加到收藏！');
+        }
+        
+        // 标签点击
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                showToast(`🔍 标签: ${this.textContent}`);
+            });
+        });
+    </script>
+</body>
+</html>
