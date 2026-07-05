@@ -1,0 +1,571 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~急诊疾病章节首页*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        .nav-btn {
+            position: fixed;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+        
+        .home-btn {
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .prev-btn {
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(45deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+        }
+        
+        .next-btn {
+            top: 60px;
+            right: 15px;
+            background: linear-gradient(45deg, #fc4a1a 0%, #f7b733 100%);
+            color: white;
+        }
+        
+        .fav-btn {
+            top: 105px;
+            right: 15px;
+            background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        
+        .fav-btn.active {
+            background: linear-gradient(45deg, #ff6b6b 0%, #ee5a24 100%);
+        }
+        
+        .title-section {
+            text-align: center;
+            margin: 80px 0 30px 0;
+            padding: 20px;
+        }
+        
+        .main-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1a5276;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            letter-spacing: 3px;
+        }
+        
+        .title-decoration {
+            color: #e74c3c;
+            font-size: 30px;
+        }
+        
+        .ornament {
+            text-align: center;
+            font-size: 50px;
+            color: #7fb3d5;
+            margin: 20px 0;
+            letter-spacing: 5px;
+        }
+        
+        .table-container {
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            overflow-x: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        thead tr {
+            background: linear-gradient(45deg, #1e5799 0%, #2989d8 50%, #207cca 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 25px 15px;
+            font-size: 22px;
+            font-weight: bold;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e8e8e8;
+            transition: background 0.3s ease;
+        }
+        
+        tbody tr:hover {
+            background: #f8f9ff;
+        }
+        
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+        
+        tbody td {
+            padding: 20px 15px;
+            font-size: 16px;
+            line-height: 2;
+            color: #2c3e50;
+            vertical-align: middle;
+            text-align: center;
+        }
+        
+        .chapter-title {
+            font-size: 36px;
+            font-weight: bold;
+            color: #1a5276;
+            letter-spacing: 8px;
+            padding: 60px 20px;
+        }
+        
+        .divider {
+            color: #85c1e9;
+            font-size: 24px;
+            letter-spacing: 10px;
+        }
+        
+        .footer-note {
+            color: #95a5a6;
+            font-size: 13px;
+            font-style: italic;
+        }
+        
+        .page-num {
+            text-align: center;
+            color: #95a5a6;
+            font-size: 14px;
+            padding: 10px;
+        }
+        
+        .tags-section {
+            max-width: 600px;
+            margin: 0 auto 25px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #ffeaa7;
+            color: #d63031;
+        }
+        
+        .tag-drug {
+            background: #74b9ff;
+            color: #0984e3;
+        }
+        
+        .tag-bacteria {
+            background: #55efc4;
+            color: #00b894;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+        }
+        
+        .keywords-section {
+            max-width: 600px;
+            margin: 0 auto 20px auto;
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .keywords-title {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 8px;
+        }
+        
+        .keywords {
+            font-size: 13px;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        
+        .copy-section {
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .copy-title {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 12px;
+        }
+        
+        .copy-box-wrapper {
+            display: flex;
+            gap: 12px;
+            align-items: stretch;
+        }
+        
+        #copyInput {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #2c3e50;
+            background: #fafafa;
+            outline: none;
+            transition: border-color 0.3s;
+            width: calc(100% - 100px);
+        }
+        
+        #copyInput:focus {
+            border-color: #3498db;
+        }
+        
+        .copy-btn {
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .copy-btn.copied {
+            background: linear-gradient(45deg, #00b894 0%, #00cec9 100%);
+        }
+        
+        .page-link {
+            text-align: center;
+            color: #95a5a6;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+        
+        .border-frame {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 30px;
+            border: 3px double #7fb3d5;
+            border-radius: 5px;
+            position: relative;
+        }
+        
+        .border-frame::before {
+            content: "❦ ❦ ❦ ❦ ❦ ❦ ❦ ❦ ❦ ❦";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 0 15px;
+            color: #7fb3d5;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        @media (max-width: 600px) {
+            .main-title {
+                font-size: 22px;
+            }
+            
+            .chapter-title {
+                font-size: 28px;
+                padding: 40px 15px;
+            }
+            
+            .ornament {
+                font-size: 36px;
+            }
+            
+            thead th {
+                font-size: 18px;
+                padding: 20px 10px;
+            }
+            
+            tbody td {
+                font-size: 14px;
+                padding: 15px;
+            }
+            
+            .nav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                top: 10px;
+                left: 10px;
+            }
+            
+            .prev-btn, .next-btn, .fav-btn {
+                right: 10px;
+            }
+            
+            .prev-btn { top: 10px; }
+            .next-btn { top: 50px; }
+            .fav-btn { top: 90px; }
+            
+            .title-section {
+                margin-top: 60px;
+            }
+            
+            #copyInput {
+                font-size: 12px;
+            }
+            
+            .border-frame {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航按钮 -->
+    <button class="nav-btn home-btn" onclick="location.href='index.html'">🏠 返回首页</button>
+    <button class="nav-btn prev-btn" onclick="location.href='67.html'">⬆ 上一页</button>
+    <button class="nav-btn next-btn" onclick="location.href='69.html'">⬇ 下一页</button>
+    <button class="nav-btn fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    
+    <!-- 标题 -->
+    <div class="title-section">
+        <h1 class="main-title">
+            <span class="title-decoration">~~~~~</span>
+            急诊疾病章节首页
+            <span class="title-decoration">*****</span>
+        </h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~ 急诊疾病章节首页 *****、急诊疾病、急 诊 疾 病、✿ ✿ ✿ ✿ ✿、使用 Scanner Pro 创建</div>
+    </div>
+    
+    <!-- 装饰花纹 -->
+    <div class="ornament">❦ ❦ ❦ ❦ ❦</div>
+    
+    <!-- 主表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>急诊疾病</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="border-frame">
+                            <div class="chapter-title">急 诊 疾 病</div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="divider">✿ ✿ ✿ ✿ ✿</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="footer-note">使用 Scanner Pro 创建</td>
+                </tr>
+                <tr>
+                    <td class="page-num">— 第 68 页 —</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">急诊疾病</span>
+            <span class="tag tag-disease">急症</span>
+            <span class="tag tag-disease">疾病</span>
+        </div>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">🔍 关键词</div>
+        <div class="keywords">
+            急诊、急诊疾病、章节首页、Scanner Pro
+        </div>
+    </div>
+    
+    <!-- 页码链接 -->
+    <div class="page-link">页码：68</div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制（标题 + 副标题 + 关键词 + 页码）</div>
+        <div class="copy-box-wrapper">
+            <input type="text" id="copyInput" value="急诊疾病章节首页；急诊疾病；急诊、急诊疾病、章节首页、Scanner Pro=68" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                
+                // 保存到 localStorage
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '急诊疾病章节首页',
+                    url: '68.html',
+                    category: '急诊疾病',
+                    date: new Date().toISOString()
+                };
+                
+                // 避免重复添加
+                const exists = favorites.some(f => f.url === '68.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                // 同时更新 index.html 的收藏
+                updateIndexFavorite(pageInfo);
+                
+                alert('已添加到收藏！');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const filtered = favorites.filter(f => f.url !== '68.html');
+                localStorage.setItem('favorites', JSON.stringify(filtered));
+            }
+        }
+        
+        function updateIndexFavorite(pageInfo) {
+            try {
+                const indexWindow = window.opener;
+                if (indexWindow && !indexWindow.closed) {
+                    indexWindow.postMessage({
+                        type: 'ADD_FAVORITE',
+                        data: pageInfo
+                    }, '*');
+                }
+            } catch(e) {
+                console.log('无法向首页发送消息');
+            }
+        }
+        
+        // 检查是否已收藏
+        function checkFavoriteStatus() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '68.html');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = checkFavoriteStatus;
+    </script>
+</body>
+</html>
