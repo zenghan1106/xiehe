@@ -4,89 +4,175 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>xiehe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
   :root{
     --ink:#1a1714;
     --paper:#f4f1ea;
+    --paper-2:#ece7db;
     --accent:#e2452b;
     --muted:#8a8175;
+    --line:rgba(26,23,20,.14);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{
     font-family:"Noto Serif SC",Georgia,"Songti SC",serif;
-    background:var(--paper);
-    color:var(--ink);
-    line-height:1.6;
+    background:var(--paper);color:var(--ink);line-height:1.65;
     -webkit-font-smoothing:antialiased;
   }
-  .wrap{max-width:960px;margin:0 auto;padding:0 28px}
-  header{
-    display:flex;justify-content:space-between;align-items:center;
-    padding:28px 0;border-bottom:1px solid rgba(26,23,20,.12);
+  .sans{font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+  a{color:inherit}
+
+  /* nav */
+  header.nav{
+    position:sticky;top:0;z-index:20;
+    backdrop-filter:saturate(140%) blur(8px);
+    background:color-mix(in srgb,var(--paper) 86%,transparent);
+    border-bottom:1px solid var(--line);
   }
-  .mark{font-size:22px;font-weight:700;letter-spacing:.04em}
+  .nav-in{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+  .mark{font-size:22px;font-weight:900;letter-spacing:.04em}
   .mark span{color:var(--accent)}
-  nav a{color:var(--muted);text-decoration:none;margin-left:24px;font-size:15px}
-  nav a:hover{color:var(--ink)}
-  .hero{padding:120px 0 96px}
-  .kicker{
-    color:var(--accent);font-size:14px;letter-spacing:.22em;
-    text-transform:uppercase;margin-bottom:22px;
-  }
+  nav.links a{color:var(--muted);text-decoration:none;margin-left:26px;font-size:15px;transition:color .2s}
+  nav.links a:hover{color:var(--ink)}
+  .menu-btn{display:none;background:none;border:0;font-size:22px;cursor:pointer;color:var(--ink)}
+
+  /* hero */
+  .hero{padding:120px 0 90px;position:relative}
+  .kicker{color:var(--accent);font-size:13px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:24px}
   h1{
-    font-size:clamp(48px,9vw,104px);line-height:.98;font-weight:700;
-    letter-spacing:-.01em;margin-bottom:28px;
+    font-size:clamp(54px,11vw,128px);line-height:.94;font-weight:900;
+    letter-spacing:-.02em;margin-bottom:30px;
   }
-  .lede{font-size:clamp(18px,2.4vw,22px);color:#4a443c;max-width:40ch}
-  .cta{
-    display:inline-block;margin-top:40px;background:var(--ink);color:var(--paper);
-    padding:15px 34px;border-radius:999px;text-decoration:none;font-size:16px;
-    transition:transform .2s ease;
+  h1 em{font-style:normal;color:var(--accent)}
+  .lede{font-size:clamp(18px,2.4vw,23px);color:#4a443c;max-width:46ch}
+  .cta-row{margin-top:42px;display:flex;gap:14px;flex-wrap:wrap}
+  .btn{
+    display:inline-block;padding:15px 34px;border-radius:999px;text-decoration:none;
+    font-size:16px;transition:transform .2s ease,background .2s;
   }
-  .cta:hover{transform:translateY(-2px)}
-  .note{
-    margin-top:64px;padding:18px 22px;border:1px dashed rgba(26,23,20,.25);
-    border-radius:12px;color:var(--muted);font-size:14px;
+  .btn.primary{background:var(--ink);color:var(--paper)}
+  .btn.primary:hover{transform:translateY(-2px)}
+  .btn.ghost{border:1px solid var(--ink);color:var(--ink)}
+  .btn.ghost:hover{background:var(--ink);color:var(--paper)}
+
+  /* sections */
+  section.block{padding:84px 0;border-top:1px solid var(--line)}
+  .sec-title{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+  h2{font-size:clamp(30px,5vw,52px);font-weight:700;line-height:1.05;margin-bottom:22px;letter-spacing:-.01em}
+  .prose{font-size:18px;color:#3f3a33;max-width:62ch}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:42px}
+  .card{
+    background:var(--paper-2);border:1px solid var(--line);border-radius:16px;
+    padding:30px 26px;transition:transform .2s ease;
   }
-  footer{
-    padding:40px 0;border-top:1px solid rgba(26,23,20,.12);
-    color:var(--muted);font-size:13px;display:flex;justify-content:space-between;
-  }
-  @media(max-width:600px){
-    nav{display:none}
-    .hero{padding:80px 0 64px}
+  .card:hover{transform:translateY(-4px)}
+  .card .num{font-size:14px;color:var(--accent);font-weight:700;letter-spacing:.1em}
+  .card h3{font-size:22px;margin:12px 0 10px;font-weight:700}
+  .card p{font-size:15.5px;color:#564f46;line-height:1.6}
+
+  /* contact */
+  .contact-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:start}
+  .mail{font-size:clamp(26px,4vw,40px);font-weight:700;color:var(--ink);text-decoration:none;border-bottom:2px solid var(--accent);padding-bottom:4px}
+  .social a{display:inline-block;margin-right:18px;color:var(--muted);text-decoration:none;font-size:15px}
+  .social a:hover{color:var(--ink)}
+
+  footer.ft{padding:40px 0;border-top:1px solid var(--line);color:var(--muted);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+  @media(max-width:760px){
+    nav.links{display:none}
+    .menu-btn{display:block}
+    .hero{padding:84px 0 60px}
+    .grid3{grid-template-columns:1fr}
+    .contact-grid{grid-template-columns:1fr}
   }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="mark">xie<span>he</span></div>
-      <nav>
-        <a href="#">关于</a>
-        <a href="#">作品</a>
-        <a href="#">联系</a>
-      </nav>
-    </header>
 
-    <section class="hero">
-      <div class="kicker">GitHub Pages · 占位首页</div>
-      <h1>这里将是<br>xiehe 的网站</h1>
-      <p class="lede">内容待定。告诉我这个站是做什么的，我把它换成真正能打的页面。</p>
-      <a class="cta" href="#">了解更多</a>
-
-      <div class="note">
-        这是本地生成的占位页，用于验证 GitHub Pages 部署链路。<br>
-        等你给内容，我会替换成定制设计（可升级为 React / Vite 版本）。
-      </div>
-    </section>
-
-    <footer>
-      <span>© <span id="y"></span> xiehe</span>
-      <span>Hosted on GitHub Pages</span>
-    </footer>
+<header class="nav">
+  <div class="wrap nav-in">
+    <div class="mark">xie<span>he</span></div>
+    <nav class="links sans">
+      <a href="#about">关于</a>
+      <a href="#work">作品</a>
+      <a href="#contact">联系</a>
+    </nav>
+    <button class="menu-btn" aria-label="menu">≡</button>
   </div>
-  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+</header>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="kicker">xiehe · 个人站点</div>
+    <h1>把想法<br>做成<em>作品</em>。</h1>
+    <p class="lede">这是 xiehe 的线上角落。一处安放项目、记录思考、与人连接的地方。</p>
+    <div class="cta-row sans">
+      <a class="btn primary" href="#work">看看作品</a>
+      <a class="btn ghost" href="#contact">联系我</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="block" id="about">
+    <div class="sec-title">关于 / About</div>
+    <h2>一行话说清楚<br>我是谁、在做什么。</h2>
+    <p class="prose">【待替换】在这里写一段自我介绍：你的身份、你专注的领域、你相信什么。保持克制，两三句话足够。读者停留不过几秒，先把最硬核的那句亮出来。</p>
+  </section>
+
+  <!-- WORK -->
+  <section class="block" id="work">
+    <div class="sec-title">作品 / Work</div>
+    <h2>近期在做的事</h2>
+    <div class="grid3">
+      <div class="card">
+        <div class="num sans">01</div>
+        <h3>项目标题</h3>
+        <p>【待替换】一句话描述这个项目解决了什么问题、有什么亮点。</p>
+      </div>
+      <div class="card">
+        <div class="num sans">02</div>
+        <h3>项目标题</h3>
+        <p>【待替换】一句话描述这个项目解决了什么问题、有什么亮点。</p>
+      </div>
+      <div class="card">
+        <div class="num sans">03</div>
+        <h3>项目标题</h3>
+        <p>【待替换】一句话描述这个项目解决了什么问题、有什么亮点。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="block" id="contact">
+    <div class="sec-title">联系 / Contact</div>
+    <div class="contact-grid">
+      <div>
+        <h2>想聊聊？</h2>
+        <p class="prose" style="margin-bottom:22px">合作、约稿、或者只是打个招呼都欢迎。</p>
+        <a class="mail" href="mailto:hello@xiehe.com">hello@xiehe.com</a>
+      </div>
+      <div class="social sans">
+        <a href="#">GitHub ↗</a>
+        <a href="#">微信公众号 ↗</a>
+        <a href="#">微博 ↗</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="ft sans">
+  <span>© <span id="y"></span> xiehe · 用 GitHub Pages 搭建</span>
+  <span>Hosted on GitHub Pages</span>
+</footer>
+
+<script>document.getElementById('y').textContent=new Date().getFullYear();</script>
 </body>
 </html>
