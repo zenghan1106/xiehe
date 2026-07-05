@@ -1,0 +1,593 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~肺栓塞（PE）诊断与检查*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8f0f5 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #333;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .header h1 {
+            font-size: 22px;
+            color: #1a5276;
+            padding: 15px;
+            background: linear-gradient(90deg, #3498db, #2980b9);
+            color: white;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            word-break: break-all;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            order: 1;
+        }
+        
+        .nav-right {
+            order: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-home {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #2980b9;
+        }
+        
+        .btn-page {
+            background: #5dade2;
+            color: white;
+            padding: 8px 16px;
+            font-size: 13px;
+        }
+        
+        .btn-page:hover {
+            background: #3498db;
+        }
+        
+        .btn-favorite {
+            background: #f39c12;
+            color: white;
+            padding: 8px 16px;
+            font-size: 13px;
+        }
+        
+        .btn-favorite:hover {
+            background: #e67e22;
+        }
+        
+        .btn-favorite.active {
+            background: #e74c3c;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        thead {
+            background: linear-gradient(90deg, #3498db, #2980b9);
+            color: white;
+        }
+        
+        thead th {
+            padding: 18px 15px;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e8e8e8;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        td {
+            padding: 15px;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #2c3e50;
+            vertical-align: top;
+        }
+        
+        .section-title {
+            background: #e8f6ff;
+            font-weight: 600;
+            color: #1a5276;
+            font-size: 15px;
+        }
+        
+        .definition-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 12px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+        
+        .risk-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 12px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+        
+        .clinical-box {
+            background: #f3e5f5;
+            border-left: 4px solid #9c27b0;
+            padding: 12px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+        
+        .required-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 12px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+        
+        .optional-box {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 12px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+        
+        ul {
+            margin-left: 20px;
+            padding-left: 10px;
+        }
+        
+        li {
+            margin-bottom: 6px;
+        }
+        
+        .bullet-mark {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .copy-section {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        .copy-input-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            font-size: 14px;
+            outline: none;
+        }
+        
+        .btn-copy {
+            background: #27ae60;
+            color: white;
+            padding: 12px 25px;
+        }
+        
+        .btn-copy:hover {
+            background: #229954;
+        }
+        
+        .btn-copy.copied {
+            background: #7f8c8d;
+        }
+        
+        .tags-section {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a5276;
+            margin-bottom: 15px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: white;
+        }
+        
+        .tag-disease {
+            background: #e74c3c;
+        }
+        
+        .tag-drug {
+            background: #3498db;
+        }
+        
+        .tag-check {
+            background: #27ae60;
+        }
+        
+        .tag-symptom {
+            background: #f39c12;
+        }
+        
+        .tag-test {
+            background: #9b59b6;
+        }
+        
+        .keywords-section {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        .keywords-section a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .page-number {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a5276;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 17px;
+                padding: 12px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 10px;
+            }
+            
+            td {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-right {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: flex-end;
+            }
+            
+            .copy-input-group {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">← 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="77.html" class="btn btn-page">↑ 上一页</a>
+            <a href="79.html" class="btn btn-page">↓ 下一页</a>
+            <button class="btn btn-favorite" id="favoriteBtn" onclick="toggleFavorite()">☆ 收藏</button>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="header">
+        <h1>~~~~~肺栓塞（PE）诊断与检查*****</h1>
+    </div>
+    
+    <!-- 主表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">肺栓塞（PE）诊断与检查</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2" class="section-title">
+                        <span class="bullet-mark">■</span> <strong>肺栓塞</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">
+                        1. 定义
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="definition-box">
+                            <ul>
+                                <li>肺栓塞（PE）是内源性或外源性栓子阻塞肺动脉引起肺循环障碍的一组疾病或临床综合征。</li>
+                                <li>包括肺血栓栓塞症、脂肪栓塞综合征、羊水栓塞、空气栓塞等。不到15%的肺栓塞发生肺梗死。</li>
+                                <li>导致肺栓塞的血栓多数来自深静脉血栓形成（DVT），DVT与PE实质上是同一种疾病过程在不同部位、不同阶段的表现，二者合称静脉血栓栓塞症（VTE）。</li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">
+                        2. 危险因素
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="risk-box">
+                            <ul>
+                                <li><strong>强易患因素：</strong>大手术、急性心肌梗死、大创伤、恶性肿瘤、脊髓损伤、骨盆骨折。</li>
+                                <li><strong>中等易患因素：</strong>心力衰竭、PE病史、卧床、肥胖、高龄、凝血功能紊乱、妊娠、应用避孕药物、慢性呼吸功能不全。</li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">
+                        3. 临床表现
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="clinical-box">
+                            <ul>
+                                <li><strong>突发呼吸困难：</strong>最常见，出现概率为50%～75%，合并胸痛、咯血的"三联征"出现概率仅20%，而至少出现这三者之一占94%。</li>
+                                <li>部分患者有咳嗽、晕厥、休克，甚至猝死起病。</li>
+                                <li>呼吸、心率加快，P2亢进，下肢水肿是最可能出现的体征。</li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">
+                        4. 必做检查
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="required-box">
+                            <ul>
+                                <li><strong>ECG：</strong>SⅠQⅢTⅢ有强烈提示意义，但只在19%患者中出现。电轴右偏、右束支传导阻滞、肺型P波也能提示右心高负荷。</li>
+                                <li><strong>D-Dimer检测：</strong>敏感性高而特异性差。其浓度与PE的位置、血栓大小有密切关系。D-Dimer正常有助于排除PE，但50岁以上患者建议使用年龄矫正的临界值（年龄×10μg/L）代替标的500μg/L临界值。</li>
+                                <li><strong>床旁超声：</strong>超声心动图可发现右心室高负荷，左心室"D"字征有助于诊断PE。同时可定量估测肺动脉压力。部分情况下可在右心室或肺动脉内看见飘动的血栓。下肢静脉超声可方便且快速地发现可能的下肢DVT。</li>
+                                <li><strong>CTPA：</strong>能快速有效地明确PE的大小和部位，是急诊诊断PE的首选检查。</li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-title">
+                        5. 选做检查
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="optional-box">
+                            <ul>
+                                <li><strong>ABG：</strong>提示可能的低氧、呼吸性碱中毒，对诊断帮助不大。</li>
+                                <li><strong>胸片：</strong>表现无特异性，可能发现肺动脉段突出，少数人可能出现Westermark征（局部肺纹理减少）。</li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <div class="copy-input-group">
+            <input type="text" class="copy-input" id="copyInput" value="肺栓塞（PE）诊断与检查；肺栓塞；PE；肺血栓栓塞症；脂肪栓塞综合征；羊水栓塞；空气栓塞；深静脉血栓形成；DVT；静脉血栓栓塞症；VTE；急性心肌梗死；心力衰竭；ECG；D-Dimer；床旁超声；CTPA；ABG；胸片；Westermark征；=78" readonly>
+            <button class="btn btn-copy" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">肺栓塞</span>
+            <span class="tag tag-disease">PE</span>
+            <span class="tag tag-disease">肺血栓栓塞症</span>
+            <span class="tag tag-disease">脂肪栓塞综合征</span>
+            <span class="tag tag-disease">羊水栓塞</span>
+            <span class="tag tag-disease">空气栓塞</span>
+            <span class="tag tag-disease">深静脉血栓形成</span>
+            <span class="tag tag-disease">DVT</span>
+            <span class="tag tag-disease">静脉血栓栓塞症</span>
+            <span class="tag tag-disease">VTE</span>
+            <span class="tag tag-disease">急性心肌梗死</span>
+            <span class="tag tag-disease">心力衰竭</span>
+            <span class="tag tag-test">ECG</span>
+            <span class="tag tag-test">D-Dimer</span>
+            <span class="tag tag-test">床旁超声</span>
+            <span class="tag tag-test">CTPA</span>
+            <span class="tag tag-test">ABG</span>
+            <span class="tag tag-test">胸片</span>
+            <span class="tag tag-symptom">Westermark征</span>
+        </div>
+    </div>
+    
+    <!-- 关键词和页码 -->
+    <div class="keywords-section">
+        <p>关键词：肺栓塞（PE）诊断与检查 | 肺栓塞 | PE | 肺血栓栓塞症 | 脂肪栓塞综合征 | 羊水栓塞 | 空气栓塞 | 深静脉血栓形成 | DVT | 静脉血栓栓塞症 | VTE | 急性心肌梗死 | 心力衰竭 | ECG | D-Dimer | 床旁超声 | CTPA | ABG | 胸片 | Westermark征</p>
+        <p class="page-number">78</p>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '已复制';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.textContent = '复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isActive = btn.classList.contains('active');
+            
+            if (!isActive) {
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '肺栓塞（PE）诊断与检查',
+                    url: '78.html',
+                    pageNum: '78'
+                };
+                
+                const exists = favorites.some(f => f.url === '78.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+                localStorage.setItem('newFavorite', JSON.stringify(pageInfo));
+                alert('已添加到收藏！');
+            } else {
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '78.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                btn.textContent = '☆ 收藏';
+                btn.classList.remove('active');
+                alert('已取消收藏！');
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.url === '78.html');
+            const btn = document.getElementById('favoriteBtn');
+            
+            if (isFavorited) {
+                btn.textContent = '★ 已收藏';
+                btn.classList.add('active');
+            }
+        };
+    </script>
+</body>
+</html>
