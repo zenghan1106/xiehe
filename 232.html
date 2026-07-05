@@ -1,0 +1,584 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~硬皮病肾危象(SRC)*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .nav-btn {
+            position: fixed;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .home-btn {
+            top: 15px;
+            left: 15px;
+            background-color: #28a745;
+        }
+        
+        .prev-btn {
+            top: 15px;
+            right: 15px;
+            background-color: #6c757d;
+        }
+        
+        .next-btn {
+            top: 60px;
+            right: 15px;
+            background-color: #007bff;
+        }
+        
+        .fav-btn {
+            position: fixed;
+            top: 105px;
+            right: 15px;
+            padding: 10px 18px;
+            border-radius: 8px;
+            border: none;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            background-color: #ffc107;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .fav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .fav-btn.active {
+            background-color: #ff6b6b;
+            color: white;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 26px;
+            margin: 80px 0 20px;
+            padding: 15px;
+            background-color: #d6eaf8;
+            border-radius: 12px;
+            border-left: 5px solid #2874a6;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        thead {
+            background-color: #2874a6;
+            color: white;
+        }
+        
+        thead th {
+            padding: 18px 15px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f4f8;
+        }
+        
+        td {
+            padding: 14px 15px;
+            font-size: 15px;
+            vertical-align: top;
+        }
+        
+        td:first-child {
+            font-weight: bold;
+            color: #2874a6;
+            width: 120px;
+            background-color: #ebf5fb;
+        }
+        
+        .section-title {
+            background-color: #d4e6f1;
+            color: #1a5276;
+            font-size: 17px;
+            font-weight: bold;
+        }
+        
+        .bullet {
+            color: #2874a6;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+        
+        .sub-item {
+            margin-left: 20px;
+            margin-top: 6px;
+            color: #555;
+        }
+        
+        .check-mark {
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+        
+        .tags-container {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 18px;
+            color: #2874a6;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 6px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background-color: #ffeaa7;
+            color: #d63031;
+        }
+        
+        .tag-drug {
+            background-color: #dfe6e9;
+            color: #2d3436;
+        }
+        
+        .tag-bacteria {
+            background-color: #fab1a0;
+            color: #c0392b;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .copy-section {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #2874a6;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            padding: 12px 25px;
+            background-color: #2874a6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background-color: #1a5276;
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn.copied {
+            background-color: #28a745;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #6c757d;
+            margin: 15px 0;
+            font-weight: 500;
+        }
+        
+        .keywords {
+            text-align: center;
+            padding: 15px;
+            color: #6c757d;
+            font-size: 14px;
+        }
+        
+        .keywords span {
+            display: inline-block;
+            margin: 4px 8px;
+            padding: 4px 12px;
+            background-color: #e9ecef;
+            border-radius: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 20px;
+                margin-top: 140px;
+            }
+            
+            thead th {
+                font-size: 17px;
+                padding: 14px 10px;
+            }
+            
+            td {
+                padding: 12px 10px;
+                font-size: 14px;
+            }
+            
+            td:first-child {
+                width: 100px;
+            }
+            
+            .nav-btn, .fav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                top: 10px;
+                left: 10px;
+            }
+            
+            .prev-btn {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .next-btn {
+                top: 50px;
+                right: 10px;
+            }
+            
+            .fav-btn {
+                top: 90px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航按钮 -->
+    <a href="index.html" class="nav-btn home-btn">🏠 返回首页</a>
+    <a href="231.html" class="nav-btn prev-btn">← 上一页</a>
+    <a href="233.html" class="nav-btn next-btn">下一页 →</a>
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    
+    <!-- 标题 -->
+    <h1>~~~~~硬皮病肾危象(SRC)*****</h1><div class="kw-auto" style="margin:12px 0;padding:8px 12px;background:#e8f4f8;border-left:4px solid #0891b2;border-radius:6px;font-size:13px;color:#334;line-height:1.7;">关键词：~~~~~硬皮病肾危象(SRC)*****、硬皮病肾危象（SRC）— 急诊处理要点、1. 疾病概述、2. 临床表现、3. 必做检查、4. 选做检查、5. 诊断、6. 急诊处理、定义、病理特征、分类、SRC定义、发病时间、疾病性质、危险因素、高血压、肾损伤、尿液检查、检查项目、诊断要点、原则、治疗目标、ACEI类药物</div>
+    
+    <!-- 主表格 -->
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">硬皮病肾危象（SRC）— 急诊处理要点</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="2" class="section-title">1. 疾病概述</td>
+            </tr>
+            <tr>
+                <td>定义</td>
+                <td>硬皮病是影响心、肺、肾和消化道等多器官的全身性自身免疫病</td>
+            </tr>
+            <tr>
+                <td>病理特征</td>
+                <td>真皮层中胶原过度沉积和以血管壁增厚及管腔缩窄为特征的广泛血管病变</td>
+            </tr>
+            <tr>
+                <td>分类</td>
+                <td>根据受累广泛的程度分为局限性硬化症和系统性硬化症（SSc）</td>
+            </tr>
+            <tr>
+                <td>SRC定义</td>
+                <td>硬皮病最严重的肾表现，5%～20%的SSc患者可发生SRC</td>
+            </tr>
+            <tr>
+                <td>发病时间</td>
+                <td>SRC是SSc的一种较早期并发症，几乎均发生在起病的前5年内，甚至可能是SSc的初始表现</td>
+            </tr>
+            <tr>
+                <td>疾病性质</td>
+                <td>SRC是一种急症，若不经治疗，SRC可在1～2个月内进展至终末期肾病</td>
+            </tr>
+            <tr>
+                <td>危险因素</td>
+                <td>弥漫性皮肤受累、应用糖皮质激素或环孢素、自身抗体（抗RNA聚合酶Ⅲ抗体风险增高）等</td>
+            </tr>
+            
+            <tr>
+                <td colspan="2" class="section-title">2. 临床表现</td>
+            </tr>
+            <tr>
+                <td>高血压</td>
+                <td>突然发生的中至重度高血压，常伴恶性高血压表现，如视网膜病变、高血压脑病</td>
+            </tr>
+            <tr>
+                <td>肾损伤</td>
+                <td>急性肾损伤（AKI）</td>
+            </tr>
+            <tr>
+                <td>尿液检查</td>
+                <td>尿常规正常或仅显示轻度蛋白尿，伴极少量细胞或管型</td>
+            </tr>
+            
+            <tr>
+                <td colspan="2" class="section-title">3. 必做检查</td>
+            </tr>
+            <tr>
+                <td>检查项目</td>
+                <td>血常规、肾功能、尿常规、血涂片、头颅CT、眼底检查</td>
+            </tr>
+            
+            <tr>
+                <td colspan="2" class="section-title">4. 选做检查</td>
+            </tr>
+            <tr>
+                <td>检查项目</td>
+                <td>游离血红蛋白、结合珠蛋白、乳酸脱氢酶、ADAMTS13</td>
+            </tr>
+            
+            <tr>
+                <td colspan="2" class="section-title">5. 诊断</td>
+            </tr>
+            <tr>
+                <td>诊断要点</td>
+                <td>SRC的诊断是基于高风险的SSc患者的特征性表现，但需注意除外其他可能引起AKI的病因</td>
+            </tr>
+            
+            <tr>
+                <td colspan="2" class="section-title">6. 急诊处理</td>
+            </tr>
+            <tr>
+                <td>原则</td>
+                <td>在不可逆肾损害发生前迅速有效控制血压</td>
+            </tr>
+            <tr>
+                <td>治疗目标</td>
+                <td>72小时内恢复至患者基线血压</td>
+            </tr>
+            <tr>
+                <td>ACEI类药物</td>
+                <td>
+                    <span class="check-mark">✓</span>卡托普利是首选<br>
+                    <span class="check-mark">✓</span>治疗剂量：在无中枢神经系统受累证据（如脑病、视盘水肿）的高血压患者中，卡托普利初始剂量为6.25～12.5mg，以每4～8小时递增12.5～25mg，直至达到目标血压。最大剂量为300～450mg/d<br>
+                    <span class="check-mark">✓</span>治疗中需密切监测血肌酐变化，ACEI治疗初期可能会出现血肌酐升高（因为ACEI扩张出球小动脉，降低肾小球内压），此时血肌酐轻度升高不是停用ACEI指征
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 页码 -->
+    <div class="page-number">页码：232</div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-container">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div>
+            <span class="tag tag-disease">硬皮病</span>
+            <span class="tag tag-disease">系统性硬化症</span>
+            <span class="tag tag-disease">局限性硬化症</span>
+            <span class="tag tag-disease">硬皮病肾危象</span>
+            <span class="tag tag-disease">SRC</span>
+            <span class="tag tag-disease">SSc</span>
+            <span class="tag tag-disease">急性肾损伤</span>
+            <span class="tag tag-disease">AKI</span>
+            <span class="tag tag-disease">恶性高血压</span>
+            <span class="tag tag-disease">视网膜病变</span>
+            <span class="tag tag-disease">高血压脑病</span>
+            <span class="tag tag-disease">终末期肾病</span>
+            <span class="tag tag-drug">卡托普利</span>
+            <span class="tag tag-drug">ACEI</span>
+            <span class="tag tag-drug">糖皮质激素</span>
+            <span class="tag tag-drug">环孢素</span>
+            <span class="tag tag-bacteria">抗RNA聚合酶Ⅲ抗体</span>
+            <span class="tag tag-bacteria">ADAMTS13</span>
+        </div>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="硬皮病肾危象(SRC)；系统性硬化症；硬皮病；SRC；SSc；急性肾损伤；AKI；卡托普利；ACEI；恶性高血压；=232" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        <span>硬皮病</span>
+        <span>肾危象</span>
+        <span>SRC</span>
+        <span>SSc</span>
+        <span>卡托普利</span>
+        <span>ACEI</span>
+        <span>急性肾损伤</span>
+        <span>高血压</span>
+    </div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '✅ 已复制';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.textContent = '📋 复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '✅ 已复制';
+                    btn.classList.add('copied');
+                    
+                    setTimeout(() => {
+                        btn.textContent = '📋 复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFavorited = btn.classList.contains('active');
+            
+            if (!isFavorited) {
+                // 保存收藏到localStorage
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '硬皮病肾危象(SRC)',
+                    url: '232.html',
+                    pageNum: '232'
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.url === pageInfo.url);
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                
+                // 尝试更新index.html的收藏列表（如果同域）
+                try {
+                    updateIndexFavorites(pageInfo);
+                } catch(e) {
+                    console.log('无法直接更新index.html，收藏已保存到本地');
+                }
+            } else {
+                // 取消收藏
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '232.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+            }
+        }
+        
+        // 尝试更新index页面的收藏
+        function updateIndexFavorites(pageInfo) {
+            // 通过localStorage事件通知其他页面
+            localStorage.setItem('newFavorite', JSON.stringify({
+                ...pageInfo,
+                timestamp: Date.now()
+            }));
+        }
+        
+        // 检查是否已收藏
+        function checkFavoriteStatus() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.url === '232.html');
+            const btn = document.getElementById('favBtn');
+            
+            if (isFavorited) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        checkFavoriteStatus();
+    </script>
+</body>
+</html>
